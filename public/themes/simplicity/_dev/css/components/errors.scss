@@ -1,0 +1,32 @@
+#products,
+#pagenotfound {
+  #main {
+    .page-header {
+      margin: 2rem 0 3rem;
+    }
+    .page-content {
+      margin-bottom: 10rem;
+    }
+  }
+  .page-not-found {
+    /*@include box-shadow;*/
+    /*background: white;*/
+    padding: 1rem;
+    font-size: $font-size-sm;
+    color: $gray;
+    /*margin: 0 auto;*/
+    margin: 0;
+    h4 {
+      font-size: $base-font-size;
+      font-weight: $font-weight-bold;
+      /*margin: 0.5rem 0 1rem;*/
+      text-align: center;
+    }
+    .search-widget {
+      float: none;
+      input {
+        width: 100%;
+      }
+    }
+  }
+}

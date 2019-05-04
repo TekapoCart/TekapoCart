@@ -1,0 +1,33 @@
+#custom-text {
+
+  /*padding-top: 1.5rem;
+  margin-bottom: 1.5rem;*/
+}
+
+.product-description,
+.page-content.page-cms {
+
+  overflow-wrap: break-word;
+
+  ul {
+    list-style: initial;
+    padding-left: 20px;
+  }
+  ol {
+    padding-left: 20px;
+  }
+  p {
+    color: $gray-darker;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+}
+
+@include media-breakpoint-down(md) {
+  #block-cmsinfo {
+    padding: $medium-space $large-space;
+  }
+}

@@ -1,0 +1,103 @@
+@mixin search-box {
+  form {
+    position: relative;
+    input[type=text] {
+      &:focus {
+        outline: 3px $brand-primary solid;
+        color: $gray-darker;
+        background: white;
+        + button .search {
+          color: $brand-primary;
+        }
+      }
+      border: none;
+      padding: 10px;
+      min-width: 255px;
+      color: $gray;
+      border: $input-btn-border-width solid $input-border-color;
+    }
+    button[type=submit] {
+      position: absolute;
+      background: none;
+      border: none;
+      bottom: 0.3125rem;
+      right: 0.125rem;
+      color: $gray;
+      .search:hover {
+        color: $brand-primary;
+      }
+    }
+  }
+}
+
+@mixin box-shadow {
+  box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+@mixin box-shadow-light {
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* featuredproducts.scss */
+@mixin product-miniature-desktop($thumb-width, $divider) {
+  img {
+    width: $thumb-width;
+    height: $thumb-width;
+  }
+  .thumbnail-container {
+    width: $thumb-width + 7;
+    height: $thumb-width + 70;
+  }
+  .highlighted-informations {
+    width: $thumb-width + 7;
+  }
+  .product-description {
+    width: $thumb-width + 7;
+  }
+  margin: 15px calc((100% - #{$thumb-width + 7} * #{$divider}) / (#{$divider} * 2));
+
+  .sticker {
+    width: $thumb-width / 3.46;
+    height: $thumb-width / 3.46;
+    top: 0 - $thumb-width / 10;
+    left: 0 - $thumb-width / 15;
+  }
+}
+@mixin product-miniature-desktop-left-column($thumb-width, $divider) {
+  margin: 15px calc((100% - #{$thumb-width + 7} * (#{$divider} - 1) ) / ( (#{$divider} - 1) * 2));
+}
+@mixin product-miniature-desktop-no-desc($thumb-width) {
+  .thumbnail-container {
+    height: $thumb-width;
+  }
+}
+@mixin product-miniature-mobile($thumb-width, $divider) {
+  img {
+    width: $thumb-width;
+    height: $thumb-width;
+  }
+  .thumbnail-container {
+    width: $thumb-width + 4;
+    height: $thumb-width + 4 + 70;
+  }
+  .highlighted-informations {
+    width: $thumb-width + 4;
+  }
+  .product-description {
+    width: $thumb-width + 4;
+  }
+  margin: 10px calc((100% - #{$thumb-width + 4} * #{$divider}) / (#{$divider} * 2));
+
+  .sticker {
+    width: $thumb-width / 3.46;
+    height: $thumb-width / 3.46;
+    top: 0 - $thumb-width / 10;
+    left: 0 - $thumb-width / 15;
+  }
+}
+@mixin product-miniature-mobile-no-desc($thumb-width) {
+  padding-bottom: 0;
+  .thumbnail-container {
+    height: $thumb-width + 4;
+  }
+}

@@ -1,0 +1,60 @@
+{**
+ * 2007-2018 PrestaShop
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/OSL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+ * versions in the future. If you wish to customize PrestaShop for your
+ * needs please refer to http://www.prestashop.com for more information.
+ *
+ * @author    PrestaShop SA <contact@prestashop.com>
+ * @copyright 2007-2018 PrestaShop SA
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ * International Registered Trademark & Property of PrestaShop SA
+ *}
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 lt-ie6"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie7"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie8"> <![endif]-->
+<!--[if gt IE 8]> <html class="no-js ie9"> <![endif]-->
+<html lang="{$iso}">
+	<head>
+		<meta charset="utf-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		{*suzy: 2018-10-20 新增 theme-color *}<meta name="theme-color" content="#67C8C2">
+		<link rel="icon" type="image/x-icon" href="{$img_dir}favicon.ico" />
+		<link rel="apple-touch-icon" href="{$img_dir}app_icon.png" />
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="robots" content="NOFOLLOW, NOINDEX">
+		<title>
+			{$shop_name} 後台 {if $meta_title != ''}{if isset($navigationPipe)}{$navigationPipe|escape:'html':'UTF-8'}{else}&gt;{/if} {$meta_title}{/if} {* suzy: 2018-09-12 隱藏 (PrestaShop&trade;)*}
+		</title>
+		{foreach from=$css_files key=css_uri item=media}
+			<link href="{$css_uri}" rel="stylesheet" type="text/css" media="{$media}" />
+		{/foreach}
+		{foreach from=$js_files item=js_uri}
+			<script type="text/javascript" src="{$js_uri}"></script>
+		{/foreach}
+		{* suzy: 2018-11-03 版號換成 _TC_VERSION_DATE_ *}
+		<script type="text/javascript" src="../js/admin/login.js?v={$smarty.const._TC_VERSION_DATE_|escape:'html':'UTF-8'}"></script>
+
+		{if (isset($js_def) && count($js_def) || isset($js_files) && count($js_files))}
+			{include file=$smarty.const._PS_ALL_THEMES_DIR_|cat:"javascript.tpl"}
+		{/if}
+	</head>
+	<body class="ps_back-office bootstrap">
+		<div id="login">
+			<div id="content">

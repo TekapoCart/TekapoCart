@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>contactform</name>
+    <displayName><![CDATA[聯絡我們設定]]></displayName>
+    <version><![CDATA[4.1.1]]></version>
+    <description><![CDATA[在&ldquo;聯繫我們&rdquo;頁面添加聯繫表單。]]></description>
+    <author><![CDATA[PrestaShop]]></author>
+    <tab><![CDATA[front_office_features]]></tab>
+    <is_configurable>1</is_configurable>
+    <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>

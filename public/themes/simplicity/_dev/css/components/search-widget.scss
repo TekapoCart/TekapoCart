@@ -1,0 +1,141 @@
+.simplicity-search-widget {
+
+  form {
+    position: relative;
+    cursor: pointer;
+
+    input[type="text"] {
+      width: 40px;
+      height: 44px;
+      margin-top: 5px;
+      margin-right: 10px;
+      border: 1px solid transparent;
+      padding-left: 10px;
+      background-color: transparent;
+
+
+
+      &:focus {
+        width: 150px;
+        outline: none;
+        border: 1px solid black;
+        background-color: #fff;
+
+        position: absolute;
+        left: -160px;
+
+        @include transition(all .4s ease-in-out);
+      }
+      &:not(:focus) {
+        text-indent: -9999px;
+      }
+    }
+    label {
+      cursor: pointer;
+      font-size: 1rem;
+      &:hover {
+        color: $brand-primary;
+      }
+    }
+    i {
+      position: absolute;
+      right: 15px;
+      top: 17px;
+    }
+    span {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+    }
+
+  }
+}
+
+.lang-en {
+  .simplicity-search-widget {
+    i {
+      right: 15px;
+    }
+    span {
+      right: 10px;
+    }
+  }
+}
+
+.search-widget {
+  display: inline-block;
+  @include search-box;
+}
+.header-top {
+
+  #_desktop_search_me {
+    max-width: 200px;
+    float:right
+  }
+
+  .search-widget {
+    form {
+      input[type="text"] {
+        min-width: inherit;
+        width: 100%;
+      }
+    }
+  }
+}
+#checkout {
+  #search_widget {
+    display: none; /* Not ideal solution by allows to reuse same hooks/templates */
+  }
+}
+
+#pagenotfound {
+  .page-content {
+    #search_widget {
+      width: 100%;
+    }
+  }
+}
+
+.page-not-found {
+  .search-widget {
+    form {
+      display: inline-block;
+    }
+  }
+}
+
+/*** Responsive part ***/
+@include media-breakpoint-down(sm) {
+
+  .simplicity-search-widget {
+    form {
+      i {
+        right: 10px;
+      }
+    }
+  }
+
+  .header-top {
+    .search-widget {
+      float: none;
+      form {
+        margin: 0 auto;
+        input[type="text"] {
+          min-width: inherit;
+          /*background-color: white;*/
+        }
+      }
+    }
+  }
+}
+@include media-breakpoint-up(md) {
+  .search-widget {
+    min-width: 15.63rem;
+  }
+}
+
+@media only screen and (max-width : 374px) {
+  .simplicity-search-widget form i {
+    right: 8px;
+  }
+}

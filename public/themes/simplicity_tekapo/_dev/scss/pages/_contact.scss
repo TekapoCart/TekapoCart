@@ -1,0 +1,23 @@
+#contact {
+  background-color: #3f4652;
+  background-image: url(https://www.tekapo.io/img/cms/contact/contact-bg-blur.jpg?2);
+  background-size: cover;
+  background-position: 0 0;
+  background-attachment: fixed;
+  .contact-rich {
+    h4, .block .data, .block .icon i {
+      color: rgba(255,255,255,.8);
+      color: #fff;
+    }
+  }
+  .contact-form {
+    background-color: #fff;
+    max-width: 500px;
+    margin: auto;
+  }
+  hr {
+    border-top: 1px solid rgba(255,255,255,.8);
+  }
+}
+
+

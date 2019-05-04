@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>ps_languageselector</name>
+    <displayName><![CDATA[語言選擇區塊]]></displayName>
+    <version><![CDATA[2.0.2]]></version>
+    <description><![CDATA[新增一個提供客戶切換語言的區塊。]]></description>
+    <author><![CDATA[PrestaShop]]></author>
+    <tab><![CDATA[]]></tab>
+    <is_configurable>0</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>

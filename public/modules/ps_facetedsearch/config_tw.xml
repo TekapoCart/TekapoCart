@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>ps_facetedsearch</name>
+    <displayName><![CDATA[篩選條件]]></displayName>
+    <version><![CDATA[2.2.0]]></version>
+    <description><![CDATA[相近價格、同屬性、規格商品自動歸類。]]></description>
+    <author><![CDATA[PrestaShop]]></author>
+    <tab><![CDATA[front_office_features]]></tab>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>

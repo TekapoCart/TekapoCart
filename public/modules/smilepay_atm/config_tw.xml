@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>smilepay_atm</name>
+    <displayName><![CDATA[SmilePay 虛擬帳號]]></displayName>
+    <version><![CDATA[2.2.5]]></version>
+    <description><![CDATA[買家取得「14 碼虛擬帳號」至臨櫃繳款、ATM 櫃員機轉帳、Web ATM 轉帳。可即時銷帳。<br>免年費型手續費：13元。]]></description>
+    <author><![CDATA[SmilePay]]></author>
+    <tab><![CDATA[payments_gateways]]></tab>
+	<confirmUninstall><![CDATA[您確定移除設定資料？]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>

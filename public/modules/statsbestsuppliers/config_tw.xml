@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>statsbestsuppliers</name>
+    <displayName><![CDATA[最佳供應商]]></displayName>
+    <version><![CDATA[2.0.0]]></version>
+    <description><![CDATA[將最佳供應商列表添加到統計信息顯示板。]]></description>
+    <author><![CDATA[PrestaShop]]></author>
+    <tab><![CDATA[analytics_stats]]></tab>
+    <is_configurable>0</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>

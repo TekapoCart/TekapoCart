@@ -1,0 +1,86 @@
+.block_newsletter input[type=text]:focus,
+body#checkout section.checkout-step .address-item.selected,
+.facet-dropdown.open > .select-title,
+.tabs .nav-tabs .nav-link:hover,
+#product-modal .modal-content .modal-body .product-images img:hover,
+.product-images > li.thumb-container > .thumb.selected,
+.product-images > li.thumb-container > .thumb:hover,
+.ps-alert-success .item i,
+.ps-alert-success .item,
+.tabs .nav-tabs .nav-link.active,
+#_desktop_top_menu .top-menu .current > a,
+.faq .q {
+  border-color: $primary-link-color;
+}
+
+a,
+a:hover,
+a:active,
+a:focus,
+.btn-unstyle:focus .expand-more,
+.cart-grid-body a.label:hover,
+.account-list a:hover,
+.footer-container li a:hover,
+.carousel .carousel-control .icon-prev:hover i,
+.carousel .carousel-control .icon-next:hover i,
+.dropdown:hover .expand-more,
+.pagination a:not(.disabled):hover,
+.block-categories .category-sub-menu .current,
+.block-categories .collapse-icons .add:hover,
+.block-categories .collapse-icons .remove:hover,
+.block-categories .arrows .arrow-right,
+.block-categories .arrows .arrow-down:hover,
+.simplicity-search-widget form label:hover,
+#products .highlighted-informations .quick-view:hover,
+.featured-products .highlighted-informations .quick-view:hover,
+.product-accessories  .highlighted-informations .quick-view:hover,
+.product-miniature .highlighted-informations .quick-view:hover,
+.page-my-account #content .links a:hover i,
+.top-menu .sub-menu a:hover,
+#mobile_top_menu_wrapper .top-menu .current > a,
+.product-price,
+#blockcart-modal .product-name,
+.done,
+.product-line-grid-body > .product-line-info > .available,
+#product-availability .product-available,
+.tabs .nav-tabs .nav-link.active,
+#_desktop_top_menu .top-menu .current > a,
+#_desktop_top_menu .top-menu a:hover[data-depth="0"],
+body#checkout a:hover,
+.faq .q:before {
+  color: $primary-link-color;
+}
+
+.form-control:focus,
+.input-group:focus,
+.product-customization .product-message:focus {
+  outline-color: $primary-link-color;
+}
+
+.group-span-filestyle .btn-default,
+.custom-radio input[type="radio"]:checked + span,
+.block-social li:hover,
+.products-sort-order .select-list:hover,
+.facet-dropdown .select-list:hover,
+#blockcart-modal .modal-header,
+.ps-alert-success .item i svg,
+.ps-alert-success .item,
+.btn-primary {
+  background-color: $primary-link-color;
+}
+
+@media (max-width: 991px) {
+  .block-social li {
+    background-color: $primary-link-color;
+  }
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: $primary-link-hover;
+}
+
+.btn-primary:disabled:hover,
+.btn-primary:disabled:focus {
+  background-color: $primary-link-disabled-hover;
+}

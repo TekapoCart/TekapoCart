@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>dashtrends</name>
+    <displayName><![CDATA[儀表板趨勢]]></displayName>
+    <version><![CDATA[2.0.2]]></version>
+    <description><![CDATA[增加一個基於所選關鍵數據圖形展示店鋪發展狀況的區塊。]]></description>
+    <author><![CDATA[PrestaShop]]></author>
+    <tab><![CDATA[dashboard]]></tab>
+    <is_configurable>0</is_configurable>
+    <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>

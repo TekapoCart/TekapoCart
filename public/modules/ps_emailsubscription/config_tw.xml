@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>ps_emailsubscription</name>
+    <displayName><![CDATA[訂閱電子報]]></displayName>
+    <version><![CDATA[2.3.0]]></version>
+    <description><![CDATA[新增一張訂閱電子報的表格。]]></description>
+    <author><![CDATA[PrestaShop]]></author>
+    <tab><![CDATA[]]></tab>
+	<confirmUninstall><![CDATA[確定要刪除所有的聯絡人？]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>

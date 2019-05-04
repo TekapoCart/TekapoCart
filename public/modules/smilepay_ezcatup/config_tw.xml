@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>smilepay_ezcatup</name>
+    <displayName><![CDATA[黑貓宅配]]></displayName>
+    <version><![CDATA[2.2.5]]></version>
+    <description><![CDATA[SmilePay 商家後台列印托運單&rarr;電話通知黑貓到府收件&rarr;當日17點前寄件，包裹隔日送達。<br>免年費型手續費：8元，運費另計。]]></description>
+    <author><![CDATA[SmilePay]]></author>
+    <tab><![CDATA[shipping_logistics]]></tab>
+	<confirmUninstall><![CDATA[您確定移除設定資料？]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>

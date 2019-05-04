@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>ps_mainmenu</name>
+    <displayName><![CDATA[主選單]]></displayName>
+    <version><![CDATA[2.1.1]]></version>
+    <description><![CDATA[商店的主要選單，可將商品分類、自訂頁面、商品的連結設置於此。]]></description>
+    <author><![CDATA[PrestaShop]]></author>
+    <tab><![CDATA[front_office_features]]></tab>
+    <is_configurable>1</is_configurable>
+    <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>

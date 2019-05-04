@@ -1,0 +1,72 @@
+.about {
+  width: 100%;
+  counter-reset: line;
+  position: relative;
+  > span {
+    font-family: monospace;
+    padding: 2px;
+    display: block;
+    line-height: 1.5rem;
+    &:before {
+      counter-increment: line;
+      content: counter(line);
+      display: inline-block;
+      padding: 0 .5em;
+      margin-right: .5em;
+      color: #b2aeab;
+      font-size: 14px;
+    }
+  }
+  .text {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  hr {
+    margin: 50px auto 70px auto;
+    width: 60%;
+    text-align: center;
+    border: 0;
+    font-size: 30px;
+    &:before {
+      content: '🍺 🍺 🍺 ';
+    }
+  }
+  .bracket {
+    font-family: monospace;
+    letter-spacing: 1px;
+    padding: 20px 100px;
+    color: #b2aeab;
+  }
+  .bracket-content {
+    padding: 0 100px;
+  }
+}
+
+@media (max-width: 767px) {
+  .about {
+    > span {
+      margin-left: -5px;
+      &:before {
+        padding: 0;
+        margin-right: 0;
+        font-size: 12px;
+        line-height: 1.2rem;
+      }
+    }
+    .top-img {
+      margin-bottom: 20px;
+    }
+    .bracket {
+      padding: 10px 50px;
+      font-size: 14px;
+    }
+    .bracket-content {
+      padding: 0 17px;
+      margin-left: 40px;
+    }
+    dd {
+      text-align: center;
+    }
+  }
+}

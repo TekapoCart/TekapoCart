@@ -1,0 +1,129 @@
+.carousel {
+  /*box-shadow: 1px 1px 7px 0 rgba(0, 0, 0, 0.15);*/
+  /*margin-bottom: 1.5rem;*/
+  overflow-x: hidden;
+  .direction {
+    z-index: auto;
+  }
+  .carousel-inner {
+    /*height: 340px;*/
+    overflow-x: hidden;
+    @media (max-width: 767px) {
+      height: auto;
+    }
+  }
+  .carousel-item {
+    height: 100%;
+    img {
+      @media (max-width: 767px) {
+        max-width: 100%;
+        height: auto;
+      }
+      @media (min-width: 768px) {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+    .caption {
+      position: absolute;
+      width: 100%;
+
+      top: 20%;
+      .caption-description {
+        font-size: 50px;
+        line-height: 90px;
+        .material-icons {
+          margin-left: 2px;
+          margin-bottom: 8px;
+          font-size: 45px;
+        }
+      }
+
+    }
+    figure {
+      @media (max-width: 767px) {
+        margin: 0;
+      }
+    }
+  }
+  .carousel-control {
+    opacity: 1;
+    .icon-next,
+    .icon-prev {
+      &::before {
+        content: "";
+      }
+      i {
+        /*font-size: 3.125rem;*/
+        @media (min-width: 768px) {
+          font-size: 3.125rem;
+        }
+        @media (max-width: 767px) {
+          font-size: 1.3rem;
+        }
+        color: white;
+      }
+      &:hover {
+        i {
+          color: $brand-primary;
+        }
+      }
+    }
+    .icon-prev {
+      left: 1rem;
+    }
+    .icon-next {
+      right: 2rem;
+    }
+    &.left,
+    &.right {
+      background: none;
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .carousel {
+    .carousel-item {
+      .caption {
+        top: 15%;
+        .caption-description {
+          font-size: 40px;
+          line-height: 70px;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .carousel {
+    .carousel-item {
+      .caption {
+        top: 10%;
+        .caption-description {
+          font-size: 35px;
+          line-height: 60px;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .carousel {
+    .carousel-item {
+      .caption {
+        top: 15%;
+        .caption-description {
+          font-size: 16px;
+          line-height: 25px;
+          .material-icons {
+            margin-bottom: 3px;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}

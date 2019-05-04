@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>statspersonalinfos</name>
+    <displayName><![CDATA[註冊客戶資訊]]></displayName>
+    <version><![CDATA[2.0.2]]></version>
+    <description><![CDATA[將您的註冊客戶的統計數據（如性別和年齡）添加到統計儀表板。]]></description>
+    <author><![CDATA[PrestaShop]]></author>
+    <tab><![CDATA[analytics_stats]]></tab>
+    <is_configurable>0</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>

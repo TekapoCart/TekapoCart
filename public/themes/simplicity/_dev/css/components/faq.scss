@@ -1,0 +1,36 @@
+.faq {
+
+  > li {
+    margin: 15px 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $gray-lighter;
+  }
+
+  .q, .a {
+    padding: 15px 15px 15px 70px;
+    position: relative;
+    min-height: 60px;
+    color: $gray-darker;
+    &:before {
+      position: absolute;
+      top: 17px;
+      left: 15px;
+      font-size: 40px;
+    }
+  }
+  .q {
+    background: $gray-lighter;
+    border-left: 5px solid $brand-primary;
+    &:before {
+      content: 'Q.';
+      color: $brand-primary;
+    }
+  }
+  .a {
+    border-left: 5px solid $gray;
+    &:before {
+      content: 'A.';
+      color: $gray;
+    }
+  }
+}

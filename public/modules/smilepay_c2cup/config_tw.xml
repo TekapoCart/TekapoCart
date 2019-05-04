@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>smilepay_c2cup</name>
+    <displayName><![CDATA[超商取貨]]></displayName>
+    <version><![CDATA[2.2.5]]></version>
+    <description><![CDATA[買家選取門市&rarr;選擇付款方式&rarr;賣家列印服務單&rarr;門市交寄（60元）&rarr;三日貨到店，簡訊通知買家&rarr;買家七日內取貨。<br>免年費型手續費：13元，運費：60元。]]></description>
+    <author><![CDATA[SmilePay]]></author>
+    <tab><![CDATA[shipping_logistics]]></tab>
+	<confirmUninstall><![CDATA[是否要移除此模組]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>

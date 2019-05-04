@@ -1,0 +1,23 @@
+msc-sidebar {
+  --overlay-color: rgba(0, 0, 0, .2);
+  --timing-function: cubic-bezier(0, 0, .21, 1);
+  --duration: 233ms;
+  --z-index: 1000;
+}
+
+msc-sidebar[open] nav {
+  background: #fff;
+}
+
+msc-sidebar nav {
+  width: 55vw;
+  height: 100%;
+  display: block;
+  /*position: relative;*/
+}
+
+msc-sidebar:not(:defined) {
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+}
