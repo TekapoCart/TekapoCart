@@ -40,7 +40,7 @@
       </ul>
       <select class="link hidden-md-up" aria-labelledby="currency-selector-label">
         {foreach from=$currencies item=currency}
-          <option value="{$currency.url}"{if $currency.current} selected="selected"{/if}>{$currency.iso_code} {$currency.sign}</option>
+          <option value="{$currency.url}"{if $currency.current} selected="selected"{/if}>{$currency.iso_code} {$currency.name}{*$currency.sign*}</option>
         {/foreach}
       </select>
     </div>
