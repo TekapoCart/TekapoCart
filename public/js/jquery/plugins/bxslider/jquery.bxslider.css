@@ -52,6 +52,8 @@
   height: 10px;
   margin: 0 5px;
   background: #000;
+  /* suzy: 2019-05-09 tune style */
+  background: #b2b2b2;
   outline: 0;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -59,7 +61,9 @@
 
 .bx-wrapper .bx-pager.bx-default-pager a:hover,
 .bx-wrapper .bx-pager.bx-default-pager a.active {
-  background: #000; }
+  background: #000;
+  /* suzy: 2019-05-09 tune style */
+  background: #333; }
 
 /* DIRECTION CONTROLS (NEXT / PREV) */
 .bx-wrapper .bx-controls-direction a {
@@ -73,25 +77,43 @@
   font-size: 0;
   overflow: hidden;
   outline: none;
-  text-decoration: none; }
+  text-decoration: none;
+  /* suzy: 2019-05-09 tune style */
+  width: 50px;
+  height: 70px;
+  padding: 10px 0;
+  z-index: 60; }
   .bx-wrapper .bx-controls-direction a:before {
     padding-left: 2px;
     color: #c0c0c0;
     font-family: "FontAwesome";
     font-size: 20px;
-    line-height: 22px; }
+    line-height: 22px;
+    /* suzy: 2019-05-09 tune style */
+    color: #b2b2b2;
+    font-family: "Material Icons";
+    font-size: 40px;
+    line-height: 42px; }
   .bx-wrapper .bx-controls-direction a:hover:before {
-    color: #333; }
+    color: #333;
+    /* suzy: 2019-05-09 tune style */
+    background: rgba(255, 255, 255, 0.2); }
 
 .bx-next {
   right: 10px; }
   .bx-next:before {
-    content: "\f138"; }
+    content: "\f138";
+    /* suzy: 2019-05-09 tune style */
+    content: "\E315";
+  }
 
 .bx-prev {
   left: 10px; }
   .bx-prev:before {
-    content: "\f137"; }
+    content: "\f137";
+    /* suzy: 2019-05-09 tune style */
+    content: "\E314";
+  }
 
 .bx-wrapper .bx-controls-direction a.disabled {
   display: none; }
