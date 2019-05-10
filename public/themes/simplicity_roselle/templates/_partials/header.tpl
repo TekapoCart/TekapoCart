@@ -56,6 +56,7 @@
     </div>
 {/block}
 </div>
+<div id="roselle-navbar-placeholder"></div>
 
 <div class="header-bottom">
     {hook h='displayNavFullWidth'}
