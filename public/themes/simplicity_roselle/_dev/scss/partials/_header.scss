@@ -163,6 +163,9 @@
 
 @media (max-width: 767px) {
   #header {
+    .navbar-fixed-top {
+      min-height: 60px;
+    }
     .header-top {
       background: transparent;
     }

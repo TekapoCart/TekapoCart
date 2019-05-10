@@ -4,7 +4,7 @@
  */
 
 var navbar = document.getElementById("roselle-navbar");
-var stickyPos = $('#roselle-navbar').outerHeight();
+var stickyPos = $('#roselle-navbar').height();
 
 if (document.body.id === 'index') {
     window.onscroll = function() {
