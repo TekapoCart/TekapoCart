@@ -1,9 +1,11 @@
 @import "partials/_variables";
 
-@import "partials/_animations";
-@import "partials/_msc-sidebar";
+@import "components/_animations";
+@import "components/_msc";
+@import "components/_footer-icons";
 
 @import "partials/_brand-colors";
 @import "partials/_commons";
+@import "partials/_header";
 
 @import "pages/_index";

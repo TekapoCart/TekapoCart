@@ -1,0 +1,45 @@
+#footer-icons {
+  text-align: center;
+  padding: 38px 0 30px 0;
+  background: #fff;
+  .icon {
+    color: $footer-icon-color;
+    margin: 30px 0;
+    .material-icons {
+      font-size: 60px;
+      margin-bottom: 16px;
+    }
+    h6 {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 25px;
+    }
+    &:hover {
+      color: $primary-link-color;
+      .material-icons {
+        font-size: 65px;
+        margin-bottom: 11px;
+      }
+      &.icon1 {
+        .material-icons {
+          animation: circle 0.6s linear infinite;
+        }
+      }
+      &.icon2 {
+        .material-icons {
+          animation: swing 1.5s linear infinite;
+        }
+      }
+      &.icon3 {
+        .material-icons {
+          animation: shift-x 1.4s linear infinite;
+        }
+      }
+      &.icon4 {
+        .material-icons {
+          animation: blinker 1.5s linear infinite;
+        }
+      }
+    }
+  }
+}

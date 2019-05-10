@@ -2,136 +2,6 @@ html {
   scroll-behavior: smooth;
 }
 
-#header {
-  position: relative;
-
-  #_desktop_search_me,
-  #_desktop_currency_selector,
-  #_desktop_language_selector,
-  #_desktop_user_info,
-  #_desktop_cart {
-    margin-top: 0px;
-  }
-
-  .navbar-fixed-top {
-    top: 0;
-    position: fixed;
-    border-width: 0 0 1px;
-    background-color: rgba(255,255,255,0.9);
-    box-shadow: 0 0.5px 2px -1px rgba(0,0,0,.75);
-    /* transition: all 0.6s; */
-    z-index: 100;
-  }
-
-  .header-nav {
-    .right-nav {
-      position: relative;
-      z-index: 11;
-    }
-    .blockcart {
-      margin-bottom: 0;
-    }
-    .user-info {
-      margin-bottom: 0;
-    }
-  }
-
-  .header-top {
-    .logo-wrapper {
-      margin: 0;
-      padding: 0;
-      padding-top: 4px;
-      position: absolute;
-      z-index: 9;
-      top: -50px;
-      left: 0;
-      display: block;
-      width: 100%;
-
-      a {
-        max-width: 275px;
-        display: block;
-        margin: auto;
-        transition: all 0.6s;
-      }
-
-      img {
-        max-width: 100%;
-        /*
-        border: 6px solid #fff;
-        border-radius: 100px;
-        */
-      }
-
-      .logo {
-        display: block;
-        height: auto;
-        max-height: initial;
-        transition: all 0.4s ease 0s;
-      }
-
-      &.shrink {
-        img {
-          border-width: 2px;
-        }
-        a {
-          max-width: 85px;
-        }
-      }
-
-    }
-
-    .menu-wrapper {
-      margin: 0;
-      padding: 0;
-
-      position: relative;
-      z-index: 10;
-
-      width: 100%;
-
-      .menu {
-        width: 100%;
-      }
-      .top-menu {
-        margin: 0;
-        li:nth-child(5),
-        li:nth-child(6),
-        li:nth-child(7) {
-          float: right;
-        }
-        li:nth-of-type(1n+8) {
-          display: none;
-        }
-      }
-
-
-    }
-
-  }
-
-  .scroll-down {
-    position: absolute;
-    bottom: 15%;
-    left: 50%;
-    margin-left: -40px;
-    z-index: 99;
-    a {
-      color: #fff;
-      font-size: 18px;
-      /*margin-left: -35px;*/
-      height: 40px;
-      display: block;
-      text-align: center;
-      border: 1px solid #fff;
-      padding: 9px 25px;
-      border-radius: 6px;
-      background-color: rgba(255,255,255,0.2);
-    }
-  }
-}
-
-/* 底色 */
 #wrapper,
 #carousel,
 #products .product-description,
@@ -153,9 +23,11 @@ html {
   background: $primary-background;
 }
 
+/*
 .banner img {
   width: 100%;
 }
+*/
 
 #wrapper {
   padding-bottom: 0;
@@ -175,7 +47,6 @@ html {
 .intro {
   padding-top: 30px;
   padding-bottom: 80px;
-  text-align: center;
   min-height: 450px;
   background: $primary-background;
   h1 {
@@ -202,6 +73,7 @@ html {
   img {
     max-width: 100%;
   }
+  /*
   hr {
     padding: 0;
     border: none;
@@ -219,71 +91,15 @@ html {
       padding: 0 0.25em;
       background: $primary-background;
     }
-
   }
-}
-
-/* 頁尾圖片區塊 */
-.roselle-bottom-image {
-  background: url(https://roselle.tekapo.space/img/cms/roselle/roselle-bottom.png) no-repeat center center;
-  width: 100%;
-  height: 400px;
-  background-size: cover;
-}
-
-/* 頁尾小圖 */
-#footer-icons {
-  text-align: center;
-  padding: 38px 0 30px 0;
-  background: #fff;
-  .icon {
-    color: $gray;
-    margin: 30px 0;
-    .material-icons {
-      font-size: 60px;
-      margin-bottom: 16px;
-    }
-    h6 {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 25px;
-    }
-    &:hover {
-      color: $brand-primary;
-      .material-icons {
-        font-size: 65px;
-        margin-bottom: 11px;
-      }
-      &.icon1 {
-        .material-icons {
-          animation: circle 0.6s linear infinite;
-        }
-      }
-      &.icon2 {
-        .material-icons {
-          animation: swing 1.5s linear infinite;
-        }
-      }
-      &.icon3 {
-        .material-icons {
-          animation: shift-x 1.4s linear infinite;
-        }
-      }
-      &.icon4 {
-        .material-icons {
-          animation: blinker 1.5s linear infinite;
-        }
-      }
-    }
-  }
-
+  */
 }
 
 .copyright {
   .material-icons {
     font-size: 16px;
     margin: 0 3px;
-    color: $brand-primary;
+    color: $primary-link-color;
     animation: blinker 1.5s linear infinite;
   }
 }
