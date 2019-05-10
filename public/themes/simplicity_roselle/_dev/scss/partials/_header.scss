@@ -136,9 +136,6 @@
 
 @media (min-width: 768px) {
   #header {
-    .navbar-fixed-top {
-      min-height: 101px;
-    }
     .header-top {
       .logo-wrapper {
         .logo {
@@ -163,9 +160,6 @@
 
 @media (max-width: 767px) {
   #header {
-    .navbar-fixed-top {
-      min-height: 60px;
-    }
     .header-top {
       background: transparent;
     }

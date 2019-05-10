@@ -6,21 +6,19 @@
 var navbar = document.getElementById("roselle-navbar");
 var stickyPos = $('#roselle-navbar').height();
 
-if (document.body.id === 'index') {
-    window.onscroll = function() {
-        logoFunction()
-    };
-} else {
-    navbar.classList.add("navbar-fixed-top");
-    $('.logo-wrapper').addClass('shrink');
-    $('#roselle-navbar-placeholder').css('height', stickyPos);
+window.onscroll = function() {
+    logoFunction();
+};
+
+window.resize = function() {
+    logoFunction();
 }
 
 function logoFunction() {
-    if (window.pageYOffset >= stickyPos) {
+    if (document.body.id === 'index' && window.pageYOffset >= stickyPos) {
         navbar.classList.add("navbar-fixed-top");
         $('.logo-wrapper').addClass('shrink');
-        $('#roselle-navbar-placeholder').css('height', stickyPos);
+        $('#roselle-navbar-placeholder').css('height', stickyPos + 20);
     } else {
         navbar.classList.remove("navbar-fixed-top");
         $('.logo-wrapper').removeClass('shrink');
