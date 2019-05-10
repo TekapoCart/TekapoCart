@@ -3,13 +3,15 @@
  * A template should always ship with an empty custom.js
  */
 
-
+var navbar = document.getElementById("roselle-navbar");
+var stickyPos = $('#roselle-navbar').height();
 if (document.body.id === 'index') {
     window.onscroll = function() {
         logoFunction()
     };
-    var navbar = document.getElementById("roselle-navbar");
-    var stickyPos = $('#roselle-navbar').height();
+} else {
+    stickyPos = 0;
+    logoFunction();
 }
 
 function logoFunction() {
