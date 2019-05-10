@@ -5,7 +5,6 @@
 
 var navbar = document.getElementById("roselle-navbar");
 var stickyPos = $('#roselle-navbar').height();
-var margin = 20;
 
 window.onscroll = function() {
     logoFunction();
@@ -19,11 +18,11 @@ function logoFunction() {
     if (document.body.id === 'index' && window.pageYOffset < stickyPos) {
         navbar.classList.remove("navbar-fixed-top");
         $('.logo-wrapper').removeClass('shrink');
-        $('#roselle-navbar-placeholder').css('height', margin);
+        $('#roselle-navbar-placeholder').css('height', 0);
     } else {
         navbar.classList.add("navbar-fixed-top");
         $('.logo-wrapper').addClass('shrink');
-        $('#roselle-navbar-placeholder').css('height', stickyPos + margin);
+        $('#roselle-navbar-placeholder').css('height', stickyPos);
     }
 }
 
