@@ -5,7 +5,7 @@
 
 window.onscroll = function() {myFunction()};
 var navbar = document.getElementById("roselle-navbar");
-var stickyPos = $('#roselle-navbar').height();
+var stickyPos = typeof $('#index') !== 'undefined' ? $('#roselle-navbar').height() : 0;
 function myFunction() {
     if (window.pageYOffset >= stickyPos) {
         navbar.classList.add("navbar-fixed-top");
