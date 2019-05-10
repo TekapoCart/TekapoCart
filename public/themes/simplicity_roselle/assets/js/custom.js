@@ -3,10 +3,15 @@
  * A template should always ship with an empty custom.js
  */
 
-window.onscroll = function() {myFunction()};
+
+window.onscroll = function() {
+    logoFunction()
+};
+
 var navbar = document.getElementById("roselle-navbar");
 var stickyPos = typeof $('#index') !== 'undefined' ? $('#roselle-navbar').height() : 0;
-function myFunction() {
+
+function logoFunction() {
     if (window.pageYOffset >= stickyPos) {
         navbar.classList.add("navbar-fixed-top");
         $('.logo-wrapper').addClass('shrink');
@@ -18,6 +23,9 @@ function myFunction() {
 
 
 (function() {
+
+    logoFunction();
+
     let pack;
     if (typeof navigator.scriptList == 'undefined') {
         navigator.scriptList = [];
