@@ -29,6 +29,8 @@ function logoFunction() {
 
 (function() {
 
+    logoFunction();
+
     let pack;
     if (typeof navigator.scriptList == 'undefined') {
         navigator.scriptList = [];
