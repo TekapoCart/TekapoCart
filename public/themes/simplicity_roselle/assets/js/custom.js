@@ -5,7 +5,7 @@
 
 var navbar = document.getElementById("roselle-navbar");
 var stickyPos = $('#roselle-navbar').height();
-var margin = 0;
+var margin = 20;
 
 window.onscroll = function() {
     logoFunction();
