@@ -4,12 +4,13 @@
  */
 
 
-window.onscroll = function() {
-    logoFunction()
-};
-
-var navbar = document.getElementById("roselle-navbar");
-var stickyPos = document.body.id === 'index' ? $('#roselle-navbar').height() : 0;
+if (document.body.id === 'index') {
+    window.onscroll = function() {
+        logoFunction()
+    };
+    var navbar = document.getElementById("roselle-navbar");
+    var stickyPos = $('#roselle-navbar').height();
+}
 
 function logoFunction() {
     if (window.pageYOffset >= stickyPos) {
@@ -21,10 +22,7 @@ function logoFunction() {
     }
 }
 
-
 (function() {
-
-    logoFunction();
 
     let pack;
     if (typeof navigator.scriptList == 'undefined') {
