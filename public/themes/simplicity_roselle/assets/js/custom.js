@@ -9,7 +9,7 @@ window.onscroll = function() {
 };
 
 var navbar = document.getElementById("roselle-navbar");
-var stickyPos = typeof $('#index') !== 'undefined' ? $('#roselle-navbar').height() : 0;
+var stickyPos = document.body.id === 'index' ? $('#roselle-navbar').height() : 0;
 
 function logoFunction() {
     if (window.pageYOffset >= stickyPos) {
