@@ -10,8 +10,8 @@ if (document.body.id === 'index') {
         logoFunction()
     };
 } else {
-    stickyPos = 0;
-    logoFunction();
+    navbar.classList.add("navbar-fixed-top");
+    $('.logo-wrapper').addClass('shrink');
 }
 
 function logoFunction() {
