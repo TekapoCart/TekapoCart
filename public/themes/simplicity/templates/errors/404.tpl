@@ -34,12 +34,12 @@
     {block name='page_content'}
       <div class="text-xs-center">
         <div style="font-size: 100px; font-family: monospace">404</div>
-
         <div style="margin-top: 30px;">
           <img src="/img/logo-gcart.svg" style="width: 180px; transform: rotate(180deg);">
         </div>
-
         <p>{$page.title}</p>
+        <br>
+        <button type="button" class="btn btn-secondary">{l s='Back' d='messages'}{l s='Home' d='Shop.Theme.Global'}</button>
       </div>
     {/block}
   </section>
