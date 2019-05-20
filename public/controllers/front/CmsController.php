@@ -206,11 +206,29 @@ class CmsControllerCore extends FrontController
         foreach ($this->cms_category->getSubCategories($this->context->language->id) as $subCategory) {
             $categoryCms['sub_categories'][$subCategory['id_cms_category']] = $subCategory;
             $categoryCms['sub_categories'][$subCategory['id_cms_category']]['link'] = $this->context->link->getCMSCategoryLink($subCategory['id_cms_category'], $subCategory['link_rewrite']);
+
+            // suzy: 2019-05-19 支援圖片
+            $img_dir = _PS_IMG_DIR_ . 'cms/page/category/';
+            $img_path = _PS_IMG_ . 'cms/page/category/';
+            if (file_exists($img_dir . $subCategory['id_cms_category'] . '.jpg')) {
+                $categoryCms['sub_categories'][$subCategory['id_cms_category']]['image'] = $img_path . $subCategory['id_cms_category'] . '.jpg';
+            } elseif (file_exists($img_dir . $subCategory['id_cms_category'] . '.png')) {
+                $categoryCms['sub_categories'][$subCategory['id_cms_category']]['image'] = $img_path . $subCategory['id_cms_category'] . '.png';
+            }
         }
 
         foreach (CMS::getCMSPages($this->context->language->id, (int) $this->cms_category->id, true, (int) $this->context->shop->id) as $cmsPages) {
             $categoryCms['cms_pages'][$cmsPages['id_cms']] = $cmsPages;
             $categoryCms['cms_pages'][$cmsPages['id_cms']]['link'] = $this->context->link->getCMSLink($cmsPages['id_cms'], $cmsPages['link_rewrite']);
+
+            // suzy: 2019-05-19 支援圖片
+            $img_dir = _PS_IMG_DIR_ . 'cms/page/';
+            $img_path = _PS_IMG_ . 'cms/page/';
+            if (file_exists($img_dir . $cmsPages['id_cms'] . '.jpg')) {
+                $categoryCms['cms_pages'][$cmsPages['id_cms']]['image'] = $img_path . $cmsPages['id_cms'] . '.jpg';
+            } elseif (file_exists($img_dir . $cmsPages['id_cms'] . '.png')) {
+                $categoryCms['cms_pages'][$cmsPages['id_cms']]['image'] = $img_path . $cmsPages['id_cms'] . '.png';
+            }
         }
 
         return $categoryCms;

@@ -183,7 +183,8 @@ class Ps_Banner extends Module implements WidgetInterface
                         'type' => 'file_lang',
                         'label' => $this->trans('Banner image', array(), 'Modules.Banner.Admin'),
                         'name' => 'BANNER_IMG',
-                        'desc' => $this->trans('Upload an image for your top banner. The recommended dimensions are 1110 x 214px if you are using the default theme.', array(), 'Modules.Banner.Admin'),
+                        // suzy: 2019-05-20 隱藏說明文字
+                        // 'desc' => $this->trans('Upload an image for your top banner. The recommended dimensions are 1110 x 214px if you are using the default theme.', array(), 'Modules.Banner.Admin'),
                         'lang' => true,
                     ),
                     array(

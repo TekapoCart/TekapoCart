@@ -93,6 +93,8 @@ class PositionsController extends FrameworkBundleAdminController
 
             // 首頁 內容
             'displayHome',
+            // 首頁 主內容下方滿版
+            'displayHomeAfter',
 
             // 商品頁 左側欄
             'displayLeftColumnProduct',

@@ -502,8 +502,8 @@ class Ps_MainMenu extends Module implements WidgetInterface
             'page_identifier' => 'cms-category-' . $id_cms_category,
             'label' => $category->name,
             // suzy: 2019-01-16 自訂頁面分類不設連結
-            // 'url' => $category->getLink(),
-            'url' => '#',
+             'url' => $category->getLink(),
+            // 'url' => '#',
             'children' => array_merge($subCategories, $subPages)
         ]);
 

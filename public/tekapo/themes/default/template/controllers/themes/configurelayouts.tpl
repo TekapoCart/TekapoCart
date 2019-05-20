@@ -66,8 +66,7 @@
                     {foreach $available_layouts as $key => $layout}
                       {if {$key} !== {$defaultKey} }
                         <option value="{$key}" {if isset($page_layouts.{$page.page}) && $page_layouts.{$page.page} == $key}selected="selected"{/if}>
-                          {* suzy: 2018-08-20 調換位置 {$layout.name} - {$layout.description}*}
-                          {$layout.description} [{$layout.name}]
+                          {$layout.name} - {$layout.description}
                         </option>
                       {/if}
                     {/foreach}
