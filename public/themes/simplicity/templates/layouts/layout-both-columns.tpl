@@ -91,6 +91,10 @@
             </div>
           {/block}
         </div>
+
+        {block name="content_after"}
+        {/block}
+
         {hook h="displayWrapperBottom"}
       </section>
 
