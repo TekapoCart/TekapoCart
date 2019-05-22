@@ -91,8 +91,8 @@
   .sticker {
     width: $thumb-width / 3.46;
     height: $thumb-width / 3.46;
-    top: 0 - $thumb-width / 10;
-    left: 0 - $thumb-width / 15;
+    top: 0 - $thumb-width / (10 + 2); /* 微調 + 2 */
+    left: 0 - $thumb-width / (15 + 2); /* 微調 + 2 */
   }
 }
 @mixin product-miniature-mobile-no-desc($thumb-width) {

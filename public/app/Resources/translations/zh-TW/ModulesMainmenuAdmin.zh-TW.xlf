@@ -144,7 +144,7 @@ File: modules/ps_mainmenu/ps_mainmenu.php:1184</note>
       </trans-unit>
       <trans-unit id="778118c7dd993db08f704e15efa4a7fa" approved="yes">
         <source>Choose product ID</source>
-        <target xml:lang="zh-TW">選擇商品編號</target>
+        <target xml:lang="zh-TW">選擇商品 ID</target>
         <note>Context:
 File: modules/ps_mainmenu/ps_mainmenu.php:1200</note>
       </trans-unit>
@@ -173,7 +173,7 @@ File: modules/ps_mainmenu/ps_mainmenu.php:1357</note>
     <body>
       <trans-unit id="17a1352d3f69a733fd472fce0238a07d" approved="yes">
         <source>Indicate the ID number for the product</source>
-        <target xml:lang="zh-TW">指出商品的編號</target>
+        <target xml:lang="zh-TW">請輸入商品 ID</target>
         <note>Context:
 File: modules/ps_mainmenu/views/templates/admin/_configure/helpers/form/form.tpl:53</note>
       </trans-unit>
