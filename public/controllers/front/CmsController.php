@@ -203,6 +203,15 @@ class CmsControllerCore extends FrontController
         $categoryCms['sub_categories'] = array();
         $categoryCms['cms_pages'] = array();
 
+        // suzy: 2019-05-23 支援圖片
+        $img_dir = _PS_IMG_DIR_ . 'cms/page/category/';
+        $img_path = _PS_IMG_ . 'cms/page/category/';
+        if (file_exists($img_dir . $categoryCms['cms_category']['id'] . '.jpg')) {
+            $categoryCms['cms_category']['image'] = $img_path . $categoryCms['cms_category']['id'] . '.jpg';
+        } elseif (file_exists($img_dir . $categoryCms['cms_category']['id'] . '.png')) {
+            $categoryCms['cms_category']['image'] = $img_path . $categoryCms['cms_category']['id'] . '.png';
+        }
+
         foreach ($this->cms_category->getSubCategories($this->context->language->id) as $subCategory) {
             $categoryCms['sub_categories'][$subCategory['id_cms_category']] = $subCategory;
             $categoryCms['sub_categories'][$subCategory['id_cms_category']]['link'] = $this->context->link->getCMSCategoryLink($subCategory['id_cms_category'], $subCategory['link_rewrite']);
