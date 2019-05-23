@@ -24,7 +24,7 @@
  *}
 <div id="_desktop_currency_selector">
   <div class="currency-selector-wrapper">
-    <span id="currency-selector-label" class="hidden-md-up">{*l s='Currency:' d='Shop.Theme.Global'*}<i class="material-icons attach_money">attach_money</i></span>
+    <span id="currency-selector-label"><span class="hidden-md-up">{l s='Currency:' d='Shop.Theme.Global'}</span></span>
     <div class="currency-selector dropdown js-dropdown">
       <button data-target="#" data-toggle="dropdown" class="hidden-sm-down btn-unstyle" aria-haspopup="true" aria-expanded="false" aria-label="{l s='Currency dropdown' d='Shop.Theme.Global'}">
         {*<span class="expand-more">{$current_currency.iso_code}{$current_currency.sign}</span>
