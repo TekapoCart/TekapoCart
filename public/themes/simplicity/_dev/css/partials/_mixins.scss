@@ -69,6 +69,7 @@
 @mixin product-miniature-desktop-no-desc($thumb-width) {
   .thumbnail-container {
     height: $thumb-width;
+    margin-bottom: 0;
   }
 }
 @mixin product-miniature-mobile($thumb-width, $divider) {
@@ -99,5 +100,6 @@
   padding-bottom: 0;
   .thumbnail-container {
     height: $thumb-width + 4;
+    margin-bottom: 0;
   }
 }
