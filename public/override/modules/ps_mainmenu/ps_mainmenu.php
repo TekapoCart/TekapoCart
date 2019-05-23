@@ -24,8 +24,9 @@ class Ps_MainMenuOverride extends Ps_MainMenu
             return 'suppliers';
         } else if ($controllerName === 'product' && ($id = Tools::getValue('id_product'))) {
             return 'product-' . $id;
-        } else if ($controllerName === 'index') {
-            return 'shop-' . $this->context->shop->id;
+// suzy: 2019-05-23 修正 link 不能判讀 首頁 current
+//        } else if ($controllerName === 'index') {
+//            return 'shop-' . $this->context->shop->id;
         } else {
             $scheme = 'http';
             if (array_key_exists('REQUEST_SCHEME', $_SERVER)) {
