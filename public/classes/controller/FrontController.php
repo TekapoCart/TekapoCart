@@ -1631,6 +1631,10 @@ class FrontControllerCore extends Controller
             'lat' => Configuration::get('PS_STORES_CENTER_LAT'),
 
             'logo' => (Configuration::get('PS_LOGO')) ? _PS_IMG_ . Configuration::get('PS_LOGO') : '',
+
+            // suzy: 2019-06-02 支援通知信 LOGO
+            'logo_mail' => (Configuration::get('PS_LOGO_MAIL')) ? _PS_IMG_ . Configuration::get('PS_LOGO_MAIL') : '',
+
             'stores_icon' => (Configuration::get('PS_STORES_ICON')) ? _PS_IMG_ . Configuration::get('PS_STORES_ICON') : '',
             'favicon' => (Configuration::get('PS_FAVICON')) ? _PS_IMG_ . Configuration::get('PS_FAVICON') : '',
             'favicon_update_time' => Configuration::get('PS_IMG_UPDATE_TIME'),
