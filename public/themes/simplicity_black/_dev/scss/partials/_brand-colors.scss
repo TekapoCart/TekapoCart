@@ -47,7 +47,9 @@ a:focus,
 #_desktop_top_menu .top-menu .current > a,
 #_desktop_top_menu .top-menu a:hover[data-depth="0"],
 body#checkout a:hover,
-.faq .q:before {
+.faq .q:before,
+.dropdown-item:focus,
+.dropdown-item:hover {
   color: $primary-link-color;
 }
 

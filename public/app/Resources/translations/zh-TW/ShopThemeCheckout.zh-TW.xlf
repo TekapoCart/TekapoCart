@@ -80,7 +80,7 @@ File: src/Adapter/Cart/CartPresenter.php:379</note>
       </trans-unit>
       <trans-unit id="ca96f27e7d3e3b67b5d1f43a54296466" approved="yes">
         <source>%count% items</source>
-        <target xml:lang="zh-TW">%count% 項商品</target>
+        <target xml:lang="zh-TW">%count% 項</target>
         <note>Context:
 File: src/Adapter/Cart/CartPresenter.php:380</note>
       </trans-unit>

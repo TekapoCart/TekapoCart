@@ -407,21 +407,21 @@ class ImageManagerCore
 
             list($currentWidth, $currentHeight, $type) = getimagesize($destinationFile);
             $srcImage = ImageManager::create($type, $destinationFile);
-            $centreX = round($currentWidth / 2);
-            $centreY = round($currentHeight / 2);
-            $cropWidth  = $oldDestinationWidth;
-            $cropHeight = $oldDestinationHeight;
-            $cropWidthHalf  = round($cropWidth / 2);
-            $cropHeightHalf = round($cropHeight / 2);
+            $centreX = round($currentWidth / 2); // 1350 / 2 = 675
+            $centreY = round($currentHeight / 2); // 500 /2 = 250
+            $cropWidth  = $oldDestinationWidth;  // 500
+            $cropHeight = $oldDestinationHeight; // 500
+            $cropWidthHalf  = round($cropWidth / 2); // 250
+            $cropHeightHalf = round($cropHeight / 2); // 250
 
-            $x1 = max(0, $centreX - $cropWidthHalf);
-            $y1 = max(0, $centreY - $cropHeightHalf);
+            $x1 = max(0, $centreX - $cropWidthHalf); // 675 - 250 = 425
+            $y1 = max(0, $centreY - $cropHeightHalf); // 250 - 250 = 0
 
-            $x2 = min($currentWidth, $centreX + $cropWidthHalf);
-            $y2 = min($currentHeight, $centreY + $cropHeightHalf);
+            $x2 = min($currentWidth, $centreX + $cropWidthHalf); // 675 + 250 = 925
+            $y2 = min($currentHeight, $centreY + $cropHeightHalf); // 250 + 250 = 500
 
-            $newWidth = $x2 - $x1;
-            $newHeight = $y2 - $y1;
+            $newWidth = $x2 - $x1; // 925 - 425 = 500
+            $newHeight = $y2 - $y1; // 500 - 0 = 500
 
             if (!$image_use_imagick) {
                 @imagedestroy($srcImage);
@@ -432,7 +432,7 @@ class ImageManagerCore
             } else {
 
                 // suzy: 2019-03-20 新增使用 Imagick 縮圖
-                $imagick = new \Imagick(realpath($sourceFile));
+                $imagick = new \Imagick(realpath($destinationFile));
                 $imagick->cropImage($newWidth, $newHeight, $x1, $y1);
                 $imagick->setImageFormat($fileType);
 
