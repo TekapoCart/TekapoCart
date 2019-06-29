@@ -324,7 +324,8 @@ class ValidateCore
      */
     public static function isCatalogName($name)
     {
-        return preg_match(Tools::cleanNonUnicodeSupport('/^[^<>;=#{}]*$/u'), $name);
+        return preg_match(Tools::cleanNonUnicodeSupport('/^[^<>;=]*$/u'), $name); // suzy: 2018-11-09 品名 allow 大括弧、井字
+        // return preg_match(Tools::cleanNonUnicodeSupport('/^[^<>;=#{}]*$/u'), $name);
     }
 
     /**
