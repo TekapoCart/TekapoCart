@@ -218,6 +218,9 @@ class Ps_Wirepayment extends PaymentModule
             return;
         }
 
+        // suzy: 2018-10-28 讓轉帳匯款支援超商取貨
+        $c2cup_run = false;
+
         $state = $params['order']->getCurrentState();
         if (
             in_array(
