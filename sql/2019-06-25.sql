@@ -1,4 +1,4 @@
---- _TC_VERSION_ 1.0.3
+--- TC_VERSION 1.0.3
 ---- 新增分類 ID 3 「系列」
 
 INSERT INTO `ps_category` (`id_category`, `id_parent`, `id_shop_default`, `level_depth`, `nleft`, `nright`, `active`, `date_add`, `date_upd`, `position`, `is_root_category`) VALUES
