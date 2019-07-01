@@ -1,3 +1,10 @@
+
+--- multi shop meta data
+
+
+-------------------------
+
+
 INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `description`, `keywords`, `url_rewrite`) VALUES
 ('1', '2', '1', '404 錯誤', '找不到此頁', '', 'page-not-found'),
 ('1', '2', '2', '404 error', 'This page cannot be found', '', 'page-not-found'),
