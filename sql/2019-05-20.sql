@@ -1,3 +1,5 @@
+--- _TC_VERSION_ 1.0.3
+
 INSERT INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (NULL, 'displayHomeAfter', '首頁 主內容下方滿版', '', '1', '21');
 
 -- multi shop 特價商品

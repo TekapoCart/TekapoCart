@@ -1,6 +1,23 @@
 TekapoCart <hi@tekapo.io>
 -------------------------------------------
 *******************************************
+* 1.0.3 (July 01, 2019)
+*******************************************
+Improve
+- 新增 HTML 編輯器允許添加 data-* 屬性
+- 新增 HTML 編輯器新增 class .iframe-container 用以支援多裝置嵌入影片
+- 新增 TC 核心正式納入 msc select (mainly for mobile menu)
+- 新增 hook：首頁 主內容下方滿版 (displayHomeAfter)
+- 新增 自訂頁面分類頁: 支援圖片 banner、同時作為滿版 banner 出現在自訂頁面頁 header_bottom
+- 新增 js plugin: colcade (for 自訂頁面分類頁)
+- 內建外掛 bsslider 調整 css 樣式 (pager, next, prev)
+- 回復 自訂頁面分類不設連結
+- 修改 聯絡我們 heading 改 meta.title (可由後台修改)
+
+Fix
+- 修正 開放品名大括弧
+
+*******************************************
 * 1.0.0 (May 05, 2019)
 *******************************************
 - PrestaShop 1.7.5.0

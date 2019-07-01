@@ -1,4 +1,5 @@
---- 補之前新增分類 3 的相關資料
+--- TC_VERSION 1.0.3
+--- 補之前分類 ID 3 「系列」相關資料
 
 INSERT INTO `ps_gshoppingflux` (`id_gcategory`, `export`, `condition`, `availability`, `gender`, `age_group`, `color`, `material`, `pattern`, `size`, `id_shop`) VALUES
 (3, 1, '', '', '', '', '', '', '', '', 1),

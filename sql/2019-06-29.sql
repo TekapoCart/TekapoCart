@@ -1,9 +1,5 @@
-
+--- TC_VERSION 1.0.3
 --- multi shop meta data
-
-
--------------------------
-
 
 INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `description`, `keywords`, `url_rewrite`) VALUES
 ('1', '2', '1', '404 錯誤', '找不到此頁', '', 'page-not-found'),
@@ -35,9 +31,7 @@ INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `descripti
 ('2', '4', '3', 'Best sellers', 'Our best sellers', '', 'best-sales'),
 ('2', '4', '4', 'ベストセラー', '当店のベストセラー', '', 'best-sales');
 
-
 -------------------------
-
 
 INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `description`, `keywords`, `url_rewrite`) VALUES
 ('4', '2', '1', '我的 TekapoCart Shop', '本站於 _TIME_ 建立，全站 A+ SSL 加密，顧客可以安心的購物網站。', '', ''),
@@ -57,9 +51,7 @@ INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `descripti
 ('4', '4', '3', '', 'Software maintained by TekapoCart', '', ''),
 ('4', '4', '4', '', 'Software maintained by TekapoCart', '', '');
 
-
 -------------------------
-
 
 INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `description`, `keywords`, `url_rewrite`) VALUES
 ('14', '2', '1', '購物車', '', '', 'cart'),
@@ -79,9 +71,7 @@ INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `descripti
 ('14', '4', '3', '购物车', '', '', 'cart'),
 ('14', '4', '4', 'Cart', '', '', 'cart');
 
-
 -------------------------
-
 
 INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `description`, `keywords`, `url_rewrite`) VALUES
 ('19', '2', '1', '訂單追蹤', '', '', 'order-follow'),
@@ -101,9 +91,7 @@ INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `descripti
 ('19', '4', '3', 'Order Follow', '', '', 'order-follow'),
 ('19', '4', '4', '注文対応', '', '', 'order-follow');
 
-
 -------------------------
-
 
 INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `description`, `keywords`, `url_rewrite`) VALUES
 ('22', '2', '1', '搜尋結果', '用關鍵字搜尋', '', 'search'),
