@@ -427,12 +427,23 @@ class Smilepay_c2cup extends CarrierModule
             $store_data = $this->getStoreData();
             //$template_store = $this->l('store name') .  $store_data['storename'];
             $maptext = $this->l('select emap again');
-            $mapstoretext = sprintf($this->l('emap info text'), $store_data['storename'], $store_data['storeid'], $store_data['storeaddress']);
+            // $mapstoretext = sprintf($this->l('emap info text'), $store_data['storename'], $store_data['storeid'], $store_data['storeaddress']);
+
+            // suzy: 2018-07-20 加上 <br>
+            $mapstoretext =  "<br>".sprintf($this->l('emap info text'),$store_data['storename'],$store_data['storeid'],'<br>',$store_data['storeaddress']);
         }
 
 
-        $template = "<div id='smilepay_c2cup_emap_but' style='margin-left:35px;'><p style='margin-left:20px;'><button type='button'  onclick='window.open(\"$url\",\"_self\");' class='btn-primary'>" . $maptext . "</button>&nbsp;&nbsp;&nbsp;&nbsp;"
-            . $mapstoretext . "</p></div>";
+        // $template = "<div id='smilepay_c2cup_emap_but' style='margin-left:35px;'><p style='margin-left:20px;'><button type='button'  onclick='window.open(\"$url\",\"_self\");' class='btn-primary'>" . $maptext . "</button>&nbsp;&nbsp;&nbsp;&nbsp;"
+        //    . $mapstoretext . "</p></div>";
+
+        // suzy: 2018-07-20 拿掉 p style margin-left 20px
+        // 加上 class='offset-xs-2 col-xs-10 offset-sm-1 col-sm-11'
+        $template = "<div id='smilepay_c2cup_emap_but' style='margin-left:35px;'><p><button type='button' onclick='window.open(\"$url\",\"_self\");' class='btn btn-primary'>".$maptext ."</button>"
+            .$mapstoretext."</p></div>";
+
+
+
         // .$this->l('emap note') ."<span style='color:red;'>'".$this->getCarrierName()."'</span> ".$this->l('emap note2')."</br></br></br>";
 
 
@@ -460,7 +471,10 @@ class Smilepay_c2cup extends CarrierModule
 //            $btnscript = "";
 //        }
 
-        $btnscript = "";
+        // suzy: 2018-07-20 不需版本判斷
+        $btnscript ="<script>var carrier_smilepayc2cup_711='".Configuration::get(self::SMILEPAY_C2CUP_711_CARRIER_ID)."';
+                        carrier_smilepayc2cup_fami='".Configuration::get(self::SMILEPAY_C2CUP_FAMI_CARRIER_ID)."';
+                        </script>";
 
         return $template . $btnscript;
         // return "<button type='button' onclick='window.open(\"$url\",\"_blank\");' style='border-style:hidden;height:30px;'>".$this->l('select emap') ."</button></br></br></br>";
