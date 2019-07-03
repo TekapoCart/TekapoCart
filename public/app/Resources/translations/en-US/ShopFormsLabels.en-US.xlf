@@ -155,6 +155,11 @@ File: themes/classic/templates/customer/password-new.tpl:63</note>
         <note>Context:
 File: themes/classic/templates/customer/_partials/order-messages.tpl:59</note>
       </trans-unit>
+      <trans-unit id="1625e29c02062efe5dbc42c3efeeebd5">
+        <source>-- please choose country --</source>
+        <target xml:lang="en">-- please choose country</target>
+        <note>Line: 59</note>
+      </trans-unit>
       <trans-unit id="deb10517653c255364175796ace3553f" approved="yes">
         <source>Product</source>
         <target xml:lang="en">Product</target>

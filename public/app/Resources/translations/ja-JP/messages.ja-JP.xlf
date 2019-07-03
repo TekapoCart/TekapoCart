@@ -882,7 +882,7 @@ File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:46</
       </trans-unit>
       <trans-unit id="d79cf3f429596f77db95c65074663a54" approved="yes">
         <source>Order ID</source>
-        <target xml:lang="ja">注文ID</target>
+        <target xml:lang="ja">注文番号</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:47</note>
       </trans-unit>
@@ -1223,6 +1223,12 @@ File: admin-dev/themes/default/template/controllers/modules/filters.tpl:34</note
         <target xml:lang="ja">無効なモジュール</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/modules/filters.tpl:43</note>
+      </trans-unit>
+      <trans-unit id="1f0e9c979b965d24aa3c2c4b832c3ba1" approved="yes">
+        <source>Filter by</source>
+        <target xml:lang="ja">条件から検索</target>
+        <note>Context:
+File: admin-dev/themes/default/template/controllers/modules/filters.tpl:31</note>
       </trans-unit>
       <trans-unit id="7b4d2812164df0dceca0b53bb650e52d" approved="yes">
         <source><![CDATA[Installed & Not Installed]]></source>
@@ -2160,7 +2166,7 @@ File: admin-dev/themes/default/template/controllers/customer_threads/helpers/opt
     <body>
       <trans-unit id="94966d90747b97d1f0f206c98a8b1ac3" approved="yes">
         <source>Send</source>
-        <target xml:lang="ja">送信</target>
+        <target xml:lang="ja">送信する</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/helpers/view/view.tpl:119</note>
       </trans-unit>

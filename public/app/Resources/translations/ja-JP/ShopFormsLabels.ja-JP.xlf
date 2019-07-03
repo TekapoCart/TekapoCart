@@ -149,9 +149,14 @@ File: themes/classic/templates/customer/password-new.tpl:63</note>
         <note>Context:
 File: themes/classic/templates/customer/_partials/order-messages.tpl:59</note>
       </trans-unit>
+      <trans-unit id="1625e29c02062efe5dbc42c3efeeebd5">
+        <source>-- please choose country --</source>
+        <target xml:lang="ja">-- 配送先国選択</target>
+        <note>Line: 59</note>
+      </trans-unit>
       <trans-unit id="deb10517653c255364175796ace3553f" approved="yes">
         <source>Product</source>
-        <target xml:lang="ja">商品</target>
+        <target xml:lang="ja">商品名</target>
         <note>Context:
 File: themes/classic/templates/customer/_partials/order-messages.tpl:56</note>
       </trans-unit>
@@ -221,7 +226,7 @@ File: themes/classic/modules/contactform/views/templates/widget/contactform.tpl:
       </trans-unit>
       <trans-unit id="5d4710f9a8250b13164a82c94d5b00d1" approved="yes">
         <source>Order reference</source>
-        <target xml:lang="ja">注文ID</target>
+        <target xml:lang="ja">注文番号</target>
         <note>Context:
 File: themes/classic/modules/contactform/views/templates/widget/contactform.tpl:73</note>
       </trans-unit>

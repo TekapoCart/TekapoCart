@@ -20,7 +20,7 @@ File: modules/ps_emailgenerator/templates/modules/referralprogram/referralprogra
     <body>
       <trans-unit id="008400d8db73946ba53b2d7f091eb845" approved="yes">
         <source>Order {order_name}</source>
-        <target xml:lang="ja">注文ID: {order_name}</target>
+        <target xml:lang="ja">注文番号: {order_name}</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/order_changed.php:21</note>
       </trans-unit>
@@ -222,7 +222,7 @@ File: modules/ps_emailgenerator/templates/core/contact_form.php:40</note>
     <body>
       <trans-unit id="83fa39a28a4d159061c408fbd6a249e7" approved="yes">
         <source>Order ID:</source>
-        <target xml:lang="ja">注文ID:</target>
+        <target xml:lang="ja">注文番号:</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/contact.php:23</note>
       </trans-unit>
@@ -643,7 +643,7 @@ File: modules/ps_emailgenerator/templates/core/footer.php:6</note>
     <body>
       <trans-unit id="f5d74ea75357b5e139854c14f8e24fe3" approved="yes">
         <source>Order details</source>
-        <target xml:lang="ja">注文詳細</target>
+        <target xml:lang="ja">注文明細</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:28</note>
       </trans-unit>
@@ -667,7 +667,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:4
       </trans-unit>
       <trans-unit id="0eede552438475bdfe820c13f24c9399" approved="yes">
         <source>Total price</source>
-        <target xml:lang="ja">合計価格</target>
+        <target xml:lang="ja">合計金額</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:51</note>
       </trans-unit>

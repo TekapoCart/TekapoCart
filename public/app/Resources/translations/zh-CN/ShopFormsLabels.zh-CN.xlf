@@ -137,6 +137,17 @@ File: themes/classic/templates/customer/password-new.tpl:63</note>
   </file>
   <file original="themes/classic/templates/customer/_partials/order-messages.tpl" source-language="en" target-language="zh-CN" datatype="plaintext">
     <body>
+      <trans-unit id="1625e29c02062efe5dbc42c3efeeebc4" approved="yes">
+        <source>-- please choose --</source>
+        <target xml:lang="en">-- please choose</target>
+        <note>Context:
+File: themes/classic/templates/customer/_partials/order-messages.tpl:59</note>
+      </trans-unit>
+      <trans-unit id="1625e29c02062efe5dbc42c3efeeebd5">
+        <source>-- please choose country --</source>
+        <target xml:lang="zh-CN">-- please choose country</target>
+        <note>Line: 59</note>
+      </trans-unit>
       <trans-unit id="deb10517653c255364175796ace3553f" approved="yes">
         <source>Product</source>
         <target xml:lang="zh-CN">产品</target>

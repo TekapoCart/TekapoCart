@@ -82,7 +82,7 @@ File: themes/classic/templates/customer/history.tpl:32</note>
       </trans-unit>
       <trans-unit id="3ec365dd533ddb7ef3d1c111186ce872" approved="yes">
         <source>Details</source>
-        <target xml:lang="ja">詳細</target>
+        <target xml:lang="ja">注文明細</target>
         <note>Context:
 File: themes/classic/templates/customer/history.tpl:101</note>
       </trans-unit>
@@ -479,19 +479,19 @@ File: themes/StarterTheme/templates/customer/my-account.tpl:34</note>
     <body>
       <trans-unit id="41de6d6cfb8953c021bbe4ba0701c8a1" approved="yes">
         <source>Messages</source>
-        <target xml:lang="ja">メッセージ</target>
+        <target xml:lang="ja">備考 / 配送情報</target>
         <note>Context:
 File: themes/classic/templates/customer/_partials/order-messages.tpl:28</note>
       </trans-unit>
       <trans-unit id="58b3d8603dffe8484e90c0ca371921ac" approved="yes">
         <source>Add a message</source>
-        <target xml:lang="ja">メッセージを追加：</target>
+        <target xml:lang="ja">備考の新規追加</target>
         <note>Context:
 File: themes/classic/templates/customer/_partials/order-messages.tpl:49</note>
       </trans-unit>
       <trans-unit id="d93651d012e77dac5581b08db33195b2" approved="yes">
         <source>If you would like to add a comment about your order, please write it in the field below.</source>
-        <target xml:lang="ja">ご注文に関してコメントを残されたい場合は、以下にお書きください。</target>
+        <target xml:lang="ja">ショップに関するお問い合わせ、ご質問など、商品名を選択し、下欄に入力後「送信する」をクリックしてください。</target>
         <note>Context:
 File: themes/classic/templates/customer/_partials/order-messages.tpl:50</note>
       </trans-unit>
@@ -549,13 +549,13 @@ File: themes/classic/templates/customer/identity.tpl:28</note>
     <body>
       <trans-unit id="f5d74ea75357b5e139854c14f8e24fe3" approved="yes">
         <source>Order details</source>
-        <target xml:lang="ja">注文詳細</target>
+        <target xml:lang="ja">注文明細</target>
         <note>Context:
 File: themes/classic/templates/customer/order-detail.tpl:28</note>
       </trans-unit>
       <trans-unit id="674592d247a228106f4f0d9f81c0d92c" approved="yes">
         <source>Order Reference %reference% - placed on %date%</source>
-        <target xml:lang="ja">注文参照コード： %reference% - ご注文日： %date%</target>
+        <target xml:lang="ja">注文番号： %reference% - 注文日： %date%</target>
         <note>Context:
 File: themes/classic/templates/customer/order-detail.tpl:38</note>
       </trans-unit>
@@ -585,7 +585,7 @@ File: themes/classic/templates/customer/order-detail.tpl:75</note>
       </trans-unit>
       <trans-unit id="46774573a61204e0aac6c4ab10247d3e" approved="yes">
         <source>Follow your order's status step-by-step</source>
-        <target xml:lang="ja">注文を順番に確認</target>
+        <target xml:lang="ja">注文內容</target>
         <note>Context:
 File: themes/classic/templates/customer/order-detail.tpl:84</note>
       </trans-unit>

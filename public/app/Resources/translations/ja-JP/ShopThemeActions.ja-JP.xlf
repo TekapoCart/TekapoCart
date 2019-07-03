@@ -297,7 +297,7 @@ File: themes/classic/templates/_partials/pagination.tpl:50</note>
     <body>
       <trans-unit id="94966d90747b97d1f0f206c98a8b1ac3" approved="yes">
         <source>Send</source>
-        <target xml:lang="ja">送信</target>
+        <target xml:lang="ja">送信する</target>
         <note>Context:
 File: themes/classic/modules/contactform/views/templates/widget/contactform.tpl:130</note>
       </trans-unit>
@@ -359,7 +359,7 @@ File: themes/classic/templates/customer/password-new.tpl:76</note>
     <body>
       <trans-unit id="332c80b1838dc515f5031e09da3b7f3f" approved="yes">
         <source>Reorder</source>
-        <target xml:lang="ja">再注文</target>
+        <target xml:lang="ja">再購入</target>
         <note>Context:
 File: themes/classic/templates/customer/order-detail.tpl:47</note>
       </trans-unit>
@@ -389,13 +389,13 @@ File: themes/classic/templates/catalog/_partials/sort-orders.tpl:33</note>
     <body>
       <trans-unit id="5015f5f6af450ad9492bc74f1059244b" approved="yes">
         <source>Filter By</source>
-        <target xml:lang="ja">絞込み条件</target>
+        <target xml:lang="ja">条件から検索</target>
         <note>Context:
 File: themes/classic/templates/catalog/_partials/facets.tpl:28</note>
       </trans-unit>
       <trans-unit id="81aa2078d1eceede831b2976dbf32e62" approved="yes">
         <source>Clear all</source>
-        <target xml:lang="ja">すべてクリア</target>
+        <target xml:lang="ja">検索条件を削除する</target>
         <note>Context:
 File: themes/classic/templates/catalog/_partials/facets.tpl:35</note>
       </trans-unit>

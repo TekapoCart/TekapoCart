@@ -100,7 +100,7 @@ File: controllers/admin/AdminCustomersController.php:1001</note>
     <body>
       <trans-unit id="f193c3dd6da8a06a610c632db03d55c8" approved="yes">
         <source>The order ID -- or the invoice order ID -- is missing.</source>
-        <target xml:lang="ja">不足している注文ID、または、請求注文ID</target>
+        <target xml:lang="ja">不足している注文番号、または、請求注文番号</target>
         <note>Context:
 File: controllers/admin/AdminPdfController.php:90</note>
       </trans-unit>
@@ -118,7 +118,7 @@ File: controllers/admin/AdminPdfController.php:125</note>
       </trans-unit>
       <trans-unit id="f2e9d5988718c8a3dde49c6bcb55125b" approved="yes">
         <source>The supply order ID is missing.</source>
-        <target xml:lang="ja">不足しているサプライヤー注文ID</target>
+        <target xml:lang="ja">不足しているサプライヤー注文番号</target>
         <note>Context:
 File: controllers/admin/AdminPdfController.php:150</note>
       </trans-unit>
