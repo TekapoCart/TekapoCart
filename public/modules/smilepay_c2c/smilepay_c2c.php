@@ -68,10 +68,7 @@ class Smilepay_c2c extends PaymentModule
         self::SMILEPAY_C2CP_711_ID => '7NET',
         self::SMILEPAY_C2CP_FAMI_ID => 'FAMI'
     );
-    protected static $order_img = array(
-        self::SMILEPAY_C2CP_711_ID => 'smilepay_c2c.jpg',
-        self::SMILEPAY_C2CP_FAMI_ID => 'smilepayc2c_fami.jpg'
-    );
+
     //Don't remove following comment.
     //Produce the lang string
     //$this->l('smilepay_c2cp_711');
@@ -667,8 +664,6 @@ class Smilepay_c2c extends PaymentModule
 
         $result['StorecsvName'] = $this->getCVSStoreName($service_id);
 
-        $order_img = $this->getOrder_img($params['order']->id_carrier);
-
         if (in_array($state, [
             $c2c_status,
             Configuration::get('PS_OS_OUTOFSTOCK'),
@@ -680,7 +675,6 @@ class Smilepay_c2c extends PaymentModule
             if ($Status == "1") {
 
                 $this->smarty->assign(array(
-                    'order_img' => $order_img,
                     'Status' => '超商取貨付款 處理中',
                     'SmilePayNO' => $result['SmilePayNO'],
                     'Amount' => $result['Amount'],
@@ -696,7 +690,6 @@ class Smilepay_c2c extends PaymentModule
             } else {
 
                 $this->smarty->assign(array(
-                    'order_img' => $order_img,
                     'Status' => '', // 不確定要填什麼
                     'PayEndDate' => "",
                     'SmilePayNO' => "",
@@ -773,16 +766,6 @@ class Smilepay_c2c extends PaymentModule
             return self::$spapi_pay_subzg[$service_id];
         } else {
             return '';
-        }
-    }
-
-    public function getOrder_img($carrier_id)
-    {
-        $service_id = $this->getService_id($carrier_id);
-        if (isset(self::$order_img[$service_id])) {
-            return self::$order_img[$service_id];
-        } else {
-            return self::$order_img[self::SMILEPAY_C2CP_711_ID];
         }
     }
 
