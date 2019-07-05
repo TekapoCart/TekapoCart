@@ -262,7 +262,8 @@
     <tab class_name="AdminPayment" display_type="default_list">
         <module name="ps_cashondelivery" position="1"/>
         <module name="ps_wirepayment" position="2"/>
-        <module name="paypal" position="3"/>
+        <module name="ecpay" position="3"/>
+        <module name="paypal" position="4"/>
         <module name="smilepay_credit" position="4"/>
         <module name="smilepay_atm" position="5"/>
         <module name="smilepay_c2c" position="6"/>
