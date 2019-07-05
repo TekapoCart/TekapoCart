@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>ecpay</name>
+	<displayName><![CDATA[綠界整合金流]]></displayName>
+	<version><![CDATA[1.0.0922]]></version>
+	<description><![CDATA[https://www.ecpay.com.tw/]]></description>
+	<author><![CDATA[ECPay]]></author>
+	<tab><![CDATA[payments_gateways]]></tab>
+	<confirmUninstall><![CDATA[是否確定移除綠界整合金流模組]]></confirmUninstall>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>
