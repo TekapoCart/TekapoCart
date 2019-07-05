@@ -152,7 +152,7 @@ class Ecpay extends PaymentModule
 
                 $payment_option = new PaymentOption();
                 $payment_option->setCallToActionText($payment_desc)
-                    ->setLogo(Media::getMediaPath(_PS_MODULE_DIR_.$this->name.'/logo.png'))
+                    // ->setLogo(Media::getMediaPath(_PS_MODULE_DIR_.$this->name.'/logo.png'))
                     ->setAction($this->context->link->getModuleLink($this->name, 'validation', array(), true))
                     ->setInputs([
                         'payment_type' => [
