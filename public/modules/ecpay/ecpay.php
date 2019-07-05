@@ -278,9 +278,9 @@ class Ecpay extends PaymentModule
 	public function getOrderStatusID($status_name)
 	{
 		$order_status = array(
-			'created' => 1
-			, 'succeeded' => 2
-			, 'failed' => 8
+			'created' => 1,
+            'succeeded' => 2,
+            'failed' => 8,
 		);
 		
 		return $order_status[$status_name];
@@ -288,12 +288,51 @@ class Ecpay extends PaymentModule
 	
 	public function setOrderComments($order_id, $comments)
 	{
-		# Set the order comments
-		$message = new Message();
-		$message->message = $comments;
-		$message->id_order = intval($order_id);
-		$message->private = 1;
-		$message->add();
+
+//	    # Set the order comments
+//		$message = new Message();
+//		$message->message = $comments;
+//		$message->id_order = intval($order_id);
+//		$message->private = 1;
+//		$message->add();
+
+        try {
+
+            $order = new Order($order_id);
+            $customer = new Customer($order->id_customer);
+
+            $id_customer_thread = CustomerThread::getIdCustomerThreadByEmailAndIdOrder($customer->email, $order->id);
+            if (!$id_customer_thread) {
+                $customer_thread = new CustomerThread();
+                $customer_thread->id_contact = 0;
+                $customer_thread->id_customer = (int)$order->id_customer;
+                $customer_thread->id_shop = (int)$this->context->shop->id;
+                $customer_thread->id_order = $order->id;
+                $customer_thread->id_lang = $this->context->language->id;
+                $customer_thread->email = $customer->email;
+                $customer_thread->status = 'open';
+                $customer_thread->token = Tools::passwdGen(12);
+                $customer_thread->add();
+            } else {
+                $customer_thread = new CustomerThread((int)$id_customer_thread);
+            }
+
+            $customer_message = new CustomerMessage();
+            $customer_message->id_customer_thread = $customer_thread->id;
+            $customer_message->id_employee = 0;
+            $customer_message->message = $comments;
+            $customer_message->private = 0;
+            $customer_message->system = 1;
+            $customer_message->add();
+
+        } catch(Exception $e) {
+
+            $error = $e->getMessage();
+            $result_message = '0|' . $error;
+
+            $this->module->logEcpayMessage('Order ' . $order_id . ' process result : ' . $result_message, true);
+        }
+
 	}
 	
 	public function updateOrderStatus($order_id, $status_id, $send_mail = false)

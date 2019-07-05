@@ -42,3 +42,5 @@ INSERT INTO `ps_module_access` (`id_profile`, `id_authorization_role`) VALUES
 (1, 922),
 (1, 923),
 (1, 924);
+
+

@@ -187,7 +187,7 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
 									}
 									else
 									{
-										if ($order->current_state != $order_create_status_id)
+										if ($order->current_state != $created_status_id)
 										{
 											# The order already paid or not in the standard procedure, do nothing
 										}
