@@ -718,7 +718,7 @@ File: modules/ps_emailgenerator/templates/core/payment.php:25</note>
     <body>
       <trans-unit id="280f51a8705636bd7e7ba595529411d4" approved="yes">
         <source>Password reset request for {shop_name}</source>
-        <target xml:lang="zh-TW">{shop_name}密碼重置請求</target>
+        <target xml:lang="zh-TW">{shop_name} 密碼重設請求</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/password_query.php:21</note>
       </trans-unit>
