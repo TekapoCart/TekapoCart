@@ -310,7 +310,7 @@ class Ecpay extends PaymentModule
 		}
 	}
 	
-	public function logEcpayMessage($message, $is_append)
+	public function logEcpayMessage($message, $is_append = false)
 	{
 		if (!$is_append)
 		{
