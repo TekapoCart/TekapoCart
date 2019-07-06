@@ -174,19 +174,20 @@ class Ecpay extends PaymentModule
 
 		// suzy: 2019-07-06 custom payment return
         $ecpay_feedback = '';
-        $customerMessages = CustomerMessage::getMessagesByOrderId((int) $this->module->currentOrder, false);
+        $customerMessages = CustomerMessage::getMessagesByOrderId((int) $params['order']->id, false);
         foreach ($customerMessages as $cmId => $customerMessage) {
             if ($customerMessage['system'] == 1 && $customerMessage['private'] == 0) {
                 $ecpay_feedback = $customerMessage['message'];
             }
         }
 
-        $this->smarty->assign(array(
-            $ecpay_feedback,
-        ));
+        $this->smarty->assign(
+            array(
+                'ecpay_feedback' => $ecpay_feedback,
+            )
+        );
 
-        return $this->display(__FILE__, 'payment_return.tpl');
-
+        return $this->fetch('module:ecpay/views/templates/hook/payment_return.tpl');
 	}
 	
 	public function checkCurrency($cart)

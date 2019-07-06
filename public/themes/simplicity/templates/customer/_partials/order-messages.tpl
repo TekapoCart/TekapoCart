@@ -38,7 +38,7 @@
           </div>
           <div class="col-sm-8">
             {if $message.system == 1}
-                {$message.message|replace:', ':'<br>'}
+                {$message.message|replace:',':'<br>' nofilter}
             {else}
                 {$message.message nofilter}
             {/if}
