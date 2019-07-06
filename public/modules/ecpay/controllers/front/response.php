@@ -30,6 +30,11 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                 if (count($ecpay_feedback) < 1) {
                     throw new Exception('Get ECPay feedback failed.');
                 } else {
+
+                    # Log ecpay feedback
+                    $this->module->logEcpayMessage(json_encode($ecpay_feedback), true);
+
+
                     # Get the cart order id
                     $cart_order_id = $this->module->getCartOrderID($ecpay_feedback['MerchantTradeNo'], Configuration::get('ecpay_merchant_id'));
 

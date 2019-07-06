@@ -123,7 +123,7 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                     $aio->MerchantID = Configuration::get('ecpay_merchant_id');
                     if ($this->module->isTestMode($aio->MerchantID)) {
                         $service_url = 'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut';
-                        $aio->Send['MerchantTradeNo'] = 'TEST';
+                        $aio->Send['MerchantTradeNo'] = date('YmdHis');
                     } else {
                         $service_url = 'https://payment.ecpay.com.tw/Cashier/AioCheckOut';
                     }
@@ -197,10 +197,7 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                     $this->module->validateOrder($cart_id, $order_status_id, $order_total, $this->module->displayName, $chosen_payment_desc, array(),
                         (int)$currency->id, false, $customer->secure_key);
 
-                    # Get the order
-                    $order = new Order($this->module->currentOrder);
-
-                    $aio->Send['MerchantTradeNo'] .= $order->reference;
+                    $aio->Send['MerchantTradeNo'] .= $this->module->currentOrder;
                     $aio->Send['MerchantTradeDate'] = date('Y/m/d H:i:s');
 
                     $aio->Send['ClientBackURL'] = Tools::getShopDomainSsl(true, true) . __PS_BASE_URI__
