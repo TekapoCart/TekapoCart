@@ -172,7 +172,20 @@ class Ecpay extends PaymentModule
 			return;
 		}
 
+		// suzy: 2019-07-06 custom payment return
+        $ecpay_feedback = '';
+        $customerMessages = CustomerMessage::getMessagesByOrderId((int) $this->module->currentOrder, false);
+        foreach ($customerMessages as $cmId => $customerMessage) {
+            if ($customerMessage['system'] == 1 && $customerMessage['private'] == 0) {
+                $ecpay_feedback = $customerMessage['message'];
+            }
+        }
 
+        $this->smarty->assign(array(
+            $ecpay_feedback,
+        ));
+
+        return $this->display(__FILE__, 'payment_return.tpl');
 
 	}
 	

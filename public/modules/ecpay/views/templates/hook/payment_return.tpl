@@ -1,0 +1,1 @@
+{$ecpay_feedback|replace:', ':'<br>'}

@@ -37,7 +37,11 @@
             {$message.message_date}
           </div>
           <div class="col-sm-8">
-            {$message.message nofilter}
+            {if $message.system == 1}
+                {$message.message|replace:', ':'<br>'}
+            {else}
+                {$message.message nofilter}
+            {/if}
           </div>
         </div>
       {/foreach}
