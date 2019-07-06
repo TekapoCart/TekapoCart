@@ -34,26 +34,22 @@ class Smilepay_c2cValidationModuleFrontController extends ModuleFrontController
         $total = (float)$cart->getOrderTotal(true, Cart::BOTH);
 
         /*
-        $mailVars =	array(
-            '{cheque_name}' => Configuration::get('CHEQUE_NAME'),
-			'{cheque_address}' => Configuration::get('CHEQUE_ADDRESS'),
-			'{cheque_address_html}' => str_replace("\n", '<br />', Configuration::get('CHEQUE_ADDRESS')));
-        */
-
-        /*
         $storeid = $_REQUEST['storeid'];
         $storename = $_REQUEST['storename'];
         $storeaddress = $_REQUEST['storeaddress'];
         */
 
-        $rq = Db::getInstance()->getRow('SELECT `id_order_state` FROM `' . _DB_PREFIX_ . 'order_state_lang` WHERE id_lang = \'' . pSQL('1') . '\' AND  template = \'SmilePay_c2c_status\'');
-
-        //$rq['id_order_state']
-
-        $c2c_status = $rq['id_order_state'];
-
-        $this->module->validateOrder((int)$cart->id, $c2c_status, $total, $this->module->displayName, null, array(), (int)$currency->id, false,
-            $customer->secure_key);
+        $this->module->validateOrder(
+            (int)$cart->id,
+            _SMILEPAY_C2C_PENDING_STATUS_,
+            $total,
+            $this->module->displayName,
+            null,
+            array(),
+            (int)$currency->id,
+            false,
+            $customer->secure_key
+        );
 
         $user_address = new Address(intval($cart->id_address_invoice));
         $store_data = $this->module->getStoreData();

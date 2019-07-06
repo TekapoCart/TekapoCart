@@ -1,14 +1,15 @@
 <?php
 /*
-*
-*  @author smilepay 
-*  <service@smse.comt.tw>
-*/
-include "smilepay_credit_orderst.php";
+ * 速買配 信用卡付款
+ */
 
 if (!defined('_PS_VERSION_')) {
     exit;
 }
+
+// 訂單狀態： 信用卡 等待付款
+define('_SMILEPAY_CREDIT_PENDING_STATUS_', 19);
+
 use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 
 class Smilepay_credit extends PaymentModule
@@ -285,15 +286,14 @@ class Smilepay_credit extends PaymentModule
         ) {
             return;
         }
-        $rq = Db::getInstance()->getRow('SELECT `id_order_state` FROM `' . _DB_PREFIX_ . 'order_state_lang` WHERE id_lang = \'' . pSQL('1') . '\' AND  template = \'SmilePay_credit_status\'');
-        $credit_status = $rq['id_order_state'];
+
         //<smilepay_c2cup> start
         $c2cup_template = '';
         $c2cup_run = false;
         //<smilepay_c2cup> end
         $state = $params['order']->getCurrentState();
-        //if ($state == Configuration::get('PS_OS_CHEQUE') || $state == Configuration::get('PS_OS_OUTOFSTOCK'))
-        if ($state == $credit_status || $state == Configuration::get('PS_OS_OUTOFSTOCK')) {
+
+        if ($state == _SMILEPAY_CREDIT_PENDING_STATUS_ || $state == Configuration::get('PS_OS_OUTOFSTOCK')) {
 
             // post value
 

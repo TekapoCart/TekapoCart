@@ -123,7 +123,7 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                     $aio->MerchantID = Configuration::get('ecpay_merchant_id');
                     if ($this->module->isTestMode($aio->MerchantID)) {
                         $service_url = 'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut';
-                        $aio->Send['MerchantTradeNo'] = date('YmdHis');
+                        $aio->Send['MerchantTradeNo'] = 'TEST';
                     } else {
                         $service_url = 'https://payment.ecpay.com.tw/Cashier/AioCheckOut';
                     }
@@ -131,9 +131,6 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                     $aio->HashIV = Configuration::get('ecpay_hash_iv');
                     $aio->ServiceURL = $service_url;
                     $aio->Send['ReturnURL'] = $this->context->link->getModuleLink('ecpay', 'response', array());
-                    $aio->Send['ClientBackURL'] = Tools::getShopDomainSsl(true,
-                            true) . __PS_BASE_URI__ . '/index.php?controller=order-confirmation&id_cart=' . $cart_id . '&id_module=' . $this->module->id . '&id_order=' . $this->module->currentOrder . '&key=' . $customer->secure_key;
-                    $aio->Send['MerchantTradeDate'] = date('Y/m/d H:i:s');
 
                     # Get the currency object
                     $currency = $this->context->currency;
@@ -196,14 +193,22 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                     }
 
                     # Create an order
-                    $order_status_id = $this->module->getOrderStatusID('created');# Preparation in progress
+                    $order_status_id = $this->module->getOrderStatusID('created', $payment_type); # Preparation in progress
                     $this->module->validateOrder($cart_id, $order_status_id, $order_total, $this->module->displayName, $chosen_payment_desc, array(),
                         (int)$currency->id, false, $customer->secure_key);
 
-                    # Get the order id
-                    $order = new Order($cart_id);
-                    $order_id = Order::getOrderByCartId($cart_id);
-                    $aio->Send['MerchantTradeNo'] .= (int)$order_id;
+                    # Get the order
+                    $order = new Order($this->module->currentOrder);
+
+                    $aio->Send['MerchantTradeNo'] .= $order->reference;
+                    $aio->Send['MerchantTradeDate'] = date('Y/m/d H:i:s');
+
+                    $aio->Send['ClientBackURL'] = Tools::getShopDomainSsl(true, true) . __PS_BASE_URI__
+                        . 'index.php?controller=order-confirmation&id_cart=' . $cart_id
+                        . '&id_module=' . $this->module->id
+                        . '&id_order=' . $this->module->currentOrder
+                        . '&key=' . $customer->secure_key
+                    ;
 
                     # Get the redirect html
                     $aio->CheckOut();

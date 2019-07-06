@@ -32,5 +32,3 @@ INSERT INTO `ps_module_access` (`id_profile`, `id_authorization_role`) VALUES
 (1, 918),
 (1, 919),
 (1, 920);
-
--- 同步文字 ps_order_state_lang

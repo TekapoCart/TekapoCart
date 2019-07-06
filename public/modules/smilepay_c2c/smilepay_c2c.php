@@ -1,23 +1,15 @@
 <?php
-
 /*
-
-*
-
-*  @author smilepay 
-
-*  <service@smse.comt.tw>
-
-*/
-
-include "smilepay_c2c_orderst_1.php";
-
-include "smilepay_c2c_orderst_2.php";
-
+ * 速買配 超商取貨付款
+ */
 
 if (!defined('_PS_VERSION_')) {
     exit;
 }
+
+// 訂單狀態： 超商取貨付款 處理中
+
+define('_SMILEPAY_C2C_PENDING_STATUS_', 14);
 
 if (!defined('SMILEPAY_C2CP_MODULE')) {
     define('SMILEPAY_C2CP_MODULE', 1);
@@ -25,6 +17,7 @@ if (!defined('SMILEPAY_C2CP_MODULE')) {
 
 define('SMILEPAY_C2CP_MAP_SELECT', 1);
 define('SMILEPAY_C2CP_MAP_ORDER_SUBMIT', 2);
+
 use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 
 class Smilepay_c2c extends PaymentModule
@@ -342,19 +335,6 @@ class Smilepay_c2c extends PaymentModule
         return true;
     }
 
-    public function modifyDBOrderStateName()
-    {
-        $rq = Db::getInstance()->getRow('SELECT `id_order_state` FROM `' . _DB_PREFIX_ . 'order_state_lang` WHERE id_lang = \'' . pSQL('1') . '\' AND  template = \'SmilePay_c2c_status\'');
-        if ($rq['id_order_state']) {
-            $order_status_name = $this->l('smilepay_order_state_wait');
-
-            return Db::getInstance()->Execute('UPDATE `' . _DB_PREFIX_ . 'order_state_lang` SET `name`=' . "'$order_status_name' WHERE `id_order_state`='" . $rq['id_order_state'] . "';");
-
-        }
-        return true;
-    }
-
-
     private function _postValidation()
     {
 
@@ -593,17 +573,6 @@ class Smilepay_c2c extends PaymentModule
         if (!$this->isSmilepay_c2cp_shipping($params['cart']->id_carrier)) {
             return;
         }
-
-        /* if(defined('SMILEPAY_C2CP_MODULE'))
-         {
-             $smilepay_c2cup_obj = new Smilepay_c2cup();
-
-             if($smilepay_c2cup_obj->isSelectedC2cupShipping( $params['cart']->id_carrier))
-             {
-                 return;
-             }
-         }*/
-
 
         $this->smarty->assign(
             $this->getTemplateVars()

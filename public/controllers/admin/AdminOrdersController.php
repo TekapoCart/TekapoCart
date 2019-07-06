@@ -1866,14 +1866,18 @@ class AdminOrdersControllerCore extends AdminController
 
         // suzy: 2018-09-14 調整訂單狀態顯示
         $states = OrderState::getOrderStates($this->context->language->id);
-        $unpaid_state_ids = [10, 20, 15, 16, 18, 19, 17, 14, 1, 12, 23, 24];
-        $paid_state_ids = [2, 11, 9];
-        $shipment_state_ids = [3, 4, 13, 5, 25];
+        $unpaid_state_ids = [1, 10, 12, 19, 20, 23, 24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
+        $processing_state_ids =  [14, 17, 25];
+        $paid_state_ids = [2, 9];
+        $shipment_state_ids = [3, 4, 5];
         $archived_state_ids = [7, 22];
-        $error_state_ids = [6, 8, 21, 26];
+        $error_state_ids = [6, 8, 21];
         $sorted_states = [
             'unpaid' => [
-                '-' => '[待付款] 處理中 / 待付款',
+                '-' => '[待付款]',
+            ],
+            'processing' => [
+                '-' => '[處理中]',
             ],
             'paid' => [
                 '-' => '[已付款]',
@@ -1887,6 +1891,7 @@ class AdminOrdersControllerCore extends AdminController
             'error' => [
                 '-' => '[異常]',
             ],
+
         ];
         foreach ($states as $state) {
             if ($state['sort'] == 0) {
@@ -1894,6 +1899,8 @@ class AdminOrdersControllerCore extends AdminController
             }
             if (in_array($state['id_order_state'], $unpaid_state_ids)) {
                 $sorted_states['unpaid'][$state['id_order_state']] = '﹂' . $state['name'];
+            } else if (in_array($state['id_order_state'], $processing_state_ids)) {
+                    $sorted_states['processing'][$state['id_order_state']] = '﹂' . $state['name'];
             } else if (in_array($state['id_order_state'], $paid_state_ids)) {
                 $sorted_states['paid'][$state['id_order_state']] = '﹂' . $state['name'];
             } else if (in_array($state['id_order_state'], $shipment_state_ids)) {

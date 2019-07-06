@@ -38,27 +38,22 @@ class Smilepay_ezcatValidationModuleFrontController extends ModuleFrontControlle
         $currency = $this->context->currency;
         $total = (float)$cart->getOrderTotal(true, Cart::BOTH);
 
-        /*
-
-$mailVars =	array(
-    '{cheque_name}' => Configuration::get('CHEQUE_NAME'),
-    '{cheque_address}' => Configuration::get('CHEQUE_ADDRESS'),
-    '{cheque_address_html}' => str_replace("\n", '<br />', Configuration::get('CHEQUE_ADDRESS')));
-      */
-
         /*$storeid=$_REQUEST['storeid'];
         $storename=$_REQUEST['storename'];
         $storeaddress=$_REQUEST['storeaddress'];
         */
-        $rq = Db::getInstance()->getRow('SELECT `id_order_state` FROM `' . _DB_PREFIX_ . 'order_state_lang` WHERE id_lang = \'' . pSQL('1') . '\' AND  template = \'SmilePay_ezcat_status\'');
 
-        //$rq['id_order_state']
-
-        $ezcat_status = $rq['id_order_state'];
-
-
-        $this->module->validateOrder((int)$cart->id, $ezcat_status, $total, $this->module->displayName, null, array(), (int)$currency->id, false,
-            $customer->secure_key);
+        $this->module->validateOrder(
+            (int)$cart->id,
+            _SMILEPAY_EZCAT_PENDING_STATUS_,
+            $total,
+            $this->module->displayName,
+            null,
+            array(),
+            (int)$currency->id,
+            false,
+            $customer->secure_key
+        );
 
         $user_address = new Address(intval($cart->id_address_delivery));
         $address = $user_address->city . $user_address->address1 . $user_address->address2;

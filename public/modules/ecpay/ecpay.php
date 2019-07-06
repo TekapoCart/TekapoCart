@@ -61,7 +61,7 @@ class Ecpay extends PaymentModule
 			, 'ecpay_payment_cvs'
 			, 'ecpay_payment_barcode'
 		);
-		
+
 		# Custom variables: ECPay log
 		$this->ecpayLog = _PS_MODULE_DIR_ . $this->name . '/log/return_url.log';
 		if (!file_exists(dirname($this->ecpayLog)))
@@ -74,26 +74,20 @@ class Ecpay extends PaymentModule
 	public function install()
 	{
 		# Register PrestaShop hooks
-		if (!parent::install() OR !$this->registerHook('paymentOptions') or !$this->registerHook('paymentReturn'))
-		{
+		if (!parent::install() OR !$this->registerHook('paymentOptions') or !$this->registerHook('paymentReturn')) {
 			return false;
 		}
-		else
-		{
-			return true;
-		}
+
+        return true;
 	}
-		
+
 	public function uninstall()
 	{
-		if (!parent::uninstall() or !$this->cleanEcpayConfig())
-		{
+		if (!parent::uninstall() or !$this->cleanEcpayConfig()) {
 			return false;
 		}
-		else
-		{
-			return true;
-		}
+
+        return true;
 	}
 		
 	public function getContent()
@@ -167,9 +161,6 @@ class Ecpay extends PaymentModule
 
             }
         }
-
-
-
 
         return $payment_options;
 	}
@@ -275,13 +266,94 @@ class Ecpay extends PaymentModule
 		return $cart_order_id;
 	}
 	
-	public function getOrderStatusID($status_name)
+	public function getOrderStatusID($status_name, $payment_type = '')
 	{
-		$order_status = array(
-			'created' => 1,
-            'succeeded' => 2,
-            'failed' => 8,
-		);
+	    switch ($payment_type) {
+            case 'Credit':
+                $order_status = array(
+                    'created' => 27,
+                    'succeeded' => 2,
+                    'failed' => 8,
+                );
+                break;
+            case 'Credit_03':
+                $order_status = array(
+                    'created' => 28,
+                    'succeeded' => 2,
+                    'failed' => 8,
+                );
+                break;
+            case 'Credit_06':
+                $order_status = array(
+                    'created' => 29,
+                    'succeeded' => 2,
+                    'failed' => 8,
+                );
+                break;
+            case 'Credit_12':
+                $order_status = array(
+                    'created' => 30,
+                    'succeeded' => 2,
+                    'failed' => 8,
+                );
+                break;
+            case 'Credit_18':
+                $order_status = array(
+                    'created' => 31,
+                    'succeeded' => 2,
+                    'failed' => 8,
+                );
+                break;
+            case 'Credit_24':
+                $order_status = array(
+                    'created' => 32,
+                    'succeeded' => 2,
+                    'failed' => 8,
+                );
+                break;
+            case 'WebATM':
+                $order_status = array(
+                    'created' => 33,
+                    'succeeded' => 2,
+                    'failed' => 8,
+                );
+                break;
+            case 'ATM':
+                $order_status = array(
+                    'created' => 34,
+                    'succeeded' => 2,
+                    'failed' => 8,
+                );
+                break;
+            case 'CVS':
+                $order_status = array(
+                    'created' => 35,
+                    'succeeded' => 2,
+                    'failed' => 8,
+                );
+                break;
+            case 'BARCODE':
+                $order_status = array(
+                    'created' => 36,
+                    'succeeded' => 2,
+                    'failed' => 8,
+                );
+                break;
+            default:
+                $order_status = array(
+                    'created' => 1,
+                    'succeeded' => 2,
+                    'failed' => 8,
+                );
+
+        }
+
+//        $order_status = array(
+//            'created' => 1,
+//            'succeeded' => 2,
+//            'failed' => 8,
+//        );
+
 		
 		return $order_status[$status_name];
 	}
@@ -386,13 +458,12 @@ class Ecpay extends PaymentModule
 		# Set the payment methods options
 		$payment_methods = array();
 		$payments_desc = $this->getPaymentsDesc();
-		foreach ($payments_desc as $payment_name => $payment_desc)
-		{
+		foreach ($payments_desc as $payment_name => $payment_desc) {
 			array_push($payment_methods, array('id_option' => strtolower($payment_name), 'name' => $payment_desc));
 		}
 		
 		# Set the configurations for generating a setting form
-    $fields_form[0]['form'] = array(
+        $fields_form[0]['form'] = array(
 			'legend' => array(
 				'title' => $this->l('ECPay configuration')
 				, 'image' => '../modules/ecpay/images/ecpay_setting_logo.png'
@@ -432,30 +503,29 @@ class Ecpay extends PaymentModule
 				, 'title' => $this->l('Save')
 				, 'class' => 'button'
 			)
-    );
+        );
 		
 		$helper = new HelperForm();
 		
 		# Module, token and currentIndex
-    $helper->module = $this;
-    $helper->name_controller = $this->name;
-    $helper->token = Tools::getAdminTokenLite('AdminModules');
-    $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
+        $helper->module = $this;
+        $helper->name_controller = $this->name;
+        $helper->token = Tools::getAdminTokenLite('AdminModules');
+        $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
 		
 		# Get the default language
-    $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
+        $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
 		
 		# Language
-    $helper->default_form_language = $default_lang;
-    $helper->allow_employee_form_lang = $default_lang;
+        $helper->default_form_language = $default_lang;
+        $helper->allow_employee_form_lang = $default_lang;
 		
 		# Load the current settings
-		foreach ($this->ecpayParams as $param_name)
-		{
+		foreach ($this->ecpayParams as $param_name) {
 			$helper->fields_value[$param_name] = Configuration::get($param_name);
 		}
      
-    return $helper->generateForm($fields_form);
+        return $helper->generateForm($fields_form);
 	}
 	
 	private function postProcess()

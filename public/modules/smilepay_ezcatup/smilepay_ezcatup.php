@@ -1,9 +1,9 @@
 
 <?php
 
-if (!defined('_PS_VERSION_'))
-  exit;
-
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class Smilepay_ezcatup extends CarrierModule
 {
