@@ -172,7 +172,8 @@ class Ecpay extends PaymentModule
 			return;
 		}
 
-		Tools::redirect('index.php?controller=history');
+
+
 	}
 	
 	public function checkCurrency($cart)
@@ -268,6 +269,7 @@ class Ecpay extends PaymentModule
 	
 	public function getOrderStatusID($status_name, $payment_type = '')
 	{
+	    // suzy: 2019-07-06 自訂狀態 ID
 	    switch ($payment_type) {
             case 'Credit':
                 $order_status = array(
@@ -360,14 +362,6 @@ class Ecpay extends PaymentModule
 	
 	public function setOrderComments($order_id, $comments)
 	{
-
-//	    # Set the order comments
-//		$message = new Message();
-//		$message->message = $comments;
-//		$message->id_order = intval($order_id);
-//		$message->private = 1;
-//		$message->add();
-
         try {
 
             $order = new Order($order_id);

@@ -34,7 +34,6 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                     # Log ecpay feedback
                     $this->module->logEcpayMessage(json_encode($ecpay_feedback), true);
 
-
                     # Get the cart order id
                     $cart_order_id = $this->module->getCartOrderID($ecpay_feedback['MerchantTradeNo'], Configuration::get('ecpay_merchant_id'));
 
@@ -84,6 +83,10 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                         $order_current_status = (int)$order->getCurrentState();
                         switch ($ecpay_payment_method) {
                             case ECPay_PaymentMethod::Credit:
+                                # suzy: 2019-07-06 Set instalment status id to 27
+                                if (in_array($order_current_status, [28, 29, 30, 31, 32])) {
+                                    $order_current_status = 27;
+                                }
                             case ECPay_PaymentMethod::WebATM:
                                 if ($return_code != 1 and $return_code != 800) {
                                     throw new Exception($fail_message);
