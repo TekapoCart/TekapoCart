@@ -81,7 +81,10 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
 						
 						# Update the order status and comments
 						$fail_message = sprintf('Order %s Exception.(%s: %s)', $cart_order_id, $return_code, $return_message);
-						$created_status_id = $this->module->getOrderStatusID('created');
+
+                        # Get payment status id
+                        $payment_type = $ecpay_payment_method;
+						$created_status_id = $this->module->getOrderStatusID('created', $payment_type);
 						$succeeded_status_id = $this->module->getOrderStatusID('succeeded');
 						$order_current_status = (int)$order->getCurrentState();
 						switch($ecpay_payment_method)
