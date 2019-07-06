@@ -325,14 +325,14 @@ class Ecpay extends PaymentModule
                     'failed' => 8,
                 );
                 break;
-            case 'CVS':
+            case 'BARCODE':
                 $order_status = array(
                     'created' => 35,
                     'succeeded' => 2,
                     'failed' => 8,
                 );
                 break;
-            case 'BARCODE':
+            case 'CVS':
                 $order_status = array(
                     'created' => 36,
                     'succeeded' => 2,
