@@ -7,7 +7,7 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
     public function postProcess()
     {
         # Return URL log
-        $this->module->logEcpayMessage('Process ECPay feedback');
+        $this->module->logEcpayMessage('Process ECPay feedback', true); // suzy: 2019-07-07 不洗掉
 
         # Set the default result message
         $result_message = '1|OK';
