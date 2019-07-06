@@ -116,7 +116,7 @@ if (!defined('_PS_HOST_MODE_')) {
 }
 
 // suzy: 2019-07-06 第三方回傳 Log
-define('_PS_LOG_DIR_', str_replace('public', 'log', _PS_ROOT_DIR_) . '/');
+define('_PS_LOG_DIR_', _PS_ROOT_DIR_.'/var/logs/');
 
 define('_PS_CAT_IMG_DIR_', _PS_IMG_DIR_.'c/');
 define('_PS_COL_IMG_DIR_', _PS_IMG_DIR_.'co/');

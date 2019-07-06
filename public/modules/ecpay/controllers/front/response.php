@@ -32,7 +32,7 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                 } else {
 
                     # Log ecpay feedback
-                    $this->module->logEcpayMessage(json_encode($ecpay_feedback), true);
+                    # $this->module->logEcpayMessage(json_encode($ecpay_feedback), true);
 
                     # Get the cart order id
                     $cart_order_id = $this->module->getCartOrderID($ecpay_feedback['MerchantTradeNo'], Configuration::get('ecpay_merchant_id'));
