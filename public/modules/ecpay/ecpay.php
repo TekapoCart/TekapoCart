@@ -63,11 +63,7 @@ class Ecpay extends PaymentModule
 		);
 
 		# Custom variables: ECPay log
-		$this->ecpayLog = _PS_MODULE_DIR_ . $this->name . '/log/return_url.log';
-		if (!file_exists(dirname($this->ecpayLog)))
-		{
-			mkdir(dirname($this->ecpayLog));
-		}
+		$this->ecpayLog = _PS_LOG_DIR_ . $this->name . '.log';
 	}
 	
 	# Perform checks and actions during the module's installation process
