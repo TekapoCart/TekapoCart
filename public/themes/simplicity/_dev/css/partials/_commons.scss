@@ -557,7 +557,7 @@ button:disabled {
   }
 }
 
-#content-hook_payment_return {
+#content-hook_payment_return, #content-hook_order_confirmation, #content-hook_display_order_detail {
   margin-bottom: 20px;
   .text-block {
     line-height: 35px;

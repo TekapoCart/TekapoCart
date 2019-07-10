@@ -199,7 +199,7 @@ File: themes/classic/templates/customer/guest-login.tpl:34</note>
       </trans-unit>
       <trans-unit id="92dbb751eb9457441af82a53f3cfae54" approved="yes">
         <source>For example: QIIXJXNUI or QIIXJXNUI#1</source>
-        <target xml:lang="ja">例： QIIXJXNUI 、 QIIXJXNUI#1 など</target>
+        <target xml:lang="ja">例： QIIXJXNUI など</target>
         <note>Context:
 File: themes/classic/templates/customer/guest-login.tpl:52</note>
       </trans-unit>

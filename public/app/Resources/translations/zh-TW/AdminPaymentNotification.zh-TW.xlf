@@ -46,7 +46,7 @@ File: classes/PaymentModule.php:880</note>
       </trans-unit>
       <trans-unit id="43423b4056880b08f2c9aa50d8670531" approved="yes">
         <source>Cart cannot be loaded or an order has already been placed using this cart</source>
-        <target xml:lang="zh-TW">無法載入購物車或是這個購物車已經建立了一個訂單</target>
+        <target xml:lang="zh-TW">Oops 無法載入購物車或是這個購物車已經建立了一筆訂單。</target>
         <note>Context:
 File: classes/PaymentModule.php:897</note>
       </trans-unit>

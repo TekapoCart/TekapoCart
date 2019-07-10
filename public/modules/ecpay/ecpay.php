@@ -163,28 +163,36 @@ class Ecpay extends PaymentModule
   
 	public function hookPaymentReturn($params)
 	{
-		if (!$this->active)
-		{
+		if (!$this->active) {
 			return;
 		}
 
-		// suzy: 2019-07-06 custom payment return
-        $ecpay_feedback = '';
-        $customerMessages = CustomerMessage::getMessagesByOrderId((int) $params['order']->id, false);
-        foreach ($customerMessages as $cmId => $customerMessage) {
-            if ($customerMessage['system'] == 1 && $customerMessage['private'] == 0) {
-                $ecpay_feedback = $customerMessage['message'];
-            }
-        }
+        $rq = Db::getInstance()->getRow('SELECT payment_message FROM `'
+            . _DB_PREFIX_ . 'ORDERS` WHERE id_order=' . $params['order']->id);
+        $payment_message = $rq['payment_message'];
 
-        $this->smarty->assign(
-            array(
-                'ecpay_feedback' => $ecpay_feedback,
-            )
-        );
+        $this->smarty->assign(array(
+            'payment_message' => $payment_message,
+        ));
 
         return $this->fetch('module:ecpay/views/templates/hook/payment_return.tpl');
 	}
+
+    public function hookDisplayOrderDetail($params)
+    {
+
+        if ($params['order']->module !== 'ecpay') {
+            return;
+        }
+
+        // 顯示付款資訊
+        $row = Db::getInstance()->getRow('SELECT payment_message FROM `' . _DB_PREFIX_ . 'orders` WHERE id_order=' . $params['order']->id);
+        $this->smarty->assign([
+            'payment_message' => $row['payment_message'],
+        ]);
+
+        return $this->fetch('module:smilepay_ecpay/views/templates/hook/order_detail.tpl');
+    }
 	
 	public function checkCurrency($cart)
 	{
@@ -369,7 +377,25 @@ class Ecpay extends PaymentModule
 		
 		return $order_status[$status_name];
 	}
-	
+
+	// suzy: 2019-07-09 使用後台訂單付款訊息 orders.payment_message
+	public function setPaymentMessage($order_id, $message)
+    {
+        try {
+
+            Db::getInstance()->Execute('UPDATE `'
+                . _DB_PREFIX_ . 'orders` SET  `payment_message` = "' . $message
+                . '"  WHERE  `id_order` =' . $order_id);
+
+        } catch(Exception $e) {
+
+            $error = $e->getMessage();
+            $result_message = '0|' . $error;
+
+            $this->module->logEcpayMessage('Order ' . $order_id . ' process result : ' . $result_message, true);
+        }
+    }
+
 	public function setOrderComments($order_id, $comments)
 	{
         try {

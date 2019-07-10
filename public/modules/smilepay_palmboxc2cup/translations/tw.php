@@ -44,7 +44,7 @@ $_MODULE['<{smilepay_palmboxc2cup}prestashop>content_order_41da9ff56da0ff3422de9
 $_MODULE['<{smilepay_palmboxc2cup}prestashop>content_order_bb38edb2ab34e9f812d35a4203ec9f70'] = '未選擇門市，請至速買配平台手動建立';
 $_MODULE['<{smilepay_palmboxc2cup}prestashop>content_order_de5ef09e1e35278009348b465de7a24a'] = '單位:公分';
 $_MODULE['<{smilepay_palmboxc2cup}prestashop>content_order_85dc7591de3a6093cbbba1b30122d4ec'] = '建立訂單';
-$_MODULE['<{smilepay_palmboxc2cup}prestashop>content_order_c68b83413439cbbefa27d39e52ed99f3'] = 'SmilePay 追蹤碼';
+$_MODULE['<{smilepay_palmboxc2cup}prestashop>content_order_c68b83413439cbbefa27d39e52ed99f3'] = 'SmilePay No.';
 $_MODULE['<{smilepay_palmboxc2cup}prestashop>content_order_b07f8d2bf975389c35549e50951de39a'] = '寄件碼';
 $_MODULE['<{smilepay_palmboxc2cup}prestashop>content_order_b1e2d01fb0c85dbb4183b1e22e6887ea'] = '注意事項:';
 $_MODULE['<{smilepay_palmboxc2cup}prestashop>content_order_8051a9d19a2cfb2c16f7b154c9674bee'] = '格口尺寸會依據您的大小，而收取不同的運費。';

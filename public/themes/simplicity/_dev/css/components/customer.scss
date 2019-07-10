@@ -72,10 +72,9 @@
 }
 /*** Most of the customer accpunt pages ***/
 .page-customer-account {
-  #content {
-    /*@include customer-area-box;*/
-    font-size: $font-size-sm;
 
+  #content {
+    font-size: $font-size-sm;
     .order-actions {
       a {
         padding: 0 0.125rem;
@@ -90,6 +89,12 @@
     .no-account {
       /*text-align: center;*/
       font-size: $base-font-size;
+    }
+  }
+
+  &.page-guest-tracking {
+    #content {
+      font-size: initial;
     }
   }
 }
@@ -158,7 +163,7 @@
   }
 }
 /*** Order details page ***/
-.page-order-detail {
+.page-order-detail, .page-guest-tracking {
   /*font-size: 0.875rem;*/
   /*color: $gray;*/
   .box {

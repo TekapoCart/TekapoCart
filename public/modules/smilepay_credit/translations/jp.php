@@ -43,5 +43,5 @@ $_MODULE['<{smilepay_credit}prestashop>payment_return_7aafff18bdf75d825ea66cdc8b
 $_MODULE['<{smilepay_credit}prestashop>payment_return_98d20470c116d9fd1e0a36e6d4d53676'] = '交易金額';
 $_MODULE['<{smilepay_credit}prestashop>payment_return_0db71da7150c27142eef9d22b843b4a9'] = '若有任何問題，請聯繫我們';
 $_MODULE['<{smilepay_credit}prestashop>payment_return_64430ad2835be8ad60c59e7d44e4b0b1'] = '客戶服務';
-$_MODULE['<{smilepay_credit}prestashop>payment_return_8de637e24570c1edb0357826a2ad5aea'] = '我們在您的訂單中發現一個問題。如果您認為這是一個錯誤，您可以聯繫我們';
+$_MODULE['<{smilepay_credit}prestashop>payment_return_8de637e24570c1edb0357826a2ad5aea'] = '訂單發生異常。如果您持續無法成功下單，敬請與我們聯絡。';
 $_MODULE['<{smilepay_credit}prestashop>payment_return_c52e73296e544682fed91beabd0ca8c1'] = '付款失敗';

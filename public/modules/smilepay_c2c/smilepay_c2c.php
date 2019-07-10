@@ -8,7 +8,6 @@ if (!defined('_PS_VERSION_')) {
 }
 
 // 訂單狀態： 超商取貨付款 處理中
-
 define('_SMILEPAY_C2C_PENDING_STATUS_', 14);
 
 if (!defined('SMILEPAY_C2CP_MODULE')) {
@@ -22,12 +21,8 @@ use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 
 class Smilepay_c2c extends PaymentModule
 {
-
-    private $_html = '';
-
-    private $_postErrors = array();
-
     const PREFIX = 'smilepay_c2cp_';
+
     const SMILEPAY_C2CP_711_CARRIER_ID = 'SMILEPAY_C2CP_711_CARRIER_ID';
     const SMILEPAY_C2CP_711_CARRIER_ID_REF = 'SMILEPAY_C2CP_711_CARRIER_ID_REF';
     const SMILEPAY_C2CP_FAMI_CARRIER_ID = 'SMILEPAY_C2CP_FAMI_CARRIER_ID';
@@ -36,17 +31,17 @@ class Smilepay_c2c extends PaymentModule
     const SMILEPAY_C2CP_711_ID = 'smilepay_c2cp_711';
     const SMILEPAY_C2CP_FAMI_ID = 'smilepay_c2cp_fami';
 
+    private $_html = '';
+    private $_postErrors = [];
     protected $emapurl = 'https://emap.presco.com.tw/c2cemap.ashx';
-    public $id_carrier = array();
-    public $id_ref_carrier = array();
-
+    public $id_carrier = [];
+    public $id_ref_carrier = [];
     public $Dcvc;
-
     public $Mid;
-
     public $Rvg2c;
     public $VKey;
     public $Apiurl;
+
     protected static $map_url = array(
         self::SMILEPAY_C2CP_711_ID => array(
             'mobile' => 'https://emap.presco.com.tw/c2cemapm-u.ashx?eshopid=870&servicetype=1&tempvar=%s&url=%s',
@@ -57,15 +52,17 @@ class Smilepay_c2c extends PaymentModule
             'normal' => 'https://ssl.smse.com.tw/api/LogisticsEmap.asp?TypesServer=FAMIC2C&TypesInterface=WEB&tempvar=%s&url=%s'
         )
     );
+
     protected static $spapi_pay_subzg = array(
         self::SMILEPAY_C2CP_711_ID => '7NET',
-        self::SMILEPAY_C2CP_FAMI_ID => 'FAMI'
+        self::SMILEPAY_C2CP_FAMI_ID => 'FAMI',
     );
 
-    //Don't remove following comment.
-    //Produce the lang string
-    //$this->l('smilepay_c2cp_711');
-    //$this->l('smilepay_c2cp_fami');
+    protected static $spapi_pay_zg = array(
+        self::SMILEPAY_C2CP_711_ID => 51,
+        self::SMILEPAY_C2CP_FAMI_ID => 51,
+    );
+
     protected $_carriers_brief = array(
         self::SMILEPAY_C2CP_711_ID =>
             array(
@@ -83,24 +80,15 @@ class Smilepay_c2c extends PaymentModule
             ),
     );
 
-
     public function __construct()
     {
-
         $this->name = 'smilepay_c2c';
-
         $this->tab = 'payments_gateways';
-
         $this->version = '2.2.5';
-
         $this->author = 'SmilePay';
-
         $this->Apiurl = 'http://ssl.smse.com.tw/ezpos/mtmk_utf.asp';
-
         $this->currencies = true;
-
         $this->currencies_mode = 'checkbox';
-
 
         $config = Configuration::getMultiple(array(
             'SMILEPAY_c2c_DCVC',
@@ -110,8 +98,7 @@ class Smilepay_c2c extends PaymentModule
             'SMILEPAY_c2c_Spdesc',
             'SMILEPAY_c2c_paymentName',
             self::SMILEPAY_C2CP_711_CARRIER_ID,
-            self::SMILEPAY_C2CP_711_CARRIER_ID_REF
-        ,
+            self::SMILEPAY_C2CP_711_CARRIER_ID_REF,
             self::SMILEPAY_C2CP_FAMI_CARRIER_ID,
             self::SMILEPAY_C2CP_FAMI_CARRIER_ID_REF
         ));
@@ -160,11 +147,8 @@ class Smilepay_c2c extends PaymentModule
 
         parent::__construct();
 
-
         $this->displayName = $this->l('SmilePay c2c');
-
         $this->description = "買家選取門市→賣家列印服務單→門市交寄（60元）→三日貨到店，簡訊通知買家→買家七日內取貨付款。<br>免年費型手續費：13元，運費：60元。";
-
         $this->confirmUninstall = $this->l('Are you sure you want to delete your details ?');
 
         if (trim($this->paymentName) == "") {
@@ -179,12 +163,10 @@ class Smilepay_c2c extends PaymentModule
             $this->warning = $this->l('No currency set for this module');
         }
 
-
     }
 
     public function install()
     {
-
         if (!parent::install() || !$this->registerHook('paymentOptions') || !$this->registerHook('paymentReturn')
             || !$this->registerHook('actionCarrierUpdate') || !$this->registerHook('displayCarrierExtraContent')
             || !$this->registerHook('actionCarrierProcess') || !$this->registerHook('actionFrontControllerSetMedia')
@@ -197,14 +179,11 @@ class Smilepay_c2c extends PaymentModule
             }
         }
 
-
         return true;
-
     }
 
     public function uninstall()
     {
-
         if (!Configuration::deleteByName('SMILEPAY_c2c_DCVC') || !Configuration::deleteByName('SMILEPAY_c2c_MID')
             || !Configuration::deleteByName('SMILEPAY_c2c_Rvg2c') || !Configuration::deleteByName('SMILEPAY_c2c_VKey')
             || !Configuration::deleteByName('SMILEPAY_c2c_paymentName') || !Configuration::deleteByName('SMILEPAY_c2c_Spdesc') || !parent::uninstall()
@@ -220,7 +199,6 @@ class Smilepay_c2c extends PaymentModule
             }
         }
         return true;
-
     }
 
     protected function removeCarrierConfig()
@@ -243,7 +221,6 @@ class Smilepay_c2c extends PaymentModule
     //create carrier
     protected function createCarriers()
     {
-
         return $this->_resetCarrierdata();
     }
 
@@ -281,7 +258,6 @@ class Smilepay_c2c extends PaymentModule
 
         }
         return !$error;
-
     }
 
     //
@@ -295,6 +271,7 @@ class Smilepay_c2c extends PaymentModule
         } else {
             $carrier = new Carrier();
         }
+
         $carrier->name = $this->l($carrier_brief_array['name']);
         $carrier->active = true;
         $carrier->deleted = 0;
@@ -305,7 +282,6 @@ class Smilepay_c2c extends PaymentModule
         $carrier->is_module = true;
         $carrier->external_module_name = $this->name;
         $carrier->need_range = true;
-
 
         if (!$add_new) {
             if (!file_exists(dirname(__FILE__) . $carrier_brief_array['icon'], _PS_SHIP_IMG_DIR_ . '/' . (int)$carrier->id . '.jpg')) {
@@ -337,7 +313,6 @@ class Smilepay_c2c extends PaymentModule
 
     private function _postValidation()
     {
-
         if (Tools::isSubmit('btnSubmit')) {
 
             if (!Tools::getValue('Dcvc')) {
@@ -349,15 +324,12 @@ class Smilepay_c2c extends PaymentModule
             } elseif (!Tools::getValue('Mid')) {
                 $this->_postErrors[] = $this->l('Check code is required.');
             }
-
         }
-
     }
 
 
     private function _postProcess()
     {
-
         if (Tools::isSubmit('btnSubmit')) {
 
             if (!is_null(Tools::getValue('Dcvc'))) {
@@ -395,125 +367,79 @@ class Smilepay_c2c extends PaymentModule
             } else {
                 $spdesc = Tools::getValue('Spdesc');
             }
+
             Configuration::updateValue('SMILEPAY_c2c_DCVC', $dcvc);
-
             Configuration::updateValue('SMILEPAY_c2c_MID', $mid);
-
             Configuration::updateValue('SMILEPAY_c2c_Rvg2c', $rvg2c);
-
             Configuration::updateValue('SMILEPAY_c2c_VKey', $vkey);
-
             Configuration::updateValue('SMILEPAY_c2c_paymentName', $paymentName);
-
             Configuration::updateValue('SMILEPAY_c2c_Spdesc', $spdesc);
+
             //reset carrier
             if (!is_null(Tools::getValue('SMILEPAY_c2cp_Carrier_Reset_on')) && Tools::getValue('SMILEPAY_c2cp_Carrier_Reset_on') == 'Y') {
-
                 $this->_resetCarrierdata();
             }
-
-
         }
 
         $this->_html .= $this->displayConfirmation($this->l('Settings updated'));
-
     }
 
 
     private function _displaySmilepay()
     {
-
         $this->_html .= '<img src="../modules/smilepay_c2c/smilepay_c2c.jpg" style="float:left; margin-right:15px;"><b>' . $this->l('This module allows you to accept payments by Smilepay c2c.') . '</b><br /><br />';
-
     }
 
 
     private function _displayForm()
     {
-
         $this->_html .=
-
             '<form action="' . Tools::htmlentitiesUTF8($_SERVER['REQUEST_URI']) . '" method="post">
-
 			<fieldset>
-
 			<legend><img src="../img/admin/contact.gif" />' . $this->l('Contact details') . '</legend>
-
 				<table border="0" width="500" cellpadding="0" cellspacing="0" id="form">
-
 					<tr>
-
 						<td colspan="2">' . $this->l('Please specify the Shop code and Check code to smilepay c2c') . '.<br /><br /></td>
-
 					</tr>
-
                     <tr>
 						<td colspan="2">' . $this->l('Remember to set carrier note') . '<br /><br /></td>
 					</tr>
-
 					<tr>
-
 						<td width="130" style="height: 35px;">' . $this->l('Shop code') . '</td>
-
 						<td><input type="text" name="Dcvc" value="' . Tools::htmlentitiesUTF8(Tools::getValue('Dcvc', $this->Dcvc)) . '" style="width: 300px;" /></td>
-
 					</tr>
-
 					<tr>
-
 						<td  width="130" style="height: 35px;">' . $this->l('Shop rvg2c') . '</td>
-
 						<td><input type="text" name="Rvg2c" value="' . Tools::htmlentitiesUTF8(Tools::getValue('Rvg2c', $this->Rvg2c)) . '" style="width: 300px;" /></td>
-
 					</tr>
-
 					<tr>
-
 						<td  width="130" style="height: 35px;">' . $this->l('Shop VKey') . '</td>
-
 						<td><input type="text" name="VKey" value="' . Tools::htmlentitiesUTF8(Tools::getValue('VKey', $this->VKey)) . '" style="width: 300px;" /></td>
-
 					</tr>								
-
 					<tr>
-                        
 						<td width="130" style="height: 35px;">' . $this->l('Check code') . '</td>
-
 						<td><input type="text" name="Mid" value="' . Tools::htmlentitiesUTF8(Tools::getValue('Mid', $this->Mid)) . '" style="width: 300px;" /></td>
-                        
 					</tr>
                     <tr>
-
 					    <td width="130" style="height: 35px;">' . $this->l('Front Payment Name') . '</td>
-
 					    <td><input type="text" name="paymentName" value="' . Tools::htmlentitiesUTF8(Tools::getValue('paymentName',
                 $this->paymentName)) . '" style="width: 300px;" /></td>
-
 				    </tr>
                     <tr>
 						<td width="130" style="height: 70px;">' . $this->l('Payment Description Of Frontend') . '</td>
 						<td><textarea name="Spdesc" style="width: 300px;height: 70px">' . Tools::htmlentitiesUTF8(Tools::getValue('Spdesc',
                 $this->Spdesc)) . '</textarea></td>
 					</tr>
-
                     <tr><td></td><td ><br /><input  name="SMILEPAY_c2cp_Carrier_Reset_on"  type="checkbox" value="Y">' . $this->l('Reset carrier config') . '</input></td></tr>
-
 					<tr><td colspan="2" align="center"><br /><input class="button" name="btnSubmit" value="' . $this->l('Update settings') . '" type="submit" /></td></tr>
-
 				</table>
-
 			</fieldset>
-
 		</form>';
-
     }
-
 
     public function getContent()
     {
-
         $this->_html = '<h2>' . $this->displayName . '</h2>';
-
 
         if (Tools::isSubmit('btnSubmit')) {
             $this->_postValidation();
@@ -531,11 +457,9 @@ class Smilepay_c2c extends PaymentModule
         }
 
         $this->_displaySmilepay();
-
         $this->_displayForm();
 
         return $this->_html;
-
     }
 
     public function hookActionCarrierUpdate($params)
@@ -558,10 +482,10 @@ class Smilepay_c2c extends PaymentModule
             return;
         }
 
-
         if (!$this->checkCurrency($params['cart'])) {
             return;
         }
+
         if (is_null($this->Dcvc) || empty($this->Dcvc)
             || is_null($this->Mid) || empty($this->Mid)
             || is_null($this->Rvg2c) || empty($this->Rvg2c)
@@ -589,14 +513,11 @@ class Smilepay_c2c extends PaymentModule
 
     public function getTemplateVars()
     {
-        $cart = $this->context->cart;
-
-
+        // $cart = $this->context->cart;
         return [
             'Description' => $this->Spdesc,
         ];
     }
-
 
     public function hookPaymentReturn($params)
     {
@@ -607,30 +528,20 @@ class Smilepay_c2c extends PaymentModule
 
         if (defined("SMILEPAY_C2CUP_MODULE")) {
             $smilepay_c2cup_obj = new Smilepay_c2cup();
-
-            // suzy: 修正缺少參數的虫虫
-            // if($smilepay_c2cup_obj->isSelectedC2cupShipping())
             if ($smilepay_c2cup_obj->isSelectedC2cupShipping($params['order']->id_carrier)) {
                 return;
             }
         }
 
-        $rq = Db::getInstance()->getRow('SELECT `id_order_state` FROM `' . _DB_PREFIX_ . 'order_state_lang` WHERE id_lang = \'' . pSQL('1') . '\' AND  template = \'SmilePay_c2c_status\'');
-
-        //$rq['id_order_state']
-
-        $c2c_status = $rq['id_order_state'];
-
+        $c2c_status = _SMILEPAY_C2C_PENDING_STATUS_;
         $state = $params['order']->getCurrentState();
 
         if (!$result = $this->getResultData()) {
-
             Tools::redirectLink(__PS_BASE_URI__);
             exit;
         }
 
         $service_id = $this->getService_id($params['order']->id_carrier);
-
         $result['StorecsvName'] = $this->getCVSStoreName($service_id);
 
         if (in_array($state, [
@@ -642,67 +553,39 @@ class Smilepay_c2c extends PaymentModule
             $Status = $result['Status'];
 
             if ($Status == "1") {
-
                 $this->smarty->assign(array(
-                    'Status' => '超商取貨付款 處理中',
-                    'SmilePayNO' => $result['SmilePayNO'],
-                    'Amount' => $result['Amount'],
-                    'this_path' => $this->_path,
-                    'csv_storename' => $result['StorecsvName'],
-                    'storeid' => $result['Storeid'],
-                    'storename' => $result['Storename'],
-                    'storeaddress' => $result['Storeaddress'],
                     'Pur_name' => $result['Pur_name'],
                     'Mobile_number' => $result['Mobile_number'],
-                ));
-
-            } else {
-
-                $this->smarty->assign(array(
-                    'Status' => '', // 不確定要填什麼
-                    'PayEndDate' => "",
-                    'SmilePayNO' => "",
-                    'csv_storename' => "",
-                    'Amount' => "",
+                    'storeid' => $result['Storeid'],
+                    'csv_storename' => $result['StorecsvName'],
+                    'storename' => $result['Storename'],
+                    'storeaddress' => $result['Storeaddress'],
                     'this_path' => $this->_path,
-                    'storeid' => "",
-                    'storename' => "",
-                    'storeaddress' => "",
-                    'Pur_name' => '',
-                    'Mobile_number' => '',
                 ));
+
+                return $this->display(__FILE__, 'payment_return.tpl');
             }
-
-            return $this->display(__FILE__, 'payment_showreturn.tpl');
-
-        } else {
-
-            $this->smarty->assign(array(
-                'Status' => "ERROR",
-                'PayEndDate' => "",
-                'SmilePayNO' => "",
-                'Amount' => "",
-                'this_path' => $this->_path,
-                'storeid' => "",
-                'storename' => "",
-                'storeaddress' => "",
-            ));
-
-            return $this->display(__FILE__, 'payment_showreturn.tpl');
-
         }
+
+        $this->smarty->assign(array(
+            'Pur_name' => '',
+            'Mobile_number' => '',
+            'storeid' => '',
+            'csv_storename' => '',
+            'storename' => '',
+            'storeaddress' => '',
+            'this_path' => $this->_path,
+        ));
+
+        return $this->display(__FILE__, 'payment_return.tpl');
 
 
     }
 
-
     public function checkCurrency($cart)
     {
-
         $currency_order = new Currency((int)($cart->id_currency));
-
         $currencies_module = $this->getCurrency((int)$cart->id_currency);
-
 
         if (is_array($currencies_module)) {
             foreach ($currencies_module as $currency_module) {
@@ -713,19 +596,26 @@ class Smilepay_c2c extends PaymentModule
         }
 
         return false;
-
     }
 
     public function getService_id($carrier_id)
     {
-
         foreach ($this->id_carrier as $key => $carrier_id_item) {
             if ($carrier_id == $carrier_id_item && !empty($carrier_id_item)) {
                 return $key;
             }
         }
         return false;
+    }
 
+    public function getPay_zg($carrier_id)
+    {
+        $service_id = $this->getService_id($carrier_id);
+        if (isset(self::$spapi_pay_zg[$service_id])) {
+            return self::$spapi_pay_zg[$service_id];
+        } else {
+            return '';
+        }
     }
 
     public function getPay_subzg($carrier_id)
@@ -748,21 +638,23 @@ class Smilepay_c2c extends PaymentModule
         return isset($table[$service_id]) ? $table[$service_id] : 'Unknow';
     }
 
-    //get map url
+    // get map url
     public function getEmapBtnUrl($service_id)
     {
-        //map mobile start
+        // map mobile start
         $useragent = $_SERVER['HTTP_USER_AGENT'];
         $isMobile = false;
+
         if (strpos($useragent, 'Android') === false && strpos($useragent, 'iPad') === false && strpos($useragent, 'iPhone') === false
             || strpos($useragent, 'Safari') === false && strpos($useragent, 'AppleWebKit') === false && strpos($useragent, 'Dalvik') === false
         ) {
-            //pc
+            // pc
             $isMobile = false;
         } else {
             $isMobile = true;
         }
-        //map mobile end
+
+        // map mobile end
         if (!isset(self::$map_url[$service_id])) {
             return false;
         }
@@ -791,13 +683,11 @@ class Smilepay_c2c extends PaymentModule
             } else {
                 return false;
             }
-
-
         }
         return true;
     }
 
-    //check shipping method is in type of Smilepay_c2c
+    // check shipping method is in type of Smilepay_c2c
     public function isSmilepay_c2cp_shipping($l_carrier_id)
     {
 
@@ -828,7 +718,6 @@ class Smilepay_c2c extends PaymentModule
     {
         $cookie = new Cookie('smilepay_c2cp_storedata');
 
-
         $cookie->__unset('c2cp_id_cart');
         $cookie->__unset('status');
         $cookie->__unset('storeid');
@@ -844,7 +733,6 @@ class Smilepay_c2c extends PaymentModule
         foreach ($storedata as $key => $val) {
             $cookie->__set($key, $val);
         }
-
     }
 
     public function setReturnCheckoutUrl($url)
@@ -852,7 +740,6 @@ class Smilepay_c2c extends PaymentModule
         $cookie = new Cookie('smilepay_c2cp_checkouturl');
         $cookie->setExpire(time() + 60 * 60 * 2);
         $cookie->__set('c2cemapurl', $url);
-
     }
 
     public function getReturnCheckoutUrl()
@@ -865,7 +752,6 @@ class Smilepay_c2c extends PaymentModule
         } else {
             return false;
         }
-
     }
 
     public function clearReturnCheckoutUrl()
@@ -899,12 +785,9 @@ class Smilepay_c2c extends PaymentModule
         return $result;
     }
 
-
     //is selected store which token ship?
     public function isShippingStoreSelected($id_carrier = 0, $id_cart = null)
     {
-
-
         $storedata = $this->getStoreData();
         $context = Context::getContext();
         if (is_null($id_cart)) {
@@ -926,15 +809,14 @@ class Smilepay_c2c extends PaymentModule
             }
             return true;
         }
-        return false;
 
+        return false;
     }
 
 
     //show Map button
     public function hookdisplayCarrierExtraContent($params)
     {
-
         /*$deliveryOptionList = $params['cart']->getDeliveryOptionList();
         if (count($deliveryOptionList) > 1 || empty($deliveryOptionList)) {
             return false;
@@ -1129,7 +1011,6 @@ class Smilepay_c2c extends PaymentModule
                 $result['Data_id'] = $data['Data_id'];
             }
 
-
         } else {
             return false;
         }
@@ -1158,10 +1039,6 @@ class Smilepay_c2c extends PaymentModule
                 );
             }
         }
-
-
     }
-
-
 }
 

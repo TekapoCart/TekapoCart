@@ -24,14 +24,11 @@
 *}
 
 {if $status == 'ok'}
-
     <h3 class="card-title h3">{l s='Payment Info' d='Modules.Wirepayment.Shop'}</h3>
-
     <p>
-      {*l s='Your order on %s is complete.' sprintf=[$shop_name] d='Modules.Wirepayment.Shop'*}{*<br/>*}
-      {l s='Please send us a bank wire with:' d='Modules.Wirepayment.Shop'}
+        {*l s='Your order on %s is complete.' sprintf=[$shop_name] d='Modules.Wirepayment.Shop'*}{*<br/>*}
+        {l s='Please send us a bank wire with:' d='Modules.Wirepayment.Shop'}
     </p>
-
     {*<p>
         {l s='Please specify your order reference %s in the bankwire description.' sprintf=[$reference] d='Modules.Wirepayment.Shop'}<br/>
         l s='We\'ve also sent you this information by e-mail.' d='Modules.Wirepayment.Shop'
@@ -44,11 +41,9 @@
     {*<p>
       {l s='If you have questions, comments or concerns, please contact our [1]expert customer support team[/1].' d='Modules.Wirepayment.Shop' sprintf=['[1]' => "<a href='{$contact_url}'>", '[/1]' => '</a>']}
     </p>*}
-
     <p>{$bankwireCustomText nofilter}</p>
-
 {else}
     <p class="warning">
-      {l s='We noticed a problem with your order. If you think this is an error, feel free to contact our [1]expert customer support team[/1].' d='Modules.Wirepayment.Shop' sprintf=['[1]' => "<a href='{$contact_url}'>", '[/1]' => '</a>']}
+        {l s='We noticed a problem with your order. If you think this is an error, feel free to contact our [1]expert customer support team[/1].' d='Modules.Wirepayment.Shop' sprintf=['[1]' => "<a href='{$contact_url}'>", '[/1]' => '</a>']}
     </p>
 {/if}

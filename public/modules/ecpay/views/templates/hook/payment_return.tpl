@@ -2,3 +2,4 @@
 <div class="text-block">
 {$ecpay_feedback|replace:',':'<br>' nofilter}
 </div>
+{$payment_message|replace:',':'<br>' nofilter}

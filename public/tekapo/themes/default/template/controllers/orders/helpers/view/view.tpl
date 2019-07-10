@@ -211,8 +211,8 @@
                   {foreach from=$history item=row key=key}
                     {if ($key == 0)}
                       <tr>
-                        <td {* suzy: 2018-09-12 顏色 style="background-color:{$row['color']}"*}><img src="../img/os/{$row['id_order_state']|intval}.gif" width="16" height="16" alt="{$row['ostate_name']|stripslashes}" /></td>
-                        <td {* suzy: 2018-09-12 顏色 style="background-color:{$row['color']};color:{$row['text-color']}"*}>{$row['ostate_name']|stripslashes}</td>
+                        {* suzy: 2019-07-08 隱藏 icon <td style="background-color:{$row['color']}"><img src="../img/os/{$row['id_order_state']|intval}.gif" width="16" height="16" alt="{$row['ostate_name']|stripslashes}" /></td>*}
+                        <td {* suzy: 2018-09-12 顏色 style="background-color:{$row['color']};color:{$row['text-color']}"*}><span style="background-color:{$row['color']};color:{$row['text-color']}; padding: 6px 8px; border-radius: 3px; display: inline-block;">{$row['ostate_name']|stripslashes}</span></td>
                         <td {* suzy: 2018-09-12 顏色 style="background-color:{$row['color']};color:{$row['text-color']}"*}>{if $row['employee_lastname']}{* suzy: 2018-09-14 姓氏 移到前面*}{$row['employee_lastname']|stripslashes} {$row['employee_firstname']|stripslashes}{/if}</td>
                         <td {* suzy: 2018-09-12 顏色 style="background-color:{$row['color']};color:{$row['text-color']}"*}>{dateFormat date=$row['date_add'] full=true}</td>
                         <td {* suzy: 2018-09-12 顏色 style="background-color:{$row['color']};color:{$row['text-color']}"*} class="text-right">
@@ -226,7 +226,7 @@
                       </tr>
                     {else}
                       <tr>
-                        <td><img src="../img/os/{$row['id_order_state']|intval}.gif" width="16" height="16" /></td>
+                        {* suzy: 2019-07-08 隱藏 icon <td><img src="../img/os/{$row['id_order_state']|intval}.gif" width="16" height="16" /></td>*}
                         <td>{$row['ostate_name']|stripslashes}</td>
                         <td>{if $row['employee_lastname']}{* suzy: 2018-09-14 姓氏 移到前面 *}{$row['employee_lastname']|stripslashes} {$row['employee_firstname']|stripslashes}{else}&nbsp;{/if}</td>
                         <td>{dateFormat date=$row['date_add'] full=true}</td>

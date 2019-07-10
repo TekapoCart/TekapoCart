@@ -13,48 +13,30 @@ define('_SMILEPAY_ATM_PENDING_STATUS_', 20);
 use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 
 class Smilepay_atm extends PaymentModule
-
 {
-
     private $_html = '';
-
     private $_postErrors = array();
-
     public $Dcvc;
     public $Mid;
     public $Rvg2c;
     public $VKey;
-    public $Apiurl;
-
     public $cus_atm;
 
     public function __construct()
     {
-
         $this->name = 'smilepay_atm';
-
         $this->tab = 'payments_gateways';
-
         $this->version = '2.2.5';
-
         $this->author = 'SmilePay';
-
-
-        $this->Apiurl = 'http://ssl.smse.com.tw/ezpos/mtmk_utf.asp';
-
-
         $this->currencies = true;
-
         $this->currencies_mode = 'checkbox';
-
-
         $config = Configuration::getMultiple(array(
             'SMILEPAY_ATM_DCVC',
             'SMILEPAY_ATM_MID',
             'SMILEPAY_ATM_Rvg2c',
             'SMILEPAY_ATM_VKey',
             'SMILEPAY_ATM_Spdesc',
-            'SMILEPAY_ATM_paymentName'
+            'SMILEPAY_ATM_paymentName',
         ));
 
         if (isset($config['SMILEPAY_ATM_DCVC'])) {
@@ -76,25 +58,22 @@ class Smilepay_atm extends PaymentModule
         if (isset($config['SMILEPAY_ATM_paymentName'])) {
             $this->paymentName = $config['SMILEPAY_ATM_paymentName'];
         } else {
-            $this->paymentName = "";
+            $this->paymentName = '';
         }
 
         if (isset($config['SMILEPAY_ATM_Spdesc'])) {
             $this->Spdesc = $config['SMILEPAY_ATM_Spdesc'];
         } else {
-            $this->Spdesc = "";
+            $this->Spdesc = '';
         }
 
         parent::__construct();
 
-
         $this->displayName = $this->l('Smilepay atm');
-
         $this->description = "買家取得「14 碼虛擬帳號」至臨櫃繳款、ATM 櫃員機轉帳、Web ATM 轉帳。可即時銷帳。<br>免年費型手續費：13元。";
-
         $this->confirmUninstall = $this->l('Are you sure you want to delete your details ?');
 
-        if (trim($this->paymentName) == "") {
+        if (trim($this->paymentName) == '') {
             $this->paymentName = $this->displayName;
         }
 
@@ -105,29 +84,19 @@ class Smilepay_atm extends PaymentModule
         if (!count(Currency::checkPaymentCurrencies($this->id))) {
             $this->warning = $this->l('No currency set for this module');
         }
-
-
     }
 
-
     public function install()
-
     {
-
         if (!parent::install() || !$this->registerHook('paymentOptions') || !$this->registerHook('paymentReturn')) {
             return false;
         }
 
-
         return true;
-
     }
 
-
     public function uninstall()
-
     {
-
         if (!Configuration::deleteByName('SMILEPAY_ATM_DCVC') || !Configuration::deleteByName('SMILEPAY_ATM_MID')
             || !Configuration::deleteByName('SMILEPAY_ATM_Rvg2c') || !Configuration::deleteByName('SMILEPAY_ATM_VKey')
             || !Configuration::deleteByName('SMILEPAY_ATM_paymentName') || !Configuration::deleteByName('SMILEPAY_ATM_Spdesc') || !parent::uninstall()
@@ -136,16 +105,11 @@ class Smilepay_atm extends PaymentModule
         }
 
         return true;
-
     }
 
-
     private function _postValidation()
-
     {
-
         if (Tools::isSubmit('btnSubmit')) {
-
             if (!Tools::getValue('Dcvc')) {
                 $this->_postErrors[] = $this->l('Shop code field is required.');
             } elseif (!Tools::getValue('Rvg2c')) {
@@ -155,16 +119,11 @@ class Smilepay_atm extends PaymentModule
             } elseif (!Tools::getValue('Mid')) {
                 $this->_postErrors[] = $this->l('Check code is required.');
             }
-
         }
-
     }
 
-
     private function _postProcess()
-
     {
-
         if (Tools::isSubmit('btnSubmit')) {
             if (!is_null(Tools::getValue('Dcvc'))) {
                 $dcvc = trim(Tools::getValue('Dcvc'));
@@ -202,119 +161,66 @@ class Smilepay_atm extends PaymentModule
                 $spdesc = Tools::getValue('Spdesc');
             }
 
-
             Configuration::updateValue('SMILEPAY_ATM_DCVC', $dcvc);
-
             Configuration::updateValue('SMILEPAY_ATM_MID', $mid);
-
             Configuration::updateValue('SMILEPAY_ATM_Rvg2c', $rvg2c);
-
             Configuration::updateValue('SMILEPAY_ATM_VKey', $vkey);
-
             Configuration::updateValue('SMILEPAY_ATM_paymentName', $paymentName);
-
             Configuration::updateValue('SMILEPAY_ATM_Spdesc', $spdesc);
-
         }
 
         $this->_html .= $this->displayConfirmation($this->l('Settings updated'));
-
     }
-
 
     private function _displaySmilepay()
-
     {
-
         $this->_html .= '<img src="../modules/smilepay_atm/smilepay_atm.jpg" style="float:left; margin-right:15px;"><b>' . $this->l('This module allows you to accept payments by Smilepay Atm.') . '</b><br /><br />';
-
     }
 
-
     private function _displayForm()
-
     {
-
-        (Configuration::get('SMILEPAY_ATM_CUS') == '1') ? $cus_atm_checked = 'checked' : $cus_atm_checked = '';
-
-
         $this->_html .=
-
             '<form action="' . Tools::htmlentitiesUTF8($_SERVER['REQUEST_URI']) . '" method="post">
-
 			<fieldset>
-
 			<legend><img src="../img/admin/contact.gif" />' . $this->l('Contact details') . '</legend>
-
 				<table border="0" width="500" cellpadding="0" cellspacing="0" id="form">
-
 				<tr>
-
 					<td colspan="2">' . $this->l('Please specify the Shop code and Check code to smilepay atm.') . '.<br /><br /></td>
-
 				</tr>
-
 				<tr>
-
 					<td width="130" style="height: 35px;">' . $this->l('Shop code') . '</td>
-
 					<td><input type="text" name="Dcvc" value="' . Tools::htmlentitiesUTF8(Tools::getValue('Dcvc', $this->Dcvc)) . '" style="width: 300px;" /></td>
-
 				</tr>
-
 				<tr>
-
 					<td width="130" style="height: 35px;">' . $this->l('Shop rvg2c') . '</td>
-
 					<td><input type="text" name="Rvg2c" value="' . Tools::htmlentitiesUTF8(Tools::getValue('Rvg2c', $this->Rvg2c)) . '" style="width: 300px;" /></td>
-
 				</tr>
-
 				<tr>
-
 					<td width="130" style="height: 35px;">' . $this->l('Shop VKey') . '</td>
-
 					<td><input type="text" name="VKey" value="' . Tools::htmlentitiesUTF8(Tools::getValue('VKey', $this->VKey)) . '" style="width: 300px;" /></td>
-
 				</tr>								
-
 				<tr>
-
 					<td width="130" style="height: 35px;">' . $this->l('Check code') . '</td>
-
 					<td><input type="text" name="Mid" value="' . Tools::htmlentitiesUTF8(Tools::getValue('Mid', $this->Mid)) . '" style="width: 300px;" /></td>
-
 				</tr>
                 <tr>
-
 					<td width="130" style="height: 35px;">' . $this->l('Front Payment Name') . '</td>
-
 					<td><input type="text" name="paymentName" value="' . Tools::htmlentitiesUTF8(Tools::getValue('paymentName', $this->paymentName)) . '" style="width: 300px;" /></td>
-
 				</tr>
 				<tr>
 					<td width="130" style="height: 70px;">' . $this->l('Payment Description Of Frontend') . '</td>
 					<td><textarea name="Spdesc" style="width: 300px;height: 70px">' . Tools::htmlentitiesUTF8(Tools::getValue('Spdesc',
                 $this->Spdesc)) . '</textarea></td>
 				</tr>	
-
 				<tr><td colspan="2" align="center"><br /><input class="button" name="btnSubmit" value="' . $this->l('Update settings') . '" type="submit" /></td></tr>
-
 				</table>
-
 			</fieldset>
-
 		</form>';
-
     }
 
-
     public function getContent()
-
     {
-
         $this->_html = '<h2>' . $this->displayName . '</h2>';
-
 
         if (Tools::isSubmit('btnSubmit')) {
 
@@ -327,21 +233,15 @@ class Smilepay_atm extends PaymentModule
                     $this->_html .= $this->displayError($err);
                 }
             }
-
         } else {
             $this->_html .= '<br />';
         }
 
-
         $this->_displaySmilepay();
-
         $this->_displayForm();
 
-
         return $this->_html;
-
     }
-
 
     public function hookPaymentOptions($params)
     {
@@ -353,6 +253,7 @@ class Smilepay_atm extends PaymentModule
         if (!$this->checkCurrency($params['cart'])) {
             return;
         }
+
         if (is_null($this->Dcvc) || empty($this->Dcvc)
             || is_null($this->Mid) || empty($this->Mid)
             || is_null($this->Rvg2c) || empty($this->Rvg2c)
@@ -361,24 +262,10 @@ class Smilepay_atm extends PaymentModule
             return;
         }
 
-        //Is shipping type of Smilepay_c2c?
-        if (defined('SMILEPAY_C2CP_MODULE')) {
-
-            $smilepay_c2cp_obj = new Smilepay_c2c();
-            if ($smilepay_c2cp_obj->active && $smilepay_c2cp_obj->isSmilepay_c2cp_shipping($params['cart']->id_carrier)) {
-                return;
-            }
-        } else {
-            if (file_exists('modules/smilepay_c2c/smilepay_c2c.php')) {
-                include_once('modules/smilepay_c2c/smilepay_c2c.php');
-                $smilepay_c2cp_obj = new Smilepay_c2c();
-                if ($smilepay_c2cp_obj->active && $smilepay_c2cp_obj->isSmilepay_c2cp_shipping($params['cart']->id_carrier)) {
-                    return;
-                }
-
-
-            }
-
+        include_once('modules/smilepay_c2c/smilepay_c2c.php');
+        $smilepay_c2cp_obj = new Smilepay_c2c();
+        if ($smilepay_c2cp_obj->active && $smilepay_c2cp_obj->isSmilepay_c2cp_shipping($params['cart']->id_carrier)) {
+            return;
         }
 
         $this->smarty->assign(
@@ -395,138 +282,49 @@ class Smilepay_atm extends PaymentModule
 
     public function getTemplateVars()
     {
-        $cart = $this->context->cart;
-
-
+        // $cart = $this->context->cart;
         return [
             'Description' => $this->Spdesc,
         ];
     }
 
-
     public function hookPaymentReturn($params)
     {
-
-
         if (!$this->active) {
             return;
         }
 
+        $rq = Db::getInstance()->getRow('SELECT payment_message FROM `'
+            . _DB_PREFIX_ . 'ORDERS` WHERE id_order=' . $params['order']->id);
+        $payment_message = $rq['payment_message'];
 
-        $result = $this->getResultData();
+        $this->smarty->assign(array(
+            'payment_message' => $payment_message,
+        ));
 
-        //<smilepay_c2cup> start
-        $c2cup_template = '';
-        $c2cup_run = false;
-        //<smilepay_c2cup> end
-        if (isset($result) && !empty($result)) {
-            $Status = $result['Status'];
+        return $this->display(__FILE__, 'payment_return.tpl');
+    }
 
+    public function hookDisplayOrderDetail($params)
+    {
 
-            if ($Status == "1") {
-
-
-                $this->smarty->assign(array(
-
-                    'Status' => '訂單成立',
-
-                    'AtmBankNo' => $result['AtmBankNo'],
-
-                    'AtmNo' => $result['AtmNo'],
-
-                    'PayEndDate' => mb_strlen($result['PayEndDate']) < 10 ? '' : $result['PayEndDate'],
-
-                    'SmilePayNO' => $result['SmilePayNO'],
-
-                    'Amount' => $result['Amount'],
-
-                    'this_path' => $this->_path,
-
-                ));
-
-                //<smilepay_c2cup> start
-                if (file_exists("modules/smilepay_c2cup/smilepay_c2cup.php")) {
-                    include_once("modules/smilepay_c2cup/smilepay_c2cup.php");
-                    $smilepay_c2cup_obj = new Smilepay_c2cup();
-                    if ($smilepay_c2cup_obj->isSelectedC2cupShipping($params['order']->id_carrier)) {
-                        $result = $smilepay_c2cup_obj->runC2CupProcess($params['order']->id);
-                        $c2cup_template = $smilepay_c2cup_obj->produceResultTemplate($result);
-                        $c2cup_run = true;
-                        // $c2cup_template is saved output html
-                    }
-                }
-                //<smilepay_c2cup> end
-                /*//<smilepay_ezcatup> start 
-                elseif(file_exists("modules/smilepay_ezcatup/smilepay_ezcatup.php"))
-                {
-                    include_once("modules/smilepay_ezcatup/smilepay_ezcatup.php");
-                    $smilepay_ezcatup_obj = new Smilepay_ezcatup();   
-                    if($smilepay_ezcatup_obj->isSelectedEzcatupShipping($params['order']->id_carrier))
-                    {
-                        $result = $smilepay_ezcatup_obj->runEzcatupProcess($params['order']->id);
-                    }
-                }
-                //<smilepay_ezcatup> end */
-            } else {
-                $this->smarty->assign(array(
-
-                    'Status' => $result['Status'],
-
-                    'AtmBankNo' => '',
-
-                    'AtmNo' => '',
-
-                    'PayEndDate' => "",
-
-                    'SmilePayNO' => "",
-
-                    'Amount' => "",
-
-                    'this_path' => $this->_path,
-
-                ));
-            }
-        } else {
-            $this->smarty->assign(array(
-
-                'Status' => '未如預期錯誤',
-
-                'AtmBankNo' => '未知錯誤，請先確認訂單是否有錯，若有問題請與商家聯絡',
-
-                'AtmNo' => '',
-
-                'PayEndDate' => "",
-
-                'SmilePayNO' => "",
-
-                'Amount' => "",
-
-                'this_path' => $this->_path,
-
-            ));
-
-
+        if ($params['order']->module !== 'smilepay_atm') {
+            return;
         }
 
-        //<smilepay_c2cup> start
-        if ($c2cup_run) {
-            return $c2cup_template . $this->display(__FILE__, 'payment_showreturn.tpl');
-        }
-        //<smilepay_c2cup> end
+        // 顯示付款資訊
+        $row = Db::getInstance()->getRow('SELECT payment_message FROM `' . _DB_PREFIX_ . 'orders` WHERE id_order=' . $params['order']->id);
+        $this->smarty->assign([
+            'payment_message' => $row['payment_message'],
+        ]);
 
-        return $this->display(__FILE__, 'payment_showreturn.tpl');
-
-        //}
-
+        return $this->display(__FILE__, 'display_order_detail.tpl');
     }
 
     public function checkCurrency($cart)
     {
-
         $currency_order = new Currency((int)($cart->id_currency));
-
         $currencies_module = $this->getCurrency((int)$cart->id_currency);
-
 
         if (is_array($currencies_module)) {
             foreach ($currencies_module as $currency_module) {
@@ -537,48 +335,6 @@ class Smilepay_atm extends PaymentModule
         }
 
         return false;
-
     }
 
-    public function saveResultData($result)
-    {
-        $cookie = new Cookie('smilepay_atm_result');
-        $cookie->setExpire(time() + 60 * 60);
-
-
-        foreach ($result as $key => $val) {
-            $cookie->__set($key, $val);
-        }
-
-    }
-
-    public function getResultData()
-    {
-        $cookie = new Cookie('smilepay_atm_result');
-        $data = $cookie->getAll();
-
-
-        if (isset($data['Status']) && !empty($data['Status'])) {
-            $result['Status'] = $data['Status'];
-
-            if ($result['Status'] == 1) {
-                $result['AtmBankNo'] = $data['AtmBankNo'];
-                $result['AtmNo'] = $data['AtmNo'];
-                $result['PayEndDate'] = $data['PayEndDate'];
-                $result['SmilePayNO'] = $data['SmilePayNO'];
-                $result['Amount'] = $data['Amount'];
-            } else {
-                $result['Desc'] = $data['Desc'];
-            }
-
-
-        } else {
-            return false;
-        }
-
-        return $result;
-    }
 }
-
-
-

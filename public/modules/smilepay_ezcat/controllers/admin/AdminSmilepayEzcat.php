@@ -1,12 +1,22 @@
-<?php
-/**
- * @since 1.5.0
- */
+<?php
+
+/**
+
+ * @since 1.5.0
+
+ */
+
 class AdminSmilepayEzcatController extends ModuleAdminController
-{    protected $smilepay_gateway = "https://ssl.smse.com.tw/api/SPPayment.asp";
+{
+    protected $smilepay_gateway = "https://ssl.smse.com.tw/api/SPPayment.asp";
     protected $smilepay_ezcat_gateway = "https://ssl.smse.com.tw/api/ezcatGetTrackNum.asp";
 	public function postProcess()
-	{       $order_id=$_REQUEST['order_id'];       $smilepay_ezcat_data = $this->module->getSmilepayOrderResult($order_id);              if(empty($smilepay_ezcat_data) || empty($smilepay_ezcat_data['smse_id']) )       {
+	{
+       $order_id=$_REQUEST['order_id'];
+       $smilepay_ezcat_data = $this->module->getSmilepayOrderResult($order_id);
+       
+       if(empty($smilepay_ezcat_data) || empty($smilepay_ezcat_data['smse_id']) )
+       {
             $result_pro1 = $this->_createSmilepayOrderProcess($_REQUEST['order_id']);
             if($result_pro1['Status'] != '1')
             {
@@ -19,7 +29,11 @@ class AdminSmilepayEzcatController extends ModuleAdminController
                 $this->module->addComment($message,$order_id,true,false);
                 $this->module->insertCreateSmilepayOrderResult($result_pro1);
             }
-       }       $order_carrier = new OrderCarrier($order_id);       $message="";       if((isset($result_pro1)|| !empty($smilepay_ezcat_data['smse_id']))  && empty($order_carrier->tracking_number ))       {
+       }
+       $order_carrier = new OrderCarrier($order_id);
+       $message="";
+       if((isset($result_pro1)|| !empty($smilepay_ezcat_data['smse_id']))  && empty($order_carrier->tracking_number ))
+       {
            $sp_length = $_REQUEST['sp_length'];
            $sp_width = $_REQUEST['sp_width'];
            $sp_height = $_REQUEST['sp_height'];
@@ -41,7 +55,19 @@ class AdminSmilepayEzcatController extends ModuleAdminController
                echo 'Process2 Status' . $result_pro2['Status'] .'<br>' .$result_pro2['Desc'];
                exit;
            }
-       }       $arg = array(                    'order_id'=>$order_id,                 //   'vieworder'=>'',                  //  'tokken'=>Tools::getAdminTokenLite('AdminOrders')                );       $url = $this->context->link->getAdminLink('AdminOrders',  false) . "&id_order=".(int)$order_id.'&vieworder'.'&token='.Tools::getAdminTokenLite('AdminOrders');       Tools::redirectAdmin($url);             exit;    }
+       }
+       $arg = array(
+                    'order_id'=>$order_id,
+                 //   'vieworder'=>'',
+                  //  'tokken'=>Tools::getAdminTokenLite('AdminOrders')
+                );
+       $url = $this->context->link->getAdminLink('AdminOrders',  false) . "&id_order=".(int)$order_id.'&vieworder'.'&token='.Tools::getAdminTokenLite('AdminOrders');
+
+       Tools::redirectAdmin($url);
+      
+       exit;
+    }
+
 
     function _createSmilepayOrderProcess($order_id)
     {
@@ -90,7 +116,7 @@ class AdminSmilepayEzcatController extends ModuleAdminController
             $post_data['Od_sob'] = $order->reference;
             $post_data['temperature'] =  $temperature;
             $post_data['Roturl_status'] =  "psok2";
-            $post_data['Roturl'] =  "http://".$_SERVER["HTTP_HOST"].$this->module->getPathUri()."sprespon.php";
+            $post_data['Roturl'] =  "https://".$_SERVER["HTTP_HOST"].$this->module->getPathUri()."sprespon.php";
 		
             
 
@@ -308,4 +334,5 @@ class AdminSmilepayEzcatController extends ModuleAdminController
 
 
 
-}
+}
+

@@ -1851,7 +1851,9 @@ class AdminOrdersControllerCore extends AdminController
         $history = $order->getHistory($this->context->language->id);
 
         foreach ($history as &$order_state) {
-            $order_state['text-color'] = Tools::getBrightness($order_state['color']) < 128 ? 'white' : 'black';
+            // suzy: 2019-07-08 強制白
+            // $order_state['text-color'] = Tools::getBrightness($order_state['color']) < 128 ? 'white' : 'black';
+            $order_state['text-color'] = 'white';
         }
 
         $shipping_refundable_tax_excl = $order->total_shipping_tax_excl;
