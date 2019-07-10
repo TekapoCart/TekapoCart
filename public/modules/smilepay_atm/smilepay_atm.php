@@ -295,7 +295,7 @@ class Smilepay_atm extends PaymentModule
         }
 
         $rq = Db::getInstance()->getRow('SELECT payment_message FROM `'
-            . _DB_PREFIX_ . 'ORDERS` WHERE id_order=' . $params['order']->id);
+            . _DB_PREFIX_ . 'orders` WHERE id_order=' . $params['order']->id);
         $payment_message = $rq['payment_message'];
 
         $this->smarty->assign(array(
