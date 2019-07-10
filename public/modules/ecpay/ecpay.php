@@ -143,7 +143,7 @@ class Ecpay extends PaymentModule
                 $payment_option = new PaymentOption();
                 $payment_option->setCallToActionText($payment_desc)
                     // ->setLogo(Media::getMediaPath(_PS_MODULE_DIR_.$this->name.'/logo.png'))
-                    ->setAction($this->context->link->getModuleLink($this->name, 'validation', array(), true))
+                    // ->setAdditionalInformation($this->context->smarty->fetch('module:ecpay/views/templates/front/payment_info.tpl'))
                     ->setInputs([
                         'payment_type' => [
                             'name' =>'payment_type',
@@ -151,7 +151,8 @@ class Ecpay extends PaymentModule
                             'value' => $payment_name,
                         ],
                     ])
-                    ->setAdditionalInformation($this->context->smarty->fetch('module:ecpay/views/templates/front/payment_infos.tpl'));
+                    ->setAction($this->context->link->getModuleLink($this->name, 'validation', array(), true))
+                ;
 
                 $payment_options[] = $payment_option;
 
