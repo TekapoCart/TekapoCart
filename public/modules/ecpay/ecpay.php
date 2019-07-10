@@ -54,11 +54,11 @@ class Ecpay extends PaymentModule
 			, 'ecpay_payment_credit_03'
 			, 'ecpay_payment_credit_06'
 			, 'ecpay_payment_credit_12'
-			, 'ecpay_payment_credit_18'
+            , 'ecpay_payment_credit_18'
 			, 'ecpay_payment_credit_24'
-			, 'ecpay_payment_webatm'
-			, 'ecpay_payment_atm'
-			, 'ecpay_payment_cvs'
+            , 'ecpay_payment_webatm'
+            , 'ecpay_payment_atm'
+            , 'ecpay_payment_cvs'
 			, 'ecpay_payment_barcode'
 		);
 
@@ -223,12 +223,12 @@ class Ecpay extends PaymentModule
 			, 'Credit_03' => $this->l('Credit Card(03 Installments)')
 			, 'Credit_06' => $this->l('Credit Card(06 Installments)')
 			, 'Credit_12' => $this->l('Credit Card(12 Installments)')
-			, 'Credit_18' => $this->l('Credit Card(18 Installments)')
+//			, 'Credit_18' => $this->l('Credit Card(18 Installments)')
 			, 'Credit_24' => $this->l('Credit Card(24 Installments)')
-			, 'WebATM' => $this->l('WebATM')
+//			, 'WebATM' => $this->l('WebATM')
 			, 'ATM' => $this->l('ATM')
-			, 'CVS' => $this->l('CVS')
-			, 'BARCODE' => $this->l('BARCODE')
+//			, 'CVS' => $this->l('CVS')
+//			, 'BARCODE' => $this->l('BARCODE')
 		);
 		
 		return $payments_desc;
