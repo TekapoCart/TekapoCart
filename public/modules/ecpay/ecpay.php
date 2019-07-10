@@ -175,7 +175,7 @@ class Ecpay extends PaymentModule
             'payment_message' => $payment_message,
         ));
 
-        return $this->fetch('module:ecpay/views/templates/hook/payment_return.tpl');
+        return $this->display(__FILE__, 'payment_return.tpl');
 	}
 
     public function hookDisplayOrderDetail($params)
@@ -191,7 +191,7 @@ class Ecpay extends PaymentModule
             'payment_message' => $row['payment_message'],
         ]);
 
-        return $this->fetch('module:smilepay_ecpay/views/templates/hook/order_detail.tpl');
+        return $this->display(__FILE__, 'display_order_detail.tpl');
     }
 	
 	public function checkCurrency($cart)
@@ -384,8 +384,8 @@ class Ecpay extends PaymentModule
         try {
 
             Db::getInstance()->Execute('UPDATE `'
-                . _DB_PREFIX_ . 'orders` SET  `payment_message` = "' . $message
-                . '"  WHERE  `id_order` =' . $order_id);
+                . _DB_PREFIX_ . 'orders` SET `payment_message` = "' . $message
+                . '" WHERE `id_order` =' . $order_id);
 
         } catch(Exception $e) {
 
