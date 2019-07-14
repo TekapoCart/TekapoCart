@@ -3,7 +3,7 @@
         array (
             'database_host' => '127.0.0.1',
             'database_port' => '',
-            'database_name' => 'tekapocart',
+            'database_name' => 'tekapocart_dbname',
             'database_user' => 'tekapocart',
             'database_password' => '12345678',
             'database_prefix' => 'ps_',
