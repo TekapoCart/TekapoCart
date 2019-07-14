@@ -1,12 +1,10 @@
 <?php
 
-
 class Smilepay_c2cValidationModuleFrontController extends ModuleFrontController
 {
 
     public function postProcess()
     {
-
         $cart = $this->context->cart;
 
         if ($cart->id_customer == 0 || $cart->id_address_delivery == 0 || $cart->id_address_invoice == 0 || !$this->module->active) {
@@ -21,6 +19,7 @@ class Smilepay_c2cValidationModuleFrontController extends ModuleFrontController
                 break;
             }
         }
+
         if (!$authorized) {
             die($this->module->l('This payment method is not available.', 'validation'));
         }
@@ -32,12 +31,6 @@ class Smilepay_c2cValidationModuleFrontController extends ModuleFrontController
 
         $currency = $this->context->currency;
         $total = (float)$cart->getOrderTotal(true, Cart::BOTH);
-
-        /*
-        $storeid = $_REQUEST['storeid'];
-        $storename = $_REQUEST['storename'];
-        $storeaddress = $_REQUEST['storeaddress'];
-        */
 
         $this->module->validateOrder(
             (int)$cart->id,
@@ -60,28 +53,33 @@ class Smilepay_c2cValidationModuleFrontController extends ModuleFrontController
 
         $order = new Order($this->module->currentOrder);
 
-        //map URL
-        $smilepay_gateway = 'https://ssl.smse.com.tw/api/sppayment.asp';
+        // 背景要號 API
+        // 串接文件： https://ssl.smse.com.tw/pay_gr/pay_help_paydc_Background_api.ASP
+
+        $smilepay_gateway = 'https://ssl.smse.com.tw/api/SPPayment.asp';
         $usernamef = $user_address->firstname;
         $usernamel = $user_address->lastname;
         $username = $usernamel . $usernamef;
-
         $pay_subzg = $this->module->getPay_subzg($cart->id_carrier);
-        $post_str = 'Dcvc=' . $this->module->Dcvc .
-            '&Pay_zg=51' .
-            '&Pay_subzg=' . $pay_subzg .
-            '&Rvg2c=' . $this->module->Rvg2c .
-            '&Pur_name=' . mb_substr($username, 0, 5, "utf-8") .
-            '&Tel_number=' . $user_address->phone .
-            '&Mobile_number=' . $user_address->phone_mobile .
-            '&Email=' . $cookie->email .
-            '&Data_id=' . $this->module->currentOrder .
-            '&od_sob=' . $order->reference .
-            '&Amount=' . intval(round($order->getOrdersTotalPaid())) .
-            '&Roturl=' . "http://" . $_SERVER["HTTP_HOST"] . $this->module->getPathUri() . "sprespon.php" .
-            '&Roturl_status=' . "psok2" .
-            '&C2cstore=' . $storeid . "/" . $storename . "/" . $storeaddress .
-            '&Verify_key=' . $this->module->VKey;
+        $pay_zg = $this->module->getPay_zg($cart->id_carrier);
+
+        $post_str =
+            'Dcvc=' . $this->module->Dcvc .                             // 商家代號
+            '&Rvg2c=' . $this->module->Rvg2c .                          // 參數碼
+            '&Verify_key=' . $this->module->VKey .                      // 檢查碼
+            '&Od_sob=' . $order->reference .                            // 消費項目
+            '&Pay_zg=' . $pay_zg .                                      // 收費模式
+            '&Pay_subzg=' . $pay_subzg .                                // 交付運送之超商或物流公司
+            '&Data_id=' . $this->module->currentOrder .                 // 訂單號碼
+            '&Amount=' . intval(round($order->getOrdersTotalPaid())) .  // 金額
+            '&Pur_name=' . mb_substr($username, 0, 5, "utf-8") .        // 購買人姓名
+            '&Tel_number=' . $user_address->phone .                     // 聯絡電話
+            '&Mobile_number=' . $user_address->phone_mobile .           // 行動電話
+            '&Logistics_store=' . $storeid . "/" . $storename . "/" . $storeaddress . // 取件門市店號/店名/地址
+            '&Email=' . $cookie->email .                                 // 電子信箱
+            '&Roturl=' . "https://" . $_SERVER["HTTP_HOST"] . $this->module->getPathUri() . "sprespon.php" . // 交易完成後要回送的位置
+            '&Roturl_status=' . "psok2" .                               // 回送處理情形
+            '';
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $smilepay_gateway);
@@ -105,12 +103,10 @@ class Smilepay_c2cValidationModuleFrontController extends ModuleFrontController
                 $result['Mobile_number'] = $user_address->phone_mobile;
             }
 
-
             $service_id = $this->module->getService_id($order->id_carrier);
             $cvs_store_name = $this->module->getCVSStoreName($service_id);
 
             $msg = sprintf($this->module->l('smilepay_c2c success comment', 'validation'),
-//                $this->module->getCarrierName($this->module->currentOrder),
                 $storeid,
                 $cvs_store_name,
                 $storename,
@@ -120,25 +116,10 @@ class Smilepay_c2cValidationModuleFrontController extends ModuleFrontController
                 $xml->Amount
             );
 
-            $adminmsg = sprintf($this->module->l('smilepay_c2c success admin comment', 'validation'),
-//                $this->module->getCarrierName($this->module->currentOrder),
-                $xml->SmilePayNO
-//                $storeid,
-//                $storename,
-//                $storeaddress,
-//                $username,
-//                $user_address->phone_mobile,
-//                $xml->Amount
-            );
-
-            $account_roturlmap = Tools::getHttpHost(true) . __PS_BASE_URI__ .
-                'index.php?fc=module&module=smilepay_c2c&types=xml&controller=payc2cget&id_order=' .
-                $this->module->currentOrder .
-                '&VKey=' . $this->module->VKey .
-                '&dcvc=' . $this->module->Dcvc .
-                "&Smseid=" . $xml->SmilePayNO;
-            $c2cbutton = "<input type=button value='列印交貨便服務單' onclick=window.open('" . $account_roturlmap . "')><br>" . $storename . "<br>" . $xml->SmilePayNO;
-            Db::getInstance()->Execute('UPDATE `' . _DB_PREFIX_ . 'orders` SET  `smilepayc2ctable` = "' . $c2cbutton . '"  WHERE  `id_order` =' . $this->module->currentOrder);
+//            $adminmsg = sprintf(
+//                $this->module->l('smilepay_c2c success admin comment', 'validation'),
+//                $xml->SmilePayNO
+//            );
 
             $result['Status'] = $xml->Status;
             $result['SmilePayNO'] = $xml->SmilePayNO;
@@ -149,6 +130,37 @@ class Smilepay_c2cValidationModuleFrontController extends ModuleFrontController
             $result['Storeid'] = $storeid;
             $result['Storeaddress'] = $storeaddress;
             $result['Pur_name'] = $username;
+
+//            $_url = Tools::getHttpHost(true) . __PS_BASE_URI__ .
+//                'index.php?fc=module&module=smilepay_c2c&types=xml&controller=payc2cget'
+//                . '&id_order=' . $this->module->currentOrder
+//                . '&VKey=' . $this->module->VKey
+//                . '&dcvc=' . $this->module->Dcvc
+//                . "&Smseid=" . $xml->SmilePayNO;
+
+            $_url = sprintf("http://ssl.smse.com.tw/api/C2CPayment.asp?types=web&Dcvc=%s&Smseid=%s&Verify_key=%s&Pay_subzg=%s",
+                $this->module->Dcvc,
+                $xml->SmilePayNO,
+                $this->module->VKey,
+                $this->module->getPay_subzg($order->id_carrier)
+            );
+
+            $order_id = $result['Data_id'];
+            $smseid = $xml->SmilePayNO;
+
+            $customername = $result['CustomerName'];
+            $phone = $result['CustomerPhone'];
+            $amount = $result['Amount'];
+
+            $btn_style = 'font-size: 18px; margin-bottom: 10px; border-radius: 5px; padding: 5px 10px;';
+            $btn_url = '<button style="' . $btn_style . '" onclick=window.open("' . $_url . '") >取號 / 列印寄件單</button>';
+
+            $date = date("Y-m-d H:i:s");
+            $sql = 'INSERT INTO `' . _DB_PREFIX_ . 'smilepay_c2cup_table` (`id_order`, `smse_id`, `btn_url`, `date_upd`, `store_id`, `store_name`, `store_address`, `customer_name`, `customer_phone`, `amount`) VALUES(';
+            $sql .= "'$order_id' , '$smseid', '$btn_url', '$date', '$storeid', '$storename', '$storeaddress', '$customername', '$phone', '$amount'";
+            $sql .= ');';
+
+            Db::getInstance()->Execute($sql);
 
         } else {
 
@@ -164,22 +176,11 @@ class Smilepay_c2cValidationModuleFrontController extends ModuleFrontController
             $result['Status'] = $xml->Status;
             $result['Desc'] = $xml->Desc;
             $result['Data_id'] = $this->module->currentOrder;
-
         }
 
         $this->module->saveResultData($result);
 
-
-//		Db::getInstance()->Execute('INSERT INTO `'._DB_PREFIX_.'customer_thread`'
-//            . '(`id_shop`, `id_lang`, `id_contact`, `id_customer`, `id_order`, `id_product`, `status`, `email`, `date_add`, `date_upd`)'
-//            . "VALUES({$cart->id_shop}, {$cart->id_lang}, 0,{$cart->id_customer}, ".$this->module->currentOrder.", 0, 'open', '" . $customer->email . "', '" . date('Y-m-d H:i:s') . "', '" . date('Y-m-d H:i:s') . "' )");
-//        $id_customer_thread = Db::getInstance()->getRow('SELECT `id_customer_thread` FROM `'._DB_PREFIX_.'customer_thread` WHERE id_order = ' .$this->module->currentOrder);
-//        Db::getInstance()->Execute('INSERT INTO `'._DB_PREFIX_.'customer_message` (`id_customer_thread`, `id_employee`, `message`,`date_add`,`date_upd`, `system`)VALUES(' .$id_customer_thread['id_customer_thread'].',"1","'.$msg.'","'. date("Y-m-d H:i:s").'","'. date("Y-m-d H:i:s").'",1)');
-//        if(isset($adminmsg)) {
-//            Db::getInstance()->Execute('INSERT INTO `'._DB_PREFIX_.'customer_message` (`id_customer_thread`, `id_employee`, `message`,`date_add`,`date_upd`,`private`, `system`)VALUES('
-//                .$id_customer_thread['id_customer_thread'].',"1","'.$adminmsg.'","'. date("Y-m-d H:i:s").'","'. date("Y-m-d H:i:s").'",1,1)');
-//        }
-
+        // 訂單備註
         $id_customer_thread = CustomerThread::getIdCustomerThreadByEmailAndIdOrder($customer->email, $order->id);
         if (!$id_customer_thread) {
             $customer_thread = new CustomerThread();
@@ -203,15 +204,15 @@ class Smilepay_c2cValidationModuleFrontController extends ModuleFrontController
         $customer_message->system = 1;
         $customer_message->add();
 
-        if (isset($adminmsg)) {
-            $customer_message = new CustomerMessage();
-            $customer_message->id_customer_thread = $customer_thread->id;
-            $customer_message->id_employee = 0;
-            $customer_message->message = $adminmsg;
-            $customer_message->private = 1;
-            $customer_message->system = 1;
-            $customer_message->add();
-        }
+//        if (isset($adminmsg)) {
+//            $customer_message = new CustomerMessage();
+//            $customer_message->id_customer_thread = $customer_thread->id;
+//            $customer_message->id_employee = 0;
+//            $customer_message->message = $adminmsg;
+//            $customer_message->private = 1;
+//            $customer_message->system = 1;
+//            $customer_message->add();
+//        }
 
         Tools::redirect('index.php?controller=order-confirmation&id_cart=' . (int)$cart->id . '&id_module=' . (int)$this->module->id . '&id_order=' . $this->module->currentOrder . '&key=' . $customer->secure_key . "&storeid=" . $storeid . "&storename=" . $storename . "&storeaddress=" . $storeaddress);
 

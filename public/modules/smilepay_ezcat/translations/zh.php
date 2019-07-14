@@ -29,11 +29,11 @@ $_MODULE['<{smilepay_ezcat}prestashop>smilepay_ezcat_b17f3f4dcf653a5776792498a9b
 $_MODULE['<{smilepay_ezcat}prestashop>adminsmilepayezcat_abe2d6e077d368d612db9ff1bdd8a205'] = 'SmilePay 黑貓貨到付現，追蹤碼：%s';
 $_MODULE['<{smilepay_ezcat}prestashop>adminsmilepayezcat_ae6b2f45d7c479b34c518967e140eeb5'] = 'SmilePay 黑貓貨到付現，託運單號：%s';
 $_MODULE['<{smilepay_ezcat}prestashop>validation_05c289261571270bc8f183b9c04c04b2'] = '%s，訂單金額：%s，訂單已經送出，請留意出貨通知';
-$_MODULE['<{smilepay_ezcat}prestashop>validation_9f781355096e28886cfb9fef3280221e'] = '%s，追蹤碼：%s，訂單金額：%s，SmilePay 訂單已經建立';
+$_MODULE['<{smilepay_ezcat}prestashop>validation_9f781355096e28886cfb9fef3280221e'] = '追蹤碼：%s';
 $_MODULE['<{smilepay_ezcat}prestashop>content_order_1eab1f7673a130056ef747f9c947392b'] = '寄貨時的包裹大小(長x寬x高 )';
 $_MODULE['<{smilepay_ezcat}prestashop>content_order_5f25a1036cecc410df6344f4755101c9'] = '(單位: 公分cm)';
 $_MODULE['<{smilepay_ezcat}prestashop>content_order_85dc7591de3a6093cbbba1b30122d4ec'] = '建立託運單';
-$_MODULE['<{smilepay_ezcat}prestashop>content_order_c68b83413439cbbefa27d39e52ed99f3'] = 'SmilePay 追蹤碼';
+$_MODULE['<{smilepay_ezcat}prestashop>content_order_c68b83413439cbbefa27d39e52ed99f3'] = 'SmilePay No.';
 $_MODULE['<{smilepay_ezcat}prestashop>content_order_d743c2a34a70764ec6e787f66e490ce0'] = '託運單號';
 $_MODULE['<{smilepay_ezcat}prestashop>content_order_b1e2d01fb0c85dbb4183b1e22e6887ea'] = '注意：';
 $_MODULE['<{smilepay_ezcat}prestashop>content_order_fd08d213b8a7b9432233c3cd2340064a'] = '出貨請至 SmilePay 商家後台列印';

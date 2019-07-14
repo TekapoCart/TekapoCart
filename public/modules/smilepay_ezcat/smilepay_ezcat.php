@@ -571,18 +571,15 @@ class Smilepay_ezcat extends PaymentModule
             } else {
                 $spdesc = Tools::getValue('Spdesc');
             }
+
             Configuration::updateValue('SMILEPAY_ezcat_DCVC', $dcvc);
-
             Configuration::updateValue('SMILEPAY_ezcat_MID', $mid);
-
             Configuration::updateValue('SMILEPAY_ezcat_Rvg2c', $rvg2c);
-
             Configuration::updateValue('SMILEPAY_ezcat_VKey', $vkey);
-
             Configuration::updateValue('SMILEPAY_ezcat_paymentName', $paymentName);
-
             Configuration::updateValue('SMILEPAY_ezcat_Spdesc', $spdesc);
-            //reset carrier
+
+            // reset carrier
             if (!is_null(Tools::getValue('SMILEPAY_ezcatp_Carrier_Reset_on')) && Tools::getValue('SMILEPAY_ezcatp_Carrier_Reset_on') == 'Y') {
 
                 $this->_resetCarrierdata();
@@ -607,80 +604,47 @@ class Smilepay_ezcat extends PaymentModule
         $this->_html .=
 
             '<form action="' . Tools::htmlentitiesUTF8($_SERVER['REQUEST_URI']) . '" method="post">
-
 			<fieldset>
-
 			<legend><img src="../img/admin/contact.gif" />' . $this->l('Contact details') . '</legend>
-
 				<table border="0" width="500" cellpadding="0" cellspacing="0" id="form">
-
 					<tr>
-
 						<td colspan="2">' . $this->l('Please specify the Shop code and Check code to smilepay ezcat') . '.<br /><br /></td>
-
 					</tr>
-
                     <tr>
 						<td colspan="2">' . $this->l('Remember to set carrier note') . '<br /><br /></td>
 					</tr>
-
 					<tr>
-
 						<td width="130" style="height: 35px;">' . $this->l('Shop code') . '</td>
-
 						<td><input type="text" name="Dcvc" value="' . Tools::htmlentitiesUTF8(Tools::getValue('Dcvc', $this->Dcvc)) . '" style="width: 300px;" /></td>
-
 					</tr>
-
 					<tr>
-
 						<td  width="130" style="height: 35px;">' . $this->l('Shop rvg2c') . '</td>
-
 						<td><input type="text" name="Rvg2c" value="' . Tools::htmlentitiesUTF8(Tools::getValue('Rvg2c', $this->Rvg2c)) . '" style="width: 300px;" /></td>
-
 					</tr>
-
 					<tr>
-
 						<td  width="130" style="height: 35px;">' . $this->l('Shop VKey') . '</td>
-
 						<td><input type="text" name="VKey" value="' . Tools::htmlentitiesUTF8(Tools::getValue('VKey', $this->VKey)) . '" style="width: 300px;" /></td>
-
 					</tr>								
-
 					<tr>
-                        
 						<td width="130" style="height: 35px;">' . $this->l('Check code') . '</td>
-
 						<td><input type="text" name="Mid" value="' . Tools::htmlentitiesUTF8(Tools::getValue('Mid', $this->Mid)) . '" style="width: 300px;" /></td>
-                        
 					</tr>
                     <tr>
-
 					    <td width="130" style="height: 35px;">' . $this->l('Front Payment Name') . '</td>
-
 					    <td><input type="text" name="paymentName" value="' . Tools::htmlentitiesUTF8(Tools::getValue('paymentName',
                 $this->paymentName)) . '" style="width: 300px;" /></td>
-
 				    </tr>
                     <tr>
 						<td width="130" style="height: 70px;">' . $this->l('Payment Description Of Frontend') . '</td>
 						<td><textarea name="Spdesc" style="width: 300px;height: 70px">' . Tools::htmlentitiesUTF8(Tools::getValue('Spdesc',
                 $this->Spdesc)) . '</textarea></td>
 					</tr>
-
                     <tr><td></td><td ><br /><input  name="SMILEPAY_ezcatp_Carrier_Reset_on"  type="checkbox" value="Y">' . $this->l('Reset carrier config') . '</input></td></tr>
-
 					<tr><td colspan="2" align="center"><br /><input class="button" name="btnSubmit" value="' . $this->l('Update settings') . '" type="submit" /></td></tr>
-
 				</table>
-
 			</fieldset>
-
 		</form>';
-
     }
-
 
     public function getContent()
     {
@@ -703,11 +667,9 @@ class Smilepay_ezcat extends PaymentModule
         }
 
         $this->_displaySmilepay();
-
         $this->_displayForm();
 
         return $this->_html;
-
     }
 
     public function hookActionCarrierUpdate($params)
@@ -721,7 +683,6 @@ class Smilepay_ezcat extends PaymentModule
         }
     }
 
-
     public function hookPaymentOptions($params)
     {
         // echo print_r($params['cart'],true);
@@ -730,10 +691,10 @@ class Smilepay_ezcat extends PaymentModule
             return;
         }
 
-
         if (!$this->checkCurrency($params['cart'])) {
             return;
         }
+
         if (is_null($this->Dcvc) || empty($this->Dcvc)
             || is_null($this->Mid) || empty($this->Mid)
             || is_null($this->Rvg2c) || empty($this->Rvg2c)
@@ -761,18 +722,14 @@ class Smilepay_ezcat extends PaymentModule
 
     public function getTemplateVars()
     {
-        $cart = $this->context->cart;
-
-
+        // $cart = $this->context->cart;
         return [
             'Description' => $this->Spdesc,
         ];
     }
 
-
     public function hookPaymentReturn($params)
     {
-
 
         if (!$this->active) {
             return;
@@ -791,68 +748,43 @@ class Smilepay_ezcat extends PaymentModule
             $Status = $result ['Status'];
             if ($Status == "1") {
                 $this->smarty->assign(array(
-
                     'Status' => '黑貓貨到付現取處理中',
-
                     'SmilePayNO' => $result['SmilePayNO'],
-
                     'Amount' => $result['Amount'],
-
                     'this_path' => $this->_path,
-
-
                 ));
             } else {
                 $this->smarty->assign(array(
-
                     'Status' => iconv("big5", "UTF-8", "�q�楢��") . $result ['Status'],
-
                     'PayEndDate' => "",
-
                     'SmilePayNO' => "",
-
                     'Amount' => "",
-
                     'this_path' => $this->_path,
-
                 ));
             }
-
 
             return $this->display(__FILE__, 'payment_showreturn.tpl');
 
         } else {
 
             $this->smarty->assign(array(
-
                 'Status' => iconv("big5", "UTF-8", "�q�楢��") . "ERROR",
-
                 'PayEndDate' => "",
-
                 'SmilePayNO' => "",
-
                 'Amount' => "",
-
                 'this_path' => $this->_path,
-
-
             ));
 
             $msg = "ERROR";
 
             return $this->display(__FILE__, 'payment_showreturn.tpl');
-
         }
-
-
     }
-
 
     public function checkCurrency($cart)
     {
 
         $currency_order = new Currency((int)($cart->id_currency));
-
         $currencies_module = $this->getCurrency((int)$cart->id_currency);
 
         if (is_array($currencies_module)) {
@@ -864,9 +796,7 @@ class Smilepay_ezcat extends PaymentModule
         }
 
         return false;
-
     }
-
 
     public function isCarrierInstall()
     {
@@ -881,13 +811,11 @@ class Smilepay_ezcat extends PaymentModule
             } else {
                 return false;
             }
-
-
         }
         return true;
     }
 
-    //check shipping method is in type of Smilepay_ezcat
+    // check shipping method is in type of Smilepay_ezcat
     public function isSmilepay_ezcatp_shipping($l_carrier_id)
     {
         $l_carrier = new Carrier($l_carrier_id);
@@ -896,10 +824,9 @@ class Smilepay_ezcat extends PaymentModule
         } else {
             return false;
         }
-
     }
 
-    //get carrier name
+    // get carrier name
     public function getCarrierName($order_id)
     {
         if (isset($order_id) && !empty($order_id)) {
@@ -917,7 +844,6 @@ class Smilepay_ezcat extends PaymentModule
         $cookie = new Cookie('smilepay_ezcatp_checkouturl');
         $cookie->setExpire(time() + 60 * 60);
         $cookie->__set('ezcatemapurl', $url);
-
     }
 
     public function getReturnCheckoutUrl()
@@ -937,7 +863,6 @@ class Smilepay_ezcat extends PaymentModule
     {
         $cookie = new Cookie('smilepay_ezcatp_checkouturl');
         $cookie->__unset('ezcatemapurl');
-
     }
 
 
@@ -959,8 +884,6 @@ class Smilepay_ezcat extends PaymentModule
         } elseif (!$carrier->active) {
             return false;
         }
-
-
     }
 
     //validation of name,phone and store info
@@ -968,8 +891,6 @@ class Smilepay_ezcat extends PaymentModule
     {
         $context = Context::getContext();
         /*$address = new Address(intval($params['cart']->id_address_delivery));
-
-
         if(!is_null($address->phone_mobile) && !empty($address->phone_mobile))
              $phone = $address->phone_mobile;
         else
@@ -1009,7 +930,7 @@ class Smilepay_ezcat extends PaymentModule
 
     }
 
-    //validation of name,phone and store info api
+    // validation of name,phone and store info api
     public function shippingValidate($cart)
     {
         if (!isset($cart) && empty($cart)) {
@@ -1048,7 +969,6 @@ class Smilepay_ezcat extends PaymentModule
             if (isset($data['checkout-delivery-step'])) {
                 $data['checkout-delivery-step']['step_is_complete'] = '';
 
-
                 Db::getInstance()->execute(
                     'UPDATE ' . _DB_PREFIX_ . 'cart SET checkout_session_data = "' . pSQL(json_encode($data)) . '"
                                 WHERE id_cart = ' . (int)$this->context->cart->id
@@ -1071,7 +991,6 @@ class Smilepay_ezcat extends PaymentModule
         foreach ($result as $key => $val) {
             $cookie->__set($key, $val);
         }
-
     }
 
     public function getResultData()
@@ -1079,22 +998,17 @@ class Smilepay_ezcat extends PaymentModule
         $cookie = new Cookie('smilepay_ezcatp_result');
         $data = $cookie->getAll();
 
-
         if (isset($data['Status']) && !empty($data['Status'])) {
             $result['Status'] = $data['Status'];
 
             if ($result['Status'] == 1) {
-
                 $result['SmilePayNO'] = $data['SmilePayNO'];
                 $result['Amount'] = $data['Amount'];
-
                 $result['Data_id'] = $data['Data_id'];
-
             } else {
                 $result['Desc'] = $data['Desc'];
                 $result['Data_id'] = $data['Data_id'];
             }
-
 
         } else {
             return false;
@@ -1102,7 +1016,6 @@ class Smilepay_ezcat extends PaymentModule
 
         return $result;
     }
-
 
     /*public function hookActionFrontControllerSetMedia($params)
     {
@@ -1124,26 +1037,18 @@ class Smilepay_ezcat extends PaymentModule
                 );
             }
         }
-        
-
     }*/
 
     public function hookDisplayAdminOrderContentOrder($params)
     {
-
         $order = $params['order'];
         $carrier = new Carrier($params['order']->id_carrier);
         $rq = Db::getInstance()->executeS('select * from `' . _DB_PREFIX_ . 'smilepay_ezcat_table` where id_order=' . $order->id);
 
         $smilepay_ezcat_data = $this->getSmilepayOrderResult($order->id);
 
-
         if ((isset($rq) && !empty($rq)) || $carrier->external_module_name == $this->name) {
 
-            /*if($smilepay_ezcat_data['track_num'])
-            {
-                
-            }*/
             if ($carrier->id_reference == $this->id_ref_carrier['normal']) {
                 $shipping_code = 'normal';
             } elseif ($carrier->id_reference == $this->id_ref_carrier['fridge']) {
@@ -1187,7 +1092,7 @@ class Smilepay_ezcat extends PaymentModule
 
     }
 
-    //add comment
+    // add comment
     public function addComment($message, $order_id, $visibility = false, $sendmail = false)
     {
         if (!isset($order_id) || empty($order_id)) {
@@ -1215,10 +1120,9 @@ class Smilepay_ezcat extends PaymentModule
 
         $employees = Employee::getEmployees();
 
-
         $customer_message = new CustomerMessage();
         $customer_message->id_customer_thread = $customer_thread->id;
-        $customer_message->id_employee = $employees[0]['id_employee'];//(int)$context->employee->id; // for first employee
+        $customer_message->id_employee = $employees[0]['id_employee'];
         $customer_message->message = $message;
         $customer_message->private = $visibility;
         $customer_message->add();

@@ -83,7 +83,7 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                         $order_current_status = (int)$order->getCurrentState();
                         switch ($ecpay_payment_method) {
                             case ECPay_PaymentMethod::Credit:
-                                # suzy: 2019-07-06 Set instalment status id to 27
+                                # suzy: 2019-07-06 讓信用卡分期訂單狀態通過檢查機制
                                 if (in_array($order_current_status, [28, 29, 30, 31, 32])) {
                                     $order_current_status = 27;
                                 }
@@ -94,7 +94,9 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                                     if ($order_current_status != $created_status_id) {
                                         # The order already paid or not in the standard procedure, do nothing
                                     } else {
-                                        $this->module->setOrderComments($cart_order_id, $payment_result_comments);
+                                        // suzy: 2019-07-09 將 付款結果 顯示在 後台訂單付款訊息
+                                        // $this->module->setOrderComments($cart_order_id, $payment_result_comments);
+                                        $this->module->setPaymentMessage($cart_order_id, $payment_result_comments);
                                         $this->module->updateOrderStatus($cart_order_id, $succeeded_status_id, true);
                                     }
                                 }
@@ -111,12 +113,17 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                                             , $ecpay_feedback['vAccount']
                                             , $ecpay_feedback['ExpireDate']
                                         );
-                                        $this->module->setOrderComments($cart_order_id, $comments . $get_code_result_comments);
+                                        // suzy: 2019-07-09 將 付款結果 顯示在 後台訂單付款訊息
+                                        // $this->module->setOrderComments($cart_order_id, $comments . $get_code_result_comments);
+                                        $this->module->setPaymentMessage($cart_order_id, $comments . $get_code_result_comments);
+
                                     } else {
                                         if ($order_current_status != $created_status_id) {
                                             # The order already paid or not in the standard procedure, do nothing
                                         } else {
-                                            $this->module->setOrderComments($cart_order_id, $payment_result_comments);
+                                            // suzy: 2019-07-09 將 付款結果 顯示在 後台訂單付款訊息
+                                            // $this->module->setOrderComments($cart_order_id, $payment_result_comments);
+                                            $this->module->setPaymentMessage($cart_order_id, $payment_result_comments);
                                             $this->module->updateOrderStatus($cart_order_id, $succeeded_status_id, true);
                                         }
                                     }
@@ -132,12 +139,16 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                                             , $ecpay_feedback['PaymentNo']
                                             , $ecpay_feedback['ExpireDate']
                                         );
-                                        $this->module->setOrderComments($cart_order_id, $comments . $get_code_result_comments);
+                                        // suzy: 2019-07-09 將 付款結果 顯示在 後台訂單付款訊息
+                                        // $this->module->setOrderComments($cart_order_id, $comments . $get_code_result_comments);
+                                        $this->module->setPaymentMessage($cart_order_id, $comments . $get_code_result_comments);
                                     } else {
                                         if ($order_current_status != $created_status_id) {
                                             # The order already paid or not in the standard procedure, do nothing
                                         } else {
-                                            $this->module->setOrderComments($cart_order_id, $payment_result_comments);
+                                            // suzy: 2019-07-09 將 付款結果 顯示在 後台訂單付款訊息
+                                            // $this->module->setOrderComments($cart_order_id, $payment_result_comments);
+                                            $this->module->setPaymentMessage($cart_order_id, $payment_result_comments);
                                             $this->module->updateOrderStatus($cart_order_id, $succeeded_status_id, true);
                                         }
                                     }
@@ -155,12 +166,16 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                                             , $ecpay_feedback['Barcode2']
                                             , $ecpay_feedback['Barcode3']
                                         );
-                                        $this->module->setOrderComments($cart_order_id, $comments . $get_code_result_comments);
+                                        // suzy: 2019-07-09 將 付款結果 顯示在 後台訂單付款訊息
+                                        // $this->module->setOrderComments($cart_order_id, $comments . $get_code_result_comments);
+                                        $this->module->setPaymentMessage($cart_order_id, $comments . $get_code_result_comments);
                                     } else {
                                         if ($order->current_state != $created_status_id) {
                                             # The order already paid or not in the standard procedure, do nothing
                                         } else {
-                                            $this->module->setOrderComments($cart_order_id, $payment_result_comments);
+                                            // suzy: 2019-07-09 將 付款結果 顯示在 後台訂單付款訊息
+                                            // $this->module->setOrderComments($cart_order_id, $payment_result_comments);
+                                            $this->module->setPaymentMessage($cart_order_id, $payment_result_comments);
                                             $this->module->updateOrderStatus($cart_order_id, $succeeded_status_id, true);
                                         }
                                     }

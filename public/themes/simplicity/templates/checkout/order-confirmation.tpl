@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-md-12">
 
-            {* 您的訂單已成立 *}
+            {* 您的訂單已建立 *}
             {block name='order_confirmation_header'}
               <h3 class="h1 card-title">
                 <i class="material-icons rtl-no-flip done">&#xE876;</i>{l s='Your order is confirmed' d='Shop.Theme.Checkout'}

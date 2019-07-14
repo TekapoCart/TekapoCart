@@ -54,11 +54,11 @@ class Ecpay extends PaymentModule
 			, 'ecpay_payment_credit_03'
 			, 'ecpay_payment_credit_06'
 			, 'ecpay_payment_credit_12'
-			, 'ecpay_payment_credit_18'
+            , 'ecpay_payment_credit_18'
 			, 'ecpay_payment_credit_24'
-			, 'ecpay_payment_webatm'
-			, 'ecpay_payment_atm'
-			, 'ecpay_payment_cvs'
+            , 'ecpay_payment_webatm'
+            , 'ecpay_payment_atm'
+            , 'ecpay_payment_cvs'
 			, 'ecpay_payment_barcode'
 		);
 
@@ -143,7 +143,7 @@ class Ecpay extends PaymentModule
                 $payment_option = new PaymentOption();
                 $payment_option->setCallToActionText($payment_desc)
                     // ->setLogo(Media::getMediaPath(_PS_MODULE_DIR_.$this->name.'/logo.png'))
-                    ->setAction($this->context->link->getModuleLink($this->name, 'validation', array(), true))
+                    // ->setAdditionalInformation($this->context->smarty->fetch('module:ecpay/views/templates/front/payment_info.tpl'))
                     ->setInputs([
                         'payment_type' => [
                             'name' =>'payment_type',
@@ -151,7 +151,8 @@ class Ecpay extends PaymentModule
                             'value' => $payment_name,
                         ],
                     ])
-                    ->setAdditionalInformation($this->context->smarty->fetch('module:ecpay/views/templates/front/payment_infos.tpl'));
+                    ->setAction($this->context->link->getModuleLink($this->name, 'validation', array(), true))
+                ;
 
                 $payment_options[] = $payment_option;
 
@@ -163,28 +164,36 @@ class Ecpay extends PaymentModule
   
 	public function hookPaymentReturn($params)
 	{
-		if (!$this->active)
-		{
+		if (!$this->active) {
 			return;
 		}
 
-		// suzy: 2019-07-06 custom payment return
-        $ecpay_feedback = '';
-        $customerMessages = CustomerMessage::getMessagesByOrderId((int) $params['order']->id, false);
-        foreach ($customerMessages as $cmId => $customerMessage) {
-            if ($customerMessage['system'] == 1 && $customerMessage['private'] == 0) {
-                $ecpay_feedback = $customerMessage['message'];
-            }
+        $rq = Db::getInstance()->getRow('SELECT payment_message FROM `'
+            . _DB_PREFIX_ . 'orders` WHERE id_order=' . $params['order']->id);
+        $payment_message = $rq['payment_message'];
+
+        $this->smarty->assign(array(
+            'payment_message' => $payment_message,
+        ));
+
+        return $this->display(__FILE__, 'payment_return.tpl');
+	}
+
+    public function hookDisplayOrderDetail($params)
+    {
+
+        if ($params['order']->module !== 'ecpay') {
+            return;
         }
 
-        $this->smarty->assign(
-            array(
-                'ecpay_feedback' => $ecpay_feedback,
-            )
-        );
+        // 顯示付款資訊
+        $row = Db::getInstance()->getRow('SELECT payment_message FROM `' . _DB_PREFIX_ . 'orders` WHERE id_order=' . $params['order']->id);
+        $this->smarty->assign([
+            'payment_message' => $row['payment_message'],
+        ]);
 
-        return $this->fetch('module:ecpay/views/templates/hook/payment_return.tpl');
-	}
+        return $this->display(__FILE__, 'display_order_detail.tpl');
+    }
 	
 	public function checkCurrency($cart)
 	{
@@ -214,12 +223,12 @@ class Ecpay extends PaymentModule
 			, 'Credit_03' => $this->l('Credit Card(03 Installments)')
 			, 'Credit_06' => $this->l('Credit Card(06 Installments)')
 			, 'Credit_12' => $this->l('Credit Card(12 Installments)')
-			, 'Credit_18' => $this->l('Credit Card(18 Installments)')
+//			, 'Credit_18' => $this->l('Credit Card(18 Installments)')
 			, 'Credit_24' => $this->l('Credit Card(24 Installments)')
-			, 'WebATM' => $this->l('WebATM')
+//			, 'WebATM' => $this->l('WebATM')
 			, 'ATM' => $this->l('ATM')
-			, 'CVS' => $this->l('CVS')
-			, 'BARCODE' => $this->l('BARCODE')
+//			, 'CVS' => $this->l('CVS')
+//			, 'BARCODE' => $this->l('BARCODE')
 		);
 		
 		return $payments_desc;
@@ -369,7 +378,25 @@ class Ecpay extends PaymentModule
 		
 		return $order_status[$status_name];
 	}
-	
+
+	// suzy: 2019-07-09 使用後台訂單付款訊息 orders.payment_message
+	public function setPaymentMessage($order_id, $message)
+    {
+        try {
+
+            Db::getInstance()->Execute('UPDATE `'
+                . _DB_PREFIX_ . 'orders` SET `payment_message` = "' . $message
+                . '" WHERE `id_order` =' . $order_id);
+
+        } catch(Exception $e) {
+
+            $error = $e->getMessage();
+            $result_message = '0|' . $error;
+
+            $this->module->logEcpayMessage('Order ' . $order_id . ' process result : ' . $result_message, true);
+        }
+    }
+
 	public function setOrderComments($order_id, $comments)
 	{
         try {

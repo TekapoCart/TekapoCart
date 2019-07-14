@@ -1,3 +1,3 @@
 #!/bin/sh
 
-git pull && chown www-data:www-data -R /var/www/html && rm -rf ./public/var/cache/prod/*
+git pull && chown www-data:www-data -R . && rm -rf ./public/var/cache/prod/*

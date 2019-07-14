@@ -218,9 +218,6 @@ class Ps_Wirepayment extends PaymentModule
             return;
         }
 
-        // suzy: 2018-10-28 讓轉帳匯款支援超商取貨
-        $c2cup_run = false;
-
         $state = $params['order']->getCurrentState();
         if (
             in_array(
@@ -244,18 +241,6 @@ class Ps_Wirepayment extends PaymentModule
             $bankwireAddress = Tools::nl2br($this->address);
             if (!$bankwireAddress) {
                 $bankwireAddress = '___________';
-            }
-
-            // suzy: 2018-10-28 讓轉帳匯款支援超商取貨
-            if (file_exists("modules/smilepay_c2cup/smilepay_c2cup.php")) {
-                include_once("modules/smilepay_c2cup/smilepay_c2cup.php");
-                $smilepay_c2cup_obj = new Smilepay_c2cup();
-                if ($smilepay_c2cup_obj->isSelectedC2cupShipping($params['order']->id_carrier)) {
-                    $result = $smilepay_c2cup_obj->runC2CupProcess($params['order']->id);
-                    $c2cup_template = $smilepay_c2cup_obj->produceResultTemplate($result);
-                    $c2cup_run = true;
-                    // $c2cup_template is saved output html
-                }
             }
 
             // suzy: 2018-10-28 顯示匯款完成提醒訊息
@@ -286,11 +271,6 @@ class Ps_Wirepayment extends PaymentModule
                     'contact_url' => $this->context->link->getPageLink('contact', true),
                 )
             );
-        }
-
-        // suzy: 2018-10-28 讓轉帳匯款支援超商取貨
-        if ($c2cup_run) {
-            return $c2cup_template . $this->fetch('module:ps_wirepayment/views/templates/hook/payment_return.tpl');
         }
 
         return $this->fetch('module:ps_wirepayment/views/templates/hook/payment_return.tpl');

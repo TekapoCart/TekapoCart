@@ -1851,7 +1851,9 @@ class AdminOrdersControllerCore extends AdminController
         $history = $order->getHistory($this->context->language->id);
 
         foreach ($history as &$order_state) {
-            $order_state['text-color'] = Tools::getBrightness($order_state['color']) < 128 ? 'white' : 'black';
+            // suzy: 2019-07-08 強制白
+            // $order_state['text-color'] = Tools::getBrightness($order_state['color']) < 128 ? 'white' : 'black';
+            $order_state['text-color'] = 'white';
         }
 
         $shipping_refundable_tax_excl = $order->total_shipping_tax_excl;
@@ -1866,7 +1868,7 @@ class AdminOrdersControllerCore extends AdminController
 
         // suzy: 2018-09-14 調整訂單狀態顯示
         $states = OrderState::getOrderStates($this->context->language->id);
-        $unpaid_state_ids = [1, 10, 12, 19, 20, 23, 24, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
+        $unpaid_state_ids = [1, 10, 12, 19, 20, 23, 24, 27, 28, 29, 30, 32, 34];
         $processing_state_ids =  [14, 17, 25];
         $paid_state_ids = [2, 9];
         $shipment_state_ids = [3, 4, 5];

@@ -1,12 +1,22 @@
-<?php
-/**
- * @since 1.5.0
- */
+<?php
+
+/**
+
+ * @since 1.5.0
+
+ */
+
 class AdminSmilepayPalmboxc2cupController extends ModuleAdminController
-{    protected $smilepay_gateway = "https://ssl.smse.com.tw/api/SPPayment.asp";
+{
+    protected $smilepay_gateway = "https://ssl.smse.com.tw/api/SPPayment.asp";
     protected $smilepay_palmboxc2cup_gateway = "https://ssl.smse.com.tw/api/pbGetCheckCode.asp";
 	public function postProcess()
-	{       $order_id=$_REQUEST['order_id'];       $smilepay_palmboxc2cup_data = $this->module->loadStoreInfoByOrderid($order_id);             if(empty($smilepay_palmboxc2cup_data) || empty($smilepay_palmboxc2cup_data['smse_id']) )       {
+	{
+       $order_id=$_REQUEST['order_id'];
+       $smilepay_palmboxc2cup_data = $this->module->loadStoreInfoByOrderid($order_id);
+      
+       if(empty($smilepay_palmboxc2cup_data) || empty($smilepay_palmboxc2cup_data['smse_id']) )
+       {
             $result_pro1 = $this->_createSmilepayOrderProcess($_REQUEST['order_id']);
             if($result_pro1['Status'] != '1')
             {
@@ -23,7 +33,12 @@ class AdminSmilepayPalmboxc2cupController extends ModuleAdminController
 
                 $this->module->saveStoreInfoByOrderid($result_pro1_conv);
             }
-       }      // $smilepay_palmboxc2cup_data = $this->module->loadStoreInfoByOrderid($order_id);       $order_carrier = new OrderCarrier($order_id);       $message="";       if((isset($result_pro1)|| !empty($smilepay_palmboxc2cup_data['smse_id']))  && empty($smilepay_palmboxc2cup_data['checkcode'] ))       {
+       }
+      // $smilepay_palmboxc2cup_data = $this->module->loadStoreInfoByOrderid($order_id);
+       $order_carrier = new OrderCarrier($order_id);
+       $message="";
+       if((isset($result_pro1)|| !empty($smilepay_palmboxc2cup_data['smse_id']))  && empty($smilepay_palmboxc2cup_data['checkcode'] ))
+       {
            $sp_size = $_REQUEST['sp_size'];
 
            $result_pro2 =$this->_createSmilepayOrderShippingProcess($order_id,$sp_size);
@@ -43,7 +58,19 @@ class AdminSmilepayPalmboxc2cupController extends ModuleAdminController
                echo 'Process2 Status' . $result_pro2['Status'] .'<br>' .$result_pro2['Desc'];
                exit;
            }
-       }       $arg = array(                    'order_id'=>$order_id,                 //   'vieworder'=>'',                  //  'tokken'=>Tools::getAdminTokenLite('AdminOrders')                );       $url = $this->context->link->getAdminLink('AdminOrders',  false) . "&id_order=".(int)$order_id.'&vieworder'.'&token='.Tools::getAdminTokenLite('AdminOrders');       Tools::redirectAdmin($url);             exit;    }
+       }
+       $arg = array(
+                    'order_id'=>$order_id,
+                 //   'vieworder'=>'',
+                  //  'tokken'=>Tools::getAdminTokenLite('AdminOrders')
+                );
+       $url = $this->context->link->getAdminLink('AdminOrders',  false) . "&id_order=".(int)$order_id.'&vieworder'.'&token='.Tools::getAdminTokenLite('AdminOrders');
+
+       Tools::redirectAdmin($url);
+      
+       exit;
+    }
+
 
     function _createSmilepayOrderProcess($order_id)
     {
@@ -111,7 +138,7 @@ class AdminSmilepayPalmboxc2cupController extends ModuleAdminController
             $post_data['Od_sob'] = $order->reference;
             $post_data['Temperature'] =  $temperature;
             //$post_data['Roturl_status'] =  "psok2";
-            //$post_data['Roturl'] =  "http://".$_SERVER["HTTP_HOST"].$this->module->getPathUri()."sprespon.php";
+            //$post_data['Roturl'] =  "https://".$_SERVER["HTTP_HOST"].$this->module->getPathUri()."sprespon.php";
 		
 
             $ch = curl_init();
@@ -312,4 +339,5 @@ class AdminSmilepayPalmboxc2cupController extends ModuleAdminController
     }
 
 
-}
+}
+

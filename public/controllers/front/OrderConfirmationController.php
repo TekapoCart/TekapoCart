@@ -63,6 +63,13 @@ class OrderConfirmationControllerCore extends FrontController
         }
         $this->reference = $order->reference;
         if (!Validate::isLoadedObject($order) || $order->id_customer != $this->context->customer->id || $this->secure_key != $order->secure_key) {
+            // suzy: 2019-07-08 非會員改導 guest tracking
+            // Tools::redirect($redirectLink);
+            $customer = new Customer((int)($order->id_customer));
+            if ($customer->is_guest) {
+                Tools::redirect('index.php?controller=guest-tracking');
+            }
+
             Tools::redirect($redirectLink);
         }
         $module = Module::getInstanceById((int) ($this->id_module));

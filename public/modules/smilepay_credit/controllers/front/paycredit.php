@@ -26,65 +26,28 @@ class Smilepay_creditPaycreditModuleFrontController extends ModuleFrontControlle
                 break;
             }
         }
+
         if (!$authorized) {
             die($this->module->l('This payment method is not available.', 'validation'));
         }
-
-
-        //parent::initContent();
 
         $customer = new Customer($cart->id_customer);
         if (!Validate::isLoadedObject($customer)) {
             Tools::redirect('index.php?controller=order&step=1');
         }
 
-        $order = new Order($id_order);
-
-        $user_address = new Address($cart->id_address_invoice);
-
-
         $URL = "https://ssl.smse.com.tw/ezpos/roturl.asp?Dcvc=" . $this->module->Dcvc .
             "&Rvg2c=1&Data_id=" . $id_order .
             "&types=web";
-        $msg = "如刷卡結果無返回請點按鈕查詢結果 <input type=button value='查詢' onclick=window.open('" . $URL . "')>";
-        Db::getInstance()->Execute('UPDATE `' . _DB_PREFIX_ . 'orders` SET  `smilepayc2ctable` = "' . $msg . '"  WHERE  `id_order` =' . $id_order);
 
-//        Db::getInstance()->Execute('INSERT INTO `' . _DB_PREFIX_ . "customer_thread` (`id_shop`, `id_lang`, `id_contact`, `id_customer`, `id_order`, `id_product`, `status`)VALUES(1,{$cart->id_lang},0,{$cart->id_customer}," . $id_order . ',0,\'open\' )');
-//        $id_customer_thread = Db::getInstance()->getRow('SELECT `id_customer_thread` FROM `' . _DB_PREFIX_ . 'customer_thread` WHERE id_order = ' . $id_order);
-        $msguser = "如刷卡結果無返回，請通知商家協助查詢。";
-//        Db::getInstance()->Execute('INSERT INTO `' . _DB_PREFIX_ . 'customer_message` (`id_customer_thread`, `id_employee`, `message`,`date_add`,`date_upd`)VALUES(' . $id_customer_thread['id_customer_thread'] . ',"1","' . $msguser . '","' . date("Y-m-d H:i:s") . '","' . date("Y-m-d H:i:s") . '")');
+        // $msg = "如刷卡結果無返回請點按鈕查詢結果 <input type=button value='查詢' onclick=window.open('" . $URL . "')>";
+        // Db::getInstance()->Execute('UPDATE `' . _DB_PREFIX_ . 'orders` SET  `payment_message` = "' . $msg . '"  WHERE  `id_order` =' . $id_order);
 
-        $id_customer_thread = CustomerThread::getIdCustomerThreadByEmailAndIdOrder($customer->email, $order->id);
-        if (!$id_customer_thread) {
-            $customer_thread = new CustomerThread();
-            $customer_thread->id_contact = 0;
-            $customer_thread->id_customer = (int)$cart->id_customer;
-            $customer_thread->id_shop = (int)$cart->id_shop;
-            $customer_thread->id_order = (int)$id_order; // $this->module->currentOrder;
-            $customer_thread->id_lang = (int)$cart->id_lang;
-            $customer_thread->email = $customer->email;
-            $customer_thread->status = 'open';
-            $customer_thread->token = Tools::passwdGen(12);
-            $customer_thread->add();
-        } else {
-            $customer_thread = new CustomerThread((int)$id_customer_thread);
-        }
-
-        $customer_message = new CustomerMessage();
-        $customer_message->id_customer_thread = $customer_thread->id;
-        $customer_message->id_employee = 0;
-        $customer_message->message = $msguser;
-        $customer_message->system = 1;
-        $customer_message->add();
-
+        $order = new Order($id_order);
 
         if (!Validate::isLoadedObject($order)) {
             die($this->module->l('This payment order_hist is not available.', 'validation'));
         }
-
-
-        //尚修正
-        //var_dump($this);
 
         $this->context->smarty->assign(array(
             'status' => 'ok',
