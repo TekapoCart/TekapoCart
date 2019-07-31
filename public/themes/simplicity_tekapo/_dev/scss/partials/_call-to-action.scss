@@ -1,0 +1,38 @@
+.call-to-action {
+  display: none;
+}
+
+#index,
+.cms-id-16,
+.cms-id-18,
+.cms-id-22 {
+  .call-to-action {
+    display: block;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+}
+
+.call-to-action {
+  h6 {
+    font-size: 26px;
+    line-height: 55px;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+  .button {
+    .call {
+      color: #fff;
+      background-color: $theme-green-color;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .call-to-action {
+    h6 {
+      font-size: 26px;
+      line-height: 39px;
+    }
+  }
+}

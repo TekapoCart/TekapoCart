@@ -1,10 +1,30 @@
-/*
- * Custom code goes here.
- * A template should always ship with an empty custom.js
- */
-
 // https://guides.github.com/javascripts/application.js
 
+var tableOfContents = function($listContainer) {
+    if ($listContainer.length === 0) return;
+
+    $('.toc-item').each(function(index, chapterAnchor) {
+        $chapterAnchor = $(chapterAnchor);
+        var listLink = $('<a>')
+            .attr('href', '#' + $chapterAnchor.attr('id'))
+            .text($chapterAnchor.attr('title'))
+            .bind('click', scrollTo);
+
+        var listItem = $('<li>').append(listLink);
+
+        $listContainer.append(listItem);
+    })
+}
+
+var scrollTo = function(e) {
+    e.preventDefault();
+    var elScrollTo = $(e.target).attr('href');
+    var $el = $(elScrollTo);
+
+    $('body,html').animate({ scrollTop: $el.offset().top }, 400, 'swing', function() {
+        location.hash = elScrollTo;
+    })
+}
 
 $(function(){
 
@@ -63,33 +83,11 @@ $(function(){
             })
         }
     }
+
+    $('.item').click(function(){
+        window.open($(this).data('url'));
+    });
+
 })
 
 
-
-
-var tableOfContents = function($listContainer) {
-    if ($listContainer.length === 0) return;
-
-    $('.toc-item').each(function(index, chapterAnchor) {
-        $chapterAnchor = $(chapterAnchor);
-        var listLink = $('<a>')
-            .attr('href', '#' + $chapterAnchor.attr('id'))
-            .text($chapterAnchor.attr('title'))
-            .bind('click', scrollTo);
-
-        var listItem = $('<li>').append(listLink);
-
-        $listContainer.append(listItem);
-    })
-}
-
-var scrollTo = function(e) {
-    e.preventDefault();
-    var elScrollTo = $(e.target).attr('href');
-    var $el = $(elScrollTo);
-
-    $('body,html').animate({ scrollTop: $el.offset().top }, 400, 'swing', function() {
-        location.hash = elScrollTo;
-    })
-}

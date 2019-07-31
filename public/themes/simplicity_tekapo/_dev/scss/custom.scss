@@ -1,7 +1,28 @@
-@import "partials/_commons";
+@import "partials/_variables";
 
+@import "components/_animations";
+@import "components/_text-animating";
+@import "components/_text-gradient";
+@import "components/_bx-wrapper";
+@import "components/_box-wrapper";
+@import "components/_devices";
+@import "components/_button";
+@import "components/_hr";
+@import "components/_theme-color";
+@import "components/_chalkboard";
+@import "components/_polaroid";
+@import "components/_tooltip";
+
+@import "partials/_commons";
+@import "partials/_menu";
+@import "partials/_logo";
+@import "partials/_block";
+@import "partials/_quote";
+@import "partials/_call-to-action";
+
+@import "pages/_index";
 @import "pages/_about";
-@import "pages/_contact";
+@import "pages/_theme";
 @import "pages/_demo";
 @import "pages/_feature";
-@import "pages/_index";
+@import "pages/_contact";

@@ -51,7 +51,7 @@
       }
     }
   }
-  .b4block {
+  .intro {
     padding: 80px;
     h2 {
       font-size: 48px;
@@ -73,7 +73,7 @@
       margin: 0 auto;
     }
   }
-  .block {
+  .topic {
     padding-right: 15px;
     padding-left: 15px;
     padding-bottom: 80px;
@@ -173,13 +173,13 @@
 
 @media (max-width: 991px) {
   .feature  {
-    .b4block {
+    .intro {
       padding: 40px 15px;
       p {
         width: 85%;
       }
     }
-    .block {
+    .topic {
       .friendly-url {
         margin-bottom: 10px;
         font-size: 33px;
@@ -202,7 +202,7 @@
     .headline {
       display: none;
     }
-    .b4block {
+    .intro {
       h2 {
         font-size: 35px;
       }
@@ -211,7 +211,7 @@
         width: 100%;
       }
     }
-    .block {
+    .topic {
       padding-bottom: 0;
       .text {
         margin-top: 10px;

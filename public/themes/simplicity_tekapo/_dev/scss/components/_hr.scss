@@ -1,0 +1,24 @@
+.index hr {
+  margin: 50px auto 180px auto;
+  width: 60%;
+  text-align: center;
+  border: 0;
+  font-size: 20px;
+}
+
+@media (max-width: 767px) {
+  .index hr {
+    margin-bottom: 120px;
+  }
+}
+
+.index hr:before {
+  color: $theme-green-color;
+  content: '೧೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೨೮';
+}
+
+@media (max-width: 768px) {
+  .index hr:before {
+    content: '೧೨೨೨೨೨೨೨೨೨೨೨೮';
+  }
+}

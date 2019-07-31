@@ -1,0 +1,102 @@
+.devices {
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 60px;
+  max-width: 1600px;
+  img {
+    padding: 0;
+  }
+  .phone-screen {
+    position: absolute;
+    z-index: 8;
+    overflow: scroll;
+    overflow-x: hidden;
+    width: 7.368421052%;
+    height: 27.850467289%;
+    left: 0.526315789%;
+    top: 66.91588785%;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  .phone {
+    position: absolute;
+    z-index: 7;
+    background: url("https://www.tekapo.io/img/cms/index/device/iphone.png") no-repeat 0 0 / contain transparent;
+    width: 8.508771929%;
+    height: 36.261682243%;
+    top: 62.803738317%;
+    left: 0;
+  }
+  .tablet-screen {
+    position: absolute;
+    z-index: 6;
+    overflow: scroll;
+    overflow-x: hidden;
+    width: 16.052631578%;
+    height: 45.046728972%;
+    top: 48.971962616%;
+    left: 9.649122807%;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  .tablet {
+    position: absolute;
+    z-index: 5;
+    background: url("https://www.tekapo.io/img/cms/index/device/ipad.png") no-repeat 0 0 / contain transparent;
+    width: 18.333333333%;
+    height: 55.140186915%;
+    top: 43.925233644%;
+    left: 8.596491228%;
+  }
+  .laptop-screen {
+    position: absolute;
+    z-index: 4;
+    overflow: scroll;
+    overflow-x: hidden;
+    width: 36.052631578%;
+    height: 48.037383177%;
+    top: 44.112149532%;
+    left: 62.543859649%;
+    left: 58.15%;
+    img {
+      width: 100%;
+    }
+  }
+  .laptop {
+    position: absolute;
+    z-index: 3;
+    background: url("https://www.tekapo.io/img/cms/index/device/macbook.png") no-repeat 0 0 / contain transparent;
+    width: 47.543859649%;
+    height: 58.130841121%;
+    top: 40.934579439%;
+    right: -4.385964912%;
+    right: 0;
+  }
+  .desktop-screen {
+    position: absolute;
+    z-index: 1;
+    overflow: scroll;
+    overflow-x: hidden;
+    width: 53.245614035%;
+    height: 64.672897196%;
+    top: 4.29906542%;
+    left: 19.210526315%;
+    img {
+      width: 100%;
+    }
+  }
+  .desktop {
+    background: url("https://www.tekapo.io/img/cms/index/device/imac.png") no-repeat scroll 39.959% 0% / contain transparent;
+    height: 0;
+    padding-top: 46.929824561%;
+    padding-right: 17.105263157%;
+  }
+}

@@ -1,0 +1,35 @@
+.box-wrapper {
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  display: grid;
+  grid-gap: 1px;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  background: #d9d9d9;
+  .box {
+    padding: 8vh 4vw;
+    background: #fff;
+    h5 {
+      font-size: 42px;
+      font-weight: 400;
+      margin-top: 32px;
+      margin-bottom: 24px;
+    }
+    .icon {
+      .material-icons {
+        font-size: 120px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .box-wrapper {
+    grid-template-columns: 1fr;
+    .box {
+      h5 {
+        font-size: 32px;
+      }
+    }
+  }
+}

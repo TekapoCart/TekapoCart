@@ -1,0 +1,63 @@
+.logo-svg {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+}
+
+.logo-text {
+  color: $theme-green-color;
+  font-family: Verdana;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.logo-svg-color {
+  fill: $theme-green-color;
+}
+
+#index, #contact {
+  .logo-text {
+    color: #fff;
+    color: hsla(0, 0%, 100%, .65);
+  }
+  .logo-svg-color {
+    fill: #fff;
+    fill: hsla(0, 0%, 100%, .65);
+  }
+
+  .logo-wrapper, .top-logo {
+
+    a img {
+      filter: brightness(1.8);
+    }
+
+    &.on {
+
+      a img {
+        filter: initial;
+      }
+
+      .logo-text {
+        color: $theme-green-color;
+      }
+      .logo-svg-color {
+        fill: $theme-green-color;
+      }
+    }
+  }
+
+
+
+}
+
+@media (max-width: 767px) {
+  #index {
+    #menu-icon .material-icons {
+      color: #fff;
+      color: hsla(0, 0%, 100%, .65);
+      &.on {
+        color: initial;
+      }
+    }
+  }
+}

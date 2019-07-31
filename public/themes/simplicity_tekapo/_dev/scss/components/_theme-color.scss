@@ -1,0 +1,24 @@
+span {
+  &.theme {
+    line-height: 18px;
+    width: 18px;
+    display: inline-block;
+    margin: 0 2px;
+  }
+  &.green {
+    color: $theme-green-color;
+    background-color: $theme-green-color;
+  }
+  &.black {
+    color: $theme-black-color;
+    background-color: $theme-black-color;
+  }
+  &.blue {
+    color: $theme-blue-color;
+    background-color: $theme-blue-color;
+  }
+  &.pink {
+    color: $theme-pink-color;
+    background-color: $theme-pink-color;
+  }
+}
