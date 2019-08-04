@@ -4003,6 +4003,7 @@ exit;
                     $def->addAttribute('div', 'data-control', 'Text');
                     $def->addAttribute('div', 'data-pager', 'Text');
                     $def->addAttribute('div', 'data-url', 'Text');
+                    $def->addAttribute('input', 'placeholder', 'Text');
 
                 }
 

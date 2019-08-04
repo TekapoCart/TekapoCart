@@ -26,6 +26,16 @@ var scrollTo = function(e) {
     })
 }
 
+//
+var copyToClipboard = function() {
+    var textArea = document.createElement("textarea");
+    textArea.value = $('.code', $(this).parent()).text();
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    textArea.remove();
+}
+
 $(function(){
 
     if ($('#toc-wrapper').length) {
@@ -84,8 +94,27 @@ $(function(){
         }
     }
 
+    // 商店展示
     $('.item').click(function(){
         window.open($(this).data('url'));
+    });
+
+    // 開店教學
+    $('.copy').click(copyToClipboard);
+
+    $('#shop_url').blur(function() {
+        str = $(this).val().length === 0 ? 'www.yoursite.com' : $(this).val();
+        $('.shop_url').text(str.replace('https:', '').replace('http:', '').replace('/', ''));
+    });
+
+    $('#admin_email').blur(function() {
+        str = $(this).val().length === 0 ? 'admin@example.com' : $(this).val();
+        $('.admin_email').text($(this).val());
+    });
+
+    $('.dns').click(function(){
+        $('.block-dns').hide();
+        $('#block-' + $(this).attr('id')).show();
     });
 
 })
