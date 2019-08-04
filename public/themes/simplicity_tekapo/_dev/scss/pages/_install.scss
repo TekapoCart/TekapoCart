@@ -164,7 +164,10 @@
       &.start:after {
         content: '?';
       }
-      &:not(.start):after {
+      &.end:after {
+        content: '➹';
+      }
+      &:not(.start):not(.end):after {
         counter-increment: tutorialstep;
         content: counter(tutorialstep);
       }
