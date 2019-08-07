@@ -119,6 +119,28 @@ $(function(){
         $('#' + $(this).attr('id')).addClass('selected');
     });
 
+    // open-theme
+    $('.screencapture-control').click(function() {
+
+
+        var dataId = $(this).attr('data-id');
+        $('.screencapture, .screencapture-control').removeClass('selected');
+        $(this).addClass('selected');
+        $('#' + dataId).addClass('selected');
+
+        $('img', $('#' + dataId)).each(function(i, val) {
+            var dataSrc = $(this).attr('data-src');
+            if (dataSrc.length > 0) {
+                $(this).attr('src', dataSrc);
+            }
+
+        });
+
+
+        return false;
+    });
+
+
 })
 
 
