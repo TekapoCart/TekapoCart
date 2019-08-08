@@ -374,12 +374,14 @@ class AdminGroupsControllerCore extends AdminController
                     'name' => 'reduction',
                     'values' => ($group->id ? $this->formatCategoryDiscountList((int) $group->id) : array()),
                 ),
+                /* suzy: 2019-08-08 隱藏群組授權模塊
                 array(
                     'type' => 'modules',
                     'label' => $this->trans('Modules authorization', array(), 'Admin.Shopparameters.Feature'),
                     'name' => 'auth_modules',
                     'values' => $this->formatModuleListAuth($group->id),
                 ),
+                */
             ),
         );
 
