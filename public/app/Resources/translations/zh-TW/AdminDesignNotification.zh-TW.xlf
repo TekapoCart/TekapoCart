@@ -38,7 +38,7 @@ File: controllers/admin/AdminThemesController.php:423</note>
       </trans-unit>
       <trans-unit id="9ccfef29efe298e9a48295a69436e11f" approved="yes">
         <source><![CDATA[Your theme has been correctly reset to its default settings. You may want to regenerate your images. See the Improve > Design > Images Settings screen for the 'Regenerate thumbnails' button.]]></source>
-        <target xml:lang="zh-TW"><![CDATA[你的主題已經被正確重新設置到默認模式。你可能要重新生成你的圖像。請見改善> 設計 > 圖像設定頁面之＇再生成圖標＇按鈕。]]></target>
+        <target xml:lang="zh-TW"><![CDATA[你的主題已經被正確重新設置到預設模式。你可能要重新生成你的圖像。請見改善> 設計 > 圖像設定頁面之＇再生成圖標＇按鈕。]]></target>
         <note>Context:
 File: controllers/admin/AdminThemesController.php:1071</note>
       </trans-unit>

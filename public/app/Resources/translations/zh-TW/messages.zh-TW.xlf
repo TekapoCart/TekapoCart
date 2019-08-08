@@ -3285,7 +3285,7 @@ File: admin-dev/themes/default/template/controllers/attribute_generator/content.
       </trans-unit>
       <trans-unit id="1b8bea6c0d2655c4e2c1070c9beee03a" approved="yes">
         <source>Default Quantity:</source>
-        <target xml:lang="zh-TW">默認數量：</target>
+        <target xml:lang="zh-TW">預設數量：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/attribute_generator/content.tpl:129</note>
       </trans-unit>
@@ -3868,7 +3868,7 @@ File: admin-dev/themes/default/template/controllers/themes/helpers/options/optio
       </trans-unit>
       <trans-unit id="21e2bb42873eddcb9b476b8eafbe0c18" approved="yes">
         <source>Reset to defaults</source>
-        <target xml:lang="zh-TW">重置為默認值</target>
+        <target xml:lang="zh-TW">重置為預設值</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/themes/helpers/options/options.tpl:106</note>
       </trans-unit>

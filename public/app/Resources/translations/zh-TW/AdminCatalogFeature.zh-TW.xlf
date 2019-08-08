@@ -1006,7 +1006,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductOptions.php:194</note>
       </trans-unit>
       <trans-unit id="efb78d0dd61da3bb7e5ca1770b894420" approved="yes">
         <source>Default suppliers</source>
-        <target xml:lang="zh-TW">默認供應商</target>
+        <target xml:lang="zh-TW">預設供應商</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductOptions.php:226</note>
       </trans-unit>
@@ -1826,7 +1826,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.htm
       </trans-unit>
       <trans-unit id="b36c5a58c30cc53bab5e9b3fda84755c" approved="yes">
         <source>Recommended size 800 x 800px for default theme.</source>
-        <target xml:lang="zh-TW">默認主題的推薦尺寸為800 x 800px 像素。</target>
+        <target xml:lang="zh-TW">預設主題的推薦尺寸為800 x 800px 像素。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.html.twig:336</note>
       </trans-unit>
@@ -2543,7 +2543,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
       </trans-unit>
       <trans-unit id="0b5c5a9176b94b7577e998f7440228a7" approved="yes">
         <source>Default supplier</source>
-        <target xml:lang="zh-TW">默認供應商</target>
+        <target xml:lang="zh-TW">預設供應商</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_supplier_choice.html.twig:55</note>
       </trans-unit>
