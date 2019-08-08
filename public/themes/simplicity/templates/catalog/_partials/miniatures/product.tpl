@@ -43,12 +43,14 @@
       <div class="product-no-desc-overlay">
           <a href="{$product.url}" style="width: 100%; height: 100%; display: block;">
               <div class="product-title">{$product.name|truncate:70:'...'}</div>
+              {if $product.show_price && $product.price_amount > 0}
               <div class="product-price-and-shipping">
                 {if $product.has_discount}
                   <span class="regular-price">{$product.regular_price}</span>
                 {/if}
                 <span class="price">{$product.price}</span>
               </div>
+              {/if}
           </a>
       </div>
 
