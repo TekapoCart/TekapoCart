@@ -58,6 +58,9 @@ ul {
     .material-icons {
       transition: transform 0.5s ease;
       transform: translate(3px, 0);
+      &.backward {
+        transform: translate(-3px, 0);
+      }
       &.external {
         transform: translate(3px, -3px);
       }

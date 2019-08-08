@@ -1942,11 +1942,6 @@ class AdminControllerCore extends Controller
 
         $this->context->smarty->assign(array(
 
-            // suzy: 2018-07-30 Tawk 用的資訊
-            'employee_email' => $this->context->employee->email,
-            'employee_name' => $this->context->employee->lastname . ' ' . $this->context->employee->firstname,
-            'tawk_hash' => hash_hmac('sha256', $this->context->employee->email, 'a597cff15447c4a7a82060f1521a029d2cbe00a1'),
-
             // suzy: 2018-08-12 加入「立即變更您的密碼」提醒
             'change_passwd_alert' => $this->context->cookie->change_passwd_alert,
 
