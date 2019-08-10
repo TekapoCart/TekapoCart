@@ -100,7 +100,7 @@ pre {
 }
 
 .dropdown-item {
-  color: $gray;
+  color: $gray-darker;
   &:focus, &:hover {
     background: none;
     color: $brand-primary-hover;
@@ -385,7 +385,6 @@ input, textarea {
   cursor: pointer;
   border-radius: 50%;
   border: $gray 2px solid;
-  background: $input-background;
   /*margin-right: 1.25rem;*/
   input[type="radio"] {
     opacity: 0;
@@ -429,7 +428,6 @@ input, textarea {
       height: 0.9375rem;
       vertical-align: middle;
       cursor: pointer;
-      background: $input-background;
       border: 2px $gray-darker solid;
       .checkbox-checked {
         display: none;
@@ -502,15 +500,10 @@ input, textarea {
   margin-top: $small-space;
 }
 
-.btn.disabled,
-.btn.disabled:hover {
-  background: $gray;
-}
-
-button:disabled {
-  background: $gray;
+button:disabled, .btn.disabled {
+  background: $btn-disabled-bg;
   &:hover {
-    background: $gray;
+    background: $btn-disabled-bg;
   }
 }
 
@@ -570,19 +563,6 @@ button:disabled {
     font-weight: $font-weight-bold;
     &.active {
       color: $gray-darker;
-    }
-  }
-}
-
-.separator {
-  margin: 0;
-  border-color: $brand-border-color;
-}
-
-.table {
-  tbody {
-    td {
-      background: $table-background;
     }
   }
 }

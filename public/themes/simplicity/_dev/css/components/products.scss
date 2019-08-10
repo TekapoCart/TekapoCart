@@ -323,6 +323,7 @@
   color: $gray-darker;
   .modal-header {
     background: $brand-success;
+    border-color: $category-border-color;
   }
   .modal-body {
     background: $gray-light;

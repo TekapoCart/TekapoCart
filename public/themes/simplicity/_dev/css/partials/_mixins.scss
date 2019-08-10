@@ -69,7 +69,7 @@
 }
 @mixin product-miniature-desktop-no-desc($thumb-width) {
   .thumbnail-container {
-    height: $thumb-width;
+    height: #{$thumb-width + 7};
     margin-bottom: 0;
   }
 }

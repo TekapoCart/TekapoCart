@@ -23,9 +23,6 @@ body#checkout {
       margin-top: 0.1875rem;
     }
   }
-  a:hover {
-    color: #1a8196;
-  }
   section#content {
     margin-bottom: 1.563rem;
   }
@@ -291,7 +288,7 @@ body#checkout {
   }
   .modal-content {
     padding: $medium-space;
-    background-color: $gray-light;
+    background-color: $brand-background;
   }
   .cart-summary-products {
 
@@ -391,8 +388,18 @@ body#checkout {
     textarea {
       max-width: 100%;
       margin-bottom: 10px;
-      padding-left: 5px;
-      border-color: $gray-darker;
+      // padding-left: 5px;
+      // border-color: $gray-darker;
+      background: $gray-light;
+      color: $gray;
+      border: $input-btn-border-width solid $input-border-color;
+      padding: 0.5rem 1rem;
+      &:focus {
+        background-color: $input-background;
+        outline: none;
+        border: $input-btn-border-width solid $input-border-color;
+        color: $gray-darker;
+      }
     }
   }
   #footer {

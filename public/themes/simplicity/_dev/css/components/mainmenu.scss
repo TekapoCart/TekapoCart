@@ -117,13 +117,13 @@
 
 #mobile_top_menu_wrapper, #mobile_top_menu_msc_wrapper {
   h4 {
-    background: #f6f6f6;
+    background: $gray-lighter;
     padding: 10px;
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 0;
-    border-top: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid $category-border-color;
+    border-bottom: 1px solid $category-border-color;
   }
   #top-menu {
     margin-bottom: 0.625rem;

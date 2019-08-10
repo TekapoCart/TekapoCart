@@ -46,8 +46,8 @@ class Simplicity_Logo extends Module implements WidgetInterface
 
         parent::__construct();
 
-        $this->displayName = 'LOGO';
-        $this->description = 'LOGO 設定';
+        $this->displayName = 'LOGO & BG';
+        $this->description = 'LOGO & BG 設定';
 
         $this->templateFile = 'module:simplicity_logo/simplicity_logo.tpl';
     }
@@ -78,6 +78,8 @@ class Simplicity_Logo extends Module implements WidgetInterface
             'display_type' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_TYPE'),
             'display_text' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_TEXT'),
             'display_font' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_FONT'),
+
+            'body_bg_css' => Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS'),
         ];
     }
 
@@ -99,7 +101,6 @@ class Simplicity_Logo extends Module implements WidgetInterface
         if (Tools::isSubmit('subMOD')) {
 
             $display_type = Tools::getValue('display_type');
-
             if (!empty($display_type) && ValidateCore::isGenericName($display_type)) {
                 Configuration::updateValue('SIMPLICITY_LOGO_DISPLAY_TYPE', $display_type);
             } else {
@@ -107,7 +108,6 @@ class Simplicity_Logo extends Module implements WidgetInterface
             }
 
             $display_text = Tools::getValue('display_text');
-
             if (ValidateCore::isGenericName($display_text)) {
                 Configuration::updateValue('SIMPLICITY_LOGO_DISPLAY_TEXT', $display_text);
             } else {
@@ -115,11 +115,15 @@ class Simplicity_Logo extends Module implements WidgetInterface
             }
 
             $display_font = Tools::getValue('display_font');
-
             if (ValidateCore::isGenericName($display_font)) {
                 Configuration::updateValue('SIMPLICITY_LOGO_DISPLAY_FONT', $display_font);
             } else {
                 // $output .= $this->displayError('請正確填寫「LOGO 文字字體」');
+            }
+
+            $body_bg_css = Tools::getValue('body_bg_css');
+            if (ValidateCore::isGenericName($body_bg_css)) {
+                Configuration::updateValue('SIMPLICITY_LOGO_BODY_BG_CSS', $body_bg_css);
             }
 
             Tools::clearCache();
@@ -147,6 +151,8 @@ class Simplicity_Logo extends Module implements WidgetInterface
         $helper->fields_value['display_type'] = Configuration::get('SIMPLICITY_LOGO_DISPLAY_TYPE');
         $helper->fields_value['display_text'] = Configuration::get('SIMPLICITY_LOGO_DISPLAY_TEXT');
         $helper->fields_value['display_font'] = Configuration::get('SIMPLICITY_LOGO_DISPLAY_FONT');
+
+        $helper->fields_value['body_bg_css'] = Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS');
 
         $helper->submit_action = 'subMOD';
 
@@ -185,6 +191,14 @@ class Simplicity_Logo extends Module implements WidgetInterface
                         'name' => 'display_font',
                         'desc' => '如需另設字體請填寫瀏覽器支援的字體 例如：Arial, Times New Roman, Verdana, Monospace 等，若無請留空白。<a href="https://zh.wikipedia.org/wiki/%E5%AD%97%E4%BD%93%E5%AE%B6%E6%97%8F" target="_blank">可用字體參考</a>'
                     ),
+
+                    array(
+                        'type' => 'text',
+                        'label' => '背景 CSS',
+                        'name' => 'body_bg_css',
+                        'desc' => "一行 CSS 搞定背景圖特效。<br>範例1：#ddebeb<br>範例2：url('https://raw.githubusercontent.com/TekapoCart/theme_resources/master/background/wood-1920.png') 0 0 repeat fixed"
+                    ),
+
                 ),
                 'buttons' => array(
                     'save-and-stay' => array(

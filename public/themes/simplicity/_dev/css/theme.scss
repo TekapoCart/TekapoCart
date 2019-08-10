@@ -311,6 +311,8 @@
 
       i.material-icons {
         transform: rotate(270deg);
+        font-size: 14px;
+        color: $gray;
       }
 
       &::after {
@@ -331,7 +333,8 @@
       }
       */
       a {
-        color: $gray-darker;
+        color: $gray;
+        font-size: 14px;
       }
     }
   }
@@ -593,7 +596,9 @@
   }
 }
 
-#content-hook_payment_return, #content-hook_order_confirmation, #content-hook_display_order_detail {
+#content-hook_payment_return,
+#content-hook_order_confirmation,
+#content-hook_display_order_detail {
   margin-bottom: 20px;
   .text-block {
     line-height: 35px;
@@ -611,6 +616,21 @@ button:focus {
 .modal-backdrop.in {
   opacity: $overlay-opacity;
 }
+
+.separator {
+  margin: 0;
+  border-color: $brand-border-color;
+}
+
+.table {
+  tbody {
+    td {
+      background: $table-background;
+    }
+  }
+}
+
+
 
 // dark mode
 

@@ -117,6 +117,7 @@
     color: $gray-darker;
     .address-body {
       padding: 1rem;
+      background: $brand-background;
       h4 {
         font-size: $base-font-size;
         font-weight: $font-weight-bold;
@@ -315,6 +316,7 @@
           display: block;
           height: 100%;
           border: 1px solid $darker-border-color;
+          background: $brand-background;
           @include customer-area-base-box;
         }
         i {
