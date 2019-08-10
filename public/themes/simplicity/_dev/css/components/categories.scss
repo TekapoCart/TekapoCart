@@ -89,7 +89,7 @@
     color: $gray-darker;
     padding: $small-space $medium-space;
     &:hover {
-      background: $brand-primary;
+      background: $brand-primary-hover;
       color: white;
       text-decoration: none;
     }
@@ -138,7 +138,7 @@
     background: $gray-lighter;
     padding: $small-space $medium-space;
     &:hover {
-      background: $brand-primary;
+      background: $brand-primary-hover;
       color: white;
       text-decoration: none;
     }
@@ -255,7 +255,7 @@
     color: $gray-darker;
     margin-right: $small-space;
     margin-bottom: $small-space;
-    background: white;
+    background: $brand-background;
     padding: 0.625rem;
     display: inline-block;
     font-size: $font-size-xs;
@@ -300,7 +300,7 @@
     }
     li[data-depth="0"] {
       padding-bottom: 20px;
-      border-bottom: 1px solid #e3e3e3;
+      border-bottom: 1px solid $category-border-color;
       margin-bottom: 8px;
     }
     li[data-depth="0"] > a {
@@ -342,7 +342,7 @@
     .add,
     .remove {
       &:hover {
-        color: $brand-primary;
+        color: $brand-primary-hover;
       }
     }
     .remove {
@@ -356,7 +356,7 @@
       cursor: pointer;
       margin-left: 2px;
       &:hover {
-        color: $brand-primary;
+        color: $brand-primary-hover;
       }
     }
     .arrow-down {

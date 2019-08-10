@@ -12,17 +12,20 @@
       border: 1px solid transparent;
       padding-left: 10px;
       background-color: transparent;
-
+      outline: none;
+      color: $gray-darker;
 
 
       &:focus {
         width: 150px;
         outline: none;
-        border: 1px solid black;
-        background-color: #fff;
-
+        // border: 1px solid black;
+        // background-color: #fff;
         position: absolute;
         left: -160px;
+
+        border: $input-btn-border-width solid $input-border-color;
+        background-color: $input-background;
 
         @include transition(all .4s ease-in-out);
       }
@@ -34,7 +37,7 @@
       cursor: pointer;
       font-size: 1rem;
       &:hover {
-        color: $brand-primary;
+        color: $brand-primary-hover;
       }
     }
     i {

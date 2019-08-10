@@ -22,20 +22,21 @@
   }
   .thumbnail-container {
     position: relative;
-    margin-bottom: 1.563rem;
+    // margin-bottom: 1.563rem;
     &:hover, &:focus {
       .highlighted-informations {
-        bottom: 5.5rem;
+        // bottom: 5.5rem;
+        visibility: visible;
         &::after {
           opacity: 1;
         }
         &.no-variants{
-          bottom: 4.2rem;
+          // bottom: 4.2rem;
         }
       }
       .product-description::after{
         content: "";
-        border-top: white 1px solid;
+        border-top: $brand-background 1px solid;
         position: absolute;
         width: 80%;
         top: 0;
@@ -64,35 +65,43 @@
     position: relative;
     text-align: center;
     width: 100%;
-    top: -0.25em;
+    // top: -0.25em;
     padding-top: 0.1875rem;
     min-height: 2.5rem;
-    background: white;
+    background: $brand-background;
   }
   .highlighted-informations {
     position: absolute;
-    bottom: 1.25rem;
+    // bottom: 1.25rem;
+    // transition: bottom .3s;
+    bottom: 63px;
+    transition: visibility .3s;
+    visibility: hidden;
     padding-top: 0.625rem;
     z-index: 0;
-    background: white;
+    background: $brand-background;
     opacity: 0.75;
     text-align: center;
-    height: 3.125rem;
-    transition: bottom .3s;
+    height: 80px;
+    overflow: hidden;
     .quick-view {
       color: $gray;
       font-size: $base-font-size;
       &:hover {
-        color: $brand-primary;
+        color: $brand-primary-hover;
       }
+    }
+
+    &.no-variants {
+      height: 50px
     }
   }
   .product-description {
-    position: absolute;
+    // position: absolute;
     z-index: 1;
-    background: white;
-    height: 70px;
-    bottom: 0;
+    // background: $brand-background;
+    // height: 70px;
+    // bottom: 0;
   }
   img {
     /*margin-left: 4px;*/
@@ -173,7 +182,7 @@
     margin-bottom: 1.5rem;
   }
   .product-no-desc-overlay {
-    visibility: hidden;
+    display: none;
     .product-title, .product-price-and-shipping {
       visibility: hidden;
     }
@@ -186,7 +195,7 @@
     .thumbnail-container {
       position: relative;
       .product-no-desc-overlay {
-        visibility: visible;
+        display: block;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -196,7 +205,7 @@
         width: 100%;
         opacity: 0;
         transition: opacity .5s ease;
-        background-color: #fff;
+        background-color: $brand-background;
       }
       &:hover {
         img {
@@ -611,7 +620,7 @@
   article:nth-child(-n+5)::before {
     position: absolute;
     top: 0;
-    left: 3px;
+    left: 0;
     z-index: 5;
     color: #fff;
     background-color: #555;
@@ -641,7 +650,7 @@
 @include media-breakpoint-down(sm) { /* 768px 以下 (max-width: 767px) - [XS] */
   .bestsellers {
     article:nth-child(-n+5)::before {
-      left: 2px;
+      left: 0;
     }
     article:nth-child(4), article:nth-child(5) {
       display: none;
@@ -654,4 +663,9 @@
 #footer .featured-products {
   padding-left: 15px;
   padding-right: 15px;
+  margin-bottom: 24px;
+  .products {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 }

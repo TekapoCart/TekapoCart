@@ -7,7 +7,7 @@
         color: $gray-darker;
         background: white;
         + button .search {
-          color: $brand-primary;
+          color: $brand-primary-hover;
         }
       }
       border: none;
@@ -24,7 +24,7 @@
       right: 0.125rem;
       color: $gray;
       .search:hover {
-        color: $brand-primary;
+        color: $brand-primary-hover;
       }
     }
   }
@@ -41,8 +41,9 @@
 /* featuredproducts.scss */
 @mixin product-miniature-desktop($thumb-width, $divider) {
   img {
-    width: $thumb-width;
-    height: $thumb-width;
+    // width: $thumb-width;
+    // height: $thumb-width;
+    width: 100%;
   }
   .thumbnail-container {
     width: $thumb-width + 7;
@@ -74,8 +75,9 @@
 }
 @mixin product-miniature-mobile($thumb-width, $divider) {
   img {
-    width: $thumb-width;
-    height: $thumb-width;
+    // width: $thumb-width;
+    // height: $thumb-width;
+    width: 100%;
   }
   .thumbnail-container {
     width: $thumb-width + 4;
@@ -101,5 +103,70 @@
   .thumbnail-container {
     height: $thumb-width + 4;
     margin-bottom: 0;
+  }
+}
+
+@mixin share-buttons($social-media, $hover-postfix) {
+  background-image: url("../img/#{$social-media}.svg");
+  &.icon-gray {
+    background-image: url("../img/#{$social-media}-gray.svg");
+    &:hover {
+      background-image: url("../img/#{$social-media}#{$hover-postfix}.svg");
+    }
+  }
+}
+
+@mixin button-variant-lighten($color, $background, $border) {
+  $active-background: lighten($background, 10%);
+  $active-border: lighten($border, 12%);
+
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+  // @include box-shadow($btn-box-shadow);
+
+  @include hover {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &:focus,
+  &.focus {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+    // Remove the gradient for the pressed/active state
+    background-image: none;
+    // @include box-shadow($btn-active-box-shadow);
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: $color;
+      background-color: lighten($background, 17%);
+      border-color: lighten($border, 25%);
+    }
+  }
+
+  &.disabled,
+  &:disabled {
+    &:focus,
+    &.focus {
+      background-color: $background;
+      border-color: $border;
+    }
+    @include hover {
+      background-color: $background;
+      border-color: $border;
+    }
   }
 }
