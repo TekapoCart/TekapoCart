@@ -916,7 +916,13 @@ class FrontControllerCore extends Controller
      */
     public function setMedia()
     {
-        $this->registerStylesheet('theme-main', '/assets/css/theme.css', ['media' => 'all', 'priority' => 50]);
+        // suzy: 2019-08-10 後台可控制選哪個 theme.css
+        $cssName = 'theme.css';
+        if ($this->context->shop->theme->getName() == 'simplicity_dark') {
+            $cssName = 'theme_dark.css';
+        }
+        $this->registerStylesheet('theme-main', '/assets/css/' . $cssName, ['media' => 'all', 'priority' => 50]);
+        // $this->registerStylesheet('theme-main', '/assets/css/theme.css', ['media' => 'all', 'priority' => 50]);
         $this->registerStylesheet('theme-custom', '/assets/css/custom.css', ['media' => 'all', 'priority' => 1000]);
 
         if ($this->context->language->is_rtl) {
