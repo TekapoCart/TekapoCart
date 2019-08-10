@@ -177,7 +177,7 @@ $(function() {
     {/if}
 
 {/if}
-<div class="row">
+<div class="row hide {* suzy: 2019-08-08 隱藏連外區塊 *}">
     <div class="col-lg-4">
         <div class="panel">
             <h3>{l s='Search doc.prestashop.com' d='Admin.Navigation.Search'}</h3>

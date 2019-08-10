@@ -200,7 +200,7 @@ File: controllers/admin/AdminReferrersController.php:278</note>
     <body>
       <trans-unit id="510f6a8fda6eb21f9ff01954e034a29a" approved="yes">
         <source>For security reasons, you cannot delete default order statuses.</source>
-        <target xml:lang="zh-TW">基於安全考慮，您不能刪除默認的訂單狀態。</target>
+        <target xml:lang="zh-TW">基於安全考慮，您不能刪除預設的訂單狀態。</target>
         <note>Context:
 File: controllers/admin/AdminStatusesController.php:610</note>
       </trans-unit>

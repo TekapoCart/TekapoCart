@@ -1,6 +1,6 @@
 .simplicity-igfeed {
-    padding-left: 27px;
-    padding-right: 27px;
+    padding-left: 15px;
+    padding-right: 15px;
     margin-top: 30px;
     margin-bottom: 50px;
 }
@@ -72,9 +72,9 @@
 }
 
 @media (max-width: 767px) {
-    .simplicity-igfeed {
-        padding-left: 24px;
-        padding-right: 24px;
+    .simplicity-igfeed .row {
+        margin-left: -20px;
+        margin-right: -20px;
     }
 
     .simplicity-igfeed .social1,

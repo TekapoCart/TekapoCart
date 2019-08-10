@@ -2,9 +2,6 @@
   #header {
     position: relative;
     z-index: 10;
-    .logo {
-      filter: brightness(1.8);
-    }
   }
   .hero-red {
     background-image: linear-gradient(-280deg, #67c8c2, #5cb4ae);
@@ -15,7 +12,7 @@
     top: 0;
   }
   .hero-background {
-    /*background-image: url(https://www.tekapo.io/img/cms/index/hero-background-shift.jpg);*/
+    // background-image: url(https://www.tekapo.io/img/cms/index/hero-background-shift.jpg);
     background-image: url(https://www.tekapo.io/img/cms/index/hero-background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -42,12 +39,13 @@
     margin-bottom: .5em;
     line-height: 75px;
     color: #fff;
+    font-weight: 700;
   }
   h2 {
     font-weight: 400;
     font-size: 26px;
-    margin-bottom: 80px;
     color: #fff;
+    margin-bottom: 0
   }
   h3 {
     font-weight: 400;
@@ -60,195 +58,9 @@
     font-size: 32px;
     line-height: 39px;
     font-weight: 400;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
   }
-  h5 {
-    font-size: 42px;
-    font-weight: 400;
-    margin-top: 32px;
-    margin-bottom: 24px;
-  }
-  .block {
-    text-align: center;
-    max-width: 1120px;
-    margin: 0 auto 180px auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .text {
-      margin-bottom: 24px;
-    }
-    .figure {
-      img {
-        width: 95%;
-        &.teacher9 {
-          box-shadow: none;
-          width: 120px;
-          position: absolute;
-          top: 10%;
-          right: 20%;
-        }
-      }
-      .chalkboard {
-        text-align: left;
-        font-size: 18px;
-        color: #E8E8E8;
-        display: block;
-        min-width: 300px;
-        width: 80%;
-        height: 80%;
-        margin: 30px auto 0 auto;
-        background-color: #497959;
-        padding: 20px 30px;
-        overflow-y: auto;
-        border-radius: 10px;
-        border: #B78240 solid 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        position: relative;
-        margin-top: 0;
-        &:after {
-          content: "";
-          display: block;
-          position: absolute;
-          border-radius: 0.1em 0.1em 0 0.1em;
-          width: 50px;
-          height: 8px;
-          background: #f1f1f1;
-          top: 45%;
-          right: 25%;
-          margin-top: 75px;
-          margin-right: 60px;
-          box-shadow: inset 0 -4px 1px rgba(0, 0, 0, 0.3), -1px -1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 rgba(0, 0, 0, 0.3)
-        }
-      }
-    }
-    p {
-      margin-bottom: 32px;
-      font-size: 18px;
-      line-height: 27px;
-    }
-  }
-  .box-wrapper {
-    border-top: 1px solid #d9d9d9;
-    border-bottom: 1px solid #d9d9d9;
-    display: grid;
-    grid-gap: 1px;
-    grid-template-columns: 1fr 1fr;
-    text-align: center;
-    background: #d9d9d9;
-  }
-  .box {
-    padding: 8vh 4vw;
-    background: #fff;
-    .icon {
-      .material-icons {
-        font-size: 120px;
-      }
-    }
-  }
-  .devices {
-    position: relative;
-    margin: 0 auto;
-    margin-bottom: 60px;
-    max-width: 1600px;
-    img {
-      padding: 0;
-    }
-    .phone-screen {
-      position: absolute;
-      z-index: 8;
-      overflow: scroll;
-      overflow-x: hidden;
-      width: 7.368421052%;
-      height: 27.850467289%;
-      left: 0.526315789%;
-      top: 66.91588785%;
-      &::-webkit-scrollbar {
-        width: 0;
-      }
-      img {
-        width: 100%;
-      }
-    }
-    .phone {
-      position: absolute;
-      z-index: 7;
-      background: url("https://www.tekapo.io/img/cms/index/device/iphone.png") no-repeat 0 0 / contain transparent;
-      width: 8.508771929%;
-      height: 36.261682243%;
-      top: 62.803738317%;
-      left: 0;
-    }
-    .tablet-screen {
-      position: absolute;
-      z-index: 6;
-      overflow: scroll;
-      overflow-x: hidden;
-      width: 16.052631578%;
-      height: 45.046728972%;
-      top: 48.971962616%;
-      left: 9.649122807%;
-      &::-webkit-scrollbar {
-        width: 0;
-      }
-      img {
-        width: 100%;
-      }
-    }
-    .tablet {
-      position: absolute;
-      z-index: 5;
-      background: url("https://www.tekapo.io/img/cms/index/device/ipad.png") no-repeat 0 0 / contain transparent;
-      width: 18.333333333%;
-      height: 55.140186915%;
-      top: 43.925233644%;
-      left: 8.596491228%;
-    }
-    .laptop-screen {
-      position: absolute;
-      z-index: 4;
-      overflow: scroll;
-      overflow-x: hidden;
-      width: 36.052631578%;
-      height: 48.037383177%;
-      top: 44.112149532%;
-      left: 62.543859649%;
-      left: 58.15%;
-      img {
-        width: 100%;
-      }
-    }
-    .laptop {
-      position: absolute;
-      z-index: 3;
-      background: url("https://www.tekapo.io/img/cms/index/device/macbook.png") no-repeat 0 0 / contain transparent;
-      width: 47.543859649%;
-      height: 58.130841121%;
-      top: 40.934579439%;
-      right: -4.385964912%;
-      right: 0;
-    }
-    .desktop-screen {
-      position: absolute;
-      z-index: 1;
-      overflow: scroll;
-      overflow-x: hidden;
-      width: 53.245614035%;
-      height: 64.672897196%;
-      top: 4.29906542%;
-      left: 19.210526315%;
-      img {
-        width: 100%;
-      }
-    }
-    .desktop {
-      background: url("https://www.tekapo.io/img/cms/index/device/imac.png") no-repeat scroll 39.959% 0% / contain transparent;
-      height: 0;
-      padding-top: 46.929824561%;
-      padding-right: 17.105263157%;
-    }
-  }
+
 }
 
 @media (min-width: 1200px) {
@@ -294,27 +106,6 @@
     }
     h3 {
       font-size: 21px;
-    }
-    h5 {
-      font-size: 32px;
-    }
-    .block {
-      flex-direction: column;
-      margin-bottom: 120px;
-      .figure {
-        order: 2;
-        position: relative;
-        img {
-          &.teacher9 {
-            top: 18%;
-            right: 15%;
-            width: 110px;
-          }
-        }
-      }
-    }
-    .box-wrapper {
-      grid-template-columns: 1fr;
     }
   }
 }

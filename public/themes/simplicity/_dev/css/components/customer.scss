@@ -110,13 +110,14 @@
 .page-addresses {
   .address {
     /*@include box-shadow;*/
-    border: 1px solid black;
+    border: 1px solid $darker-border-color;
     /*background: white;*/
     margin-bottom: 1.875rem;
     font-size: $font-size-sm;
     color: $gray-darker;
     .address-body {
       padding: 1rem;
+      background: $brand-background;
       h4 {
         font-size: $base-font-size;
         font-weight: $font-weight-bold;
@@ -314,7 +315,8 @@
         span.link-item {
           display: block;
           height: 100%;
-          border: 1px solid black;
+          border: 1px solid $darker-border-color;
+          background: $brand-background;
           @include customer-area-base-box;
         }
         i {
@@ -327,7 +329,7 @@
         &:hover {
           color: $gray-darker;
           i {
-            color: $brand-primary;
+            color: $brand-primary-hover;
           }
         }
       }

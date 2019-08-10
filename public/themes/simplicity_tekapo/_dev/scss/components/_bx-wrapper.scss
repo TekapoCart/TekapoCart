@@ -1,0 +1,17 @@
+.bx-wrapper .bx-pager {
+  bottom: 5px;
+  text-align: left;
+  padding-left: 40px;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a:hover,
+.bx-wrapper .bx-pager.bx-default-pager a.active {
+  background: #b2b2b2;
+
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a {
+  background: white;
+  border: 1px solid #b2b2b2;
+}
+

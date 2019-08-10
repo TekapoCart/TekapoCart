@@ -1,14 +1,10 @@
 {if isset($feed_data) && $feed_data|count > 0}
-
-
     <section class="simplicity-igfeed">
-
         <div class="row">
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                  width="128" height="64" viewBox="0 0 1280.000000 640.000000"
                  preserveAspectRatio="xMidYMid meet">
-                <g transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)"
-                   fill="#000000" stroke="none">
+                <g class="svg-primary-fill" transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)" stroke="none">
                     <path d="M658 5006 c-83 -30 -212 -120 -308 -216 -142 -142 -252 -326 -317
 -532 -22 -70 -26 -102 -26 -203 -1 -102 3 -129 23 -180 61 -156 190 -282 323
 -316 37 -9 50 -9 62 1 24 20 18 52 -29 134 -115 201 -109 484 16 783 51 125
@@ -86,7 +82,6 @@ l0 -39 -50 52 c-27 29 -70 64 -95 78 -134 77 -308 57 -437 -48 -47 -38 -130
                 </g>
             </svg>
         </div>
-
         <div class="row">
             {foreach $feed_data as $media}
                 <div class="col-xs-4 col-lg-2 media">
@@ -106,5 +101,4 @@ l0 -39 -50 52 c-27 29 -70 64 -95 78 -134 77 -308 57 -437 -48 -47 -38 -130
             {/foreach}
         </div>
     </section>
-
 {/if}

@@ -40,7 +40,7 @@
       display: none;
     }
     /*box-shadow: 2px 1px 11px 2px rgba(0, 0, 0, 0.1);*/
-    box-shadow: 1px 1px 1px 1px $gray-light;
+    box-shadow: 1px 1px 1px 1px $focus-background;
     border: none;
     /*margin-left: 0.9375rem;*/
     /*width: calc(100% - 30px);*/
@@ -52,7 +52,7 @@
       margin: 0 1.25rem;
     }
     a:hover {
-      color: $brand-primary;
+      color: $brand-primary-hover;
     }
   }
   .popover {
@@ -79,7 +79,7 @@
       }
     }
     .current > a {
-      color: $brand-primary;
+      color: $brand-primary-hover;
     }
   }
 }
@@ -87,7 +87,7 @@
 #mobile_top_menu_wrapper {
   /*padding-bottom: 0.625rem;*/
   padding: 15px;
-  background: #fff;
+  background: $brand-background;
   &.scroll {
     overflow-y: scroll;
     position: fixed;
@@ -117,13 +117,13 @@
 
 #mobile_top_menu_wrapper, #mobile_top_menu_msc_wrapper {
   h4 {
-    background: #f6f6f6;
+    background: $gray-lighter;
     padding: 10px;
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 0;
-    border-top: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid $category-border-color;
+    border-bottom: 1px solid $category-border-color;
   }
   #top-menu {
     margin-bottom: 0.625rem;
@@ -170,7 +170,7 @@
       margin-left: 0;
       width: 100%;
       min-width: 100%;
-      background: #f6f6f6;
+      background: $gray-lighter;
       ul[data-depth="0"] > li {
         /*border-bottom: 1px solid $gray;*/
       }
@@ -181,6 +181,7 @@
           margin: 0;
           a {
             text-transform: none;
+            background: $table-background;
           }
         }
       }
@@ -190,7 +191,7 @@
       li > a {
         padding: 0.625rem;
         padding-right: 0;
-        border-bottom: 1px solid white;
+        border-bottom: 1px solid $menu-border-color;
       }
       ul[data-depth="2"] li a {
         padding-left: 1.25rem;
@@ -203,7 +204,7 @@
       }
     }
     .current > a {
-      color: $brand-primary;
+      color: $brand-primary-hover;
     }
   }
   .js-top-menu-bottom {

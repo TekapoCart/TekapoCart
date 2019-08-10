@@ -916,7 +916,13 @@ class FrontControllerCore extends Controller
      */
     public function setMedia()
     {
-        $this->registerStylesheet('theme-main', '/assets/css/theme.css', ['media' => 'all', 'priority' => 50]);
+        // suzy: 2019-08-10 特定佈景選取特定 theme.css
+        $cssName = 'theme.css';
+        if ($this->context->shop->theme->getName() == 'simplicity_dark') {
+            $cssName = 'theme_dark.css';
+        }
+        $this->registerStylesheet('theme-main', '/assets/css/' . $cssName, ['media' => 'all', 'priority' => 50]);
+        // $this->registerStylesheet('theme-main', '/assets/css/theme.css', ['media' => 'all', 'priority' => 50]);
         $this->registerStylesheet('theme-custom', '/assets/css/custom.css', ['media' => 'all', 'priority' => 1000]);
 
         if ($this->context->language->is_rtl) {
@@ -1550,7 +1556,14 @@ class FrontControllerCore extends Controller
     {
         $quantity_discount_price = Configuration::get('PS_DISPLAY_DISCOUNT_PRICE');
 
+        // suzy: 2019-08-10 後台控制 body background css style
+        $body_bg_css = trim(Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS'));
+        $body_bg_css = strlen($body_bg_css) > 0 ? $body_bg_css : '';
+
         return array(
+
+            'body_bg_css' => $body_bg_css,
+
             'display_taxes_label' => $this->getDisplayTaxesLabel(),
             'low_quantity_threshold' => (int) Configuration::get('PS_LAST_QTIES'),
             'is_b2b' => (bool) Configuration::get('PS_B2B_ENABLE'),

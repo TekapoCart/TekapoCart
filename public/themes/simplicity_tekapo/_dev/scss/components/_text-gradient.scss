@@ -1,0 +1,9 @@
+.text-gradient {
+  font-family: Times New Roman;
+  font-style: italic;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, $theme-green-color), color-stop(0.5, $theme-blue-color), color-stop(1, $theme-pink-color) );
+  background-image: gradient( linear, left top, right top, color-stop(0, $theme-green-color), color-stop(0.5, $theme-blue-color), color-stop(1, $theme-pink-color) );
+}

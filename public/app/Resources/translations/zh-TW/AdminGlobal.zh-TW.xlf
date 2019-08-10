@@ -176,7 +176,7 @@ File: controllers/admin/AdminShopUrlController.php:547</note>
     <body>
       <trans-unit id="7a1920d61156abc05a60135aefe8bc67" approved="yes">
         <source>Default</source>
-        <target xml:lang="zh-TW">默認</target>
+        <target xml:lang="zh-TW">預設</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductQuantity.php:271</note>
       </trans-unit>

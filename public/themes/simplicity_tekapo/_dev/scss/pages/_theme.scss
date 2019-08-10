@@ -1,0 +1,75 @@
+.theme {
+  .block {
+    &.opening {
+      margin-top: 30px;
+      margin-bottom: 100px;
+      text-align: center;
+      p {
+        font-size: 22px;
+        line-height: 35px;
+        text-align: center;
+      }
+      .figures {
+        margin-bottom: 50px;
+        position: relative;
+        img {
+          width: 100%;
+          max-width: 100%;
+          padding: 0;
+          &.laptop {
+            width: 90%;
+          }
+          &.phone {
+            width: 15%;
+            position: absolute;
+            right: 5%;
+            bottom: 0;
+          }
+        }
+        .screen {
+          position: absolute;
+          top: 6%;
+          left: 16.5%;
+          width: 67%;
+          height: 83%;
+          overflow: hidden;
+        }
+        .phone-screen {
+          width: 13.2%;
+          position: absolute;
+          top: 42.5%;
+          right: 5.9%;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+  .devices {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .block {
+    &.opening {
+      p {
+        font-size: 16px;
+        line-height: 24px;
+        padding-left: 15px;
+        padding-right: 15px;
+        text-align: justify;
+      }
+      img {
+        margin-bottom: 0;
+      }
+      .phone-screen {
+        top: 37.5%;
+      }
+    }
+  }
+}
+
+.page-content.page-cms .theme ul {
+  list-style: none;
+}

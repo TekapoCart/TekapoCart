@@ -1,0 +1,21 @@
+.text-animating {
+  overflow: hidden;
+  height: 350px;
+  ul {
+    animation-name: change;
+    animation-duration: 16s;
+    animation-iteration-count: infinite;
+  }
+}
+
+@media (max-width: 991px) {
+  .text-animating {
+    height: 350px;
+  }
+}
+
+@media (max-width: 767px) {
+  .text-animating {
+    height: 230px;
+  }
+}

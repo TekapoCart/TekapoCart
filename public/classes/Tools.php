@@ -4002,6 +4002,10 @@ exit;
                     // suzy: 2019-05-09 allow data-* attributes
                     $def->addAttribute('div', 'data-control', 'Text');
                     $def->addAttribute('div', 'data-pager', 'Text');
+                    $def->addAttribute('div', 'data-url', 'Text');
+                    $def->addAttribute('div', 'data-id', 'Text');
+                    $def->addAttribute('img', 'data-src', 'Text');
+                    $def->addAttribute('input', 'placeholder', 'Text');
 
                 }
 

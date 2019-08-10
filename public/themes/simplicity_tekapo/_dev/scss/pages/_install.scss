@@ -1,0 +1,242 @@
+.install {
+
+  > ul {
+    width: 980px;
+    margin: 0 auto;
+    margin-top: 90px;
+    counter-reset: tutorialstep;
+    > li {
+      text-align: center;
+      position: relative;
+      background-color: #fff;
+      margin: 0 0 70px 0px;
+      padding: 40px 0 60px;
+      font-size: 18px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      z-index: 1;
+      h4 {
+        font-size: 30px;
+        line-height: 1em;
+        font-weight: 400;
+      }
+      p {
+        margin: 30px 120px 30px;
+        line-height: 30px;
+        color: #eeeb82;
+        font-size: 18px;
+      }
+      img {
+        max-width: 700px;
+        border: 1px solid #efefef;
+      }
+      ul.tabs {
+        margin: 30px auto 0;
+        font-size: 0;
+        li {
+          display: inline-block;
+          margin: 0;
+          font-size: 15px;
+          &:first-child a {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+          }
+          &:nth-child(even) a {
+            margin: 0 -1px;
+          }
+          &:last-child a {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+          }
+        }
+        a {
+          color: #323232;
+          background-color: #fcfcfc;
+          padding: 10px 20px;
+          display: inline-block;
+          border: 1px solid #dddddd;
+          position: relative;
+          line-height: 1em;
+          &.selected {
+            color: #fff;
+            background-color: $theme-blue-color;
+            border-color: $theme-blue-color;
+            outline: none;
+          }
+        }
+      }
+      label {
+        width: 100px;
+        padding-right: 10px;
+      }
+      input {
+        padding: 5px 10px;
+        width: 250px;
+      }
+      .terminal {
+        max-width: 700px;
+        margin: 30px auto 0;
+        .header {
+          height: 25px;
+          display: block;
+          background: -webkit-linear-gradient(top, #f7f7f7 0%, #cfcfcf 5%, #aaa 100%);
+          background: linear-gradient(top, #f7f7f7 0%, #cfcfcf 5%, #aaa 100%);
+          border: 1px solid #9c9c9c;
+          border-bottom-color: #111;
+          border-top-left-radius: 7px;
+          border-top-right-radius: 7px;
+          text-align: center;
+          font-size: 13px;
+          line-height: 25px;
+          text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+          color: #444;
+        }
+        .shell {
+          font-family: Consolas, "Liberation Mono", Courier, monospace;
+          font-size: 17px;
+          line-height: 28px;
+          background-color: #3d3d3d;
+          overflow: hidden;
+          padding: 20px;
+          margin: 0;
+          border-bottom-left-radius: 7px;
+          border-bottom-right-radius: 7px;
+          text-align: left;
+          display: block;
+          position: relative;
+          p {
+            margin: 0;
+            color: #eeeb82;
+            .path {
+              color: #71cfee;
+              user-select: none;
+              padding-right: 0.6em;
+            }
+            .prompt {
+              color: #d74d52;
+              user-select: none;
+              padding-right: 0.6em;
+            }
+            .code {
+              font-weight: 700;
+            }
+            button {
+              position: absolute;
+              top: 6px;
+              right: 6px;
+              opacity: 0;
+              border: none;
+              border-radius: 4px;
+              padding: 3px 4px 0 5px;
+              cursor: pointer;
+              background: #dfe1e5;
+              .material-icons {
+                font-size: 19px;
+                vertical-align: sub;
+              }
+              &:active {
+                background: $theme-green-color;
+              }
+            }
+          }
+          &:hover {
+            button {
+              opacity: 1;
+            }
+          }
+        }
+      }
+      .finish {
+        margin-top: 40px;
+        span {
+          border-radius: 50px;
+          border: solid 1px #e5e5e5;
+          padding: 20px;
+          display: inline-block;
+          .material-icons {
+            color: $theme-green-color;
+            font-size: 50px;
+
+          }
+        }
+
+      }
+      &.start:after {
+        content: '?';
+      }
+      &.end:after {
+        content: '➹';
+      }
+      &:not(.start):not(.end):after {
+        counter-increment: tutorialstep;
+        content: counter(tutorialstep);
+      }
+      &:after {
+        width: 58px;
+        height: 58px;
+        line-height: 58px;
+        background-color: $theme-green-color;
+        border-radius: 200px;
+        font-size: 30px;
+        font-weight: 300;
+        color: #fff;
+        position: absolute;
+        left: -15px;
+        top: -15px;
+        text-align: center;
+        z-index: 100;
+      }
+    }
+  }
+
+}
+
+@media (max-width: 767px) {
+  .install {
+    > ul {
+      width: 100%;
+      margin-top: 20px;
+      > li {
+        padding: 40px 0 30px;
+        h4 {
+          font-size: 25px;
+        }
+        p {
+          margin: 20px 10px;
+          font-size: 16px;
+        }
+        &:after {
+          width: 48px;
+          height: 48px;
+          line-height: 48px;
+        }
+        label {
+          text-align: center;
+          padding: 0;
+        }
+        .terminal {
+          max-width: 90%;
+        }
+      }
+    }
+
+
+  }
+}
+
+.page-content.page-cms .install ul {
+  list-style: none;
+}
+
+.page-content.page-cms .install img {
+  max-width: 700px;
+}
+
+@media (max-width: 767px) {
+  .page-content.page-cms .install ul {
+    padding-left: 0;
+  }
+  .page-content.page-cms .install img {
+    max-width: 90%;
+  }
+}

@@ -33,7 +33,7 @@
   <section id="content" class="page-content page-not-found">
     {block name='page_content'}
       <div class="text-xs-center">
-        <div style="font-size: 100px; font-family: monospace">404</div>
+        <div style="font-size: 100px; font-family: monospace; margin-top: 80px;">404</div>
         <div style="margin-top: 30px;">
           <img src="/img/logo-gcart.svg" style="width: 180px; transform: rotate(180deg);">
         </div>

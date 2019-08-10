@@ -1,0 +1,31 @@
+.quote {
+  padding: 88px 0 94px 0;
+  background-color: $alt-background;
+  blockquote {
+    font-size: 34px;
+    line-height: 48px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  cite {
+    text-align: center;
+    display: block;
+    margin: 30px auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .quote {
+    padding: 42px 20px 44px;
+    blockquote {
+      font-size: 22px;
+      line-height: 28px;
+      padding: 0 15px;
+    }
+    cite {
+      font-size: 16px;
+      line-height: 22px;
+      width: 250px;
+    }
+  }
+}

@@ -173,7 +173,7 @@ File: controllers/admin/AdminGendersController.php:146</note>
       </trans-unit>
       <trans-unit id="88972b928c146c793fc9bd5c41a27b95" approved="yes">
         <source>Add new social title</source>
-        <target xml:lang="zh-TW">新增稱謂</target>
+        <target xml:lang="zh-TW">新增稱號</target>
         <note>Context:
 File: controllers/admin/AdminGendersController.php:101</note>
       </trans-unit>

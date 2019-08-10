@@ -57,11 +57,11 @@
 }
 .radio-label {
   @include box-shadow;
-  background: white;
+  background: $brand-background;
   display: inline-block;
   padding: 0.125rem $small-space;
   font-weight: $font-weight-bold;
-  border: 2px solid white;
+  border: 2px solid $brand-background;
 }
 .product-actions {
   .control-label {
@@ -91,7 +91,7 @@
   }
   #quantity_wanted {
     color: $gray-darker;
-    background-color: white;
+    background-color: $brand-background;
     height: 2.75rem;
     padding: 0.175rem 0.5rem;
     width: 3rem;
@@ -205,11 +205,11 @@
       &.active {
         border: none;
         border-bottom: $brand-primary 3px solid;
-        color: $brand-primary;
+        color: $brand-primary-hover;
       }
       &:hover {
         border: none;
-        border-bottom: $brand-primary 3px solid;
+        border-bottom: $brand-primary-hover 3px solid;
       }
     }
     .nav-item {
@@ -231,12 +231,11 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    background: white;
     position: absolute;
     left: 0;
     top: 0;
     opacity: 0;
-    background: rgba(255,255,255,0.7);
+    background: $overlay-background;
     text-align: center;
     cursor: pointer;
     @include transition(opacity .7s ease-in-out);
@@ -288,7 +287,7 @@
           width: 9.25rem;
           cursor: pointer;
           &:hover {
-            border: $brand-primary 3px solid;
+            border: $brand-primary-hover 3px solid;
           }
         }
       }
@@ -324,6 +323,7 @@
   color: $gray-darker;
   .modal-header {
     background: $brand-success;
+    border-color: $category-border-color;
   }
   .modal-body {
     background: $gray-light;
@@ -386,7 +386,7 @@
       }
       &.selected,
       &:hover {
-        border: $brand-primary 3px solid;
+        border: $brand-primary-hover 3px solid;
       }
     }
   }
@@ -564,7 +564,7 @@ li.product-flag {
     padding: 0.625rem;
     &:focus {
       background-color: white;
-      outline: 0.1875rem solid $brand-primary;
+      outline: 0.1875rem solid $brand-primary-hover;
     }
   }
   .file-input {
