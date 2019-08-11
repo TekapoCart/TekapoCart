@@ -37,16 +37,28 @@
 
 /*** HEADER ***/
 #header {
-  /*background: white;*/
-  /*color: $gray;*/
-  .header-banner .logo-wrapper {
-    text-align: center;
-    margin-top: 1rem;
+  .header-banner, .header-top, .header-bottom {
+    .logo-wrapper {
+      text-align: center;
+      margin-top: 16px;
+      margin-bottom: 32px;
+      .logo {
+        max-width: 50%;
+      }
+    }
   }
-  .logo {
-    max-width: 100%;
-    max-height: 45px;
+  .header-banner, .header-bottom {
+    .menu-wrapper {
+      text-align: center;
+    }
   }
+  .header-nav {
+    .logo {
+      max-width: 100%;
+      max-height: 45px;
+    }
+  }
+
   a {
     /*
     color: $gray-darker;
@@ -117,13 +129,14 @@
       margin-right: 0.9375rem;
       margin-top: 16px;
       margin-bottom: 10px;
+      margin-left: -5px;
       /*padding: 0 0.75rem;*/
       text-align: right;
       white-space: nowrap;
       a {
         color: $gray-darker;
         .icon-fill {
-          fill: #232323;
+          fill: $gray-darker;
         }
       }
       .account {

@@ -1,17 +1,19 @@
 TekapoCart <hi@tekapo.io>
 -------------------------------------------
 *******************************************
-* 1.0.7 (Auguest 11, 2019)
+* 1.0.7 (Auguest 12, 2019)
 *******************************************
 Improve
 - 新增 佈景 simplicity_dark 暗色系
 - 新增 後台可設定背景 css
 - 新增 商品列表 no-desc class hide price when price = 0
-- 開放 後台 Customer Group （訪客群組看不到價錢）
+- 開放 後台 Customer Group（讓訪客群組看不到價錢）
 - 移除 後台上方搜尋連線 api-addons
 - 移除 tawk
+- 擴展 LOGO 版型搭配
 File
-- 2019-08-08.sql
+- 2019-08-08.sql（開放 後台 Customer Group）
+- 2019-08-11.sql（allow change default currency）
 
 *******************************************
 * 1.0.6 (Auguest 08, 2019)
