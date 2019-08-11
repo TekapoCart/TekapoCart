@@ -10,7 +10,7 @@
             'database_engine' => 'InnoDB',
             'mailer_transport' => 'smtp',
             'mailer_host' => 'smtp.gmail.com',
-            'mailer_user' => 'e.wawacart@gmail.com',
+            'mailer_user' => 'e.tekapo@gmail.com',
             'mailer_password' => '',
             'secret' => 'tMiUMy8UHXi9siBLjJx0vPotpQU9aO3tCw1ezZ9DG7bt0r4kePVOQXah',
             'ps_caching' => 'CacheMemcache',

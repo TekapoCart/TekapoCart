@@ -30,7 +30,7 @@
 
 {% block content %}
   <div class="row justify-content-center">
-    <div class="col-xl-10">
+    <div class="col-xl-10" style="display: none;" {# suzy: 2019-08-11 隱藏 本地化包匯入 #}>
       {% include '@PrestaShop/Admin/Improve/International/Localization/Blocks/import_localization_pack_block.html.twig' %}
     </div>
   </div>
@@ -43,7 +43,7 @@
       <div class="col-xl-10">
         {% include '@PrestaShop/Admin/Improve/International/Localization/Blocks/local_units.html.twig' %}
       </div>
-      <div class="col-xl-10">
+      <div class="col-xl-10" style="display: none;" {# suzy: 2019-08-11 隱藏 進階設定 #}>
         {% include '@PrestaShop/Admin/Improve/International/Localization/Blocks/advanced_configuration.html.twig' %}
       </div>
 
