@@ -1560,9 +1560,14 @@ class FrontControllerCore extends Controller
         $body_bg_css = trim(Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS'));
         $body_bg_css = strlen($body_bg_css) > 0 ? $body_bg_css : '';
 
+        // suzy: 2019-08-10 後台控制 mobile type
+        $mobile_type = trim(Configuration::get('SIMPLICITY_LOGO_MOBILE_TYPE'));
+        $mobile_type = (int) $mobile_type > 0 ? $mobile_type : 0;
+
         return array(
 
             'body_bg_css' => $body_bg_css,
+            'mobile_type' => $mobile_type,
 
             'display_taxes_label' => $this->getDisplayTaxesLabel(),
             'low_quantity_threshold' => (int) Configuration::get('PS_LAST_QTIES'),

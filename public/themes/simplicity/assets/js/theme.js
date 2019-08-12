@@ -921,6 +921,30 @@ $(document).ready(function () {
   topMenu.init();
   productMinitature.init();
   productSelect.init();
+
+  // msc start
+  var pack = undefined;
+  if (typeof navigator.scriptList == 'undefined') {
+    navigator.scriptList = [];
+  }
+  pack = [
+  // '/js/msc/class-msc-sidebar.js',
+  '/js/msc/wcl.js', '/js/msc/class-msc-select.js'];
+  for (var i = -1, l = pack.length; ++i < l;) {
+    var path = pack[i],
+        script;
+    if (navigator.scriptList.indexOf(path) != -1) continue;
+    navigator.scriptList.push(path);
+    script = document.createElement('script');
+    document.head.appendChild(script);
+    script.async = true;
+    script.src = path;
+  }
+  if (document.currentScript) {
+    pack = document.currentScript;
+    pack.parentNode.removeChild(pack);
+  }
+  // msc end
 });
 
 /***/ }),
@@ -1957,7 +1981,7 @@ var TopMenu = (function (_DropDown) {
       });
       prestashop.on('responsive update', function (event) {
         (0, _jquery2['default'])('.js-sub-menu').removeAttr('style');
-        self.toggleMobileMenu();
+        // self.toggleMobileMenu();
       });
       _get(Object.getPrototypeOf(TopMenu.prototype), 'init', this).call(this);
     }
@@ -1970,11 +1994,13 @@ var TopMenu = (function (_DropDown) {
         (0, _jquery2['default'])('.header-bottom').hide(); // suzy: 追加
         (0, _jquery2['default'])('#menu-icon .material-icons').addClass('on'); // suzy: 追加
         (0, _jquery2['default'])('#_mobile_logo').addClass('on'); // suzy: 追加
+        (0, _jquery2['default'])('#menu-icon .material-icons').text('close'); // suzy: 追加
       } else {
           (0, _jquery2['default'])('#notifications, #wrapper, #footer').show();
           (0, _jquery2['default'])('.header-bottom').show(); // suzy: 追加
           (0, _jquery2['default'])('#menu-icon .material-icons').removeClass('on'); // suzy: 追加
           (0, _jquery2['default'])('#_mobile_logo').removeClass('on'); // suzy: 追加
+          (0, _jquery2['default'])('#menu-icon .material-icons').text('menu'); // suzy: 追加
         }
     }
   }]);

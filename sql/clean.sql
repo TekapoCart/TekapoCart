@@ -12,6 +12,7 @@ TRUNCATE TABLE `ps_customer_group`;
 TRUNCATE TABLE `ps_customer_message`;
 TRUNCATE TABLE `ps_customer_thread`;
 TRUNCATE TABLE `ps_mail`;
+TRUNCATE TABLE `ps_page`;
 TRUNCATE TABLE `ps_order_carrier`;
 TRUNCATE TABLE `ps_order_detail`;
 TRUNCATE TABLE `ps_order_history`;

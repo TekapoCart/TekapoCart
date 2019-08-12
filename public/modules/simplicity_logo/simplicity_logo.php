@@ -80,6 +80,8 @@ class Simplicity_Logo extends Module implements WidgetInterface
             'display_font' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_FONT'),
 
             'body_bg_css' => Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS'),
+
+            'mobile_type' => Configuration::get('SIMPLICITY_LOGO_MOBILE_TYPE'),
         ];
     }
 
@@ -126,6 +128,11 @@ class Simplicity_Logo extends Module implements WidgetInterface
                 Configuration::updateValue('SIMPLICITY_LOGO_BODY_BG_CSS', $body_bg_css);
             }
 
+            $mobile_type = Tools::getValue('mobile_type');
+            if (!empty($mobile_type) && ValidateCore::isGenericName($mobile_type)) {
+                Configuration::updateValue('SIMPLICITY_LOGO_MOBILE_TYPE', $mobile_type);
+            }
+
             Tools::clearCache();
 
             if (!$output) {
@@ -153,6 +160,8 @@ class Simplicity_Logo extends Module implements WidgetInterface
         $helper->fields_value['display_font'] = Configuration::get('SIMPLICITY_LOGO_DISPLAY_FONT');
 
         $helper->fields_value['body_bg_css'] = Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS');
+
+        $helper->fields_value['mobile_type'] = Configuration::get('SIMPLICITY_LOGO_MOBILE_TYPE');
 
         $helper->submit_action = 'subMOD';
 
@@ -196,8 +205,26 @@ class Simplicity_Logo extends Module implements WidgetInterface
                         'type' => 'text',
                         'label' => '背景 CSS',
                         'name' => 'body_bg_css',
-                        'desc' => "一行 CSS 搞定背景圖特效。<br>範例1：#ddebeb<br>範例2：url('https://raw.githubusercontent.com/TekapoCart/theme_resources/master/background/wood-1920.png') 0 0 repeat fixed"
+                        'desc' => "一行 CSS 搞定背景圖特效。<br>範例1：#ddebeb<br>範例2：url('https://raw.githubusercontent.com/TekapoCart/theme_resources/master/background/wood-1920.png') 0 0 repeat fixed #000"
                     ),
+
+
+                    array(
+                        'type' => 'select',
+                        'name' => 'mobile_type',
+                        'label' => '手機版顯示方式',
+                        'options' => array(
+                            'query' => array(
+                                array('id' => '0', 'name' => 'LOGO 置左'),
+                                array('id' => '1', 'name' => 'LOGO 置中'),
+                            ),
+                            'id' => 'id',
+                            'name' => 'name'
+                        ),
+                        'required' => true,
+                        'desc' => '「LOGO 置左」適合扁 LOGO、「LOGO 置中」適合方塊 LOGO。預設為「LOGO 置左」。'
+                    ),
+
 
                 ),
                 'buttons' => array(

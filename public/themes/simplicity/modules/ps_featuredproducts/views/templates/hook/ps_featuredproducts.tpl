@@ -25,7 +25,7 @@
 <section class="featuredproducts featured-products clearfix">
   {if strlen($label) > 0}
   <div>
-    <h3 class="display4-size" style="display:inline-block;">{$label}{*l s='Popular Products' d='Shop.Theme.Catalog'*}</h3>
+    <h3 class="display5-size" style="display:inline-block;">{$label}{*l s='Popular Products' d='Shop.Theme.Catalog'*}</h3>
     {if $products.showMore }
     <a href="{$allProductsLink}" style="margin-top: 5px; float: right">{l s='More' d='Admin.Navigation.Menu'}</a>
     {/if}
