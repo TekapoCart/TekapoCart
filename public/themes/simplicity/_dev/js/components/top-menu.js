@@ -70,7 +70,7 @@ export default class TopMenu extends DropDown {
     });
     prestashop.on('responsive update', function(event) {
       $('.js-sub-menu').removeAttr('style');
-      self.toggleMobileMenu();
+      // self.toggleMobileMenu();
     });
     super.init();
   }
@@ -82,11 +82,13 @@ export default class TopMenu extends DropDown {
           $('.header-bottom').hide(); // suzy: 追加
           $('#menu-icon .material-icons').addClass('on'); // suzy: 追加
           $('#_mobile_logo').addClass('on'); // suzy: 追加
+          $('#menu-icon .material-icons').text('close'); // suzy: 追加
       } else {
           $('#notifications, #wrapper, #footer').show();
           $('.header-bottom').show(); // suzy: 追加
           $('#menu-icon .material-icons').removeClass('on'); // suzy: 追加
           $('#_mobile_logo').removeClass('on'); // suzy: 追加
+          $('#menu-icon .material-icons').text('menu'); // suzy: 追加
       }
   }
 

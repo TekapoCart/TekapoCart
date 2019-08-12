@@ -1,103 +1,103 @@
 (function() {
-	//navigator.whenDefined
-	if (typeof navigator.whenDefined !== 'function') {
-		Object.defineProperty(navigator, 'whenDefined', {
-			configurable: false,
-			enumerable: true,
-			value: function() {
-				let units;
+    //navigator.whenDefined
+    if (typeof navigator.whenDefined !== 'function') {
+        Object.defineProperty(navigator, 'whenDefined', {
+            configurable: false,
+            enumerable: true,
+            value: function() {
+                let units;
 
-				units = Array.from(arguments);
-				if (units.indexOf('document.body') === -1) {
-					units.push('document.body');
-				}
-				const promises = units.map(
-					(unit) => {
-						return new Promise((resolve, reject) => {
-							let c, max, iid
-							
-							c = 0;
-							max = 10000;
+                units = Array.from(arguments);
+                if (units.indexOf('document.body') === -1) {
+                    units.push('document.body');
+                }
+                const promises = units.map(
+                        (unit) => {
+                        return new Promise((resolve, reject) => {
+                            let c, max, iid
 
-							iid = setInterval(() => {
-								let _root, parts
-								c += 5;
-								if (c > max) {
-									clearInterval(iid);
-									reject(new Error(`"${unit}" unit missing.`));
-								}
+                                c = 0;
+                max = 10000;
 
-								_root = window;
-								parts = unit.split('.');
-								while (parts.length) {
-									let prop
-									prop = parts.shift();
-									if (typeof _root[prop] === 'undefined') {
-										_root = null;
-										break;
-									} else {
-										_root = _root[prop];
-									}
-								}
+                iid = setInterval(() => {
+                        let _root, parts
+                            c += 5;
+                if (c > max) {
+                    clearInterval(iid);
+                    reject(new Error(`"${unit}" unit missing.`));
+                }
 
-								if (_root !== null) {
-									clearInterval(iid);
-									resolve();
-								}
-							}, 5);
-						});
-					}
-				)
+                _root = window;
+                parts = unit.split('.');
+                while (parts.length) {
+                    let prop
+                    prop = parts.shift();
+                    if (typeof _root[prop] === 'undefined') {
+                        _root = null;
+                        break;
+                    } else {
+                        _root = _root[prop];
+                    }
+                }
 
-				return Promise.all(promises);
-			}
-		});
-	}
+                if (_root !== null) {
+                    clearInterval(iid);
+                    resolve();
+                }
+            }, 5);
+            });
+            }
+                )
 
-	if (typeof window.MscSidebar !== 'undefined') return; 
+                return Promise.all(promises);
+            }
+        });
+    }
 
-	//web component starts here
-	let enviromentInit, isInit, overScrollSupport, scrollY;
+    if (typeof window.MscSidebar !== 'undefined') return;
 
-	isInit = false;
-	enviromentInit = () => {
-		let propValue;
+    //web component starts here
+    let enviromentInit, isInit, overScrollSupport, scrollY;
 
-		if (isInit) return;
+    isInit = false;
+    enviromentInit = () => {
+        let propValue;
 
-		isInit = true;
-		
-		overScrollSupport = CSS.supports('overscroll-behavior:contain');
-		propValue = {
-			'overflow': 'hidden',
-			'pointer-events': 'none'
-		};
+        if (isInit) return;
 
-		if (!overScrollSupport) {
-			/**
-			 * referrnce:
-			 * https://davidwalsh.name/prevent-body-scrolling
-			 * https://www.bram.us/2016/05/02/prevent-overscroll-bounce-in-ios-mobilesafari-pure-css/
-			 * https://code.i-harness.com/zh-TW/q/9c3884
-			 * https://medium.com/jsdownunder/locking-body-scroll-for-all-devices-22def9615177
-			 * https://stackoverflow.com/questions/41594997/ios-10-safari-prevent-scrolling-behind-a-fixed-overlay-and-maintain-scroll-posi
-			 */
-			propValue = {
-				...propValue,
-				'position': 'fixed',
-				'top': '0',
-				'left': '0',
-				'width': '100%',
-				'height': '100vh',
-				'box-sizing': 'border-box',
-				'margin-top': 'var(--scroll-lock)'
-			}
-		}
-		_wcl.addStylesheetRules('.scroll-lock', propValue);
-	};
+        isInit = true;
 
-	const template = document.createElement('template');
-	template.innerHTML = `
+        overScrollSupport = CSS.supports('overscroll-behavior:contain');
+        propValue = {
+            'overflow': 'hidden',
+            'pointer-events': 'none'
+        };
+
+        if (!overScrollSupport) {
+            /**
+             * referrnce:
+             * https://davidwalsh.name/prevent-body-scrolling
+             * https://www.bram.us/2016/05/02/prevent-overscroll-bounce-in-ios-mobilesafari-pure-css/
+             * https://code.i-harness.com/zh-TW/q/9c3884
+             * https://medium.com/jsdownunder/locking-body-scroll-for-all-devices-22def9615177
+             * https://stackoverflow.com/questions/41594997/ios-10-safari-prevent-scrolling-behind-a-fixed-overlay-and-maintain-scroll-posi
+             */
+            propValue = {
+                ...propValue,
+                'position': 'fixed',
+                'top': '0',
+                'left': '0',
+                'width': '100%',
+                'height': '100vh',
+                'box-sizing': 'border-box',
+                'margin-top': 'var(--scroll-lock)'
+        }
+        }
+        _wcl.addStylesheetRules('.scroll-lock', propValue);
+    };
+
+    const template = document.createElement('template');
+    template.innerHTML = `
 		<style>
 		/*reset*/
 		div,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,legend,input,textarea,p,article,aside,figcaption,figure,nav,section,mark,audio,video,main{margin:0;padding:0}
@@ -141,191 +141,191 @@
 		</div>
 	`;
 
-	const supportSides = [
-		'left',
-		'right'
-	];
+    const supportSides = [
+        'left',
+        'right'
+    ];
 
-	class MscSidebar extends HTMLElement {
-		constructor() {
-			super();
+    class MscSidebar extends HTMLElement {
+        constructor() {
+            super();
 
-			//enviromentInit
-			enviromentInit();
+            //enviromentInit
+            enviromentInit();
 
-			//template
-			this.attachShadow({mode: 'open'});
-			this.shadowRoot.appendChild(template.content.cloneNode(true));
+            //template
+            this.attachShadow({mode: 'open'});
+            this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-			//data
-			this._nodes = {};
-			this._nodes.styleSheet = this.shadowRoot.querySelector('style');
-			this._nodes.restrict = this.shadowRoot.querySelector('.msc-sidebar__restrict');
+            //data
+            this._nodes = {};
+            this._nodes.styleSheet = this.shadowRoot.querySelector('style');
+            this._nodes.restrict = this.shadowRoot.querySelector('.msc-sidebar__restrict');
 
-			//evt
-			this._onClick = this._onClick.bind(this);
-			this._onTransitionend = this._onTransitionend.bind(this);
-		}
+            //evt
+            this._onClick = this._onClick.bind(this);
+            this._onTransitionend = this._onTransitionend.bind(this);
+        }
 
-		connectedCallback() {
-			this._upgradeProperty('open');
-			this._upgradeProperty('side');
+        connectedCallback() {
+            this._upgradeProperty('open');
+            this._upgradeProperty('side');
 
-			//evt
-			this.addEventListener('click', this._onClick);
-			this._nodes.restrict.addEventListener('transitionend', this._onTransitionend);
-		}
+            //evt
+            this.addEventListener('click', this._onClick);
+            this._nodes.restrict.addEventListener('transitionend', this._onTransitionend);
+        }
 
-		disconnectedCallback() {
-			//evt
-			this.removeEventListener('click', this._onClick);
-			this._nodes.restrict.removeEventListener('transitionend', this._onTransitionend);
-		}
+        disconnectedCallback() {
+            //evt
+            this.removeEventListener('click', this._onClick);
+            this._nodes.restrict.removeEventListener('transitionend', this._onTransitionend);
+        }
 
-		attributeChangedCallback(attrName, oldValue, newValue) {
-			const hasValue = newValue !== null;
+        attributeChangedCallback(attrName, oldValue, newValue) {
+            const hasValue = newValue !== null;
 
-			switch (attrName) {
-				case 'open':
-					if (hasValue) {
-						if (!this.hasAttribute('ready')) {
-							this.setAttribute('ready', true);
-						}
-						
-						this._nodes.restrict.scrollTop = 0;
-						this._scrollLock(true);
-					}
+            switch (attrName) {
+                case 'open':
+                    if (hasValue) {
+                        if (!this.hasAttribute('ready')) {
+                            this.setAttribute('ready', true);
+                        }
 
-					//custom event
-					this.dispatchEvent(new Event('curtain-change', { bubbles:true, composed:true }));
-					break;
-				case 'side':
-					if (!hasValue || supportSides.indexOf(newValue) === -1) {
-						this.setAttribute('side', supportSides[0]);
-					}
-					break;
-			}
-		}
+                        this._nodes.restrict.scrollTop = 0;
+                        this._scrollLock(true);
+                    }
 
-		static get observedAttributes() {
-			return ['open', 'side'];
-		}		
+                    //custom event
+                    this.dispatchEvent(new Event('curtain-change', { bubbles:true, composed:true }));
+                    break;
+                case 'side':
+                    if (!hasValue || supportSides.indexOf(newValue) === -1) {
+                        this.setAttribute('side', supportSides[0]);
+                    }
+                    break;
+            }
+        }
 
-		static get observedSides() {
-			return supportSides;
-		}
+        static get observedAttributes() {
+            return ['open', 'side'];
+        }
 
-		set side(value) {
-			if (supportSides.indexOf(value) === -1) {
-				value = supportSides[0];
-			}
-			return this.setAttribute('side', value);
-		}
+        static get observedSides() {
+            return supportSides;
+        }
 
-		get side() {
-			return this.getAttribute('side') || supportSides[0];
-		}
+        set side(value) {
+            if (supportSides.indexOf(value) === -1) {
+                value = supportSides[0];
+            }
+            return this.setAttribute('side', value);
+        }
 
-		set open(value) {
-			const force = Boolean(value);
+        get side() {
+            return this.getAttribute('side') || supportSides[0];
+        }
 
-			return (force) ? this.curtainRaising() : this.curtainCall();
-		}
+        set open(value) {
+            const force = Boolean(value);
 
-		get open() {
-			return this.hasAttribute('open');
-		}
+            return (force) ? this.curtainRaising() : this.curtainCall();
+        }
 
-		_upgradeProperty(prop) {
-			if (this.hasOwnProperty(prop)) {
-				let value;
+        get open() {
+            return this.hasAttribute('open');
+        }
 
-				value = this[prop];
-				delete this[prop];
-				this[prop] = value;
-			}
-		}
+        _upgradeProperty(prop) {
+            if (this.hasOwnProperty(prop)) {
+                let value;
 
-		_onClick(e) {
-			if (e.target === this) {
-				this.curtainCall();
-			}
-		}
+                value = this[prop];
+                delete this[prop];
+                this[prop] = value;
+            }
+        }
 
-		_onTransitionend(e) {
-			if (this.open) {
-				return;
-			}
+        _onClick(e) {
+            if (e.target === this) {
+                this.curtainCall();
+            }
+        }
 
-			if (this.hasAttribute('ready')) {
-				this.removeAttribute('ready');
-			}
+        _onTransitionend(e) {
+            if (this.open) {
+                return;
+            }
 
-			this._scrollLock(false);
-		}
+            if (this.hasAttribute('ready')) {
+                this.removeAttribute('ready');
+            }
 
-		_scrollLock(value) {
-			const isLock = Boolean(value);
+            this._scrollLock(false);
+        }
 
-			if (isLock) {
-				if (document.body.classList.contains('scroll-lock')) {
-					return;
-				}
+        _scrollLock(value) {
+            const isLock = Boolean(value);
 
-				if (!overScrollSupport) {
-					scrollY = _wcl.scrollY;
-					_wcl.addStylesheetRules('body.scroll-lock', {
-						'--scroll-lock': `-${scrollY}px`
-					});
-				}
-				document.body.classList.add('scroll-lock');
-			} else {
-				document.body.classList.remove('scroll-lock');
-				if (!overScrollSupport) {
-					_wcl.scrollY = scrollY;
-				}
-			}
-		}
+            if (isLock) {
+                if (document.body.classList.contains('scroll-lock')) {
+                    return;
+                }
 
-		curtainRaising() {
-			if (!this.hasAttribute('ready')) {
-				this.setAttribute('ready', true);
-			}
+                if (!overScrollSupport) {
+                    scrollY = _wcl.scrollY;
+                    _wcl.addStylesheetRules('body.scroll-lock', {
+                        '--scroll-lock': `-${scrollY}px`
+                    });
+                }
+                document.body.classList.add('scroll-lock');
+            } else {
+                document.body.classList.remove('scroll-lock');
+                if (!overScrollSupport) {
+                    _wcl.scrollY = scrollY;
+                }
+            }
+        }
 
-			this.setAttribute('open', true);
-		}
+        curtainRaising() {
+            if (!this.hasAttribute('ready')) {
+                this.setAttribute('ready', true);
+            }
 
-		curtainCall() {
-			this.removeAttribute('open');
-		}
+            this.setAttribute('open', true);
+        }
 
-		toggle(value) {
-			let isOpen;
+        curtainCall() {
+            this.removeAttribute('open');
+        }
 
-			if (typeof value !== 'undefined') {
-				isOpen = !Boolean(value);
-			} else {
-				isOpen = this.open;
-			}
+        toggle(value) {
+            let isOpen;
 
-			return (!isOpen) ? this.curtainRaising() : this.curtainCall();
-		}
-	}
+            if (typeof value !== 'undefined') {
+                isOpen = !Boolean(value);
+            } else {
+                isOpen = this.open;
+            }
 
-	if (window) window.MscSidebar = MscSidebar;
+            return (!isOpen) ? this.curtainRaising() : this.curtainCall();
+        }
+    }
 
-	//customElements define
-	navigator.whenDefined('_wcl', 'MscSidebar').then(
-		() => {
-			let supports;
+    if (window) window.MscSidebar = MscSidebar;
 
-			supports = _wcl.supports();
-			if (supports.customElements && supports.shadowDOM && supports.template) {
-				customElements.define(_wcl.classToTagName('MscSidebar'), MscSidebar);
-			}
-		},
-		(err) => {
-			console.error(`${_wcl.classToTagName('MscSidebar')}: ${err.message}`);
-		}
-	);
+    //customElements define
+    navigator.whenDefined('_wcl', 'MscSidebar').then(
+        () => {
+        let supports;
+
+    supports = _wcl.supports();
+    if (supports.customElements && supports.shadowDOM && supports.template) {
+        customElements.define(_wcl.classToTagName('MscSidebar'), MscSidebar);
+    }
+},
+    (err) => {
+        console.error(`${_wcl.classToTagName('MscSidebar')}: ${err.message}`);
+    }
+    );
 })();

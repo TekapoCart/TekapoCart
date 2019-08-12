@@ -209,7 +209,7 @@
     padding: 1rem 0;
   }
   .cart-item {
-    border-bottom: 1px solid $gray-light;
+    border-bottom: 1px solid $divider-border-color;
     &:last-child {
       border-bottom: 0;
     }

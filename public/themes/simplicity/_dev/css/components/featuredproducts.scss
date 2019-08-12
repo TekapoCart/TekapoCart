@@ -1,5 +1,9 @@
 
-#products,.featured-products,.product-accessories,.product-miniature  {
+#products, .featured-products, .product-accessories, .product-miniature {
+
+  h3 {
+    margin-bottom: 15px;
+  }
 
   .products {
     display: flex;
@@ -30,11 +34,11 @@
         &::after {
           opacity: 1;
         }
-        &.no-variants{
+        &.no-variants {
           // bottom: 4.2rem;
         }
       }
-      .product-description::after{
+      .product-description::after {
         content: "";
         border-top: $brand-background 1px solid;
         position: absolute;
@@ -110,7 +114,7 @@
     .discount {
       display: none;
     }
-    .product-flags .new,.online-only,.on-sale,.discount-percentage,.discount-amount,.pack {
+    .product-flags .new, .online-only, .on-sale, .discount-percentage, .discount-amount, .pack {
       display: block;
       position: absolute;
       left: -0.4375rem;
@@ -132,7 +136,7 @@
         /*background: $brand-secondary;*/
         background: $brand-tertiary;
       }
-      &.on-sale{
+      &.on-sale {
         /*background: $brand-secondary;*/
         background: $tag-sale;
         /*
@@ -150,8 +154,8 @@
         font-size: $font-size-xs;
         margin-top: 13rem;
         margin-left: 8.688rem;
-        &::before{
-          content:"\E30A";
+        &::before {
+          content: "\E30A";
           font-family: 'Material Icons';
           vertical-align: middle;
           margin: 0.3125rem;
@@ -256,8 +260,19 @@
 
 }
 
+#footer .featured-products {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 24px;
+  .products {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+
 /************************************************************************************************/
-@media only screen and (min-width : 1200px ) {
+@media only screen and (min-width: 1200px) {
 
   /* desktop-4 (預設) */
   .product-miniature {
@@ -335,7 +350,7 @@
 
 /************************************************************************************************/
 /* 包含 iPad Pro (1024px) */
-@media only screen and (min-width : 992px ) and (max-width : 1199px ) {
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
 
   /* desktop-4 */
   .product-miniature {
@@ -444,7 +459,7 @@
 
 /************************************************************************************************/
 /* 包含 iPad (768px) */
-@media only screen and (min-width : 768px ) and (max-width : 991px ) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
 
   /* desktop-4 */
   .product-miniature {
@@ -553,15 +568,23 @@
 }
 
 /************************************************************************************************/
-@include media-breakpoint-down(sm) { /* 768px 以下 (max-width: 767px) - [XS] */
+/* 包含 iPhone Plus (414px) */
+@media only screen and (min-width: 411px) and (max-width: 767px) {
+
+  #products, .featured-products, .product-accessories, .product-miniature {
+    .products {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
 
   /* mobile-2 (預設) */
   .product-miniature {
-    @include product-miniature-mobile(166px, 2);
+    @include product-miniature-mobile(174px, 2);
     padding-bottom: 20px;
   }
   .product-miniature.no-desc {
-    @include product-miniature-mobile-no-desc(166px);
+    @include product-miniature-mobile-no-desc(174px);
   }
 
   /* mobile-1 */
@@ -575,7 +598,72 @@
 
   /* mobile-3 */
   .product-miniature.mobile-3 {
-    @include product-miniature-mobile(106px, 3);
+    @include product-miniature-mobile(114px, 3);
+    padding-bottom: 0;
+
+    /* 欄位很小，需要特別處理 */
+    .product-flags .new, .discount-percentage {
+      font-size: 0.6rem;
+      line-height: 1rem;
+      padding: 0.1rem 0.2rem;
+      min-width: initial;
+      min-height: initial;
+    }
+    .product-title {
+      margin-top: 0.5rem;
+    }
+    .product-title a, .product-price-and-shipping, .regular-price {
+      font-size: 0.7rem;
+      line-height: 1rem;
+    }
+
+  }
+  .product-miniature.mobile-3.no-desc {
+    @include product-miniature-mobile-no-desc(114px);
+  }
+
+  #footer .featured-products {
+    padding-left: 15px;
+    padding-right: 15px;
+    .products {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+
+}
+/************************************************************************************************/
+/* 包含 iPhone (375px) */
+@media only screen and (max-width: 410px) {
+
+  #products, .featured-products, .product-accessories, .product-miniature {
+    .products {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+
+  /* mobile-2 (預設) */
+  .product-miniature {
+    @include product-miniature-mobile(158px, 2);
+    padding-bottom: 20px;
+  }
+  .product-miniature.no-desc {
+    @include product-miniature-mobile-no-desc(158px);
+  }
+
+  /* mobile-1 */
+  .product-miniature.mobile-1 {
+    @include product-miniature-mobile(256px, 1);
+    padding-bottom: 20px;
+  }
+  .product-miniature.mobile-1.no-desc {
+    @include product-miniature-mobile-no-desc(256px);
+  }
+
+  /* mobile-3 */
+  .product-miniature.mobile-3 {
+    @include product-miniature-mobile(104px, 3);
     padding-bottom: 0;
 
     /* 欄位很小，需要特別處理 */
@@ -599,9 +687,18 @@
     @include product-miniature-mobile-no-desc(106px);
   }
 
+  #footer .featured-products {
+    padding-left: 15px;
+    padding-right: 15px;
+    .products {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+
 }
 
-@media only screen and (max-width : 374px) {
+@media only screen and (max-width: 374px) {
   .product-miniature {
     zoom: 0.85;
   }
@@ -659,14 +756,3 @@
   }
 }
 
-
-
-#footer .featured-products {
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-bottom: 24px;
-  .products {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-}

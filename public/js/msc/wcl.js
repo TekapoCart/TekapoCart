@@ -1,299 +1,382 @@
 (function() {
-	let _wcl;
+    let _wcl;
 
-	_wcl = window._wcl || {};
-	Object.defineProperties(_wcl, {
-		camelCase: {
-			configurable: true,
-			enumerable: true,
-			value: function(str) {
-				return str.replace(/-([a-z])/ig,
-					function(all, letter) {
-						return letter.toUpperCase();
-					}
-				);
-			}
-		},
-		capitalize: {
-			configurable: true,
-			enumerable: true,
-			value: function(str) {
-				return str.replace(/^[a-z]{1}/,
-					function($1) {
-						return $1.toUpperCase()
-					}
-				);
-			}
-		},
-		classToTagName: {
-			configurable: true,
-			enumerable: true,
-			value: function(str) {
-				return str.replace(/([A-Z])/g,
-					function(all, letter) {
-						return '-' + letter.toLowerCase();
-					}
-				).replace(/^-(.*)/, '$1');
-			}
-		},
-		isNumeric: {
-			configurable: true,
-			enumerable: true,
-			value: (value) => !isNaN(value - parseFloat(value))
-		},
-		isEventSupport: {
-			configurable: true,
-			enumerable: true,
-			value: function(eventName, element) {
-				/**
-				 * reference:
-				 * http://perfectionkills.com/detecting-event-support-without-browser-sniffing/
-				 * @example
-				 isEventSupport('touchstart');
-				 */
+    _wcl = window._wcl || {};
+    Object.defineProperties(_wcl, {
+            getUUID: {
+                configurable: true,
+                enumerable: true,
+                value: function() {
+                    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+                        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+                    )
+                }
+            },
+            camelCase: {
+                configurable: true,
+                enumerable: true,
+                value: function(str) {
+                    return str.replace(/-([a-z])/ig,
+                        function(all, letter) {
+                            return letter.toUpperCase();
+                        }
+                    );
+                }
+            },
+            capitalize: {
+                configurable: true,
+                enumerable: true,
+                value: function(str) {
+                    return str.replace(/^[a-z]{1}/,
+                        function($1) {
+                            return $1.toUpperCase()
+                        }
+                    );
+                }
+            },
+            classToTagName: {
+                configurable: true,
+                enumerable: true,
+                value: function(str) {
+                    return str.replace(/([A-Z])/g,
+                        function(all, letter) {
+                            return '-' + letter.toLowerCase();
+                        }
+                    ).replace(/^-(.*)/, '$1');
+                }
+            },
+            isObject: {
+                configurable: true,
+                enumerable: true,
+                value: (value) => value && typeof value === 'object' && value.constructor === Object
+        },
+        isNumeric: {
+        configurable: true,
+            enumerable: true,
+            value: (value) => !isNaN(value - parseFloat(value))
+    },
+    isAPISupport: {
+        configurable: true,
+            enumerable: true,
+            value: function(apiName, element) {
+            let node, flag, prefix;
 
-				let node, flag;
+            navigator.supports = navigator.supports || {};
+            navigator.supports.api = navigator.supports.api || {};
 
-				navigator.supports = navigator.supports || {};
-				navigator.supports.event = navigator.supports.event || {};
+            if (typeof navigator.supports.api[apiName] !== 'undefined') {
+                flag = navigator.supports.api[apiName];
+            } else {
+                if (element) {
+                    node = (element.tagName) ? element.cloneNode(true) : element;
+                } else {
+                    node = window;
+                }
 
-				if (typeof navigator.supports.event[eventName] !== 'undefined') {
-					flag = navigator.supports.event[eventName];
-				} else {
-					if (element) {
-						node = (element.tagName) ? element.cloneNode(true) : element;
-					} else {
-						node = document.createElement('div');
-					}
+                flag = ['', 'webkit', 'moz', 'o', 'ms'].find(
+                        (key) => {
+                        let s;
+                s = key + (key ? this.capitalize(apiName) : apiName);
+                return node[s];
+            }
+            );
 
-					flag = `on${eventName}` in node;
+                flag = (flag !== undefined) ? true : false;
 
-					if (!flag && node.setAttribute) {
-						node.setAttribute(eventName, 'return;');
-						flag = typeof node[eventName] == 'function';
-					}
+                //localStorage
+                if (['localStorage', 'sessionStorage'].includes(apiName) && flag) {
+                    try {
+                        localStorage.setItem('isapisupport', 'dummy');
+                        localStorage.removeItem('isapisupport');
+                    } catch(err) {
+                        flag = false;
+                    }
+                }//end if
 
-					navigator.supports.event[eventName] = flag;
-					node = null;
-				}
+                navigator.supports.api[apiName] = flag;
+                node = null;
+            }
 
-				return flag;
-			}
-		},
-		isCSSPropertySupport: {
-			configurable: true,
-			enumerable: true,
-			value: function(property) {
-				/**
-				 * @example
-				 isCSSPropertySupport('overscroll-behavior');
-				 */
+            return flag;
+        }
+    },
+    isEventSupport: {
+        configurable: true,
+            enumerable: true,
+            value: function(eventName, element) {
+            /**
+             * reference:
+             * http://perfectionkills.com/detecting-event-support-without-browser-sniffing/
+             * @example
+             * isEventSupport('touchstart');
+             */
 
-				let node, flag;
+            let node, flag;
 
-				navigator.supports = navigator.supports || {};
-				navigator.supports.css = navigator.supports.css || {};
+            navigator.supports = navigator.supports || {};
+            navigator.supports.event = navigator.supports.event || {};
 
-				property = (/^-ms/.test(property)) ? ('ms' + this.camelCase(property.replace(/-ms/,''))) : this.camelCase(property);
+            if (typeof navigator.supports.event[eventName] !== 'undefined') {
+                flag = navigator.supports.event[eventName];
+            } else {
+                if (element) {
+                    node = (element.tagName) ? element.cloneNode(true) : element;
+                } else {
+                    node = document.createElement('div');
+                }
 
-				if (typeof navigator.supports.css[property] !== 'undefined') {
-					flag = navigator.supports.css[property];
-				} else {
-					node = document.createElement('div');
-					flag = property in node.style;
-					navigator.supports.css[property] = flag;
-					node = null;
-				}
+                flag = `on${eventName}` in node;
 
-				return flag;
-			}
-		},
-		scrollY: {
-			configurable: true,
-			enumerable: true,
-			get: () => {
-				return _wcl.getScroll().y;
-			},
-			set: (y) => {
-				if (document.documentElement && document.documentElement.scrollTop) {
-					document.documentElement.scrollTop = y;
-				} else {
-					document.body.scrollTop = y;
-				}
-			}
-		},
-		pointer: {
-			configurable: true,
-			enumerable: true,
-			value: function(e) {
-				let x, y, docElement, body;
-				
-				docElement = document.documentElement;
+                if (!flag && node.setAttribute) {
+                    node.setAttribute(eventName, 'return;');
+                    flag = typeof node[eventName] == 'function';
+                }
 
-				//x
-				body = document.body || { scrollLeft: 0 };
-				x = e.pageX || (e.clientX + (docElement.scrollLeft || body.scrollLeft) - (docElement.clientLeft || 0));
+                navigator.supports.event[eventName] = flag;
+                node = null;
+            }
 
-				//y
-				body = document.body || { scrollTop: 0 };
-				y = e.pageY || (e.clientY + (docElement.scrollTop || body.scrollTop) - (docElement.clientTop || 0));
+            return flag;
+        }
+    },
+    isCSSPropertySupport: {
+        configurable: true,
+            enumerable: true,
+            value: function(property) {
+            /**
+             * @example
+             * isCSSPropertySupport('overscroll-behavior');
+             *
+             * otherwise, maybe we can try CSS.supports
+             * https://developer.mozilla.org/en-US/docs/Web/API/CSS/supports
+             */
 
-				return {x, y};
-			}
-		},
-		pursuer: {
-			configurable: true,
-			enumerable: true,
-			value: function() {
-				let down, move, up;
+            let node, flag;
 
-				if (this.isEventSupport('touchstart')) {
-					down = 'touchstart';
-					move = 'touchmove';
-					up = 'touchend';
-				} else if (typeof navigator.msPointerEnabled != 'undefined' && navigator.msPointerEnabled) {
-					down = 'MSPointerDown';
-					move = 'MSPointerMove';
-					up = 'MSPointerUp';
-				} else {
-					down = 'mousedown';
-					move = 'mousemove';
-					up = 'mouseup';
-				}
+            navigator.supports = navigator.supports || {};
+            navigator.supports.css = navigator.supports.css || {};
 
-				return {down, move, up}
-			}
-		},
-		supports: {
-			configurable: true,
-			enumerable: true,
-			value: function() {
-				let flag;
-				navigator.supports = navigator.supports || {};
-				if (!navigator.supports.wp) {
-					flag = true;
-					try {
-						class DummyClass {}
-					} catch (err) {
-						flag = false;
-					}
+            property = (/^-ms/.test(property)) ? ('ms' + this.camelCase(property.replace(/-ms/,''))) : this.camelCase(property);
 
-					navigator.supports.wp = {
-						classes: flag,
-						customElements: 'customElements' in window,
-						import: 'import' in document.createElement('link'),
-						shadowDOM: !!HTMLElement.prototype.attachShadow,
-						template: 'content' in document.createElement('template')
-					};
-				}
-				return navigator.supports.wp
-			}
-		},
-		getScroll: {
-			configurable: true,
-			enumerable: true,
-			value: () => {
-				let x, y
-				x = (self.pageXOffset) ? self.pageXOffset : (document.documentElement && document.documentElement.scrollLeft) ? document.documentElement.scrollLeft : document.body.scrollLeft;
-				y = (self.pageYOffset) ? self.pageYOffset : (document.documentElement && document.documentElement.scrollTop) ? document.documentElement.scrollTop : document.body.scrollTop;
-				return {x, y};
-			}
-		},
-		getPosition: {
-			configurable: true,
-			enumerable: true,
-			value: (element) => {
-				let x, y;
-				x = 0;
-				y = 0;
-				while (element != null) {
-					x += element.offsetLeft;
-					y += element.offsetTop;
-					element = element.offsetParent;
-				}
-				return {x, y};
-			}
-		},
-		getSize: {
-			configurable: true,
-			enumerable: true,
-			value: (element) => {
-				let width, height;
+            if (typeof navigator.supports.css[property] !== 'undefined') {
+                flag = navigator.supports.css[property];
+            } else {
+                node = document.createElement('div');
+                flag = property in node.style;
+                navigator.supports.css[property] = flag;
+                node = null;
+            }
 
-				width = element.offsetWidth;
-				height = element.offsetHeight;
-				return {width, height};
-			}
-		},
-		getRand: {
-			configurable: true,
-			enumerable: true,
-			value: (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
-		},
-		grabStyleSheet: {
-			configurable: true,
-			enumerable: true,
-			value: function() {
-				return navigator.customStyleSheet || (function() {
-					navigator.customStyleSheet = document.createElement('style');
-					document.head.appendChild(navigator.customStyleSheet);
-					return navigator.customStyleSheet;
-				})();
-			}
-		},
-		addStylesheetRules: {
-			configurable: true,
-			enumerable: true,
-			value: function(selector = '', props = {}, styleSheet = this.grabStyleSheet()) {
-				/**
-				 * Add a stylesheet rule to the document
-				 * @example
-				 addStylesheetRules(
-					'body',
-					{
-						background: '#f00',
-						color: '#0f0'
-					}
-					[, styleSheet]
-				 )
+            return flag;
+        }
+    },
+    scrollY: {
+        configurable: true,
+            enumerable: true,
+            get: () => {
+            return _wcl.getScroll().y;
+        },
+        set: (y) => {
+            if (document.documentElement && document.documentElement.scrollTop) {
+                document.documentElement.scrollTop = y;
+            } else {
+                document.body.scrollTop = y;
+            }
+        }
+    },
+    pointer: {
+        configurable: true,
+            enumerable: true,
+            value: function(e) {
+            let x, y, docElement, body;
 
-				 addStylesheetRules(
-					'@keyframes fancy-anchor-ripple',
-					{
-						'0%': '{transform:scale(1);opacity:1;}',
-						'100%': '{transform:scale(100);opacity:0;}'
-					}
-					[, styleSheet]
-				 )
-				 */
-				if (!selector || !Object.keys(props).length || !styleSheet.sheet) return;
+            docElement = document.documentElement;
 
-				let propStr, findIndex, sign;
+            //x
+            body = document.body || { scrollLeft: 0 };
+            x = e.pageX || (e.clientX + (docElement.scrollLeft || body.scrollLeft) - (docElement.clientLeft || 0));
 
-				sign = (/keyframes/i.test(selector)) ? '' : ';'
-				styleSheet = styleSheet.sheet;
-				propStr = Object.keys(props).reduce(
-					(acc, cur) => {
-						let sign;
+            //y
+            body = document.body || { scrollTop: 0 };
+            y = e.pageY || (e.clientY + (docElement.scrollTop || body.scrollTop) - (docElement.clientTop || 0));
 
-						sign = /^\{.*\}$/.test(props[cur]) ? '' : ':';
-						return acc.concat([`${cur}${sign}${props[cur]}`]);
-					}
-				, []).join(sign);
-				findIndex = Array.from(styleSheet.cssRules).findIndex((rule) => rule.selectorText == selector);
+            return {x, y};
+        }
+    },
+    pursuer: {
+        configurable: true,
+            enumerable: true,
+            value: function() {
+            let down, move, up;
 
-				if (findIndex !== -1) {
-					try {
-						styleSheet.cssRules[findIndex].style.cssText = propStr;
-					} catch(err) {}
-				} else {
-					try {
-						styleSheet.insertRule(`${selector}{${propStr}}`, styleSheet.cssRules.length);
-					} catch(err) {}
-				}
-			}
-		}
-	});
-	
-	window._wcl = _wcl;
+            if (this.isEventSupport('touchstart')) {
+                down = 'touchstart';
+                move = 'touchmove';
+                up = 'touchend';
+            } else if (typeof navigator.msPointerEnabled != 'undefined' && navigator.msPointerEnabled) {
+                down = 'MSPointerDown';
+                move = 'MSPointerMove';
+                up = 'MSPointerUp';
+            } else {
+                down = 'mousedown';
+                move = 'mousemove';
+                up = 'mouseup';
+            }
+
+            return {down, move, up}
+        }
+    },
+    purgeObject: {
+        configurable: true,
+            enumerable: true,
+            value: function(targetObject) {
+            if (this.isObject(targetObject)) {
+                Object.keys(targetObject).forEach(
+                    (key) => {
+                    let { [key]:prop } = targetObject;
+
+                if (Array.isArray(prop)) {
+                    while (prop.length) {
+                        prop.pop();
+                    }// end fwhile
+                }// end if
+
+                targetObject[key] = null;
+            }
+            );
+            }// end if
+        }
+    },
+    supports: {
+        configurable: true,
+            enumerable: true,
+            value: function() {
+            let flag;
+            navigator.supports = navigator.supports || {};
+            if (!navigator.supports.wp) {
+                flag = true;
+                try {
+                    class DummyClass {}
+                } catch (err) {
+                    flag = false;
+                }
+
+                navigator.supports.wp = {
+                    classes: flag,
+                    customElements: 'customElements' in window,
+                    import: 'import' in document.createElement('link'),
+                    shadowDOM: !!HTMLElement.prototype.attachShadow,
+                    template: 'content' in document.createElement('template')
+                };
+            }
+            return navigator.supports.wp
+        }
+    },
+    getScroll: {
+        configurable: true,
+            enumerable: true,
+            value: () => {
+            let x, y
+            x = (self.pageXOffset) ? self.pageXOffset : (document.documentElement && document.documentElement.scrollLeft) ? document.documentElement.scrollLeft : document.body.scrollLeft;
+            y = (self.pageYOffset) ? self.pageYOffset : (document.documentElement && document.documentElement.scrollTop) ? document.documentElement.scrollTop : document.body.scrollTop;
+            return {x, y};
+        }
+    },
+    getPosition: {
+        configurable: true,
+            enumerable: true,
+            value: (element) => {
+            let x, y;
+            x = 0;
+            y = 0;
+            while (element != null) {
+                x += element.offsetLeft;
+                y += element.offsetTop;
+                element = element.offsetParent;
+            }
+            return {x, y};
+        }
+    },
+    getSize: {
+        configurable: true,
+            enumerable: true,
+            value: (element) => {
+            let width, height;
+
+            width = element.offsetWidth;
+            height = element.offsetHeight;
+            return {width, height};
+        }
+    },
+    getRand: {
+        configurable: true,
+            enumerable: true,
+            value: (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+    },
+    grabStyleSheet: {
+        configurable: true,
+            enumerable: true,
+            value: function() {
+            return navigator.customStyleSheet || (function() {
+                    navigator.customStyleSheet = document.createElement('style');
+                    document.head.appendChild(navigator.customStyleSheet);
+                    return navigator.customStyleSheet;
+                })();
+        }
+    },
+    addStylesheetRules: {
+        configurable: true,
+            enumerable: true,
+            value: function(selector = '', props = {}, styleSheet = this.grabStyleSheet()) {
+            /**
+             * Add a stylesheet rule to the document
+             * @example
+             addStylesheetRules(
+             'body',
+             {
+                 background: '#f00',
+                 color: '#0f0'
+             }
+             [, styleSheet]
+             )
+
+             addStylesheetRules(
+             '@keyframes fancy-anchor-ripple',
+             {
+                 '0%': '{transform:scale(1);opacity:1;}',
+                 '100%': '{transform:scale(100);opacity:0;}'
+             }
+             [, styleSheet]
+             )
+             */
+            if (!selector || !Object.keys(props).length || !styleSheet.sheet) return;
+
+            let propStr, findIndex, sign;
+
+            sign = (/keyframes/i.test(selector)) ? '' : ';'
+            styleSheet = styleSheet.sheet;
+            propStr = Object.keys(props).reduce(
+                    (acc, cur) => {
+                    let sign;
+
+            sign = /^\{.*\}$/.test(props[cur]) ? '' : ':';
+            return acc.concat([`${cur}${sign}${props[cur]}`]);
+        }
+        , []).join(sign);
+            findIndex = Array.from(styleSheet.cssRules).findIndex((rule) => rule.selectorText == selector);
+
+            if (findIndex !== -1) {
+                try {
+                    styleSheet.cssRules[findIndex].style.cssText = propStr;
+                } catch(err) {}
+            } else {
+                try {
+                    styleSheet.insertRule(`${selector}{${propStr}}`, styleSheet.cssRules.length);
+                } catch(err) {}
+            }
+        }
+    }
+});
+
+    window._wcl = _wcl;
 })();

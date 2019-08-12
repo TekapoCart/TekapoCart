@@ -324,6 +324,10 @@
   .modal-header {
     background: $brand-success;
     border-color: $category-border-color;
+    .close {
+      color: $close-color;
+      text-shadow-color: $close-text-shadow;
+    }
   }
   .modal-body {
     background: $gray-light;
