@@ -34,15 +34,11 @@
   {block name='header_nav'}
     <nav class="header-nav">
       <div class="container">
-
-        <div class="row">
-          <div class="hidden-sm-down">{* 只能放 LOGO 跟 主分類 的意思 *}
+        <div class="row hidden-sm-down">{* 只能放 LOGO 跟 主分類 的意思 *}
             <div class="col-md-9 col-xs-12">
               {hook h='displayNav1'}
             </div>
-          </div>
         </div>
-
       </div>
     </nav>
   {/block}
@@ -52,21 +48,31 @@
     <div class="header-top">
       <div class="container">
         <div class="row">
-          <div class="hidden-sm-down">{* 只能放 LOGO 跟 主分類 的意思 *}
-            <div class="col-sm-12">
-               {hook h='displayTop'}
-            </div>
+          <div class="col-sm-12">
+              {hook h='displayTop'}
           </div>
         </div>
 
         {* 手機版 start *}
         <div class="hidden-md-up text-sm-center mobile">
-          <div class="float-xs-right" id="menu-icon">
-            <i class="material-icons d-inline">menu</i>
-          </div>
-          <div class="float-xs-left">
-            <div class="top-logo" id="_mobile_logo"></div>
-          </div>
+            {if $configuration.mobile_type == 1 }
+              <div class="option-b">
+                <div id="menu-icon">
+                  <i class="material-icons d-inline">menu</i>
+                </div>
+                <div class="top-logo" id="_mobile_logo"></div>
+                <div id="_mobile_cart"></div>
+              </div>
+            {else}
+              <div class="option-a">
+                <div class="float-xs-left">
+                  <div class="top-logo" id="_mobile_logo"></div>
+                </div>
+                <div class="float-xs-right" id="menu-icon">
+                  <i class="material-icons d-inline">menu</i>
+                </div>
+              </div>
+            {/if}
           <div class="clearfix"></div>
         </div>
         {* 手機版 end *}
@@ -82,6 +88,4 @@
 
 <div id="mobile_top_menu_wrapper" class="row hidden-md-up" style="display:none;">
   <div class="js-top-menu mobile" id="_mobile_top_menu"></div>
-  <div class="js-top-menu-bottom">
-  </div>
 </div>
