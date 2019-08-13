@@ -38,7 +38,6 @@
   .header-bottom {
     .logo-wrapper, .menu-wrapper {
       text-align: center;
-      text-align: center;
     }
     .logo-wrapper {
       margin-top: 16px;
@@ -55,11 +54,6 @@
       position: relative;
     }
 
-    .logo-wrapper, .menu-wrapper {
-      display: inline-block;
-      margin-top: 20px;
-      padding-right: 25px;
-    }
     .logo-wrapper {
       .logo {
         max-width: 100%;
@@ -129,7 +123,17 @@
 }
 
 @include media-breakpoint-up(md) {
-
+#header {
+  .header-nav,
+  .header-top {
+    .logo-wrapper, .menu-wrapper {
+      display: inline-block;
+      margin-top: 22px;
+      margin-bottom: 6px;
+      padding-right: 25px;
+    }
+  }
+}
 }
 
 @include media-breakpoint-down(lg) { /* 1200px 以下 */

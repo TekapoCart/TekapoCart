@@ -140,6 +140,12 @@ $(document).ready(() => {
   $('body').on('click', '.js-search-link', function (event) {
     event.preventDefault();
     prestashop.emit('updateFacets', $(event.target).closest('a').get(0).href);
+
+    // suzy: 追加
+    if (window.innerWidth < 768 && $('#header').hasClass('is-open')) {
+        $('#menu-icon').trigger('click');
+    }
+
   });
 
   $('body').on('change', '#search_filters select', function (event) {

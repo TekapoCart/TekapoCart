@@ -69,7 +69,6 @@
 
 #_desktop_top_menu {
   display: inline-block;
-  margin-bottom: 0.375rem;
   > ul {
     > li {
       display: inline-block;
@@ -128,10 +127,8 @@
     font-size: 16px;
     font-weight: 400;
     background: $gray-lighter;
-    padding: 10px;
+    padding: 10px 15px;
     margin-bottom: 0;
-    border-top: 1px solid $category-border-color;
-    border-bottom: 1px solid $category-border-color;
   }
   .user-info {
     a {
@@ -234,6 +231,17 @@
           padding-left: 3.75rem;
         }
       }
+    }
+  }
+  #search_filters_wrapper {
+    display: block;
+  }
+  #search_filters {
+    .clear-all-wrapper {
+      padding-left: 15px;
+    }
+    .facet {
+      padding: 10px 15px;
     }
   }
   .js-top-menu-bottom {

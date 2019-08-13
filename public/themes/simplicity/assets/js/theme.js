@@ -1982,20 +1982,40 @@ var TopMenu = (function (_DropDown) {
       prestashop.on('responsive update', function (event) {
         (0, _jquery2['default'])('.js-sub-menu').removeAttr('style');
         // self.toggleMobileMenu();
+        self.closeMobileMenu();
       });
       _get(Object.getPrototypeOf(TopMenu.prototype), 'init', this).call(this);
+    }
+
+    // suzy: 追加
+  }, {
+    key: 'closeMobileMenu',
+    value: function closeMobileMenu() {
+      if (document.querySelector('#mobile_top_menu_wrapper')) {
+        (0, _jquery2['default'])('#mobile_top_menu_wrapper').hide();
+        (0, _jquery2['default'])('#header').removeClass('is-open');
+        (0, _jquery2['default'])('#notifications, #wrapper, #footer').show();
+        (0, _jquery2['default'])('.header-bottom').show();
+        (0, _jquery2['default'])('#menu-icon .material-icons').removeClass('on');
+        (0, _jquery2['default'])('#_mobile_logo').removeClass('on');
+        (0, _jquery2['default'])('#menu-icon .material-icons').text('menu');
+      } else if (document.querySelector('#mobile_top_menu_msc_wrapper')) {
+        document.querySelector('#mobile_top_menu_msc_wrapper').curtainCall();
+      }
     }
   }, {
     key: 'toggleMobileMenu',
     value: function toggleMobileMenu() {
-      (0, _jquery2['default'])('#header').toggleClass('is-open');
+      // $('#header').toggleClass('is-open');
       if ((0, _jquery2['default'])('#mobile_top_menu_wrapper').is(":visible")) {
+        (0, _jquery2['default'])('#header').addClass('is-open'); // suzy: 追加
         (0, _jquery2['default'])('#notifications, #wrapper, #footer').hide();
         (0, _jquery2['default'])('.header-bottom').hide(); // suzy: 追加
         (0, _jquery2['default'])('#menu-icon .material-icons').addClass('on'); // suzy: 追加
         (0, _jquery2['default'])('#_mobile_logo').addClass('on'); // suzy: 追加
         (0, _jquery2['default'])('#menu-icon .material-icons').text('close'); // suzy: 追加
       } else {
+          (0, _jquery2['default'])('#header').removeClass('is-open'); // suzy: 追加
           (0, _jquery2['default'])('#notifications, #wrapper, #footer').show();
           (0, _jquery2['default'])('.header-bottom').show(); // suzy: 追加
           (0, _jquery2['default'])('#menu-icon .material-icons').removeClass('on'); // suzy: 追加
@@ -2613,6 +2633,11 @@ var _componentsColumnSlide2 = _interopRequireDefault(_componentsColumnSlide);
   (0, _jquery2['default'])('body').on('click', '.js-search-link', function (event) {
     event.preventDefault();
     _prestashop2['default'].emit('updateFacets', (0, _jquery2['default'])(event.target).closest('a').get(0).href);
+
+    // suzy: 追加
+    if (window.innerWidth < 768 && (0, _jquery2['default'])('#header').hasClass('is-open')) {
+      (0, _jquery2['default'])('#menu-icon').trigger('click');
+    }
   });
 
   (0, _jquery2['default'])('body').on('change', '#search_filters select', function (event) {

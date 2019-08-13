@@ -51,16 +51,13 @@
   <div class="header-top">
     <div class="container">
       <div class="row">
-        <div class="hidden-sm-down">{* 只能放 LOGO 跟 主分類 的意思 *}
-          <div class="col-md-12">
+        <div class="col-md-12">
             {hook h='displayTop'}
-          </div>
         </div>
       </div>
 
       {* 手機版 start *}
       <div class="hidden-md-up text-sm-center mobile">
-
           {if $configuration.mobile_type == 1 }
             <div class="option-b">
               <div id="menu-icon">
@@ -80,7 +77,6 @@
               <div class="float-xs-right" id="_mobile_cart"></div>
             </div>
           {/if}
-
         <div class="clearfix"></div>
       </div>
       {* 手機版 end *}
@@ -90,7 +86,7 @@
 {/block}
 
 <div class="header-bottom">
-  {hook h='displayNavFullWidth'}
+    {hook h='displayNavFullWidth'}
 </div>
 
 
@@ -98,7 +94,6 @@
   <div id="_mobile_search_me"></div>
   <div id="_mobile_user_info"></div>
   <div class="js-top-menu mobile" id="_mobile_top_menu"></div>
-  <!-- 篩選商品 -->
   <div id="_mobile_search_filters"></div>
   <div class="js-top-menu-bottom">
     <div id="_mobile_language_selector"></div>
