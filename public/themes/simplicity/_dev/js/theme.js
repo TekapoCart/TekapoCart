@@ -73,7 +73,7 @@ $(document).ready(() => {
     navigator.scriptList = [];
   }
   pack = [
-    // '/js/msc/class-msc-sidebar.js',
+    '/js/msc/class-msc-sidebar.js',
     '/js/msc/wcl.js',
     '/js/msc/class-msc-select.js'
   ];

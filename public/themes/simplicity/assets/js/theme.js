@@ -927,9 +927,7 @@ $(document).ready(function () {
   if (typeof navigator.scriptList == 'undefined') {
     navigator.scriptList = [];
   }
-  pack = [
-  // '/js/msc/class-msc-sidebar.js',
-  '/js/msc/wcl.js', '/js/msc/class-msc-select.js'];
+  pack = ['/js/msc/class-msc-sidebar.js', '/js/msc/wcl.js', '/js/msc/class-msc-select.js'];
   for (var i = -1, l = pack.length; ++i < l;) {
     var path = pack[i],
         script;
