@@ -23,5 +23,5 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 
-<div id="statsContainer" class="col-md-9">
+<div id="statsContainer" class="col-md-10">{* suzy: 2019-08-15 col-md-9 改 10 *}
 	{include file="../../form_date_range_picker.tpl"}

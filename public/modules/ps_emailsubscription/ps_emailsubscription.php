@@ -889,7 +889,8 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
                         'label' => $this->trans('Welcome voucher code', array(), 'Modules.Emailsubscription.Admin'),
                         'name' => 'NW_VOUCHER_CODE',
                         'class' => 'fixed-width-md',
-                        'desc' => $this->trans('Leave blank to disable by default.', array(), 'Modules.Emailsubscription.Admin'),
+                        // suzy: 2019-08-15 移除贅字
+                        // 'desc' => $this->trans('Leave blank to disable by default.', array(), 'Modules.Emailsubscription.Admin'),
                     ),
                     array(
                         'type' => 'textarea',
@@ -903,7 +904,8 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
                             array(),
                             'Modules.Emailsubscription.Admin'
                         ),
-                        'desc' => $this->trans('Leave blank to disable by default.', array(), 'Modules.Emailsubscription.Admin'),
+                        // suzy: 2019-08-15 移除贅字
+                        // 'desc' => $this->trans('Leave blank to disable by default.', array(), 'Modules.Emailsubscription.Admin'),
                     ),
                 ),
                 'submit' => array(

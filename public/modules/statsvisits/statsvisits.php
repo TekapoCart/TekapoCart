@@ -94,7 +94,7 @@ class statsvisits extends ModuleGraph
 		<div class="panel-heading">
 			'.$this->displayName.'
 		</div>
-		<h4>'.$this->trans('Guide', array(), 'Admin.Global').'</h4>
+		<!-- suzy: 2019-08-15 隱藏贅字 <h4>'.$this->trans('Guide', array(), 'Admin.Global').'</h4>
 			<div class="alert alert-warning">
 				<h4>'.$this->trans('Determine the interest of a visit', array(), 'Modules.Statsvisits.Admin').'</h4>
 				<p>
@@ -107,7 +107,7 @@ class statsvisits extends ModuleGraph
 				<p>
 					'.$this->trans('This information is mostly qualitative. It is up to you to determine the interest of a disjointed visit.', array(), 'Modules.Statsvisits.Admin').'
 				</p>
-			</div>
+			</div>-->
 			<div class="alert alert-info">
 				'.$this->trans('A visit corresponds to an internet user coming to your shop, and until the end of their session, only one visit is counted.', array(), 'Modules.Statsvisits.Admin').'
 				'.$this->trans('A visitor is an unknown person who has not registered or logged into your store. A visitor can also be considered a person who has visited your shop multiple times.', array(), 'Modules.Statsvisits.Admin').'

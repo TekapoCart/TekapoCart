@@ -1982,13 +1982,13 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:37</note>
       </trans-unit>
       <trans-unit id="d9c3a508aadc89c987a08811138836e2" approved="yes">
         <source>Advanced filters</source>
-        <target xml:lang="zh-TW">進階過濾</target>
+        <target xml:lang="zh-TW">進階篩選</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:38</note>
       </trans-unit>
       <trans-unit id="d17ef666e0e109b8ff0889c4666816c4" approved="yes">
         <source>Apply advanced filters</source>
-        <target xml:lang="zh-TW">套用進階過濾</target>
+        <target xml:lang="zh-TW">套用進階篩選</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:39</note>
       </trans-unit>
@@ -2006,19 +2006,19 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:45</note>
       </trans-unit>
       <trans-unit id="7f84fa02a3bf4c70c747b29908a03096" approved="yes">
         <source>Filter by movement type</source>
-        <target xml:lang="zh-TW">按庫存活動類型過濾</target>
+        <target xml:lang="zh-TW">按庫存活動類型篩選</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:46</note>
       </trans-unit>
       <trans-unit id="5110c1f147fe533096f7dead2dac17ee" approved="yes">
         <source>Filter by employee</source>
-        <target xml:lang="zh-TW">按員工過濾</target>
+        <target xml:lang="zh-TW">按員工篩選</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:47</note>
       </trans-unit>
       <trans-unit id="d940660a1591632abf56608dd80b0f41" approved="yes">
         <source>Filter by period</source>
-        <target xml:lang="zh-TW">以期間過濾：</target>
+        <target xml:lang="zh-TW">以期間篩選：</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:48</note>
       </trans-unit>
@@ -2036,7 +2036,7 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:50</note>
       </trans-unit>
       <trans-unit id="5dd5cd6670a0fc8e47a47aa94d27b8b2" approved="yes">
         <source>Filter by status</source>
-        <target xml:lang="zh-TW">按狀態過濾</target>
+        <target xml:lang="zh-TW">按狀態篩選</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:51</note>
       </trans-unit>

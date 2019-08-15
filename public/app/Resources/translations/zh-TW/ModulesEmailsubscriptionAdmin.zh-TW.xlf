@@ -46,13 +46,13 @@ File: modules/ps_emailsubscription/ps_emailsubscription.php:290</note>
       </trans-unit>
       <trans-unit id="54d2f1bab16b550e32395a7e6edb8de5" approved="yes">
         <source>Would you like to send a verification email after subscription?</source>
-        <target xml:lang="zh-TW">在訂閱後是否要發送一個確認信？</target>
+        <target xml:lang="zh-TW">加入訂閱時發送 E-Mail 驗證信？</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:842</note>
       </trans-unit>
       <trans-unit id="b37f32d509cf5aabe806b16791588aa3" approved="yes">
         <source>Would you like to send a confirmation email after subscription?</source>
-        <target xml:lang="zh-TW">在訂閱後是否要發送一個確認信？</target>
+        <target xml:lang="zh-TW">訂閱成功發送確認通知信？</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:859</note>
       </trans-unit>
@@ -70,9 +70,15 @@ File: modules/ps_emailsubscription/ps_emailsubscription.php:893</note>
       </trans-unit>
       <trans-unit id="7328d85830cd590d040882106846e28d" approved="yes">
         <source>Newsletter conditions</source>
-        <target xml:lang="zh-TW">電子報訂閱條款</target>
+        <target xml:lang="zh-TW">補充文字</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:883</note>
+      </trans-unit>
+      <trans-unit id="23467d023d8767effca98a537a6a0622" approved="yes">
+        <source>This text will be displayed beneath the newsletter subscribe button.</source>
+        <target xml:lang="zh-TW">文字顯示訂閱按區塊下方。</target>
+        <note>Context:
+File: modules/ps_emailsubscription/ps_emailsubscription.php:889</note>
       </trans-unit>
       <trans-unit id="f1c0e2889f04c8333beb7f4d7f87ad23" approved="yes">
         <source>Export customers' addresses</source>
@@ -100,7 +106,7 @@ File: modules/ps_emailsubscription/ps_emailsubscription.php:954</note>
       </trans-unit>
       <trans-unit id="1b09c341aa487e26dac94d2467b7f7e3" approved="yes">
         <source>Filter customers who have subscribed to the newsletter or not, and who have an account or not.</source>
-        <target xml:lang="zh-TW">過濾已訂閱電子報的訂戶，以及有帳戶的客戶。</target>
+        <target xml:lang="zh-TW">篩選已訂閱電子報的訂戶，以及有帳戶的客戶。</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:955</note>
       </trans-unit>
@@ -148,13 +154,13 @@ File: modules/ps_emailsubscription/ps_emailsubscription.php:1027</note>
       </trans-unit>
       <trans-unit id="375afa60efcc1d48300bd339cb8154b0" approved="yes">
         <source>Email address to search</source>
-        <target xml:lang="zh-TW">E-Mail 搜索</target>
+        <target xml:lang="zh-TW">E-Mail 查詢</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:1033</note>
       </trans-unit>
       <trans-unit id="e347582d22a4ba3c822de504b23d4704" approved="yes">
         <source>Example: contact@prestashop.com or @prestashop.com</source>
-        <target xml:lang="zh-TW">例: contact@prestashop.com or @prestashop.com</target>
+        <target xml:lang="zh-TW">例: user@example.com or @example.com</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:1036</note>
       </trans-unit>
