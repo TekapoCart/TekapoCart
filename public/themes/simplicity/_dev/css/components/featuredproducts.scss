@@ -428,7 +428,7 @@
 
   /* desktop-6 */
   .product-miniature.desktop-6 {
-    @include product-miniature-desktop(150px, 6);
+    @include product-miniature-desktop(130px, 6);
 
     /* 欄位很小，需要特別處理 */
     .product-flags .new, .discount-percentage {
@@ -449,11 +449,11 @@
   #content-wrapper.left-column,
   #content-wrapper.right-column {
     .product-miniature.desktop-6 {
-      @include product-miniature-desktop-left-column(150px, 6);
+      @include product-miniature-desktop-left-column(130px, 6);
     }
   }
   .product-miniature.desktop-6.no-desc {
-    @include product-miniature-desktop-no-desc(150px);
+    @include product-miniature-desktop-no-desc(130px);
   }
 }
 
@@ -537,7 +537,7 @@
 
   /* desktop-6 */
   .product-miniature.desktop-6 {
-    @include product-miniature-desktop(100px, 6);
+    @include product-miniature-desktop(95px, 6);
 
     /* 欄位很小，需要特別處理 */
     .product-flags .new, .discount-percentage {
@@ -558,11 +558,11 @@
   #content-wrapper.left-column,
   #content-wrapper.right-column {
     .product-miniature.desktop-6 {
-      @include product-miniature-desktop-left-column(100px, 6);
+      @include product-miniature-desktop-left-column(95px, 6);
     }
   }
   .product-miniature.desktop-6.no-desc {
-    @include product-miniature-desktop-no-desc(100px);
+    @include product-miniature-desktop-no-desc(95px);
   }
 
 }
