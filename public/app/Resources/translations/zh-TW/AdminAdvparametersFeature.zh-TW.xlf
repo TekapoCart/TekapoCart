@@ -932,7 +932,7 @@ File: controllers/admin/AdminEmployeesController.php:219</note>
       </trans-unit>
       <trans-unit id="cce99c598cfdb9773ab041d54c3d973a" approved="yes">
         <source>Profile</source>
-        <target xml:lang="zh-TW">基本資料描述</target>
+        <target xml:lang="zh-TW">角色</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:88</note>
       </trans-unit>
@@ -974,7 +974,7 @@ File: controllers/admin/AdminEmployeesController.php:108</note>
       </trans-unit>
       <trans-unit id="485263210a4a12e35e3426045e3301b1" approved="yes">
         <source>Add new employee</source>
-        <target xml:lang="zh-TW">新增新員工</target>
+        <target xml:lang="zh-TW">新增帳號</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:169</note>
       </trans-unit>
@@ -998,7 +998,7 @@ File: controllers/admin/AdminEmployeesController.php:309</note>
       </trans-unit>
       <trans-unit id="57452e2dda1a10cfe2cc34c575e6b9d0" approved="yes">
         <source>Permission profile</source>
-        <target xml:lang="zh-TW">所屬角色權限</target>
+        <target xml:lang="zh-TW">所屬角色</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:360</note>
       </trans-unit>
@@ -1400,7 +1400,7 @@ File: controllers/admin/AdminShopGroupController.php:229</note>
     <body>
       <trans-unit id="69d18853cb35672b765f55ae37ae4967" approved="yes">
         <source>Add new profile</source>
-        <target xml:lang="zh-TW">新增設定檔</target>
+        <target xml:lang="zh-TW">新增角色</target>
         <note>Context:
 File: controllers/admin/AdminProfilesController.php:111</note>
       </trans-unit>

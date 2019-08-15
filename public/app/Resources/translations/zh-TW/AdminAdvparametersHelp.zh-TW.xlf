@@ -281,7 +281,7 @@ File: controllers/admin/AdminEmployeesController.php:242</note>
       </trans-unit>
       <trans-unit id="d222c4d0463bd3f146536ac89c0d7c77" approved="yes">
         <source>Password should be at least %num% characters long.</source>
-        <target xml:lang="zh-TW">密碼字符長度不能短於%num%。</target>
+        <target xml:lang="zh-TW">密碼長度不能短於 %num%。</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:281</note>
       </trans-unit>
