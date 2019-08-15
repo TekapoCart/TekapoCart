@@ -244,6 +244,10 @@ class AdminCmsContentControllerCore extends AdminController
             $cms = new CMS($id_cms);
             if (Validate::isLoadedObject($cms)) {
                 if (isset($position) && $cms->updatePosition($way, $position)) {
+
+                    // suzy: 2019-08-15 清除 smarty cache
+                    Tools::clearSmartyCache();
+
                     die(true);
                 } else {
                     die('{"hasError" : true, "errors" : "Can not update cms position"}');
@@ -273,6 +277,10 @@ class AdminCmsContentControllerCore extends AdminController
             $cms_category = new CMSCategory($id_cms_category_to_move);
             if (Validate::isLoadedObject($cms_category)) {
                 if (isset($position) && $cms_category->updatePosition($way, $position)) {
+
+                    // suzy: 2019-08-15 清除 smarty cache
+                    Tools::clearSmartyCache();
+
                     die(true);
                 } else {
                     die('{"hasError" : true, "errors" : "Can not update cms categories position"}');
