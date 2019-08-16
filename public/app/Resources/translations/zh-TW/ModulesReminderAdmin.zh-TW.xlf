@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="9c34e90380dac7b56fdd19192a99d531" approved="yes">
         <source>Customer follow-up</source>
-        <target xml:lang="zh-TW">客戶跟進</target>
+        <target xml:lang="zh-TW">客戶 follow-up</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:75</note>
       </trans-unit>
@@ -52,7 +52,7 @@ File: modules/ps_reminder/ps_reminder.php:760</note>
       </trans-unit>
       <trans-unit id="87b1e57b5e8cd700618b6ae4938a4023" approved="yes">
         <source>Four kinds of e-mail alerts are available in order to stay in touch with your customers!</source>
-        <target xml:lang="zh-TW">有四種電郵提醒可用以聯繫客戶！</target>
+        <target xml:lang="zh-TW">四種方式吸引客戶回購</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:767</note>
       </trans-unit>
@@ -64,19 +64,19 @@ File: modules/ps_reminder/ps_reminder.php:778</note>
       </trans-unit>
       <trans-unit id="ea9dc62a0ddf4640f019f04a22ab9835" approved="yes">
         <source>For each cancelled cart (with no order), generate a discount and send it to the customer.</source>
-        <target xml:lang="zh-TW">對於每個被取消的購物車（無訂單），發出一個折扣，並傳送給相關客戶</target>
+        <target xml:lang="zh-TW">針對取消的購物車（無成立訂單），發出折價券</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:785</note>
       </trans-unit>
       <trans-unit id="b30690be173bcd4a83df0cd68f89a385" approved="yes">
         <source>Discount amount</source>
-        <target xml:lang="zh-TW">折扣量</target>
+        <target xml:lang="zh-TW">折扣</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:1106</note>
       </trans-unit>
       <trans-unit id="2018945d252b94aeb99b0909f288717c" approved="yes">
         <source>Discount validity</source>
-        <target xml:lang="zh-TW">折扣有效性</target>
+        <target xml:lang="zh-TW">折扣效期</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:1130</note>
       </trans-unit>
@@ -94,13 +94,13 @@ File: modules/ps_reminder/ps_reminder.php:848</note>
       </trans-unit>
       <trans-unit id="a8b8dbd070a92fb8b17baab71d8d633f" approved="yes">
         <source>Re-order</source>
-        <target xml:lang="zh-TW">重訂</target>
+        <target xml:lang="zh-TW">再次購買</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:869</note>
       </trans-unit>
       <trans-unit id="895858cf10b8a1750a42875cb9c69092" approved="yes">
         <source>For each validated order, generate a discount and send it to the customer.</source>
-        <target xml:lang="zh-TW">對每個確認訂單，發出一個折扣，並傳送給相關客戶</target>
+        <target xml:lang="zh-TW">針對每筆完成訂單，發出折價券</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:876</note>
       </trans-unit>
@@ -112,7 +112,7 @@ File: modules/ps_reminder/ps_reminder.php:1145</note>
       </trans-unit>
       <trans-unit id="a46ad892f7f00e051cc90050ff2e1ddf" approved="yes">
         <source>For each customer raising a threshold, generate a discount and send it to the customer.</source>
-        <target xml:lang="zh-TW">為每個提高限制的客戶發出折扣，並傳送給相關客戶</target>
+        <target xml:lang="zh-TW">設定金額門檻，發出折價券</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:967</note>
       </trans-unit>
@@ -124,7 +124,7 @@ File: modules/ps_reminder/ps_reminder.php:1015</note>
       </trans-unit>
       <trans-unit id="346f38f5b951daec00dcca38364f8359" approved="yes">
         <source>For each customer who has already placed at least one order and with no orders since a given duration, generate a discount and send it to the customer.</source>
-        <target xml:lang="zh-TW">在指定的時間內，為每個至少完成一個訂單而再無續單的客戶發出折扣並傳送給相關客戶。</target>
+        <target xml:lang="zh-TW">在指定的時間內，為至少完成一筆訂單而無續單的客戶發出折價券</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:1068</note>
       </trans-unit>
@@ -142,7 +142,7 @@ File: modules/ps_reminder/ps_reminder.php:1166</note>
       </trans-unit>
       <trans-unit id="1d52a8fe6cab6930fad9d814a1b0ca4c" approved="yes">
         <source>Delete outdated discounts during each launch to clean database</source>
-        <target xml:lang="zh-TW">在每一次清理資料庫時刪除過時的折扣</target>
+        <target xml:lang="zh-TW">在每一次清理資料庫時刪除過期的折扣</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:1177</note>
       </trans-unit>
@@ -152,13 +152,13 @@ File: modules/ps_reminder/ps_reminder.php:1177</note>
     <body>
       <trans-unit id="8b83489bd116cb60e2f348e9c63cd7f6" approved="yes">
         <source>Best customers</source>
-        <target xml:lang="zh-TW">最佳客戶</target>
+        <target xml:lang="zh-TW">最低金額</target>
         <note>Context:
 File: modules/ps_reminder/views/templates/hook/stats.tpl:39</note>
       </trans-unit>
       <trans-unit id="7d75b7b0f976b3091f490864c6ffbf97" approved="yes">
         <source>Bad customers</source>
-        <target xml:lang="zh-TW">糟糕客戶</target>
+        <target xml:lang="zh-TW">勿忘我</target>
         <note>Context:
 File: modules/ps_reminder/views/templates/hook/stats.tpl:40</note>
       </trans-unit>
