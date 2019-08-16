@@ -8,10 +8,9 @@ UPDATE `ps_tab` SET `position` = '8' WHERE `ps_tab`.`id_tab` = 92;
 UPDATE `ps_tab` SET `position` = '9' WHERE `ps_tab`.`id_tab` = 103;
 UPDATE `ps_tab` SET `position` = '10' WHERE `ps_tab`.`id_tab` = 105;
 
-
 UPDATE `ps_tab` SET `active` = '1' WHERE `ps_tab`.`id_tab` = 105;
 UPDATE `ps_tab` SET `active` = '1' WHERE `ps_tab`.`id_tab` = 107;
-UPDATE `ps_tab` SET `active` = '1' WHERE `ps_tab`.`id_tab` = 108;
+UPDATE `ps_tab` SET `active` = '0' WHERE `ps_tab`.`id_tab` = 108;
 
 UPDATE `ps_tab_lang` SET `name` = '管理者' WHERE `ps_tab_lang`.`id_tab` = 105 AND `ps_tab_lang`.`id_lang` = 1;
 UPDATE `ps_tab_lang` SET `name` = '帳號' WHERE `ps_tab_lang`.`id_tab` = 106 AND `ps_tab_lang`.`id_lang` = 1;
