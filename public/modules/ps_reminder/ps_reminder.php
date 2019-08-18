@@ -765,11 +765,11 @@ class Ps_Reminder extends Module
                 Configuration::get('PS_FOLLOWUP_SECURE_KEY') . '</b></p>';
 
             // suzy: 2019-08-18 修改文字說明
-            $cron_info = '發送前請確認下方 SMTP 信箱已設定。本功能僅適合微量發送，請留意發信量限制。<br><a href="' .
+            $cron_info = '<strong>發送前請確認下方 SMTP 信箱已設定。本功能僅適合微量發送，請留意發信量限制。</strong><br><a href="' .
                 $this->context->shop->getBaseURL() .
                 'modules/ps_reminder/cron.php?secure_key=' .
                 Configuration::get('PS_FOLLOWUP_SECURE_KEY')
-                . '" target="_blank">發信</a>';
+                . '" target="_blank">開始發送</a>';
 
         }
 
