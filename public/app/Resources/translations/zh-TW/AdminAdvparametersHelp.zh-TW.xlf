@@ -123,25 +123,31 @@ File: controllers/admin/AdminEmailsController.php:165</note>
     <body>
       <trans-unit id="68db67219aa1fd6e5f8820e20fd78b25" approved="yes">
         <source>How do I create a new SQL query?</source>
-        <target xml:lang="zh-TW">如何新增一個SQL查詢?</target>
+        <target xml:lang="zh-TW">如何新增 SQL 查詢？</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:117</note>
       </trans-unit>
       <trans-unit id="555f1c93c6aa30a9b28e5cb37eaade53" approved="yes">
         <source>Click "Add New".</source>
-        <target xml:lang="zh-TW">點擊\"Add New\"</target>
+        <target xml:lang="zh-TW">點選「新增 SQL 查詢」</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:119</note>
       </trans-unit>
       <trans-unit id="b7ccdf6ab58f5514acc520721ddc9f08" approved="yes">
         <source>Fill in the fields and click "Save".</source>
-        <target xml:lang="zh-TW">欄位內填寫內容後點選"儲存"</target>
+        <target xml:lang="zh-TW">欄位內填寫內容後點選「儲存」</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:120</note>
       </trans-unit>
+      <trans-unit id="64427cd6d9efe12b779a1e3bb2fafc06" approved="yes">
+        <source>You can then view the query results by clicking on the Edit action in the dropdown menu</source>
+        <target xml:lang="zh-TW">點選下拉選單「瀏覽」查詢結果或「編輯」SQL 查詢</target>
+        <note>Context:
+File: controllers/admin/AdminRequestSqlController.php:121</note>
+      </trans-unit>
       <trans-unit id="29147406190a86209d5f4b3080cc7fa9" approved="yes">
         <source>You can also export the query results as a CSV file by clicking on the Export button</source>
-        <target xml:lang="zh-TW">您也可以點選 匯出 按鈕來匯出搜尋結果為 CSV 檔案</target>
+        <target xml:lang="zh-TW">或點選「匯出」按鈕匯出 CSV 格式的查詢結果</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:122</note>
       </trans-unit>
