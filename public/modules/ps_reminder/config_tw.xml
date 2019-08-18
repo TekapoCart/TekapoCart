@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>ps_reminder</name>
-    <displayName><![CDATA[折價券發放]]></displayName>
+    <displayName><![CDATA[發放折價券通知信]]></displayName>
     <version><![CDATA[2.0.0]]></version>
-    <description><![CDATA[針對潛在訂單，發送折價券發放通知信。折價券分為四種：購物未結、再訂購、Top 買家、零回購買家]]></description>
+    <description><![CDATA[針對潛在訂單，發送折價券通知信。折價券分為四種：購物車未結、再次購買、消費金額到達、久未購買。]]></description>
     <author><![CDATA[PrestaShop]]></author>
     <tab><![CDATA[advertising_marketing]]></tab>
     <is_configurable>1</is_configurable>

@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="9c34e90380dac7b56fdd19192a99d531" approved="yes">
         <source>Customer follow-up</source>
-        <target xml:lang="zh-TW">客戶 follow-up</target>
+        <target xml:lang="zh-TW">發放折價券通知信</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:75</note>
       </trans-unit>
@@ -22,7 +22,7 @@ File: modules/ps_reminder/ps_reminder.php:141</note>
       </trans-unit>
       <trans-unit id="edf9feeab43a7623f6afc152d1ede515" approved="yes">
         <source>Discount for your cancelled cart</source>
-        <target xml:lang="zh-TW">為您取消購物車而發出的折扣</target>
+        <target xml:lang="zh-TW">購物車未結而發出的折扣</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:221</note>
       </trans-unit>
@@ -58,13 +58,13 @@ File: modules/ps_reminder/ps_reminder.php:767</note>
       </trans-unit>
       <trans-unit id="b547c073d144a57761d1d00d0b9d9f27" approved="yes">
         <source>Cancelled carts</source>
-        <target xml:lang="zh-TW">取消購物車</target>
+        <target xml:lang="zh-TW">⑴ 購物車未結</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:778</note>
       </trans-unit>
       <trans-unit id="ea9dc62a0ddf4640f019f04a22ab9835" approved="yes">
         <source>For each cancelled cart (with no order), generate a discount and send it to the customer.</source>
-        <target xml:lang="zh-TW">針對取消的購物車（無成立訂單），發出折價券</target>
+        <target xml:lang="zh-TW">針對 7 日內已加入購物車尚未完成結帳的會員，發送折價券。</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:785</note>
       </trans-unit>
@@ -88,49 +88,49 @@ File: modules/ps_reminder/ps_reminder.php:1136</note>
       </trans-unit>
       <trans-unit id="4c5caf3567f8b9ce900fe5973453b68c" approved="yes">
         <source>The next process will send %d e-mail(s).</source>
-        <target xml:lang="zh-TW">下一次處理會寄出 %d 封電子郵件。</target>
+        <target xml:lang="zh-TW">目前 %d 筆符合</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:848</note>
       </trans-unit>
       <trans-unit id="a8b8dbd070a92fb8b17baab71d8d633f" approved="yes">
         <source>Re-order</source>
-        <target xml:lang="zh-TW">再次購買</target>
+        <target xml:lang="zh-TW">⑵ 再次購買</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:869</note>
       </trans-unit>
       <trans-unit id="895858cf10b8a1750a42875cb9c69092" approved="yes">
         <source>For each validated order, generate a discount and send it to the customer.</source>
-        <target xml:lang="zh-TW">針對每筆完成訂單，發出折價券</target>
+        <target xml:lang="zh-TW">針對 7 日內完成訂單的會員，發送折價券。</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:876</note>
       </trans-unit>
       <trans-unit id="f120254f109d626d73ddddeb9cda26e5" approved="yes">
         <source>Next process will send: %d e-mail(s)</source>
-        <target xml:lang="zh-TW">下一次處理會寄出 %d 封電子郵件</target>
+        <target xml:lang="zh-TW">目前 %d 筆符合</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:1145</note>
       </trans-unit>
       <trans-unit id="a46ad892f7f00e051cc90050ff2e1ddf" approved="yes">
         <source>For each customer raising a threshold, generate a discount and send it to the customer.</source>
-        <target xml:lang="zh-TW">設定金額門檻，發出折價券</target>
+        <target xml:lang="zh-TW">針對 90 日內單筆消費金額到達門檻的會員，發送折價券。</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:967</note>
       </trans-unit>
       <trans-unit id="2a63f555989152ba866b43a1faacd680" approved="yes">
         <source>Threshold</source>
-        <target xml:lang="zh-TW">限制</target>
+        <target xml:lang="zh-TW">門檻</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:1015</note>
       </trans-unit>
       <trans-unit id="346f38f5b951daec00dcca38364f8359" approved="yes">
         <source>For each customer who has already placed at least one order and with no orders since a given duration, generate a discount and send it to the customer.</source>
-        <target xml:lang="zh-TW">在指定的時間內，為至少完成一筆訂單而無續單的客戶發出折價券</target>
+        <target xml:lang="zh-TW">針對有下過訂單，X 天未購買的會員，發送折價券。</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:1068</note>
       </trans-unit>
       <trans-unit id="d82843c16839bfb05827d1912d89c917" approved="yes">
         <source>Since x days</source>
-        <target xml:lang="zh-TW">從X天</target>
+        <target xml:lang="zh-TW">從 X 天</target>
         <note>Context:
 File: modules/ps_reminder/ps_reminder.php:1116</note>
       </trans-unit>
@@ -152,13 +152,13 @@ File: modules/ps_reminder/ps_reminder.php:1177</note>
     <body>
       <trans-unit id="8b83489bd116cb60e2f348e9c63cd7f6" approved="yes">
         <source>Best customers</source>
-        <target xml:lang="zh-TW">最低金額</target>
+        <target xml:lang="zh-TW">⑶ 消費金額到達</target>
         <note>Context:
 File: modules/ps_reminder/views/templates/hook/stats.tpl:39</note>
       </trans-unit>
       <trans-unit id="7d75b7b0f976b3091f490864c6ffbf97" approved="yes">
         <source>Bad customers</source>
-        <target xml:lang="zh-TW">勿忘我</target>
+        <target xml:lang="zh-TW">⑷ 久未購買</target>
         <note>Context:
 File: modules/ps_reminder/views/templates/hook/stats.tpl:40</note>
       </trans-unit>
@@ -200,13 +200,13 @@ File: modules/ps_reminder/views/templates/hook/stats.tpl:36</note>
       </trans-unit>
       <trans-unit id="4a43635068b63d16d845f9feb6bcc125" approved="yes">
         <source>Canceled carts</source>
-        <target xml:lang="zh-TW">取消了的購物車</target>
+        <target xml:lang="zh-TW">⑴ 購物車未結</target>
         <note>Context:
 File: modules/ps_reminder/views/templates/hook/stats.tpl:37</note>
       </trans-unit>
       <trans-unit id="c336ea796ae42ed04ed1ac310a678823" approved="yes">
         <source>Re-orders</source>
-        <target xml:lang="zh-TW">重訂</target>
+        <target xml:lang="zh-TW">⑵ 再次購買</target>
         <note>Context:
 File: modules/ps_reminder/views/templates/hook/stats.tpl:38</note>
       </trans-unit>

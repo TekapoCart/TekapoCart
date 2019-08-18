@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<title>{shop_name} からのお知らせ</title>
+		<title>来自 {shop_name} 的留言</title>
 		
 		
 		<style>	@media only screen and (max-width: 300px){ 
@@ -70,7 +70,7 @@
 <tr>
 	<td align="center" class="titleblock" style="padding:7px 0">
 		<font size="2" face="Open-sans, sans-serif" color="#555454">
-			<span class="title" style="font-weight:500;font-size:28px;text-transform:uppercase;line-height:33px">{lastname} {firstname} 様</span>
+			<span class="title" style="font-weight:500;font-size:28px;line-height:33px">您好 {firstname} {lastname},</span>
 		</font>
 	</td>
 </tr>
@@ -84,12 +84,12 @@
 				<td width="10" style="padding:7px 0">&nbsp;</td>
 				<td style="padding:7px 0">
 					<font size="2" face="Open-sans, sans-serif" color="#555454">
-						<p data-html-only="1" style="border-bottom:1px solid #D6D4D4;margin:3px 0 7px;text-transform:uppercase;font-weight:500;font-size:18px;padding-bottom:10px">
-							Your cart at {shop_name}						</p>
+						<p data-html-only="1" style="border-bottom:1px solid #D6D4D4;margin:3px 0 7px;font-weight:500;font-size:18px;padding-bottom:10px">
+							您在 {shop_name} 的购物车						</p>
 						<span style="color:#777">
-							You are one of our best customers, however you have not placed an order in {days_threshold} days.<br /> <br /> 
-							Your cart has been saved, you can resume your order by visiting our shop: <span style="color:#333"><strong><a title="{shop_name}" href="{shop_url}" style="color:#337ff1">{shop_url}</a></strong></span><br /><br />
-							We wish to thank you for the trust you have placed in us and want to give you a discount of {amount}% valid on your next order! This offer is valid for <span style="color:#333"><strong>{days}</strong></span> days, so do not waste a moment!						</span>
+							我们注意到，您在{shop_name}上次访问期间，你没有完成你已经开始的订单。<br /> <br /> 
+							您的购物车已保存，您可以通过访问我们的商店恢复您的订单： <span style="color:#333"><strong><a title="{shop_name}" href="{shop_url}" style="color:#337ff1">{shop_url}</a></strong></span><br /><br />
+							作为奖励，我们可以给您的下一个订单 {amount}％的折扣！此优惠有效期为<span style="color:#333"><strong>{days}</strong></span> 天，所以不要浪费！						</span>
 					</font>
 				</td>
 				<td width="10" style="padding:7px 0">&nbsp;</td>
@@ -107,9 +107,11 @@
 				<td width="10" style="padding:7px 0">&nbsp;</td>
 				<td style="padding:7px 0">
 					<font size="2" face="Open-sans, sans-serif" color="#555454">
+						<p data-html-only="1" style="border-bottom:1px solid #D6D4D4;margin:3px 0 7px;font-weight:500;font-size:18px;padding-bottom:10px">
+							您的{shop_name} 注册信息						</p>
 						<span style="color:#777">
-							<span style="color:#333"><strong>Here is your coupon:</strong></span> {voucher_num}<br /><br />
-							Enter this code in your shopping cart to get your discount.						</span>
+							<span style="color:#333"><strong>这是您的券：</strong></span> {voucher_num}<br />
+							输入此号码到您的购物车得到折扣。						</span>
 					</font>
 				</td>
 				<td width="10" style="padding:7px 0">&nbsp;</td>
@@ -123,7 +125,7 @@
 						</tr>
 						<tr>
 							<td align="right" class="footer" style="border-top:4px solid #333333;padding:7px 0">
-                                <span><a href="https://tekapo.io" style="color:#337ff1">TekapoCart</a></span>
+                                <span><a href="{shop_url}" style="color:#337ff1">{shop_name}</a></span>
 							</td>
 						</tr>
 					</table>

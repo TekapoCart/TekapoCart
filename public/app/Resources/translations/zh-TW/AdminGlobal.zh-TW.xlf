@@ -996,13 +996,13 @@ File: modules/ps_categorytree/ps_categorytree.php:213</note>
     <body>
       <trans-unit id="ca0dbad92a874b2f69b549293387925e" approved="yes">
         <source>Code</source>
-        <target xml:lang="zh-TW">優惠折扣碼</target>
+        <target xml:lang="zh-TW">折扣碼</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:76</note>
       </trans-unit>
       <trans-unit id="502996d9790340c5fd7b86a5b93b1c9f" approved="yes">
         <source>Priority</source>
-        <target xml:lang="zh-TW">優先順序</target>
+        <target xml:lang="zh-TW">排序</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:131</note>
       </trans-unit>

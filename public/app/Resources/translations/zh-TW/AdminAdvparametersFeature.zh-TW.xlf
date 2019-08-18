@@ -998,7 +998,7 @@ File: controllers/admin/AdminEmployeesController.php:309</note>
       </trans-unit>
       <trans-unit id="57452e2dda1a10cfe2cc34c575e6b9d0" approved="yes">
         <source>Permission profile</source>
-        <target xml:lang="zh-TW">所屬角色</target>
+        <target xml:lang="zh-TW">所屬部門</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:360</note>
       </trans-unit>
