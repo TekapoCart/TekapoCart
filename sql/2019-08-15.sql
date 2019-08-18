@@ -1,4 +1,5 @@
 --- TC_VERSION 1.1.0
+-- 後台管理帳號
 
 UPDATE `ps_tab_lang` SET `name` = '購物車記錄' WHERE `ps_tab_lang`.`id_tab` = 8 AND `ps_tab_lang`.`id_lang` = 1;
 
@@ -14,12 +15,10 @@ UPDATE `ps_tab` SET `position` = '10' WHERE `ps_tab`.`id_tab` = 105;
 UPDATE `ps_tab` SET `active` = '1' WHERE `ps_tab`.`id_tab` = 105;
 UPDATE `ps_tab` SET `active` = '1' WHERE `ps_tab`.`id_tab` = 107;
 UPDATE `ps_tab` SET `active` = '0' WHERE `ps_tab`.`id_tab` = 108;
-UPDATE `ps_tab` SET `active` = '0' WHERE `ps_tab`.`id_tab` = 111;
 
 UPDATE `ps_tab_lang` SET `name` = '管理者' WHERE `ps_tab_lang`.`id_tab` = 105 AND `ps_tab_lang`.`id_lang` = 1;
 UPDATE `ps_tab_lang` SET `name` = '帳號' WHERE `ps_tab_lang`.`id_tab` = 106 AND `ps_tab_lang`.`id_lang` = 1;
 UPDATE `ps_tab_lang` SET `name` = '部門' WHERE `ps_tab_lang`.`id_tab` = 107 AND `ps_tab_lang`.`id_lang` = 1;
-UPDATE `ps_tab_lang` SET `name` = 'SQL 查詢' WHERE `ps_tab_lang`.`id_tab` = 110 AND `ps_tab_lang`.`id_lang` = 1;
 
 UPDATE `ps_profile_lang` SET `name` = '商品' WHERE `ps_profile_lang`.`id_profile` = 2;
 UPDATE `ps_profile_lang` SET `name` = '訂單/客戶/客服' WHERE `ps_profile_lang`.`id_profile` = 3;

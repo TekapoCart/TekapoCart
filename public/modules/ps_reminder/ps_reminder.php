@@ -638,6 +638,10 @@ class Ps_Reminder extends Module
 
     public function cronTask()
     {
+
+        // suzy: 2019-08-18 文字補充
+        echo '發送中...請等待 <br>';
+
         Context::getContext()->link = new Link(); //when this is call by cron context is not init
         $conf = Configuration::getMultiple(array(
             'PS_FOLLOW_UP_ENABLE_1',
@@ -676,6 +680,9 @@ class Ps_Reminder extends Module
                 }
             }
         }
+
+        // suzy: 2019-08-18 文字補充
+        echo '發送完畢';
     }
 
     public function renderStats()
