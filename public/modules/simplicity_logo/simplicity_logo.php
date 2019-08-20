@@ -79,6 +79,7 @@ class Simplicity_Logo extends Module implements WidgetInterface
             'display_text' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_TEXT'),
             'display_font' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_FONT'),
 
+            'logo_max_width_css' => Configuration::get('SIMPLICITY_LOGO_MAX_WIDTH_CSS'),
             'body_bg_css' => Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS'),
 
             'mobile_type' => Configuration::get('SIMPLICITY_LOGO_MOBILE_TYPE'),
@@ -123,6 +124,11 @@ class Simplicity_Logo extends Module implements WidgetInterface
                 // $output .= $this->displayError('請正確填寫「LOGO 文字字體」');
             }
 
+            $logo_max_width_css = Tools::getValue('logo_max_width_css');
+            if (ValidateCore::isGenericName($logo_max_width_css)) {
+                Configuration::updateValue('SIMPLICITY_LOGO_MAX_WIDTH_CSS', $logo_max_width_css);
+            }
+
             $body_bg_css = Tools::getValue('body_bg_css');
             if (ValidateCore::isGenericName($body_bg_css)) {
                 Configuration::updateValue('SIMPLICITY_LOGO_BODY_BG_CSS', $body_bg_css);
@@ -159,6 +165,7 @@ class Simplicity_Logo extends Module implements WidgetInterface
         $helper->fields_value['display_text'] = Configuration::get('SIMPLICITY_LOGO_DISPLAY_TEXT');
         $helper->fields_value['display_font'] = Configuration::get('SIMPLICITY_LOGO_DISPLAY_FONT');
 
+        $helper->fields_value['logo_max_width_css'] = Configuration::get('SIMPLICITY_LOGO_MAX_WIDTH_CSS');
         $helper->fields_value['body_bg_css'] = Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS');
 
         $helper->fields_value['mobile_type'] = Configuration::get('SIMPLICITY_LOGO_MOBILE_TYPE');
@@ -199,6 +206,13 @@ class Simplicity_Logo extends Module implements WidgetInterface
                         'label' => '文字 LOGO 字體',
                         'name' => 'display_font',
                         'desc' => '如需另設字體請填寫瀏覽器支援的字體 例如：Arial, Times New Roman, Verdana, Monospace 等，若無請留空白。<a href="https://zh.wikipedia.org/wiki/%E5%AD%97%E4%BD%93%E5%AE%B6%E6%97%8F" target="_blank">可用字體參考</a>'
+                    ),
+
+                    array(
+                        'type' => 'text',
+                        'label' => '桌機版 LOGO 最大寬度',
+                        'name' => 'logo_max_width_css',
+                        'desc' => '控制桌機版 LOGO 寬度。預設為「50%」。'
                     ),
 
                     array(
