@@ -5,9 +5,9 @@
         </a>
     </div>
 {else}
-    <div class="logo-wrapper hidden-sm-down" id="_desktop_logo">
+    <div class="logo-wrapper hidden-sm-down{if $configuration.logo_max_width } {$configuration.logo_max_width}"{/if}" id="_desktop_logo">
         <a href="{if $language.iso_code == 'tw'}{$urls.base_url}{else}{$urls.base_url}{$language.iso_code}{/if}">
-            <img class="logo img-responsive" src="{$shop.logo}" alt="{$shop.name}"{if strlen($logo_max_width_css) > 0 } style="max-width: {$logo_max_width_css};"{/if}>
+            <img class="logo img-responsive" src="{$shop.logo}" alt="{$shop.name}">
         </a>
     </div>
 {/if}
