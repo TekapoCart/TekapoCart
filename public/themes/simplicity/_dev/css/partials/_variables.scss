@@ -31,6 +31,7 @@ $footer-border-color: #f6f6f6;
 $tag-new: #96DCE0;
 $tag-sale: #F3CB54;
 
+$breadcrumb-color: $gray;
 $label-color: $gray-darker;
 $btn-primary-color: #fff;
 $btn-primary-bg: $brand-primary;
@@ -53,13 +54,15 @@ $overlay-opacity: 0.5;
 $close-color: #000;
 $close-text-shadow: #fff;
 
+
+
 // dark mode start
 
 //$brand-primary: #c7c7c7;
 //$brand-background: #000;
 //$brand-border-color: rgba(255, 255, 255, 0.25);
 //
-//$brand-primary-hover: darken($brand-primary, 20%);
+//$brand-primary-hover: darken($brand-primary, 30%);
 //$brand-success: lighten($brand-background, 30%);
 //$gray-darker: $brand-primary;
 //$gray: $brand-primary;
@@ -79,6 +82,7 @@ $close-text-shadow: #fff;
 //$menu-border-color: $brand-border-color;
 //$footer-border-color: $brand-border-color;
 //
+//$breadcrumb-color: $brand-primary-hover;
 //$btn-primary-color: $brand-primary;
 //$btn-primary-bg: $brand-background;
 //$btn-primary-border: $brand-border-color;

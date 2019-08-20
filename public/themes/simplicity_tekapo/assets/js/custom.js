@@ -113,7 +113,7 @@ $(function(){
     });
 
     $('.dns').click(function(){
-        $(this).removeClass('selected');
+        $('.dns').removeClass('selected');
         $('.block-dns').hide();
         $('#block-' + $(this).attr('id')).show();
         $('#' + $(this).attr('id')).addClass('selected');
