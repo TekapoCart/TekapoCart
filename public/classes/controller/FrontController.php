@@ -1564,10 +1564,15 @@ class FrontControllerCore extends Controller
         $mobile_type = trim(Configuration::get('SIMPLICITY_LOGO_MOBILE_TYPE'));
         $mobile_type = (int) $mobile_type > 0 ? $mobile_type : 0;
 
+        // suzy: 2019-08-20 後台控制 logo max-width
+        $logo_max_width = trim(Configuration::get('SIMPLICITY_LOGO_MAX_WIDTH_CSS'));
+        $logo_max_width = strlen($logo_max_width) > 0 ? $logo_max_width : '';
+
         return array(
 
             'body_bg_css' => $body_bg_css,
             'mobile_type' => $mobile_type,
+            'logo_max_width' => $logo_max_width,
 
             'display_taxes_label' => $this->getDisplayTaxesLabel(),
             'low_quantity_threshold' => (int) Configuration::get('PS_LAST_QTIES'),

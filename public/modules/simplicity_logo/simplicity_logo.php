@@ -209,9 +209,25 @@ class Simplicity_Logo extends Module implements WidgetInterface
                     ),
 
                     array(
-                        'type' => 'text',
-                        'label' => '桌機版 LOGO 最大寬度',
+                        'type' => 'select',
+                        'label' => '桌機版 LOGO 寬度',
                         'name' => 'logo_max_width_css',
+                        'options' => array(
+                            'query' => array(
+                                array('id' => '', 'name' => ''),
+                                array('id' => 'w20', 'name' => '20%'),
+                                array('id' => 'w30', 'name' => '30%'),
+                                array('id' => 'w40', 'name' => '40%'),
+                                array('id' => 'w50', 'name' => '50%'),
+                                array('id' => 'w60', 'name' => '60%'),
+                                array('id' => 'w70', 'name' => '70%'),
+                                array('id' => 'w80', 'name' => '80%'),
+                                array('id' => 'w90', 'name' => '90%'),
+                                array('id' => 'w100', 'name' => '100%'),
+                            ),
+                            'id' => 'id',
+                            'name' => 'name'
+                        ),
                         'desc' => '控制桌機版 LOGO 寬度。預設為「50%」。'
                     ),
 
