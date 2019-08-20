@@ -396,10 +396,19 @@ class AdminCmsControllerCore extends AdminController
                 $this->errors[] = $this->trans('You do not have permission to delete this.', array(), 'Admin.Notifications.Error');
             }
         } elseif (Tools::isSubmit('submitAddcms') || Tools::isSubmit('submitAddcmsAndPreview')) {
+
+            // suzy: 2019-08-20 自訂頁面 友善連結加強過濾
+            foreach ($_POST as $key => $value) {
+                if (substr($key, 0, 12) === 'link_rewrite') {
+                    $_POST[$key] = Tools::link_rewrite($value);
+                }
+            }
+
             parent::validateRules();
             if (count($this->errors)) {
                 return false;
             }
+
             if (!$id_cms = (int) Tools::getValue('id_cms')) {
                 $cms = new CMS();
                 $this->copyFromPost($cms, 'cms');
