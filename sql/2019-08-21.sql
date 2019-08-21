@@ -1,0 +1,3 @@
+--- TC_VERSION 1.1.0
+
+DELETE FROM ps_configuration WHERE name='SIMPLICITY_TINYPNG_API_KEY_1';

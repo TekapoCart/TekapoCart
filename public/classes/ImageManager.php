@@ -159,10 +159,10 @@ class ImageManagerCore
      *@return bool Operation result
      */
     public static function resize(
-        $sourceFile,
+        $sourceFile,                                        // 原圖片
         $destinationFile,
-        $destinationWidth = null,
-        $destinationHeight = null,
+        $destinationWidth = null,                           // 目的圖片寬度
+        $destinationHeight = null,                          // 目的圖片高度
         $fileType = 'jpg',
         $forceType = false,
         &$error = 0,
@@ -185,6 +185,13 @@ class ImageManagerCore
         ) {
             $is_thumb = true;
         }
+
+        // $tmpWidth        原圖片寬度
+        // $tmpHeight       原圖片高度
+        // $type            原圖片類型
+
+        // $sourceWidth     原圖片寬度
+        // $sourceHeight    原圖片高度
 
         list($tmpWidth, $tmpHeight, $type) = getimagesize($sourceFile);
         $rotate = 0;
@@ -232,76 +239,6 @@ class ImageManagerCore
             $fileType = 'png';
         }
 
-        if ($rotate == 0) {
-
-            // suzy: 2018-09-20 加入 TINYPNG 壓圖功能
-            //////////////////////////////////////
-            $tinypng_api_key = Configuration::get('SIMPLICITY_TINYPNG_API_KEY_1');
-
-            if (! empty($tinypng_api_key) && empty($destinationWidth) && empty($destinationHeight)) {
-
-                $success = false;
-
-                $curl = curl_init();
-                $curlOptions = [
-                    CURLOPT_BINARYTRANSFER => 1,
-                    CURLOPT_HEADER => 1,
-                    CURLOPT_POST => 1,
-                    CURLOPT_RETURNTRANSFER => 1,
-                    CURLOPT_URL => 'https://api.tinypng.com/shrink',
-                    CURLOPT_USERAGENT => 'TekapoCart',
-                    CURLOPT_USERPWD => 'api:'. $tinypng_api_key,
-                ];
-                curl_setopt_array($curl, $curlOptions);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, file_get_contents($sourceFile));
-                $res = curl_exec($curl);
-                $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-                $header = substr($res, 0, curl_getinfo($curl, CURLINFO_HEADER_SIZE));
-                $content = substr($res, curl_getinfo($curl, CURLINFO_HEADER_SIZE));
-
-                if ($http_code === 201) {
-                    foreach(explode("\r\n", $header) as $h) {
-                        if(substr($h, 0, 10) === 'Location: ') {
-                            $curl = curl_init();
-                            $curlOptions = [
-                                CURLOPT_URL => substr($h, 10),
-                                CURLOPT_RETURNTRANSFER => true,
-                                CURLOPT_HEADER => 0
-                            ];
-                            curl_setopt_array($curl, $curlOptions);
-                            $success = file_put_contents($destinationFile, curl_exec($curl)) !== false;
-                            break;
-                        }
-                    }
-                }
-                curl_close($curl);
-
-                if ($success) {
-                    // suzy: 2018-09-22 0664 改 0644
-                    @chmod($destinationFile, 0644);
-                    if (file_exists(_GCP_KEY_) && strlen(_GCP_BUCKET_) > 0) {
-                        $storage = new StorageClient(['keyFilePath' => _GCP_KEY_]);
-                        $bucket = $storage->bucket(_GCP_BUCKET_);
-                        $file = fopen($destinationFile, 'r');
-                        $bucket->upload($file, [
-                            'name' => str_replace(_PS_ROOT_DIR_ . '/', '', $destinationFile),
-                            'metadata' => [
-                                'Cache-Control' => 'public, max-age=604800',
-                            ]
-                        ]);
-                        fclose($file);
-                    }
-                    Hook::exec('actionOnImageResizeAfter', array('dst_file' => $destinationFile, 'file_type' => $fileType));
-                    file_put_contents(
-                        dirname($destinationFile) . DIRECTORY_SEPARATOR . 'fileType',
-                        $fileType
-                    );
-                    return $success;
-                }
-            }
-            //////////////////////////////////////
-        }
-
         if (!$sourceWidth) {
             return !($error = self::ERROR_FILE_WIDTH);
         }
@@ -312,9 +249,12 @@ class ImageManagerCore
             $destinationHeight = $sourceHeight;
         }
 
+        // widthDiff    原圖、目的圖  寬比例
+        // heightDiff   原圖、目的圖  高比例
         $widthDiff = $destinationWidth / $sourceWidth;
         $heightDiff = $destinationHeight / $sourceHeight;
 
+        // 縮圖產生方式
         $psImageGenerationMethod = Configuration::get('PS_IMAGE_GENERATION_METHOD');
 
         // suzy: 2018-09-22 crop 選項
@@ -424,7 +364,7 @@ class ImageManagerCore
             $newHeight = $y2 - $y1; // 500 - 0 = 500
 
             if (!$image_use_imagick) {
-                @imagedestroy($srcImage);
+
                 $destImage = imagecreatetruecolor($newWidth, $newHeight);
                 imagecopy($destImage, $srcImage, 0, 0, $x1, $y1, $newWidth, $newHeight);
 
