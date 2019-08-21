@@ -203,23 +203,22 @@
     line-height: 2.5rem;
   }
   .page-list {
-    background: white;
+    // background: $brand-background;
     padding: 0.375rem;
     margin-bottom: 0;
-    /*@include box-shadow-light;*/
     li {
       display: inline;
     }
   }
   a {
-    color: black;
+    color: $gray-darker;
     font-weight: $font-weight-bold;
-    font-size: 1rem;
+    font-size: 18px;
     &:not(.previous):not(.next) {
       letter-spacing: 0.125rem;
     }
     &:not(.disabled):hover {
-      color: $brand-primary;
+      color: $brand-primary-hover;
     }
   }
   .previous {
@@ -232,10 +231,8 @@
     color: $gray;
   }
   .current a {
-    /*color: $brand-primary;*/
-    color: $gray;
+    color: $brand-primary-hover;
     text-decoration: none;
-    /*font-size: 1.25rem;*/
   }
 
 }
