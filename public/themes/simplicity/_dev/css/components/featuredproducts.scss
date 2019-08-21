@@ -27,6 +27,7 @@
   .thumbnail-container {
     position: relative;
     // margin-bottom: 1.563rem;
+
     &:hover, &:focus {
       .highlighted-informations {
         // bottom: 5.5rem;
@@ -40,7 +41,7 @@
       }
       .product-description::after {
         content: "";
-        border-top: $brand-background 1px solid;
+        border-top: transparent 1px solid;
         position: absolute;
         width: 80%;
         top: 0;
