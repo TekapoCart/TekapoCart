@@ -7,7 +7,7 @@
 }
 
 .thumbnail-container a {
-    padding-top: 3px;
+    padding-top: 14px;
 }
 
 .product-miniature .product-title {
@@ -33,26 +33,26 @@
 @media only screen and (min-width : 1200px) {
     .product-miniature.desktop-5 img,
     .product-miniature img {
-        width: 97%;
+        width: 88%;
     }
 }
 
 @media only screen and (max-width : 1199px) and (min-width : 992px) {
     .product-miniature.desktop-5 img,
     .product-miniature img {
-        width: 97%;
+        width: 88%;
     }
 }
 
 @media only screen and (max-width : 991px) and (min-width : 768px) {
     .product-miniature img {
-        width: 97%;
+        width: 88%;
     }
 }
 
 @media only screen and (max-width : 767px) {
     .product-miniature.mobile-3 img,
     .product-miniature img {
-        width: 97%;
+        width: 88%;
     }
 }
