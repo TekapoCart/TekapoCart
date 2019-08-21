@@ -47,7 +47,7 @@
   }
   .thumbnail-container {
     width: $thumb-width + 7;
-    height: $thumb-width + 70;
+    height: $thumb-width + 90;
   }
   .highlighted-informations {
     width: $thumb-width + 7;
@@ -55,7 +55,7 @@
   .product-description {
     width: $thumb-width + 7;
   }
-  margin: 15px calc((100% - #{$thumb-width + 7} * #{$divider}) / (#{$divider} * 2));
+  margin: 25px calc((100% - #{$thumb-width + 7} * #{$divider}) / (#{$divider} * 2));
 
   .sticker {
     width: $thumb-width / 3.46;
@@ -65,7 +65,7 @@
   }
 }
 @mixin product-miniature-desktop-left-column($thumb-width, $divider) {
-  margin: 15px calc((100% - #{$thumb-width + 7} * (#{$divider} - 1) ) / ( (#{$divider} - 1) * 2));
+  margin: 25px calc((100% - #{$thumb-width + 7} * (#{$divider} - 1) ) / ( (#{$divider} - 1) * 2));
 }
 @mixin product-miniature-desktop-no-desc($thumb-width) {
   .thumbnail-container {
@@ -81,7 +81,7 @@
   }
   .thumbnail-container {
     width: $thumb-width + 4;
-    height: $thumb-width + 4 + 70;
+    height: $thumb-width + 4 + 90;
   }
   .highlighted-informations {
     width: $thumb-width + 4;

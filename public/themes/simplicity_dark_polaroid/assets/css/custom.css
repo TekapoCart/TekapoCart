@@ -1,0 +1,55 @@
+/* Polaroid */
+
+.product-cover img {
+    box-shadow:2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail-container {
+    box-shadow:2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+    height: 323px;
+    background-color: #fff;
+}
+
+.thumbnail-container a {
+    padding-top: 3px;
+}
+
+.product-miniature .product-title {
+    margin-top: 10px;
+}
+
+.product-miniature .product-description,
+.product-miniature .product-description {
+    background: #fff;
+}
+
+.product-miniature .highlighted-informations {
+    display: none;
+}
+
+@media only screen and (min-width : 1200px) {
+    .product-miniature.desktop-5 img,
+    .product-miniature img {
+        width: 97%;
+    }
+}
+
+@media only screen and (max-width : 1199px) and (min-width : 992px) {
+    .product-miniature.desktop-5 img,
+    .product-miniature img {
+        width: 97%;
+    }
+}
+
+@media only screen and (max-width : 991px) and (min-width : 768px) {
+    .product-miniature img {
+        width: 97%;
+    }
+}
+
+@media only screen and (max-width : 767px) {
+    .product-miniature.mobile-3 img,
+    .product-miniature img {
+        width: 97%;
+    }
+}

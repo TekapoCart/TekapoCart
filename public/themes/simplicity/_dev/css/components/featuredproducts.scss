@@ -104,9 +104,11 @@
   .product-description {
     // position: absolute;
     z-index: 1;
-    // background: $brand-background;
+
     // height: 70px;
     // bottom: 0;
+    padding: 0 5px 5px 5px;
+    // background: $brand-background;
   }
   img {
     /*margin-left: 4px;*/

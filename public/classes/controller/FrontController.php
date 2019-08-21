@@ -918,7 +918,7 @@ class FrontControllerCore extends Controller
     {
         // suzy: 2019-08-10 特定佈景選取特定 theme.css
         $cssName = 'theme.css';
-        if ($this->context->shop->theme->getName() == 'simplicity_dark') {
+        if (substr($this->context->shop->theme->getName(), 0, 15) == 'simplicity_dark') {
             $cssName = 'theme_dark.css';
         }
         $this->registerStylesheet('theme-main', '/assets/css/' . $cssName, ['media' => 'all', 'priority' => 50]);
