@@ -249,13 +249,6 @@ class AdminImagesControllerCore extends AdminController
                             'desc' => '此功能在商品縮圖同時截取商品中間部份，解決畫面呈現多張圖片時，因為尺寸不一致而不美觀的問題。<br>只有 home_default / small_default 支援此功能。（預設：否）',
                             'visibility' => Shop::CONTEXT_ALL,
                         ),
-                        'SIMPLICITY_TINYPNG_API_KEY_1' => array(
-                            'title' => 'TinyPNG API 金鑰',
-                            'required' => false,
-                            'desc' => '<a href="https://tinypng.com/" target="_blank">TinyPNG</a> 能夠快速地替圖片「瘦身」，產生最適合網頁瀏覽、檔案更小、與原圖幾乎無異的圖片。<br>前往註冊取得 API 金鑰，每個月可免費使用 500 次。<br>設定好後新上傳的圖都會經過優化。',
-                            'type' => 'text',
-                            'visibility' => Shop::CONTEXT_ALL,
-                        ),
                         'SIMPLICITY_IMAGICK' => array(
                             'type' => 'bool',
                             'title' => '使用 Imagick 縮圖',
