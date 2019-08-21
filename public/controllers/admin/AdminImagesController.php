@@ -234,9 +234,9 @@ class AdminImagesControllerCore extends AdminController
                             'cast' => 'intval',
                             'type' => 'radio',
                             'choices' => array(
-                                '0' => '1. 依據上方縮圖的比例產生縮圖，與來源圖比例不合處會自動補白色背景（PNG 補透明背景）。（預設）',
-                                '1' => '2. 依據上方縮圖的「寬」，與來源圖的比例產生縮圖。',
-                                '2' => '3. 依據上方縮圖的「高」，與來源圖的比例產生縮圖。'
+                                '0' => '1. 依照縮圖比例，與來源圖比例不合處會自動補白色背景（PNG 補透明背景）。（預設）',
+                                '1' => '2. 依照縮圖的「寬」，使用來源圖比例產生縮圖。',
+                                '2' => '3. 依照縮圖的「高」，使用來源圖比例產生縮圖。'
                             ),
                             'identifier' => 'id',
                             'visibility' => Shop::CONTEXT_ALL,

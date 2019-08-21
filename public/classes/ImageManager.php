@@ -159,10 +159,10 @@ class ImageManagerCore
      *@return bool Operation result
      */
     public static function resize(
-        $sourceFile,
+        $sourceFile,                                        // 原圖片
         $destinationFile,
-        $destinationWidth = null,
-        $destinationHeight = null,
+        $destinationWidth = null,                           // 目的圖片寬度
+        $destinationHeight = null,                          // 目的圖片高度
         $fileType = 'jpg',
         $forceType = false,
         &$error = 0,
@@ -185,6 +185,13 @@ class ImageManagerCore
         ) {
             $is_thumb = true;
         }
+
+        // $tmpWidth        原圖片寬度
+        // $tmpHeight       原圖片高度
+        // $type            原圖片類型
+
+        // $sourceWidth     原圖片寬度
+        // $sourceHeight    原圖片高度
 
         list($tmpWidth, $tmpHeight, $type) = getimagesize($sourceFile);
         $rotate = 0;
@@ -242,9 +249,12 @@ class ImageManagerCore
             $destinationHeight = $sourceHeight;
         }
 
+        // widthDiff    原圖、目的圖  寬比例
+        // heightDiff   原圖、目的圖  高比例
         $widthDiff = $destinationWidth / $sourceWidth;
         $heightDiff = $destinationHeight / $sourceHeight;
 
+        // 縮圖產生方式
         $psImageGenerationMethod = Configuration::get('PS_IMAGE_GENERATION_METHOD');
 
         // suzy: 2018-09-22 crop 選項
@@ -354,7 +364,7 @@ class ImageManagerCore
             $newHeight = $y2 - $y1; // 500 - 0 = 500
 
             if (!$image_use_imagick) {
-                @imagedestroy($srcImage);
+
                 $destImage = imagecreatetruecolor($newWidth, $newHeight);
                 imagecopy($destImage, $srcImage, 0, 0, $x1, $y1, $newWidth, $newHeight);
 
