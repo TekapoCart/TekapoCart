@@ -2882,12 +2882,16 @@ function toggleThumbnails() {
   if (_prestashop2['default'].responsive.mobile) {
     (0, _jquery2['default'])('.js_thumbnail_product').each(function (idx) {
       // var target = $('#' + el.id);
-      (0, _jquery2['default'])(this).attr('src', (0, _jquery2['default'])(this).attr('data-home-default-mobile'));
+      if ((0, _jquery2['default'])(this).attr('data-home-default-mobile').length > 0) {
+        (0, _jquery2['default'])(this).attr('src', (0, _jquery2['default'])(this).attr('data-home-default-mobile'));
+      }
     });
   } else {
     (0, _jquery2['default'])('.js_thumbnail_product').each(function (idx) {
       // var target = $('#' + el.id);
-      (0, _jquery2['default'])(this).attr('src', (0, _jquery2['default'])(this).attr('data-home-default'));
+      if ((0, _jquery2['default'])(this).attr('data-home-default').length > 0) {
+        (0, _jquery2['default'])(this).attr('src', (0, _jquery2['default'])(this).attr('data-home-default'));
+      }
     });
   }
 }

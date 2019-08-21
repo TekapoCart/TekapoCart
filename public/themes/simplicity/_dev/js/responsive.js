@@ -70,12 +70,16 @@ function toggleThumbnails()
     if (prestashop.responsive.mobile) {
         $('.js_thumbnail_product').each(function(idx) {
             // var target = $('#' + el.id);
-            $(this).attr('src', $(this).attr('data-home-default-mobile'));
+			if ($(this).attr('data-home-default-mobile').length > 0) {
+                $(this).attr('src', $(this).attr('data-home-default-mobile'));
+			}
         });
     } else {
         $('.js_thumbnail_product').each(function(idx) {
             // var target = $('#' + el.id);
-            $(this).attr('src', $(this).attr('data-home-default'));
+			if ($(this).attr('data-home-default').length > 0) {
+                $(this).attr('src', $(this).attr('data-home-default'));
+			}
         });
     }
 }
