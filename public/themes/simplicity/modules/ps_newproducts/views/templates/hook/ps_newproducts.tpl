@@ -23,7 +23,7 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 
-<section class="newproducts featured-products clearfix mt-3">
+<section class="newproducts featured-products clearfix mt-2">
   {if strlen($label) > 0}
   <div>
     <h3 class="display3-size" style="display:inline-block;">{$label}{*l s='New products' d='Shop.Theme.Catalog'*}</h3>
