@@ -58,11 +58,11 @@
 
 @media only screen and (max-width: 410px) {
     .product-miniature.mobile-1 {
-        margin: 10px calc((100% - 300px * 1) / 2);
+        margin: 10px calc((100% - 320px * 1) / 2);
     }
 
     .product-miniature.mobile-1 .thumbnail-container {
-        width: 300px;
+        width: 320px;
         height: 380px;
     }
 
@@ -71,6 +71,6 @@
     }
 
     .product-miniature.mobile-1 .product-description {
-        width: 300px;
+        width: 320px;
     }
 }
