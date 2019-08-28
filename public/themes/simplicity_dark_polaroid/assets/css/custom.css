@@ -54,6 +54,10 @@
     .product-miniature img {
         width: 88%;
     }
+    .product-miniature .product-title {
+        height: 54px;
+        overflow-x: hidden;
+    }
 }
 
 @media only screen and (max-width: 410px) {
