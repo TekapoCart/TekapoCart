@@ -54,6 +54,7 @@
     .product-miniature img {
         width: 88%;
     }
+    .product-miniature.mobile-3 .product-title,
     .product-miniature .product-title {
         height: 54px;
         overflow-x: hidden;

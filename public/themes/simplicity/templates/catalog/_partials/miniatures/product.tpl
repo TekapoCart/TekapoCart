@@ -35,6 +35,7 @@
             data-home-default = "{$product.cover.bySize.home_default.url}"
             data-home-default-mobile = "{$product.cover.bySize.small_default.url}"
             class = "js_thumbnail_product"
+            loading="lazy"
           >
         </a>
       {/block}
