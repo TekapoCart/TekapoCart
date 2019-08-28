@@ -21,7 +21,6 @@
     color: #232323;
 }
 
-.product-miniature .product-description,
 .product-miniature .product-description {
     background: #fff;
 }
@@ -54,5 +53,24 @@
     .product-miniature.mobile-3 img,
     .product-miniature img {
         width: 88%;
+    }
+}
+
+@media only screen and (max-width: 410px) {
+    .product-miniature.mobile-1 {
+        margin: 10px calc((100% - 300px * 1) / 2);
+    }
+
+    .product-miniature.mobile-1 .thumbnail-container {
+        width: 300px;
+        height: 380px;
+    }
+
+    .product-miniature.mobile-1 img {
+        width: 88%;
+    }
+
+    .product-miniature.mobile-1 .product-description {
+        width: 300px;
     }
 }
