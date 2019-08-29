@@ -62,7 +62,11 @@
 
         {block name='product_price_and_shipping'}
           {if $product.show_price}
-            <div class="product-price-and-shipping">
+            <div class="product-price-and-shipping" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+
+              <link itemprop="availability" href="https://schema.org/InStock"/>
+              <meta itemprop="priceCurrency" content="{$currency.iso_code}">
+
               {if $product.has_discount}
                 {hook h='displayProductPriceBlock' product=$product type="old_price"}
 
