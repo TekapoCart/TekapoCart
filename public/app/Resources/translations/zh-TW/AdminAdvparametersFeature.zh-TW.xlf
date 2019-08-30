@@ -1949,7 +1949,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/ad
       </trans-unit>
       <trans-unit id="454036c51196464f8d9c84ded5808985" approved="yes">
         <source>Maximum size for attached files</source>
-        <target xml:lang="zh-TW">附件的大小上限</target>
+        <target xml:lang="zh-TW">檔案的大小上限</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/administration.html.twig:83</note>
       </trans-unit>

@@ -748,12 +748,13 @@ class Ps_ImageSlider extends Module implements WidgetInterface
                         'lang' => true,
                         'desc' => $this->getTranslator()->trans('Maximum image size: %s.', array(ini_get('upload_max_filesize')), 'Admin.Global')
                     ),
+                    /* suzy: 2018-07-05 隱藏不需要的欄位
                     array(
                         'type' => 'text',
                         'label' => $this->getTranslator()->trans('Title', array(), 'Admin.Global'),
                         'name' => 'title',
                         'lang' => true,
-                    ),
+                    ),*/
                     array(
                         'type' => 'text',
                         'label' => $this->getTranslator()->trans('Target URL', array(), 'Modules.Imageslider.Admin'),
@@ -761,12 +762,13 @@ class Ps_ImageSlider extends Module implements WidgetInterface
                         'required' => true,
                         'lang' => true,
                     ),
+                    /* suzy: 2018-07-05 隱藏不需要的欄位
                     array(
                         'type' => 'text',
                         'label' => $this->getTranslator()->trans('Caption', array(), 'Modules.Imageslider.Admin'),
                         'name' => 'legend',
                         'lang' => true,
-                    ),
+                    ),*/
                     array(
                         'type' => 'textarea',
                         'label' => $this->getTranslator()->trans('Description', array(), 'Admin.Global'),
@@ -909,6 +911,14 @@ class Ps_ImageSlider extends Module implements WidgetInterface
                 ),
                 'submit' => array(
                     'title' => $this->getTranslator()->trans('Save', array(), 'Admin.Actions'),
+                ),
+                // suzy: 2019-08-30 新增「返回佈景模組」
+                'buttons' => array(
+                    array(
+                        'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
+                        'title' => '返回佈景模組',
+                        'icon' => 'process-icon-back'
+                    )
                 )
             ),
         );

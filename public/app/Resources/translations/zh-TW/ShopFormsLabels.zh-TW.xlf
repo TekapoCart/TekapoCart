@@ -238,7 +238,7 @@ File: themes/classic/modules/contactform/views/templates/widget/contactform.tpl:
       </trans-unit>
       <trans-unit id="e9cb217697088a98b1937d111d936281" approved="yes">
         <source>Attachment</source>
-        <target xml:lang="zh-TW">附件</target>
+        <target xml:lang="zh-TW">檔案</target>
         <note>Context:
 File: themes/classic/modules/contactform/views/templates/widget/contactform.tpl:90</note>
       </trans-unit>

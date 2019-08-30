@@ -62,7 +62,7 @@ File: controllers/admin/AdminProductsController.php:489</note>
       </trans-unit>
       <trans-unit id="c8632adcab64537747393f4d0d5d77ac" approved="yes">
         <source>An error occurred while saving product attachments.</source>
-        <target xml:lang="zh-TW">儲存產品附件時發生錯誤</target>
+        <target xml:lang="zh-TW">儲存產品檔案時發生錯誤</target>
         <note>Context:
 File: controllers/admin/AdminProductsController.php:514</note>
       </trans-unit>
@@ -642,7 +642,7 @@ File: controllers/admin/AdminAttributeGeneratorController.php:170</note>
     <body>
       <trans-unit id="935b31f32421029fb633ead151d69d83" approved="yes">
         <source>This file is associated with the following products, do you really want to  delete it?</source>
-        <target xml:lang="zh-TW">這個附件與以下商品相關，你真的要刪除嗎？</target>
+        <target xml:lang="zh-TW">這個檔案與以下商品相關，你真的要刪除嗎？</target>
         <note>Context:
 File: controllers/admin/AdminAttachmentsController.php:91</note>
       </trans-unit>
@@ -798,7 +798,7 @@ File: src/Adapter/Attribute/AdminAttributeGeneratorControllerWrapper.php:123</no
     <body>
       <trans-unit id="b385b71f1d14c0afa6d7ca6cb18927b3" approved="yes">
         <source>There is no attachment yet.</source>
-        <target xml:lang="zh-TW">尚未有任何附件。</target>
+        <target xml:lang="zh-TW">尚未有任何檔案。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/TwigTemplateForm/bootstrap_4_layout.html.twig:320</note>
       </trans-unit>

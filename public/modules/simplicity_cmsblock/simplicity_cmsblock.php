@@ -37,46 +37,73 @@ class Simplicity_Cmsblock extends Module
 
     public function getContent()
     {
-        if (Tools::isSubmit('module_settings')) {
-            Configuration::updateValue('SIMPLICITY_CMSBLOCK_ID', $_POST['cmsblock_id']);
+        if (Tools::isSubmit('submitModule')) {
+            Configuration::updateValue('SIMPLICITY_CMSBLOCK_ID', $_POST['SIMPLICITY_CMSBLOCK_ID']);
             $this->_clearCache($this->templateFile);
         }
-        return $this->displayForm();
+
+        return $this->renderForm();
     }
 
-    public function displayForm()
+    public function renderForm()
     {
-        $options = "<option>" . $this->l('-- 請選擇 --') . "</option>";
-        $id_lang = (int)Configuration::get('PS_LANG_DEFAULT');
 
-        foreach (CMS::listCms($id_lang) AS $k => $v) {
-            if (Configuration::get('SIMPLICITY_CMSBLOCK_ID') == $v['id_cms']) {
-                $selected = 'selected="selected"';
-            } else {
-                $selected = '';
-            }
-            $options .= '<option value="' . $v['id_cms'] . '" ' . $selected . '>' . $v['meta_title'] . '</option>';
+        $lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
+
+        $options = [];
+        $options[] = [
+            'id' => '',
+            'name' => '-- 請選擇 --',
+        ];
+        foreach (CMS::listCms($lang) AS $k => $v) {
+            $options[] = [
+                'id' => $v['id_cms'],
+                'name' => $v['meta_title'],
+            ];
         }
 
-        return '
-        <div class="panel clearfix">
-		<h3>嵌入自訂頁面</h3>
-		<form action="' . $_SERVER['REQUEST_URI'] . '" method="post">
-                <label>請選擇想顯示在首頁的頁面：</label>
-                    <div class="margin-form" style="text-align:left;" >
-                    <select name="cmsblock_id">' . $options . '
-                    </select>
-                    </div>
-                <input type="hidden" name="module_settings" class="button" value="' . $this->l('save') . '">
-            
-                <div class="panel-footer">
-                <button type="submit" name="submit_settings_updates"class="button btn btn-default pull-right" />
-                <i class="process-icon-save"></i>' . $this->l('Save') . '
-                </button>
-                </div>      
-		</form>
-		</div>
-		';
+        $this->fields_form[] = array(
+            'form' => array(
+                'legend' => array(
+                    'title' => $this->trans('Settings', array(), 'Admin.Global'),
+                    'icon' => 'icon-cogs'
+                ),
+                'input' => array(
+                    array(
+                        'type' => 'select',
+                        'name' => 'SIMPLICITY_CMSBLOCK_ID',
+                        'label' => '自訂頁面',
+                        'options' => array(
+                            'query' => $options,
+                            'id' => 'id',
+                            'name' => 'name'
+                        ),
+                        'required' => false,
+                        'desc' => '請選擇想顯示在首頁的頁面。'
+                    ),
+                ),
+                'submit' => array(
+                    'title' => $this->trans('Save', array(), 'Admin.Actions')
+                ),
+                'buttons' => array(
+                    array(
+                        'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
+                        'title' => '返回佈景模組',
+                        'icon' => 'process-icon-back'
+                    )
+                )
+            ),
+        );
+
+        $helper = new HelperForm();
+        $helper->module = $this;
+        $helper->identifier = $this->identifier;
+        $helper->submit_action = 'submitModule';
+        $helper->token = Tools::getAdminTokenLite('AdminModules');
+
+        $helper->fields_value['SIMPLICITY_CMSBLOCK_ID'] = Configuration::get('SIMPLICITY_CMSBLOCK_ID');
+
+        return $helper->generateForm($this->fields_form);
     }
 
     function hookHome($params)

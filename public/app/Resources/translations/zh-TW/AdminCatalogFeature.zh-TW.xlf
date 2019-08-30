@@ -736,19 +736,19 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/opti
       </trans-unit>
       <trans-unit id="9fb17d168ec32414787e4f47ccd3812c" approved="yes">
         <source>Attached files</source>
-        <target xml:lang="zh-TW">附件</target>
+        <target xml:lang="zh-TW">檔案</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/options.html.twig:169</note>
       </trans-unit>
       <trans-unit id="3a97ab5db26de551af8e0e63c280d56f" approved="yes">
         <source>Add files that customers can download directly on the product page (instructions, manual, recipe, etc.).</source>
-        <target xml:lang="zh-TW">添加客戶可以直接在商品頁面上下載的文件（如說明書，手冊，食譜等）。</target>
+        <target xml:lang="zh-TW">添加客戶可在商品頁面下載的檔案（如說明書、手冊、食譜等）。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/options.html.twig:170</note>
       </trans-unit>
       <trans-unit id="16be564a60317ed9d5eef83c90eaf225" approved="yes">
         <source>Attach a new file</source>
-        <target xml:lang="zh-TW">附加文件</target>
+        <target xml:lang="zh-TW">新增檔案</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/options.html.twig:184</note>
       </trans-unit>

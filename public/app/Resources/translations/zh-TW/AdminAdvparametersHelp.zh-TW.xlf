@@ -517,7 +517,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/ad
       </trans-unit>
       <trans-unit id="a067e61c044ba333fae23b61c83d87c4" approved="yes">
         <source>Set the maximum size allowed for attachment files (in megabytes). This value has to be lower or equal to the maximum file upload allotted by your server (currently: %size% MB).</source>
-        <target xml:lang="zh-TW">設置允許附件文件的最大上傳量（以MB為單位）。 該值必須少於或等於伺服器分配的最大文件上傳量（當前為：%size%MB）。</target>
+        <target xml:lang="zh-TW">設定允許檔案的最大上傳量（以MB為單位）。 該值必須少於或等於伺服器分配的最大文件上傳量（當前為：%size%MB）。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/administration.html.twig:83</note>
       </trans-unit>

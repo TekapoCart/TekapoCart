@@ -276,7 +276,7 @@ File: modules/ps_emailgenerator/templates/core/contact.php:23</note>
       </trans-unit>
       <trans-unit id="53659d236625358b98797389fd2504fa" approved="yes">
         <source>Attached file:</source>
-        <target xml:lang="zh-TW">附件：</target>
+        <target xml:lang="zh-TW">檔案：</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/contact.php:24</note>
       </trans-unit>

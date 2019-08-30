@@ -80,6 +80,8 @@ global_settings:
         - ps_socialfollow
       displayFooter:
         - ps_linklist
+      displayFooterAfter:
+        - simplicity_footerbar
       displayLeftColumn:
         - ps_categorytree
         - ps_facetedsearch
