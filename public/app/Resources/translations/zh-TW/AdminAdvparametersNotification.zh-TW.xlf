@@ -482,7 +482,7 @@ File: controllers/admin/AdminImportController.php:4188</note>
       </trans-unit>
       <trans-unit id="931bbbb741d025e3ff25ee3c2e72f414" approved="yes">
         <source>Linking Accessories...</source>
-        <target xml:lang="zh-TW">連接附件...</target>
+        <target xml:lang="zh-TW">連接檔案...</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:4449</note>
       </trans-unit>

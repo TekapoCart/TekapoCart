@@ -1699,7 +1699,7 @@ File: admin-dev/themes/default/template/controllers/customer_threads/message.tpl
       </trans-unit>
       <trans-unit id="bfb069b69766c9a8a1fac8aabfd970b2" approved="yes">
         <source>File attachment</source>
-        <target xml:lang="zh-TW">附件</target>
+        <target xml:lang="zh-TW">檔案</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/message.tpl:66</note>
       </trans-unit>

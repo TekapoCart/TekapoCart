@@ -163,7 +163,7 @@ class Ps_Socialfollow extends Module implements WidgetInterface
                 ),
                 'submit' => array(
                     'title' => $this->trans('Save', array(), 'Admin.Global'),
-                )
+                ),
             ),
         );
 

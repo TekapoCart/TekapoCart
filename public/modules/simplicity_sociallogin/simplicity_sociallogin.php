@@ -257,6 +257,13 @@ class Simplicity_Sociallogin extends Module
                 ),
                 'submit' => array(
                     'title' => $this->trans('Save', array(), 'Admin.Global'),
+                ),
+                'buttons' => array(
+                    array(
+                        'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
+                        'title' => '返回佈景模組',
+                        'icon' => 'process-icon-back'
+                    )
                 )
             ),
         );

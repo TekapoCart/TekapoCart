@@ -285,8 +285,8 @@
 
     {block name='product_accessories'}
       {if $accessories}
-        <section class="product-accessories clearfix">
-          <h3 class="h5">{l s='You might also like' d='Shop.Theme.Catalog'}</h3>
+        <section class="product-accessories clearfix mt-3">
+          <h2>{l s='You might also like' d='Shop.Theme.Catalog'}</h2>
           <div class="products">
             {foreach from=$accessories item="product_accessory"}
               {block name='product_miniature'}

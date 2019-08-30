@@ -137,6 +137,8 @@ class Simplicity_Logo extends Module implements WidgetInterface
             $mobile_type = Tools::getValue('mobile_type');
             if (!empty($mobile_type) && ValidateCore::isGenericName($mobile_type)) {
                 Configuration::updateValue('SIMPLICITY_LOGO_MOBILE_TYPE', $mobile_type);
+            } else {
+                Configuration::updateValue('SIMPLICITY_LOGO_MOBILE_TYPE', 0);
             }
 
             Tools::clearCache();
@@ -257,14 +259,14 @@ class Simplicity_Logo extends Module implements WidgetInterface
 
 
                 ),
+                'submit' => array(
+                    'title' => $this->trans('Save', array(), 'Admin.Actions')
+                ),
                 'buttons' => array(
-                    'save-and-stay' => array(
-                        'title' => $this->l('Save'),
-                        'name' => 'subMOD',
-                        'type' => 'submit',
-                        'id' => 'configuration_form_submit_btn_save',
-                        'class' => 'btn btn-default pull-right',
-                        'icon' => 'process-icon-save',
+                    array(
+                        'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
+                        'title' => '返回佈景模組',
+                        'icon' => 'process-icon-back'
                     )
                 )
             )

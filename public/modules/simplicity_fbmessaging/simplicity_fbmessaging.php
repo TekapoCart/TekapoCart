@@ -320,6 +320,14 @@ class Simplicity_Fbmessaging extends Module
                 ],
                 'submit' => [
                     'title' => $this->trans('Save', array(), 'Admin.Global'),
+                ],
+                // suzy: 2019-08-30 新增「返回佈景模組」
+                'buttons' => [
+                    [
+                        'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
+                        'title' => '返回佈景模組',
+                        'icon' => 'process-icon-back'
+                    ]
                 ]
             ],
         ];

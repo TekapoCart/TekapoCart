@@ -226,10 +226,20 @@ class Ps_Customtext extends Module implements WidgetInterface
             'submit' => array(
                 'title' => $this->trans('Save', array(), 'Admin.Actions'),
             ),
+            // suzy: 2019-08-30 隱藏「返回列表」，改成返回「返回佈景模組」
+            /*
             'buttons' => array(
                 array(
                     'href' => AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'),
                     'title' => $this->trans('Back to list', array(), 'Admin.Actions'),
+                    'icon' => 'process-icon-back'
+                )
+            )
+            */
+            'buttons' => array(
+                array(
+                    'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
+                    'title' => '返回佈景模組',
                     'icon' => 'process-icon-back'
                 )
             )

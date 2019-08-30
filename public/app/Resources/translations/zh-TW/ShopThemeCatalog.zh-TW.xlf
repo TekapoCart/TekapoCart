@@ -588,7 +588,7 @@ File: themes/classic/templates/catalog/product.tpl:176</note>
       </trans-unit>
       <trans-unit id="3767d4f3efe17bd95a1bc7cf4194bb93" approved="yes">
         <source>You might also like</source>
-        <target xml:lang="zh-TW">您可能會喜歡</target>
+        <target xml:lang="zh-TW">你可能會喜歡</target>
         <note>Context:
 File: themes/classic/templates/catalog/product.tpl:236</note>
       </trans-unit>

@@ -29,13 +29,14 @@
       {block name='product_thumbnail'}
         <a href="{$product.url}" class="thumbnail product-thumbnail">
           <img
-            src = "/img/1px.png"
             alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
-            data-full-size-image-url = "{$product.cover.large.url}"
-            data-home-default = "{$product.cover.bySize.home_default.url}"
-            data-home-default-mobile = "{$product.cover.bySize.small_default.url}"
-            class = "js_thumbnail_product"
-            loading="lazy"
+            {*src="/img/1px.png"*}
+            {*data-full-size-image-url="{$product.cover.large.url}"*}
+            {*data-home-default="{$product.cover.bySize.home_default.url}"*}
+            {*data-home-default-mobile="{$product.cover.bySize.small_default.url}"*}
+            {*class="js_thumbnail_product"*}
+            src="{$product.cover.bySize.home_default.url}"
+            {*loading="lazy"*}
           >
         </a>
       {/block}
