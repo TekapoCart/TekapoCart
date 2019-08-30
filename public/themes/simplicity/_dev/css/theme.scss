@@ -40,11 +40,12 @@
   padding-top: 10px;
   padding-bottom: 10px;
   .banner {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
     display: block;
     img {
-      box-shadow: 1px 1px 7px 0 rgba(0, 0, 0, 0.15);
+      // box-shadow: 1px 1px 7px 0 rgba(0, 0, 0, 0.15);
+      width: 100%;
     }
   }
   .breadcrumb {
