@@ -956,7 +956,8 @@ class FrontControllerCore extends Controller
     {
         /* @see P3P Policies (http://www.w3.org/TR/2002/REC-P3P-20020416/#compact_policies) */
         header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
-        header('Powered-By: PrestaShop');
+        // suzy: 2019-08-30 隱藏 Powered-By
+        // header('Powered-By: PrestaShop');
     }
 
     /**
