@@ -30,12 +30,11 @@
         <a href="{$product.url}" class="thumbnail product-thumbnail">
           <img
             alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
-            {*src="/img/1px.png"*}
+            src="/img/1px.png"
             {*data-full-size-image-url="{$product.cover.large.url}"*}
-            {*data-home-default="{$product.cover.bySize.home_default.url}"*}
-            {*data-home-default-mobile="{$product.cover.bySize.small_default.url}"*}
-            {*class="js_thumbnail_product"*}
-            src="{$product.cover.bySize.home_default.url}"
+            data-home-default="{$product.cover.bySize.home_default.url}"
+            data-home-default-mobile="{$product.cover.bySize.small_default.url}"
+            class="js_thumbnail_product"
             {*loading="lazy"*}
           >
         </a>
