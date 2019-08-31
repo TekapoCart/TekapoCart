@@ -61,7 +61,6 @@
                   <i class="material-icons d-inline">menu</i>
                 </div>
                 <div class="top-logo" id="_mobile_logo"></div>
-                <div id="_mobile_cart"></div>
               </div>
             {else}
               <div class="option-a">
@@ -85,6 +84,7 @@
 <div class="header-bottom">
     {hook h='displayNavFullWidth'}
 </div>
+
 
 <div id="mobile_top_menu_wrapper" class="row hidden-md-up" style="display:none;">
   <div class="js-top-menu mobile" id="_mobile_top_menu"></div>
