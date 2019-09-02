@@ -90,7 +90,19 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             Configuration::updateValue('BLOCKSOCIAL_VIMEO', Tools::getValue('blocksocial_vimeo', ''));
             Configuration::updateValue('BLOCKSOCIAL_INSTAGRAM', Tools::getValue('blocksocial_instagram', ''));
 
+            // suzy: 新增 LINE、WEIBO、Flickr、Etsy、Pinkoi、LinkedIn、Tripadvisor
+            Configuration::updateValue('BLOCKSOCIAL_LINE', Tools::getValue('blocksocial_line', ''));
+            Configuration::updateValue('BLOCKSOCIAL_WEIBO', Tools::getValue('blocksocial_weibo', ''));
+            Configuration::updateValue('BLOCKSOCIAL_FLICKR', Tools::getValue('blocksocial_flickr', ''));
+            Configuration::updateValue('BLOCKSOCIAL_ETSY', Tools::getValue('blocksocial_etsy', ''));
+            Configuration::updateValue('BLOCKSOCIAL_PINKOI', Tools::getValue('blocksocial_pinkoi', ''));
+            Configuration::updateValue('BLOCKSOCIAL_LINKEDIN', Tools::getValue('blocksocial_linkedin', ''));
+            Configuration::updateValue('BLOCKSOCIAL_TRIPADVISOR', Tools::getValue('blocksocial_tripadvisor', ''));
+
             $this->_clearCache('*');
+
+            // suzy: 2018 徹底刪除 cache
+            Tools::clearSmartyCache();
 
             Tools::redirectAdmin($this->context->link->getAdminLink('AdminModules').'&configure='.$this->name.'&tab_module='.$this->tab.'&conf=4&module_name='.$this->name);
         }
@@ -116,54 +128,111 @@ class Ps_Socialfollow extends Module implements WidgetInterface
                         'type' => 'text',
                         'label' => $this->trans('Facebook URL', array(), 'Modules.Socialfollow.Admin'),
                         'name' => 'blocksocial_facebook',
-                        'desc' => $this->trans('Your Facebook fan page.', array(), 'Modules.Socialfollow.Admin'),
+                        // suzy: 2018-10-08 隱藏 desc
+                        // 'desc' => $this->trans('Your Facebook fan page.', array(), 'Modules.Socialfollow.Admin'),
+                    ),
+                    // suzy: 2018-06-30 新增 LINE
+                    array(
+                        'type' => 'text',
+                        'label' => 'LINE',
+                        'name' => 'blocksocial_line',
                     ),
                     array(
                         'type' => 'text',
                         'label' => $this->trans('Twitter URL', array(), 'Modules.Socialfollow.Admin'),
                         'name' => 'blocksocial_twitter',
-                        'desc' => $this->trans('Your official Twitter account.', array(), 'Modules.Socialfollow.Admin'),
+                        // suzy: 2018-10-08 隱藏 desc
+                        // 'desc' => $this->trans('Your official Twitter account.', array(), 'Modules.Socialfollow.Admin'),
                     ),
                     array(
                         'type' => 'text',
                         'label' => $this->trans('RSS URL', array(), 'Modules.Socialfollow.Admin'),
                         'name' => 'blocksocial_rss',
-                        'desc' => $this->trans('The RSS feed of your choice (your blog, your store, etc.).', array(), 'Modules.Socialfollow.Admin'),
+                        // suzy: 2018-10-08 隱藏 desc
+                        // 'desc' => $this->trans('The RSS feed of your choice (your blog, your store, etc.).', array(), 'Modules.Socialfollow.Admin'),
                     ),
                     array(
                         'type' => 'text',
                         'label' => $this->trans('YouTube URL', array(), 'Modules.Socialfollow.Admin'),
                         'name' => 'blocksocial_youtube',
-                        'desc' => $this->trans('Your official YouTube account.', array(), 'Modules.Socialfollow.Admin'),
+                        // suzy: 2018-10-08 隱藏 desc
+                        // 'desc' => $this->trans('Your official YouTube account.', array(), 'Modules.Socialfollow.Admin'),
                     ),
                     array(
                         'type' => 'text',
                         'label' => $this->trans('Google+ URL:', array(), 'Modules.Socialfollow.Admin'),
                         'name' => 'blocksocial_google_plus',
-                        'desc' => $this->trans('Your official Google+ page.', array(), 'Modules.Socialfollow.Admin'),
+                        // suzy: 2018-10-08 隱藏 desc
+                        // 'desc' => $this->trans('Your official Google+ page.', array(), 'Modules.Socialfollow.Admin'),
                     ),
                     array(
                         'type' => 'text',
                         'label' => $this->trans('Pinterest URL:', array(), 'Modules.Socialfollow.Admin'),
                         'name' => 'blocksocial_pinterest',
-                        'desc' => $this->trans('Your official Pinterest account.', array(), 'Modules.Socialfollow.Admin'),
+                        // suzy: 2018-10-08 隱藏 desc
+                        // 'desc' => $this->trans('Your official Pinterest account.', array(), 'Modules.Socialfollow.Admin'),
                     ),
                     array(
                         'type' => 'text',
                         'label' => $this->trans('Vimeo URL:', array(), 'Modules.Socialfollow.Admin'),
                         'name' => 'blocksocial_vimeo',
-                        'desc' => $this->trans('Your official Vimeo account.', array(), 'Modules.Socialfollow.Admin'),
+                        // suzy: 2018-10-08 隱藏 desc
+                        // 'desc' => $this->trans('Your official Vimeo account.', array(), 'Modules.Socialfollow.Admin'),
                     ),
                     array(
                         'type' => 'text',
                         'label' => $this->trans('Instagram URL:', array(), 'Modules.Socialfollow.Admin'),
                         'name' => 'blocksocial_instagram',
-                        'desc' => $this->trans('Your official Instagram account.', array(), 'Modules.Socialfollow.Admin'),
+                        // suzy: 2018-10-08 隱藏 desc
+                        // 'desc' => $this->trans('Your official Instagram account.', array(), 'Modules.Socialfollow.Admin'),
+                    ),
+                    // suzy: 2018-10-08 新增 flickr、etsy
+                    array(
+                        'type' => 'text',
+                        'label' => 'Flickr',
+                        'name' => 'blocksocial_flickr',
+                    ),
+                    array(
+                        'type' => 'text',
+                        'label' => 'Etsy',
+                        'name' => 'blocksocial_etsy',
+                    ),
+                    // suzy: 2018-12-09 新增 Pinkoi
+                    array(
+                        'type' => 'text',
+                        'label' => 'Pinkoi',
+                        'name' => 'blocksocial_pinkoi',
+                    ),
+                    // suzy: 2018-12-09 新增 LinkedIn
+                    array(
+                        'type' => 'text',
+                        'label' => 'LinkedIn',
+                        'name' => 'blocksocial_linkedin',
+                    ),
+                    // suzy: 2018-07-02 新增 WEIBO
+                    array(
+                        'type' => 'text',
+                        'label' => 'Weibo',
+                        'name' => 'blocksocial_weibo',
+                    ),
+                    // suzy: 2019-09-02 新增 Tripadvisor
+                    array(
+                        'type' => 'text',
+                        'label' => 'Tripadvisor',
+                        'name' => 'blocksocial_tripadvisor',
                     ),
                 ),
                 'submit' => array(
                     'title' => $this->trans('Save', array(), 'Admin.Global'),
                 ),
+                // suzy: 2019-08-30 新增「返回佈景模組」
+                'buttons' => array(
+                    array(
+                        'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
+                        'title' => '返回佈景模組',
+                        'icon' => 'process-icon-back'
+                    )
+                )
             ),
         );
 
@@ -189,6 +258,15 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             'blocksocial_pinterest' => Tools::getValue('blocksocial_pinterest', Configuration::get('BLOCKSOCIAL_PINTEREST')),
             'blocksocial_vimeo' => Tools::getValue('blocksocial_vimeo', Configuration::get('BLOCKSOCIAL_VIMEO')),
             'blocksocial_instagram' => Tools::getValue('blocksocial_instagram', Configuration::get('BLOCKSOCIAL_INSTAGRAM')),
+
+            // suzy: 新增 LINE、WEIBO、Flickr、Etsy、Pinkoi、LinkedIn、Tripadvisor
+            'blocksocial_line' => Tools::getValue('blocksocial_line', Configuration::get('BLOCKSOCIAL_LINE')),
+            'blocksocial_weibo' => Tools::getValue('blocksocial_weibo', Configuration::get('BLOCKSOCIAL_WEIBO')),
+            'blocksocial_flickr' => Tools::getValue('blocksocial_flickr', Configuration::get('BLOCKSOCIAL_FLICKR')),
+            'blocksocial_etsy' => Tools::getValue('blocksocial_etsy', Configuration::get('BLOCKSOCIAL_ETSY')),
+            'blocksocial_pinkoi' => Tools::getValue('blocksocial_pinkoi', Configuration::get('BLOCKSOCIAL_PINKOI')),
+            'blocksocial_linkedin' => Tools::getValue('blocksocial_linkedin', Configuration::get('BLOCKSOCIAL_LINKEDIN')),
+            'blocksocial_tripadvisor' => Tools::getValue('blocksocial_tripadvisor', Configuration::get('BLOCKSOCIAL_TRIPADVISOR')),
         );
     }
 
@@ -276,6 +354,67 @@ class Ps_Socialfollow extends Module implements WidgetInterface
                 'label' => $this->trans('Instagram', array(), 'Modules.Socialfollow.Shop'),
                 'class' => 'instagram',
                 'url' => $sf_instagram,
+            );
+        }
+
+        // suzy: 2018-06-30 新增 LINE
+        if ($sf_line = Configuration::get('BLOCKSOCIAL_LINE')) {
+            $social_links['line'] = array(
+                'label' => $this->trans('Line', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'line',
+                'url' => $sf_line,
+            );
+        }
+
+        // suzy: 2018-10-08 新增 flickr、etsy
+        if ($sf_flickr = Configuration::get('BLOCKSOCIAL_FLICKR')) {
+            $social_links['flickr'] = array(
+                'label' => $this->trans('Instagram', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'flickr',
+                'url' => $sf_flickr,
+            );
+        }
+        if ($sf_etsy = Configuration::get('BLOCKSOCIAL_ETSY')) {
+            $social_links['etsy'] = array(
+                'label' => $this->trans('Etsy', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'etsy',
+                'url' => $sf_etsy,
+            );
+        }
+
+        // suzy: 2018-12-09 新增 Pinkoi
+        if ($sf_pinkoi = Configuration::get('BLOCKSOCIAL_PINKOI')) {
+            $social_links['pinkoi'] = array(
+                'label' => $this->trans('Pinkoi', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'pinkoi',
+                'url' => $sf_pinkoi,
+            );
+        }
+
+        // suzy: 2018-12-09 新增 LinkedIn
+        if ($sf_linkedin = Configuration::get('BLOCKSOCIAL_LINKEDIN')) {
+            $social_links['linkedin'] = array(
+                'label' => $this->trans('LinkedIn', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'linkedin',
+                'url' => $sf_linkedin,
+            );
+        }
+
+        // suzy: 2018-07-02 新增 WEIBO
+        if ($sf_weibo = Configuration::get('BLOCKSOCIAL_WEIBO')) {
+            $social_links['weibo'] = array(
+                'label' => $this->trans('Weibo', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'weibo',
+                'url' => $sf_weibo,
+            );
+        }
+
+        // suzy: 2019-09-02 新增 Tripadvisor
+        if ($sf_tripadvisor = Configuration::get('BLOCKSOCIAL_TRIPADVISOR')) {
+            $social_links['tripadvisor'] = array(
+                'label' => $this->trans('Tripadvisor', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'tripadvisor',
+                'url' => $sf_tripadvisor,
             );
         }
 
