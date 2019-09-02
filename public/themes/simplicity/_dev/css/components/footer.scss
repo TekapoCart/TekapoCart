@@ -136,12 +136,14 @@
 .linkedin {
   background-image: url(../img/linkedin.svg);
 }
+.tripadvisor {
+  background-image: url(../img/tripadvisor.svg);
+}
 .footer-container {
   margin-top: $medium-space;
   padding-bottom: $small-space;
   /*padding-top: $medium-space;*/
   overflow: hidden;
-  /*box-shadow: 2px 2px 11px 0px rgba(0, 0, 0, 0.3);*/
   li {
     margin-bottom: 0.3125rem;
   }
