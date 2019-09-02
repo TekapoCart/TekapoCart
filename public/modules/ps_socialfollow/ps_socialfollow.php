@@ -301,54 +301,6 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             );
         }
 
-        if ($sf_twitter = Configuration::get('BLOCKSOCIAL_TWITTER')) {
-            $social_links['twitter'] = array(
-                'label' => $this->trans('Twitter', array(), 'Modules.Socialfollow.Shop'),
-                'class' => 'twitter',
-                'url' => $sf_twitter,
-            );
-        }
-
-        if ($sf_rss = Configuration::get('BLOCKSOCIAL_RSS')) {
-            $social_links['rss'] = array(
-                'label' => $this->trans('Rss', array(), 'Modules.Socialfollow.Shop'),
-                'class' => 'rss',
-                'url' => $sf_rss,
-            );
-        }
-
-        if ($sf_youtube = Configuration::get('BLOCKSOCIAL_YOUTUBE')) {
-            $social_links['youtube'] = array(
-                'label' => $this->trans('YouTube', array(), 'Modules.Socialfollow.Shop'),
-                'class' => 'youtube',
-                'url' => $sf_youtube,
-            );
-        }
-
-        if ($sf_googleplus = Configuration::get('BLOCKSOCIAL_GOOGLE_PLUS')) {
-            $social_links['googleplus'] = array(
-                'label' => $this->trans('Google +', array(), 'Modules.Socialfollow.Shop'),
-                'class' => 'googleplus',
-                'url' => $sf_googleplus,
-            );
-        }
-
-        if ($sf_pinterest = Configuration::get('BLOCKSOCIAL_PINTEREST')) {
-            $social_links['pinterest'] = array(
-                'label' => $this->trans('Pinterest', array(), 'Modules.Socialfollow.Shop'),
-                'class' => 'pinterest',
-                'url' => $sf_pinterest,
-            );
-        }
-
-        if ($sf_vimeo = Configuration::get('BLOCKSOCIAL_VIMEO')) {
-            $social_links['vimeo'] = array(
-                'label' => $this->trans('Vimeo', array(), 'Modules.Socialfollow.Shop'),
-                'class' => 'vimeo',
-                'url' => $sf_vimeo,
-            );
-        }
-
         if ($sf_instagram = Configuration::get('BLOCKSOCIAL_INSTAGRAM')) {
             $social_links['instagram'] = array(
                 'label' => $this->trans('Instagram', array(), 'Modules.Socialfollow.Shop'),
@@ -366,19 +318,11 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             );
         }
 
-        // suzy: 2018-10-08 新增 flickr、etsy
-        if ($sf_flickr = Configuration::get('BLOCKSOCIAL_FLICKR')) {
-            $social_links['flickr'] = array(
-                'label' => $this->trans('Instagram', array(), 'Modules.Socialfollow.Shop'),
-                'class' => 'flickr',
-                'url' => $sf_flickr,
-            );
-        }
-        if ($sf_etsy = Configuration::get('BLOCKSOCIAL_ETSY')) {
-            $social_links['etsy'] = array(
-                'label' => $this->trans('Etsy', array(), 'Modules.Socialfollow.Shop'),
-                'class' => 'etsy',
-                'url' => $sf_etsy,
+        if ($sf_twitter = Configuration::get('BLOCKSOCIAL_TWITTER')) {
+            $social_links['twitter'] = array(
+                'label' => $this->trans('Twitter', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'twitter',
+                'url' => $sf_twitter,
             );
         }
 
@@ -391,12 +335,46 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             );
         }
 
+        // suzy: 2018-10-08 新增 flickr、etsy
+        if ($sf_flickr = Configuration::get('BLOCKSOCIAL_FLICKR')) {
+            $social_links['flickr'] = array(
+                'label' => $this->trans('Instagram', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'flickr',
+                'url' => $sf_flickr,
+            );
+        }
+
+        if ($sf_etsy = Configuration::get('BLOCKSOCIAL_ETSY')) {
+            $social_links['etsy'] = array(
+                'label' => $this->trans('Etsy', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'etsy',
+                'url' => $sf_etsy,
+            );
+        }
+
+        if ($sf_pinterest = Configuration::get('BLOCKSOCIAL_PINTEREST')) {
+            $social_links['pinterest'] = array(
+                'label' => $this->trans('Pinterest', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'pinterest',
+                'url' => $sf_pinterest,
+            );
+        }
+
         // suzy: 2018-12-09 新增 LinkedIn
         if ($sf_linkedin = Configuration::get('BLOCKSOCIAL_LINKEDIN')) {
             $social_links['linkedin'] = array(
                 'label' => $this->trans('LinkedIn', array(), 'Modules.Socialfollow.Shop'),
                 'class' => 'linkedin',
                 'url' => $sf_linkedin,
+            );
+        }
+
+        // suzy: 2019-09-02 新增 Tripadvisor
+        if ($sf_tripadvisor = Configuration::get('BLOCKSOCIAL_TRIPADVISOR')) {
+            $social_links['tripadvisor'] = array(
+                'label' => $this->trans('Tripadvisor', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'tripadvisor',
+                'url' => $sf_tripadvisor,
             );
         }
 
@@ -409,12 +387,35 @@ class Ps_Socialfollow extends Module implements WidgetInterface
             );
         }
 
-        // suzy: 2019-09-02 新增 Tripadvisor
-        if ($sf_tripadvisor = Configuration::get('BLOCKSOCIAL_TRIPADVISOR')) {
-            $social_links['tripadvisor'] = array(
-                'label' => $this->trans('Tripadvisor', array(), 'Modules.Socialfollow.Shop'),
-                'class' => 'tripadvisor',
-                'url' => $sf_tripadvisor,
+        if ($sf_youtube = Configuration::get('BLOCKSOCIAL_YOUTUBE')) {
+            $social_links['youtube'] = array(
+                'label' => $this->trans('YouTube', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'youtube',
+                'url' => $sf_youtube,
+            );
+        }
+
+        if ($sf_vimeo = Configuration::get('BLOCKSOCIAL_VIMEO')) {
+            $social_links['vimeo'] = array(
+                'label' => $this->trans('Vimeo', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'vimeo',
+                'url' => $sf_vimeo,
+            );
+        }
+
+        if ($sf_googleplus = Configuration::get('BLOCKSOCIAL_GOOGLE_PLUS')) {
+            $social_links['googleplus'] = array(
+                'label' => $this->trans('Google +', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'googleplus',
+                'url' => $sf_googleplus,
+            );
+        }
+
+        if ($sf_rss = Configuration::get('BLOCKSOCIAL_RSS')) {
+            $social_links['rss'] = array(
+                'label' => $this->trans('Rss', array(), 'Modules.Socialfollow.Shop'),
+                'class' => 'rss',
+                'url' => $sf_rss,
             );
         }
 
