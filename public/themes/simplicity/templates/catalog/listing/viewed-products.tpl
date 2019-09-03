@@ -3,5 +3,5 @@
 {block name='product_list_active_filters'}
 {/block}
 
-{block name='product_list_bottom'}
+{block name='pagination'}
 {/block}
