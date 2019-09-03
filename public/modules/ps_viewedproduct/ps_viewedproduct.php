@@ -248,11 +248,22 @@ class Ps_Viewedproduct extends Module implements WidgetInterface
             $arr = explode(',', $this->context->cookie->viewed);
         }
 
-        if (!in_array($idProduct, $arr)) {
-            $arr[] = $idProduct;
-
-            $this->context->cookie->viewed = trim(implode(',', $arr), ',');
+        // suzy: 2019-09-03 改寫存取規則 - 最近瀏覽的排在前面
+//        if (!in_array($idProduct, $arr)) {
+//            $arr[] = $idProduct;
+//
+//            $this->context->cookie->viewed = trim(implode(',', $arr), ',');
+//        }
+        $key = array_search ($idProduct, $arr);
+        if ($key !== false) {
+            unset($arr[$key]);
         }
+        $arr[] = $idProduct;
+        $viewNumber = (int) Configuration::get('PRODUCTS_VIEWED_NBR');
+        if (count($arr) > $viewNumber) {
+            $arr = array_slice($arr, count($arr) - $viewNumber);
+        }
+        $this->context->cookie->viewed = trim(implode(',', $arr), ',');
     }
 
     protected function getViewedProductIds()
