@@ -88,7 +88,7 @@ class ProductAssemblerCore
 			    WHERE p.id_product = $idProduct";
 
         $rows = Db::getInstance()->executeS($sql);
-        if ($rows === false) {
+        if ($rows === false || empty($rows)) { // suzy: 2019-09-03 也有可能回傳空 array 所以加上 empty($rows) 判斷
             return $rawProduct;
         }
 

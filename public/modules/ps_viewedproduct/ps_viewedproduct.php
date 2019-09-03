@@ -273,7 +273,16 @@ class Ps_Viewedproduct extends Module implements WidgetInterface
             $arr = array_diff($arr, array($this->currentProductId));
         }
 
-        return array_slice($arr, 0, (int) (Configuration::get('PRODUCTS_VIEWED_NBR')));
+        // suzy: 2019-09-03 改寫存取規則 - 先檢查商品是否還存在資料庫
+        // return array_slice($arr, 0, (int) (Configuration::get('PRODUCTS_VIEWED_NBR')));
+        $arr = array_slice($arr, 0, (int) (Configuration::get('PRODUCTS_VIEWED_NBR')));
+        $productIds = [];
+        $sql = 'SELECT id_product FROM ' . _DB_PREFIX_ . 'product WHERE id_product IN (' . implode(',', array_map('intval', $arr)) . ')';
+        $rows = Db::getInstance()->executeS($sql);
+        foreach ($rows as $key => $value) {
+            $productIds[] = $value['id_product'];
+        }
+        return array_intersect($arr, $productIds);
     }
 
     protected function getViewedProducts()
