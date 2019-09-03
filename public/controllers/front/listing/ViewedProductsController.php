@@ -41,7 +41,7 @@ class ViewedProductsControllerCore extends FrontController
 
                 if (is_array($productIds)) {
                     foreach ($productIds as $productId) {
-                        if ($this->currentProductId != $productId) {
+                        if (isset($this->currentProductId) && $this->currentProductId != $productId) {
                             $products_for_template[] = $presenter->present(
                                 $presentationSettings,
                                 $assembler->assembleProduct(array('id_product' => $productId)),
