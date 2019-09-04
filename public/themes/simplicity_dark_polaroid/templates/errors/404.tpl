@@ -15,7 +15,7 @@
                 </div>
                 <p>{$page.title}</p>
                 <br>
-                <button type="button" class="btn btn-secondary">{l s='Back' d='messages'}{l s='Home' d='Shop.Theme.Global'}</button>
+                <a href="{$urls.base_url}" class="btn btn-secondary" >{l s='Back' d='messages'}{l s='Home' d='Shop.Theme.Global'}</a>
             </div>
         {/block}
     </section>
