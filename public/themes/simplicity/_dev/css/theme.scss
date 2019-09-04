@@ -93,6 +93,14 @@
     }
   }
 }
+#index, #contact {
+  #wrapper {
+    .breadcrumb {
+      display: none;
+    }
+  }
+}
+
 /*** MAIN ***/
 #main {
   .page-header {

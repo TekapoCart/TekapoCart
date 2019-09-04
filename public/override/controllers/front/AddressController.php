@@ -4,12 +4,9 @@ if (!defined('_PS_VERSION_'))
 
 class AddressController extends AddressControllerCore
 {
-
     public function getBreadcrumbLinks()
     {
-
         $breadcrumb = parent::getBreadcrumbLinks();
-
         // suzy: 2018-07-30 調整麵包屑
         if (Tools::getValue('id_address')) {
             $breadcrumb['links'][] = [
@@ -20,11 +17,8 @@ class AddressController extends AddressControllerCore
                 // 'title' => $this->trans('New address', array(), 'Shop.Theme.Customeraccount'),
             ];
         }
-
         return $breadcrumb;
     }
-
-
 }
 
 
