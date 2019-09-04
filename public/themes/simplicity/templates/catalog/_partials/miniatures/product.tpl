@@ -23,9 +23,8 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 {block name='product_miniature_item'}
-  <article data-sticker="{$product.sticker}" class="product-miniature js-product-miniature {if isset($cssClass)}{$cssClass}{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
-    <meta itemprop="url" content="{$product.url}">
-      
+  <article data-sticker="{$product.sticker}" class="product-miniature js-product-miniature {if isset($cssClass)}{$cssClass}{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}">
+
     {if strlen($product.sticker) > 0}<div class="sticker" style="background-image: url('/img/cms/sticker/{$product.sticker}');{if strpos($product.sticker, 'nshift') !== false} top: 0; left: 0;{/if}"></div>{/if}
     <div class="thumbnail-container">
       {block name='product_thumbnail'}
@@ -59,15 +58,12 @@
 
       <div class="product-description">
         {block name='product_name'}
-          <h3 class="h3 product-title" itemprop="name"><a href="{$product.url}">{$product.name|truncate:70:'...'}</a></h3>
+          <h3 class="h3 product-title"><a href="{$product.url}">{$product.name|truncate:70:'...'}</a></h3>
         {/block}
 
         {block name='product_price_and_shipping'}
           {if $product.show_price}
-            <div class="product-price-and-shipping" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-
-              <link itemprop="availability" href="https://schema.org/InStock"/>
-              <meta itemprop="priceCurrency" content="{$currency.iso_code}">
+            <div class="product-price-and-shipping">
 
               {if $product.has_discount}
                 {hook h='displayProductPriceBlock' product=$product type="old_price"}
@@ -84,7 +80,7 @@
               {hook h='displayProductPriceBlock' product=$product type="before_price"}
 
               <span class="sr-only">{l s='Price' d='Shop.Theme.Catalog'}</span>
-              <span itemprop="price" content="{$product.price_amount}" class="price">{$product.price}</span>
+              <span class="price">{$product.price}</span>
 
               {hook h='displayProductPriceBlock' product=$product type='unit_price'}
 
