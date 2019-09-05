@@ -4008,9 +4008,13 @@ exit;
                     $def->addAttribute('input', 'placeholder', 'Text');
 
                     // suzy: 2019-09-03 allow microdata
-                    $def->addAttribute('div', 'itemprop', 'Text');
                     $def->addAttribute('div', 'itemscope', 'Text');
                     $def->addAttribute('div', 'itemtype', 'Text');
+                    $def->addAttribute('div', 'itemprop', 'Text');
+                    $def->addAttribute('span', 'itemprop', 'Text');
+                    $def->addAttribute('meta', 'itemprop', 'Text');
+                    $def->addAttribute('p', 'itemprop', 'Text');
+                    $def->addAttribute('meta', 'content', 'Text');
 
                 }
 

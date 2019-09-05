@@ -47,9 +47,8 @@
 
 {block name='content'}
 
-  <section id="main" itemscope itemtype="https://schema.org/Product">
+  <section id="main" itemscope itemtype="https://schema.org/Product" itemid="{$product.url}">
     <meta itemprop="url" content="{$product.url}">
-
     <div class="row">
       <div class="col-md-6">
         {block name='page_content_container'}
