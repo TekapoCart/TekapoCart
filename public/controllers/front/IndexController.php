@@ -40,4 +40,15 @@ class IndexControllerCore extends FrontController
         ));
         $this->setTemplate('index');
     }
+
+    // suzy: 2019-09-05 調整麵包屑
+    public function getBreadcrumbLinks()
+    {
+        $breadcrumb = parent::getBreadcrumbLinks();
+        $breadcrumb['links'][] = [
+            'title' => $this->trans('Home', array(), 'Shop.Theme.Global'),
+        ];
+        return $breadcrumb;
+    }
+
 }

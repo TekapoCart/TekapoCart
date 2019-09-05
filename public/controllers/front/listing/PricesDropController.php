@@ -71,4 +71,14 @@ class PricesDropControllerCore extends ProductListingFrontController
         */
         return Configuration::get('BLOCKSPECIALS_LABEL', $this->context->language->id);
     }
+
+    // suzy: 2018-07-30 調整麵包屑
+    public function getBreadcrumbLinks()
+    {
+        $breadcrumb = parent::getBreadcrumbLinks();
+        $breadcrumb['links'][] = [
+            'title' => $this->trans('Price drop', array(), 'Shop.Theme.Catalog'),
+        ];
+        return $breadcrumb;
+    }
 }
