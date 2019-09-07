@@ -68,6 +68,12 @@ class CmsControllerCore extends FrontController
         if (Validate::isLoadedObject($this->cms)) {
             $adtoken = Tools::getAdminToken('AdminCmsContent' . (int) Tab::getIdFromClassName('AdminCmsContent') . (int) Tools::getValue('id_employee'));
             if (!$this->cms->isAssociatedToShop() || !$this->cms->active && Tools::getValue('adtoken') != $adtoken) {
+
+                // suzy: 2019-09-07 不讓 Browser Keep Cache
+                header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+                header("Cache-Control: post-check=0, pre-check=0", false);
+                header("Pragma: no-cache");
+
                 $this->redirect_after = '404';
                 $this->redirect();
             } else {
@@ -76,6 +82,12 @@ class CmsControllerCore extends FrontController
         } elseif (Validate::isLoadedObject($this->cms_category) && $this->cms_category->active) {
             $this->assignCase = 2;
         } else {
+
+            // suzy: 2019-09-07 不讓 Browser Keep Cache
+            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+            header("Cache-Control: post-check=0, pre-check=0", false);
+            header("Pragma: no-cache");
+
             $this->redirect_after = '404';
             $this->redirect();
         }
