@@ -455,7 +455,7 @@ input, textarea {
 }
 
 .done {
-  color: $brand-success;
+  color: $brand-primary;
   display: inline-block;
   padding: 0 0.8125rem;
   margin-right: 1.563rem;
@@ -488,7 +488,8 @@ input, textarea {
       flex: 0 0 45%;
       background: $gray-light;
       padding: 0.625rem;
-      margin: 0.125rem;
+      // margin: 0.125rem;
+      margin: 0;
       &:nth-of-type(even) {
         background: $gray-lighter;
       }
