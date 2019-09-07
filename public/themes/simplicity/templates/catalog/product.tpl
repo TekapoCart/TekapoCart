@@ -312,6 +312,12 @@
         {/block}
       </footer>
     {/block}
+
+    {*<div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+        <meta itemprop="ratingValue" content="5">
+        <meta itemprop="reviewCount" content="1">
+    </div>*}
+
   </section>
 
   <div id="product_embedded_attributes" data-product="{$product.embedded_attributes|json_encode}" style="visibility: hidden"></div>
