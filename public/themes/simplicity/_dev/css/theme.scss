@@ -281,7 +281,7 @@ button:focus {
 
 .table-bordered {
   th, td {
-    border: 1px solid #333;
+    border: 1px solid $table-border-color;
   }
 }
 
