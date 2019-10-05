@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -319,12 +319,14 @@ class ImageCore extends ObjectModel
             unlink(_PS_TMP_IMG_DIR_ . 'product_' . $idProduct . '.jpg');
         }
 
-        return Db::getInstance()->execute('
+        return Db::getInstance()->execute(
+            '
 			UPDATE `' . _DB_PREFIX_ . 'image`
 			SET `cover` = NULL
 			WHERE `id_product` = ' . (int) $idProduct
         ) &&
-        Db::getInstance()->execute('
+        Db::getInstance()->execute(
+            '
 			UPDATE `' . _DB_PREFIX_ . 'image_shop` image_shop
 			SET image_shop.`cover` = NULL
 			WHERE image_shop.id_shop IN (' . implode(',', array_map('intval', Shop::getContextListShopID())) . ') AND image_shop.`id_product` = ' . (int) $idProduct
@@ -388,9 +390,10 @@ class ImageCore extends ObjectModel
                         if (!Configuration::get('PS_LEGACY_IMAGES')) {
                             $imageNew->createImgFolder();
                         }
-
-                        copy(_PS_PROD_IMG_DIR_ . $imageOld->getExistingImgPath() . '-' . $imageType['name'] . '.jpg',
-                        $newPath . '-' . $imageType['name'] . '.jpg');
+                        copy(
+                            _PS_PROD_IMG_DIR_ . $imageOld->getExistingImgPath() . '-' . $imageType['name'] . '.jpg',
+                        $newPath . '-' . $imageType['name'] . '.jpg'
+                        );
 
                         // suzy: 2018-12-31 商品複製的圖片也要上傳到 cdn
                         $destinationFile = $newPath.'-'.$imageType['name'].'.jpg';
@@ -566,7 +569,8 @@ class ImageCore extends ObjectModel
      */
     public function deleteProductAttributeImage()
     {
-        return Db::getInstance()->execute('
+        return Db::getInstance()->execute(
+            '
 			DELETE
 			FROM `' . _DB_PREFIX_ . 'product_attribute_image`
 			WHERE `id_image` = ' . (int) $this->id
@@ -640,6 +644,7 @@ class ImageCore extends ObjectModel
             foreach (scandir($this->image_dir . $this->getImgFolder(), SCANDIR_SORT_NONE) as $file) {
                 if (($file != '.' && $file != '..')) {
                     $deleteFolder = false;
+
                     break;
                 }
             }
@@ -678,6 +683,7 @@ class ImageCore extends ObjectModel
             foreach (scandir($path, SCANDIR_SORT_NONE) as $file) {
                 if (($file != '.' && $file != '..' && $file != 'index.php')) {
                     $removeFolder = false;
+
                     break;
                 }
             }
@@ -869,7 +875,7 @@ class ImageCore extends ObjectModel
 
         @mkdir($testFolder, self::$access_rights, true);
         @chmod($testFolder, self::$access_rights);
-        if (!is_writeable($testFolder)) {
+        if (!is_writable($testFolder)) {
             return false;
         }
         @rmdir($testFolder);

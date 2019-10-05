@@ -589,7 +589,7 @@
             <i class="icon-user"></i>
             {l s='Customer' d='Admin.Global'}
             <span class="badge">
-              <a href="?tab=AdminCustomers&amp;id_customer={$customer->id}&amp;viewcustomer&amp;token={getAdminToken tab='AdminCustomers'}">
+              <a href="{$link->getAdminLink('AdminCustomers', true, [], ['id_customer' => $customer->id,'viewcustomer' => 1])}">
                 {if Configuration::get('PS_B2B_ENABLE')}{$customer->company} - {/if}
                 {$gender->name|escape:'html':'UTF-8'}
                 {* suzy: 2018-09-15 調整姓名 *}{$customer->lastname} {$customer->firstname}
@@ -605,7 +605,8 @@
                 {l s='This order has been placed by a guest.' d='Admin.Orderscustomers.Feature'}
                 {* suzy: 2018-09-26 隱藏「將客戶升級成為會員」功能
                 {if (!Customer::customerExists($customer->email))}
-                  <form method="post" action="index.php?tab=AdminCustomers&amp;id_customer={$customer->id}&amp;id_order={$order->id|intval}&amp;token={getAdminToken tab='AdminCustomers'}">
+                  <form method="post"
+                        action="{$link->getAdminLink('AdminCustomers', true, [], ['guesttocustomer' => 1, 'id_customer' => $customer->id, 'id_order' => $order->id])}">
                     <input type="hidden" name="id_lang" value="{$order->id_lang}" />
                     <input class="btn btn-default" type="submit" name="submitGuestToCustomer" value="{l s='Transform a guest into a customer'}" />
                     <p class="help-block">{l s='This feature will generate a random password and send an email to the customer.' d='Admin.Orderscustomers.Help'}</p>

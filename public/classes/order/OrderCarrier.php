@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -133,14 +133,14 @@ class OrderCarrierCore extends ObjectModel
         $orderLanguage = new Language((int) $order->id_lang);
         $templateVars = array(
             '{followup}' => str_replace('@', $this->tracking_number, $carrier->url),
-            // suzy:
+            // suzy: 遮罩處理
             '{firstname}' => Tools::maskString($customer->firstname, 'name'),
             '{lastname}' => $customer->lastname,
             '{id_order}' => $order->id,
             '{shipping_number}' => $this->tracking_number,
             '{order_name}' => $order->getUniqReference(),
             '{carrier}' => $carrier->name,
-            // suzy:
+            // suzy: 遮罩處理
             '{address1}' => Tools::maskString($address->address1, 'address'),
             '{country}' => $address->country,
             '{postcode}' => $address->postcode,
@@ -159,6 +159,7 @@ class OrderCarrierCore extends ObjectModel
             ),
             $templateVars,
             $customer->email,
+            // suzy: 遮罩處理
             Tools::maskString($customer->firstname, 'name') . ' ' . $customer->lastname,
             null,
             null,

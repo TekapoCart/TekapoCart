@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,20 +16,20 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
+use PrestaShop\PrestaShop\Adapter\Configuration as ConfigurationAdapter;
+use PrestaShop\PrestaShop\Adapter\ContainerBuilder;
+use PrestaShop\PrestaShop\Adapter\Image\ImageRetriever;
 use PrestaShop\PrestaShop\Adapter\Presenter\Cart\CartPresenter;
 use PrestaShop\PrestaShop\Adapter\Presenter\Object\ObjectPresenter;
-use PrestaShop\PrestaShop\Adapter\Configuration as ConfigurationAdapter;
-use PrestaShop\PrestaShop\Adapter\Image\ImageRetriever;
-use PrestaShop\PrestaShop\Adapter\ContainerBuilder;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Debug\Debug;
+use Symfony\Component\Filesystem\Filesystem;
 
 class FrontControllerCore extends Controller
 {
@@ -317,7 +317,8 @@ class FrontControllerCore extends Controller
                     'Current theme is unavailable. Please check your theme\'s directory name ("%s") and permissions.',
                     array(basename(rtrim(_PS_THEME_DIR_, '/\\'))),
                     'Admin.Design.Notification'
-                ));
+                )
+            );
         }
 
         if (Configuration::get('PS_GEOLOCATION_ENABLED')) {
@@ -383,10 +384,10 @@ class FrontControllerCore extends Controller
                 PrestaShopLogger::addLog('Frontcontroller::init - Cart cannot be loaded or an order has already been placed using this cart', 1, null, 'Cart', (int) $this->context->cookie->id_cart, true);
                 unset($this->context->cookie->id_cart, $cart, $this->context->cookie->checkedTOS);
                 $this->context->cookie->check_cgv = false;
-            } elseif (intval(Configuration::get('PS_GEOLOCATION_ENABLED'))
+            } elseif ((int) (Configuration::get('PS_GEOLOCATION_ENABLED'))
                 && !in_array(strtoupper($this->context->cookie->iso_code_country), explode(';', Configuration::get('PS_ALLOWED_COUNTRIES')))
                 && $cart->nbProducts()
-                && intval(Configuration::get('PS_GEOLOCATION_NA_BEHAVIOR')) != -1
+                && (int) (Configuration::get('PS_GEOLOCATION_NA_BEHAVIOR')) != -1
                 && !FrontController::isInWhitelistForGeolocation()
                 && !in_array($_SERVER['SERVER_NAME'], array('localhost', '127.0.0.1', '::1'))
             ) {
@@ -854,6 +855,7 @@ class FrontControllerCore extends Controller
             if (@filemtime(_PS_GEOIP_DIR_ . _PS_GEOIP_CITY_FILE_)) {
                 if (!isset($this->context->cookie->iso_code_country) || (isset($this->context->cookie->iso_code_country) && !in_array(strtoupper($this->context->cookie->iso_code_country), explode(';', Configuration::get('PS_ALLOWED_COUNTRIES'))))) {
                     $reader = new GeoIp2\Database\Reader(_PS_GEOIP_DIR_ . _PS_GEOIP_CITY_FILE_);
+
                     try {
                         $record = $reader->city(Tools::getRemoteAddr());
                     } catch (\GeoIp2\Exception\AddressNotFoundException $e) {
@@ -954,10 +956,6 @@ class FrontControllerCore extends Controller
      */
     public function initHeader()
     {
-        /* @see P3P Policies (http://www.w3.org/TR/2002/REC-P3P-20020416/#compact_policies) */
-        header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
-        // suzy: 2019-08-30 隱藏 Powered-By
-        // header('Powered-By: PrestaShop');
     }
 
     /**
@@ -1402,7 +1400,7 @@ class FrontControllerCore extends Controller
             $params['id'] = null;
         }
 
-        if (is_null($locale)) {
+        if (null === $locale) {
             $locale = $this->context->language->locale;
         }
 
@@ -1514,7 +1512,8 @@ class FrontControllerCore extends Controller
         }
 
         $pages = array();
-        /* suzy: 2018-11-19 隱藏沒有使用的 urls.pages
+        // suzy: 2018-11-19 隱藏沒有使用的 urls.pages
+        /*
         $p = array(
             'address', 'addresses', 'authentication', 'cart', 'category', 'cms', 'contact',
             'discount', 'guest-tracking', 'history', 'identity', 'index', 'my-account',
@@ -1530,6 +1529,7 @@ class FrontControllerCore extends Controller
             'order-slip', 'pagenotfound', 'pdf-invoice', 'pdf-order-return', 'pdf-order-slip',
             'prices-drop', 'product', 'search',
         );
+
         foreach ($p as $page_name) {
             $index = str_replace('-', '_', $page_name);
             $pages[$index] = $this->context->link->getPageLink($page_name, $this->ssl);
@@ -1576,6 +1576,8 @@ class FrontControllerCore extends Controller
             'logo_max_width' => $logo_max_width,
 
             'display_taxes_label' => $this->getDisplayTaxesLabel(),
+            'display_prices_tax_incl' => (bool) (new TaxConfiguration())->includeTaxes(),
+            'taxes_enabled' => (bool) Configuration::get('PS_TAX'),
             'low_quantity_threshold' => (int) Configuration::get('PS_LAST_QTIES'),
             'is_b2b' => (bool) Configuration::get('PS_B2B_ENABLE'),
             'is_catalog' => (bool) Configuration::isCatalogMode(),
@@ -1619,11 +1621,13 @@ class FrontControllerCore extends Controller
             $cust = $this->objectPresenter->present($this->context->customer);
         }
 
-        unset($cust['secure_key']);
-        unset($cust['passwd']);
-        unset($cust['show_public_prices']);
-        unset($cust['deleted']);
-        unset($cust['id_lang']);
+        unset(
+            $cust['secure_key'],
+            $cust['passwd'],
+            $cust['show_public_prices'],
+            $cust['deleted'],
+            $cust['id_lang']
+        );
 
         $cust['is_logged'] = $this->context->customer->isLogged(true);
 
@@ -1785,7 +1789,6 @@ class FrontControllerCore extends Controller
 
     public function getCanonicalURL()
     {
-        return;
     }
 
     /**
@@ -1853,7 +1856,7 @@ class FrontControllerCore extends Controller
         } elseif (Tools::getValue('fc') == 'module' && $module_name != '' && (Module::getInstanceByName($module_name) instanceof PaymentModule)) {
             $page_name = 'module-payment-submit';
         } elseif (preg_match('#^' . preg_quote($this->context->shop->physical_uri, '#') . 'modules/([a-zA-Z0-9_-]+?)/(.*)$#', $_SERVER['REQUEST_URI'], $m)) {
-            // @retrocompatibility Are we in a module ?
+            /** @retrocompatibility Are we in a module ? */
             $page_name = 'module-' . $m[1] . '-' . str_replace(array('.php', '/'), array('', '-'), $m[2]);
         } else {
             $page_name = Dispatcher::getInstance()->getController();
@@ -1930,8 +1933,7 @@ class FrontControllerCore extends Controller
         $formatter
             ->setAskForPartnerOptin(Configuration::get('PS_CUSTOMER_OPTIN'))
             ->setAskForBirthdate(Configuration::get('PS_CUSTOMER_BIRTHDATE'))
-            ->setPartnerOptinRequired($customer->isFieldRequired('optin'))
-        ;
+            ->setPartnerOptinRequired($customer->isFieldRequired('optin'));
 
         return $formatter;
     }

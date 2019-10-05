@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -38,8 +38,13 @@ use Tools;
  */
 class LogoUploader
 {
-    /* @var $shop the shop */
+    /** @var $shop the shop */
     private $shop;
+
+    /**
+     * @var array
+     */
+    private $errors = [];
 
     public function __construct(Shop $shop)
     {
@@ -67,16 +72,14 @@ class LogoUploader
         $shopId = (int) $this->shop->id;
 
         // suzy: 2018-10-19 ico 改成 png
-        /*
-        if ($shopId == Configuration::get('PS_SHOP_DEFAULT')) {
-            $this->uploadIco('PS_FAVICON', _PS_IMG_DIR_ . 'favicon.ico');
-        }
-        if ($this->uploadIco('PS_FAVICON', _PS_IMG_DIR_ . 'favicon-' . $shopId . '.ico')) {
-            Configuration::updateValue('PS_FAVICON', 'favicon-' . $shopId . '.ico');
-        }
-
-        Configuration::updateGlobalValue('PS_FAVICON', 'favicon.ico');
-        */
+//        if ($shopId == Configuration::get('PS_SHOP_DEFAULT')) {
+//            $this->uploadIco('PS_FAVICON', _PS_IMG_DIR_ . 'favicon.ico');
+//        }
+//        if ($this->uploadIco('PS_FAVICON', _PS_IMG_DIR_ . 'favicon-' . $shopId . '.ico')) {
+//            Configuration::updateValue('PS_FAVICON', 'favicon-' . $shopId . '.ico');
+//        }
+//
+//        Configuration::updateGlobalValue('PS_FAVICON', 'favicon.ico');
 
         if ($this->uploadIco($configName, _PS_IMG_DIR_.$fileName.'-'.$shopId.'.png')) {
             Configuration::updateValue($configName, $fileName.'-'.$shopId.'.png');
@@ -203,8 +206,7 @@ class LogoUploader
             . $logoPrefix
             . '-'
             . (int) Configuration::get('PS_IMG_UPDATE_TIME')
-            . (int) $shopId . $fileExtension
-        ;
+            . (int) $shopId . $fileExtension;
 
         if ($this->shop->getContext() == Shop::CONTEXT_ALL
             || $shopId == 0
@@ -212,8 +214,7 @@ class LogoUploader
         ) {
             $logoName = Tools::link_rewrite($shopName)
                 . '-'
-                . $logoPrefix . '-' . (int) Configuration::get('PS_IMG_UPDATE_TIME') . $fileExtension
-            ;
+                . $logoPrefix . '-' . (int) Configuration::get('PS_IMG_UPDATE_TIME') . $fileExtension;
         }
 
         return $logoName;

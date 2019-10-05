@@ -1,16 +1,15 @@
 <?php
 
-include('config/config.php');
+include 'config/config.php';
 
 // suzy: 2018-08-18 load GCP Cloud Storage
 require_once(_PS_ADMIN_DIR_.'/../vendor/autoload.php');
 use Google\Cloud\Storage\StorageClient;
 
-
 if ($_SESSION['verify'] != 'RESPONSIVEfilemanager') {
     die('Forbidden');
 }
-include('include/utils.php');
+include 'include/utils.php';
 
 $_POST['path'] = $current_path.str_replace("\0", '', $_POST['path']);
 $_POST['path_thumb'] = $thumbs_base_path.str_replace("\0", '', $_POST['path_thumb']);
@@ -37,7 +36,7 @@ while ($cycle && $i < $max_cycles) {
         $cycle = false;
     }
     if (file_exists($path.'config.php')) {
-        require_once($path.'config.php');
+        require_once $path.'config.php';
         $cycle = false;
     }
     $path = fix_dirname($path).'/';

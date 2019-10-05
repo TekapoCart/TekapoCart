@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -34,7 +34,7 @@ class DbPDOCore extends Db
     /** @var PDO */
     protected $link;
 
-    /* @var PDOStatement */
+    /** @var PDOStatement */
     protected $result;
 
     /**
@@ -79,7 +79,7 @@ class DbPDOCore extends Db
         } else {
             $dsn .= 'host=' . $host;
         }
-        // suzy: 2018-11-09 change from utf8 to utf8mb4
+        // suzy: 2018-11-09 修改 utf8 to utf8mb4
         $dsn .= ';charset=utf8mb4';
 
         return new PDO($dsn, $user, $password, array(PDO::ATTR_TIMEOUT => $timeout, PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true));
@@ -434,6 +434,7 @@ class DbPDOCore extends Db
                 if (in_array($row['Support'], array('DEFAULT', 'YES'))) {
                     $value = 'InnoDB';
                 }
+
                 break;
             }
         }

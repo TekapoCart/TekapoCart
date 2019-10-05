@@ -214,7 +214,7 @@ class Ps_Wirepayment extends PaymentModule
 //        if (!$this->active || !Configuration::get(self::FLAG_DISPLAY_PAYMENT_INVITE)) {
 //            return;
 //        }
-        if (!$this->active) {
+        if (!$this->active || !Configuration::get(self::FLAG_DISPLAY_PAYMENT_INVITE)) {
             return;
         }
 

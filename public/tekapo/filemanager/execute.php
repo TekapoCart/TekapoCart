@@ -1,16 +1,15 @@
 <?php
 
-include('config/config.php');
+include 'config/config.php';
 
 // suzy: 2018-08-18 load GCP Cloud Storage
 require_once(_PS_ADMIN_DIR_.'/../vendor/autoload.php');
 use Google\Cloud\Storage\StorageClient;
 
-
 if ($_SESSION['verify'] != 'RESPONSIVEfilemanager') {
     die('Forbidden');
 }
-include('include/utils.php');
+include 'include/utils.php';
 
 $_POST['path'] = isset($_POST['path']) ? str_replace("\0", '', $_POST['path']) : null;
 $_POST['path_thumb'] = isset($_POST['path_thumb']) ? $thumbs_base_path . str_replace("\0", '', $_POST['path_thumb']) : null;
@@ -52,7 +51,7 @@ while ($cycle && $i < $max_cycles) {
     }
 
     if (file_exists($path.'config.php')) {
-        require_once($path.'config.php');
+        require_once $path.'config.php';
         $cycle = false;
     }
     $path = fix_dirname($path).'/';
@@ -152,6 +151,7 @@ if (isset($_GET['action'])) {
                     }
                 }
             }
+
             break;
         case 'delete_folder':
             if ($delete_folders) {
@@ -175,11 +175,13 @@ if (isset($_GET['action'])) {
                     }
                 }
             }
+
             break;
         case 'create_folder':
             if ($create_folders) {
                 create_folder(fix_path($path, $transliteration), fix_path($path_thumb, $transliteration));
             }
+
             break;
         case 'rename_folder':
             if ($rename_folders) {
@@ -205,6 +207,7 @@ if (isset($_GET['action'])) {
                     die(lang_Empty_name);
                 }
             }
+
             break;
         case 'rename_file':
             if ($rename_files) {
@@ -231,6 +234,7 @@ if (isset($_GET['action'])) {
                     die(lang_Empty_name);
                 }
             }
+
             break;
         case 'duplicate_file':
             if ($duplicate_files) {
@@ -256,9 +260,11 @@ if (isset($_GET['action'])) {
                     die(lang_Empty_name);
                 }
             }
+
             break;
         default:
             die('wrong action');
+
             break;
     }
 }

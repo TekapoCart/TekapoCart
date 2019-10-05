@@ -76,11 +76,11 @@
                                 </button>
                             {elseif ($module.enable_mobile eq 7 || $module.enable_mobile eq 1 || $module.enable_mobile eq 0) && $action eq 'disable_mobile'}
                                 <button type="button" class="dropdown-item module_action_menu_{$action}">
-                                    {l s='Disable Mobile' mod='ps_themecusto'}
+                                    {l s='Disable mobile' mod='ps_themecusto'}
                                 </button>
                             {elseif ($module.enable_mobile eq 3 || $module.enable_mobile eq 0) && $action eq 'enable_mobile'}
                                 <button type="button" class="dropdown-item module_action_menu_{$action}">
-                                    {l s='Enable Mobile' mod='ps_themecusto'}
+                                    {l s='Enable mobile' mod='ps_themecusto'}
                                 </button>
                             {/if}
                         {/if}
