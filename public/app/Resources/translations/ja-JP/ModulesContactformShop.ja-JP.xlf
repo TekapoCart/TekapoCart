@@ -50,7 +50,7 @@ File: modules/contactform/views/templates/widget/contactform.tpl:34</note>
       </trans-unit>
       <trans-unit id="d93651d012e77dac5581b08db33195b2" approved="yes">
         <source>If you would like to add a comment about your order, please write it in the field below.</source>
-        <target xml:lang="ja">ご注文に関してコメントを残されたい場合は、以下にお書きください。</target>
+        <target xml:lang="ja">ショップに関するお問い合わせ、ご質問など、商品名を選択し、下欄に入力後「送信する」をクリックしてください。</target>
         <note>Context:
 File: modules/contactform/views/templates/widget/contactform.tpl:35</note>
       </trans-unit>
@@ -68,7 +68,7 @@ File: modules/contactform/views/templates/widget/contactform.tpl:61</note>
       </trans-unit>
       <trans-unit id="5d4710f9a8250b13164a82c94d5b00d1" approved="yes">
         <source>Order reference</source>
-        <target xml:lang="ja">注文ID</target>
+        <target xml:lang="ja">注文番号</target>
         <note>Context:
 File: modules/contactform/views/templates/widget/contactform.tpl:67</note>
       </trans-unit>

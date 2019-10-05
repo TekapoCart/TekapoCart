@@ -1,0 +1,81 @@
+/* Polaroid */
+
+.thumbnail-container {
+    box-shadow:2px 2px 8px 0 rgba(0, 0, 0, 0.2);
+    height: 323px;
+    background-color: #fff;
+}
+
+.thumbnail-container a {
+    padding-top: 14px;
+}
+
+.product-miniature .product-title {
+    margin-top: 10px;
+}
+
+#products .product-title a,
+.product-miniature .product-title a,
+#products .product-price-and-shipping,
+.product-miniature .product-price-and-shipping {
+    color: #232323;
+}
+
+.product-miniature .product-description {
+    background: #fff;
+}
+
+.product-miniature .highlighted-informations {
+    display: none;
+}
+
+@media only screen and (min-width : 1200px) {
+    .product-miniature.desktop-5 img,
+    .product-miniature img {
+        width: 88%;
+    }
+}
+
+@media only screen and (max-width : 1199px) and (min-width : 992px) {
+    .product-miniature.desktop-5 img,
+    .product-miniature img {
+        width: 88%;
+    }
+}
+
+@media only screen and (max-width : 991px) and (min-width : 768px) {
+    .product-miniature img {
+        width: 88%;
+    }
+}
+
+@media only screen and (max-width : 767px) {
+    .product-miniature.mobile-3 img,
+    .product-miniature img {
+        width: 88%;
+    }
+    .product-miniature.mobile-3 .product-title,
+    .product-miniature .product-title {
+        height: 54px;
+        overflow-x: hidden;
+    }
+}
+
+@media only screen and (max-width: 410px) {
+    .product-miniature.mobile-1 {
+        margin: 10px calc((100% - 320px * 1) / 2);
+    }
+
+    .product-miniature.mobile-1 .thumbnail-container {
+        width: 320px;
+        height: 380px;
+    }
+
+    .product-miniature.mobile-1 img {
+        width: 88%;
+    }
+
+    .product-miniature.mobile-1 .product-description {
+        width: 320px;
+    }
+}

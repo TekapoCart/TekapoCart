@@ -736,19 +736,19 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/opti
       </trans-unit>
       <trans-unit id="9fb17d168ec32414787e4f47ccd3812c" approved="yes">
         <source>Attached files</source>
-        <target xml:lang="zh-TW">附件</target>
+        <target xml:lang="zh-TW">檔案</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/options.html.twig:169</note>
       </trans-unit>
       <trans-unit id="3a97ab5db26de551af8e0e63c280d56f" approved="yes">
         <source>Add files that customers can download directly on the product page (instructions, manual, recipe, etc.).</source>
-        <target xml:lang="zh-TW">添加客戶可以直接在商品頁面上下載的文件（如說明書，手冊，食譜等）。</target>
+        <target xml:lang="zh-TW">添加客戶可在商品頁面下載的檔案（如說明書、手冊、食譜等）。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/options.html.twig:170</note>
       </trans-unit>
       <trans-unit id="16be564a60317ed9d5eef83c90eaf225" approved="yes">
         <source>Attach a new file</source>
-        <target xml:lang="zh-TW">附加文件</target>
+        <target xml:lang="zh-TW">新增檔案</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/options.html.twig:184</note>
       </trans-unit>
@@ -1006,7 +1006,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductOptions.php:194</note>
       </trans-unit>
       <trans-unit id="efb78d0dd61da3bb7e5ca1770b894420" approved="yes">
         <source>Default suppliers</source>
-        <target xml:lang="zh-TW">默認供應商</target>
+        <target xml:lang="zh-TW">預設供應商</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductOptions.php:226</note>
       </trans-unit>
@@ -1826,7 +1826,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.htm
       </trans-unit>
       <trans-unit id="b36c5a58c30cc53bab5e9b3fda84755c" approved="yes">
         <source>Recommended size 800 x 800px for default theme.</source>
-        <target xml:lang="zh-TW">默認主題的推薦尺寸為800 x 800px 像素。</target>
+        <target xml:lang="zh-TW">預設主題的推薦尺寸為800 x 800px 像素。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.html.twig:336</note>
       </trans-unit>
@@ -1982,13 +1982,13 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:37</note>
       </trans-unit>
       <trans-unit id="d9c3a508aadc89c987a08811138836e2" approved="yes">
         <source>Advanced filters</source>
-        <target xml:lang="zh-TW">進階過濾</target>
+        <target xml:lang="zh-TW">進階篩選</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:38</note>
       </trans-unit>
       <trans-unit id="d17ef666e0e109b8ff0889c4666816c4" approved="yes">
         <source>Apply advanced filters</source>
-        <target xml:lang="zh-TW">套用進階過濾</target>
+        <target xml:lang="zh-TW">套用進階篩選</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:39</note>
       </trans-unit>
@@ -2006,19 +2006,19 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:45</note>
       </trans-unit>
       <trans-unit id="7f84fa02a3bf4c70c747b29908a03096" approved="yes">
         <source>Filter by movement type</source>
-        <target xml:lang="zh-TW">按庫存活動類型過濾</target>
+        <target xml:lang="zh-TW">按庫存活動類型篩選</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:46</note>
       </trans-unit>
       <trans-unit id="5110c1f147fe533096f7dead2dac17ee" approved="yes">
         <source>Filter by employee</source>
-        <target xml:lang="zh-TW">按員工過濾</target>
+        <target xml:lang="zh-TW">按員工篩選</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:47</note>
       </trans-unit>
       <trans-unit id="d940660a1591632abf56608dd80b0f41" approved="yes">
         <source>Filter by period</source>
-        <target xml:lang="zh-TW">以期間過濾：</target>
+        <target xml:lang="zh-TW">以期間篩選：</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:48</note>
       </trans-unit>
@@ -2036,7 +2036,7 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:50</note>
       </trans-unit>
       <trans-unit id="5dd5cd6670a0fc8e47a47aa94d27b8b2" approved="yes">
         <source>Filter by status</source>
-        <target xml:lang="zh-TW">按狀態過濾</target>
+        <target xml:lang="zh-TW">按狀態篩選</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:51</note>
       </trans-unit>
@@ -2543,7 +2543,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
       </trans-unit>
       <trans-unit id="0b5c5a9176b94b7577e998f7440228a7" approved="yes">
         <source>Default supplier</source>
-        <target xml:lang="zh-TW">默認供應商</target>
+        <target xml:lang="zh-TW">預設供應商</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_supplier_choice.html.twig:55</note>
       </trans-unit>

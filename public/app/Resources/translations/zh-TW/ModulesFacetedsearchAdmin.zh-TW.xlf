@@ -22,7 +22,7 @@ File: modules/ps_facetedsearch/ps_facetedsearch.php:618</note>
       </trans-unit>
       <trans-unit id="ccc12c5568381293a27db0232877937b" approved="yes">
         <source>Filter template name required (cannot be empty)</source>
-        <target xml:lang="zh-TW">過濾器模板名稱為必要（無法為空值）</target>
+        <target xml:lang="zh-TW">篩選模板名稱為必要（無法為空值）</target>
         <note>Context:
 File: modules/ps_facetedsearch/ps_facetedsearch.php:1043</note>
       </trans-unit>
@@ -58,13 +58,13 @@ File: modules/ps_facetedsearch/ps_facetedsearch.php:1169</note>
       </trans-unit>
       <trans-unit id="0d07af70081a2421e2b2972609d699db" approved="yes">
         <source>Filter template deleted, categories updated (reverted to default Filter template).</source>
-        <target xml:lang="zh-TW">已刪除過濾器模板，分類已更新（復原為預設過濾器模板）。</target>
+        <target xml:lang="zh-TW">已刪除篩選模板，分類已更新（復原為預設篩選模板）。</target>
         <note>Context:
 File: modules/ps_facetedsearch/ps_facetedsearch.php:1184</note>
       </trans-unit>
       <trans-unit id="491f46aa6101560e9f1e0d55a063231b" approved="yes">
         <source>Filter template not found</source>
-        <target xml:lang="zh-TW">找不到過濾器模板</target>
+        <target xml:lang="zh-TW">找不到篩選模板</target>
         <note>Context:
 File: modules/ps_facetedsearch/ps_facetedsearch.php:1186</note>
       </trans-unit>
@@ -254,7 +254,7 @@ File: modules/ps_facetedsearch/views/templates/admin/add.tpl:355</note>
       </trans-unit>
       <trans-unit id="dc3f85827350641490287c65c0c4ddf8" approved="yes">
         <source>You must select at least one filter</source>
-        <target xml:lang="zh-TW">你必須至少選擇一個過濾器</target>
+        <target xml:lang="zh-TW">你必須至少選擇一個篩選</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/add.tpl:409</note>
       </trans-unit>
@@ -360,7 +360,7 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:49</note>
       </trans-unit>
       <trans-unit id="dc83eb2d8601743d8111c5150b93fc71" approved="yes">
         <source>Filters templates</source>
-        <target xml:lang="zh-TW">過濾器模板</target>
+        <target xml:lang="zh-TW">篩選模板</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:53</note>
       </trans-unit>
@@ -378,13 +378,13 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:63</note>
       </trans-unit>
       <trans-unit id="eb0728df77683ac0f7210ed0d4a18d62" approved="yes">
         <source>Do you really want to delete this filter template?</source>
-        <target xml:lang="zh-TW">你真的要刪除這個過濾器模板？</target>
+        <target xml:lang="zh-TW">你真的要刪除這個篩選模板？</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:86</note>
       </trans-unit>
       <trans-unit id="058eeeba77f547f8a9a295a0efd4f6cd" approved="yes">
         <source>No filter template found.</source>
-        <target xml:lang="zh-TW">沒有找到過濾模板。</target>
+        <target xml:lang="zh-TW">沒有找到篩選模板。</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:102</note>
       </trans-unit>

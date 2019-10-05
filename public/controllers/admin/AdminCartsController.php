@@ -132,15 +132,6 @@ class AdminCartsControllerCore extends AdminController
                 'desc' => $this->trans('Export carts', array(), 'Admin.Orderscustomers.Feature'),
                 'icon' => 'process-icon-export',
             );
-
-            // suzy: 2018-09-27 加 Header 連結
-            $this->page_header_toolbar_btn['module_ps_reminder'] = array(
-                'href' => $this->context->link->getAdminLink('AdminModules') . '&configure=ps_reminder',
-                'desc' => '發放折價券',
-                'icon' => 'process-icon-envelope'
-
-            );
-
         }
 
         parent::initPageHeaderToolbar();

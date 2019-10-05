@@ -1,0 +1,52 @@
+.button {
+  margin-bottom: 64px;
+  .active {
+    color: $theme-green-color;
+    background-color: hsla(0, 0%, 100%, .95);
+  }
+  .expert {
+    background-color: hsla(0, 0%, 100%, .15);
+    color: #fff;
+  }
+  .more {
+    font-weight: 400;
+    font-size: 18px;
+    .material-icons {
+      font-size: 18px;
+      vertical-align: middle;
+    }
+  }
+}
+
+.button {
+  a {
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 8px;
+    height: 60px;
+    line-height: 56px;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: center;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  .button {
+    a {
+      display: block;
+      margin-bottom: 16px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  #index {
+    .button {
+      .active, .expert {
+        margin-right: 16px;
+      }
+    }
+  }
+}

@@ -1,5 +1,9 @@
 
-#products,.featured-products,.product-accessories,.product-miniature  {
+#products, .featured-products, .product-accessories, .product-miniature {
+
+  h3 {
+    margin-bottom: 15px;
+  }
 
   .products {
     display: flex;
@@ -22,20 +26,22 @@
   }
   .thumbnail-container {
     position: relative;
-    margin-bottom: 1.563rem;
+    // margin-bottom: 1.563rem;
+
     &:hover, &:focus {
       .highlighted-informations {
-        bottom: 5.5rem;
+        // bottom: 5.5rem;
+        visibility: visible;
         &::after {
           opacity: 1;
         }
-        &.no-variants{
-          bottom: 4.2rem;
+        &.no-variants {
+          // bottom: 4.2rem;
         }
       }
-      .product-description::after{
+      .product-description::after {
         content: "";
-        border-top: white 1px solid;
+        border-top: transparent 1px solid;
         position: absolute;
         width: 80%;
         top: 0;
@@ -64,35 +70,45 @@
     position: relative;
     text-align: center;
     width: 100%;
-    top: -0.25em;
+    // top: -0.25em;
     padding-top: 0.1875rem;
     min-height: 2.5rem;
-    background: white;
+    background: $brand-background;
   }
   .highlighted-informations {
     position: absolute;
-    bottom: 1.25rem;
+    // bottom: 1.25rem;
+    // transition: bottom .3s;
+    bottom: 80px;
+    transition: visibility .3s;
+    visibility: hidden;
     padding-top: 0.625rem;
     z-index: 0;
-    background: white;
+    background: $brand-background;
     opacity: 0.75;
     text-align: center;
-    height: 3.125rem;
-    transition: bottom .3s;
+    height: 80px;
+    overflow: hidden;
     .quick-view {
       color: $gray;
       font-size: $base-font-size;
       &:hover {
-        color: $brand-primary;
+        color: $brand-primary-hover;
       }
+    }
+
+    &.no-variants {
+      height: 50px
     }
   }
   .product-description {
-    position: absolute;
+    // position: absolute;
     z-index: 1;
-    background: white;
-    height: 70px;
-    bottom: 0;
+
+    // height: 70px;
+    // bottom: 0;
+    padding: 0 5px 5px 5px;
+    // background: $brand-background;
   }
   img {
     /*margin-left: 4px;*/
@@ -101,7 +117,7 @@
     .discount {
       display: none;
     }
-    .product-flags .new,.online-only,.on-sale,.discount-percentage,.discount-amount,.pack {
+    .product-flags .new, .online-only, .on-sale, .discount-percentage, .discount-amount, .pack {
       display: block;
       position: absolute;
       left: -0.4375rem;
@@ -123,7 +139,7 @@
         /*background: $brand-secondary;*/
         background: $brand-tertiary;
       }
-      &.on-sale{
+      &.on-sale {
         /*background: $brand-secondary;*/
         background: $tag-sale;
         /*
@@ -141,8 +157,8 @@
         font-size: $font-size-xs;
         margin-top: 13rem;
         margin-left: 8.688rem;
-        &::before{
-          content:"\E30A";
+        &::before {
+          content: "\E30A";
           font-family: 'Material Icons';
           vertical-align: middle;
           margin: 0.3125rem;
@@ -173,7 +189,7 @@
     margin-bottom: 1.5rem;
   }
   .product-no-desc-overlay {
-    visibility: hidden;
+    display: none;
     .product-title, .product-price-and-shipping {
       visibility: hidden;
     }
@@ -182,11 +198,12 @@
     .product-description,
     .highlighted-informations {
       visibility: hidden;
+      display: none;
     }
     .thumbnail-container {
       position: relative;
       .product-no-desc-overlay {
-        visibility: visible;
+        display: block;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -196,7 +213,7 @@
         width: 100%;
         opacity: 0;
         transition: opacity .5s ease;
-        background-color: #fff;
+        background-color: $brand-background;
       }
       &:hover {
         img {
@@ -235,7 +252,7 @@
     position: relative;
     .sticker {
       position: absolute;
-      z-index: 50;
+      z-index: 10;
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
@@ -246,8 +263,19 @@
 
 }
 
+#footer .featured-products {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 24px;
+  .products {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+
 /************************************************************************************************/
-@media only screen and (min-width : 1200px ) {
+@media only screen and (min-width: 1200px) {
 
   /* desktop-4 (預設) */
   .product-miniature {
@@ -325,7 +353,7 @@
 
 /************************************************************************************************/
 /* 包含 iPad Pro (1024px) */
-@media only screen and (min-width : 992px ) and (max-width : 1199px ) {
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
 
   /* desktop-4 */
   .product-miniature {
@@ -403,7 +431,7 @@
 
   /* desktop-6 */
   .product-miniature.desktop-6 {
-    @include product-miniature-desktop(150px, 6);
+    @include product-miniature-desktop(130px, 6);
 
     /* 欄位很小，需要特別處理 */
     .product-flags .new, .discount-percentage {
@@ -424,17 +452,17 @@
   #content-wrapper.left-column,
   #content-wrapper.right-column {
     .product-miniature.desktop-6 {
-      @include product-miniature-desktop-left-column(150px, 6);
+      @include product-miniature-desktop-left-column(130px, 6);
     }
   }
   .product-miniature.desktop-6.no-desc {
-    @include product-miniature-desktop-no-desc(150px);
+    @include product-miniature-desktop-no-desc(130px);
   }
 }
 
 /************************************************************************************************/
 /* 包含 iPad (768px) */
-@media only screen and (min-width : 768px ) and (max-width : 991px ) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
 
   /* desktop-4 */
   .product-miniature {
@@ -512,7 +540,7 @@
 
   /* desktop-6 */
   .product-miniature.desktop-6 {
-    @include product-miniature-desktop(100px, 6);
+    @include product-miniature-desktop(95px, 6);
 
     /* 欄位很小，需要特別處理 */
     .product-flags .new, .discount-percentage {
@@ -533,25 +561,33 @@
   #content-wrapper.left-column,
   #content-wrapper.right-column {
     .product-miniature.desktop-6 {
-      @include product-miniature-desktop-left-column(100px, 6);
+      @include product-miniature-desktop-left-column(95px, 6);
     }
   }
   .product-miniature.desktop-6.no-desc {
-    @include product-miniature-desktop-no-desc(100px);
+    @include product-miniature-desktop-no-desc(95px);
   }
 
 }
 
 /************************************************************************************************/
-@include media-breakpoint-down(sm) { /* 768px 以下 (max-width: 767px) - [XS] */
+/* 包含 iPhone Plus (414px) */
+@media only screen and (min-width: 411px) and (max-width: 767px) {
+
+  #products, .featured-products, .product-accessories, .product-miniature {
+    .products {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
 
   /* mobile-2 (預設) */
   .product-miniature {
-    @include product-miniature-mobile(166px, 2);
+    @include product-miniature-mobile(174px, 2);
     padding-bottom: 20px;
   }
   .product-miniature.no-desc {
-    @include product-miniature-mobile-no-desc(166px);
+    @include product-miniature-mobile-no-desc(174px);
   }
 
   /* mobile-1 */
@@ -565,7 +601,72 @@
 
   /* mobile-3 */
   .product-miniature.mobile-3 {
-    @include product-miniature-mobile(106px, 3);
+    @include product-miniature-mobile(114px, 3);
+    padding-bottom: 0;
+
+    /* 欄位很小，需要特別處理 */
+    .product-flags .new, .discount-percentage {
+      font-size: 0.6rem;
+      line-height: 1rem;
+      padding: 0.1rem 0.2rem;
+      min-width: initial;
+      min-height: initial;
+    }
+    .product-title {
+      margin-top: 0.5rem;
+    }
+    .product-title a, .product-price-and-shipping, .regular-price {
+      font-size: 0.7rem;
+      line-height: 1rem;
+    }
+
+  }
+  .product-miniature.mobile-3.no-desc {
+    @include product-miniature-mobile-no-desc(114px);
+  }
+
+  #footer .featured-products {
+    padding-left: 15px;
+    padding-right: 15px;
+    .products {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+
+}
+/************************************************************************************************/
+/* 包含 iPhone (375px) */
+@media only screen and (max-width: 410px) {
+
+  #products, .featured-products, .product-accessories, .product-miniature {
+    .products {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+
+  /* mobile-2 (預設) */
+  .product-miniature {
+    @include product-miniature-mobile(158px, 2);
+    padding-bottom: 20px;
+  }
+  .product-miniature.no-desc {
+    @include product-miniature-mobile-no-desc(158px);
+  }
+
+  /* mobile-1 */
+  .product-miniature.mobile-1 {
+    @include product-miniature-mobile(256px, 1);
+    padding-bottom: 20px;
+  }
+  .product-miniature.mobile-1.no-desc {
+    @include product-miniature-mobile-no-desc(256px);
+  }
+
+  /* mobile-3 */
+  .product-miniature.mobile-3 {
+    @include product-miniature-mobile(104px, 3);
     padding-bottom: 0;
 
     /* 欄位很小，需要特別處理 */
@@ -589,16 +690,25 @@
     @include product-miniature-mobile-no-desc(106px);
   }
 
+  #footer .featured-products {
+    padding-left: 15px;
+    padding-right: 15px;
+    .products {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+
 }
 
-@media only screen and (max-width : 374px) {
+@media only screen and (max-width: 374px) {
   .product-miniature {
     zoom: 0.85;
   }
 }
 
 .product-miniature.no-flag {
-  .product-flags, .discount-percentage {
+  .product-flags, .discount-percentage, .sticker {
     visibility: hidden;
   }
 }
@@ -611,7 +721,7 @@
   article:nth-child(-n+5)::before {
     position: absolute;
     top: 0;
-    left: 3px;
+    left: 0;
     z-index: 5;
     color: #fff;
     background-color: #555;
@@ -641,7 +751,7 @@
 @include media-breakpoint-down(sm) { /* 768px 以下 (max-width: 767px) - [XS] */
   .bestsellers {
     article:nth-child(-n+5)::before {
-      left: 2px;
+      left: 0;
     }
     article:nth-child(4), article:nth-child(5) {
       display: none;
@@ -649,9 +759,3 @@
   }
 }
 
-
-
-#footer .featured-products {
-  padding-left: 15px;
-  padding-right: 15px;
-}

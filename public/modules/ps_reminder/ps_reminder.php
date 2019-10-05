@@ -55,7 +55,7 @@ class Ps_Reminder extends Module
             'PS_FOLLOW_UP_DAYS_4',
             'PS_FOLLOW_UP_THRESHOLD_3',
             'PS_FOLLOW_UP_DAYS_THRESHOLD_4',
-            'PS_FOLLOW_UP_CLEAN_DB'
+            'PS_FOLLOW_UP_CLEAN_DB',
         );
 
         $this->bootstrap = true;
@@ -130,6 +130,11 @@ class Ps_Reminder extends Module
                     );
                 }
             }
+
+            // suzy: 2019-08-18 可指定 SMTP 信箱
+            Configuration::updateValue('PS_FOLLOW_UP_SMTP_USER', Tools::getValue('PS_FOLLOW_UP_SMTP_USER'));
+            Configuration::updateValue('PS_FOLLOW_UP_SMTP_PASSWD', Tools::getValue('PS_FOLLOW_UP_SMTP_PASSWD'));
+
             if ($ok) {
                 $html .= $this->displayConfirmation($this->trans(
                     'Settings updated succesfully',
@@ -245,7 +250,14 @@ class Ps_Reminder extends Module
                     null,
                     null,
                     null,
-                    dirname(__FILE__).'/mails/'
+                    dirname(__FILE__).'/mails/',
+
+                    false,
+                    null,
+                    null,
+                    null,
+                    null,
+                    'promotion' // suzy: 2019-08-18 可指定 SMTP 信箱
                 );
                 $this->logEmail(
                     1,
@@ -626,6 +638,10 @@ class Ps_Reminder extends Module
 
     public function cronTask()
     {
+
+        // suzy: 2019-08-18 文字補充
+        echo '發送中...請等待 <br>';
+
         Context::getContext()->link = new Link(); //when this is call by cron context is not init
         $conf = Configuration::getMultiple(array(
             'PS_FOLLOW_UP_ENABLE_1',
@@ -664,6 +680,9 @@ class Ps_Reminder extends Module
                 }
             }
         }
+
+        // suzy: 2019-08-18 文字補充
+        echo '發送完畢';
     }
 
     public function renderStats()
@@ -749,8 +768,16 @@ class Ps_Reminder extends Module
                     array(),
                     'Modules.Reminder.Admin'
                 ).'<br /><b>' . $this->context->shop->getBaseURL() .
-                'modules/followup/cron.php?secure_key=' .
+                'modules/ps_reminder/cron.php?secure_key=' . // suzy: 2019-08-16 typo
                 Configuration::get('PS_FOLLOWUP_SECURE_KEY') . '</b></p>';
+
+            // suzy: 2019-08-18 修改文字說明
+            $cron_info = '<strong>發送前請確認下方 SMTP 信箱已設定。本功能僅適合微量發送，請留意發信量限制。</strong><br><a href="' .
+                $this->context->shop->getBaseURL() .
+                'modules/ps_reminder/cron.php?secure_key=' .
+                Configuration::get('PS_FOLLOWUP_SECURE_KEY')
+                . '" target="_blank">開始發送</a>';
+
         }
 
         $fields_form_1 = array(
@@ -763,11 +790,15 @@ class Ps_Reminder extends Module
                     ),
                     'icon' => 'icon-cogs',
                 ),
+                /* suzy: 2019-08-16 隱藏贅字
                 'description' => $this->trans(
                     'Four kinds of e-mail alerts are available in order to stay in touch with your customers!',
                         array(),
                         'Modules.Reminder.Admin'
                     ) . '<br />' . $cron_info,
+                */
+                'description' => '針對潛在訂單，發送折價券通知信。折價券分為四種：購物車未結、再次購買、消費金額到達、久未購買。<br />' . $cron_info,
+
             )
         );
 
@@ -1200,6 +1231,22 @@ class Ps_Reminder extends Module
                             ),
                         ),
                     ),
+                    // suzy: 2019-08-17 行銷用信箱
+                    array(
+                        'type' => 'text',
+                        'label' => 'SMTP 使用者名稱',
+                        'name' => 'PS_FOLLOW_UP_SMTP_USER',
+                    ),
+                    array(
+                        'type' => 'text',
+                        'label' => 'SMTP 密碼',
+                        'name' => 'PS_FOLLOW_UP_SMTP_PASSWD',
+                    ),
+                    array(
+                        'type' => 'desc',
+                        'name' => '',
+                        'text' => '折價券發放通知請使用不同 SMTP 信箱',
+                    ),
                 ),
                 'submit' => array(
                     'title' => $this->trans(
@@ -1312,6 +1359,17 @@ class Ps_Reminder extends Module
                 'PS_FOLLOW_UP_CLEAN_DB',
                 Configuration::get('PS_FOLLOW_UP_CLEAN_DB')
             ),
+
+            // suzy: 2019-08-18 行銷用信箱
+            'PS_FOLLOW_UP_SMTP_USER' => Tools::getValue(
+                'PS_FOLLOW_UP_SMTP_USER',
+                Configuration::get('PS_FOLLOW_UP_SMTP_USER')
+            ),
+            'PS_FOLLOW_UP_SMTP_PASSWD' => Tools::getValue(
+                'PS_FOLLOW_UP_SMTP_PASSWD',
+                Configuration::get('PS_FOLLOW_UP_SMTP_PASSWD')
+            ),
+
         );
     }
 }

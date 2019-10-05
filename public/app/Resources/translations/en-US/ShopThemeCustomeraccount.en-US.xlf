@@ -204,7 +204,7 @@ File: themes/classic/templates/customer/guest-login.tpl:34</note>
       </trans-unit>
       <trans-unit id="92dbb751eb9457441af82a53f3cfae54" approved="yes">
         <source>For example: QIIXJXNUI or QIIXJXNUI#1</source>
-        <target xml:lang="en">For example: QIIXJXNUI or QIIXJXNUI#1</target>
+        <target xml:lang="en">For example: QIIXJXNUI</target>
         <note>Context:
 File: themes/classic/templates/customer/guest-login.tpl:52</note>
       </trans-unit>

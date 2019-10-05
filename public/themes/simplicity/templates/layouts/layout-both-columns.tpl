@@ -31,7 +31,7 @@
     {/block}
   </head>
 
-  <body id="{$page.page_name}" class="{$page.body_classes|classnames}">
+  <body id="{$page.page_name}" class="{$page.body_classes|classnames}"{if $configuration.body_bg_css } style="background: {$configuration.body_bg_css};"{/if}>
 
     {block name='hook_after_body_opening_tag'}
       {hook h='displayAfterBodyOpeningTag'}
@@ -91,6 +91,10 @@
             </div>
           {/block}
         </div>
+
+        {block name="content_after"}
+        {/block}
+
         {hook h="displayWrapperBottom"}
       </section>
 

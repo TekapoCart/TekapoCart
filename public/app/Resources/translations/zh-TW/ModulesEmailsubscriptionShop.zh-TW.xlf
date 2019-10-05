@@ -16,13 +16,13 @@ File: modules/ps_emailsubscription/ps_emailsubscription.php:348</note>
       </trans-unit>
       <trans-unit id="d4197f3e8e8b4b5d06b599bc45d683bb" approved="yes">
         <source>Unsubscription successful.</source>
-        <target xml:lang="zh-TW">退訂成功。</target>
+        <target xml:lang="zh-TW">取消訂閱成功。</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:351</note>
       </trans-unit>
       <trans-unit id="f6618fce0acbfca15e1f2b0991ddbcd0" approved="yes">
         <source>This email address is already registered.</source>
-        <target xml:lang="zh-TW">這個電子信箱已經訂閱</target>
+        <target xml:lang="zh-TW">此 E-Mail 已經訂閱</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:355</note>
       </trans-unit>
@@ -46,13 +46,13 @@ File: modules/ps_emailsubscription/ps_emailsubscription.php:375</note>
       </trans-unit>
       <trans-unit id="99c8b8e5e51bf8f00f1d66820684be9a" approved="yes">
         <source>This email is already registered and/or invalid.</source>
-        <target xml:lang="zh-TW">這個信箱已經註冊或格式有誤。</target>
+        <target xml:lang="zh-TW">此 E-Mail 已經訂閱或格式不正確。</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:612</note>
       </trans-unit>
       <trans-unit id="4e1c51e233f1ed368c58db9ef09010ba" approved="yes">
         <source>Thank you for subscribing to our newsletter.</source>
-        <target xml:lang="zh-TW">感謝您訂閱我們的電子報。</target>
+        <target xml:lang="zh-TW">感謝您的訂閱。</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:623</note>
       </trans-unit>

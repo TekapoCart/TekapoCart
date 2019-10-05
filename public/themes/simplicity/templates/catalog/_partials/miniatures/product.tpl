@@ -23,18 +23,20 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 {block name='product_miniature_item'}
-  <article data-sticker="{$product.sticker}" class="product-miniature js-product-miniature {if isset($cssClass)}{$cssClass}{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
-    {if strlen($product.sticker) > 0}<div class="sticker" style="background-image: url('/img/cms/sticker/{$product.sticker}');"></div>{/if}
+  <article data-sticker="{$product.sticker}" class="product-miniature js-product-miniature {if isset($cssClass)}{$cssClass}{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}">
+
+    {if strlen($product.sticker) > 0}<div class="sticker" style="background-image: url('/img/cms/sticker/{$product.sticker}');{if strpos($product.sticker, 'nshift') !== false} top: 0; left: 0;{/if}"></div>{/if}
     <div class="thumbnail-container">
       {block name='product_thumbnail'}
         <a href="{$product.url}" class="thumbnail product-thumbnail">
           <img
-            src = "/img/loader.svg"
             alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
-            data-full-size-image-url = "{$product.cover.large.url}"
-            data-home-default = "{$product.cover.bySize.home_default.url}"
-            data-home-default-mobile = "{$product.cover.bySize.small_default.url}"
-            class = "js_thumbnail_product"
+            src="/img/1px.png"
+            {*data-full-size-image-url="{$product.cover.large.url}"*}
+            data-home-default="{$product.cover.bySize.home_default.url}"
+            data-home-default-mobile="{$product.cover.bySize.small_default.url}"
+            class="js_thumbnail_product"
+            {*loading="lazy"*}
           >
         </a>
       {/block}
@@ -43,23 +45,26 @@
       <div class="product-no-desc-overlay">
           <a href="{$product.url}" style="width: 100%; height: 100%; display: block;">
               <div class="product-title">{$product.name|truncate:70:'...'}</div>
+              {if $product.show_price && $product.price_amount > 0}
               <div class="product-price-and-shipping">
                 {if $product.has_discount}
                   <span class="regular-price">{$product.regular_price}</span>
                 {/if}
                 <span class="price">{$product.price}</span>
               </div>
+              {/if}
           </a>
       </div>
 
       <div class="product-description">
         {block name='product_name'}
-          <h3 class="h3 product-title" itemprop="name"><a href="{$product.url}">{$product.name|truncate:70:'...'}</a></h3>
+          <h3 class="h3 product-title"><a href="{$product.url}">{$product.name|truncate:70:'...'}</a></h3>
         {/block}
 
         {block name='product_price_and_shipping'}
           {if $product.show_price}
             <div class="product-price-and-shipping">
+
               {if $product.has_discount}
                 {hook h='displayProductPriceBlock' product=$product type="old_price"}
 
@@ -75,7 +80,7 @@
               {hook h='displayProductPriceBlock' product=$product type="before_price"}
 
               <span class="sr-only">{l s='Price' d='Shop.Theme.Catalog'}</span>
-              <span itemprop="price" class="price">{$product.price}</span>
+              <span class="price">{$product.price}</span>
 
               {hook h='displayProductPriceBlock' product=$product type='unit_price'}
 

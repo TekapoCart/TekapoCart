@@ -542,7 +542,7 @@ File: controllers/front/IdentityController.php:60</note>
     <body>
       <trans-unit id="ddb329ec6521925a245fbe1334d2ce18" approved="yes">
         <source>Please provide the required information</source>
-        <target xml:lang="zh-TW">請提供必填的信息</target>
+        <target xml:lang="zh-TW">請完整提供必填資訊</target>
         <note>Context:
 File: controllers/front/GuestTrackingController.php:63</note>
       </trans-unit>

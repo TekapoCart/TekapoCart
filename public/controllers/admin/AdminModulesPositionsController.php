@@ -41,8 +41,10 @@ class AdminModulesPositionsControllerCore extends AdminController
         // 全站 右側欄
         'displayRightColumn',
 
-        // 首頁 內容
+        // 首頁 主內容
         'displayHome',
+        // 首頁 主內容下方滿版
+        'displayHomeAfter',
 
         // 商品頁 左側欄
         'displayLeftColumnProduct',

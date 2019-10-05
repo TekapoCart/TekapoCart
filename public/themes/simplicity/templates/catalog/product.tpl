@@ -47,9 +47,8 @@
 
 {block name='content'}
 
-  <section id="main" itemscope itemtype="https://schema.org/Product">
+  <section id="main" itemscope itemtype="https://schema.org/Product" itemid="{$product.url}">
     <meta itemprop="url" content="{$product.url}">
-
     <div class="row">
       <div class="col-md-6">
         {block name='page_content_container'}
@@ -285,8 +284,8 @@
 
     {block name='product_accessories'}
       {if $accessories}
-        <section class="product-accessories clearfix">
-          <h3 class="h5">{l s='You might also like' d='Shop.Theme.Catalog'}</h3>
+        <section class="product-accessories clearfix mt-3">
+          <h2>{l s='You might also like' d='Shop.Theme.Catalog'}</h2>
           <div class="products">
             {foreach from=$accessories item="product_accessory"}
               {block name='product_miniature'}
@@ -313,6 +312,12 @@
         {/block}
       </footer>
     {/block}
+
+    {*<div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+        <meta itemprop="ratingValue" content="5">
+        <meta itemprop="reviewCount" content="1">
+    </div>*}
+
   </section>
 
   <div id="product_embedded_attributes" data-product="{$product.embedded_attributes|json_encode}" style="visibility: hidden"></div>

@@ -46,8 +46,8 @@ class Simplicity_Logo extends Module implements WidgetInterface
 
         parent::__construct();
 
-        $this->displayName = 'LOGO';
-        $this->description = 'LOGO 設定';
+        $this->displayName = 'LOGO & BG';
+        $this->description = 'LOGO & BG 設定';
 
         $this->templateFile = 'module:simplicity_logo/simplicity_logo.tpl';
     }
@@ -78,6 +78,11 @@ class Simplicity_Logo extends Module implements WidgetInterface
             'display_type' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_TYPE'),
             'display_text' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_TEXT'),
             'display_font' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_FONT'),
+
+            'logo_max_width_css' => Configuration::get('SIMPLICITY_LOGO_MAX_WIDTH_CSS'),
+            'body_bg_css' => Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS'),
+
+            'mobile_type' => Configuration::get('SIMPLICITY_LOGO_MOBILE_TYPE'),
         ];
     }
 
@@ -99,7 +104,6 @@ class Simplicity_Logo extends Module implements WidgetInterface
         if (Tools::isSubmit('subMOD')) {
 
             $display_type = Tools::getValue('display_type');
-
             if (!empty($display_type) && ValidateCore::isGenericName($display_type)) {
                 Configuration::updateValue('SIMPLICITY_LOGO_DISPLAY_TYPE', $display_type);
             } else {
@@ -107,7 +111,6 @@ class Simplicity_Logo extends Module implements WidgetInterface
             }
 
             $display_text = Tools::getValue('display_text');
-
             if (ValidateCore::isGenericName($display_text)) {
                 Configuration::updateValue('SIMPLICITY_LOGO_DISPLAY_TEXT', $display_text);
             } else {
@@ -115,11 +118,27 @@ class Simplicity_Logo extends Module implements WidgetInterface
             }
 
             $display_font = Tools::getValue('display_font');
-
             if (ValidateCore::isGenericName($display_font)) {
                 Configuration::updateValue('SIMPLICITY_LOGO_DISPLAY_FONT', $display_font);
             } else {
                 // $output .= $this->displayError('請正確填寫「LOGO 文字字體」');
+            }
+
+            $logo_max_width_css = Tools::getValue('logo_max_width_css');
+            if (ValidateCore::isGenericName($logo_max_width_css)) {
+                Configuration::updateValue('SIMPLICITY_LOGO_MAX_WIDTH_CSS', $logo_max_width_css);
+            }
+
+            $body_bg_css = Tools::getValue('body_bg_css');
+            if (ValidateCore::isGenericName($body_bg_css)) {
+                Configuration::updateValue('SIMPLICITY_LOGO_BODY_BG_CSS', $body_bg_css);
+            }
+
+            $mobile_type = Tools::getValue('mobile_type');
+            if (!empty($mobile_type) && ValidateCore::isGenericName($mobile_type)) {
+                Configuration::updateValue('SIMPLICITY_LOGO_MOBILE_TYPE', $mobile_type);
+            } else {
+                Configuration::updateValue('SIMPLICITY_LOGO_MOBILE_TYPE', 0);
             }
 
             Tools::clearCache();
@@ -147,6 +166,11 @@ class Simplicity_Logo extends Module implements WidgetInterface
         $helper->fields_value['display_type'] = Configuration::get('SIMPLICITY_LOGO_DISPLAY_TYPE');
         $helper->fields_value['display_text'] = Configuration::get('SIMPLICITY_LOGO_DISPLAY_TEXT');
         $helper->fields_value['display_font'] = Configuration::get('SIMPLICITY_LOGO_DISPLAY_FONT');
+
+        $helper->fields_value['logo_max_width_css'] = Configuration::get('SIMPLICITY_LOGO_MAX_WIDTH_CSS');
+        $helper->fields_value['body_bg_css'] = Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS');
+
+        $helper->fields_value['mobile_type'] = Configuration::get('SIMPLICITY_LOGO_MOBILE_TYPE');
 
         $helper->submit_action = 'subMOD';
 
@@ -185,15 +209,64 @@ class Simplicity_Logo extends Module implements WidgetInterface
                         'name' => 'display_font',
                         'desc' => '如需另設字體請填寫瀏覽器支援的字體 例如：Arial, Times New Roman, Verdana, Monospace 等，若無請留空白。<a href="https://zh.wikipedia.org/wiki/%E5%AD%97%E4%BD%93%E5%AE%B6%E6%97%8F" target="_blank">可用字體參考</a>'
                     ),
+
+                    array(
+                        'type' => 'select',
+                        'label' => '桌機版 LOGO 寬度',
+                        'name' => 'logo_max_width_css',
+                        'options' => array(
+                            'query' => array(
+                                array('id' => '', 'name' => ''),
+                                array('id' => 'w20', 'name' => '20%'),
+                                array('id' => 'w30', 'name' => '30%'),
+                                array('id' => 'w40', 'name' => '40%'),
+                                array('id' => 'w50', 'name' => '50%'),
+                                array('id' => 'w60', 'name' => '60%'),
+                                array('id' => 'w70', 'name' => '70%'),
+                                array('id' => 'w80', 'name' => '80%'),
+                                array('id' => 'w90', 'name' => '90%'),
+                                array('id' => 'w100', 'name' => '100%'),
+                            ),
+                            'id' => 'id',
+                            'name' => 'name'
+                        ),
+                        'desc' => '控制桌機版 LOGO 寬度。預設為「50%」。'
+                    ),
+
+                    array(
+                        'type' => 'text',
+                        'label' => '背景 CSS',
+                        'name' => 'body_bg_css',
+                        'desc' => "一行 CSS 搞定背景圖特效。<br>範例1：#ddebeb<br>範例2：url('https://raw.githubusercontent.com/TekapoCart/theme_resources/master/background/wood-1920.png') 0 0 repeat fixed #000"
+                    ),
+
+
+                    array(
+                        'type' => 'select',
+                        'name' => 'mobile_type',
+                        'label' => '手機版顯示方式',
+                        'options' => array(
+                            'query' => array(
+                                array('id' => '0', 'name' => 'LOGO 置左'),
+                                array('id' => '1', 'name' => 'LOGO 置中'),
+                            ),
+                            'id' => 'id',
+                            'name' => 'name'
+                        ),
+                        'required' => true,
+                        'desc' => '「LOGO 置左」適合扁 LOGO、「LOGO 置中」適合方塊 LOGO。預設為「LOGO 置左」。'
+                    ),
+
+
+                ),
+                'submit' => array(
+                    'title' => $this->trans('Save', array(), 'Admin.Actions')
                 ),
                 'buttons' => array(
-                    'save-and-stay' => array(
-                        'title' => $this->l('Save'),
-                        'name' => 'subMOD',
-                        'type' => 'submit',
-                        'id' => 'configuration_form_submit_btn_save',
-                        'class' => 'btn btn-default pull-right',
-                        'icon' => 'process-icon-save',
+                    array(
+                        'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
+                        'title' => '返回佈景模組',
+                        'icon' => 'process-icon-back'
                     )
                 )
             )

@@ -190,7 +190,12 @@ File: themes/StarterTheme/templates/customer/_partials/order-messages.tpl:64</no
     <body>
       <trans-unit id="1625e29c02062efe5dbc42c3efeeebc4">
         <source>-- please choose --</source>
-        <target>-- please choose --</target>
+        <target>-- please choose</target>
+        <note>Line: 59</note>
+      </trans-unit>
+      <trans-unit id="1625e29c02062efe5dbc42c3efeeebd5">
+        <source>-- please choose country --</source>
+        <target>-- please choose country</target>
         <note>Line: 59</note>
       </trans-unit>
       <trans-unit id="deb10517653c255364175796ace3553f">

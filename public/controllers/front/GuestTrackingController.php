@@ -62,7 +62,7 @@ class GuestTrackingControllerCore extends FrontController
             $this->errors[] = $this->getTranslator()->trans(
                 'Please provide the required information',
                 array(),
-                'Shop.Notifications.Error'
+                'Shop.Notifications.Info' // suzy: 2019-07-06 Error 改 Info
             );
 
             return;
@@ -75,7 +75,8 @@ class GuestTrackingControllerCore extends FrontController
                 array(),
                 'Shop.Notifications.Info'
             );
-            $this->redirectWithNotifications($this->context->link->getPageLink('history'));
+            // suzy: 2019-07-06 history 改 index
+            $this->redirectWithNotifications($this->context->link->getPageLink('index'));
         } else {
             $this->order = Order::getByReferenceAndEmail($order_reference, $email);
             if (!Validate::isLoadedObject($this->order)) {

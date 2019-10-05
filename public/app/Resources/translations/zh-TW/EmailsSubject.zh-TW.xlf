@@ -92,13 +92,13 @@ File: modules/contactform/contactform.php:649</note>
     <body>
       <trans-unit id="a95bc59685fb4546de3884a5fbe474ea" approved="yes">
         <source>Newsletter voucher</source>
-        <target xml:lang="zh-TW">電子報優惠卷</target>
+        <target xml:lang="zh-TW">電子報折扣碼</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:661</note>
       </trans-unit>
       <trans-unit id="efabbb0eb84d3c8e487a72e879953673" approved="yes">
         <source>Newsletter confirmation</source>
-        <target xml:lang="zh-TW">通訊訂閱確認</target>
+        <target xml:lang="zh-TW">電子報訂閱確認通知</target>
         <note>Context:
 File: modules/ps_emailsubscription/ps_emailsubscription.php:695</note>
       </trans-unit>

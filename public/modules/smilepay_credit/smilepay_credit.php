@@ -1,14 +1,15 @@
 <?php
 /*
-*
-*  @author smilepay 
-*  <service@smse.comt.tw>
-*/
-include "smilepay_credit_orderst.php";
+ * 速買配 信用卡付款
+ */
 
 if (!defined('_PS_VERSION_')) {
     exit;
 }
+
+// 訂單狀態： 信用卡 等待付款
+define('_SMILEPAY_CREDIT_PENDING_STATUS_', 19);
+
 use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 
 class Smilepay_credit extends PaymentModule
@@ -27,10 +28,8 @@ class Smilepay_credit extends PaymentModule
         $this->tab = 'payments_gateways';
         $this->version = '2.2.5';
         $this->author = 'SmilePay';
-
         $this->Apiurl = 'https://ssl.smse.com.tw/ezpos/mtmk_utf.asp';
-        //$this->Apiurl = 'https://ssl.smse.com.tw/ezpos_test/mtmk_utf.asp';
-
+        // $this->Apiurl = 'https://ssl.smse.com.tw/ezpos_test/mtmk_utf.asp';
         $this->currencies = true;
         $this->currencies_mode = 'checkbox';
 
@@ -41,12 +40,15 @@ class Smilepay_credit extends PaymentModule
             'SMILEPAY_credit_Spdesc',
             'SMILEPAY_credit_paymentName'
         ));
+
         if (isset($config['SMILEPAY_credit_DCVC'])) {
             $this->Dcvc = $config['SMILEPAY_credit_DCVC'];
         }
+
         if (isset($config['SMILEPAY_credit_MID'])) {
             $this->Mid = $config['SMILEPAY_credit_MID'];
         }
+
         if (isset($config['SMILEPAY_credit_Rvg2c'])) {
             $this->Rvg2c = $config['SMILEPAY_credit_Rvg2c'];
         }
@@ -76,10 +78,10 @@ class Smilepay_credit extends PaymentModule
         if ((!isset($this->Dcvc) || !isset($this->Mid) || empty($this->Dcvc) || empty($this->Mid) || empty($this->Rvg2c))) {
             $this->warning = $this->l('The  Shop code and Check code must be configured in order to use this module correctly.');
         }
+
         if (!count(Currency::checkPaymentCurrencies($this->id))) {
             $this->warning = $this->l('No currency set for this module');
         }
-
     }
 
     public function install()
@@ -111,13 +113,13 @@ class Smilepay_credit extends PaymentModule
             } elseif (!Tools::getValue('Mid')) {
                 $this->_postErrors[] = $this->l('Check code is required.');
             }
-
         }
     }
 
     private function _postProcess()
     {
         if (Tools::isSubmit('btnSubmit')) {
+
             if (!is_null(Tools::getValue('Dcvc'))) {
                 $dcvc = trim(Tools::getValue('Dcvc'));
             } else {
@@ -147,12 +149,14 @@ class Smilepay_credit extends PaymentModule
             } else {
                 $spdesc = Tools::getValue('Spdesc');
             }
+
             Configuration::updateValue('SMILEPAY_credit_DCVC', $dcvc);
             Configuration::updateValue('SMILEPAY_credit_Rvg2c', $rvg2c);
             Configuration::updateValue('SMILEPAY_credit_MID', $mid);
             Configuration::updateValue('SMILEPAY_credit_paymentName', $paymentName);
             Configuration::updateValue('SMILEPAY_credit_Spdesc', $spdesc);
         }
+
         $this->_html .= $this->displayConfirmation($this->l('Settings updated'));
     }
 
@@ -179,7 +183,6 @@ class Smilepay_credit extends PaymentModule
 						<td width="130" style="vertical-align: top;height: 35px;">' . $this->l('Check code') . '</td>
 						<td><input type="text" name="Mid" value="' . Tools::htmlentitiesUTF8(Tools::getValue('Mid', $this->Mid)) . '" style="width: 300px;" />            
                         </td>
-
 					</tr>
                     <tr>
 					    <td width="130" style="height: 35px;">' . $this->l('Front Payment Name') . '</td>
@@ -191,8 +194,6 @@ class Smilepay_credit extends PaymentModule
 						<td><textarea name="Spdesc" style="width: 300px;height: 70px">' . Tools::htmlentitiesUTF8(Tools::getValue('Spdesc',
                 $this->Spdesc)) . '</textarea></td>
 					</tr>		
-
-
 					<tr><td colspan="2" align="center"><br /><input class="button" name="btnSubmit" value="' . $this->l('Update settings') . '" type="submit" /></td></tr>
 				</table>
 			</fieldset>
@@ -228,16 +229,19 @@ class Smilepay_credit extends PaymentModule
         if (!$this->active) {
             return;
         }
+
         if (!$this->checkCurrency($params['cart'])) {
             return;
         }
+
         if (is_null($this->Dcvc) || empty($this->Dcvc)
             || is_null($this->Mid) || empty($this->Mid)
             || is_null($this->Rvg2c) || empty($this->Rvg2c)
         ) {
             return;
         }
-        //Is shipping type of Smilepay_c2c?
+
+        // Is shipping type of Smilepay_c2c?
         if (defined('SMILEPAY_C2CP_MODULE')) {
             $smilepay_c2cp_obj = new Smilepay_c2c();
             if ($smilepay_c2cp_obj->active && $smilepay_c2cp_obj->isSmilepay_c2cp_shipping($params['cart']->id_carrier)) {
@@ -250,11 +254,9 @@ class Smilepay_credit extends PaymentModule
                 if ($smilepay_c2cp_obj->active && $smilepay_c2cp_obj->isSmilepay_c2cp_shipping($params['cart']->id_carrier)) {
                     return;
                 }
-
-
             }
-
         }
+
         $this->smarty->assign(
             $this->getTemplateVars()
         );
@@ -276,7 +278,6 @@ class Smilepay_credit extends PaymentModule
     public function hookPaymentReturn($params)
     {
 
-
         if (!$this->active) {
             return;
         }
@@ -285,125 +286,99 @@ class Smilepay_credit extends PaymentModule
         ) {
             return;
         }
-        $rq = Db::getInstance()->getRow('SELECT `id_order_state` FROM `' . _DB_PREFIX_ . 'order_state_lang` WHERE id_lang = \'' . pSQL('1') . '\' AND  template = \'SmilePay_credit_status\'');
-        $credit_status = $rq['id_order_state'];
-        //<smilepay_c2cup> start
-        $c2cup_template = '';
-        $c2cup_run = false;
-        //<smilepay_c2cup> end
+
         $state = $params['order']->getCurrentState();
-        //if ($state == Configuration::get('PS_OS_CHEQUE') || $state == Configuration::get('PS_OS_OUTOFSTOCK'))
-        if ($state == $credit_status || $state == Configuration::get('PS_OS_OUTOFSTOCK')) {
+
+        if ($state == _SMILEPAY_CREDIT_PENDING_STATUS_ || $state == Configuration::get('PS_OS_OUTOFSTOCK')) {
 
             // post value
-
             $classif = trim($_POST['Classif']);
             $data_id = trim($_POST['Data_id']);
-            $od_sob = trim($_POST['Od_sob']);
             $amount = trim($_POST['Amount']);
             $smseid = trim($_REQUEST['Smseid']);
             $mid_smilepay = trim($_POST['Mid_smilepay']);
             $respid = trim($_POST['Response_id']);
+            $od_sob = trim($_POST['Od_sob']);
             $LastPan = $_POST['LastPan'];
             $Errdesc = $_POST['Errdesc'];
 
-            //取得訂單資訊
-            //$order_history = new Order($data_id);
-            //$order_db_amount  = round($order_history->getOrdersTotalPaid());
-
             $order_db_amount = round($params['order']->getOrdersTotalPaid());
 
-            //checksum Mid and Mid_smilepay from SmielPay
+            // checksum Mid and Mid_smilepay from SmilePay
             if (isset($this->Mid)) {
                 if (!$this->midfun($this->Mid, $order_db_amount, $smseid, $mid_smilepay)) {
                     die("Possible fraud");
                 }
             }
 
-
             if ($amount == $order_db_amount && ($classif == 'A' && $respid == '1')) {
-                /* For 1.4.3 and less compatibility
-                $updateConfig = array('PS_OS_CHEQUE' => 1, 'PS_OS_PAYMENT' => 2, 'PS_OS_PREPARATION' => 3, 'PS_OS_SHIPPING' => 4,
-                'PS_OS_DELIVERED' => 5, 'PS_OS_CANCELED' => 6, 'PS_OS_REFUND' => 7, 'PS_OS_ERROR' => 8, 'PS_OS_OUTOFSTOCK' => 9,
-                'PS_OS_BANKWIRE' => 10, 'PS_OS_PAYPAL' => 11, 'PS_OS_WS_PAYMENT' => 12);
-                */
-                $newOrderStatusId = 2;
+                $newOrderStatusId = 2; // 已付款
                 $history = new OrderHistory();
                 $history->id_order = (int)($data_id);
                 $history->changeIdOrderState($newOrderStatusId, $data_id);
                 $history->addWithemail();
-                $this->smarty->assign(array(
-                    'status' => 'ok',
-                    'total' => $amount,
-                    'id_order' => $data_id,
-                    'this_path' => $this->_path
-                ));
-                if (isset($params['order']->reference) && !empty($params['order']->reference)) {
-                    $this->smarty->assign('reference', $params['order']->reference);
-                }
-                $msg = "繳費方式：線上刷卡，授權成功、授權金額：" . $amount . "、追蹤碼：" . $smseid;
-
-
-                //<smilepay_c2cup> start
-                if (file_exists("modules/smilepay_c2cup/smilepay_c2cup.php")) {
-                    include_once("modules/smilepay_c2cup/smilepay_c2cup.php");
-
-
-                    $smilepay_c2cup_obj = new Smilepay_c2cup();
-
-                    if ($smilepay_c2cup_obj->isSelectedC2cupShipping($params['order']->id_carrier)) {
-                        $result = $smilepay_c2cup_obj->runC2CupProcess($params['order']->id);
-                        $c2cup_template = $smilepay_c2cup_obj->produceResultTemplate($result);
-                        $c2cup_run = true;
-                        // $c2cup_template is saved output html
-                    }
-                }
-
-                //<smilepay_c2cup> end
-
+                $msg = "繳費方式 : 線上刷卡 授權成功, 授權金額 : " . $amount . ", 追蹤碼 : " . $smseid;
 
             } else {
-                $newOrderStatusId = 8;
+                $newOrderStatusId = 8; // 付款失敗
                 $history = new OrderHistory();
                 $history->id_order = (int)($data_id);
                 $history->changeIdOrderState($newOrderStatusId, $data_id);
                 $history->addWithemail();
-
                 $Errdesc = iconv("big5", "UTF-8", $_REQUEST['Errdesc']);
-                $this->smarty->assign(array(
-                    'status' => 'failed',
-                    'errdesc' => $Errdesc,
-                    'this_path' => $this->_path
-                ));
-                $msg = "繳費方式：線上刷卡，授權失敗：" . $Errdesc . "、追蹤碼：" . $smseid;
-
+                $msg = "繳費方式 : 線上刷卡, 授權失敗 : " . $Errdesc . ", 追蹤碼 : " . $smseid;
             }
-            $cart = $this->context->cart;
-            Db::getInstance()->Execute('INSERT INTO `' . _DB_PREFIX_ . 'customer_thread` (`id_shop`, `id_lang`, `id_contact`, `id_customer`, `id_order`, `id_product`, `status`)' . "VALUES({$cart->id_shop},{$cart->id_lang},0,{$cart->id_customer}," . $data_id . ',0,\'open\' )');
-            $id_customer_thread = Db::getInstance()->getRow('SELECT `id_customer_thread` FROM `' . _DB_PREFIX_ . 'customer_thread` WHERE id_order = ' . $data_id);
-            Db::getInstance()->Execute('INSERT INTO `' . _DB_PREFIX_ . 'customer_message` (`id_customer_thread`, `id_employee`, `message`,`date_add`,`date_upd`)VALUES(' . $id_customer_thread['id_customer_thread'] . ',"1","' . $msg . '","' . date("Y-m-d H:i:s") . '","' . date("Y-m-d H:i:s") . '")');
-            Db::getInstance()->Execute('UPDATE `' . _DB_PREFIX_ . 'orders` SET  `smilepayc2ctable` = "' . $msg . '"  WHERE  `id_order` =' . $data_id);
 
-        } else {
+            $state = $newOrderStatusId;
 
+//            $cart = $this->context->cart;
+//            $order = $params['order'];
+//            $customer = new Customer($params['order']->id_customer);
+
+            Db::getInstance()->Execute('UPDATE `'
+                . _DB_PREFIX_ . 'orders` SET `payment_message` = "' . $msg
+                . '" WHERE `id_order` =' . $params['order']->id);
+        }
+
+        $rq = Db::getInstance()->getRow('SELECT payment_message FROM `'
+            . _DB_PREFIX_ . 'orders` WHERE id_order=' . $params['order']->id);
+        $payment_message = $rq['payment_message'];
+
+        if ($state == 2) {
             $this->smarty->assign(array(
-                'status' => 'unknow',
+                'status' => 'ok',
+                'message' => $payment_message,
                 'this_path' => $this->_path
             ));
-
+        } else {
+            $this->smarty->assign(array(
+                'status' => 'failed',
+                'message' => $payment_message,
+                'this_path' => $this->_path
+            ));
         }
 
+        return $this->display(__FILE__, 'payment_return.tpl');
+    }
 
-        //<smilepay_c2cup> start
-        if ($c2cup_run) {
-            return $c2cup_template . $this->fetch('module:smilepay_credit/views/templates/hook/payment_return.tpl');
+    public function hookDisplayOrderDetail($params)
+    {
+
+        if ($params['order']->module !== 'smilepay_credit') {
+            return;
         }
-        //<smilepay_c2cup> end
-        return $this->fetch('module:smilepay_credit/views/templates/hook/payment_return.tpl');
+
+        // 顯示付款資訊
+        $row = Db::getInstance()->getRow('SELECT payment_message FROM `' . _DB_PREFIX_ . 'orders` WHERE id_order=' . $params['order']->id);
+        $this->smarty->assign([
+            'payment_message' => $row['payment_message'],
+        ]);
+
+        return $this->display(__FILE__, 'display_order_detail.tpl');
     }
 
     // compute Mid
-    function midfun($Mid_value, $Amount, $Smseid, $Mid_smilepay)
+    private function midfun($Mid_value, $Amount, $Smseid, $Mid_smilepay)
     {
         $Amount = str_pad($Amount, 8, '0', STR_PAD_LEFT);
         $Smseid = preg_replace('/[\D]/i', '9', substr($Smseid, -4));
@@ -452,9 +427,7 @@ class Smilepay_credit extends PaymentModule
 
     public function getTemplateVars()
     {
-        $cart = $this->context->cart;
-
-
+        // $cart = $this->context->cart;
         return [
             'Description' => $this->Spdesc,
         ];

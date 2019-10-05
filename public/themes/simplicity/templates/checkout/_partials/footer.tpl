@@ -23,15 +23,11 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 {block name='footer'}
-    {* copyright 版權聲明 *}
-    <div class="row">
-        <div class="col-xs-12">
-            <p class="text-xs-center copyright">
-                {block name='copyright_link'}
-                    Copyright &copy; {$smarty.now|date_format:"%Y"} <a href="{$urls.base_url}" target="_blank">{$shop.name}</a><br>
-                    Powered by <a href="https://www.tekapo.io/" target="_blank">TekapoCart</a>
-                {/block}
-            </p>
-        </div>
+  {* copyright 版權聲明 *}
+  {block name='copyright_link'}
+    <div class="text-xs-center copyright">
+      Copyright &copy; {$smarty.now|date_format:"%Y"} <a href="{$urls.base_url}" target="_blank">{$shop.name}</a><br>
+      Powered by <a href="https://www.tekapo.io/" target="_blank">TekapoCart</a>
     </div>
+  {/block}
 {/block}

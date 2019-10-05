@@ -36,21 +36,17 @@
         {hook h='displayFooter'}
       {/block}
     </div>
-    <div class="row">
-      {block name='hook_footer_after'}
-        {hook h='displayFooterAfter'}
-      {/block}
-    </div>
-    {* copyright 版權聲明 *}
-    <div class="row">
-      <div class="col-xs-12">
-        <p class="text-xs-center copyright">
-            {block name='copyright_link'}
-              Copyright &copy; {$smarty.now|date_format:"%Y"} <a href="{$urls.base_url}" target="_blank">{$shop.name}</a><br>
-              Powered by <a href="https://www.tekapo.io/" target="_blank">TekapoCart</a>
-            {/block}
-        </p>
-      </div>
-    </div>
   </div>
 </div>
+
+{* copyright 版權聲明 *}
+{block name='copyright_link'}
+  <div class="text-xs-center copyright">
+    Copyright &copy; {$smarty.now|date_format:"%Y"} <a href="{$urls.base_url}" target="_blank">{$shop.name}</a><br>
+    Powered by <a href="https://www.tekapo.io/" target="_blank">TekapoCart</a>
+  </div>
+{/block}
+
+{block name='hook_footer_after'}
+  {hook h='displayFooterAfter'}
+{/block}

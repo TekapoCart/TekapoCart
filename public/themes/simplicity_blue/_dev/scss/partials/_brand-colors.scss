@@ -1,4 +1,5 @@
 .block_newsletter input[type=text]:focus,
+.block_newsletter form input[type="text"]:focus,
 body#checkout section.checkout-step .address-item.selected,
 .facet-dropdown.open > .select-title,
 .tabs .nav-tabs .nav-link:hover,
@@ -47,7 +48,9 @@ a:focus,
 #_desktop_top_menu .top-menu .current > a,
 #_desktop_top_menu .top-menu a:hover[data-depth="0"],
 body#checkout a:hover,
-.faq .q:before {
+.faq .q:before,
+.dropdown-item:focus,
+.dropdown-item:hover {
   color: $primary-link-color;
 }
 

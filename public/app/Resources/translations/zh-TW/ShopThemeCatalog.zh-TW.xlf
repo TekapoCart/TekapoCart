@@ -506,7 +506,7 @@ File: themes/StarterTheme/templates/catalog/_partials/active_filters.tpl:30</not
     <body>
       <trans-unit id="498007f495e00b14f415d5f6ae6a1362" approved="yes">
         <source>There are %product_count% products.</source>
-        <target xml:lang="zh-TW">有%product_count%項商品。</target>
+        <target xml:lang="zh-TW">有 %product_count% 項結果</target>
         <note>Context:
 File: themes/classic/templates/catalog/_partials/products-top.tpl:28</note>
       </trans-unit>
@@ -588,7 +588,7 @@ File: themes/classic/templates/catalog/product.tpl:176</note>
       </trans-unit>
       <trans-unit id="3767d4f3efe17bd95a1bc7cf4194bb93" approved="yes">
         <source>You might also like</source>
-        <target xml:lang="zh-TW">您可能會喜歡</target>
+        <target xml:lang="zh-TW">你可能會喜歡</target>
         <note>Context:
 File: themes/classic/templates/catalog/product.tpl:236</note>
       </trans-unit>
@@ -680,13 +680,13 @@ File: themes/classic/modules/ps_brandlist/views/templates/_partials/brand_form.t
     <body>
       <trans-unit id="f55e0a28b86c2ab66ac632ab9ddf1833" approved="yes">
         <source>%s other product in the same category:</source>
-        <target xml:lang="zh-TW">同類商品</target>
+        <target xml:lang="zh-TW">其他%s</target>
         <note>Context:
 File: themes/classic/modules/ps_categoryproducts/views/templates/hook/ps_categoryproducts.tpl:28</note>
       </trans-unit>
       <trans-unit id="bebb44f38b03407098d48198c1d0aaa5" approved="yes">
         <source>%s other products in the same category:</source>
-        <target xml:lang="zh-TW">同類商品</target>
+        <target xml:lang="zh-TW">其他%s</target>
         <note>Context:
 File: themes/classic/modules/ps_categoryproducts/views/templates/hook/ps_categoryproducts.tpl:30</note>
       </trans-unit>

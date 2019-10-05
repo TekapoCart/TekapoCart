@@ -3,22 +3,36 @@ $gray: #7A7A7A;
 $gray-light: #F1F1F1;
 $gray-lighter: #f6f6f6;
 
-$brand-primary: #2fb5d2; /* default */
-$brand-primary: black;
-$brand-primary: #56BB9B;
+// $brand-primary: #2fb5d2; /* default */
 $brand-primary: #67C8C2;
-
+$brand-primary-hover: $brand-primary;
 $brand-secondary: #f39d72; /* default */
 $brand-secondary: #1278D4;
-
 $brand-tertiary: #ed5454;
+$brand-success: $brand-primary ; /* #4cbb6c */
+$brand-warning: #ff9a52;
+$brand-danger: #ed5454;
+
+$brand-background: #fff;
+$focus-background: $gray-light;
+$overlay-background: rgba(255, 255, 255, 0.7);
+$social-background: $gray;
+$social-background-hover: $brand-primary;
+$table-background: $brand-background;
+
+$brand-border-color: rgba(0, 0, 0, 0.25);
+$category-border-color: #e3e3e3;
+$divider-border-color: $gray;
+$darker-border-color: $gray-darker;
+$hr-border-color: rgba(0, 0, 0, 0.1);
+$menu-border-color: #fff;
+$footer-border-color: #f6f6f6;
+$table-border-color: #333;
 
 $tag-new: #96DCE0;
 $tag-sale: #F3CB54;
 
-$brand-success: $brand-primary ; /* #4cbb6c */
-$brand-warning: #ff9a52;
-$brand-danger: #ed5454;
+$breadcrumb-color: $gray;
 $label-color: $gray-darker;
 $btn-primary-color: #fff;
 $btn-primary-bg: $brand-primary;
@@ -27,9 +41,69 @@ $btn-secondary-color: $gray-darker;
 $btn-secondary-bg: $gray-lighter;
 $btn-secondary-border: transparent;
 $btn-border-radius: 0;
-$input-border-color: rgba(0, 0, 0, 0.25);
+$btn-hover-bg: $gray-light;
+$btn-disabled-bg: $gray;
+$input-background: $brand-background;
+$input-border-color: $brand-border-color;
+$input-radio-color: $brand-primary;
 $tooltip-bg: $brand-danger;
 $border-radius: 0;
+
+$svg-primary-fill: #000;
+$overlay-opacity: 0.5;
+
+$close-color: #000;
+$close-text-shadow: #fff;
+
+
+
+// dark mode start
+
+//$brand-primary: #c7c7c7;
+//$brand-background: #000;
+//$brand-border-color: rgba(255, 255, 255, 0.25);
+//
+//$brand-primary-hover: darken($brand-primary, 20%);
+//$brand-success: lighten($brand-background, 30%);
+//$gray-darker: $brand-primary;
+//$gray: $brand-primary;
+//$gray-light: lighten($brand-background, 10%);
+//$gray-lighter: lighten($brand-background, 20%);
+//
+//$focus-background: lighten($brand-background, 20%);
+//$overlay-background: rgba(0, 0, 0, 0.25);
+//$social-background: $brand-background;
+//$social-background-hover: lighten($social-background, 20%);
+//$table-background: lighten($brand-background, 30%);
+//
+//$category-border-color: $brand-border-color;
+//$divider-border-color: $brand-border-color;
+//$darker-border-color: $gray-darker;
+//$hr-border-color: $brand-border-color;
+//$menu-border-color: $brand-border-color;
+//$footer-border-color: $brand-border-color;
+//$table-border-color: transparent;
+//
+//$breadcrumb-color: $brand-primary-hover;
+//$btn-primary-color: $brand-primary;
+//$btn-primary-bg: $brand-background;
+//$btn-primary-border: $brand-border-color;
+//$btn-hover-bg: lighten($btn-primary-bg, 10%);
+//$btn-disabled-bg: $brand-background;
+//$input-background: lighten($btn-primary-bg, 20%);
+//$input-border-color: $brand-border-color;
+//$input-radio-color: $btn-primary-color;
+//
+//$svg-primary-fill: $brand-primary;
+//$overlay-opacity: 0.85;
+//
+//$close-color: $brand-primary;
+//$close-text-shadow: $brand-background;
+
+// dark mode end
+
+
+
 
 $extra-small-space: 0.3125rem;
 $small-space: 0.625rem;

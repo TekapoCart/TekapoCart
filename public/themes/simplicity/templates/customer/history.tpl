@@ -47,7 +47,7 @@
       <tbody>
         {foreach from=$orders item=order}
           <tr>
-            <th scope="row">{$order.details.reference}</th>
+            <td scope="row">{$order.details.reference}</td>
             <td>{$order.details.order_date}</td>
             <td class="text-xs-right">{$order.totals.total.value}</td>
             <td class="hidden-md-down">{$order.details.payment}</td>

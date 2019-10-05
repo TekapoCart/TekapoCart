@@ -564,7 +564,7 @@ abstract class PaymentModuleCore extends Module
 
                     // suzy: 2018-12-02 通知信補充資訊（轉帳匯款資訊）
                     $extra_info_data = [];
-                    if (is_array($this->extra_mail_vars)) {
+                    if (isset($this->extra_mail_vars) && is_array($this->extra_mail_vars)) {
                         $extra_info_data = array_merge($extra_info_data, $this->extra_mail_vars);
                     }
                     $extra_info_html = '';

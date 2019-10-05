@@ -85,14 +85,16 @@ class AdminEmployeesControllerCore extends AdminController
                 'align' => 'center',
                 'class' => 'fixed-width-xs',
             ),
-            'firstname' => array(
-                'title' => $this->trans('First name', array(), 'Admin.Global'),
-                'maxlength' => 30,
-            ),
+            // suzy: 2019-08-15 調換 姓、名 欄位位置
             'lastname' => array(
                 'title' => $this->trans('Last name', array(), 'Admin.Global'),
                 'maxlength' => 30,
             ),
+            'firstname' => array(
+                'title' => $this->trans('First name', array(), 'Admin.Global'),
+                'maxlength' => 30,
+            ),
+
             'email' => array(
                 'title' => $this->trans('Email address', array(), 'Admin.Global'),
                 'maxlength' => 50,
@@ -113,6 +115,7 @@ class AdminEmployeesControllerCore extends AdminController
             ),
         );
 
+        /* suzy: 2019-08-15 隱藏欄位 重新產生密碼：360 分、記住管理介面表單使用的語言：否
         $this->fields_options = array(
             'general' => array(
                 'title' => $this->trans('Employee options', array(), 'Admin.Advparameters.Feature'),
@@ -140,6 +143,7 @@ class AdminEmployeesControllerCore extends AdminController
                 'submit' => array('title' => $this->trans('Save', array(), 'Admin.Actions')),
             ),
         );
+        */
 
         $home_tab = Tab::getInstanceFromClassName('AdminDashboard', $this->context->language->id);
         $this->tabs_list[$home_tab->id] = array(
@@ -185,7 +189,6 @@ class AdminEmployeesControllerCore extends AdminController
     {
         parent::initPageHeaderToolbar();
 
-        /* suzy: 2018-09-16 隱藏新增員工
         if (empty($this->display)) {
             $this->page_header_toolbar_btn['new_employee'] = array(
                 'href' => self::$currentIndex . '&addemployee&token=' . $this->token,
@@ -193,7 +196,6 @@ class AdminEmployeesControllerCore extends AdminController
                 'icon' => 'process-icon-new',
             );
         }
-        */
 
         if ($this->display == 'edit') {
             $obj = $this->loadObject(true);
@@ -340,7 +342,8 @@ class AdminEmployeesControllerCore extends AdminController
                 'type' => 'default_tab',
                 'label' => $this->trans('Default page', array(), 'Admin.Advparameters.Feature'),
                 'name' => 'default_tab',
-                'hint' => $this->trans('This page will be displayed just after login.', array(), 'Admin.Advparameters.Help'),
+                // suzy: 2019-08-15 隱藏贅字
+                // 'hint' => $this->trans('This page will be displayed just after login.', array(), 'Admin.Advparameters.Help'),
                 'options' => $this->tabs_list,
             ),
             array(
@@ -375,7 +378,8 @@ class AdminEmployeesControllerCore extends AdminController
                         'label' => $this->trans('Disabled', array(), 'Admin.Global'),
                     ),
                 ),
-                'hint' => $this->trans('Allow or disallow this employee to log in to the Admin panel.', array(), 'Admin.Advparameters.Help'),
+                // suzy: 2019-08-15 隱藏贅字
+                // 'hint' => $this->trans('Allow or disallow this employee to log in to the Admin panel.', array(), 'Admin.Advparameters.Help'),
             );
 
             // if employee is not SuperAdmin (id_profile = 1), don't make it possible to select the admin profile

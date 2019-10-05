@@ -110,7 +110,7 @@ File: controllers/admin/AdminEmailsController.php:235</note>
       </trans-unit>
       <trans-unit id="e379446940f88886aba80367a10fa4cc" approved="yes">
         <source>Test message -- Prestashop</source>
-        <target xml:lang="ja">テストメッセージ - Prestashop</target>
+        <target xml:lang="ja">テストメッセージ - TekapoCart</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:236</note>
       </trans-unit>

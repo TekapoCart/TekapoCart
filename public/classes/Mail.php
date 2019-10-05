@@ -146,6 +146,7 @@ class MailCore extends ObjectModel
         $bcc = null,
         $replyTo = null,
         $replyToName = null
+        , $mailType = false // suzy: 2019-08-18 可指定 SMTP 信箱
     ) {
         if (!$idShop) {
             $idShop = Context::getContext()->shop->id;
@@ -204,6 +205,13 @@ class MailCore extends ObjectModel
             null,
             $idShop
         );
+
+        // suzy: 2019-08-18 可指定 SMTP 信箱
+        if ($mailType == 'promotion') {
+            $configuration['PS_MAIL_USER'] = Configuration::get('PS_FOLLOW_UP_SMTP_USER');
+            $configuration['PS_MAIL_PASSWD'] = Configuration::get('PS_FOLLOW_UP_SMTP_PASSWD');
+        }
+
 
         // Returns immediately if emails are deactivated
         if ($configuration['PS_MAIL_METHOD'] == self::METHOD_DISABLE) {

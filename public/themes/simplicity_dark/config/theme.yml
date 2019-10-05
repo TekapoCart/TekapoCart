@@ -1,0 +1,6 @@
+parent: simplicity
+name: simplicity_dark
+display_name: simplicity dark
+version: 1.0.0
+assets:
+  use_parent_assets: true

@@ -1,0 +1,33 @@
+<?php
+
+global $_MODULE;
+$_MODULE = array();
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_ec02595c27d5f172d9ff8d8cddc7143b'] = 'バーチャル口座番号';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_fa214007826415a21a8456e3e09f999d'] = '您確定移除設定資料？';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_b5f2ad24bfa2d2eb49e86020aa246df4'] = '商家代號、商家驗證參數需正確設定模組中。';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_4402acab1c8f90dcf4a31dc96833bd86'] = '沒有相關貨幣可以設定';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_5ab6179c9f04aeafd30fe74a4e495324'] = '商家代號必填';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_1cdb6408c981be254c4837a12106011f'] = '商家參數碼必填';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_d75fee75719373789c0a9cf66bc5715e'] = '商家檢查碼必填';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_fd02c57c1fdaba6ec1b096ba8e54807b'] = '商家驗證參數必填';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_c888438d14855d7d96a2724ee9c306bd'] = '設定完成';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_429bfcc908403b8f5817a87739c5b018'] = '這模組允許您使用 SmilePay バーチャル口座番号';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_5dd532f0a63d89c5af0243b74732f63c'] = '設定內容';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_e5813bbd4c9cf88b4a774ebc5f9eb110'] = '請填入 SmilePay 虛擬帳號的商家代號、驗證代號';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_f490b1e9a3253eb1bf829447cd3dc631'] = '商家代號';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_630d24bbfc3cce05b812e137137b3944'] = '商家參數碼';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_5a9582dee91a53323ba8634e88b32e58'] = '商家檢查碼';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_4a3492b1742b86627ecd71176887fefc'] = '商家驗證參數';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_f7971164e6822c0889e5d57f5ecf95b9'] = '付款方式名稱';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_0380b1423812799759c5eaebcb3f9556'] = '付款方式訊息(結帳時顯示)';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_b17f3f4dcf653a5776792498a9b44d6a'] = '更新設定';
+$_MODULE['<{smilepay_atm}prestashop>validation_ac67a8f6348f27ec86668c656c110178'] = '期限はありません';
+$_MODULE['<{smilepay_atm}prestashop>payment_return_cbaa9595799c934ab0c48dc00d52a857'] = '請於繳費截止期限內完成轉帳，注意：如超過繳費期限，請勿繳款。';
+$_MODULE['<{smilepay_atm}prestashop>payment_return_b43a3036f14923175e5f2cdcd8fe3a55'] = '狀態';
+$_MODULE['<{smilepay_atm}prestashop>payment_return_53dbc7b2c6a7559b24c51dd9d4c9bfbf'] = '金融機関コード';
+$_MODULE['<{smilepay_atm}prestashop>payment_return_6ea6e77f2d07d60325b8f67c40d60ea7'] = 'バーチャル口座番号';
+$_MODULE['<{smilepay_atm}prestashop>payment_return_7024a57c0e176f0c147834f6a9f1ef5c'] = 'お支払い期限';
+$_MODULE['<{smilepay_atm}prestashop>payment_return_e09f460dd01853cd29e35080836f4515'] = '金額';
+$_MODULE['<{smilepay_atm}prestashop>payment_return_811d3dacf58dd6f97978e5b64f7289a2'] = '銀行名';
+$_MODULE['<{smilepay_atm}prestashop>payment_return_932b0a83e9e8987eb14ddf066b184950'] = '口座名義';
+$_MODULE['<{smilepay_atm}prestashop>payment_return_1cf8f7f677807da3aaca05e81b5502ee'] = '期限はありません';

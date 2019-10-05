@@ -245,3 +245,4 @@ var/logs/*
 public/var/sessions/*
 !public/var/sessions/.gitkeep
 !public/var/SymfonyRequirements.php
+!public/var/.htaccess

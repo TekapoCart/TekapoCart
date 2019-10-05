@@ -1,7 +1,7 @@
 .dropdown {
   color:$gray;
   &:hover .expand-more{
-    color: $brand-primary;
+    color: $brand-primary-hover;
   }
   .expand-more{
     color: $gray-darker;
@@ -21,6 +21,6 @@
     border: 0 none;
     outline: 0 none;
     color: $gray-darker;
-    background: white;
+    background: transparent;
   }
 }

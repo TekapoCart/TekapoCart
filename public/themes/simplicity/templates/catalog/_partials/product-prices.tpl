@@ -40,10 +40,19 @@
         itemscope
         itemtype="https://schema.org/Offer"
       >
-        <link itemprop="availability" href="https://schema.org/InStock"/>
+        <meta itemprop="url" content="{$product.url}" />
+        <meta itemprop="itemCondition" content="{$product.condition.schema_url}">
+        {if $product.quantity > 0}
+        <meta itemprop="availability" content="https://schema.org/InStock" />
+        {else}
+        <meta itemprop="availability" content="https://schema.org/OutOfStock" />
+        {/if}
         <meta itemprop="priceCurrency" content="{$currency.iso_code}">
 
-        <div class="current-price">
+        {assign var="dateprice" value="+1 year"|date_format:"%Y-%m-%d"}
+        {if $product.specificPrice && $product.specificPrice.reduction && $productPriceWithoutReduction > $productPrice && $product.specificPrice.to && $product.specificPrice.to != '0000-00-00 00:00:00'}<meta itemprop="priceValidUntil" content="{$product.specificPrice.to|date_format:'%Y-%m-%d'}">{else}<meta itemprop="priceValidUntil" content="{$dateprice}">{/if}
+
+          <div class="current-price">
           <span itemprop="price" content="{$product.price_amount}">{$product.price}</span>
 
           {if $product.has_discount}

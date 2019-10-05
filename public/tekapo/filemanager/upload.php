@@ -78,59 +78,12 @@ if (!empty($_FILES) && isset($_FILES['file']) && $_FILES['file']['size']) {
 
         if ($is_img) {
 
-            // suzy: 2018-09-22 加入 TINYPNG 壓圖功能
+            // suzy: 2018-08-18 加 $result
             // move_uploaded_file($tempFile, $targetFile);
-            // chmod($targetFile, 0755);
-            $tinypng_api_key = Configuration::get('SIMPLICITY_TINYPNG_API_KEY_1');
-            if (! empty($tinypng_api_key)) {
-
-                $sourceFile = $tempFile;
-                $destinationFile = $targetFile;
-
-                $success = false;
-
-                $curl = curl_init();
-                $curlOptions = [
-                    CURLOPT_BINARYTRANSFER => 1,
-                    CURLOPT_HEADER => 1,
-                    CURLOPT_POST => 1,
-                    CURLOPT_RETURNTRANSFER => 1,
-                    CURLOPT_URL => 'https://api.tinypng.com/shrink',
-                    CURLOPT_USERAGENT => 'TekapoCart',
-                    CURLOPT_USERPWD => 'api:'. $tinypng_api_key,
-                ];
-                curl_setopt_array($curl, $curlOptions);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, file_get_contents($sourceFile));
-                $res = curl_exec($curl);
-                $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-                $header = substr($res, 0, curl_getinfo($curl, CURLINFO_HEADER_SIZE));
-                $content = substr($res, curl_getinfo($curl, CURLINFO_HEADER_SIZE));
-
-                if ($http_code === 201) {
-                    foreach(explode("\r\n", $header) as $h) {
-                        if(substr($h, 0, 10) === 'Location: ') {
-                            $curl = curl_init();
-                            $curlOptions = [
-                                CURLOPT_URL => substr($h, 10),
-                                CURLOPT_RETURNTRANSFER => true,
-                                CURLOPT_HEADER => 0
-                            ];
-                            curl_setopt_array($curl, $curlOptions);
-                            $success = file_put_contents($destinationFile, curl_exec($curl)) !== false;
-                            break;
-                        }
-                    }
-                }
-                curl_close($curl);
-
-                $result = $success;
-
-            } else {
-                // suzy: 2018-08-18 加 $result
-                $result = move_uploaded_file($tempFile, $targetFile);
-            }
+            $result = move_uploaded_file($tempFile, $targetFile);
 
             // suzy: 2018-09-22 0755 改 0644
+            // chmod($targetFile, 0755);
             chmod($targetFile, 0644);
 
             $memory_error = false;

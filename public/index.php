@@ -24,12 +24,6 @@
  * International Registered Trademark & Property of PrestaShop SA
  */
 
-if ($_SERVER['HTTP_HOST'] == 'tekapo.io') {
-    header("HTTP/1.1 301 Moved Permanently");
-    header("Location: https://www.tekapo.io/");
-    exit;
-}
-
 // suzy: 2019-02-02 第一語言 URL 不加 iso code
 // if (empty($_GET['id_lang']) && !empty($_GET['switch_lang'])) {
 if (empty($_GET['id_lang'])) {

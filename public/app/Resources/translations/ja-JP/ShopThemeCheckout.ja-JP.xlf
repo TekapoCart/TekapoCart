@@ -74,7 +74,7 @@ File: src/Adapter/Cart/CartPresenter.php:368</note>
       </trans-unit>
       <trans-unit id="7e0eb131cbb6280fe2b38edf92a3bcc5" approved="yes">
         <source>1 item</source>
-        <target xml:lang="ja">1アイテム</target>
+        <target xml:lang="ja">現在の中身：1</target>
         <note>Context:
 File: src/Adapter/Cart/CartPresenter.php:379</note>
       </trans-unit>
@@ -122,19 +122,19 @@ File: themes/classic/templates/customer/history.tpl:41</note>
       </trans-unit>
       <trans-unit id="5d4710f9a8250b13164a82c94d5b00d1" approved="yes">
         <source>Order reference</source>
-        <target xml:lang="ja">注文ID</target>
+        <target xml:lang="ja">注文番号</target>
         <note>Context:
 File: themes/classic/templates/customer/history.tpl:38</note>
       </trans-unit>
       <trans-unit id="44749712dbec183e983dcd78a7736c41" approved="yes">
         <source>Date</source>
-        <target xml:lang="ja">日付</target>
+        <target xml:lang="ja">注文日</target>
         <note>Context:
 File: themes/classic/templates/customer/history.tpl:39</note>
       </trans-unit>
       <trans-unit id="0eede552438475bdfe820c13f24c9399" approved="yes">
         <source>Total price</source>
-        <target xml:lang="ja">合計価格</target>
+        <target xml:lang="ja">合計金額</target>
         <note>Context:
 File: themes/classic/templates/customer/history.tpl:40</note>
       </trans-unit>
@@ -240,6 +240,12 @@ File: controllers/front/GuestTrackingController.php:151</note>
   </file>
   <file original="src/Adapter/Order/OrderPresenter.php" source-language="en" target-language="ja" datatype="plaintext">
     <body>
+      <trans-unit id="7589dfa9a5a899e9701335164c9ab520" approved="yes">
+        <source>Shipping and handling</source>
+        <target xml:lang="ja">送料‧手数料</target>
+        <note>Context:
+File: src/Adapter/Order/OrderPresenter.php:229</note>
+      </trans-unit>
       <trans-unit id="4b78ac8eb158840e9638a3aeb26c4a9d" approved="yes">
         <source>Tax</source>
         <target xml:lang="ja">税</target>
@@ -402,7 +408,7 @@ File: themes/classic/templates/checkout/_partials/steps/shipping.tpl:115</note>
       </trans-unit>
       <trans-unit id="d93651d012e77dac5581b08db33195b2" approved="yes">
         <source>If you would like to add a comment about your order, please write it in the field below.</source>
-        <target xml:lang="ja">ご要望等ありましたら、入力してください</target>
+        <target xml:lang="ja">ショップに関するお問い合わせ、ご質問など、商品名を選択し、下欄に入力後「送信する」をクリックしてください。</target>
         <note>Context:
 File: themes/classic/templates/checkout/_partials/steps/shipping.tpl:83</note>
       </trans-unit>
@@ -534,7 +540,7 @@ File: themes/StarterTheme/templates/checkout/order-confirmation.tpl:4</note>
       </trans-unit>
       <trans-unit id="ded7f0d0397bb3138bfe1e40dcdb560a" approved="yes">
         <source>Order reference %reference%</source>
-        <target xml:lang="ja">ご注文参照コード： %reference%</target>
+        <target xml:lang="ja">注文番号： %reference%</target>
         <note>Context:
 File: themes/StarterTheme/templates/checkout/order-confirmation.tpl:59</note>
       </trans-unit>
@@ -562,7 +568,7 @@ File: themes/classic/templates/checkout/order-confirmation.tpl:11</note>
       </trans-unit>
       <trans-unit id="b8627ccd34529880156129d02a9ca37d" approved="yes">
         <source>An email has been sent to your mail address %email%.</source>
-        <target xml:lang="ja">お客様の登録アドレスにメールを送信いたしました %email%。</target>
+        <target xml:lang="ja">ご登録のメールアドレス (%email%) にご注文内容の確認メールを送りいたします。</target>
         <note>Context:
 File: themes/classic/templates/checkout/order-confirmation.tpl:16</note>
       </trans-unit>
@@ -580,7 +586,7 @@ File: themes/classic/templates/checkout/order-confirmation.tpl:23</note>
       </trans-unit>
       <trans-unit id="f5d74ea75357b5e139854c14f8e24fe3" approved="yes">
         <source>Order details</source>
-        <target xml:lang="ja">注文詳細</target>
+        <target xml:lang="ja">注文明細</target>
         <note>Context:
 File: themes/classic/templates/checkout/order-confirmation.tpl:58</note>
       </trans-unit>
@@ -592,7 +598,7 @@ File: themes/classic/templates/checkout/order-confirmation.tpl:94</note>
       </trans-unit>
       <trans-unit id="00cd7d0890cd975da95799c32764c9ce" approved="yes">
         <source>Order reference: %reference%</source>
-        <target xml:lang="ja">ご注文参照コード： %reference%</target>
+        <target xml:lang="ja">注文番号： %reference%</target>
         <note>Context:
 File: themes/classic/templates/checkout/order-confirmation.tpl:60</note>
       </trans-unit>
@@ -654,7 +660,7 @@ File: themes/classic/templates/customer/discount.tpl:88</note>
     <body>
       <trans-unit id="914419aa32f04011357d3b604a86d7eb" approved="yes">
         <source>Carrier</source>
-        <target xml:lang="ja">配送</target>
+        <target xml:lang="ja">配送方法</target>
         <note>Context:
 File: themes/classic/templates/customer/order-detail.tpl:191</note>
       </trans-unit>
@@ -690,7 +696,7 @@ File: themes/classic/templates/customer/order-detail.tpl:197</note>
       </trans-unit>
       <trans-unit id="5068c162a60b5859f973f701333f45c5" approved="yes">
         <source>Tracking number</source>
-        <target xml:lang="ja">追跡番号</target>
+        <target xml:lang="ja">お問い合わせ番号</target>
         <note>Context:
 File: themes/classic/templates/customer/order-detail.tpl:200</note>
       </trans-unit>

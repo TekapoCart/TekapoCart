@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="effdb9ce6c5d44df31b89d7069c8e0fb" approved="yes">
         <source>Alias</source>
-        <target xml:lang="zh-TW">別名：</target>
+        <target xml:lang="zh-TW">代號</target>
         <note>Context:
 File: classes/form/CustomerAddressFormatter.php:190</note>
       </trans-unit>
@@ -155,6 +155,11 @@ File: themes/classic/templates/customer/password-new.tpl:63</note>
         <note>Context:
 File: themes/classic/templates/customer/_partials/order-messages.tpl:59</note>
       </trans-unit>
+      <trans-unit id="1625e29c02062efe5dbc42c3efeeebd5">
+        <source>-- please choose country --</source>
+        <target xml:lang="zh-TW">-- 請選擇國家</target>
+        <note>Line: 59</note>
+      </trans-unit>
       <trans-unit id="deb10517653c255364175796ace3553f" approved="yes">
         <source>Product</source>
         <target xml:lang="zh-TW">商品</target>
@@ -233,7 +238,7 @@ File: themes/classic/modules/contactform/views/templates/widget/contactform.tpl:
       </trans-unit>
       <trans-unit id="e9cb217697088a98b1937d111d936281" approved="yes">
         <source>Attachment</source>
-        <target xml:lang="zh-TW">附件</target>
+        <target xml:lang="zh-TW">檔案</target>
         <note>Context:
 File: themes/classic/modules/contactform/views/templates/widget/contactform.tpl:90</note>
       </trans-unit>

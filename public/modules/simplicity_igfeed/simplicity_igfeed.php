@@ -146,13 +146,13 @@ class Simplicity_Igfeed extends Module
                     array(
                         'type' => 'text',
                         'label' => 'Client ID',
-                        'required' => true,
+                        'required' => false,
                         'name' => 'client_id'
                     ),
                     array(
                         'type' => 'text',
                         'label' => 'Client Secret',
-                        'required' => true,
+                        'required' => false,
                         'name' => 'client_secret'
                     ),
                     array(
@@ -182,14 +182,14 @@ class Simplicity_Igfeed extends Module
                         )
                     )
                 ),
+                'submit' => array(
+                    'title' => $this->trans('Save', array(), 'Admin.Actions')
+                ),
                 'buttons' => array(
-                    'save-and-stay' => array(
-                        'title' => $this->l('Save'),
-                        'name' => 'subMOD',
-                        'type' => 'submit',
-                        'id' => 'configuration_form_submit_btn_save',
-                        'class' => 'btn btn-default pull-right',
-                        'icon' => 'process-icon-save',
+                    array(
+                        'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
+                        'title' => '返回佈景模組',
+                        'icon' => 'process-icon-back'
                     )
                 )
             )

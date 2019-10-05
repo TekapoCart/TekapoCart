@@ -94,7 +94,7 @@ File: pdf/invoice.summary-tab.tpl:30</note>
     <body>
       <trans-unit id="1e860e56970a81a1ba3e1fcb7fccc846" approved="yes">
         <source>Order Reference</source>
-        <target xml:lang="ja">注文ID</target>
+        <target xml:lang="ja">注文番号</target>
         <note>Context:
 File: pdf/order-slip.summary-tab.tpl:27</note>
       </trans-unit>
@@ -582,7 +582,7 @@ File: pdf/order-return.summary-tab.tpl:30</note>
       </trans-unit>
       <trans-unit id="44749712dbec183e983dcd78a7736c41" approved="yes">
         <source>Date</source>
-        <target xml:lang="ja">日付</target>
+        <target xml:lang="ja">注文日</target>
         <note>Context:
 File: pdf/order-return.summary-tab.tpl:31</note>
       </trans-unit>

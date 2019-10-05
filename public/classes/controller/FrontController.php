@@ -916,7 +916,13 @@ class FrontControllerCore extends Controller
      */
     public function setMedia()
     {
-        $this->registerStylesheet('theme-main', '/assets/css/theme.css', ['media' => 'all', 'priority' => 50]);
+        // suzy: 2019-08-10 特定佈景選取特定 theme.css
+        $cssName = 'theme.css';
+        if (substr($this->context->shop->theme->getName(), 0, 15) == 'simplicity_dark') {
+            $cssName = 'theme_dark.css';
+        }
+        $this->registerStylesheet('theme-main', '/assets/css/' . $cssName, ['media' => 'all', 'priority' => 50]);
+        // $this->registerStylesheet('theme-main', '/assets/css/theme.css', ['media' => 'all', 'priority' => 50]);
         $this->registerStylesheet('theme-custom', '/assets/css/custom.css', ['media' => 'all', 'priority' => 1000]);
 
         if ($this->context->language->is_rtl) {
@@ -950,7 +956,8 @@ class FrontControllerCore extends Controller
     {
         /* @see P3P Policies (http://www.w3.org/TR/2002/REC-P3P-20020416/#compact_policies) */
         header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
-        header('Powered-By: PrestaShop');
+        // suzy: 2019-08-30 隱藏 Powered-By
+        // header('Powered-By: PrestaShop');
     }
 
     /**
@@ -1550,7 +1557,24 @@ class FrontControllerCore extends Controller
     {
         $quantity_discount_price = Configuration::get('PS_DISPLAY_DISCOUNT_PRICE');
 
+        // suzy: 2019-08-10 後台控制 body background css style
+        $body_bg_css = trim(Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS'));
+        $body_bg_css = strlen($body_bg_css) > 0 ? $body_bg_css : '';
+
+        // suzy: 2019-08-10 後台控制 mobile type
+        $mobile_type = trim(Configuration::get('SIMPLICITY_LOGO_MOBILE_TYPE'));
+        $mobile_type = (int) $mobile_type > 0 ? $mobile_type : 0;
+
+        // suzy: 2019-08-20 後台控制 logo max-width
+        $logo_max_width = trim(Configuration::get('SIMPLICITY_LOGO_MAX_WIDTH_CSS'));
+        $logo_max_width = strlen($logo_max_width) > 0 ? $logo_max_width : '';
+
         return array(
+
+            'body_bg_css' => $body_bg_css,
+            'mobile_type' => $mobile_type,
+            'logo_max_width' => $logo_max_width,
+
             'display_taxes_label' => $this->getDisplayTaxesLabel(),
             'low_quantity_threshold' => (int) Configuration::get('PS_LAST_QTIES'),
             'is_b2b' => (bool) Configuration::get('PS_B2B_ENABLE'),
@@ -1631,6 +1655,10 @@ class FrontControllerCore extends Controller
             'lat' => Configuration::get('PS_STORES_CENTER_LAT'),
 
             'logo' => (Configuration::get('PS_LOGO')) ? _PS_IMG_ . Configuration::get('PS_LOGO') : '',
+
+            // suzy: 2019-06-02 支援通知信 LOGO
+            'logo_mail' => (Configuration::get('PS_LOGO_MAIL')) ? _PS_IMG_ . Configuration::get('PS_LOGO_MAIL') : '',
+
             'stores_icon' => (Configuration::get('PS_STORES_ICON')) ? _PS_IMG_ . Configuration::get('PS_STORES_ICON') : '',
             'favicon' => (Configuration::get('PS_FAVICON')) ? _PS_IMG_ . Configuration::get('PS_FAVICON') : '',
             'favicon_update_time' => Configuration::get('PS_IMG_UPDATE_TIME'),

@@ -368,7 +368,7 @@ File: themes/classic/templates/customer/_partials/order-detail-no-return.tpl:32<
       </trans-unit>
       <trans-unit id="0eede552438475bdfe820c13f24c9399" approved="yes">
         <source>Total price</source>
-        <target xml:lang="ja">合計価格</target>
+        <target xml:lang="ja">合計金額</target>
         <note>Context:
 File: themes/classic/templates/customer/_partials/order-detail-no-return.tpl:33</note>
       </trans-unit>
@@ -672,8 +672,18 @@ File: themes/classic/modules/ps_brandlist/views/templates/_partials/brand_form.t
   </file>
   <file original="themes/classic/modules/ps_categoryproducts/views/templates/hook/ps_categoryproducts.tpl" source-language="en" target-language="ja" datatype="plaintext">
     <body>
-      
-      
+      <trans-unit id="f55e0a28b86c2ab66ac632ab9ddf1833" approved="yes">
+        <source>%s other product in the same category:</source>
+        <target xml:lang="ja">関連商品</target>
+        <note>Context:
+File: themes/classic/modules/ps_categoryproducts/views/templates/hook/ps_categoryproducts.tpl:28</note>
+      </trans-unit>
+      <trans-unit id="bebb44f38b03407098d48198c1d0aaa5" approved="yes">
+        <source>%s other products in the same category:</source>
+        <target xml:lang="ja">関連商品</target>
+        <note>Context:
+File: themes/classic/modules/ps_categoryproducts/views/templates/hook/ps_categoryproducts.tpl:30</note>
+      </trans-unit>
     </body>
   </file>
   <file original="themes/classic/modules/ps_emailalerts/views/templates/hook/my-account-footer.tpl" source-language="en" target-language="ja" datatype="plaintext">

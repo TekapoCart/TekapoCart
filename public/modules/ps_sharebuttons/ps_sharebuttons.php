@@ -32,7 +32,7 @@ use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 
 class Ps_Sharebuttons extends Module implements WidgetInterface
 {
-    protected static $networks = array('Facebook', 'Twitter', 'Google', 'Pinterest');
+    protected static $networks = array('Facebook', 'Line', 'Weibo', 'Google', 'Twitter', 'Pinterest'); // suzy: 2018-07-02 新增 Line、Weibo
 
     private $templateFile;
 
@@ -129,6 +129,14 @@ class Ps_Sharebuttons extends Module implements WidgetInterface
                     'input' => $fields,
                     'submit' => array(
                         'title' => $this->trans('Save', array(), 'Admin.Actions')
+                    ),
+                    // suzy: 2019-08-30 新增「返回佈景模組」
+                    'buttons' => array(
+                        array(
+                            'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
+                            'title' => '返回佈景模組',
+                            'icon' => 'process-icon-back'
+                        )
                     )
                 )
             )
@@ -179,6 +187,24 @@ class Ps_Sharebuttons extends Module implements WidgetInterface
                 'label' => $this->trans('Share', array(), 'Modules.Sharebuttons.Shop'),
                 'class' => 'facebook',
                 'url' => 'http://www.facebook.com/sharer.php?u='.$sharing_url,
+            );
+        }
+
+        // suzy: 2018-06-30 新增 LINE
+        if (Configuration::get('PS_SC_LINE')) {
+            $social_share_links['line'] = array(
+                'label' => 'Line',
+                'class' => 'line hidden-md-up',
+                'url' => 'http://line.me/R/msg/text/?'.$sharing_url,
+            );
+        }
+
+        // suzy: 2018-07-02 新增 微博
+        if (Configuration::get('PS_SC_WEIBO')) {
+            $social_share_links['weibo'] = array(
+                'label' => '微博',
+                'class' => 'weibo',
+                'url' => 'http://v.t.sina.com.cn/share/share.php?title='.$sharing_name.'&url='.$sharing_url,
             );
         }
 

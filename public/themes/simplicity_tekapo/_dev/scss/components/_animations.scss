@@ -1,0 +1,10 @@
+@keyframes change {
+
+  0%, 45%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50%, 95% {
+    transform: translate3d(0, -50%, 0);
+  }
+
+}

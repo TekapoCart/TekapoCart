@@ -182,7 +182,7 @@ File: controllers/admin/AdminEmailsController.php:235</note>
       </trans-unit>
       <trans-unit id="e379446940f88886aba80367a10fa4cc" approved="yes">
         <source>Test message -- Prestashop</source>
-        <target xml:lang="zh-TW">測試郵件 – PrestaShop</target>
+        <target xml:lang="zh-TW">測試郵件 - TekapoCart</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:236</note>
       </trans-unit>
@@ -932,7 +932,7 @@ File: controllers/admin/AdminEmployeesController.php:219</note>
       </trans-unit>
       <trans-unit id="cce99c598cfdb9773ab041d54c3d973a" approved="yes">
         <source>Profile</source>
-        <target xml:lang="zh-TW">基本資料描述</target>
+        <target xml:lang="zh-TW">角色</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:88</note>
       </trans-unit>
@@ -974,7 +974,7 @@ File: controllers/admin/AdminEmployeesController.php:108</note>
       </trans-unit>
       <trans-unit id="485263210a4a12e35e3426045e3301b1" approved="yes">
         <source>Add new employee</source>
-        <target xml:lang="zh-TW">新增新員工</target>
+        <target xml:lang="zh-TW">新增帳號</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:169</note>
       </trans-unit>
@@ -998,7 +998,7 @@ File: controllers/admin/AdminEmployeesController.php:309</note>
       </trans-unit>
       <trans-unit id="57452e2dda1a10cfe2cc34c575e6b9d0" approved="yes">
         <source>Permission profile</source>
-        <target xml:lang="zh-TW">所屬角色權限</target>
+        <target xml:lang="zh-TW">所屬部門</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:360</note>
       </trans-unit>
@@ -1220,25 +1220,25 @@ File: controllers/admin/AdminRequestSqlController.php:150</note>
       </trans-unit>
       <trans-unit id="10d8074bf1e35bcac9911c5fe26261cf" approved="yes">
         <source>Select your default file encoding</source>
-        <target xml:lang="zh-TW">選擇默認文件編碼</target>
+        <target xml:lang="zh-TW">選擇預設編碼</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:61</note>
       </trans-unit>
       <trans-unit id="bbed49e90ee59ac450e80b492f452d0e" approved="yes">
         <source>Edit this SQL query</source>
-        <target xml:lang="zh-TW">編輯此SQL查詢</target>
+        <target xml:lang="zh-TW">編輯此 SQL 查詢</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:98</note>
       </trans-unit>
       <trans-unit id="9b5c3d6674b3af1946fb50faae7079e2" approved="yes">
         <source>SQL query name</source>
-        <target xml:lang="zh-TW">SQL查詢名稱</target>
+        <target xml:lang="zh-TW">SQL 查詢名稱</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:143</note>
       </trans-unit>
       <trans-unit id="26420bd9e260012164a58a0f002e4821" approved="yes">
         <source>Add new SQL query</source>
-        <target xml:lang="zh-TW">新增SQL查詢</target>
+        <target xml:lang="zh-TW">新增 SQL 查詢</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:308</note>
       </trans-unit>
@@ -1400,7 +1400,7 @@ File: controllers/admin/AdminShopGroupController.php:229</note>
     <body>
       <trans-unit id="69d18853cb35672b765f55ae37ae4967" approved="yes">
         <source>Add new profile</source>
-        <target xml:lang="zh-TW">新增設定檔</target>
+        <target xml:lang="zh-TW">新增角色</target>
         <note>Context:
 File: controllers/admin/AdminProfilesController.php:111</note>
       </trans-unit>
@@ -1949,7 +1949,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/ad
       </trans-unit>
       <trans-unit id="454036c51196464f8d9c84ded5808985" approved="yes">
         <source>Maximum size for attached files</source>
-        <target xml:lang="zh-TW">附件的大小上限</target>
+        <target xml:lang="zh-TW">檔案的大小上限</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/administration.html.twig:83</note>
       </trans-unit>

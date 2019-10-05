@@ -56,7 +56,9 @@ class Ps_CustomerSignIn extends Module implements WidgetInterface
 
         if ($logged) {
             $customerName = $this->getTranslator()->trans(
-                '%firstname% %lastname%',
+            // suzy: 2018-07 只顯示名子
+            //'%firstname% %lastname%',
+                '%firstname%',
                 array(
                     '%firstname%' => $this->context->customer->firstname,
                     '%lastname%' => $this->context->customer->lastname,

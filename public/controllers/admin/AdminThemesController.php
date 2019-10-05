@@ -763,7 +763,7 @@ class AdminThemesControllerCore extends AdminController
             if ($key >= 28) {
                 unset($pages[$key]);
             }
-            if (in_array($page['id_meta'], [5, 7, 9, 10, 11, 12, 18, 19, 20, 21, 23, 24, 25])) {
+            if (in_array($page['id_meta'], [5, 7, 9, 10, 20, 23])) {
                 unset($pages[$key]);
             }
         }

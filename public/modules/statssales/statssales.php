@@ -83,7 +83,7 @@ class statssales extends ModuleGraph
 			<div class="panel-heading">
 				'.$this->displayName.'
 			</div>
-			<h4>'.$this->trans('Guide', array(), 'Admin.Global').'</h4>
+			<!-- suzy: 2019-08-15 隱藏贅字 <h4>'.$this->trans('Guide', array(), 'Admin.Global').'</h4>
 			<div class="alert alert-warning">
 				<h4>'.$this->trans('About order statuses', array(), 'Modules.Statssales.Admin').'</h4>
 				<p>
@@ -97,7 +97,7 @@ class statssales extends ModuleGraph
                     .$this->trans('You should often consult this screen, as it allows you to quickly monitor your shop\'s sustainability. It also allows you to monitor multiple time periods.', array(), 'Modules.Statssales.Admin').'<br/>'
                     .$this->trans('Only valid orders are graphically represented.', array(), 'Modules.Statssales.Admin')
                 .'</p>
-			</div>
+			</div>-->
 			<form action="'.Tools::safeOutput($_SERVER['REQUEST_URI']).'" method="post" class="form-horizontal alert">
 				<div class="row">
 					<div class="col-lg-4 col-lg-offset-7">

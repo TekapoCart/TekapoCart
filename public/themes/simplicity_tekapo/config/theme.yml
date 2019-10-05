@@ -4,3 +4,73 @@ display_name: simplicity tekapo
 version: 1.0.0
 assets:
   use_parent_assets: true
+  js:
+    cms:
+      - id: jquery-bxslider
+        path: js/jquery/plugins/bxslider/jquery.bxslider.js
+        priority: 500
+        position: bottom
+      - id: js-cms
+        path: assets/js/cms.js
+        priority: 501
+        position: bottom
+  css:
+    cms:
+      - id: css-bxslider
+        path: js/jquery/plugins/bxslider/jquery.bxslider.css
+        priority: 500
+        media: all
+
+global_settings:
+  hooks:
+    modules_to_hook:
+      displayBanner:
+        - ps_imageslider
+      displayNav1:
+        - simplicity_headerbar
+      displayTop:
+        - simplicity_logo
+        - ps_mainmenu
+      displayHome:
+        - simplicity_cmsblock
+      displayFooterBefore:
+        - ps_socialfollow
+      displayFooter:
+        - ps_customtext
+      displayProductAdditionalInfo:
+        - ps_sharebuttons
+
+  image_types:
+    cart_default:
+      width: 125
+      height: 125
+      scope: []
+    small_default:
+      width: 300
+      height: 300
+      scope: [products, categories, manufacturers, suppliers]
+    medium_default:
+      width: 452
+      height: 452
+      scope: [manufacturers, suppliers]
+    home_default:
+      width: 500
+      height: 500
+      scope: [products]
+    large_default:
+      width: 800
+      height: 800
+      scope: [products, manufacturers, suppliers]
+    category_default:
+      width: 141
+      height: 180
+      scope: [categories]
+    stores_default:
+      width: 170
+      height: 115
+      scope: [stores]
+
+theme_settings:
+  default_layout: layout-full-width
+  layouts:
+    contact: layout-full-width

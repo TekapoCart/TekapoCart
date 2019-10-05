@@ -40,7 +40,6 @@ class ContactControllerCore extends FrontController
         $this->setTemplate('contact');
     }
 
-    /* suzy: 2019-02-03 隱藏聯絡我們的麵包屑
     public function getBreadcrumbLinks()
     {
         $breadcrumb = parent::getBreadcrumbLinks();
@@ -52,5 +51,5 @@ class ContactControllerCore extends FrontController
 
         return $breadcrumb;
     }
-    */
+
 }

@@ -7,7 +7,7 @@
         color: $gray-darker;
         background: white;
         + button .search {
-          color: $brand-primary;
+          color: $brand-primary-hover;
         }
       }
       border: none;
@@ -24,7 +24,7 @@
       right: 0.125rem;
       color: $gray;
       .search:hover {
-        color: $brand-primary;
+        color: $brand-primary-hover;
       }
     }
   }
@@ -41,12 +41,13 @@
 /* featuredproducts.scss */
 @mixin product-miniature-desktop($thumb-width, $divider) {
   img {
-    width: $thumb-width;
-    height: $thumb-width;
+    // width: $thumb-width;
+    // height: $thumb-width;
+    width: 100%;
   }
   .thumbnail-container {
     width: $thumb-width + 7;
-    height: $thumb-width + 70;
+    height: $thumb-width + 90;
   }
   .highlighted-informations {
     width: $thumb-width + 7;
@@ -54,7 +55,7 @@
   .product-description {
     width: $thumb-width + 7;
   }
-  margin: 15px calc((100% - #{$thumb-width + 7} * #{$divider}) / (#{$divider} * 2));
+  margin: 25px calc((100% - #{$thumb-width + 7} * #{$divider}) / (#{$divider} * 2));
 
   .sticker {
     width: $thumb-width / 3.46;
@@ -64,21 +65,23 @@
   }
 }
 @mixin product-miniature-desktop-left-column($thumb-width, $divider) {
-  margin: 15px calc((100% - #{$thumb-width + 7} * (#{$divider} - 1) ) / ( (#{$divider} - 1) * 2));
+  margin: 25px calc((100% - #{$thumb-width + 7} * (#{$divider} - 1) ) / ( (#{$divider} - 1) * 2));
 }
 @mixin product-miniature-desktop-no-desc($thumb-width) {
   .thumbnail-container {
-    height: $thumb-width;
+    height: #{$thumb-width + 7};
+    margin-bottom: 0;
   }
 }
 @mixin product-miniature-mobile($thumb-width, $divider) {
   img {
-    width: $thumb-width;
-    height: $thumb-width;
+    // width: $thumb-width;
+    // height: $thumb-width;
+    width: 100%;
   }
   .thumbnail-container {
     width: $thumb-width + 4;
-    height: $thumb-width + 4 + 70;
+    height: $thumb-width + 4 + 90;
   }
   .highlighted-informations {
     width: $thumb-width + 4;
@@ -91,13 +94,79 @@
   .sticker {
     width: $thumb-width / 3.46;
     height: $thumb-width / 3.46;
-    top: 0 - $thumb-width / 10;
-    left: 0 - $thumb-width / 15;
+    top: 0 - $thumb-width / (10 + 2); /* 微調 + 2 */
+    left: 0 - $thumb-width / (15 + 2); /* 微調 + 2 */
   }
 }
 @mixin product-miniature-mobile-no-desc($thumb-width) {
   padding-bottom: 0;
   .thumbnail-container {
     height: $thumb-width + 4;
+    margin-bottom: 0;
+  }
+}
+
+@mixin share-buttons($social-media, $hover-postfix) {
+  background-image: url("../img/#{$social-media}.svg");
+  &.icon-gray {
+    background-image: url("../img/#{$social-media}-gray.svg");
+    &:hover {
+      background-image: url("../img/#{$social-media}#{$hover-postfix}.svg");
+    }
+  }
+}
+
+@mixin button-variant-lighten($color, $background, $border) {
+  $active-background: lighten($background, 10%);
+  $active-border: lighten($border, 12%);
+
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+  // @include box-shadow($btn-box-shadow);
+
+  @include hover {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &:focus,
+  &.focus {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+    // Remove the gradient for the pressed/active state
+    background-image: none;
+    // @include box-shadow($btn-active-box-shadow);
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: $color;
+      background-color: lighten($background, 17%);
+      border-color: lighten($border, 25%);
+    }
+  }
+
+  &.disabled,
+  &:disabled {
+    &:focus,
+    &.focus {
+      background-color: $background;
+      border-color: $border;
+    }
+    @include hover {
+      background-color: $background;
+      border-color: $border;
+    }
   }
 }

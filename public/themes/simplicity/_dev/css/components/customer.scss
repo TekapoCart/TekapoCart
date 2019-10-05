@@ -72,10 +72,9 @@
 }
 /*** Most of the customer accpunt pages ***/
 .page-customer-account {
-  #content {
-    /*@include customer-area-box;*/
-    font-size: $font-size-sm;
 
+  #content {
+    font-size: $font-size-sm;
     .order-actions {
       a {
         padding: 0 0.125rem;
@@ -92,6 +91,12 @@
       font-size: $base-font-size;
     }
   }
+
+  &.page-guest-tracking {
+    #content {
+      font-size: initial;
+    }
+  }
 }
 /*** Login page ***/
 .page-authentication {
@@ -105,13 +110,14 @@
 .page-addresses {
   .address {
     /*@include box-shadow;*/
-    border: 1px solid black;
+    border: 1px solid $darker-border-color;
     /*background: white;*/
     margin-bottom: 1.875rem;
     font-size: $font-size-sm;
     color: $gray-darker;
     .address-body {
       padding: 1rem;
+      background: $brand-background;
       h4 {
         font-size: $base-font-size;
         font-weight: $font-weight-bold;
@@ -158,7 +164,7 @@
   }
 }
 /*** Order details page ***/
-.page-order-detail {
+.page-order-detail, .page-guest-tracking {
   /*font-size: 0.875rem;*/
   /*color: $gray;*/
   .box {
@@ -309,7 +315,8 @@
         span.link-item {
           display: block;
           height: 100%;
-          border: 1px solid black;
+          border: 1px solid $darker-border-color;
+          background: $brand-background;
           @include customer-area-base-box;
         }
         i {
@@ -322,7 +329,7 @@
         &:hover {
           color: $gray-darker;
           i {
-            color: $brand-primary;
+            color: $brand-primary-hover;
           }
         }
       }

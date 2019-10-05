@@ -274,6 +274,26 @@ File: controllers/admin/AdminGroupsController.php:295</note>
         <note>Context:
 File: controllers/admin/AdminGroupsController.php:330</note>
       </trans-unit>
+      <trans-unit id="d38245fbe312b2dafef8450b67e94f50" approved="yes">
+        <source>%group_name% - All persons without a customer account or customers that are not logged in.</source>
+        <target xml:lang="zh-TW">%group_name% - 未成為會員，無結帳記錄。</target>
+        <note>Line: 612</note>
+      </trans-unit>
+      <trans-unit id="5125d0fd7b81fee95b7e4b7689a878a9" approved="yes">
+        <source>%group_name% - All persons who placed an order through Guest Checkout.</source>
+        <target xml:lang="zh-TW">%group_name% - 未成為會員，有結帳記錄。</target>
+        <note>Line: 613</note>
+      </trans-unit>
+      <trans-unit id="96f090b06e329e3d192c0ea3701f8cb5" approved="yes">
+        <source>%group_name% - All persons who created an account on this site.</source>
+        <target xml:lang="zh-TW">%group_name% - 有成為會員，有結帳記錄。</target>
+        <note>Line: 614</note>
+      </trans-unit>
+      <trans-unit id="a2ce271cf6d8afe81168fbfc4ccb492c" approved="yes">
+        <source>PrestaShop has three default customer groups:</source>
+        <target xml:lang="zh-TW">TekapoCart 有三個預設群組：</target>
+        <note>Line: 616</note>
+      </trans-unit>
     </body>
   </file>
   <file original="controllers/admin/AdminReferrersController.php" source-language="en" target-language="zh-TW" datatype="plaintext">

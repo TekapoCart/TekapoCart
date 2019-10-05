@@ -134,7 +134,7 @@ File: modules/ps_emailgenerator/templates/core/password.php:24</note>
       </trans-unit>
       <trans-unit id="53423ed6d9f522de8d41539456628786" approved="yes">
         <source>Your new {shop_name} login details</source>
-        <target xml:lang="zh-TW">您的 {shop_name} 登錄詳情</target>
+        <target xml:lang="zh-TW">{shop_name} 登入通知</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/password.php:21</note>
       </trans-unit>
@@ -276,7 +276,7 @@ File: modules/ps_emailgenerator/templates/core/contact.php:23</note>
       </trans-unit>
       <trans-unit id="53659d236625358b98797389fd2504fa" approved="yes">
         <source>Attached file:</source>
-        <target xml:lang="zh-TW">附件：</target>
+        <target xml:lang="zh-TW">檔案：</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/contact.php:24</note>
       </trans-unit>
@@ -718,7 +718,7 @@ File: modules/ps_emailgenerator/templates/core/payment.php:25</note>
     <body>
       <trans-unit id="280f51a8705636bd7e7ba595529411d4" approved="yes">
         <source>Password reset request for {shop_name}</source>
-        <target xml:lang="zh-TW">{shop_name}密碼重置請求</target>
+        <target xml:lang="zh-TW">{shop_name} 密碼重設請求</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/password_query.php:21</note>
       </trans-unit>

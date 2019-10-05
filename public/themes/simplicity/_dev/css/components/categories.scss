@@ -20,8 +20,9 @@
   }
 }
 .block-category {
-  /*min-height: 13.75rem;*/
+  // min-height: 13.75rem;
   margin-bottom: 1.563rem;
+
   #category-description {
     p,
     strong {
@@ -89,7 +90,7 @@
     color: $gray-darker;
     padding: $small-space $medium-space;
     &:hover {
-      background: $brand-primary;
+      background: $brand-primary-hover;
       color: white;
       text-decoration: none;
     }
@@ -138,7 +139,7 @@
     background: $gray-lighter;
     padding: $small-space $medium-space;
     &:hover {
-      background: $brand-primary;
+      background: $brand-primary-hover;
       color: white;
       text-decoration: none;
     }
@@ -202,23 +203,22 @@
     line-height: 2.5rem;
   }
   .page-list {
-    background: white;
+    // background: $brand-background;
     padding: 0.375rem;
     margin-bottom: 0;
-    /*@include box-shadow-light;*/
     li {
       display: inline;
     }
   }
   a {
-    color: black;
+    color: $gray-darker;
     font-weight: $font-weight-bold;
-    font-size: 1rem;
+    font-size: 18px;
     &:not(.previous):not(.next) {
       letter-spacing: 0.125rem;
     }
     &:not(.disabled):hover {
-      color: $brand-primary;
+      color: $brand-primary-hover;
     }
   }
   .previous {
@@ -231,10 +231,8 @@
     color: $gray;
   }
   .current a {
-    /*color: $brand-primary;*/
-    color: $gray;
+    color: $brand-primary-hover;
     text-decoration: none;
-    /*font-size: 1.25rem;*/
   }
 
 }
@@ -255,7 +253,7 @@
     color: $gray-darker;
     margin-right: $small-space;
     margin-bottom: $small-space;
-    background: white;
+    background: $brand-background;
     padding: 0.625rem;
     display: inline-block;
     font-size: $font-size-xs;
@@ -280,7 +278,7 @@
       font-size: $font-size-sm;
     }
     .current {
-      color: $brand-primary;
+      color: $brand-primary-hover;
     }
     .material-icons {
       color: #888;
@@ -300,7 +298,7 @@
     }
     li[data-depth="0"] {
       padding-bottom: 20px;
-      border-bottom: 1px solid #e3e3e3;
+      border-bottom: 1px solid $category-border-color;
       margin-bottom: 8px;
     }
     li[data-depth="0"] > a {
@@ -342,7 +340,7 @@
     .add,
     .remove {
       &:hover {
-        color: $brand-primary;
+        color: $brand-primary-hover;
       }
     }
     .remove {
@@ -356,7 +354,7 @@
       cursor: pointer;
       margin-left: 2px;
       &:hover {
-        color: $brand-primary;
+        color: $brand-primary-hover;
       }
     }
     .arrow-down {
@@ -404,6 +402,7 @@
       #search_filters_wrapper {
         margin-left: -30px;
         margin-right: -30px;
+        display: none;
       }
       #search_filter_controls {
         text-align: center;

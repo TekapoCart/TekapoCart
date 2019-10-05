@@ -1,0 +1,32 @@
+.cms-category-desc {
+  margin-bottom: 50px;
+}
+
+.cms-page-list,
+.cms-subcategory-list {
+
+  li {
+    width: 33%;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+
+  img {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .cms-page-title,
+  .cms-subcategory-title {
+
+  }
+
+  .cms-page-desc,
+  .cms-subcategory-desc {
+    color: $gray-darker;
+    font-size: 14px;
+  }
+
+}

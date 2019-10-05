@@ -28,7 +28,7 @@ File: classes/lang/KeysReference/TabLang.php:29</note>
       </trans-unit>
       <trans-unit id="d3da97e2d9aee5c8fbe03156ad051c99" approved="yes">
         <source>More</source>
-        <target xml:lang="ja">もっと</target>
+        <target xml:lang="ja">もっと見る</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:30</note>
       </trans-unit>

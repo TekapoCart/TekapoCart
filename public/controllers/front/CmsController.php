@@ -68,6 +68,12 @@ class CmsControllerCore extends FrontController
         if (Validate::isLoadedObject($this->cms)) {
             $adtoken = Tools::getAdminToken('AdminCmsContent' . (int) Tab::getIdFromClassName('AdminCmsContent') . (int) Tools::getValue('id_employee'));
             if (!$this->cms->isAssociatedToShop() || !$this->cms->active && Tools::getValue('adtoken') != $adtoken) {
+
+                // suzy: 2019-09-07 不讓 Browser Keep Cache
+                header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+                header("Cache-Control: post-check=0, pre-check=0", false);
+                header("Pragma: no-cache");
+
                 $this->redirect_after = '404';
                 $this->redirect();
             } else {
@@ -76,6 +82,12 @@ class CmsControllerCore extends FrontController
         } elseif (Validate::isLoadedObject($this->cms_category) && $this->cms_category->active) {
             $this->assignCase = 2;
         } else {
+
+            // suzy: 2019-09-07 不讓 Browser Keep Cache
+            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+            header("Cache-Control: post-check=0, pre-check=0", false);
+            header("Pragma: no-cache");
+
             $this->redirect_after = '404';
             $this->redirect();
         }
@@ -203,14 +215,41 @@ class CmsControllerCore extends FrontController
         $categoryCms['sub_categories'] = array();
         $categoryCms['cms_pages'] = array();
 
+        // suzy: 2019-05-23 支援圖片
+        $img_dir = _PS_IMG_DIR_ . 'cms/page/category/';
+        $img_path = _PS_IMG_ . 'cms/page/category/';
+        if (file_exists($img_dir . $categoryCms['cms_category']['id'] . '.jpg')) {
+            $categoryCms['cms_category']['image'] = $img_path . $categoryCms['cms_category']['id'] . '.jpg';
+        } elseif (file_exists($img_dir . $categoryCms['cms_category']['id'] . '.png')) {
+            $categoryCms['cms_category']['image'] = $img_path . $categoryCms['cms_category']['id'] . '.png';
+        }
+
         foreach ($this->cms_category->getSubCategories($this->context->language->id) as $subCategory) {
             $categoryCms['sub_categories'][$subCategory['id_cms_category']] = $subCategory;
             $categoryCms['sub_categories'][$subCategory['id_cms_category']]['link'] = $this->context->link->getCMSCategoryLink($subCategory['id_cms_category'], $subCategory['link_rewrite']);
+
+            // suzy: 2019-05-19 支援圖片
+            $img_dir = _PS_IMG_DIR_ . 'cms/page/category/';
+            $img_path = _PS_IMG_ . 'cms/page/category/';
+            if (file_exists($img_dir . $subCategory['id_cms_category'] . '.jpg')) {
+                $categoryCms['sub_categories'][$subCategory['id_cms_category']]['image'] = $img_path . $subCategory['id_cms_category'] . '.jpg';
+            } elseif (file_exists($img_dir . $subCategory['id_cms_category'] . '.png')) {
+                $categoryCms['sub_categories'][$subCategory['id_cms_category']]['image'] = $img_path . $subCategory['id_cms_category'] . '.png';
+            }
         }
 
         foreach (CMS::getCMSPages($this->context->language->id, (int) $this->cms_category->id, true, (int) $this->context->shop->id) as $cmsPages) {
             $categoryCms['cms_pages'][$cmsPages['id_cms']] = $cmsPages;
             $categoryCms['cms_pages'][$cmsPages['id_cms']]['link'] = $this->context->link->getCMSLink($cmsPages['id_cms'], $cmsPages['link_rewrite']);
+
+            // suzy: 2019-05-19 支援圖片
+            $img_dir = _PS_IMG_DIR_ . 'cms/page/';
+            $img_path = _PS_IMG_ . 'cms/page/';
+            if (file_exists($img_dir . $cmsPages['id_cms'] . '.jpg')) {
+                $categoryCms['cms_pages'][$cmsPages['id_cms']]['image'] = $img_path . $cmsPages['id_cms'] . '.jpg';
+            } elseif (file_exists($img_dir . $cmsPages['id_cms'] . '.png')) {
+                $categoryCms['cms_pages'][$cmsPages['id_cms']]['image'] = $img_path . $cmsPages['id_cms'] . '.png';
+            }
         }
 
         return $categoryCms;

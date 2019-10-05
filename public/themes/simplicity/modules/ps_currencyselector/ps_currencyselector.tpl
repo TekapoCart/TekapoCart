@@ -23,26 +23,36 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 <div id="_desktop_currency_selector">
-  <div class="currency-selector-wrapper">
-    <span id="currency-selector-label" class="hidden-md-up">{*l s='Currency:' d='Shop.Theme.Global'*}<i class="material-icons attach_money">attach_money</i></span>
-    <div class="currency-selector dropdown js-dropdown">
-      <button data-target="#" data-toggle="dropdown" class="hidden-sm-down btn-unstyle" aria-haspopup="true" aria-expanded="false" aria-label="{l s='Currency dropdown' d='Shop.Theme.Global'}">
-        {*<span class="expand-more">{$current_currency.iso_code}{$current_currency.sign}</span>
-        <i class="material-icons expand-more">&#xE5C5;</i>*}
-        <i class="material-icons attach_money">attach_money</i>
-      </button>
-      <ul class="dropdown-menu hidden-sm-down" aria-labelledby="currency-selector-label">
-        {foreach from=$currencies item=currency}
-          <li {if $currency.current} class="current" {/if}>
-            <a title="{$currency.name}" rel="nofollow" href="{$currency.url}" class="dropdown-item">{$currency.iso_code} {$currency.name}{*$currency.sign*}</a>
-          </li>
-        {/foreach}
-      </ul>
-      <select class="link hidden-md-up" aria-labelledby="currency-selector-label">
-        {foreach from=$currencies item=currency}
-          <option value="{$currency.url}"{if $currency.current} selected="selected"{/if}>{$currency.iso_code} {$currency.name}{*$currency.sign*}</option>
-        {/foreach}
-      </select>
+    <div class="currency-selector-wrapper">
+        {*<span id="currency-selector-label"><span class="hidden-md-up">{l s='Currency:' d='Shop.Theme.Global'}</span></span>*}
+        <div class="currency-selector dropdown js-dropdown">
+            <button data-target="#" data-toggle="dropdown" class="hidden-sm-down btn-unstyle" aria-haspopup="true" aria-expanded="false"
+                    aria-label="{l s='Currency dropdown' d='Shop.Theme.Global'}">
+                {*<span class="expand-more">{$current_currency.iso_code}{$current_currency.sign}</span>
+                <i class="material-icons expand-more">&#xE5C5;</i>*}
+                <i class="material-icons attach_money">attach_money</i>
+            </button>
+            <ul class="dropdown-menu hidden-sm-down" aria-labelledby="currency-selector-label">
+                {foreach from=$currencies item=currency}
+                    <li {if $currency.current} class="current" {/if}>
+                        <a title="{$currency.name}" rel="nofollow" href="{$currency.url}"
+                           class="dropdown-item">{$currency.iso_code} {$currency.name}{*$currency.sign*}</a>
+                    </li>
+                {/foreach}
+            </ul>
+            {*<select class="link hidden-md-up" aria-labelledby="currency-selector-label">
+                {foreach from=$currencies item=currency}
+                    <option value="{$currency.url}"{if $currency.current} selected="selected"{/if}>{$currency.iso_code} {$currency.name}</option>
+                {/foreach}
+            </select>*}
+            <mdc-select class="hidden-md-up" data-type="filled">
+                <select class="link" name="mdc-select" slot="select">
+                    {foreach from=$currencies item=currency}
+                        <option value="{$currency.url}"{if $currency.current} selected="selected"{/if}>{$currency.iso_code} {$currency.sign}</option>
+                    {/foreach}
+                </select>
+                <label>{l s='Currency:' d='Shop.Theme.Global'}</label>
+            </mdc-select>
+        </div>
     </div>
-  </div>
 </div>

@@ -2,6 +2,7 @@ TRUNCATE TABLE `ps_connections`;
 TRUNCATE TABLE `ps_connections_source`;
 TRUNCATE TABLE `ps_emailsubscription`;
 TRUNCATE TABLE `ps_log`;
+TRUNCATE TABLE `ps_log_email`;
 TRUNCATE TABLE `ps_module_history`;
 TRUNCATE TABLE `ps_address`;
 TRUNCATE TABLE `ps_cart`;
@@ -12,6 +13,7 @@ TRUNCATE TABLE `ps_customer_group`;
 TRUNCATE TABLE `ps_customer_message`;
 TRUNCATE TABLE `ps_customer_thread`;
 TRUNCATE TABLE `ps_mail`;
+TRUNCATE TABLE `ps_page`;
 TRUNCATE TABLE `ps_order_carrier`;
 TRUNCATE TABLE `ps_order_detail`;
 TRUNCATE TABLE `ps_order_history`;
@@ -50,6 +52,11 @@ UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='PS_MAIL_PASSWD';
 
 UPDATE `ps_configuration` SET `value`='admin@example.com' WHERE `name`='PS_SHOP_EMAIL';
 UPDATE `ps_configuration` SET `value`='admin@example.com' WHERE `name`='MA_MERCHANT_MAILS';
+
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='PS_FOLLOWUP_SECURE_KEY';
+
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='PS_FOLLOW_UP_SMTP_USER';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='PS_FOLLOW_UP_SMTP_PASSWD';
 
 
 -- SmilePay 商家代號

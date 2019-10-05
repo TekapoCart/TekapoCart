@@ -140,6 +140,14 @@ class Ps_Viewedproduct extends Module implements WidgetInterface
                 'submit' => array(
                     'title' => $this->trans('Save', array(), 'Admin.Actions'),
                 ),
+                // suzy: 2019-08-30 新增「返回佈景模組」
+                'buttons' => array(
+                    array(
+                        'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
+                        'title' => '返回佈景模組',
+                        'icon' => 'process-icon-back'
+                    )
+                )
             ),
         );
 
@@ -240,11 +248,22 @@ class Ps_Viewedproduct extends Module implements WidgetInterface
             $arr = explode(',', $this->context->cookie->viewed);
         }
 
-        if (!in_array($idProduct, $arr)) {
-            $arr[] = $idProduct;
-
-            $this->context->cookie->viewed = trim(implode(',', $arr), ',');
+        // suzy: 2019-09-03 改寫存取規則 - 最近瀏覽的排在前面
+//        if (!in_array($idProduct, $arr)) {
+//            $arr[] = $idProduct;
+//
+//            $this->context->cookie->viewed = trim(implode(',', $arr), ',');
+//        }
+        $key = array_search ($idProduct, $arr);
+        if ($key !== false) {
+            unset($arr[$key]);
         }
+        $arr[] = $idProduct;
+        $viewNumber = (int) Configuration::get('PRODUCTS_VIEWED_NBR');
+        if (count($arr) > $viewNumber) {
+            $arr = array_slice($arr, count($arr) - $viewNumber);
+        }
+        $this->context->cookie->viewed = trim(implode(',', $arr), ',');
     }
 
     protected function getViewedProductIds()
@@ -254,7 +273,16 @@ class Ps_Viewedproduct extends Module implements WidgetInterface
             $arr = array_diff($arr, array($this->currentProductId));
         }
 
-        return array_slice($arr, 0, (int) (Configuration::get('PRODUCTS_VIEWED_NBR')));
+        // suzy: 2019-09-03 改寫存取規則 - 先檢查商品是否還存在資料庫
+        // return array_slice($arr, 0, (int) (Configuration::get('PRODUCTS_VIEWED_NBR')));
+        $arr = array_slice($arr, 0, (int) (Configuration::get('PRODUCTS_VIEWED_NBR')));
+        $productIds = [];
+        $sql = 'SELECT id_product FROM ' . _DB_PREFIX_ . 'product WHERE id_product IN (' . implode(',', array_map('intval', $arr)) . ')';
+        $rows = Db::getInstance()->executeS($sql);
+        foreach ($rows as $key => $value) {
+            $productIds[] = $value['id_product'];
+        }
+        return array_intersect($arr, $productIds);
     }
 
     protected function getViewedProducts()

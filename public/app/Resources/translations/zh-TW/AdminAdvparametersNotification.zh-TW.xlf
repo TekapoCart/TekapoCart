@@ -482,7 +482,7 @@ File: controllers/admin/AdminImportController.php:4188</note>
       </trans-unit>
       <trans-unit id="931bbbb741d025e3ff25ee3c2e72f414" approved="yes">
         <source>Linking Accessories...</source>
-        <target xml:lang="zh-TW">連接附件...</target>
+        <target xml:lang="zh-TW">連接檔案...</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:4449</note>
       </trans-unit>
@@ -636,7 +636,7 @@ File: controllers/admin/AdminEmailsController.php:166</note>
     <body>
       <trans-unit id="0ee028bcc2a0101d4d65745086eefc03" approved="yes">
         <source>When saving the query, only the "SELECT" SQL statement is allowed.</source>
-        <target xml:lang="zh-TW">保存查詢時，只允許使用“SELECT”SQL語句。</target>
+        <target xml:lang="zh-TW">只允許使用 SELECT 語法。</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:115</note>
       </trans-unit>

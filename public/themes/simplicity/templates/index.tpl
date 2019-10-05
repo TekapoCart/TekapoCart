@@ -35,3 +35,8 @@
         {/block}
       </section>
     {/block}
+
+    {* suzy: 2019-05-21 新增 hook: 首頁 主內容下方滿版 *}
+    {block name="content_after"}
+        {hook h="displayHomeAfter"}
+    {/block}

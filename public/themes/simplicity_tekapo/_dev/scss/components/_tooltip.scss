@@ -1,0 +1,39 @@
+.t-tooltip {
+  position: relative;
+  .popup {
+    position: absolute;
+    width: 67%;
+    top: 54px;
+    left: 16.1%;
+    display: none;
+    padding: 30px 15px;
+    box-shadow: 0 3px 6px rgba(0,0,0,.1);
+    font-size: 13px;
+    text-align: left;
+    background: #fff;
+    ol {
+      padding-left: 15px;
+    }
+  }
+
+  &:hover {
+    .popup {
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .t-tooltip {
+    .popup {
+      width: 77%;
+      top: 52px;
+      left: 0;
+      padding: 5px;
+      font-size: 12px;
+      h6 {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

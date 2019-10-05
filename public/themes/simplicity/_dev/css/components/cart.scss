@@ -42,7 +42,7 @@
 .cart-grid-body {
   a.label {
     &:hover {
-      color: $brand-primary;
+      color: $brand-primary-hover;
     }
   }
   .card-block {
@@ -106,11 +106,16 @@
     /*text-align: center;*/
   }
   .promo-input {
+    // color: $gray-darker;
+    // border: $input-border-color 1px solid;
+    // text-indent: 0.625rem;
+    height: 2.3rem;
     color: $gray-darker;
-    border: $gray 1px solid;
-    height: 2.5rem;
-    text-indent: 0.625rem;
+    background-color: $input-background;
+    border: $input-btn-border-width solid $input-border-color;
+    padding: 0.175rem 0.5rem;
     width: 50%;
+
     + button {
       margin-top: -4px;
       /*text-transform: capitalize;*/
@@ -204,7 +209,7 @@
     padding: 1rem 0;
   }
   .cart-item {
-    border-bottom: 1px solid $gray-light;
+    border-bottom: 1px solid $divider-border-color;
     &:last-child {
       border-bottom: 0;
     }

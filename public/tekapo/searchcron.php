@@ -29,6 +29,11 @@ if (!defined('_PS_ADMIN_DIR_')) {
 }
 include(_PS_ADMIN_DIR_.'/../config/config.inc.php');
 
+// suzy: 2019-09-03 不讓 Browser Keep Cache
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 if (!Tools::getValue('id_shop')) {
     Context::getContext()->shop->setContext(Shop::CONTEXT_ALL);
 } else {
@@ -44,5 +49,7 @@ ini_set('max_execution_time', 7200);
 Search::indexation(Tools::getValue('full'));
 
 if (Tools::getValue('redirect')) {
-    Tools::redirectAdmin($_SERVER['HTTP_REFERER'].'&conf=4');
+    // suzy: 2019-09-03 修正重建整個索引時，正式機 $_SERVER['HTTP_REFERER'] 抓不到東西
+    // Tools::redirectAdmin($_SERVER['HTTP_REFERER'].'&conf=4');
+    Tools::redirectAdmin('index.php?controller=AdminSearchConf');
 }

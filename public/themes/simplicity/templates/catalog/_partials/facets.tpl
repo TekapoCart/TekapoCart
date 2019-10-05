@@ -26,7 +26,7 @@
 {if $facets|@count > 0}
   <div id="search_filters">
     {block name='facets_title'}
-      <h4 class="text-uppercase {*hidden-sm-down*}">{*<i class="material-icons">filter_list</i>*}{l s='Filter By' d='Shop.Theme.Actions'}</h4>
+      <h4 class="{*text-uppercase hidden-sm-down*}">{*<i class="material-icons">filter_list</i>*}{l s='Filter By' d='Shop.Theme.Actions'}</h4>
     {/block}
 
     {block name='facets_clearall_button'}

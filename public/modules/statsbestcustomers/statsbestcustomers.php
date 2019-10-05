@@ -124,7 +124,7 @@ class statsbestcustomers extends ModuleGrid
 		<div class="panel-heading">
 			'.$this->displayName.'
 		</div>
-		<h4>'.$this->trans('Guide', array(), 'Admin.Global').'</h4>
+		<!-- suzy: 2019-08-15 隱藏贅字 <h4>'.$this->trans('Guide', array(), 'Admin.Global').'</h4>
 			<div class="alert alert-warning">
 				<h4>'.$this->trans('Develop clients\' loyalty', array(), 'Modules.Statsbestcustomers.Admin').'</h4>
 				<div>
@@ -137,7 +137,7 @@ class statsbestcustomers extends ModuleGrid
 					</ul>
 					'.$this->trans('These operations encourage clients to buy products and visit your online store more regularly.', array(), 'Modules.Statsbestcustomers.Admin').'
 				</div>
-			</div>
+			</div>-->
 		'.$this->engine($engine_params).'
 		<a class="btn btn-default export-csv" href="'.Tools::safeOutput($_SERVER['REQUEST_URI'].'&export=').'1">
 			<i class="icon-cloud-upload"></i> '.$this->trans('CSV Export', array(), 'Admin.Global').'

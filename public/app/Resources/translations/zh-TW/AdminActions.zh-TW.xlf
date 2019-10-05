@@ -738,7 +738,7 @@ File: admin-dev/themes/default/template/controllers/return/helpers/form/form.tpl
     <body>
       <trans-unit id="d7778d0c64b6ba21494c97f77a66885a" approved="yes">
         <source>Filter</source>
-        <target xml:lang="zh-TW">過濾</target>
+        <target xml:lang="zh-TW">篩選</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/modules/filters.tpl:78</note>
       </trans-unit>

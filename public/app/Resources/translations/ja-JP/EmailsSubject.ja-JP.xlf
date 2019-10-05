@@ -60,7 +60,7 @@ File: classes/PaymentModule.php:635</note>
       </trans-unit>
       <trans-unit id="fb077ecba55e5552916bde26d8b9e794" approved="yes">
         <source>Order confirmation</source>
-        <target xml:lang="ja">ご注文確認</target>
+        <target xml:lang="ja">ご注文の確認</target>
         <note>Context:
 File: classes/PaymentModule.php:841</note>
       </trans-unit>
@@ -140,7 +140,7 @@ File: controllers/admin/AdminImportController.php:4641</note>
     <body>
       <trans-unit id="abe01af80b6bc9f1fa34feaa068336b2" approved="yes">
         <source>New message regarding your order</source>
-        <target xml:lang="ja">ご注文に関する新しいメッセージ</target>
+        <target xml:lang="ja">ご注文に関しまして</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:650</note>
       </trans-unit>

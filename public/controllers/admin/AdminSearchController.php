@@ -200,6 +200,7 @@ class AdminSearchControllerCore extends AdminController
             }
         }
 
+        /* suzy: 2019-08-08 隱藏連外區塊
         if (!is_numeric(trim($this->query)) && !Validate::isEmail($this->query)) {
             $iso_lang = Tools::strtolower(Context::getContext()->language->iso_code);
             $iso_country = Tools::strtolower(Country::getIsoById(Configuration::get('PS_COUNTRY_DEFAULT')));
@@ -212,6 +213,7 @@ class AdminSearchControllerCore extends AdminController
                 }
             }
         }
+        */
     }
 
     /**

@@ -7,10 +7,6 @@ body#checkout {
     border: none;
     margin-bottom: 0;
     /*@include box-shadow;*/
-    .logo {
-      max-height: 45px;
-      width: auto;
-    }
     .logo-wrapper {
       display: inline-block;
       padding-top: 0.8rem;
@@ -22,9 +18,6 @@ body#checkout {
       flex: 0 0 15px;
       margin-top: 0.1875rem;
     }
-  }
-  a:hover {
-    color: #1a8196;
   }
   section#content {
     margin-bottom: 1.563rem;
@@ -38,7 +31,7 @@ body#checkout {
   section.checkout-step {
     /*@include box-shadow;*/
     /*background-color: white;*/
-    border-bottom: 1px rgba(0, 0, 0, 0.25) solid;
+    border-bottom: 1px $brand-border-color solid;
     padding: 0.9375rem;
     &:last-child {
       border: 0;
@@ -146,7 +139,7 @@ body#checkout {
       }
       .custom-radio {
         /*margin-right: $medium-space;*/
-        margin: 0 15px;
+        margin: 3px 15px 0 15px;
       }
       .payment-option {
         margin-bottom: 0.5rem;
@@ -163,13 +156,17 @@ body#checkout {
       flex-wrap: wrap;
     }
     .address-item {
-      background: $gray-lighter;
+      // background: $gray-lighter;
+      background: $brand-background;
       flex: 0 0 49%;
       margin-bottom: $small-space;
       border: 3px solid transparent;
       &.selected {
-        background: white;
-        border: $brand-primary 3px solid;
+        // background: $brand-background;
+        border: $brand-primary-hover 3px solid;
+      }
+      .custom-radio {
+        margin-right: 3px;
       }
     }
     .address-alias {
@@ -287,7 +284,7 @@ body#checkout {
   }
   .modal-content {
     padding: $medium-space;
-    background-color: $gray-light;
+    background-color: $brand-background;
   }
   .cart-summary-products {
 
@@ -315,7 +312,7 @@ body#checkout {
   #cart-summary-product-list {
     font-size: $font-size-sm;
     img {
-      border: $gray-light 1px solid;
+      // border: $gray-light 1px solid;
       width: 3.125rem;
     }
     .media-body {
@@ -387,13 +384,23 @@ body#checkout {
     textarea {
       max-width: 100%;
       margin-bottom: 10px;
-      padding-left: 5px;
-      border-color: $gray-darker;
+      // padding-left: 5px;
+      // border-color: $gray-darker;
+      background: $gray-light;
+      color: $gray;
+      border: $input-btn-border-width solid $input-border-color;
+      padding: 0.5rem 1rem;
+      &:focus {
+        background-color: $input-background;
+        outline: none;
+        border: $input-btn-border-width solid $input-border-color;
+        color: $gray-darker;
+      }
     }
   }
   #footer {
     /*@include box-shadow;*/
-    padding: 0.9375rem;
+    /*padding: 0.9375rem;*/
     /*background: white;*/
     color: $gray;
   }
@@ -415,7 +422,7 @@ body#checkout {
 #order-items {
   /*border-right: $gray-light 1px solid;*/
   hr {
-    border-top-color: $gray-darker;
+    border-top-color: $darker-border-color;
   }
   table {
     width: 100%;

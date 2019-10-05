@@ -196,7 +196,8 @@ class LogoUploader
         $shopName = $this->shop->name;
 
         // suzy: 2018-12-26 避免檔名出現中文
-        /*
+        $shopName = 'TC';
+
         $logoName = Tools::link_rewrite($shopName)
             . '-'
             . $logoPrefix
@@ -204,7 +205,6 @@ class LogoUploader
             . (int) Configuration::get('PS_IMG_UPDATE_TIME')
             . (int) $shopId . $fileExtension
         ;
-        */
 
         if ($this->shop->getContext() == Shop::CONTEXT_ALL
             || $shopId == 0

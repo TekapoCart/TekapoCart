@@ -176,7 +176,7 @@ File: controllers/admin/AdminShopUrlController.php:547</note>
     <body>
       <trans-unit id="7a1920d61156abc05a60135aefe8bc67" approved="yes">
         <source>Default</source>
-        <target xml:lang="zh-TW">默認</target>
+        <target xml:lang="zh-TW">預設</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductQuantity.php:271</note>
       </trans-unit>
@@ -232,7 +232,7 @@ File: admin-dev/themes/default/template/controllers/referrers/helpers/view/view.
     <body>
       <trans-unit id="d7778d0c64b6ba21494c97f77a66885a" approved="yes">
         <source>Filter</source>
-        <target xml:lang="zh-TW">過濾</target>
+        <target xml:lang="zh-TW">篩選</target>
         <note>Context:
 File: modules/statssales/statssales.php:112</note>
       </trans-unit>
@@ -820,7 +820,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="4c2a8fe7eaf24721cc7a9f0175115bd4" approved="yes">
         <source>Message</source>
-        <target xml:lang="zh-TW">訊息</target>
+        <target xml:lang="zh-TW">內容</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:862</note>
       </trans-unit>
@@ -844,7 +844,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="41de6d6cfb8953c021bbe4ba0701c8a1" approved="yes">
         <source>Messages</source>
-        <target xml:lang="zh-TW">訊息</target>
+        <target xml:lang="zh-TW">備註 / 回傳資訊</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:786</note>
       </trans-unit>
@@ -996,13 +996,13 @@ File: modules/ps_categorytree/ps_categorytree.php:213</note>
     <body>
       <trans-unit id="ca0dbad92a874b2f69b549293387925e" approved="yes">
         <source>Code</source>
-        <target xml:lang="zh-TW">優惠折扣碼</target>
+        <target xml:lang="zh-TW">折扣碼</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:76</note>
       </trans-unit>
       <trans-unit id="502996d9790340c5fd7b86a5b93b1c9f" approved="yes">
         <source>Priority</source>
-        <target xml:lang="zh-TW">優先順序</target>
+        <target xml:lang="zh-TW">排序</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:131</note>
       </trans-unit>

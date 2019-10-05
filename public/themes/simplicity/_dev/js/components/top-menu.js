@@ -70,23 +70,44 @@ export default class TopMenu extends DropDown {
     });
     prestashop.on('responsive update', function(event) {
       $('.js-sub-menu').removeAttr('style');
-      self.toggleMobileMenu();
+      // self.toggleMobileMenu();
+      self.closeMobileMenu();
+
     });
     super.init();
   }
 
+  // suzy: 追加
+  closeMobileMenu() {
+      if (document.querySelector('#mobile_top_menu_wrapper')) {
+          $('#mobile_top_menu_wrapper').hide();
+          $('#header').removeClass('is-open');
+          $('#notifications, #wrapper, #footer').show();
+          $('.header-bottom').show();
+          $('#menu-icon .material-icons').removeClass('on');
+          $('#_mobile_logo').removeClass('on');
+          $('#menu-icon .material-icons').text('menu');
+      } else if (document.querySelector('#mobile_top_menu_msc_wrapper')) {
+          document.querySelector('#mobile_top_menu_msc_wrapper').curtainCall();
+      }
+  }
+
   toggleMobileMenu() {
-      $('#header').toggleClass('is-open');
+      // $('#header').toggleClass('is-open');
       if ($('#mobile_top_menu_wrapper').is(":visible")) {
+          $('#header').addClass('is-open'); // suzy: 追加
           $('#notifications, #wrapper, #footer').hide();
           $('.header-bottom').hide(); // suzy: 追加
           $('#menu-icon .material-icons').addClass('on'); // suzy: 追加
           $('#_mobile_logo').addClass('on'); // suzy: 追加
+          $('#menu-icon .material-icons').text('close'); // suzy: 追加
       } else {
+          $('#header').removeClass('is-open'); // suzy: 追加
           $('#notifications, #wrapper, #footer').show();
           $('.header-bottom').show(); // suzy: 追加
           $('#menu-icon .material-icons').removeClass('on'); // suzy: 追加
           $('#_mobile_logo').removeClass('on'); // suzy: 追加
+          $('#menu-icon .material-icons').text('menu'); // suzy: 追加
       }
   }
 

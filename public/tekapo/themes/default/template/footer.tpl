@@ -118,26 +118,5 @@
 </div>
 {/if}
 
-{* suzy: 2018-06-13 加入 Tawk *}
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API=Tawk_API||{};
-    Tawk_API.visitor = {
-        name : '{$employee_name}',
-        email : '{$employee_email}',
-        hash : '{$tawk_hash}'
-    };
-    var Tawk_LoadStart=new Date();
-    (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/5b1941a210b99c7b36d4b88b/default';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-    })();
-</script>
-<!--End of Tawk.to Script-->
-
 </body>
 </html>

@@ -4,12 +4,14 @@ $(document).ready(function () {
     var $searchBox    = $searchWidget.find('input[type=text]');
     var searchURL     = $searchWidget.attr('data-search-controller-url');
 
+    // suzy: 2019-08-12 箭頭換掉
+
     $.widget('prestashop.psBlockSearchAutocomplete', $.ui.autocomplete, {
         _renderItem: function (ul, product) {
             return $("<li>")
                 .append($("<a>")
                     .append($("<span>").html(product.category_name).addClass("category"))
-                    .append($("<span>").html(' > ').addClass("separator"))
+                    .append($("<span>").html(' ▸ ').addClass("separator"))
                     .append($("<span>").html(product.name).addClass("product"))
                 ).appendTo(ul)
             ;

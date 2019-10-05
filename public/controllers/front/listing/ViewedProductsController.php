@@ -41,7 +41,9 @@ class ViewedProductsControllerCore extends FrontController
 
                 if (is_array($productIds)) {
                     foreach ($productIds as $productId) {
-                        if ($this->currentProductId != $productId) {
+                        // suzy: 2019-09-03 獨立頁不會有 $currentProductId 所以做特別處理
+                        $currentProductId = isset($this->currentProductId) ? $this->currentProductId : 0;
+                        if ($currentProductId != $productId) {
                             $products_for_template[] = $presenter->present(
                                 $presentationSettings,
                                 $assembler->assembleProduct(array('id_product' => $productId)),
@@ -67,8 +69,30 @@ class ViewedProductsControllerCore extends FrontController
     protected function getViewedProductIds()
     {
         $arr = array_reverse(explode(',', $this->context->cookie->viewed));
-        return array_slice($arr, 0, (int) (Configuration::get('PRODUCTS_VIEWED_NBR')));
+//        if (null !== $this->currentProductId && in_array($this->currentProductId, $arr)) {
+//            $arr = array_diff($arr, array($this->currentProductId));
+//        }
 
+        // suzy: 2019-09-03 改寫存取規則 - 先檢查商品是否還存在資料庫
+        // return array_slice($arr, 0, (int) (Configuration::get('PRODUCTS_VIEWED_NBR')));
+        $arr = array_slice($arr, 0, (int) (Configuration::get('PRODUCTS_VIEWED_NBR')));
+        $productIds = [];
+        $sql = 'SELECT id_product FROM ' . _DB_PREFIX_ . 'product WHERE id_product IN (' . implode(',', array_map('intval', $arr)) . ')';
+        $rows = Db::getInstance()->executeS($sql);
+        foreach ($rows as $key => $value) {
+            $productIds[] = $value['id_product'];
+        }
+        return array_intersect($arr, $productIds);
+    }
+
+    // suzy: 2019-09-05 調整麵包屑
+    public function getBreadcrumbLinks()
+    {
+        $breadcrumb = parent::getBreadcrumbLinks();
+        $breadcrumb['links'][] = [
+            'title' => $this->trans('Price drop', array(), 'Shop.Theme.Catalog'),
+        ];
+        return $breadcrumb;
     }
 
 }

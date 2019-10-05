@@ -173,7 +173,7 @@ File: controllers/admin/AdminGendersController.php:146</note>
       </trans-unit>
       <trans-unit id="88972b928c146c793fc9bd5c41a27b95" approved="yes">
         <source>Add new social title</source>
-        <target xml:lang="zh-TW">新增稱謂</target>
+        <target xml:lang="zh-TW">新增稱號</target>
         <note>Context:
 File: controllers/admin/AdminGendersController.php:101</note>
       </trans-unit>
@@ -1863,7 +1863,7 @@ File: admin-dev/themes/default/template/controllers/referrers/helpers/view/view.
       </trans-unit>
       <trans-unit id="208b51d8918ba3cdd679a5ec275df129" approved="yes">
         <source>Filter by product:</source>
-        <target xml:lang="zh-TW">商品過濾：</target>
+        <target xml:lang="zh-TW">商品篩選：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/referrers/helpers/view/view.tpl:112</note>
       </trans-unit>
