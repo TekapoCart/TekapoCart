@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,38 +19,69 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2018 PrestaShop SA
+ *  @copyright 2007-2019 PrestaShop SA
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
 
 include_once _PS_MODULE_DIR_.'paypal/classes/AbstractMethodPaypal.php';
+include_once _PS_MODULE_DIR_.'paypal/controllers/front/abstract.php';
 
-class PaypalEcInitModuleFrontController extends ModuleFrontController
+/**
+ * Prepare EC payment
+ */
+class PaypalEcInitModuleFrontController extends PaypalAbstarctModuleFrontController
 {
+    /* @var $method AbstractMethodPaypal*/
+    protected $method;
+
+    public function init()
+    {
+        parent::init();
+        $this->values['getToken'] = Tools::getvalue('getToken');
+        $this->values['credit_card'] = Tools::getvalue('credit_card');
+        $this->values['short_cut'] = 0;
+        $this->setMethod(AbstractMethodPaypal::load('EC'));
+    }
+    /**
+     * @see FrontController::postProcess()
+     */
     public function postProcess()
     {
-        $paypal = Module::getInstanceByName('paypal');
-        $method_ec = AbstractMethodPaypal::load('EC');
         try {
-            $url = $method_ec->init(array('use_card'=>Tools::getValue('credit_card')));
+            $this->method->setParameters($this->values);
+            $url = $this->method->init();
+            if ($this->values['getToken']) {
+                $this->jsonValues = array('success' => true, 'token' => $this->method->token);
+            } else {
+                $this->redirectUrl = $url.'&useraction=commit';
+            }
         } catch (PayPal\Exception\PPConnectionException $e) {
-            $ex_detailed_message = $paypal->l('Error connecting to ') . $e->getUrl();
-            Tools::redirect(Context::getContext()->link->getModuleLink('paypal', 'error', array('error_msg' => $ex_detailed_message)));
+            $this->errors['error_msg'] = $this->module->l('Error connecting to ', pathinfo(__FILE__)['filename']) . $e->getUrl();
         } catch (PayPal\Exception\PPMissingCredentialException $e) {
-            $ex_detailed_message = $e->errorMessage();
-            Tools::redirect(Context::getContext()->link->getModuleLink('paypal', 'error', array('error_msg' => $ex_detailed_message)));
+            $this->errors['error_msg'] = $e->errorMessage();
         } catch (PayPal\Exception\PPConfigurationException $e) {
-            $ex_detailed_message = $paypal->l('Invalid configuration. Please check your configuration file');
-            Tools::redirect(Context::getContext()->link->getModuleLink('paypal', 'error', array('error_msg' => $ex_detailed_message)));
+            $this->errors['error_msg'] = $this->module->l('Invalid configuration. Please check your configuration file', pathinfo(__FILE__)['filename']);
+        } catch (PaypalAddons\classes\PaypalException $e) {
+            $this->errors['error_code'] = $e->getCode();
+            $this->errors['error_msg'] = $e->getMessage();
+            $this->errors['msg_long'] = $e->getMessageLong();
         } catch (Exception $e) {
-            Tools::redirect(Context::getContext()->link->getModuleLink('paypal', 'error', array('error_code' => $e->getCode())));
+            $this->errors['error_code'] = $e->getCode();
+            $this->errors['error_msg'] = $e->getMessage();
         }
 
-        if (Tools::getvalue('getToken')) {
-            die($method_ec->token);
+        if (!empty($this->errors)) {
+            if ($this->values['getToken']) {
+                $this->jsonValues = array('success' => false, 'redirect_link' => Context::getContext()->link->getModuleLink($this->name, 'error', $this->errors));
+            } else {
+                $this->redirectUrl = Context::getContext()->link->getModuleLink($this->name, 'error', $this->errors);
+            }
         }
+    }
 
-        Tools::redirect($url.'&useraction=commit');
+    public function setMethod($method)
+    {
+        $this->method = $method;
     }
 }

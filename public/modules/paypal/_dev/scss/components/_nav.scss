@@ -1,0 +1,56 @@
+.paypal-nav {
+  padding-bottom: 2px;
+  margin-bottom: 20px;
+  margin-left: 8px;
+  border-bottom: 1px solid $secondary;
+
+  > .nav-item {
+
+    > .link {
+      padding-bottom: 4px;
+      padding-left: 0;
+      margin-right: 30px;
+      font-size: $font-size-base;
+      color: $primary-light;
+
+      &:hover,
+      &:focus {
+        padding-bottom: 4px;
+        padding-left: 0;
+        text-decoration: none;
+        background: transparent;
+
+        > span {
+          background: transparent;
+        }
+      }
+
+      &:focus,
+      &:active {
+        font-weight: $font-weight-bold;
+        color: $primary;
+      }
+    }
+
+    &.active {
+
+      > .link {
+        font-weight: $font-weight-bold;
+        color: $primary;
+        background: transparent;
+
+        &:hover,
+        &:focus {
+          color: $primary;
+          background: transparent;
+        }
+
+        > span {
+          padding-bottom: 4px;
+          border-bottom: 3px solid $primary;
+        }
+      }
+    }
+  }
+}
+

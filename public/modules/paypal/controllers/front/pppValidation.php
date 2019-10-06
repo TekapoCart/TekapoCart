@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,44 +19,62 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2018 PrestaShop SA
+ *  @copyright 2007-2019 PrestaShop SA
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
 
 include_once _PS_MODULE_DIR_.'paypal/classes/AbstractMethodPaypal.php';
+include_once _PS_MODULE_DIR_.'paypal/controllers/front/abstract.php';
 
-class PaypalPppValidationModuleFrontController extends ModuleFrontController
+/**
+ * Validate PPP payment
+ */
+class PaypalPppValidationModuleFrontController extends PaypalAbstarctModuleFrontController
 {
+    public function init()
+    {
+        parent::init();
+        $this->values['short_cut'] = Tools::getvalue('short_cut');
+        $this->values['paymentId'] = Tools::getvalue('paymentId');
+        $this->values['payerId'] = Tools::getvalue('PayerID');
+    }
+
+    /**
+     * @see FrontController::postProcess()
+     */
     public function postProcess()
     {
         $method_ppp = AbstractMethodPaypal::load('PPP');
-        $paypal = Module::getInstanceByName('paypal');
+        $paypal = Module::getInstanceByName($this->name);
         try {
+            $method_ppp->setParameters($this->values);
             $method_ppp->validation();
+            $cart = Context::getContext()->cart;
+            $customer = new Customer($cart->id_customer);
+            $this->redirectUrl = 'index.php?controller=order-confirmation&id_cart='.$cart->id.'&id_module='.$paypal->id.'&id_order='.$paypal->currentOrder.'&key='.$customer->secure_key;
         } catch (PayPal\Exception\PayPalConnectionException $e) {
             $decoded_message = Tools::jsonDecode($e->getData());
-            $ex_detailed_message = $decoded_message->message;
-            Tools::redirect(Context::getContext()->link->getModuleLink('paypal', 'error', array('error_msg' => $ex_detailed_message)));
+            $this->errors['error_code'] = $e->getCode();
+            $this->errors['error_msg'] = $decoded_message->message;
+            $this->errors['msg_long'] = $decoded_message->name.' - '.$decoded_message->details[0]->issue;
         } catch (PayPal\Exception\PayPalInvalidCredentialException $e) {
-            $ex_detailed_message = $e->errorMessage();
-            Tools::redirect(Context::getContext()->link->getModuleLink('paypal', 'error', array('error_msg' => $ex_detailed_message)));
+            $this->errors['error_msg'] = $e->errorMessage();
         } catch (PayPal\Exception\PayPalMissingCredentialException $e) {
-            $ex_detailed_message = $paypal->l('Invalid configuration. Please check your configuration file');
-            Tools::redirect(Context::getContext()->link->getModuleLink('paypal', 'error', array('error_msg' => $ex_detailed_message)));
+            $this->errors['error_msg'] = $paypal->l('Invalid configuration. Please check your configuration file.', pathinfo(__FILE__)['filename']);
         } catch (Exception $e) {
-            Tools::redirect(Context::getContext()->link->getModuleLink('paypal', 'error', array('error_msg' => $e->getMessage())));
+            $this->errors['error_code'] = $e->getCode();
+            $this->errors['error_msg'] = $e->getMessage();
+        } finally {
+            $this->transaction_detail = $method_ppp->getDetailsTransaction();
         }
 
         Context::getContext()->cookie->__unset('paypal_plus_payment');
-
-        $cart = Context::getContext()->cart;
-        $customer = new Customer($cart->id_customer);
-
         Context::getContext()->cookie->__unset('paypal_pSc');
         Context::getContext()->cookie->__unset('paypal_pSc_payerid');
         Context::getContext()->cookie->__unset('paypal_pSc_email');
-
-        Tools::redirect('index.php?controller=order-confirmation&id_cart='.$cart->id.'&id_module='.$paypal->id.'&id_order='.$paypal->currentOrder.'&key='.$customer->secure_key);
+        if (!empty($this->errors)) {
+            $this->redirectUrl = Context::getContext()->link->getModuleLink($this->name, 'error', $this->errors);
+        }
     }
 }

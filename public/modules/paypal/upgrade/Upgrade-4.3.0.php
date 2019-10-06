@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,7 +19,7 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2018 PrestaShop SA
+ *  @copyright 2007-2019 PrestaShop SA
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
@@ -38,19 +38,18 @@ function upgrade_module_4_3_0($module)
     Configuration::updateValue('PAYPAL_MERCHANT_ID_SANDBOX', '');
     Configuration::updateValue('PAYPAL_MERCHANT_ID_LIVE', '');
 
-    if(Configuration::get('PAYPAL_METHOD') == 'EC')
-    {
-        Configuration::updateValue('PAYPAL_METHOD','');
+    if (Configuration::get('PAYPAL_METHOD') == 'EC') {
+        Configuration::updateValue('PAYPAL_METHOD', '');
 
-        Configuration::updateValue('PAYPAL_USERNAME_SANDBOX','');
-        Configuration::updateValue('PAYPAL_PSWD_SANDBOX','');
-        Configuration::updateValue('PAYPAL_SIGNATURE_SANDBOX','');
-        Configuration::updateValue('PAYPAL_SANDBOX_ACCESS','');
+        Configuration::updateValue('PAYPAL_USERNAME_SANDBOX', '');
+        Configuration::updateValue('PAYPAL_PSWD_SANDBOX', '');
+        Configuration::updateValue('PAYPAL_SIGNATURE_SANDBOX', '');
+        Configuration::updateValue('PAYPAL_SANDBOX_ACCESS', '');
 
-        Configuration::updateValue('PAYPAL_USERNAME_LIVE','');
-        Configuration::updateValue('PAYPAL_PSWD_LIVE','');
-        Configuration::updateValue('PAYPAL_SIGNATURE_LIVE','');
-        Configuration::updateValue('PAYPAL_LIVE_ACCESS','');
+        Configuration::updateValue('PAYPAL_USERNAME_LIVE', '');
+        Configuration::updateValue('PAYPAL_PSWD_LIVE', '');
+        Configuration::updateValue('PAYPAL_SIGNATURE_LIVE', '');
+        Configuration::updateValue('PAYPAL_LIVE_ACCESS', '');
     }
 
     return true;

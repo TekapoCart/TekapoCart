@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,26 +19,22 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2018 PrestaShop SA
+ *  @copyright 2007-2019 PrestaShop SA
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
 
-abstract class AbstractMethodPaypal
-{
-    // Force les classes filles à définir cette méthode
-    abstract public function init($params);
-    abstract public function validation();
-    abstract public function confirmCapture();
-    abstract public function check();
-    abstract public function refund();
-    abstract public function setConfig($params);
-    abstract public function getConfig(Paypal $module);
-    abstract public function void($params);
-    abstract public function partialRefund($params);
+use PaypalPPBTlib\AbstractMethod;
 
-    public static function load($method)
+abstract class AbstractMethodPaypal extends AbstractMethod
+{
+    public static function load($method = null)
     {
+        if ($method == null) {
+            $countryDefault = new \Country((int)\Configuration::get('PS_COUNTRY_DEFAULT'));
+            $method = $countryDefault->iso_code == "DE" ? "PPP" : "EC";
+        }
+
         if (preg_match('/^[a-zA-Z0-9_-]+$/', $method) && file_exists(_PS_MODULE_DIR_.'paypal/classes/Method'.$method.'.php')) {
             include_once _PS_MODULE_DIR_.'paypal/classes/Method'.$method.'.php';
             $method_class = 'Method'.$method;

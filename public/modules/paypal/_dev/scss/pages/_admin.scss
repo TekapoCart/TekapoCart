@@ -1,0 +1,29 @@
+.pp-settings-link-on {
+  background: $default !important;
+  color: #000 !important;
+
+  .panel, .panel-footer {
+    background: $default !important;
+  }
+}
+
+.pp-settings-tab-on {
+  border-bottom: 3px solid #3ed2f0;
+}
+
+.stretchHeightForm form {
+  height: 100%;
+}
+
+.stretchHeightForm .panel {
+  height: 100%;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+
+.tick li {
+  margin-bottom: 40px;
+}

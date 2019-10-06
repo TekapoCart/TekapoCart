@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,23 +19,32 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2018 PrestaShop SA
+ *  @copyright 2007-2019 PrestaShop SA
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
 
+/**
+ * Class PaypalCapture.
+ */
 class PaypalCapture extends ObjectModel
 {
+    /** @var string Capture ID */
     public $id_capture;
 
+    /** @var integer PaypalOrder ID */
     public $id_paypal_order;
 
+    /** @var float Captured amount */
     public $capture_amount;
 
+    /** @var string Transaction status */
     public $result;
 
+    /** @var string Object creation date */
     public $date_add;
 
+    /** @var string Object last modification date */
     public $date_upd;
 
     /**
@@ -48,14 +57,18 @@ class PaypalCapture extends ObjectModel
         'fields' => array(
             'id_capture' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
             'id_paypal_order' => array('type' => self::TYPE_INT),
-            'capture_amount' => array('type' => self::TYPE_FLOAT),
+            'capture_amount' => array('type' => self::TYPE_FLOAT, 'size' => 10, 'scale' => 2),
             'result' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
             'date_add' => array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
             'date_upd' => array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
         )
     );
 
-
+    /**
+     * Load Capture by PaypalOrder
+     * @param integer $orderPayPalId PaypalOrder ID
+     * @return object PaypalCapture
+     */
     public static function loadByOrderPayPalId($orderPayPalId)
     {
         $sql = new DbQuery();
@@ -67,6 +80,11 @@ class PaypalCapture extends ObjectModel
         return new self($id_paypal_capture);
     }
 
+    /**
+     * Get all datas from PaypalOrder and PaypalCapture
+     * @param integer $id_order PrestaShop order ID
+     * @return array PaypalCapture
+     */
     public static function getByOrderId($id_order)
     {
         $sql = new DbQuery();
@@ -74,9 +92,22 @@ class PaypalCapture extends ObjectModel
         $sql->from('paypal_order', 'po');
         $sql->innerJoin('paypal_capture', 'pc', 'po.`id_paypal_order` = pc.`id_paypal_order`');
         $sql->where('po.id_order = '.(int)$id_order);
-        return Db::getInstance()->getRow($sql);
+        $row = Db::getInstance()->getRow($sql);
+
+        if (is_array($row)) {
+            return $row;
+        } else {
+            return array();
+        }
     }
 
+    /**
+     * Update PaypalCapture
+     * @param string $transaction_id New transaction ID that correspond to capture
+     * @param float $amount Captured amount
+     * @param string $status new payment status
+     * @param integer $id_paypal_order PaypalOrder ID
+     */
     public static function updateCapture($transaction_id, $amount, $status, $id_paypal_order)
     {
         Db::getInstance()->update(

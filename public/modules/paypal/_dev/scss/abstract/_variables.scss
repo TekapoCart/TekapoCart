@@ -1,0 +1,21 @@
+// Colors
+
+$white: #fff !default;
+$primary: #3ed2f0 !default;
+$primary-light: #2095f2 !default;
+$secondary: #d3d3d3 !default;
+$default: #ecf6fb !default;
+
+$colors: (
+  'primary' : $primary,
+  'secondary':  $secondary,
+  'default':  $default
+);
+
+// Fonts
+
+$font-weight-bold: 700 !default;
+$font-size-base: 16px !default;
+
+// Borders
+$border-width: 3px;

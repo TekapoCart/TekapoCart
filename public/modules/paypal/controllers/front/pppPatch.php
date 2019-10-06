@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,14 +19,19 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2018 PrestaShop SA
+ *  @copyright 2007-2019 PrestaShop SA
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
 
 include_once _PS_MODULE_DIR_.'paypal/classes/AbstractMethodPaypal.php';
+include_once _PS_MODULE_DIR_.'paypal/controllers/front/abstract.php';
 
-class PaypalPppPatchModuleFrontController extends ModuleFrontController
+/**
+ * Update PPP payment request before initialize it.
+ */
+
+class PaypalPppPatchModuleFrontController extends PaypalAbstarctModuleFrontController
 {
     public function postProcess()
     {
@@ -34,9 +39,11 @@ class PaypalPppPatchModuleFrontController extends ModuleFrontController
         if (Context::getContext()->cookie->paypal_plus_payment) {
             try {
                 $method_ppp->doPatch();
-                echo Tools::jsonEncode(array('success' => true));
+                $this->jsonValues = array('success' => true);
             } catch (Exception $e) {
-                die($e->getMessage());
+                $this->errors['error_code'] = $e->getCode();
+                $this->errors['error_msg'] = $e->getMessage();
+                $this->jsonValues = array('success' => false, 'redirect_link' => Context::getContext()->link->getModuleLink($this->name, 'error', $this->errors));
             }
         }
     }

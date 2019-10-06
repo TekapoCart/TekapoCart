@@ -1,0 +1,14 @@
+$directions: (
+  "top": "t",
+  "right": "r",
+  "bottom": "b",
+  "left": "l",
+) !default;
+
+@each $prop, $direction in $directions {
+  @each $color, $value in $colors {
+    .pp__border-#{$direction}-#{$color} {
+      border-#{$prop}: $border-width solid $value !important;
+    }
+  }
+}

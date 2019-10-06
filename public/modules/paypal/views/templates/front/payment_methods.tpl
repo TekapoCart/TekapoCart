@@ -1,5 +1,5 @@
 {*
-* 2007-2018 PrestaShop
+* 2007-2019 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -18,7 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author    PrestaShop SA <contact@prestashop.com>
-*  @copyright 2007-2018 PrestaShop SA
+*  @copyright 2007-2019 PrestaShop SA
 *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
@@ -38,9 +38,9 @@
             {if $method_key == 'paypal-braintree'}<h3>{l s='Your paypal accounts' mod='paypal'}</h3>{/if}
             {foreach from=$payment_method key=key  item=method}
                 <p class="method">
-                    {if $method.name}<b>{$method.name} : </b>{/if}
+                    {if $method.name}<b>{$method.name|escape:'htmlall':'UTF-8'} : </b>{/if}
                     {$method.info|escape:'htmlall':'UTF-8'}
-                    <a href="{$link->getModuleLink('paypal', 'account', ['process' => 'delete', 'method' => {$method.method}, 'id_method' => {$method.id_paypal_vaulting|escape:'htmlall':'UTF-8'}])}"><i class="material-icons">delete</i></a>
+                    <a href="{$link->getModuleLink('paypal', 'account', ['process' => 'delete', 'method' => {$method.method|escape:'htmlall':'UTF-8'}, 'id_method' => {$method.id_paypal_vaulting|escape:'htmlall':'UTF-8'}])}"><i class="material-icons">delete</i></a>
                     <br />
                     {if !$method.name}{l s='Add name' mod='paypal'}{else}{l s='Edit name' mod='paypal'}{/if}
                     <span class="edit_name" data-method_id="{$method.id_paypal_vaulting|escape:'htmlall':'UTF-8'}"><i class="material-icons">mode_edit</i></span>

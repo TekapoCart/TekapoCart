@@ -1,0 +1,47 @@
+$directions: (
+  "top": "t",
+  "right": "r",
+  "bottom": "b",
+  "left": "l",
+) !default;
+
+$spacers: (
+  "0": 0,
+  "1": 5px,
+  "2": 10px,
+  "3": 15px,
+  "4": 20px,
+  "5": 25px,
+) !default;
+
+@each $size, $length in $spacers {
+	.pp__m-#{$size} {
+		margin: $length !important;
+	}
+	.pp__p-#{$size} {
+		padding: $length !important;
+	}
+	.pp__my-#{$size} {
+		margin-top: $length !important;
+		margin-bottom: $length !important;
+	}
+	.pp__py-#{$size} {
+		padding-top: $length !important;
+		padding-bottom: $length !important;
+  }
+  .pp__px-#{$size} {
+		padding-left: $length !important;
+		padding-right: $length !important;
+	}
+}
+
+@each $prop, $direction in $directions {
+	@each $size, $length in $spacers {
+		.pp__m#{$direction}-#{$size} {
+			margin-#{$prop}: $length !important;
+		}
+		.pp__p#{$direction}-#{$size} {
+			padding-#{$prop}: $length !important;
+		}
+	}
+}
