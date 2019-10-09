@@ -26,7 +26,9 @@
 {% trans_default_domain "Admin.Shopparameters.Feature" %}
 
 {% block meta_showcase_card %}
-  {% if not showcaseCardIsClosed %}
+  {# suzy: 2019-10-09 修正變數名稱錯誤 #}
+  {# {% if not showcaseCardIsClosed %} #}
+  {% if not isShowcaseCardClosed %}
   <div id="seo-urls-showcase-card" class="showcase-card card">
     <div class="showcase-card__left shape-one helper-card__meta-background">
       <img src="{{ asset('themes/new-theme/scss/img/helper-card/seo@3x.png') }}" class="img-fluid">

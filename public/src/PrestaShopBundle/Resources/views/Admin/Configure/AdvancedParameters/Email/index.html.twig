@@ -25,6 +25,15 @@
 {% extends '@PrestaShop/Admin/layout.html.twig' %}
 {% trans_default_domain 'Admin.Advparameters.Feature' %}
 
+{# suzy: 2019-10-09 加入「通知信規則」模組連結 #}
+{% set layoutHeaderToolbarBtn = {
+  'add': {
+    'href': getAdminLink('AdminModules', true, {'configure': 'ps_emailalerts'}),
+    'desc': '通知信規則',
+    'icon': 'edit'
+  }
+} %}
+
 {% block content %}
   {% if isEmailLogsEnabled %}
   <div class="row">
