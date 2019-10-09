@@ -135,7 +135,9 @@ class CmsPageController extends FrameworkBundleAdminController
                 'help_link' => $this->generateSidebarLink($request->attributes->get('_legacy_controller')),
                 'helperDocLink' => $helperBlockLinkProvider->getLink('cms_pages'),
                 'cmsPageShowcaseCardName' => ShowcaseCard::CMS_PAGES_CARD,
-                'showcaseCardIsClosed' => $showcaseCardIsClosed,
+                // suzy: 2019-10-09 隱藏 showcaseCard
+                // 'isShowcaseCardClosed' => $showcaseCardIsClosed,
+                'isShowcaseCardClosed' => true,
             ]
         );
     }

@@ -106,7 +106,9 @@ class CustomerController extends AbstractAdminController
             'isSingleShopContext' => $this->get('prestashop.adapter.shop.context')->isSingleShopContext(),
             'deleteCustomersForm' => $deleteCustomerForm->createView(),
             'showcaseCardName' => ShowcaseCard::CUSTOMERS_CARD,
-            'isShowcaseCardClosed' => $showcaseCardIsClosed,
+            // suzy: 2019-10-09 隱藏 showcaseCard
+            // 'isShowcaseCardClosed' => $showcaseCardIsClosed,
+            'isShowcaseCardClosed' => true,
         ]);
     }
 

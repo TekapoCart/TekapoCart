@@ -119,7 +119,9 @@ class MetaController extends FrameworkBundleAdminController
             'helperDocLink' => $helperBlockLinkProvider->getLink('meta'),
             'indexPageId' => $metaDataProvider->getIdByPage('index'),
             'metaShowcaseCardName' => ShowcaseCard::SEO_URLS_CARD,
-            'showcaseCardIsClosed' => $showcaseCardIsClosed,
+            // suzy: 2019-10-09 隱藏 showcaseCard
+            // 'isShowcaseCardClosed' => $showcaseCardIsClosed,
+            'isShowcaseCardClosed' => true,
             ]
         );
     }

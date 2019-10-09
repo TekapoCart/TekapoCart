@@ -29,7 +29,8 @@
     </h3>
     <div class="card-block row">
       <div class="card-text">
-        <div class="form-group row">
+        {# suzy: 2019-10-09 隱藏「實時匯率」區塊 #}
+        <div class="form-group row" style="display: none;">
           <label class="form-control-label" for="{{ exchangeRatesForm.live_exchange_rate.vars.id }}">
             {{ 'Live exchange rates'|trans({}, 'Admin.International.Feature') }}
           </label>

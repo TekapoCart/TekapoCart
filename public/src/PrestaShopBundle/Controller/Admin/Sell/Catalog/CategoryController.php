@@ -103,7 +103,9 @@ class CategoryController extends FrameworkBundleAdminController
             'deleteCategoriesForm' => $deleteCategoriesForm->createView(),
             'isSingleShopContext' => $this->get('prestashop.adapter.shop.context')->isSingleShopContext(),
             'showcaseCardName' => ShowcaseCard::CATEGORIES_CARD,
-            'isShowcaseCardClosed' => $showcaseCardIsClosed,
+            // suzy: 2019-10-09 隱藏 showcaseCard
+            // 'isShowcaseCardClosed' => $showcaseCardIsClosed,
+            'isShowcaseCardClosed' => true,
         ]);
     }
 

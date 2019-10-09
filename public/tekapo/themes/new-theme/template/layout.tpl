@@ -81,6 +81,7 @@
 {/if}
 
 <div id="main-div">
+
     {if $install_dir_exists}
       <div class="alert alert-warning">
         {l s='For security reasons, you must also delete the /install folder.'}
@@ -90,6 +91,17 @@
       {if isset($modal_module_list)}{$modal_module_list}{/if}
 
       <div class="{if $display_header}content-div{/if} {if !isset($page_header_toolbar)}-notoolbar{/if} {if $current_tab_level == 3}with-tabs{/if}">
+
+          {* suzy: 2018-08-12 加入「立即變更您的密碼」提醒 *}
+          {if $change_passwd_alert}
+            <div class="alert alert-danger">
+                {if $controller_name == 'AdminEmployees'}
+                  請於下方的「更改密碼。。。」修改。
+                {else}
+                  恭喜您成功登入！您的密碼還是初始設定，基於安全考量，請立即更改您的密碼。前往 <a href="{$link->getAdminLink('AdminEmployees', true, [], ['id_employee' => $employee->id|intval, 'updateemployee' => 1])|escape:'html':'UTF-8'}">個人資料</a> 修改。
+                {/if}
+            </div>
+          {/if}
 
         {hook h='displayAdminAfterHeader'}
 
@@ -107,16 +119,6 @@
           </div>
         </div>
 
-        {* suzy: 2018-08-12 加入「立即變更您的密碼」提醒 *}
-        {if $change_passwd_alert}
-          <div class="alert alert-danger">
-            {if $controller_name == 'AdminEmployees'}
-              請於下方的「更改密碼。。。」修改。
-            {else}
-              恭喜您成功登入！您的密碼還是初始設定，基於安全考量，請立即更改您的密碼。前往 <a href="{$link->getAdminLink('AdminEmployees')|escape:'html':'UTF-8'}&amp;id_employee={$employee->id|intval}&amp;updateemployee">個人資料</a> 修改。
-            {/if}
-          </div>
-        {/if}
 
       </div>
     {/if}

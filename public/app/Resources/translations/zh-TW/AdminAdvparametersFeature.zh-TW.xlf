@@ -926,19 +926,19 @@ File: controllers/admin/AdminShopController.php:842</note>
     <body>
       <trans-unit id="eb626c94531ec554f93b2b78a77c8b1b" approved="yes">
         <source>Employees</source>
-        <target xml:lang="zh-TW">員工</target>
+        <target xml:lang="zh-TW">帳號</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:219</note>
       </trans-unit>
       <trans-unit id="cce99c598cfdb9773ab041d54c3d973a" approved="yes">
         <source>Profile</source>
-        <target xml:lang="zh-TW">角色</target>
+        <target xml:lang="zh-TW">部門</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:88</note>
       </trans-unit>
       <trans-unit id="a19df5d477865657e2e2d4f9c30325db" approved="yes">
         <source>Employee options</source>
-        <target xml:lang="zh-TW">員工選項</target>
+        <target xml:lang="zh-TW">帳號選項</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:96</note>
       </trans-unit>
@@ -968,7 +968,7 @@ File: controllers/admin/AdminEmployeesController.php:107</note>
       </trans-unit>
       <trans-unit id="4696cdea33eee7e2c4fcb5dca30ccf56" approved="yes">
         <source>Allow employees to select a specific language for the Admin panel form.</source>
-        <target xml:lang="zh-TW">允許員工在管理介面選擇指定語言</target>
+        <target xml:lang="zh-TW">允許管理者在管理介面選擇指定語言</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:108</note>
       </trans-unit>
@@ -1400,7 +1400,7 @@ File: controllers/admin/AdminShopGroupController.php:229</note>
     <body>
       <trans-unit id="69d18853cb35672b765f55ae37ae4967" approved="yes">
         <source>Add new profile</source>
-        <target xml:lang="zh-TW">新增角色</target>
+        <target xml:lang="zh-TW">新增部門</target>
         <note>Context:
 File: controllers/admin/AdminProfilesController.php:111</note>
       </trans-unit>

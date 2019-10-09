@@ -40,23 +40,29 @@
       <div class="card-text">
         {{ form_errors(employeeForm) }}
 
-        {{ ps.form_group_row(employeeForm.firstname, {}, {
-          'label': 'First name'|trans({}, 'Admin.Global')
-        }) }}
+        {# 調換姓名順序 #}
 
         {{ ps.form_group_row(employeeForm.lastname, {}, {
           'label': 'Last name'|trans({}, 'Admin.Global')
         }) }}
 
+        {{ ps.form_group_row(employeeForm.firstname, {}, {
+          'label': 'First name'|trans({}, 'Admin.Global')
+        }) }}
+
         <div class="form-group row">
           <label class="form-control-label"></label>
           <div class="col-sm">
-            <a href="https://www.prestashop.com/forums/" target="_blank">
+            {# suzy: 2019-10-09 隱藏連外連結 #}
+            {#<a href="https://www.prestashop.com/forums/" target="_blank">
               <img class="img-thumbnail clickable-avatar" src="{{ avatarUrl }}" alt="">
-            </a>
+            </a>#}
+            <img class="img-thumbnail clickable-avatar" src="{{ avatarUrl }}" alt="">
           </div>
         </div>
 
+        {# suzy: 2019-10-09 隱藏文字說名 #}
+        {#
         <div class="form-group row">
           <label class="form-control-label"></label>
           <div class="col-sm">
@@ -72,6 +78,7 @@
             </div>
           </div>
         </div>
+        #}
 
         {{ ps.form_group_row(employeeForm.email, {}, {
           'label': 'Email address'|trans({}, 'Admin.Global')
@@ -159,6 +166,8 @@
           }) }}
         {% endif %}
 
+        {# suzy: 2019-10-09 隱藏連外區塊 #}
+        <span style="display: none;">
         {% if isRestrictedAccess and showAddonsConnectButton %}
           <div class="form-group row">
             <label class="form-control-label">
@@ -205,6 +214,7 @@
           'label': 'Subscribe to PrestaShop newsletter'|trans,
           'help': 'PrestaShop can provide you with guidance on a regular basis by sending you tips on how to optimize the management of your store which will help you grow your business. If you do not wish to receive these tips, you can disable this option.'|trans({}, 'Admin.Advparameters.Help')
         }) }}
+        </span>
 
         {{ ps.form_group_row(employeeForm.default_page, {'attr': {'data-minimumResultsForSearch': '7', 'data-toggle': 'select2'}}, {
           'label': 'Default page'|trans,

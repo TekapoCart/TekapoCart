@@ -402,7 +402,7 @@ File: controllers/admin/AdminLanguagesController.php:188</note>
       </trans-unit>
       <trans-unit id="e59a41e120686e63cbb743f003bea4e6" approved="yes">
         <source>Language code</source>
-        <target xml:lang="zh-TW">語言代碼：</target>
+        <target xml:lang="zh-TW">語言代碼</target>
         <note>Context:
 File: controllers/admin/AdminLanguagesController.php:160</note>
       </trans-unit>

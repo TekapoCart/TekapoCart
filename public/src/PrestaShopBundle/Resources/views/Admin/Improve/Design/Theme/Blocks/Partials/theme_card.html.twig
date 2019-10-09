@@ -42,11 +42,19 @@
     <b class="theme-name">
       {{ themeName }}
     </b>
+    {# suzy: 2019-10-09 直接顯示 版號 #}
+    {#
     <span class="theme-version">
       {{ 'Version'|trans({}, 'Admin.Global') }} {{ themeVersion }}
     </span>
+    #}
+    <br><small>{{ themeVersion }}</small>
+
+    {# suzy: 2019-10-09 隱藏 Designed by #}
+    {#
     <div class="theme-author">
       {{ 'Designed by %s'|trans({'%s': themeAuthor}, 'Admin.Design.Feature') }}
     </div>
+    #}
   </div>
 {% endblock %}

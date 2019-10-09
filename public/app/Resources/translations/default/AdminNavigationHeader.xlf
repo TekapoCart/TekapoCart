@@ -92,11 +92,7 @@
         <target>New customers</target>
         <note>Line: 295</note>
       </trans-unit>
-      <trans-unit id="60434fac312a307d4f9b9eb03a6c1694">
-        <source>Welcome back %name%</source>
-        <target>Welcome back %name%</target>
-        <note>Line: 362</note>
-      </trans-unit>
+3d8de6fcc09baf73f7175fe59f278ced
       <trans-unit id="ddcf50c29294d4414f3f7c1bbc892cb5">
         <source>Resources</source>
         <target>Resources</target>

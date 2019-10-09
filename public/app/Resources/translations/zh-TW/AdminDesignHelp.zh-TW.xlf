@@ -18,24 +18,6 @@ File: controllers/admin/AdminCmsController.php:159</note>
         <note>Context:
 File: controllers/admin/AdminThemesController.php:410</note>
       </trans-unit>
-      <trans-unit id="aeec498c2bb6b53e8eb24752af092828" approved="yes">
-        <source>Will appear on email headers. If undefined, the header logo will be used.</source>
-        <target xml:lang="zh-TW">如未設定郵件LOGO, 將顯示頁首LOGO</target>
-        <note>Context:
-File: controllers/admin/AdminThemesController.php:424</note>
-      </trans-unit>
-      <trans-unit id="544cd7788ebd8916e7191e7a8fd0db57" approved="yes">
-        <source>Warning: if no invoice logo is available, the main logo will be used instead.</source>
-        <target xml:lang="zh-TW">警告：如沒有定義通知信 LOGO，會改用網站 LOGO 替代。</target>
-        <note>Context:
-File: controllers/admin/AdminThemesController.php:432</note>
-      </trans-unit>
-      <trans-unit id="b0297d22aade28eda5efbeb5c2e21e97" approved="yes">
-        <source>Will appear on invoice headers.</source>
-        <target xml:lang="zh-TW">會顯示在發票標題上。</target>
-        <note>Context:
-File: controllers/admin/AdminThemesController.php:433</note>
-      </trans-unit>
       <trans-unit id="d4d7bd35b17411da70ed5e76bcb4c3da" approved="yes">
         <source>Warning: you can use a PNG file for transparency, but it can take up to 1 second per page for processing. Please consider using JPG instead.</source>
         <target xml:lang="zh-TW">警告：您可以使用PNG文件的透明性，但處理時間可能長達每頁1秒。請考慮使用JPG格式代替。</target>
@@ -252,4 +234,38 @@ File: admin-dev/themes/default/template/controllers/images/content.tpl:69</note>
       </trans-unit>
     </body>
   </file>
+  <file original="src/PrestaShopBundle/Resources/views/Admin/Improve/Design/Theme/Blocks/logo_configuration.html.twig" source-language="en-US" target-language="en" datatype="plaintext">
+      <body>
+        <trans-unit id="aeec498c2bb6b53e8eb24752af092828">
+          <source>Will appear on email headers. If undefined, the header logo will be used.</source>
+          <target xml:lang="zh-TW">如無設定通知信 LOGO，將使用主 LOGO。</target>
+          <note>Line: 88</note>
+        </trans-unit>
+        <trans-unit id="544cd7788ebd8916e7191e7a8fd0db57">
+          <source>Warning: if no invoice logo is available, the main logo will be used instead.</source>
+          <target xml:lang="zh-TW">警告：如沒有定義通知信 LOGO，會改用網站 LOGO 替代。</target>
+          <note>Line: 117</note>
+        </trans-unit>
+        <trans-unit id="b0297d22aade28eda5efbeb5c2e21e97">
+          <source>Will appear on invoice headers.</source>
+          <target xml:lang="zh-TW">會顯示在發票標題上。</target>
+          <note>Line: 105</note>
+        </trans-unit>
+        <trans-unit id="3fb044d8f9136df5b2f0087f8a8fb0c9">
+          <source>Use our [1]favicon generator on PrestaShop Marketplace[/1] to boost your brand image!</source>
+          <target xml:lang="zh-TW">Use our [1]favicon generator on PrestaShop Marketplace[/1] to boost your brand image!</target>
+          <note>Line: 146</note>
+        </trans-unit>
+        <trans-unit id="04f1f93771bf12b0b80ae6a86ceb5cae">
+          <source>Will appear on your main page. Recommended size for the default theme: height %height% and width %width%.</source>
+          <target xml:lang="zh-TW">網站主要 LOGO。建議檔案大小不超過 500K。</target>
+          <note>Line: 35</note>
+        </trans-unit>
+        <trans-unit id="e91d6b1f1f3836b0126eb26760a0eb49">
+          <source>It is the small icon that appears in browser tabs, next to the title.</source>
+          <target xml:lang="zh-TW">位在瀏覽器頁籤上的小圖示。</target>
+          <note>Line: 130</note>
+        </trans-unit>
+      </body>
+    </file>
 </xliff>

@@ -96,7 +96,9 @@ class EmployeeController extends FrameworkBundleAdminController
             'employeeGrid' => $this->presentGrid($employeeGrid),
             'helperCardDocumentationLink' => $helperCardDocumentationLinkProvider->getLink('team'),
             'showcaseCardName' => ShowcaseCard::EMPLOYEES_CARD,
-            'isShowcaseCardClosed' => $showcaseCardIsClosed,
+            // suzy: 2019-10-09 隱藏 showcaseCard
+            // 'isShowcaseCardClosed' => $showcaseCardIsClosed,
+            'isShowcaseCardClosed' => true,
         ]);
     }
 

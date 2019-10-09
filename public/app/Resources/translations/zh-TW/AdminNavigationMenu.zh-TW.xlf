@@ -196,7 +196,7 @@ File: classes/lang/KeysReference/TabLang.php:61</note>
       </trans-unit>
       <trans-unit id="eb626c94531ec554f93b2b78a77c8b1b" approved="yes">
         <source>Employees</source>
-        <target xml:lang="zh-TW">員工</target>
+        <target xml:lang="zh-TW">帳號</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:62</note>
       </trans-unit>
@@ -388,7 +388,7 @@ File: classes/lang/KeysReference/TabLang.php:101</note>
       </trans-unit>
       <trans-unit id="d0f25115288c15321ecf672f0d6a83ea" approved="yes">
         <source>Profiles</source>
-        <target xml:lang="zh-TW">職位</target>
+        <target xml:lang="zh-TW">部門</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:102</note>
       </trans-unit>
@@ -538,7 +538,7 @@ File: classes/lang/KeysReference/TabLang.php:127</note>
       </trans-unit>
       <trans-unit id="fcf3b725bb6ebb0e635b0f0902ade451" approved="yes">
         <source><![CDATA[Theme & Logo]]></source>
-        <target xml:lang="zh-TW"><![CDATA[佈景 ＆ Logo]]></target>
+        <target xml:lang="zh-TW">佈景主題</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:128</note>
       </trans-unit>

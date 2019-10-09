@@ -23,6 +23,7 @@
  * International Registered Trademark & Property of PrestaShop SA
  *#}
 
+{# suzy: 2019-10-09 隱藏「新增語言」
 {% set layoutHeaderToolbarBtn = {
   'add' : {
     'href': path('admin_languages_create'),
@@ -30,6 +31,7 @@
     'icon': 'add_circle_outline'
   }
 } %}
+#}
 {% set layoutTitle = 'Languages'|trans({}, 'Admin.Global') %}
 {% set enableSidebar = true %}
 
@@ -38,7 +40,8 @@
 {% block content %}
   <div class="row">
     <div class="col">
-      <div class="alert alert-warning" role="alert">
+      {# suzy: 2019-10-09 隱藏文字說明 #}
+      <div class="alert alert-warning" role="alert" style="display: none;">
         <p class="alert-text">{{ 'When you delete a language, all related translations in the database will be deleted.'|trans({}, 'Admin.International.Notification') }}</p>
       </div>
 

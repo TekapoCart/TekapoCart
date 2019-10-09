@@ -248,6 +248,11 @@ File: admin-dev/themes/default/template/header.tpl:287</note>
         <note>Context:
 File: admin-dev/themes/default/template/header.tpl:293</note>
       </trans-unit>
+      <trans-unit id="60434fac312a307d4f9b9eb03a6c1694">
+        <source>Welcome back %name%</source>
+        <target>哈囉 %name%</target>
+        <note>Line: 362</note>
+      </trans-unit>
       <trans-unit id="3d8de6fcc09baf73f7175fe59f278ced" approved="yes">
         <source>Your profile</source>
         <target xml:lang="zh-TW">個人資料</target>

@@ -1567,7 +1567,7 @@ File: controllers/admin/AdminOrdersController.php:1061</note>
       </trans-unit>
       <trans-unit id="e49701f123af735cf327227e8ab09bac" approved="yes">
         <source>Manual order -- Employee:</source>
-        <target xml:lang="zh-TW">手動訂購 - 員工：</target>
+        <target xml:lang="zh-TW">手動訂購 - 管理者：</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1230</note>
       </trans-unit>
@@ -1825,7 +1825,7 @@ File: admin-dev/themes/default/template/controllers/customer_threads/helpers/vie
       </trans-unit>
       <trans-unit id="3f8faa0e229dbd775fa36b8c15bf73a6" approved="yes">
         <source>Forward this discussion to another employee</source>
-        <target xml:lang="zh-TW">將此討論轉發給另一名員工</target>
+        <target xml:lang="zh-TW">將此討論轉發給另一名管理者</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/helpers/view/view.tpl:47</note>
       </trans-unit>
@@ -1871,7 +1871,7 @@ File: admin-dev/themes/default/template/controllers/customer_threads/helpers/vie
       </trans-unit>
       <trans-unit id="42ff79fde8fc930db50949b4f700c661" approved="yes">
         <source>Forward this discussion to an employee:</source>
-        <target xml:lang="zh-TW">將此討論轉發給員工:</target>
+        <target xml:lang="zh-TW">將此討論轉發給管理者:</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/helpers/view/modal.tpl:35</note>
       </trans-unit>

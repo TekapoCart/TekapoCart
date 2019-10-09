@@ -25,7 +25,11 @@
 
 {% extends '@PrestaShop/Admin/layout.html.twig' %}
 
-{% set layoutTitle = 'Theme & Logo'|trans({}, 'Admin.Navigation.Menu') ~ ' > ' ~ 'Theme'|trans({}, 'Admin.Design.Feature') %}
+{# suzy: 2019-10-09 修改標題 #}
+{#{% set layoutTitle = 'Theme & Logo'|trans({}, 'Admin.Navigation.Menu') ~ ' > ' ~ 'Theme'|trans({}, 'Admin.Design.Feature') %}#}
+{% set layoutTitle = 'Theme & Logo'|trans({}, 'Admin.Navigation.Menu') %}
+
+{# suzy: 隱藏「新增佈景主題」、「匯出目前佈景主提」按鈕
 {% set layoutHeaderToolbarBtn = {
   'add': {
     'href': path('admin_themes_import'),
@@ -38,6 +42,7 @@
     'icon': 'cloud_download'
   }
 } %}
+#}
 
 {% block content %}
   <div id="themes-logo-page">
@@ -137,6 +142,7 @@
               {% include '@PrestaShop/Admin/Improve/Design/Theme/Blocks/delete_theme_modal.html.twig' %}
             {% endif %}
 
+            {# suzy: 2019-10-09 訪問主題目錄
             {% embed '@PrestaShop/Admin/Improve/Design/Theme/Blocks/Partials/theme_catalog_card.html.twig' %}
               {% block image %}
                 <img src="{{ asset('themes/new-theme/scss/img/pages/themes/icon_themes.png') }}" alt="{{ 'Visit the theme catalog'|trans({}, 'Admin.Design.Feature') }}">
@@ -153,6 +159,7 @@
               {% endblock %}
 
             {% endembed %}
+            #}
 
             {% include '@PrestaShop/Admin/Improve/Design/Theme/Blocks/layouts_configuration.html.twig' %}
           </div>
