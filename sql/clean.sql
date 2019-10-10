@@ -1,3 +1,4 @@
+TRUNCATE TABLE `ps_admin_filter`;
 TRUNCATE TABLE `ps_connections`;
 TRUNCATE TABLE `ps_connections_source`;
 TRUNCATE TABLE `ps_emailsubscription`;
