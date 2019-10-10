@@ -1,5 +1,5 @@
 {**
- * 2007-2017 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,19 +15,15 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2017 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
 {block name='cart_detailed_totals'}
 <div class="cart-detailed-totals">
-
-  {block name='cart_voucher'}
-    {include file='checkout/_partials/cart-voucher.tpl'}
-  {/block}
 
   <div class="card-block">
     {foreach from=$cart.subtotals item="subtotal"}
@@ -41,7 +37,10 @@
             {/if*}
             {$subtotal.label}
           </span>
-          <span class="value">{$subtotal.value}</span>
+          {*<span class="value">{$subtotal.value}</span>*}
+          <span class="value">
+            {if 'discount' == $subtotal.type}-&nbsp;{/if}{$subtotal.value}
+          </span>
           {if $subtotal.type === 'shipping'}
               <div><small class="value">{hook h='displayCheckoutSubtotalDetails' subtotal=$subtotal}</small></div>
           {/if}
@@ -50,25 +49,35 @@
     {/foreach}
   </div>
 
-  {*
-  <hr class="separator">
-
-  <div class="card-block">
-    <div class="cart-summary-line cart-total">
-      <span class="label">{$cart.totals.total.label} {$cart.labels.tax_short}</span>
-      <span class="value">{$cart.totals.total.value}</span>
-    </div>
-
-    {if $cart.subtotals.tax.value > 0}
-    <div class="cart-summary-line">
-      <small class="label">{$cart.subtotals.tax.label}</small>
-      <small class="value">{$cart.subtotals.tax.value}</small>
-    </div>
-    {/if}
+  <div class="card-block cart-summary-totals">
+      {if $cart.totals.total_including_tax.value != $cart.totals.total_excluding_tax.value && $cart.totals.total.value == $cart.totals.total_excluding_tax.value}
+      <div class="cart-summary-line">
+          <span class="label">{$cart.totals.total.label}&nbsp;{$cart.labels.tax_short}</span>
+          <span class="value">{$cart.totals.total.value}</span>
+      </div>
+      <div class="cart-summary-line cart-total">
+          <span class="label">{$cart.totals.total_including_tax.label}</span>
+          <span class="value">{$cart.totals.total_including_tax.value}</span>
+      </div>
+      {else}
+      <div class="cart-summary-line cart-total">
+          <span class="label">{$cart.totals.total.label}&nbsp;{$cart.labels.tax_short}</span>
+          <span class="value">{$cart.totals.total.value}</span>
+      </div>
+      {/if}
+      <div class="cart-summary-line">
+          <span class="label sub">{$cart.subtotals.tax.label}</span>
+          <span class="value sub">{$cart.subtotals.tax.value}</span>
+      </div>
   </div>
 
-  <hr class="separator">
-  *}
+  {block name='cart_summary_totals'}
+    {include file='checkout/_partials/cart-summary-totals.tpl' cart=$cart}
+  {/block}
+
+  {block name='cart_voucher'}
+    {include file='checkout/_partials/cart-voucher.tpl'}
+  {/block}
 
 </div>
 {/block}

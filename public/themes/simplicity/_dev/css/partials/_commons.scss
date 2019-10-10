@@ -261,6 +261,15 @@ input, textarea {
   }
 }
 
+input[type=number] {
+  -moz-appearance:textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
 .form-control-select {
   height: 2.625rem;
   -moz-appearance: none;
@@ -566,4 +575,11 @@ button:disabled, .btn.disabled {
       color: $gray-darker;
     }
   }
+}
+
+// modal-dialog-centered class added from bootstrap 4.0.0, adapted for bootstrap 4.0.0-alpha.5
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - (30px * 2)); // 30px correspond to the default margin size from bootstrap 4.0.0-alpha.5 for modal-dialog class
 }
