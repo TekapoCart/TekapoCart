@@ -343,17 +343,15 @@
     background: $brand-success;
     border-color: $category-border-color;
     .close {
-      // color: $close-color;
-      // text-shadow-color: $close-text-shadow;
-      opacity: 1;
+      margin-top: 0;
       .material-icons {
-        color: $gray-dark;
+        color: $close-color;
       }
     }
   }
   .modal-body {
-    // background: $gray-light;
-    background: $btn-warning-color;
+    background: $gray-light;
+    // background: $btn-warning-color;
     padding: 3.125rem 1.875rem;
     .divide-right span {
       display: inline-block;
@@ -373,19 +371,14 @@
   }
   .product-image {
     width: 100%;
-    max-width: 9.375rem;
-    display: block;
-    margin: 0 0 0 auto;
+    //max-width: 9.375rem;
+    //display: block;
+    //margin: 0 0 0 auto;
   }
   .modal-title {
     font-weight: $font-weight-bold;
     color: white;
     font-size: 1.125rem;
-
-    color: #353943;
-    font-size: 1rem;
-    font-weight: 400;
-
     i.material-icons {
       margin-right: $large-space;
       color: $brand-success;
@@ -410,16 +403,16 @@
     p {
       color: $gray-dark;
       display: flex;
-      justify-content: space-between;
+      // justify-content: space-between;
       padding: 0 .5rem;
       &.product-total {
         background-color: $gray-light;
         padding: .5rem;
       }
       &.cart-products-count {
-        font-size: 1rem;
-        color: $btn-tertiary-color;
-        font-weight: 600;
+        font-size: 1.125rem;
+        //color: $btn-tertiary-color;
+        //font-weight: 600;
       }
       &.product-tax {
         display: inherit;

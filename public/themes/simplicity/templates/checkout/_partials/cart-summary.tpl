@@ -24,17 +24,17 @@
  *}
 <section id="js-checkout-summary" class="card js-cart" data-refresh-url="{$urls.pages.cart}?ajax=1&action=refresh">
 
-    <div class="card-block">
+    <div class="{*card-block*}">
 
     {block name='hook_checkout_summary_top'}
       {hook h='displayCheckoutSummaryTop'}
     {/block}
 
     {block name='cart_summary_products'}
-      <div class="cart-summary-products">
+      <div class="cart-summary-products card-block">
 
-        <p>{$cart.summary_string}</p>
         <p>
+            {$cart.summary_string}
             <a href="#" data-toggle="collapse" data-target="#cart-summary-product-list">
             {l s='show details' d='Shop.Theme.Actions'}
             <i class="material-icons">expand_more</i>
@@ -58,28 +58,30 @@
         {include file='checkout/_partials/cart-summary-subtotals.tpl' cart=$cart}
     {/block}
 
-    </div>
-
     {block name='cart_summary_totals'}
         {include file='checkout/_partials/cart-summary-totals.tpl' cart=$cart}
     {/block}
+
+    </div>
 
     {*block name='cart_summary_voucher'}
         {include file='checkout/_partials/cart-voucher.tpl'}
     {/block*}
 
     {* 從 payment.tpl 搬過來 start *}
-    <div id="payment-confirmation" class="text-xs-center text-sm-right{if !isset($selected_payment_option)} hidden-xs-up{/if}">
+    <div class="card-block">
+      <div id="payment-confirmation" class="text-xs-center text-sm-right{if !isset($selected_payment_option)} hidden-xs-up{/if}">
         <div class="ps-shown-by-js">
-            <button type="submit" {if !isset($selected_payment_option) } disabled {/if} class="btn btn-primary center-block">
-                {l s='Order with an obligation to pay' d='Shop.Theme.Checkout'}
-            </button>
+          <button type="submit" {if !isset($selected_payment_option) } disabled {/if} class="btn btn-primary center-block">
+            {l s='Order with an obligation to pay' d='Shop.Theme.Checkout'}
+          </button>
         </div>
         <div class="ps-hidden-by-js">
-            {if isset($selected_payment_option) && $all_conditions_approved}
-                <label for="pay-with-{$selected_payment_option}">{l s='Order with an obligation to pay' d='Shop.Theme.Checkout'}</label>
-            {/if}
+          {if isset($selected_payment_option) && $all_conditions_approved}
+            <label for="pay-with-{$selected_payment_option}">{l s='Order with an obligation to pay' d='Shop.Theme.Checkout'}</label>
+          {/if}
         </div>
+      </div>
     </div>
     {* 從 payment.tpl 搬過來 end *}
 

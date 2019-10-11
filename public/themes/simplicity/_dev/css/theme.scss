@@ -280,6 +280,11 @@ button:focus {
 }
 
 .table-bordered {
+  thead {
+    th, td {
+      border-bottom-width: 1px;
+    }
+  }
   th, td {
     border: 1px solid $table-border-color;
   }

@@ -33,7 +33,7 @@
     <div id="order-infos">
       <div class="box">
         <div class="row">
-            <div class="col-xs-{if $order.details.reorder_url}9{else}12{/if}">
+            <div class="col-xs-{if $order.details.reorder_url}8{else}12{/if}">
               <p>
               <strong>
                 {l
@@ -45,7 +45,7 @@
               </p>
             </div>
             {if $order.details.reorder_url}
-              <div class="col-xs-3 text-xs-right">
+              <div class="col-xs-4 text-xs-right">
                 <a href="{$order.details.reorder_url}" class="button-primary">{l s='Reorder' d='Shop.Theme.Actions'}</a>
               </div>
             {/if}

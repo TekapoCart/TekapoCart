@@ -193,7 +193,7 @@ File: themes/classic/templates/customer/guest-login.tpl:28</note>
       </trans-unit>
       <trans-unit id="d2948a89e47a4ad7eb8412c1c260ea88" approved="yes">
         <source>To track your order, please enter the following information:</source>
-        <target xml:lang="zh-TW">請輸入以下資訊以追蹤您的訂單：</target>
+        <target xml:lang="zh-TW">請輸入以下資訊以查看您的訂單：</target>
         <note>Context:
 File: themes/classic/templates/customer/guest-login.tpl:34</note>
       </trans-unit>

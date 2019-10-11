@@ -21,8 +21,7 @@
         margin-bottom: 0
       }
       &.cart-total {
-        background-color: $gray-light;
-        padding: .5rem;
+        // padding: .5rem;
         .label,
         .value {
           font-weight: bold;
@@ -164,12 +163,12 @@
     // color: $gray-darker;
     // border: $input-border-color 1px solid;
     // text-indent: 0.625rem;
-    height: 2.3rem;
+    height: 2.45rem;
     color: $gray-darker;
     background-color: $input-background;
     border: $input-btn-border-width solid $input-border-color;
     padding: 0.175rem 0.5rem;
-    width: 50%;
+    width: calc(100% - 76px);
     margin-right: -.24rem;
     + button {
       margin-top: -4px;
@@ -282,6 +281,10 @@
       color: $gray;
       display: inline-block;
       margin-top: 0.3125rem;
+      .material-icons {
+        font-size: 18px;
+        margin-top: 5px;
+      }
     }
   }
 }

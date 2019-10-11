@@ -444,6 +444,7 @@ body#checkout {
   }
 }
 #order-items {
+  padding: 0;
   /*border-right: $gray-light 1px solid;*/
   .h3 {
     font-size: 1rem;
@@ -470,7 +471,7 @@ body#checkout {
         font-size: .875rem;
       }
       &.total-value {
-        background-color: $gray-light;
+        // background-color: $gray-light;
       }
       &.taxes {
         td {

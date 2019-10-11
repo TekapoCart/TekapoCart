@@ -494,11 +494,12 @@ input[type=number] {
     }
     dd,
     dt {
-      flex: 0 0 45%;
+      flex: 0 0 50%;
       background: $gray-light;
       padding: 0.625rem;
       // margin: 0.125rem;
       margin: 0;
+      border: 1px solid $brand-background;
       &:nth-of-type(even) {
         background: $gray-lighter;
       }

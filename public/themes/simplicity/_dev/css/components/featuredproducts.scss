@@ -49,19 +49,19 @@
         opacity: .25;
       }
     }
-    .product-thumbnail {
-      position: relative;
-      height: calc(100% - 70px);
-      img {
-        max-width: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-      }
-    }
+    //.product-thumbnail {
+    //  position: relative;
+    //  height: calc(100% - 70px);
+    //  img {
+    //    max-width: 100%;
+    //    position: absolute;
+    //    top: 0;
+    //    bottom: 0;
+    //    left: 0;
+    //    right: 0;
+    //    margin: auto;
+    //  }
+    //}
   }
   .products-section-title {
     text-align: center;
