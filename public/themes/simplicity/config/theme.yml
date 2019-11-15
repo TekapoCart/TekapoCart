@@ -8,7 +8,7 @@ author:
 
 meta:
   compatibility:
-      from: 1.7.3.3
+      from: 1.7.6.1
       to: ~
 
   available_layouts:

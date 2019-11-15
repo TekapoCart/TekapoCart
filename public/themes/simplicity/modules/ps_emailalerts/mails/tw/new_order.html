@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>{shop_name}發出的消息</title>
+    <link rel="stylesheet" type="text/css" href="https://test.tekapo.cart//mails/themes/classic/assets/email.css">
+    
+    <style>
+      /****** responsive ********/
+      @media only screen and (max-width: 300px){
+        body {
+          width:218px !important;
+          margin:auto !important;
+        }
+        .table {width:195px !important;margin:auto !important;}
+        .logo, .titleblock, .linkbelow, .box, .footer, .space_footer{width:auto !important;display: block !important;}
+        span.title{font-size:20px !important;line-height: 23px !important}
+        span.subtitle{font-size: 14px !important;line-height: 18px !important;padding-top:10px !important;display:block !important;}
+        td.box p{font-size: 12px !important;font-weight: bold !important;}
+        .table-recap table, .table-recap thead, .table-recap tbody, .table-recap th, .table-recap td, .table-recap tr {
+          display: block !important;
+        }
+        .table-recap{width: 200px!important;}
+        .table-recap tr td, .conf_body td{text-align:center !important;}
+        .address{display: block !important;margin-bottom: 10px !important;}
+        .space_address{display: none !important;}
+      }
+
+      @media only screen and (min-width: 301px) and (max-width: 500px) {
+        body {width:308px!important;margin:auto!important;}
+        .table {width:285px!important;margin:auto!important;}
+        .logo, .titleblock, .linkbelow, .box, .footer, .space_footer{width:auto!important;display: block!important;}
+        .table-recap table, .table-recap thead, .table-recap tbody, .table-recap th, .table-recap td, .table-recap tr {
+          display: block !important;
+        }
+        .table-recap{width: 295px !important;}
+        .table-recap tr td, .conf_body td{text-align:center !important;}
+
+      }
+
+      @media only screen and (min-width: 501px) and (max-width: 768px) {
+        body {width:478px!important;margin:auto!important;}
+        .table {width:450px!important;margin:auto!important;}
+        .logo, .titleblock, .linkbelow, .box, .footer, .space_footer{width:auto!important;display: block!important;}
+      }
+
+
+      /* Mobile */
+
+      @media only screen and (max-device-width: 480px) {
+        body {width:308px!important;margin:auto!important;}
+        .table {width:285px;margin:auto!important;}
+        .logo, .titleblock, .linkbelow, .box, .footer, .space_footer{width:auto!important;display: block!important;}
+
+        .table-recap{width: 295px!important;}
+        .table-recap tr td, .conf_body td{text-align:center!important;}
+        .address{display: block !important;margin-bottom: 10px !important;}
+        .space_address{display: none !important;}
+      }
+    </style>
+  </head>
+  <body style="-webkit-text-size-adjust:none;">
+    <table class="table table-mail">
+      <tr>
+        <td id="header-left" class="space"> </td>
+        <td align="center">
+          <table class="table" bgcolor="#ffffff">
+                          <tr>
+  <td align="center" class="logo" style="border-bottom: 4px solid #333333">
+    <a title="{shop_name}" href="{shop_url}" test="{shop_url}">
+      <img src="{shop_logo}" alt="{shop_name}">
+    </a>
+  </td>
+</tr>
+            
+            <tr>
+  <td align="center" class="titleblock">
+    <font size="2" face="Open-sans, sans-serif" color="#555454">
+      <span class="title">恭喜！</span>
+    </font>
+  </td>
+</tr>
+<tr>
+  <td class="linkbelow">
+    <font size="2" face="Open-sans, sans-serif" color="#555454">
+      <span>一筆新訂單在 {shop_name} 由 {lastname} {firstname} ({email}) 成立</span>
+    </font>
+  </td>
+</tr>
+<tr>
+  <td class="space_footer"> </td>
+</tr>
+<tr>
+  <td class="box" colspan="3" style="border:1px solid #D6D4D4;">
+    <table class="table">
+      <tr>
+        <td width="10"> </td>
+        <td>
+          <font size="2" face="Open-sans, sans-serif" color="#555454">
+            
+              <p style="border-bottom:1px solid #D6D4D4;">
+                訂單明細
+              </p>
+            
+            <span>
+              <span><strong>訂單：</strong></span> {order_name} 訂購日期： {date}<br><br>
+              <span><strong>付款：</strong></span> {payment}
+            </span>
+          </font>
+        </td>
+        <td width="10"> </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td>
+    <font size="2" face="Open-sans, sans-serif" color="#555454">
+      <table class="table table-recap" bgcolor="#ffffff">
+<!-- Title -->
+        <thead>
+          <tr>
+            <th style="border:1px solid #D6D4D4;">編號</th>
+            <th style="border:1px solid #D6D4D4;">商品</th>
+            <th style="border:1px solid #D6D4D4;">單價</th>
+            <th style="border:1px solid #D6D4D4;">數量</th>
+            <th style="border:1px solid #D6D4D4;">總金額</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items}
+          <tr class="conf_body">
+            <td bgcolor="#f8f8f8" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right">
+                    <font size="2" face="Open-sans, sans-serif" color="#555454">
+                      <strong>商品</strong>
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+            <td bgcolor="#f8f8f8" align="right" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right">
+                    <font size="2" face="Open-sans, sans-serif" color="#555454">
+                      {total_products}
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class="conf_body">
+            <td bgcolor="#f8f8f8" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right">
+                    <font size="2" face="Open-sans, sans-serif" color="#555454">
+                      <strong>折扣</strong>
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+            <td bgcolor="#f8f8f8" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right">
+                    <font size="2" face="Open-sans, sans-serif" color="#555454">
+                      {total_discounts}
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class="conf_body">
+            <td bgcolor="#f8f8f8" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right">
+                    <font size="2" face="Open-sans, sans-serif" color="#555454">
+                      <strong>禮品包裝</strong>
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+            <td bgcolor="#f8f8f8" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right">
+                    <font size="2" face="Open-sans, sans-serif" color="#555454">
+                      {total_wrapping}
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class="conf_body">
+            <td bgcolor="#f8f8f8" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right">
+                    <font size="2" face="Open-sans, sans-serif" color="#555454">
+                      <strong>運費</strong>
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+            <td bgcolor="#f8f8f8" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right">
+                    <font size="2" face="Open-sans, sans-serif" color="#555454">
+                      {total_shipping}
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class="conf_body">
+            <td bgcolor="#f8f8f8" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right">
+                    <font size="2" face="Open-sans, sans-serif" color="#555454">
+                      <strong>總稅已付</strong>
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+            <td bgcolor="#f8f8f8" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right">
+                    <font size="2" face="Open-sans, sans-serif" color="#555454">
+                      {total_tax_paid}
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class="conf_body">
+            <td bgcolor="#f8f8f8" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right">
+                    <font size="2" face="Open-sans, sans-serif" color="#555454">
+                      <strong>總付款額</strong>
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+            <td bgcolor="#f8f8f8" colspan="4" style="border:1px solid #D6D4D4;">
+              <table class="table">
+                <tr>
+                  <td width="10"> </td>
+                  <td align="right" class="total_amount">
+                    <font size="4" face="Open-sans, sans-serif" color="#555454">
+                      {total_paid}
+                    </font>
+                  </td>
+                  <td width="10"> </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </font>
+  </td>
+</tr>
+<tr>
+  <td class="box" colspan="3" style="border:1px solid #D6D4D4;">
+    <table class="table">
+      <tr>
+        <td width="10"> </td>
+        <td>
+          <font size="2" face="Open-sans, sans-serif" color="#555454">
+            
+              <p style="border-bottom:1px solid #D6D4D4;">
+                配送方式：
+              </p>
+            
+            <span>
+              {carrier}
+            </span>
+          </font>
+        </td>
+        <td width="10"> </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td class="space_footer"> </td>
+</tr>
+<tr>
+  <td>
+    <table class="table">
+      <tr>
+        <td class="box address" width="310" style="border:1px solid #D6D4D4;">
+          <table class="table">
+            <tr>
+              <td width="10"> </td>
+              <td>
+                <font size="2" face="Open-sans, sans-serif" color="#555454">
+                  
+                    <p style="border-bottom:1px solid #D6D4D4;">
+                      配送地址
+                    </p>
+                  
+                  <span>
+                    {delivery_block_html}
+                  </span>
+                </font>
+              </td>
+              <td width="10"> </td>
+            </tr>
+          </table>
+        </td>
+        <td width="20" class="space_address"> </td>
+        <td class="box address" width="310" style="border:1px solid #D6D4D4;">
+          <table class="table">
+            <tr>
+              <td width="10"> </td>
+              <td>
+                <font size="2" face="Open-sans, sans-serif" color="#555454">
+                  
+                    <p style="border-bottom:1px solid #D6D4D4;">
+                      帳單地址
+                    </p>
+                  
+                  <span>
+                    {invoice_block_html}
+                  </span>
+                </font>
+              </td>
+              <td width="10"> </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td class="space_footer"> </td>
+</tr>
+<tr>
+  <td class="box" colspan="3" style="border:1px solid #D6D4D4;">
+    <table class="table">
+      <tr>
+        <td width="10"> </td>
+        <td>
+          <font size="2" face="Open-sans, sans-serif" color="#555454">
+            
+              <p style="border-bottom:1px solid #D6D4D4;">
+                客戶留言：
+              </p>
+            
+            <span>
+              {message}
+            </span>
+          </font>
+        </td>
+        <td width="10"> </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+                          <tr>
+  <td class="space_footer"> </td>
+</tr>
+<tr>
+  <td class="footer" style="border-top: 4px solid #333333">
+    <span><a href="{shop_url}">{shop_name}</a> powered by <a href="https://www.prestashop.com/?utm_source=marchandprestashop&amp;utm_medium=e-mail=utm_campaign=footer_1-7">PrestaShop™</a></span>
+  </td>
+</tr>
+                      </table>
+        </td>
+        <td id="footer-right" class="space"> </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -253,15 +253,36 @@
                                     <tr>
                                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                         <div style="font-family:Open sans, arial, sans-serif;font-size:16px;line-height:25px;text-align:left;color:#363A41;">
-                                          <span class="label">{{ 'Order:'|trans({}, 'Emails.Body', locale)|raw }}</span> {order_name} {{ 'Placed on'|trans({}, 'Emails.Body', locale)|raw }} {date} </div>
+                                            <span class="label">{{ 'Order:'|trans({}, 'Emails.Body', locale)|raw }}</span> {order_name}
+                                        </div>
                                       </td>
                                     </tr>
+
+                                    <!-- suzy: 2019-10-12 訂購日期 移出來 -->
+                                    <tr>
+                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;">
+                                        <div style="font-family:Open sans, arial, sans-serif;font-size:16px;line-height:25px;text-align:left;color:#363A41;">
+                                            <span class="label">{{ 'Placed on'|trans({}, 'Emails.Body', locale)|raw }}</span> {date}
+                                        </div>
+                                      </td>
+                                    </tr>
+
                                     <tr>
                                       <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;">
                                         <div style="font-family:Open sans, arial, sans-serif;font-size:16px;line-height:25px;text-align:left;color:#363A41;">
                                           <span class="label">{{ 'Payment:'|trans({}, 'Emails.Body', locale)|raw }}</span> {payment} </div>
                                       </td>
                                     </tr>
+
+                                    <!-- suzy: 2019-10-12 配送方式 移上來 -->
+                                    <tr>
+                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;">
+                                        <div style="font-family:Open sans, arial, sans-serif;font-size:16px;line-height:25px;text-align:left;color:#363A41;">
+                                          <span class="label">{{ 'Carrier:'|trans({}, 'Emails.Body', locale)|raw }}</span> {carrier}
+                                        </div>
+                                      </td>
+                                    </tr>
+
                                   </table>
                                 </td>
                               </tr>
@@ -321,12 +342,13 @@
                             <tr>
                               <td align="left" class="products-table" style="font-size:0px;padding:10px 25px;padding-right:50px;padding-left:50px;word-break:break-word;">
                                 <table cellpadding="0" cellspacing="0" width="100%" border="0" style="cellspacing:0;color:#000000;font-family:Open sans, arial, sans-serif;font-size:14px;line-height:22px;table-layout:auto;width:100%;">
+                                  <!-- suzy: 2019-10-12 調整寬度 15 40 15 15 15 -> 10 40 20 10 20 -->
                                   <colgroup>
-                                    <col span="1" style="width: 15%;">
+                                    <col span="1" style="width: 10%;">
                                     <col span="1" style="width: 40%;">
-                                    <col span="1" style="width: 15%;">
-                                    <col span="1" style="width: 15%;">
-                                    <col span="1" style="width: 15%;">
+                                    <col span="1" style="width: 20%;">
+                                    <col span="1" style="width: 10%;">
+                                    <col span="1" style="width: 20%;">
                                   </colgroup>
                                   <tr>
                                     <th bgcolor="#FDFDFD">{{ 'Reference'|trans({}, 'Emails.Body', locale)|raw }}</th>
@@ -347,41 +369,42 @@
                                   {% if templateType == 'txt' %}
 {discounts_txt}
 {% endif %}
+                                  <!-- suzy: 2019-10-12 6 個金額加 align="right" -->
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Products'|trans({}, 'Emails.Body', locale)|raw }}
                                     </td>
-                                    <td bgcolor="#FDFDFD" colspan="3"> {total_products} </td>
+                                    <td bgcolor="#FDFDFD" colspan="3" align="right"> {total_products} </td>
                                   </tr>
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Discounts'|trans({}, 'Emails.Body', locale)|raw }}
                                     </td>
-                                    <td bgcolor="#FDFDFD" colspan="3"> {total_discounts} </td>
+                                    <td bgcolor="#FDFDFD" colspan="3" align="right"> {total_discounts} </td>
                                   </tr>
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Gift-wrapping'|trans({}, 'Emails.Body', locale)|raw }}
                                     </td>
-                                    <td bgcolor="#FDFDFD" colspan="3"> {total_wrapping} </td>
+                                    <td bgcolor="#FDFDFD" colspan="3" align="right"> {total_wrapping} </td>
                                   </tr>
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Shipping'|trans({}, 'Emails.Body', locale)|raw }}
                                     </td>
-                                    <td bgcolor="#FDFDFD" colspan="3"> {total_shipping} </td>
+                                    <td bgcolor="#FDFDFD" colspan="3" align="right"> {total_shipping} </td>
                                   </tr>
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Including total tax'|trans({}, 'Emails.Body', locale)|raw }}
                                     </td>
-                                    <td bgcolor="#FDFDFD" colspan="3"> {total_tax_paid} </td>
+                                    <td bgcolor="#FDFDFD" colspan="3" align="right"> {total_tax_paid} </td>
                                   </tr>
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Total paid'|trans({}, 'Emails.Body', locale)|raw }}
                                     </td>
-                                    <td bgcolor="#FDFDFD" colspan="3"> {total_paid} </td>
+                                    <td bgcolor="#FDFDFD" colspan="3" align="right"> {total_paid} </td>
                                   </tr>
                                 </table>
                               </td>
@@ -399,6 +422,10 @@
                     </tr>
                   </tbody>
                 </table>
+
+                <!-- suzy: 2019-10-12 extra info -->
+                {extra_info}
+
               </div>
               <!--[if mso | IE]>
           </td>
@@ -409,251 +436,12 @@
             </tr>
           <![endif]-->
               <!-- TABLE ENDING -->
-              <!-- SUBTITLE BEGINING -->
-              <!--[if mso | IE]>
-            <tr>
-              <td
-                 class="" width="604px"
-              >
-          
-      <table
-         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:604px;" width="604"
-      >
-        <tr>
-          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-      <![endif]-->
-              <div style="Margin:0px auto;max-width:604px;">
-                <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
-                  <tbody>
-                    <tr>
-                      <td style="direction:ltr;font-size:0px;padding:0 50px 0;text-align:left;vertical-align:top;">
-                        <!--[if mso | IE]>
-                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                
-        <tr>
-      
-            <td
-               class="" style="vertical-align:top;width:504px;"
-            >
-          <![endif]-->
-                        <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
-                          <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
-                            <tbody>
-                              <tr>
-                                <td style="vertical-align:top;padding:0;">
-                                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:0;word-break:break-word;">
-                                        <div style="font-family:Open sans, arial, sans-serif;font-size:16px;font-weight:600;line-height:25px;text-align:left;color:#363A41;">
-                                          <img src="{{ mailThemesUrl }}/modern/assets/baseline-local_shipping-24px.png" style="margin-right:10px">
-                                          {{ 'Shipping'|trans({}, 'Emails.Body', locale)|raw }}
-                                        </div>
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <!--[if mso | IE]>
-            </td>
-          
-        </tr>
-      
-                  </table>
-                <![endif]-->
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!--[if mso | IE]>
-          </td>
-        </tr>
-      </table>
-      
-              </td>
-            </tr>
-          <![endif]-->
-              <!-- SUBTITLE ENDING -->
-              <!-- BOX BEGINING -->
-              <!--[if mso | IE]>
-            <tr>
-              <td
-                 class="" width="604px"
-              >
-          
-      <table
-         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:604px;" width="604"
-      >
-        <tr>
-          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-      <![endif]-->
-              <div style="Margin:0px auto;max-width:604px;">
-                <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
-                  <tbody>
-                    <tr>
-                      <td style="direction:ltr;font-size:0px;padding:15px 50px 40px;text-align:center;vertical-align:top;">
-                        <!--[if mso | IE]>
-                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                
-        <tr>
-      
-            <td
-               class="" style="vertical-align:top;width:504px;"
-            >
-          <![endif]-->
-                        <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
-                          <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
-                            <tbody>
-                              <tr>
-                                <td style="background-color:#fefefe;border:1px solid #DFDFDF;vertical-align:top;padding-top:10px;padding-bottom:10px;">
-                                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                        <div style="font-family:Open sans, arial, sans-serif;font-size:16px;line-height:25px;text-align:left;color:#363A41;">
-                                          <span class="label">{{ 'Carrier:'|trans({}, 'Emails.Body', locale)|raw }}</span> {carrier} </div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;">
-                                        <div style="font-family:Open sans, arial, sans-serif;font-size:16px;line-height:25px;text-align:left;color:#363A41;">
-                                          <span class="label">{{ 'Payment:'|trans({}, 'Emails.Body', locale)|raw }}</span> {payment} </div>
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <!--[if mso | IE]>
-            </td>
-          
-        </tr>
-      
-                  </table>
-                <![endif]-->
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!--[if mso | IE]>
-          </td>
-        </tr>
-      </table>
-      
-              </td>
-            </tr>
-          <![endif]-->
-              <!-- BOX ENDING -->
-              <!-- 2 COLUMNS BEGINING -->
-              <!--[if mso | IE]>
-            <tr>
-              <td
-                 class="" width="604px"
-              >
-          
-      <table
-         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:604px;" width="604"
-      >
-        <tr>
-          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-      <![endif]-->
-              <div style="Margin:0px auto;max-width:604px;">
-                <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
-                  <tbody>
-                    <tr>
-                      <td style="direction:ltr;font-size:0px;padding:0 25px 0;text-align:center;vertical-align:top;">
-                        <!--[if mso | IE]>
-                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                
-        <tr>
-      
-            <td
-               class="" style="vertical-align:top;width:554px;"
-            >
-          <![endif]-->
-                        <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
-                          <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
-                            <tr>
-                              <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                <table cellpadding="0" cellspacing="0" width="100%" border="0" style="cellspacing:0;color:#000000;font-family:Open sans, arial, sans-serif;font-size:14px;line-height:22px;table-layout:auto;width:100%;">
-                                  <tr>
-                                    <td class="box">
-                                      <table class="table" style="width:100%">
-                                        <tbody>
-                                          <tr>
-                                            <td>
-                                              <p style="font-weight:600;">
-                                                <img src="{{ mailThemesUrl }}/modern/assets/baseline-location_on-24px.png" style="width:15px;margin-right:10px">
-                                                {{ 'Delivery address'|trans({}, 'Emails.Body', locale)|raw }}
-                                              </p>
-                                              <p style="border: 1px solid #DFDFDF;background-color: #FEFEFE;padding:20px;font-size:14px">
-                                                {% if templateType == 'html' %}
-{delivery_block_html}
-{% endif %}
-                                                {% if templateType == 'txt' %}
-{delivery_block_txt}
-{% endif %}
-                                              </p>
-                                            </td>
-                                            <td width="10" class="space" style="padding:7px 0"> </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </td>
-                                    <td class="box">
-                                      <table class="table" style="width:100%">
-                                        <tbody>
-                                          <tr>
-                                            <td>
-                                              <p style="font-weight:600;">
-                                                <img src="{{ mailThemesUrl }}/modern/assets/baseline-credit_card-24px.png" style="width:25px;margin-right:10px">
-                                                {{ 'Billing address'|trans({}, 'Emails.Body', locale)|raw }}
-                                              </p>
-                                              <p style="border: 1px solid #DFDFDF;background-color: #FEFEFE;padding:20px;font-size:14px">
-                                                {% if templateType == 'html' %}
-{invoice_block_html}
-{% endif %}
-                                                {% if templateType == 'txt' %}
-{invoice_block_txt}
-{% endif %}
-                                              </p>
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
-                        <!--[if mso | IE]>
-            </td>
-          
-        </tr>
-      
-                  </table>
-                <![endif]-->
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!--[if mso | IE]>
-          </td>
-        </tr>
-      </table>
-      
-              </td>
-            </tr>
-          <![endif]-->
-              <!-- 2 COLUMNS ENDING -->
+
+              <!-- suzy: 2019-10-12 移除 shipping 區塊 -->
+
+              <!-- suzy: 2019-10-12 移除 shipping address, billing address 區塊 -->
+
+
               <!-- FIRST TEXT BEGINING -->
               <!--[if mso | IE]>
             <tr>
