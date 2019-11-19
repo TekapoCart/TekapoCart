@@ -87,9 +87,19 @@ class Ps_Wirepayment extends PaymentModule
                                         '{bankwire_details}' => nl2br(Configuration::get('BANK_WIRE_DETAILS')),
                                         '{bankwire_address}' => nl2br(Configuration::get('BANK_WIRE_ADDRESS')),
                                         // suzy: 2018-10-28 顯示保留天數
-                                        '{bankwire_reservation_days}' => Configuration::get('BANK_WIRE_RESERVATION_DAYS'),
+                                        // '{bankwire_reservation_days}' => Configuration::get('BANK_WIRE_RESERVATION_DAYS'),
                                         // suzy: 2018-11-02 顯示匯款完成提醒訊息
-                                        '{bankwireCustomText}' => Tools::nl2br(Configuration::get('BANK_WIRE_CUSTOM_TEXT', $this->context->language->id)),
+                                        '{bankwire_custom_text}' => Tools::nl2br(Configuration::get('BANK_WIRE_CUSTOM_TEXT', $this->context->language->id)),
+                                        // suzy: 2019-11-19 翻譯
+                                        '{bankwire_trans_subtitle}' => $this->trans('Payment Info', array(), 'Modules.Wirepayment.Shop'),
+                                        '{bankwire_trans_owner}' => $this->trans('Name of account owner', array(), 'Modules.Wirepayment.Shop'),
+                                        '{bankwire_trans_bank}' => $this->trans('Bank name', array(), 'Modules.Wirepayment.Shop'),
+                                        '{bankwire_trans_reserve_msg}' => $this->trans(
+                                            'Goods will be reserved %s days for you and we\'ll process the order immediately after receiving the payment.',
+                                            [
+                                                '%s' => Configuration::get('BANK_WIRE_RESERVATION_DAYS'),
+                                            ],
+                                            'Modules.Wirepayment.Shop'),
                                         );
     }
 

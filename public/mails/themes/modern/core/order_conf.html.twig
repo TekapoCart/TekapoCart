@@ -258,7 +258,7 @@
                                       </td>
                                     </tr>
 
-                                    <!-- suzy: 2019-10-12 訂購日期 移出來 -->
+                                    <!-- suzy: 2019-10-12 move out order date -->
                                     <tr>
                                       <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;">
                                         <div style="font-family:Open sans, arial, sans-serif;font-size:16px;line-height:25px;text-align:left;color:#363A41;">
@@ -274,7 +274,7 @@
                                       </td>
                                     </tr>
 
-                                    <!-- suzy: 2019-10-12 配送方式 移上來 -->
+                                    <!-- suzy: 2019-10-12 move shipping method upward -->
                                     <tr>
                                       <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;">
                                         <div style="font-family:Open sans, arial, sans-serif;font-size:16px;line-height:25px;text-align:left;color:#363A41;">
@@ -342,7 +342,7 @@
                             <tr>
                               <td align="left" class="products-table" style="font-size:0px;padding:10px 25px;padding-right:50px;padding-left:50px;word-break:break-word;">
                                 <table cellpadding="0" cellspacing="0" width="100%" border="0" style="cellspacing:0;color:#000000;font-family:Open sans, arial, sans-serif;font-size:14px;line-height:22px;table-layout:auto;width:100%;">
-                                  <!-- suzy: 2019-10-12 調整寬度 15 40 15 15 15 -> 10 40 20 10 20 -->
+                                  <!-- suzy: 2019-10-12 adjust width: 15 40 15 15 15 -> 10 40 20 10 20 -->
                                   <colgroup>
                                     <col span="1" style="width: 10%;">
                                     <col span="1" style="width: 40%;">
@@ -369,7 +369,7 @@
                                   {% if templateType == 'txt' %}
 {discounts_txt}
 {% endif %}
-                                  <!-- suzy: 2019-10-12 6 個金額加 align="right" -->
+                                  <!-- suzy: 2019-10-12 add six amounts: align="right" -->
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Products'|trans({}, 'Emails.Body', locale)|raw }}
@@ -437,9 +437,9 @@
           <![endif]-->
               <!-- TABLE ENDING -->
 
-              <!-- suzy: 2019-10-12 移除 shipping 區塊 -->
+              <!-- suzy: 2019-10-12 remove shipping block -->
 
-              <!-- suzy: 2019-10-12 移除 shipping address, billing address 區塊 -->
+              <!-- suzy: 2019-10-12 remove shipping address, billing address blocks -->
 
 
               <!-- FIRST TEXT BEGINING -->
