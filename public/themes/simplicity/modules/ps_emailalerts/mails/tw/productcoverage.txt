@@ -1,0 +1,13 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+
+{shop_url}
+
+嗨
+
+Your stock cover is now less than the specified minimum of: {warning_coverage}
+
+供貨情況： {current_coverage}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

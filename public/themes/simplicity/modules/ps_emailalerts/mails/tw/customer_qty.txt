@@ -1,0 +1,15 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+
+{shop_url}
+
+嗨
+
+{product} 已經有貨了。
+
+Good news, this item is back in stock!
+
+Click on the following link to visit the product page and order it: [{product}]({product_link})
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

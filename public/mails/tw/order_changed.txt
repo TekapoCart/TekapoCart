@@ -1,0 +1,17 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+Order ID {order_name} - 訂單已修改
+
+Your order with the reference {order_name} from {shop_name} has been changed by the merchant.
+
+Go to your customer account to learn more about it.
+
+如果您是以訪客身份結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?id_order={order_name})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

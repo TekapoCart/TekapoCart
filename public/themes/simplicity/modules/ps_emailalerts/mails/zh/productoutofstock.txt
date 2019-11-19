@@ -1,0 +1,17 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+您好，
+
+{product} 几乎没有库存了。
+
+There are now less than {last_qty} items in stock.
+
+所剩库存： {qty}
+
+Replenish your inventory, go to the Catalog > Stocks section of your back office to manage your stock.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

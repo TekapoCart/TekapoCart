@@ -1,0 +1,21 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+Your cart on {shop_name}
+
+Congratulations, you are one of our best customers! However, it looks like you have not placed an order since {days_threshold} days.
+
+您的購物車已保存，您可以通過訪問我們的商店回復您的訂單： {shop_url}
+
+We are pleased to offer you a discount of {amount}% off your next order. And this offer is valid for {days} days, so do not wait any longer!
+
+Here is your VOUCHER CODE: {voucher_num}
+
+Enter this code in your shopping cart to get the discount.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

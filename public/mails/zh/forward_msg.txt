@@ -1,0 +1,17 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+您好 {firstname} {lastname},
+
+Customer Service - Discussion Forwarded
+
+{employee} wanted to forward this discussion to you.
+
+聊天记录： {messages}
+
+{employee} added {comment}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,0 +1,23 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+Your cart at {shop_name}
+
+Thanks for your visit. However, it looks like you did not complete your purchase.
+
+Your cart has been saved, you can go back to your order on our shop: {shop_url}
+
+We are pleased to offer you a discount of {amount}% off your next order. And this offer is valid for {days} days, so do not wait any longer!
+
+Your voucher code on {shop_name}
+
+Here is your VOUCHER CODE: {voucher_num}
+
+Enter this code in your shopping cart to get the discount.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,0 +1,29 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+您好 {firstname} {lastname},
+
+感谢您在{shop_name} 注册客户账户。
+
+Your login details on {shop_name}
+
+这是您的注册信息：
+
+Email address: {email}
+
+重要的安全提示：
+
+1. 始终保持你的帐户详细信息的安全。
+
+2. 永远不要透露您的登录信息给任何人。
+
+3. 定期更改密码。
+
+4. 如果您怀疑有人违法使用您的帐户，请立即通知我们。
+
+您现在可以在我们的店铺下单了： [{shop_name}]({shop_url})
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

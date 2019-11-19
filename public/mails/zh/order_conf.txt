@@ -1,0 +1,33 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+您好 {firstname} {lastname},
+
+Thank you for shopping on {shop_name}!
+
+订单详细
+
+订单： {order_name}
+
+下单： {date}
+
+支付： {payment}
+
+配送商： {carrier}
+
+参考	产品	单价	数量	总价  {products_txt} {discounts_txt}
+单件商品	{total_products}
+折扣	{total_discounts}
+礼品包装	{total_wrapping}
+配送	{total_shipping}
+Including total tax	{total_tax_paid}
+总计支付	{total_paid}              {extra_info}
+
+Follow your order and download your invoice on our shop, go to the [Order history and details]({history_url}) section of your customer account.
+
+If you have a guest account, you can follow your order via the [Guest Tracking]({guest_tracking_url}) section on our shop.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,0 +1,19 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+お客からのメッセージ
+
+Customer Email Address: {email}
+
+Order ID #:  {order_name}
+
+添付ファイル: {attached_file}
+
+顧客メッセージ：
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

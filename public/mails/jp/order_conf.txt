@@ -1,0 +1,33 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+Thank you for shopping on {shop_name}!
+
+注文明細
+
+注文 {order_name}
+
+作成日時 {date}
+
+支払い： {payment}
+
+配送： {carrier}
+
+番号	商品	単価	数量	合計金額  {products_txt} {discounts_txt}
+商品	{total_products}
+割引	{total_discounts}
+ギフトラッピング	{total_wrapping}
+送料	{total_shipping}
+Including total tax	{total_tax_paid}
+支払い合計	{total_paid}              {extra_info}
+
+Follow your order and download your invoice on our shop, go to the [Order history and details]({history_url}) section of your customer account.
+
+If you have a guest account, you can follow your order via the [Guest Tracking]({guest_tracking_url}) section on our shop.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

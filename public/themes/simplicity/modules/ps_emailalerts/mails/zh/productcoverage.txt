@@ -1,0 +1,13 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+您好，
+
+Your stock cover is now less than the specified minimum of: {warning_coverage}
+
+当前库存： {current_coverage}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

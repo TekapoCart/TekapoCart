@@ -1,0 +1,33 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+{shop_name} 感謝您的惠顧。
+
+Order ID {order_name} - Pending payment
+
+Your order with the reference {order_name} has been placed successfully. You can expect delivery as soon as your payment is received.
+
+Payment method: bank wire
+
+You have decided to pay by bank wire. Here is the information you need for your transfer:
+
+金額：  {total_paid}
+
+户名：  {bankwire_owner}
+
+匯款資訊： {bankwire_details}
+
+銀行名稱： {bankwire_address}
+
+請在匯款備註您的訂單編號。
+
+如果您是以會員身份結帳，查看訂單請至「[會員專區]({my_account_url})」→「[訂單記錄]({history_url})」。
+
+如果您是以訪客身份結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?id_order={order_name})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

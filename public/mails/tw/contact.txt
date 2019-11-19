@@ -1,0 +1,19 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+
+{shop_url}
+
+來自 {shop_name} 客戶的訊息
+
+Customer Email Address: {email}
+
+Order ID #:  {order_name}
+
+檔案： {attached_file}
+
+客戶訊息：
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

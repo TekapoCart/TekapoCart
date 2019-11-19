@@ -1,0 +1,13 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+已經以您的名義產生一筆新訂單。
+
+Please go on {order_link} to complete the payment.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,0 +1,29 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+{shop_name} 感謝您的惠顧。
+
+Order ID {order_name} - Awaiting payment by check
+
+Your order with the reference {order_name} has been placed successfully. You can expect delivery as soon as your payment is received.
+
+Payment method: check
+
+You have decided to pay by bank check. Here is the information you need for your check:
+
+金額：  {total_paid}
+
+支票抬頭：  {check_name}
+
+請郵寄支票到：  {check_address_html}
+
+如果您是以會員身份結帳，查看訂單請至「[會員專區]({my_account_url})」→「[訂單記錄]({history_url})」。
+
+如果您是以訪客身份結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?id_order={order_name})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

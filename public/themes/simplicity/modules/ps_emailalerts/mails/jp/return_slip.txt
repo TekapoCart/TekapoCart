@@ -1,0 +1,31 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+お知らせ
+
+You have received a new return request for {shop_name}.
+
+Return Details
+
+注文 {order_name} 作成日時 {date}
+
+お客様： {firstname} {lastname}, ({email})
+
+番号	商品	数量   {items}
+
+配送先住所
+
+{delivery_block_html}
+
+請求先住所
+
+{invoice_block_html}
+
+顧客メッセージ：
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

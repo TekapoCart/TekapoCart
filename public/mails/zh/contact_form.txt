@@ -1,0 +1,19 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+您好 {firstname} {lastname},
+
+Your message has been sent successfully, thank you for taking the time to write!
+
+Order ID #:  {order_name}
+
+商品：  {product_name}
+
+附件： {attached_file}
+
+We will reply as soon as possible.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,0 +1,13 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+お知らせ
+
+Your stock cover is now less than the specified minimum of: {warning_coverage}
+
+Current stock cover: {current_coverage}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

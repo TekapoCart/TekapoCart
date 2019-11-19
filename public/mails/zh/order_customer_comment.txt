@@ -1,0 +1,19 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+您好 {firstname} {lastname},
+
+Message from customer
+
+您收到了一条留言关于订单 {order_name}.
+
+客户 {firstrname} {lastname} ({email})
+
+客户留言：
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

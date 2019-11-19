@@ -1,0 +1,17 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+Hi {firstname} {lastname},
+
+Your guest account has been turned into a customer account
+
+Congratulations, your guest account for {shop_name} has been turned into a customer account!
+
+Email address: {email}
+
+You can access your customer account on our shop: [{shop_name}]({shop_url})
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,0 +1,15 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+There are now less than {last_qty} items in stock.
+
+Remaining stock: {qty}
+
+Replenish your inventory, go to the Catalog > Stocks section of your back office to manage your stock.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

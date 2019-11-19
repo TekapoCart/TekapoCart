@@ -1,0 +1,19 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+来自店铺{shop_name} 客户的留言
+
+Customer Email Address: {email}
+
+Order ID #:  {order_name}
+
+附件： {attached_file}
+
+客户留言：
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

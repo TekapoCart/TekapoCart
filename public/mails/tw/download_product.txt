@@ -1,0 +1,21 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+Thank you for your order with the reference {order_name} from {shop_name}
+
+Product(s) to download
+
+You have {nbProducts} product(s) now available for download using the following link(s):
+
+{virtualProducts}
+
+如果您是以會員身份結帳，查看訂單請至「[會員專區]({my_account_url})」→「[訂單記錄]({history_url})」。
+
+如果您是以訪客身份結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?id_order={order_name})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

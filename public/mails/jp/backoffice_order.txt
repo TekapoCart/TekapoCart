@@ -1,0 +1,13 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+お客様の代理でご注文をさせていただきました。
+
+Please go on {order_link} to complete the payment.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

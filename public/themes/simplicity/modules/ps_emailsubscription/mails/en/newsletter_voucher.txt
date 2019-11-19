@@ -1,0 +1,13 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+Hi,
+
+Subscribing to newsletter
+
+Thank you for subscribing to our newsletter. We are pleased to offer you the following voucher: {discount}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

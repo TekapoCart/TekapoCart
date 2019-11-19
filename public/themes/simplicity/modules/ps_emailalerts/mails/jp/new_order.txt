@@ -1,0 +1,43 @@
+Please do not reply directly to this email, we will not receive it.
+
+{shop_url}
+
+おめでとうございます ！
+
+A new order was placed on {shop_name} by the following customer: {firstname} {lastname} ({email})
+
+注文明細
+
+注文 {order_name} 作成日時 {date}
+
+支払い： {payment}
+
+番号	商品	単価	数量	合計金額   {items}
+商品	{total_products}
+割引	{total_discounts}
+ギフトラッピング	{total_wrapping}
+送料	{total_shipping}
+Including total tax	{total_tax_paid}
+支払い合計	{total_paid}
+
+Carrier
+
+配送： {carrier}
+
+支払い： {payment}
+
+配送先住所
+
+{delivery_block_html}
+
+請求先住所
+
+{invoice_block_html}
+
+顧客メッセージ：
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

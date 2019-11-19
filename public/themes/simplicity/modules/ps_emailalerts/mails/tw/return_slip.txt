@@ -1,0 +1,31 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+
+{shop_url}
+
+嗨
+
+{shop_name} 收到新的退貨申請。
+
+Return Details
+
+訂單編號： {order_name} 訂購日期： {date}
+
+客戶： {firstname} {lastname}, ({email})
+
+編號	商品	數量   {items}
+
+配送地址
+
+{delivery_block_html}
+
+帳單地址
+
+{invoice_block_html}
+
+客戶訊息：
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)
