@@ -56,7 +56,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/order_changed.p
       </trans-unit>
       <trans-unit id="992ed3f1f7ce7be683fd4051138b693e" approved="yes">
         <source><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}?id_order={order_name}">"Guest Tracking"</a> section on our shop.]]></source>
-        <target xml:lang="zh-CN"><![CDATA[如果您是游客账户，您可以在我们店铺的  <a href="{guest_tracking_url}?id_order={order_name}">"游客追踪"</a>  页面追踪您的订单。]]></target>
+        <target xml:lang="zh-CN"><![CDATA[如果您是游客账户，您可以在我们店铺的  <a href="{guest_tracking_url}?order_reference={order_name}">"游客追踪"</a>  页面追踪您的订单。]]></target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/order_changed.php:49</note>
       </trans-unit>

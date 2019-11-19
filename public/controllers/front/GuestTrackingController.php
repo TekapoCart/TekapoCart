@@ -59,11 +59,12 @@ class GuestTrackingControllerCore extends FrontController
         if (!$email && !$order_reference) {
             return;
         } elseif (!$email || !$order_reference) {
-            $this->errors[] = $this->getTranslator()->trans(
-                'Please provide the required information',
-                array(),
-                'Shop.Notifications.Info' // suzy: 2019-07-06 Error 改 Info
-            );
+            // suzy: 2019-11-19 改現示錯誤訊息規則
+//            $this->errors[] = $this->getTranslator()->trans(
+//                'Please provide the required information',
+//                array(),
+//                'Shop.Notifications.Error'
+//            );
 
             return;
         }

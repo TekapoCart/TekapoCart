@@ -345,7 +345,7 @@
         <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td height="40" style="vertical-align:top;height:40px;">
       
     <![endif]-->
-    <!-- suzy: 2019-10-12 &#39640;&#24230;&#25913; 30px&#12289;&#21152;&#19978;&#35531;&#21247;&#30452;&#25509;&#22238;&#35206;&#25552;&#37266; -->
+    <!-- suzy: 2019-10-12 change height to 30px and add do not reply msg -->
     <div style="height:30px;" height="30">   </div>
     <div style="text-align: center; margin-bottom: 10px; color: #999;" align="center"><small>此信件為系統自動傳送，請勿直接回覆，感謝您的配合。</small></div>
     <!--[if mso | IE]>
@@ -696,7 +696,7 @@
                                       </td>
                                     </tr>
 
-                                    <!-- suzy: 2019-10-12 &#35330;&#36092;&#26085;&#26399; &#31227;&#20986;&#20358; -->
+                                    <!-- suzy: 2019-10-12 move out order date -->
                                     <tr>
                                       <td align="left" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 0px; padding: 10px 25px; padding-top: 0; word-break: break-word;">
                                         <div style="font-family:Open sans, arial, sans-serif;font-size:16px;line-height:25px;text-align:left;color:#363A41;" align="left">
@@ -712,7 +712,7 @@
                                       </td>
                                     </tr>
 
-                                    <!-- suzy: 2019-10-12 &#37197;&#36865;&#26041;&#24335; &#31227;&#19978;&#20358; -->
+                                    <!-- suzy: 2019-10-12 move shipping method upward -->
                                     <tr>
                                       <td align="left" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 0px; padding: 10px 25px; padding-top: 0; word-break: break-word;">
                                         <div style="font-family:Open sans, arial, sans-serif;font-size:16px;line-height:25px;text-align:left;color:#363A41;" align="left">
@@ -780,7 +780,7 @@
                             <tr>
                               <td align="left" class="products-table" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-size: 0px; padding: 10px 25px; padding-right: 50px; padding-left: 50px; word-break: break-word;" bgcolor="#FDFDFD">
                                 <table cellpadding="0" cellspacing="0" width="100%" border="0" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; cellspacing: 0; color: #000000; font-family: Open sans, arial, sans-serif; font-size: 14px; line-height: 22px; table-layout: auto; width: 100%;">
-                                  <!-- suzy: 2019-10-12 &#35519;&#25972;&#23532;&#24230; 15 40 15 15 15 -> 10 40 20 10 20 -->
+                                  <!-- suzy: 2019-10-12 adjust width: 15 40 15 15 15 -> 10 40 20 10 20 -->
                                   <colgroup>
                                     <col span="1" style="width: 10%;" width="10%">
                                     <col span="1" style="width: 40%;" width="40%">
@@ -797,7 +797,7 @@
                                   </tr>
                                   {products}
                                                                     {discounts}
-                                                                    <!-- suzy: 2019-10-12 6 &#20491;&#37329;&#38989;&#21152; align="right" -->
+                                                                    <!-- suzy: 2019-10-12 add six amounts: align="right" -->
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;">
                                       商品
@@ -865,9 +865,9 @@
           <![endif]-->
               <!-- TABLE ENDING -->
 
-              <!-- suzy: 2019-10-12 &#31227;&#38500; shipping &#21312;&#22602; -->
+              <!-- suzy: 2019-10-12 remove shipping block -->
 
-              <!-- suzy: 2019-10-12 &#31227;&#38500; shipping address, billing address &#21312;&#22602; -->
+              <!-- suzy: 2019-10-12 remove shipping address, billing address blocks -->
 
 
               <!-- FIRST TEXT BEGINING -->
@@ -961,7 +961,7 @@
                             <tr>
                               <td align="left" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 0px; padding: 10px 25px; padding-top: 0; word-break: break-word;">
                                 <div style="font-family:Open sans, arial, sans-serif;font-size:14px;line-height:25px;text-align:left;color:#363A41;" align="left">
-                                  如果您是以訪客身份結帳，查看訂單請至「<a href="{guest_tracking_url}?id_order={order_name}" style="color: #25B9D7; text-decoration: underline; font-weight: 600;">非會員訂單查詢</a>」。
+                                  如果您是以訪客身份結帳，查看訂單請至「<a href="{guest_tracking_url}?order_reference={order_name}" style="color: #25B9D7; text-decoration: underline; font-weight: 600;">非會員訂單查詢</a>」。
                                 </div>
                               </td>
                             </tr>

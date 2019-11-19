@@ -56,7 +56,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/order_changed.p
       </trans-unit>
       <trans-unit id="992ed3f1f7ce7be683fd4051138b693e" approved="yes">
         <source><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}?id_order={order_name}">"Guest Tracking"</a> section on our shop.]]></source>
-        <target xml:lang="en"><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}?id_order={order_name}">"Guest Tracking"</a> section on our shop.]]></target>
+        <target xml:lang="en"><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}?order_reference={order_name}">"Guest Tracking"</a> section on our shop.]]></target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/order_changed.php:49</note>
       </trans-unit>

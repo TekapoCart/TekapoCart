@@ -26,7 +26,7 @@ Including total tax	{total_tax_paid}
 
 如果您是以會員身份結帳，查看訂單請至「[會員專區]({my_account_url})」→「[訂單記錄]({history_url})」。
 
-如果您是以訪客身份結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?id_order={order_name})」。
+如果您是以訪客身份結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?order_reference={order_name})」。
 
 [{shop_name}]({shop_url})
 

@@ -1691,7 +1691,7 @@
       </trans-unit>
       <trans-unit id="869a6d7d8b6af1ca14f874356141ac45" approved="yes">
         <source><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}" target="_blank">Guest Tracking</a> section on our shop.]]></source>
-        <target xml:lang="zh-TW"><![CDATA[如果您是以訪客身份結帳，查看訂單請至「<a href="{guest_tracking_url}?id_order={order_name}">非會員訂單查詢</a>」。]]></target>
+        <target xml:lang="zh-TW"><![CDATA[如果您是以訪客身份結帳，查看訂單請至「<a href="{guest_tracking_url}?order_reference={order_name}">非會員訂單查詢</a>」。]]></target>
         <note>Line: 317</note>
       </trans-unit>
       <trans-unit id="af6c5b694abbb964eec098febaa5d31d" approved="yes">
