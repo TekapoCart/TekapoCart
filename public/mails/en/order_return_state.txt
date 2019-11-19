@@ -8,7 +8,7 @@ Order return #{id_order_return} - Update
 
 We have updated the progress on your return #{id_order_return}, the new status is: "{state_order_return}".
 
-If you purchase as a member, follow your order via the 「[My Account]({my_account_url})」→「[Order Histroy]({history_url})」 to view your order.
+If you purchase as a member, follow your order via the 「[My Account]({my_account_url})」→「[Order Histroy]({history_url})」.
 
 [{shop_name}]({shop_url})
 

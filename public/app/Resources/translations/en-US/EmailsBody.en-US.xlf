@@ -644,7 +644,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/return_slip.php
       </trans-unit>
       <trans-unit id="63d5049791d9d79d86e9a108b0a999ca" approved="yes">
         <source>Reference</source>
-        <target xml:lang="en">Reference</target>
+        <target xml:lang="en">SKU</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/return_slip.php:37</note>
       </trans-unit>
@@ -656,7 +656,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/return_slip.php
       </trans-unit>
       <trans-unit id="694e8d1f2ee056f98ee488bdc4982d73" approved="yes">
         <source>Quantity</source>
-        <target xml:lang="en">Quantity</target>
+        <target xml:lang="en">Qty</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/return_slip.php:39</note>
       </trans-unit>
@@ -1039,7 +1039,7 @@ File: modules/ps_emailgenerator/templates/core/outofstock.php:7</note>
       </trans-unit>
       <trans-unit id="e57e950cfde3e24c3674f9266753edec">
         <source><![CDATA[Follow your order and download your invoice on our shop, go to the <a href="{history_url}" target="_blank">Order history and details</a> section of your customer account.]]></source>
-        <target xml:lang="en"><![CDATA[If you purchase as a member, follow your order via the 「<a href="{my_account_url}">My Account</a>」→「<a href="{history_url}">Order Histroy</a>」 to view your order.]]></target>
+        <target xml:lang="en"><![CDATA[If you purchase as a member, follow your order via the 「<a href="{my_account_url}">My Account</a>」→「<a href="{history_url}">Order Histroy</a>」.]]></target>
         <note>Line: 319</note>
       </trans-unit>
       <trans-unit id="e25d137c27dca2618629678d2df71113" approved="yes">

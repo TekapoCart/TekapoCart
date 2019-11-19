@@ -369,37 +369,52 @@
                                   {% if templateType == 'txt' %}
 {discounts_txt}
 {% endif %}
-                                  <!-- suzy: 2019-10-12 add six amounts: align="right" -->
+                                  <!-- suzy: 2019-10-12 add align="right" -->
+                                  {#
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Products'|trans({}, 'Emails.Body', locale)|raw }}
                                     </td>
                                     <td bgcolor="#FDFDFD" colspan="3" align="right"> {total_products} </td>
                                   </tr>
+                                  #}
+                                  <!-- suzy: 2019-10-12 add condition if -->
+                                  {% if total_discounts > 0 %}
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Discounts'|trans({}, 'Emails.Body', locale)|raw }}
                                     </td>
                                     <td bgcolor="#FDFDFD" colspan="3" align="right"> {total_discounts} </td>
                                   </tr>
+                                  {% endif %}
+
+                                  <!-- suzy: 2019-10-12 add condition if -->
+                                  {% if total_wrapping > 0 %}
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Gift-wrapping'|trans({}, 'Emails.Body', locale)|raw }}
                                     </td>
                                     <td bgcolor="#FDFDFD" colspan="3" align="right"> {total_wrapping} </td>
                                   </tr>
+                                  {% endif %}
+
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Shipping'|trans({}, 'Emails.Body', locale)|raw }}
                                     </td>
                                     <td bgcolor="#FDFDFD" colspan="3" align="right"> {total_shipping} </td>
                                   </tr>
+
+                                  <!-- suzy: 2019-10-12 add condition if -->
+                                  {% if total_tax_paid > 0 %}
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Including total tax'|trans({}, 'Emails.Body', locale)|raw }}
                                     </td>
                                     <td bgcolor="#FDFDFD" colspan="3" align="right"> {total_tax_paid} </td>
                                   </tr>
+                                  {% endif %}
+
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right">
                                       {{ 'Total paid'|trans({}, 'Emails.Body', locale)|raw }}

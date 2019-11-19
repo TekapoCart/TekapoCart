@@ -72,8 +72,8 @@
                                         <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0;word-break:break-word;">
                                             <div style="font-family:Open sans, arial, sans-serif;font-size:16px;line-height:25px;text-align:left;color:#363A41;">
                                                 {$list['{bankwire_trans_owner}']}：{$list['{bankwire_owner}']}<br />
-                                                {$list['{bankwire_details}']}<br />
                                                 {$list['{bankwire_trans_bank}']}：{$list['{bankwire_address}']}<br />
+                                                {$list['{bankwire_details}']}<br />
                                                 <br />
                                                 {$list['{bankwire_trans_reserve_msg}']}<br />
                                                 <br />

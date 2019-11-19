@@ -12,7 +12,7 @@ Order: {order_name} Placed on {date}
 
 Customer: {firstname} {lastname}, ({email})
 
-Reference	Product	Quantity   {items}
+SKU	Product	Qty   {items}
 
 Delivery address
 

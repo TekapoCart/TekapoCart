@@ -12,7 +12,7 @@ Order: {order_name} Placed on {date}
 
 Payment: {payment}
 
-Reference	Product	Unit price	Quantity	Total price   {items}
+SKU	Product	Unit price	Qty	Total price   {items}
 Products	{total_products}
 Discounts	{total_discounts}
 Gift-wrapping	{total_wrapping}

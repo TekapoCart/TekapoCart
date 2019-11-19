@@ -59,7 +59,8 @@
 		</table>
 	</td>
 	<td style="border:1px solid #D6D4D4;">
-		<table class="table">
+		<!-- suzy: 2019-11-19 added width 100% -->
+		<table class="table" style="width: 100%;">
 			<tr>
 				<td width="5">&nbsp;</td>
 				<td align="right">
@@ -85,7 +86,8 @@
 		</table>
 	</td>
 	<td style="border:1px solid #D6D4D4;">
-		<table class="table">
+		<!-- suzy: 2019-11-19 added width 100% -->
+		<table class="table" style="width: 100%;">
 			<tr>
 				<td width="5">&nbsp;</td>
 				<td align="right">

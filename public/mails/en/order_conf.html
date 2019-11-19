@@ -789,45 +789,28 @@
                                     <col span="1" style="width: 20%;" width="20%">
                                   </colgroup>
                                   <tr>
-                                    <th bgcolor="#FDFDFD" style="font-family: Open sans, Arial, sans-serif; font-size: 12px; background-color: #FDFDFD; color: #353943; font-weight: 600; padding: 10px 5px; border: 1px solid #DFDFDF;">Reference</th>
+                                    <th bgcolor="#FDFDFD" style="font-family: Open sans, Arial, sans-serif; font-size: 12px; background-color: #FDFDFD; color: #353943; font-weight: 600; padding: 10px 5px; border: 1px solid #DFDFDF;">SKU</th>
                                     <th bgcolor="#FDFDFD" style="font-family: Open sans, Arial, sans-serif; font-size: 12px; background-color: #FDFDFD; color: #353943; font-weight: 600; padding: 10px 5px; border: 1px solid #DFDFDF;">Product</th>
                                     <th bgcolor="#FDFDFD" style="font-family: Open sans, Arial, sans-serif; font-size: 12px; background-color: #FDFDFD; color: #353943; font-weight: 600; padding: 10px 5px; border: 1px solid #DFDFDF;">Unit price</th>
-                                    <th bgcolor="#FDFDFD" style="font-family: Open sans, Arial, sans-serif; font-size: 12px; background-color: #FDFDFD; color: #353943; font-weight: 600; padding: 10px 5px; border: 1px solid #DFDFDF;">Quantity</th>
+                                    <th bgcolor="#FDFDFD" style="font-family: Open sans, Arial, sans-serif; font-size: 12px; background-color: #FDFDFD; color: #353943; font-weight: 600; padding: 10px 5px; border: 1px solid #DFDFDF;">Qty</th>
                                     <th bgcolor="#FDFDFD" style="font-family: Open sans, Arial, sans-serif; font-size: 12px; background-color: #FDFDFD; color: #353943; font-weight: 600; padding: 10px 5px; border: 1px solid #DFDFDF;">Total price</th>
                                   </tr>
                                   {products}
                                                                     {discounts}
-                                                                    <!-- suzy: 2019-10-12 add six amounts: align="right" -->
-                                  <tr class="order_summary">
-                                    <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;">
-                                      Products
-                                    </td>
-                                    <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;"> {total_products} </td>
-                                  </tr>
-                                  <tr class="order_summary">
-                                    <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;">
-                                      Discounts
-                                    </td>
-                                    <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;"> {total_discounts} </td>
-                                  </tr>
-                                  <tr class="order_summary">
-                                    <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;">
-                                      Gift-wrapping
-                                    </td>
-                                    <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;"> {total_wrapping} </td>
-                                  </tr>
+                                                                    <!-- suzy: 2019-10-12 add align="right" -->
+                                                                    <!-- suzy: 2019-10-12 add condition if -->
+                                  
+                                  <!-- suzy: 2019-10-12 add condition if -->
+                                  
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;">
                                       Shipping
                                     </td>
                                     <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;"> {total_shipping} </td>
                                   </tr>
-                                  <tr class="order_summary">
-                                    <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;">
-                                      Including total tax
-                                    </td>
-                                    <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;"> {total_tax_paid} </td>
-                                  </tr>
+
+                                  <!-- suzy: 2019-10-12 add condition if -->
+                                  
                                   <tr class="order_summary">
                                     <td bgcolor="#FDFDFD" colspan="3" align="right" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open sans, Arial, sans-serif; background-color: #FDFDFD; color: #353943; font-weight: 600; font-size: 14px; padding: 10px; border: 1px solid #DFDFDF;">
                                       Total paid
@@ -902,7 +885,7 @@
                             <tr>
                               <td align="left" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 0px; padding: 10px 25px; word-break: break-word;">
                                 <div style="font-family:Open sans, arial, sans-serif;font-size:14px;line-height:25px;text-align:left;color:#363A41;" align="left">
-                                  If you purchase as a member, follow your order via the 「<a href="{my_account_url}" style="color: #25B9D7; text-decoration: underline; font-weight: 600;">My Account</a>」→「<a href="{history_url}" style="color: #25B9D7; text-decoration: underline; font-weight: 600;">Order Histroy</a>」 to view your order.
+                                  If you purchase as a member, follow your order via the 「<a href="{my_account_url}" style="color: #25B9D7; text-decoration: underline; font-weight: 600;">My Account</a>」→「<a href="{history_url}" style="color: #25B9D7; text-decoration: underline; font-weight: 600;">Order Histroy</a>」.
                                 </div>
                               </td>
                             </tr>
@@ -961,7 +944,7 @@
                             <tr>
                               <td align="left" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 0px; padding: 10px 25px; padding-top: 0; word-break: break-word;">
                                 <div style="font-family:Open sans, arial, sans-serif;font-size:14px;line-height:25px;text-align:left;color:#363A41;" align="left">
-                                  If you purchase as a guest, follow your order via the <a href="{guest_tracking_url}?order_reference={order_name}" style="color: #25B9D7; text-decoration: underline; font-weight: 600;">"Guest Tracking"</a>.
+                                  If you purchase as a guest, follow your order via the 「<a href="{guest_tracking_url}?order_reference={order_name}" style="color: #25B9D7; text-decoration: underline; font-weight: 600;">Guest Tracking</a>」.
                                 </div>
                               </td>
                             </tr>

@@ -16,17 +16,13 @@ Payment: {payment}
 
 Carrier: {carrier}
 
-Reference	Product	Unit price	Quantity	Total price  {products_txt} {discounts_txt}
-Products	{total_products}
-Discounts	{total_discounts}
-Gift-wrapping	{total_wrapping}
+SKU	Product	Unit price	Qty	Total price  {products_txt} {discounts_txt}
 Shipping	{total_shipping}
-Including total tax	{total_tax_paid}
 Total paid	{total_paid}              {extra_info}
 
-If you purchase as a member, follow your order via the 「[My Account]({my_account_url})」→「[Order Histroy]({history_url})」 to view your order.
+If you purchase as a member, follow your order via the 「[My Account]({my_account_url})」→「[Order Histroy]({history_url})」.
 
-If you purchase as a guest, follow your order via the ["Guest Tracking"]({guest_tracking_url}?order_reference={order_name}).
+If you purchase as a guest, follow your order via the 「[Guest Tracking]({guest_tracking_url}?order_reference={order_name})」.
 
 [{shop_name}]({shop_url})
 
