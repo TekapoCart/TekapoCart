@@ -56,7 +56,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/order_changed.p
       </trans-unit>
       <trans-unit id="992ed3f1f7ce7be683fd4051138b693e" approved="yes">
         <source><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}?id_order={order_name}">"Guest Tracking"</a> section on our shop.]]></source>
-        <target xml:lang="en"><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}?order_reference={order_name}">"Guest Tracking"</a> section on our shop.]]></target>
+        <target xml:lang="en"><![CDATA[If you purchase as a guest, follow your order via the 「<a href="{guest_tracking_url}?order_reference={order_name}">Guest Tracking</a>」.]]></target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/order_changed.php:49</note>
       </trans-unit>
@@ -416,7 +416,7 @@ File: modules/ps_emailgenerator/templates/core/cheque.php:49</note>
       </trans-unit>
       <trans-unit id="a51341e25ff7710496cf86468d797169" approved="yes">
         <source><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}">"Guest Tracking"</a> section on our shop.]]></source>
-        <target xml:lang="en"><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}">"Guest Tracking"</a> section on our shop.]]></target>
+        <target xml:lang="en"><![CDATA[If you purchase as a guest, follow your order via the 「<a href="{guest_tracking_url}?order_reference={order_name}">Guest Tracking</a>」.]]></target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/cheque.php:76</note>
       </trans-unit>
@@ -1022,6 +1022,11 @@ File: modules/ps_emailgenerator/templates/core/order_changed.php:21</note>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/order_changed.php:24</note>
       </trans-unit>
+      <trans-unit id="869a6d7d8b6af1ca14f874356141ac45" approved="yes">
+        <source><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}" target="_blank">Guest Tracking</a> section on our shop.]]></source>
+        <target xml:lang="en"><![CDATA[If you purchase as a guest, follow your order via the 「<a href="{guest_tracking_url}?order_reference={order_name}">Guest Tracking</a>」.]]></target>
+        <note>Line: 317</note>
+      </trans-unit>
     </body>
   </file>
   <file original="modules/ps_emailgenerator/templates/core/outofstock.php" source-language="en" target-language="en" datatype="plaintext">
@@ -1031,6 +1036,11 @@ File: modules/ps_emailgenerator/templates/core/order_changed.php:24</note>
         <target xml:lang="en">Thanks for your order with the reference {order_name} from {shop_name}.</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/outofstock.php:7</note>
+      </trans-unit>
+      <trans-unit id="e57e950cfde3e24c3674f9266753edec">
+        <source><![CDATA[Follow your order and download your invoice on our shop, go to the <a href="{history_url}" target="_blank">Order history and details</a> section of your customer account.]]></source>
+        <target xml:lang="en"><![CDATA[If you purchase as a member, follow your order via the 「<a href="{my_account_url}">My Account</a>」→「<a href="{history_url}">Order Histroy</a>」 to view your order.]]></target>
+        <note>Line: 319</note>
       </trans-unit>
       <trans-unit id="e25d137c27dca2618629678d2df71113" approved="yes">
         <source>Item(s) out of stock</source>
