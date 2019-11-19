@@ -990,6 +990,11 @@ File: modules/ps_emailgenerator/templates/core/order_changed.php:24</note>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/outofstock.php:7</note>
       </trans-unit>
+      <trans-unit id="e57e950cfde3e24c3674f9266753edec" approved="yes">
+        <source><![CDATA[Follow your order and download your invoice on our shop, go to the <a href="{history_url}" target="_blank">Order history and details</a> section of your customer account.]]></source>
+        <target xml:lang="zh-CN"><![CDATA[如果您是以会员身份结帐，请至「<a href="{history_url}">订单记录</a>」查看订单。]]></target>
+        <note>Line: 319</note>
+      </trans-unit>
       <trans-unit id="e25d137c27dca2618629678d2df71113" approved="yes">
         <source>Item(s) out of stock</source>
         <target xml:lang="zh-CN">商品无库存</target>

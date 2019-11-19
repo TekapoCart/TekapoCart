@@ -8,7 +8,7 @@ Order ID {order_name} - 退货已处理
 
 We have processed your refund for your order with the reference {order_name} from {shop_name}.
 
-Follow your order and download your invoice on our shop, go to the [Order history and details]({history_url}) section of your customer account.
+如果您是以会员身份结帐，请至「[订单记录]({history_url})」查看订单。
 
 If you have a guest account, you can follow your order via the [Guest Tracking]({guest_tracking_url}) section on our shop.
 
