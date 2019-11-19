@@ -581,7 +581,8 @@ abstract class PaymentModuleCore extends Module
                         $carrier = $order->id_carrier ? new Carrier($order->id_carrier) : false;
 
                         $data = array(
-                            '{firstname}' => $this->context->customer->firstname,
+                            // suzy: 2019-11-19 遮罩
+                            '{firstname}' => Tools::maskString($this->context->customer->firstname, 'name'),
                             '{lastname}' => $this->context->customer->lastname,
                             '{email}' => $this->context->customer->email,
                             '{delivery_block_txt}' => $this->_getFormatedAddress($delivery, AddressFormat::FORMAT_NEW_LINE),
@@ -595,7 +596,8 @@ abstract class PaymentModuleCore extends Module
                                 'lastname' => '<span style="font-weight:bold;">%s</span>',
                             )),
                             '{delivery_company}' => $delivery->company,
-                            '{delivery_firstname}' => $delivery->firstname,
+                            // suzy: 2019-11-19 遮罩
+                            '{delivery_firstname}' => Tools::maskString($delivery->firstname, 'name'),
                             '{delivery_lastname}' => $delivery->lastname,
                             '{delivery_address1}' => $delivery->address1,
                             '{delivery_address2}' => $delivery->address2,
@@ -607,7 +609,8 @@ abstract class PaymentModuleCore extends Module
                             '{delivery_other}' => $delivery->other,
                             '{invoice_company}' => $invoice->company,
                             '{invoice_vat_number}' => $invoice->vat_number,
-                            '{invoice_firstname}' => $invoice->firstname,
+                            // suzy: 2019-11-19 遮罩
+                            '{invoice_firstname}' => Tools::maskString($invoice->firstname, 'name'),
                             '{invoice_lastname}' => $invoice->lastname,
                             '{invoice_address2}' => $invoice->address2,
                             '{invoice_address1}' => $invoice->address1,
@@ -673,7 +676,7 @@ abstract class PaymentModuleCore extends Module
                                 ) . ' (' .  $order->getUniqReference()  . ')', // suzy: 2018-11-14 信件主旨加上訂單編號
                                 $data,
                                 $this->context->customer->email,
-                                Tools::maskString($this->context->customer->firstname, 'name') . ' ' . $this->context->customer->lastname,
+                                Tools::maskString($this->context->customer->firstname, 'name'), // suzy: 2019-11-19 遮罩、只留名稱
                                 null,
                                 null,
                                 $file_attachement,
