@@ -1612,7 +1612,7 @@
       </trans-unit>
       <trans-unit id="0eede552438475bdfe820c13f24c9399" approved="yes">
         <source>Total price</source>
-        <target xml:lang="zh-TW">總金額</target>
+        <target xml:lang="zh-TW">金额</target>
         <note>Line: 335</note>
       </trans-unit>
       <trans-unit id="068f80c7519d0528fb08e82137a72131" approved="yes">
@@ -1637,7 +1637,7 @@
       </trans-unit>
       <trans-unit id="ea067eb37801c5aab1a1c685eb97d601" approved="yes">
         <source>Total paid</source>
-        <target xml:lang="zh-TW">總金額</target>
+        <target xml:lang="zh-TW">總計</target>
         <note>Line: 370</note>
       </trans-unit>
       <trans-unit id="f8617a92ba0a0a4eabee724eab7c9f48" approved="yes">

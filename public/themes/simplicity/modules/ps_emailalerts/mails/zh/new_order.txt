@@ -18,7 +18,7 @@ A new order was placed on {shop_name} by the following customer: {firstname} {la
 礼品包装	{total_wrapping}
 配送	{total_shipping}
 Including total tax	{total_tax_paid}
-总计支付	{total_paid}
+总计	{total_paid}
 
 Carrier
 

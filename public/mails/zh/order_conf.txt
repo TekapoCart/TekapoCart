@@ -18,7 +18,7 @@ Thank you for shopping on {shop_name}!
 
 参考	产品	单价	数量	总价  {products_txt} {discounts_txt}
 配送	{total_shipping}
-总计支付	{total_paid}              {extra_info}
+总计	{total_paid}              {extra_info}
 
 如果您是以会员身份结帐，请至「[订单记录]({history_url})」查看订单。
 

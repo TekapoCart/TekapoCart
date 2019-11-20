@@ -16,9 +16,9 @@
 
 配送方式： {carrier}
 
-編號	商品	單價	數量	總金額  {products_txt} {discounts_txt}
+編號	商品	單價	數量	金额  {products_txt} {discounts_txt}
 運費	{total_shipping}
-總金額	{total_paid}              {extra_info}
+總計	{total_paid}              {extra_info}
 
 如果您是以會員身份結帳，請至「[訂單記錄]({history_url})」查看訂單。
 
