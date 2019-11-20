@@ -38,7 +38,7 @@ Carrier
 
 {message}
 
-如您是以會員身份結帳，如欲查看訂單請至「[訂單記錄]({history_url})」。　　　
+如您是以會員身份結帳，查看訂單請至「[訂單記錄]({history_url})」。　　　
 如您是以訪客身份結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?order_reference={order_name})」。
 
 [{shop_name}]({shop_url})
