@@ -59,7 +59,7 @@
   text-align: center;
   margin-top: 1em;
   ul {
-    display: flex;
+    // display: flex;
     @include media-breakpoint-down(sm) {
       flex-flow: wrap;
     }
@@ -75,10 +75,10 @@
   cursor: pointer;
 
   @include media-breakpoint-down(sm) {
-    height: 2rem;
-    width: 2rem;
-    margin-right: 1.3rem;
-    margin-bottom: 1.3rem;
+    // height: 2rem;
+    // width: 2rem;
+    // margin-right: 1.3rem;
+    // margin-bottom: 1.3rem;
     background-size: contain;
   }
 
