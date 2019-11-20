@@ -16,12 +16,11 @@ Thank you for shopping on {shop_name}!
 
 配送商： {carrier}
 
-参考	产品	单价	数量	总价  {products_txt} {discounts_txt}
+参考	产品	单价	数量	金额  {products_txt} {discounts_txt}
 配送	{total_shipping}
 总计	{total_paid}              {extra_info}
 
 如果您是以会员身份结帐，请至「[订单记录]({history_url})」查看订单。
-
 If you have a guest account, you can follow your order via the [Guest Tracking]({guest_tracking_url}) section on our shop.
 
 [{shop_name}]({shop_url})

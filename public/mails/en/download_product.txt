@@ -12,10 +12,6 @@ You have {nbProducts} product(s) now available for download using the following 
 
 {virtualProducts}
 
-If you purchase as a member, follow your order via the 「[Order Histroy]({history_url})」.
-
-If you purchase as a guest, follow your order via the 「[Guest Tracking]({guest_tracking_url}?order_reference={order_name})」.
-
 [{shop_name}]({shop_url})
 
 Powered by [TekapoCart](https://www.tekapo.io/)

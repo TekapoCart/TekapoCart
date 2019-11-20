@@ -12,7 +12,7 @@ A new order was placed on {shop_name} by the following customer: {firstname} {la
 
 支付： {payment}
 
-参考	产品	单价	数量	总价   {items}
+参考	产品	单价	数量	金额   {items}
 单件商品	{total_products}
 折扣	{total_discounts}
 礼品包装	{total_wrapping}
@@ -37,6 +37,9 @@ Carrier
 客户留言：
 
 {message}
+
+如果您是以会员身份结帐，请至「[订单记录]({history_url})」查看订单。
+If you have a guest account, you can follow your order via the [Guest Tracking]({guest_tracking_url}) section on our shop.
 
 [{shop_name}]({shop_url})
 

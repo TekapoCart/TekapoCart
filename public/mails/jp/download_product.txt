@@ -12,10 +12,6 @@ You have {nbProducts} product(s) now available for download using the following 
 
 {virtualProducts}
 
-Follow your order and download your invoice on our shop, go to the [Order history and details]({history_url}) section of your customer account.
-
-If you have a guest account, you can follow your order via the [Guest Tracking]({guest_tracking_url}) section on our shop.
-
 [{shop_name}]({shop_url})
 
 Powered by [TekapoCart](https://www.tekapo.io/)

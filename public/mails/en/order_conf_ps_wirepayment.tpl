@@ -1,6 +1,6 @@
 <!-- BOX BEGINING -->
 
-<div style="Margin:0px auto;max-width:604px;">
+<div style="Margin:0px auto;max-width:604px;margin-top:30px;">
 
     <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
         <tbody>
@@ -50,7 +50,8 @@
     <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
         <tbody>
         <tr>
-            <td style="direction:ltr;font-size:0px;padding:15px 50px 40px;text-align:center;vertical-align:top;">
+            <!-- suzy: 2019-11-20 change padding from 50px to 20px -->
+            <td style="direction:ltr;font-size:0px;padding:15px 20px 40px;text-align:center;vertical-align:top;">
                 <!--[if mso | IE]>
                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
 

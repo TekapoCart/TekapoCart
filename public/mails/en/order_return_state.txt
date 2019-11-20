@@ -8,8 +8,6 @@ Order return #{id_order_return} - Update
 
 We have updated the progress on your return #{id_order_return}, the new status is: "{state_order_return}".
 
-If you purchase as a member, follow your order via the 「[Order Histroy]({history_url})」.
-
 [{shop_name}]({shop_url})
 
 Powered by [TekapoCart](https://www.tekapo.io/)

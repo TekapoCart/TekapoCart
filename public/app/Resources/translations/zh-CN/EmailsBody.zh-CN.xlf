@@ -810,7 +810,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:4
       </trans-unit>
       <trans-unit id="0eede552438475bdfe820c13f24c9399" approved="yes">
         <source>Total price</source>
-        <target xml:lang="zh-CN">总价</target>
+        <target xml:lang="zh-CN">金额</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:51</note>
       </trans-unit>

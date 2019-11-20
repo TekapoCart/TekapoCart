@@ -181,8 +181,8 @@
         <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td height="40" style="vertical-align:top;height:40px;">
       
     <![endif]-->
-    <!-- suzy: 2019-10-12 change height to 30px and add do not reply msg -->
-    <div style="height:30px;">   </div>
+    <!-- suzy: 2019-10-12 change height from 40px to 10px and add do not reply msg -->
+    <div style="height:10px;">   </div>
     <div style="text-align: center; margin-bottom: 10px; color: #999;"><small>{{ 'Please do not reply directly to this email, we will not receive it.'|trans({}, 'Emails.Body', locale)|raw }}</small></div>
     <!--[if mso | IE]>
     
@@ -225,9 +225,10 @@
           </td>
         </tr>
       </table>
-      <![endif]--> 
+      <![endif]-->
                   {% block footer %}
-                      {% include '@MailThemes/modern/components/footer.html.twig' %}
+                      <!-- suzy: 2019-11-20 change from footer to order_footer -->
+                      {% include '@MailThemes/modern/components/order_footer.html.twig' %}
                   {% endblock %}
 
   </div>

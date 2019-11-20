@@ -20,10 +20,6 @@ You have decided to pay by bank check. Here is the information you need for your
 
 请邮寄支票到：  {check_address_html}
 
-如果您是以会员身份结帐，请至「[订单记录]({history_url})」查看订单。
-
-If you have a guest account, you can follow your order via the [Guest Tracking]({guest_tracking_url}) section on our shop.
-
 [{shop_name}]({shop_url})
 
 Powered by [TekapoCart](https://www.tekapo.io/)

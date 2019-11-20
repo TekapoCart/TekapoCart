@@ -8,8 +8,6 @@ Order return #{id_order_return} - Update
 
 您已更新了您的退货进度，新状态为： "{state_order_return}".
 
-如果您是以会员身份结帐，请至「[订单记录]({history_url})」查看订单。
-
 [{shop_name}]({shop_url})
 
 Powered by [TekapoCart](https://www.tekapo.io/)

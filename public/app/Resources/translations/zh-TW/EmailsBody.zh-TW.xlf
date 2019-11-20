@@ -1199,7 +1199,7 @@
       </trans-unit>
       <trans-unit id="e57e950cfde3e24c3674f9266753edec" approved="yes">
         <source><![CDATA[Follow your order and download your invoice on our shop, go to the <a href="{history_url}" target="_blank">Order history and details</a> section of your customer account.]]></source>
-        <target xml:lang="zh-TW"><![CDATA[如果您是以會員身份結帳，請至「<a href="{history_url}">訂單記錄</a>」查看訂單。]]></target>
+        <target xml:lang="zh-TW"><![CDATA[如您是以會員身份結帳，如欲查看訂單請至「<a href="{history_url}">訂單記錄</a>」。　　　]]></target>
         <note>Line: 319</note>
       </trans-unit>
       <trans-unit id="b55197a49e8c4cd8c314bc2aa39d6feb" approved="yes">
@@ -1612,7 +1612,7 @@
       </trans-unit>
       <trans-unit id="0eede552438475bdfe820c13f24c9399" approved="yes">
         <source>Total price</source>
-        <target xml:lang="zh-TW">金额</target>
+        <target xml:lang="zh-TW">金額</target>
         <note>Line: 335</note>
       </trans-unit>
       <trans-unit id="068f80c7519d0528fb08e82137a72131" approved="yes">
@@ -1691,7 +1691,7 @@
       </trans-unit>
       <trans-unit id="869a6d7d8b6af1ca14f874356141ac45" approved="yes">
         <source><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}" target="_blank">Guest Tracking</a> section on our shop.]]></source>
-        <target xml:lang="zh-TW"><![CDATA[如果您是以訪客身份結帳，查看訂單請至「<a href="{guest_tracking_url}?order_reference={order_name}">非會員訂單查詢</a>」。]]></target>
+        <target xml:lang="zh-TW"><![CDATA[如您是以訪客身份結帳，查看訂單請至「<a href="{guest_tracking_url}?order_reference={order_name}">非會員訂單查詢</a>」。]]></target>
         <note>Line: 317</note>
       </trans-unit>
       <trans-unit id="af6c5b694abbb964eec098febaa5d31d" approved="yes">

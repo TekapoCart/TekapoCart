@@ -16,13 +16,12 @@
 
 配送方式： {carrier}
 
-編號	商品	單價	數量	金额  {products_txt} {discounts_txt}
+編號	商品	單價	數量	金額  {products_txt} {discounts_txt}
 運費	{total_shipping}
 總計	{total_paid}              {extra_info}
 
-如果您是以會員身份結帳，請至「[訂單記錄]({history_url})」查看訂單。
-
-如果您是以訪客身份結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?order_reference={order_name})」。
+如您是以會員身份結帳，如欲查看訂單請至「[訂單記錄]({history_url})」。　　　
+如您是以訪客身份結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?order_reference={order_name})」。
 
 [{shop_name}]({shop_url})
 
