@@ -108,7 +108,7 @@ File: modules/ps_legalcompliance/views/templates/hook/hookDisplayCMSPrintButton.
     <body>
       <trans-unit id="5fb4f05f62f9967052977077d783fc2d" approved="yes">
         <source>Shipping and payment</source>
-        <target xml:lang="zh-TW">送貨及付款</target>
+        <target xml:lang="zh-TW">配送及付款</target>
         <note>Context:
 File: modules/ps_legalcompliance/views/templates/hook/hookDisplayFooterAfter.tpl:29</note>
       </trans-unit>

@@ -260,7 +260,7 @@ File: src/Adapter/Order/OrderPresenter.php:245</note>
       </trans-unit>
       <trans-unit id="ea067eb37801c5aab1a1c685eb97d601" approved="yes">
         <source>Total paid</source>
-        <target xml:lang="zh-TW">總付款額</target>
+        <target xml:lang="zh-TW">總計</target>
         <note>Context:
 File: src/Adapter/Order/OrderPresenter.php:290</note>
       </trans-unit>
@@ -389,6 +389,16 @@ File: themes/StarterTheme/templates/checkout/_partials/customer-form.tpl:30</not
         <target xml:lang="zh-TW">訂單商品</target>
         <note>Context:
 File: themes/classic/templates/checkout/_partials/order-confirmation-table.tpl:28</note>
+      </trans-unit>
+      <trans-unit id="6c957f72dc8cdacc75762f2cbdcdfaf2" approved="yes">
+        <source>Unit price</source>
+        <target xml:lang="zh-TW">單價</target>
+        <note>Line: 29</note>
+      </trans-unit>
+      <trans-unit id="db205f01b4fd580fb5daa9072d96849d" approved="yes">
+        <source>金額</source>
+        <target xml:lang="zh-TW">Total products</target>
+        <note>Line: 31</note>
       </trans-unit>
     </body>
   </file>
@@ -558,7 +568,7 @@ File: themes/StarterTheme/templates/checkout/order-confirmation.tpl:60</note>
       </trans-unit>
       <trans-unit id="286b82fc158785899ecbe309809b7057" approved="yes">
         <source>Shipping method %method_name%</source>
-        <target xml:lang="zh-TW">送貨方式：%method_name%</target>
+        <target xml:lang="zh-TW">配送方式：%method_name%</target>
         <note>Context:
 File: themes/StarterTheme/templates/checkout/order-confirmation.tpl:62</note>
       </trans-unit>
@@ -580,7 +590,7 @@ File: themes/classic/templates/checkout/order-confirmation.tpl:16</note>
       </trans-unit>
       <trans-unit id="bd2edc30f97526c7529487985060ce00" approved="yes">
         <source>You can print this page or take a screenshot for future reference.</source>
-        <target xml:lang="zh-TW">建議您先截圖本頁以便日後查詢。</target>
+        <target xml:lang="zh-TW">您可以列印或截圖本頁以便日後查詢。</target>
         <note>Context:
 File: themes/classic/templates/checkout/order-confirmation.tpl:16</note>
       </trans-unit>
@@ -616,7 +626,7 @@ File: themes/classic/templates/checkout/order-confirmation.tpl:61</note>
       </trans-unit>
       <trans-unit id="080753487a8bc0bb9a5275bcb9951516" approved="yes">
         <source>Shipping method: %method%</source>
-        <target xml:lang="zh-TW">送貨方式：%method%</target>
+        <target xml:lang="zh-TW">配送方式：%method%</target>
         <note>Context:
 File: themes/classic/templates/checkout/order-confirmation.tpl:64</note>
       </trans-unit>

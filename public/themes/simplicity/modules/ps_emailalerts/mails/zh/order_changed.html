@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
 <head>
-  <title> 订单改变 </title>
+  <title> 订单已修改 </title>
   <!--[if !mso]><!-- -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!--<![endif]-->
@@ -249,9 +249,8 @@
         <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td height="40" style="vertical-align:top;height:40px;">
       
     <![endif]-->
-    <!-- suzy: 2019-10-12 change height from 40px to 10px and add do not reply msg -->
-    <div style="height:10px;" height="10">   </div>
-    <div style="text-align: center; margin-bottom: 10px; color: #999;" align="center"><small>Please do not reply directly to this email, we will not receive it.</small></div>
+    <!-- suzy: 2019-10-12 remove <div style="height:10px;"> &nbsp; </div> and add do not reply msg -->
+    <div style="text-align: center; margin: 10px 0; color: #999;" align="center"><small>Please do not reply directly to this email, we will not receive it.</small></div>
     <!--[if mso | IE]>
     
         </td></tr></table>
@@ -521,7 +520,7 @@
                                     <tr>
                                       <td align="left" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 0px; padding: 10px 25px; padding-top: 0px; padding-bottom: 0px; word-break: break-word;">
                                         <div style="font-family:Open sans, arial, sans-serif;font-size:16px;font-weight:600;line-height:25px;text-align:left;color:#363A41;" align="left">
-                                          Order ID {order_name} - 订单改变
+                                          Order ID {order_name} - 订单已修改
                                         </div>
                                       </td>
                                     </tr>
@@ -658,7 +657,7 @@
                             <tr>
                               <td align="left" style="border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-size: 0px; padding: 10px 25px; word-break: break-word;">
                                 <div style="font-family:Open sans, arial, sans-serif;font-size:14px;line-height:25px;text-align:left;color:#363A41;" align="left">
-                                  If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}" target="_blank" style="color: #25B9D7; text-decoration: underline; font-weight: 600;">Guest Tracking</a> section on our shop.
+                                  访客结帐，查看订单请至「<a href="{guest_tracking_url}?order_reference={order_name}" style="color: #25B9D7; text-decoration: underline; font-weight: 600;">非会员订单查询</a>」。
                                 </div>
                               </td>
                             </tr>

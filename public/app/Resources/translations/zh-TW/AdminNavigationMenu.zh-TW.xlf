@@ -184,7 +184,7 @@ File: classes/lang/KeysReference/TabLang.php:59</note>
       </trans-unit>
       <trans-unit id="8fddfc8225dcf89be0e15709c671af4e" approved="yes">
         <source>Delivery Slips</source>
-        <target xml:lang="zh-TW">送貨單</target>
+        <target xml:lang="zh-TW">配送單</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:60</note>
       </trans-unit>

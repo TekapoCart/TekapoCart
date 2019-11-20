@@ -10,7 +10,7 @@ Your order with the reference {order_name} from {shop_name} has been canceled by
 
 Go to your customer account to learn more about it.
 
-如您是以訪客身份結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?order_reference={order_name})」。
+訪客結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?order_reference={order_name})」。
 
 [{shop_name}]({shop_url})
 

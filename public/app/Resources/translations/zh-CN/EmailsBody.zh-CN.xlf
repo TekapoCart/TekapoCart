@@ -970,7 +970,7 @@ File: modules/ps_emailgenerator/templates/core/forward_msg.php:26</note>
     <body>
       <trans-unit id="ac32eb3619340a6b6aff41d9797665d4" approved="yes">
         <source>Order changed</source>
-        <target xml:lang="zh-CN">订单改变</target>
+        <target xml:lang="zh-CN">订单已修改</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/order_changed.php:21</note>
       </trans-unit>
@@ -992,7 +992,7 @@ File: modules/ps_emailgenerator/templates/core/outofstock.php:7</note>
       </trans-unit>
       <trans-unit id="e57e950cfde3e24c3674f9266753edec" approved="yes">
         <source><![CDATA[Follow your order and download your invoice on our shop, go to the <a href="{history_url}" target="_blank">Order history and details</a> section of your customer account.]]></source>
-        <target xml:lang="zh-CN"><![CDATA[如果您是以会员身份结帐，请至「<a href="{history_url}">订单记录</a>」查看订单。]]></target>
+        <target xml:lang="zh-CN"><![CDATA[会员结帐，查看订单请至「<a href="{history_url}">订单记录</a>」。　　　]]></target>
         <note>Line: 319</note>
       </trans-unit>
       <trans-unit id="e25d137c27dca2618629678d2df71113" approved="yes">
@@ -1140,6 +1140,35 @@ File: modules/ps_emailgenerator/templates/modules/referralprogram/referralprogra
         <target xml:lang="zh-CN"><![CDATA[我们很高兴为您提供折扣券，价值<span><strong>{discount_display} (voucher # {discount_name})</strong></span>。您可以在下次下单的时候使用。]]></target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/referralprogram/referralprogram-congratulations.php:22</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/modules/ps_emailalerts/order_changed.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="ac32eb3619340a6b6aff41d9797665d4" approved="yes">
+        <source>Order changed</source>
+        <target xml:lang="zh-CN">订单已修改</target>
+        <note>Line: 180</note>
+      </trans-unit>
+      <trans-unit id="681a0aa2d158085f63f86c84900fa989" approved="yes">
+        <source>Your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1] has been changed by the merchant.</source>
+        <target xml:lang="zh-CN">Your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1] has been changed by the merchant.</target>
+        <note>Line: 247</note>
+      </trans-unit>
+      <trans-unit id="869a6d7d8b6af1ca14f874356141ac45" approved="yes">
+        <source><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}" target="_blank">Guest Tracking</a> section on our shop.]]></source>
+        <target xml:lang="zh-CN"><![CDATA[访客结帐，查看订单请至「<a href="{guest_tracking_url}?order_reference={order_name}">非会员订单查询</a>」。]]></target>
+        <note>Line: 317</note>
+      </trans-unit>
+      <trans-unit id="af6c5b694abbb964eec098febaa5d31d" approved="yes">
+        <source>Order ID {order_name}</source>
+        <target xml:lang="zh-CN">Order ID {order_name}</target>
+        <note>Line: 180</note>
+      </trans-unit>
+      <trans-unit id="c03924df23d22785084b06a548ca9976" approved="yes">
+        <source>Go to your customer account to learn more about it.</source>
+        <target xml:lang="zh-CN">Go to your customer account to learn more about it.</target>
+        <note>Line: 254</note>
       </trans-unit>
     </body>
   </file>

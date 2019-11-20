@@ -78,7 +78,7 @@ File: controllers/admin/AdminDeliverySlipController.php:47</note>
       </trans-unit>
       <trans-unit id="8cf7df5b4b5858e73a7f4e75cc658cc3" approved="yes">
         <source>Adds an image before product name on Delivery-slip</source>
-        <target xml:lang="zh-TW">在送貨單上的商品名稱前新增商品照片</target>
+        <target xml:lang="zh-TW">在配送單上的商品名稱前新增商品照片</target>
         <note>Context:
 File: controllers/admin/AdminDeliverySlipController.php:53</note>
       </trans-unit>
@@ -162,7 +162,7 @@ File: controllers/admin/AdminReturnController.php:59</note>
       </trans-unit>
       <trans-unit id="c503a53add0f47d2497ca363f9ad1b76" approved="yes">
         <source>How many days after the delivery date does the customer have to return a product?</source>
-        <target xml:lang="zh-TW">如果客戶要退貨，他需要在送貨日期的多少天內退回商品？</target>
+        <target xml:lang="zh-TW">如果客戶要退貨，他需要在配送日期的多少天內退回商品？</target>
         <note>Context:
 File: controllers/admin/AdminReturnController.php:63</note>
       </trans-unit>
@@ -252,7 +252,7 @@ File: admin-dev/themes/default/template/controllers/orders/_discount_form.tpl:92
     <body>
       <trans-unit id="dca6b819ed4897f93a1a8531df9b282a" approved="yes">
         <source>If you don't select "Free shipping," the normal shipping costs will be applied.</source>
-        <target xml:lang="zh-TW">如果您不選擇“免費送貨”，一般的運輸費用會被計算。</target>
+        <target xml:lang="zh-TW">如果您不選擇“免費配送”，一般的運輸費用會被計算。</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/_new_product.tpl:121</note>
       </trans-unit>

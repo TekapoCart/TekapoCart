@@ -10,7 +10,7 @@ File: classes/lang/KeysReference/CarrierLang.php:27</note>
       </trans-unit>
       <trans-unit id="5d671531babe55fff4ae63b94c80ea38" approved="yes">
         <source>Delivery next day!</source>
-        <target xml:lang="zh-TW">翌日送貨！</target>
+        <target xml:lang="zh-TW">翌日配送！</target>
         <note>Context:
 File: classes/lang/KeysReference/CarrierLang.php:28</note>
       </trans-unit>
@@ -26,7 +26,7 @@ File: controllers/admin/AdminCarrierWizardController.php:73</note>
       </trans-unit>
       <trans-unit id="756eb8cebeb953f5ae47235ff2e183b5" approved="yes">
         <source>Shipping locations and costs</source>
-        <target xml:lang="zh-TW">送貨位置和費用</target>
+        <target xml:lang="zh-TW">配送位置和費用</target>
         <note>Context:
 File: controllers/admin/AdminCarrierWizardController.php:76</note>
       </trans-unit>

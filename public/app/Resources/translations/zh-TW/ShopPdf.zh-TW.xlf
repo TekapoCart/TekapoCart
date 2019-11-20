@@ -36,7 +36,7 @@ File: classes/pdf/HTMLTemplateSupplyOrderForm.php:197</note>
     <body>
       <trans-unit id="065ab3a28ca4f16f55f103adc7d0226f" approved="yes">
         <source>Delivery</source>
-        <target xml:lang="zh-TW">送貨</target>
+        <target xml:lang="zh-TW">配送</target>
         <note>Context:
 File: classes/pdf/HTMLTemplateDeliverySlip.php:72</note>
       </trans-unit>

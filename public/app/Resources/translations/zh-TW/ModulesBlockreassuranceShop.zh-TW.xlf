@@ -10,7 +10,7 @@ File: modules/blockreassurance/lang/ReassuranceLang.php:41</note>
       </trans-unit>
       <trans-unit id="88d14965d6085734430a5215a1a1f18c" approved="yes">
         <source>Delivery policy (edit with Customer reassurance module)</source>
-        <target xml:lang="zh-TW">送貨政策（用客戶保證模塊編輯）</target>
+        <target xml:lang="zh-TW">配送政策（用客戶保證模塊編輯）</target>
         <note>Context:
 File: modules/blockreassurance/lang/ReassuranceLang.php:44</note>
       </trans-unit>

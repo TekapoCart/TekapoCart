@@ -1499,7 +1499,7 @@ File: controllers/admin/AdminStatusesController.php:379</note>
       </trans-unit>
       <trans-unit id="a886c3a69907e954c771aae074f24040" approved="yes">
         <source>Show delivery PDF.</source>
-        <target xml:lang="zh-TW">顯示送貨 PDF。</target>
+        <target xml:lang="zh-TW">顯示配送 PDF。</target>
         <note>Context:
 File: controllers/admin/AdminStatusesController.php:390</note>
       </trans-unit>
@@ -1723,7 +1723,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="480cb944a0974a27ec0f964de23a18f4" approved="yes">
         <source>Delivery time of in-stock products</source>
-        <target xml:lang="zh-TW">有庫存商品的送貨時間</target>
+        <target xml:lang="zh-TW">有庫存商品的配送時間</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_stock.html.twig:68</note>
       </trans-unit>

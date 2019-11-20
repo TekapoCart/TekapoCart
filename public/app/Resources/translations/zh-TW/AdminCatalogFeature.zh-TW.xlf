@@ -660,19 +660,19 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductShipping.php:150</note>
       </trans-unit>
       <trans-unit id="d41e652e3ec13615827534c10beac3ee" approved="yes">
         <source>Default delivery time</source>
-        <target xml:lang="zh-TW">預設送貨時間</target>
+        <target xml:lang="zh-TW">預設配送時間</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductShipping.php:159</note>
       </trans-unit>
       <trans-unit id="16599dbd0bf238cbae4090fe1db04145" approved="yes">
         <source>Specific delivery time to this product</source>
-        <target xml:lang="zh-TW">該商品的送貨時間（於下方設定）</target>
+        <target xml:lang="zh-TW">該商品的配送時間（於下方設定）</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductShipping.php:160</note>
       </trans-unit>
       <trans-unit id="205b01b3197cf06688f6ed574faf5664" approved="yes">
         <source>Delivery Time</source>
-        <target xml:lang="zh-TW">送貨時間</target>
+        <target xml:lang="zh-TW">配送時間</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductShipping.php:167</note>
       </trans-unit>

@@ -166,7 +166,7 @@ File: classes/CartRule.php:655</note>
       </trans-unit>
       <trans-unit id="fd6034a1544218709264bfa5c70ffb69" approved="yes">
         <source>You cannot use this voucher in your country of delivery</source>
-        <target xml:lang="zh-TW">此優惠券不適用於您送貨的國家</target>
+        <target xml:lang="zh-TW">此優惠券不適用於您配送的國家</target>
         <note>Context:
 File: classes/CartRule.php:663</note>
       </trans-unit>
