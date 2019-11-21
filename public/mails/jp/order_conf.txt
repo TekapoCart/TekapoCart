@@ -15,10 +15,11 @@ Thank you for shopping on {shop_name}!
 支払い： {payment}
 
 配送： {carrier}
+{extra_info}
 
 番号	商品	単価	数量	合計金額  {products_txt} {discounts_txt}
 送料	{total_shipping}
-支払い合計	{total_paid}              {extra_info}
+支払い合計	{total_paid}
 
 Follow your order and download your invoice on our shop, go to the [Order history and details]({history_url}) section of your customer account.
 If you have a guest account, you can follow your order via the [Guest Tracking]({guest_tracking_url}) section on our shop.

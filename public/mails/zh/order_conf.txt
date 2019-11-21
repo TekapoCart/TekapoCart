@@ -15,10 +15,11 @@ Thank you for shopping on {shop_name}!
 支付： {payment}
 
 配送商： {carrier}
+{extra_info}
 
 参考	产品	单价	数量	金额  {products_txt} {discounts_txt}
 配送	{total_shipping}
-总计	{total_paid}              {extra_info}
+总计	{total_paid}
 
 会员结帐，查看订单请至「[订单记录]({history_url})」。　　　
 访客结帐，查看订单请至「[非会员订单查询]({guest_tracking_url}?order_reference={order_name})」。

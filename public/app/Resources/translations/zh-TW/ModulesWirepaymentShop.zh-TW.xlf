@@ -18,9 +18,9 @@ File: modules/ps_wirepayment/views/templates/hook/payment.tpl:29</note>
   </file>
   <file original="modules/ps_wirepayment/views/templates/hook/payment_return.tpl" source-language="en" target-language="zh-TW" datatype="plaintext">
     <body>
-      <trans-unit id="5e1695822fc5af98f6b749ea3cbc9b4c" approved="yes">
+      <trans-unit id="7299658d326fa6da0c4838328a563697" approved="yes">
         <source>Payment Info</source>
-        <target xml:lang="zh-TW">付款資訊</target>
+        <target xml:lang="zh-TW">匯款資訊</target>
         <note>Context:
 File: modules/ps_wirepayment/views/templates/hook/payment_return.tpl:28</note>
       </trans-unit>
