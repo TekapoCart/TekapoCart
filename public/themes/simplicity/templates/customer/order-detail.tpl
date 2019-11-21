@@ -198,6 +198,10 @@
   {/block}
   {/if}
 
+  {block name='order_messages'}
+    {include file='customer/_partials/order-messages.tpl'}
+  {/block}
+
   {block name='order_detail'}
     {if $order.details.is_returnable}
       {include file='customer/_partials/order-detail-return.tpl'}
@@ -206,7 +210,4 @@
     {/if}
   {/block}
 
-  {block name='order_messages'}
-    {include file='customer/_partials/order-messages.tpl'}
-  {/block}
 {/block}

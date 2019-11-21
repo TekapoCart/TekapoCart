@@ -26,6 +26,7 @@
   <form id="order-return-form" action="{$urls.pages.order_follow}" method="post">
 
     <div class="box hidden-sm-down">
+      <h3>{l s='Order items' d='Shop.Theme.Checkout'}</h3>
       <table id="order-products" class="table table-bordered return">
         <thead class="thead-default">
           <tr>

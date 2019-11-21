@@ -24,6 +24,7 @@
  *}
 {block name='order_products_table'}
   <div class="box hidden-sm-down">
+    <h3>{l s='Order items' d='Shop.Theme.Checkout'}</h3>
     <table id="order-products" class="table table-bordered">
       <thead class="thead-default">
         <tr>
