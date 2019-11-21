@@ -24,9 +24,11 @@
  *}
 <table id="addresses-tab" cellspacing="0" cellpadding="0">
 	<tr>
+		{* suzy: 2019-11-21 隱藏商店地址
 		<td width="33%"><span class="bold"> </span><br/><br/>
 			{$order_invoice->shop_address}
 		</td>
+		*}
 		{if !empty($invoice_address)}
 			<td width="33%">{if $delivery_address}<span class="bold">{l s='Delivery Address' d='Shop.Pdf' pdf='true'}</span><br/><br/>
 					{$delivery_address}
@@ -36,7 +38,7 @@
 				{$invoice_address}
 			</td>
 		{else}
-			<td width="66%">{if $delivery_address}<span class="bold">{l s='Billing & Delivery Address' d='Shop.Pdf' pdf='true'}</span><br/><br/>
+			<td width="66%">{if $delivery_address}{* suzy: 2019-11-21 隱藏 title <span class="bold">{l s='Billing & Delivery Address' d='Shop.Pdf' pdf='true'}</span><br/><br/>*}
 					{$delivery_address}
 				{/if}
 			</td>

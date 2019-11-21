@@ -153,7 +153,7 @@ class Smilepay_c2cValidationModuleFrontController extends ModuleFrontController
             $amount = $result['Amount'];
 
             $btn_style = 'font-size: 18px; margin-bottom: 10px; border-radius: 5px; padding: 5px 10px;';
-            $btn_url = '<button style="' . $btn_style . '" onclick=window.open("' . $_url . '") >取號 / 列印寄件單</button>';
+            $btn_url = '<button style="' . $btn_style . '" onclick=window.open("' . $_url . '") >SmilePay 取號 / 列印寄件單</button>';
 
             $date = date("Y-m-d H:i:s");
             $sql = 'INSERT INTO `' . _DB_PREFIX_ . 'smilepay_c2cup_table` (`id_order`, `smse_id`, `btn_url`, `date_upd`, `store_id`, `store_name`, `store_address`, `customer_name`, `customer_phone`, `amount`) VALUES(';
