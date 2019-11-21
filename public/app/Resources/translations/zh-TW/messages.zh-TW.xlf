@@ -212,13 +212,13 @@ File: controllers/admin/AdminTabsController.php:96</note>
       </trans-unit>
       <trans-unit id="ede4759c9afae620fd586628789fa304" approved="yes">
         <source>Enable selection</source>
-        <target xml:lang="zh-TW">啟用選擇項目</target>
+        <target xml:lang="zh-TW">啟用所選</target>
         <note>Context:
 File: controllers/admin/AdminTabsController.php:299</note>
       </trans-unit>
       <trans-unit id="ab7fd6e250b64a46027a996088fdff74" approved="yes">
         <source>Disable selection</source>
-        <target xml:lang="zh-TW">停用選擇項目</target>
+        <target xml:lang="zh-TW">停用所選</target>
         <note>Context:
 File: controllers/admin/AdminTabsController.php:303</note>
       </trans-unit>
@@ -230,7 +230,7 @@ File: controllers/admin/AdminTabsController.php:52</note>
       </trans-unit>
       <trans-unit id="e25f0ecd41211b01c83e5fec41df4fe7" approved="yes">
         <source>Delete selected items?</source>
-        <target xml:lang="zh-TW">確認刪除已選定項目?</target>
+        <target xml:lang="zh-TW">確認刪除選取？</target>
         <note>Context:
 File: controllers/admin/AdminTabsController.php:53</note>
       </trans-unit>

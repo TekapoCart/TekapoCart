@@ -243,59 +243,21 @@ File: themes/classic/templates/checkout/_partials/cart-detailed-product-line.tpl
   </file>
   <file original="themes/classic/templates/checkout/_partials/order-confirmation-table.tpl" source-language="en" target-language="zh-CN" datatype="plaintext">
     <body>
-<trans-unit id="7f21696f11929f5ed55ca5bcb15d2fc1" approved="yes">
-        <source>Your order is confirmed</source>
-        <target xml:lang="zh-CN">Your order is confirmed</target>
+      <trans-unit id="2cee9edacddde0856a46d7db6aff9110" approved="yes">
+        <source>Order items</source>
+        <target xml:lang="zh-CN">购买项目</target>
         <note>Context:
-File: themes/classic/templates/checkout/order-confirmation.tpl:11</note>
+File: themes/classic/templates/checkout/_partials/order-confirmation-table.tpl:28</note>
       </trans-unit>
-      <trans-unit id="b8627ccd34529880156129d02a9ca37d" approved="yes">
-        <source>An email has been sent to your mail address %email%.</source>
-        <target xml:lang="zh-CN">An email has been sent to your mail address %email%.</target>
-        <note>Context:
-File: themes/classic/templates/checkout/order-confirmation.tpl:16</note>
+      <trans-unit id="6c957f72dc8cdacc75762f2cbdcdfaf2" approved="yes">
+        <source>Unit price</source>
+        <target xml:lang="zh-CN">单价</target>
+        <note>Line: 29</note>
       </trans-unit>
-      <trans-unit id="bd2edc30f97526c7529487985060ce00" approved="yes">
-        <source>You can print this page or take a screenshot for future reference.</source>
-        <target xml:lang="zh-CN">You can print this page or take a screenshot for future reference.</target>
-        <note>Context:
-File: themes/classic/templates/checkout/order-confirmation.tpl:16</note>
-      </trans-unit>
-      <trans-unit id="186f9a937f0afc4cce2bbc4087dfd3fa" approved="yes">
-        <source>You can also [1]download your invoice[/1]</source>
-        <target xml:lang="zh-CN">You can also [1]download your invoice[/1]</target>
-        <note>Context:
-File: themes/classic/templates/checkout/order-confirmation.tpl:23</note>
-      </trans-unit>
-      <trans-unit id="f5d74ea75357b5e139854c14f8e24fe3" approved="yes">
-        <source>Order details</source>
-        <target xml:lang="zh-CN">Order details</target>
-        <note>Context:
-File: themes/classic/templates/checkout/order-confirmation.tpl:58</note>
-      </trans-unit>
-      <trans-unit id="cc6f3e2192d71f54d7b181d91f04d165" approved="yes">
-        <source>Save time on your next order, sign up now</source>
-        <target xml:lang="zh-CN">Save time on your next order, sign up now</target>
-        <note>Context:
-File: themes/classic/templates/checkout/order-confirmation.tpl:94</note>
-      </trans-unit>
-      <trans-unit id="00cd7d0890cd975da95799c32764c9ce" approved="yes">
-        <source>Order reference: %reference%</source>
-        <target xml:lang="zh-CN">Order reference: %reference%</target>
-        <note>Context:
-File: themes/classic/templates/checkout/order-confirmation.tpl:60</note>
-      </trans-unit>
-      <trans-unit id="e120387480bc284c5347ae1baa480670" approved="yes">
-        <source>Payment method: %method%</source>
-        <target xml:lang="zh-CN">Payment method: %method%</target>
-        <note>Context:
-File: themes/classic/templates/checkout/order-confirmation.tpl:61</note>
-      </trans-unit>
-      <trans-unit id="080753487a8bc0bb9a5275bcb9951516" approved="yes">
-        <source>Shipping method: %method%</source>
-        <target xml:lang="zh-CN">Shipping method: %method%</target>
-        <note>Context:
-File: themes/classic/templates/checkout/order-confirmation.tpl:64</note>
+      <trans-unit id="db205f01b4fd580fb5daa9072d96849d" approved="yes">
+        <source>Total products</source>
+        <target xml:lang="zh-CN">金额</target>
+        <note>Line: 31</note>
       </trans-unit>
     </body>
   </file>

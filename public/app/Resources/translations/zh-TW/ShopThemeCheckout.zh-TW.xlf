@@ -386,7 +386,7 @@ File: themes/StarterTheme/templates/checkout/_partials/customer-form.tpl:30</not
     <body>
       <trans-unit id="2cee9edacddde0856a46d7db6aff9110" approved="yes">
         <source>Order items</source>
-        <target xml:lang="zh-TW">訂單商品</target>
+        <target xml:lang="zh-TW">購買項目</target>
         <note>Context:
 File: themes/classic/templates/checkout/_partials/order-confirmation-table.tpl:28</note>
       </trans-unit>
@@ -396,8 +396,8 @@ File: themes/classic/templates/checkout/_partials/order-confirmation-table.tpl:2
         <note>Line: 29</note>
       </trans-unit>
       <trans-unit id="db205f01b4fd580fb5daa9072d96849d" approved="yes">
-        <source>金額</source>
-        <target xml:lang="zh-TW">Total products</target>
+        <source>Total products</source>
+        <target xml:lang="zh-TW">金額</target>
         <note>Line: 31</note>
       </trans-unit>
     </body>

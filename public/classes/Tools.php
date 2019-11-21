@@ -93,9 +93,9 @@ class ToolsCore
 
                 break;
             case 'NO_NUMERIC':
-                // suzy: 2019-02-24 去掉 I 跟 O
+                // suzy: 2019-02-24 去掉 I、O、J、L
                 // $str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                $str = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+                $str = 'ABCDEFGHKMNPQRSTUVWXYZ';
 
                 break;
             case 'RANDOM':
