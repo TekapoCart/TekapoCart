@@ -548,7 +548,7 @@ File: controllers/front/GuestTrackingController.php:63</note>
       </trans-unit>
       <trans-unit id="ac68011e87111c9833dab09935bd88f3" approved="yes">
         <source>We couldn't find your order with the information provided, please try again</source>
-        <target xml:lang="zh-TW">我們使用所提供的信息找不到您的購物訂單，請重試</target>
+        <target xml:lang="zh-TW">查無訂單或輸入資訊有誤，請重新輸入</target>
         <note>Context:
 File: controllers/front/GuestTrackingController.php:83</note>
       </trans-unit>

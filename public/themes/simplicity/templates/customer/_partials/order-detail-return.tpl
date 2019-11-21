@@ -27,7 +27,7 @@
 
     <div class="box hidden-sm-down">
       <h3>{l s='Order items' d='Shop.Theme.Checkout'}</h3>
-      <table id="order-products" class="table table-bordered return">
+      <table id="order-products" class="table table-bordered return table-order">
         <thead class="thead-default">
           <tr>
             <th class="head-checkbox"><input type="checkbox"/></th>

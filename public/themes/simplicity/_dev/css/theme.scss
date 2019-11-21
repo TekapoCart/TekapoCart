@@ -288,7 +288,14 @@ button:focus {
   th, td {
     border: 1px solid $table-border-color;
   }
+
+  &.table-order {
+    th, td {
+      border: 1px solid $gray-lighter;
+    }
+  }
 }
+
 
 
 
