@@ -1366,13 +1366,18 @@
     <body>
       <trans-unit id="747cf5c8587184b9e489ff897d97c20d" approved="yes">
         <source>Shipped</source>
-        <target xml:lang="zh-TW">已出貨</target>
+        <target xml:lang="zh-TW">已出貨通知</target>
         <note>Line: 3</note>
       </trans-unit>
       <trans-unit id="da825075a1643697f1540f1c946c01f1" approved="yes">
         <source>Your order with the reference [1]{order_name}[/1] has been shipped.</source>
-        <target xml:lang="zh-TW">Your order with the reference [1]{order_name}[/1] has been shipped.</target>
+        <target xml:lang="zh-TW">您的訂單 [1]{order_name}[/1] 已經出貨，請留意到貨狀況。</target>
         <note>Line: 247</note>
+      </trans-unit>
+      <trans-unit id="f3ebde38fb84b9d5677bf2600e4270da" approved="yes">
+        <source>Tracking number</source>
+        <target xml:lang="zh-TW">配送編號</target>
+        <note>Line: 251</note>
       </trans-unit>
     </body>
   </file>

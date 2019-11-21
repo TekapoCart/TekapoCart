@@ -221,7 +221,7 @@ class AdminCarrierWizardControllerCore extends AdminController
                     ),
                     // suzy: 2018-12-08 在已出貨通知信顯示配送編號
                     array(
-                        'type' => 'text',
+                        'type' => 'textarea',
                         'label' => '已出貨通知信補充資訊',
                         'name' => 'shipped_email_info',
                         'lang' => true,
@@ -585,6 +585,8 @@ class AdminCarrierWizardControllerCore extends AdminController
             'delay' => $this->getFieldValue($carrier, 'delay'),
             'grade' => $this->getFieldValue($carrier, 'grade'),
             'url' => $this->getFieldValue($carrier, 'url'),
+            // suzy: 2018-12-08 在已出貨通知信顯示配送編號
+            'shipped_email_info' => $this->getFieldValue($carrier, 'shipped_email_info'),
         );
     }
 

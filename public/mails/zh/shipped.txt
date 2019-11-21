@@ -4,9 +4,14 @@ Please do not reply directly to this email, we will not receive it.
 
 您好 {firstname} {lastname},
 
-感谢在 {shop_name} 购物！
+已出货通知
 
-Your order with the reference {order_name} has been shipped.
+您的订单 {order_name} 已经出货，请留意到货状况。
+配送編號 {tracking_number}。
+{extra_info}
+
+会员结帐，查看订单请至「[订单记录]({history_url})」。　　　
+访客结帐，查看订单请至「[非会员订单查询]({guest_tracking_url}?order_reference={order_name})」。
 
 [{shop_name}]({shop_url})
 

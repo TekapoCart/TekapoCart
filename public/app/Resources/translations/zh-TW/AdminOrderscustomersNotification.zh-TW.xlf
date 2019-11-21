@@ -26,7 +26,7 @@ File: classes/order/OrderHistory.php:344</note>
     <body>
       <trans-unit id="9cdca3c7972c48111e79648c942ac672" approved="yes">
         <source>The message was successfully sent to the customer.</source>
-        <target xml:lang="zh-TW">該訊息已成功發送給客戶。</target>
+        <target xml:lang="zh-TW">訊息已成功發送。</target>
         <note>Context:
 File: classes/controller/AdminController.php:466</note>
       </trans-unit>

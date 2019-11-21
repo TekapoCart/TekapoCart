@@ -4,9 +4,14 @@
 
 嗨 {lastname}{firstname}
 
-{shop_name} 感謝您的惠顧。
+已出貨通知
 
-Your order with the reference {order_name} has been shipped.
+您的訂單 {order_name} 已經出貨，請留意到貨狀況。
+配送編號 {tracking_number}。
+{extra_info}
+
+會員結帳，查看訂單請至「[訂單記錄]({history_url})」。　　　
+訪客結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?order_reference={order_name})」。
 
 [{shop_name}]({shop_url})
 
