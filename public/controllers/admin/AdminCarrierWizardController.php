@@ -219,7 +219,7 @@ class AdminCarrierWizardControllerCore extends AdminController
                         'hint' => $this->trans('Delivery tracking URL: Type \'@\' where the tracking number should appear. It will be automatically replaced by the tracking number.', array(), 'Admin.Shipping.Help'),
                         'desc' => $this->trans('For example: \'http://example.com/track.php?num=@\' with \'@\' where the tracking number should appear.', array(), 'Admin.Shipping.Help'),
                     ),
-                    // suzy: 2018-12-08 在已出貨通知信顯示追蹤號碼
+                    // suzy: 2018-12-08 在已出貨通知信顯示配送編號
                     array(
                         'type' => 'text',
                         'label' => '已出貨通知信補充資訊',

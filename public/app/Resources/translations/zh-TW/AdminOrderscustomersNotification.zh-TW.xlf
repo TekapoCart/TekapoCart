@@ -200,7 +200,7 @@ File: controllers/admin/AdminOrdersController.php:468</note>
       </trans-unit>
       <trans-unit id="e52d022f0fb2160ec1cf7b4122ab9589" approved="yes">
         <source>The tracking number is incorrect.</source>
-        <target xml:lang="zh-TW">追蹤號碼錯誤</target>
+        <target xml:lang="zh-TW">配送編號錯誤</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:470</note>
       </trans-unit>

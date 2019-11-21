@@ -132,6 +132,12 @@ File: themes/classic/templates/customer/registration.tpl:28</note>
   </file>
   <file original="themes/classic/templates/customer/guest-login.tpl" source-language="en" target-language="zh-CN" datatype="plaintext">
     <body>
+      <trans-unit id="6b10b52dc4d44e780e6e38073668be56" approved="yes">
+        <source>Guest Order Tracking</source>
+        <target xml:lang="zh-CN">订单查询</target>
+        <note>Context:
+File: themes/classic/templates/customer/guest-login.tpl:28</note>
+      </trans-unit>
       <trans-unit id="d2948a89e47a4ad7eb8412c1c260ea88" approved="yes">
         <source>To track your order, please enter the following information:</source>
         <target xml:lang="zh-CN">为查询您的订单，请键入以下信息：</target>

@@ -180,7 +180,7 @@ class FbApi
                         'elements' => [
                             [
                                 'title' => '訂單 #' . $order->getUniqReference() . ' 已經出貨。',
-                                'subtitle' => '追蹤號碼：' . $delivery->tracking_number,
+                                'subtitle' => '配送編號：' . $delivery->tracking_number,
                                 'image_url' => $image,
                                 'buttons' => [
                                     [

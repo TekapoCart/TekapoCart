@@ -86,7 +86,7 @@ class OrderCarrierCore extends ObjectModel
     public function sendInTransitEmail($order)
     {
 
-        // suzy: 2018-12-08 輸入「追蹤號碼」後不要寄通知信
+        // suzy: 2018-12-08 輸入「配送編號」後不要寄通知信
         return true;
 
         $customer = new Customer((int) $order->id_customer);

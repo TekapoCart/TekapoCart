@@ -560,7 +560,7 @@ class AdminOrdersControllerCore extends AdminController
                             $templateVars = array('{followup}' => str_replace('@', $order->shipping_number, $carrier->url));
                         }
 
-                        // suzy: 2018-12-08 在已出貨通知信顯示追蹤號碼
+                        // suzy: 2018-12-08 在已出貨通知信顯示配送編號
                         if ($history->id_order_state == Configuration::get('PS_OS_SHIPPING')) {
                             $templateVars['{tracking_number}'] =  $order->shipping_number;
                             $templateVars['{extra_info}'] =  $carrier->shipped_email_info;

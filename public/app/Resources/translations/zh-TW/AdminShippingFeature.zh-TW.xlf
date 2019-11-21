@@ -288,7 +288,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="5068c162a60b5859f973f701333f45c5" approved="yes">
         <source>Tracking number</source>
-        <target xml:lang="zh-TW">追蹤號碼</target>
+        <target xml:lang="zh-TW">配送編號</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:339</note>
       </trans-unit>

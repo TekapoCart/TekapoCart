@@ -238,7 +238,7 @@ File: controllers/front/DiscountController.php:162</note>
     <body>
       <trans-unit id="8bbbace7ffb26d61b400c72ffe493f4d" approved="yes">
         <source>Guest order tracking</source>
-        <target xml:lang="zh-TW">非會員訂單查詢</target>
+        <target xml:lang="zh-TW">訂單查詢</target>
         <note>Context:
 File: controllers/front/GuestTrackingController.php:151</note>
       </trans-unit>
@@ -712,7 +712,7 @@ File: themes/classic/templates/customer/order-detail.tpl:197</note>
       </trans-unit>
       <trans-unit id="5068c162a60b5859f973f701333f45c5" approved="yes">
         <source>Tracking number</source>
-        <target xml:lang="zh-TW">追蹤號碼</target>
+        <target xml:lang="zh-TW">配送編號</target>
         <note>Context:
 File: themes/classic/templates/customer/order-detail.tpl:200</note>
       </trans-unit>
