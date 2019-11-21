@@ -594,7 +594,7 @@ File: src/Adapter/Product/AdminProductWrapper.php:273</note>
       </trans-unit>
       <trans-unit id="184a2ae304c9a05459cca0cbf8755b3a" approved="yes">
         <source>The specific price ID is invalid.</source>
-        <target xml:lang="zh-TW">指定的價格編號有誤</target>
+        <target xml:lang="zh-TW">指定的價格 ID 有誤</target>
         <note>Context:
 File: src/Adapter/Product/AdminProductWrapper.php:436</note>
       </trans-unit>

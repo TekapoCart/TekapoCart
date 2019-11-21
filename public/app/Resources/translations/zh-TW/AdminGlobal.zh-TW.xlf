@@ -748,7 +748,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/Lists/produ
     <body>
       <trans-unit id="b718adec73e04ce3ec720dd11a06a308" approved="yes">
         <source>ID</source>
-        <target xml:lang="zh-TW">編號</target>
+        <target xml:lang="zh-TW">ID</target>
         <note>Context:
 File: admin-dev/themes/default/template/helpers/form/form_group.tpl:37</note>
       </trans-unit>

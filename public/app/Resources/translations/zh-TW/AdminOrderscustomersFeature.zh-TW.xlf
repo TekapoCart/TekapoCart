@@ -803,7 +803,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="01abfc750a0c942167651c40d088531d" approved="yes">
         <source>#</source>
-        <target xml:lang="zh-TW">編號</target>
+        <target xml:lang="zh-TW">#</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:588</note>
       </trans-unit>
@@ -875,7 +875,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="88427ec035734b45aae9f7d8859a5008" approved="yes">
         <source>Transaction ID</source>
-        <target xml:lang="zh-TW">交易編號</target>
+        <target xml:lang="zh-TW">交易 ID</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:430</note>
       </trans-unit>
@@ -1163,7 +1163,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="0da6a00e3eb2132d5cf97463a099c49f" approved="yes">
         <source>Order no. </source>
-        <target xml:lang="zh-TW">訂單編號 </target>
+        <target xml:lang="zh-TW">訂單 No. </target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:1283</note>
       </trans-unit>
@@ -1681,7 +1681,7 @@ File: admin-dev/themes/default/template/controllers/customer_threads/message.tpl
       </trans-unit>
       <trans-unit id="d13d8380c3f4de07fef91a42fe6c60d7" approved="yes">
         <source>Customer ID:</source>
-        <target xml:lang="zh-TW">客戶編號：</target>
+        <target xml:lang="zh-TW">客戶 ID：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/message.tpl:46</note>
       </trans-unit>
@@ -1729,13 +1729,13 @@ File: admin-dev/themes/default/template/controllers/customer_threads/message.tpl
       </trans-unit>
       <trans-unit id="818d947aeb9e604f54ce4c3444cc0256" approved="yes">
         <source>Thread ID:</source>
-        <target xml:lang="zh-TW">主題編號：</target>
+        <target xml:lang="zh-TW">主題 ID：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/message.tpl:153</note>
       </trans-unit>
       <trans-unit id="0e2f5e3f12561ac94047979ec5406946" approved="yes">
         <source>Message ID:</source>
-        <target xml:lang="zh-TW">訊息編號：</target>
+        <target xml:lang="zh-TW">訊息 ID：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/message.tpl:157</note>
       </trans-unit>
@@ -1975,7 +1975,7 @@ File: admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl:
       </trans-unit>
       <trans-unit id="2fb3b950fd7711136f7f251ae5fbdbdc" approved="yes">
         <source>Text #</source>
-        <target xml:lang="zh-TW">文字編號</target>
+        <target xml:lang="zh-TW">文字 #</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl:131</note>
       </trans-unit>
@@ -2171,7 +2171,7 @@ File: admin-dev/themes/default/template/controllers/orders/_shipping.tpl:95</not
     <body>
       <trans-unit id="0945359809dad1fbf3dea1c95a0da951" approved="yes">
         <source>Document</source>
-        <target xml:lang="zh-TW">文檔</target>
+        <target xml:lang="zh-TW">檔案</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/_documents.tpl:33</note>
       </trans-unit>

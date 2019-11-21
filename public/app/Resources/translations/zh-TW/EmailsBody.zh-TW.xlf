@@ -89,7 +89,7 @@
       </trans-unit>
       <trans-unit id="83fa39a28a4d159061c408fbd6a249e7" approved="yes">
         <source>Order ID:</source>
-        <target xml:lang="zh-TW">訂單編號：</target>
+        <target xml:lang="zh-TW">訂單 ID：</target>
         <note>Line: 24</note>
       </trans-unit>
     </body>
@@ -2048,7 +2048,7 @@ File: modules/ps_emailgenerator/templates/core/log_alert.php:25</note>
     <body>
       <trans-unit id="50651089ed12eb33b55394a0a17618de" approved="yes">
         <source><![CDATA[Your order with the reference <span><strong>{order_name}</strong></span> from <span><strong>{shop_name}</strong></span> has been canceled.]]></source>
-        <target xml:lang="zh-TW"><![CDATA[您在 <span><strong>{shop_name}</strong></span> 的訂單，編號為 <span><strong>{order_name}</strong></span>，已經取消。]]></target>
+        <target xml:lang="zh-TW"><![CDATA[您在 <span><strong>{shop_name}</strong></span> 的訂單 <span><strong>{order_name}</strong></span> 已經取消。]]></target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/order_canceled.php:24</note>
       </trans-unit>

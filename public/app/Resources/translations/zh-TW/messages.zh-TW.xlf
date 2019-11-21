@@ -832,7 +832,7 @@ File: modules/ps_googleanalytics/ps_googleanalytics.php:161</note>
       </trans-unit>
       <trans-unit id="851bd83a102d143ee17d97f9e15e15af" approved="yes">
         <source>Google Analytics Tracking ID</source>
-        <target xml:lang="zh-TW">Google Analytics（谷歌分析）追踪編號</target>
+        <target xml:lang="zh-TW">Google Analytics Tracking ID</target>
         <note>Context:
 File: modules/ps_googleanalytics/ps_googleanalytics.php:166</note>
       </trans-unit>
@@ -1489,7 +1489,7 @@ File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:46</
       </trans-unit>
       <trans-unit id="d79cf3f429596f77db95c65074663a54" approved="yes">
         <source>Order ID</source>
-        <target xml:lang="zh-TW">訂單編號</target>
+        <target xml:lang="zh-TW">訂單 ID</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:47</note>
       </trans-unit>
@@ -1529,7 +1529,7 @@ File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:52</
     <body>
       <trans-unit id="490aa6e856ccf208a054389e47ce0d06" approved="yes">
         <source>Id</source>
-        <target xml:lang="zh-TW">編號</target>
+        <target xml:lang="zh-TW">ID</target>
         <note>Context:
 File: modules/psgdpr/views/templates/front/pdf/personalData.carts-tab.tpl:30</note>
       </trans-unit>
@@ -3307,7 +3307,7 @@ File: admin-dev/themes/default/template/controllers/attribute_generator/content.
     <body>
       <trans-unit id="d13d8380c3f4de07fef91a42fe6c60d7" approved="yes">
         <source>Customer ID:</source>
-        <target xml:lang="zh-TW">客戶編號：</target>
+        <target xml:lang="zh-TW">客戶 ID：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/message.tpl:127</note>
       </trans-unit>

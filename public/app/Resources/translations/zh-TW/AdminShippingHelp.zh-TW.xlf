@@ -52,7 +52,7 @@ File: controllers/admin/AdminCarriersController.php:193</note>
       </trans-unit>
       <trans-unit id="7a753d72397847025d0a91c564fa0fdc" approved="yes">
         <source>Delivery tracking URL: Type '@' where the tracking number should appear. It will then be automatically replaced by the tracking number.</source>
-        <target xml:lang="zh-TW">配送追蹤網址：輸入 '@' 來取代追蹤編號的位置，它在顯示時會自動替換成追蹤編號</target>
+        <target xml:lang="zh-TW">配送追蹤網址：輸入 '@' 來取代配送編號的位置，它在顯示時會自動替換成配送編號</target>
         <note>Context:
 File: controllers/admin/AdminCarriersController.php:206</note>
       </trans-unit>
@@ -134,7 +134,7 @@ File: controllers/admin/AdminCarrierWizardController.php:200</note>
       </trans-unit>
       <trans-unit id="ff9058a791d671d3cb7ce3117b3f989d" approved="yes">
         <source>Delivery tracking URL: Type '@' where the tracking number should appear. It will be automatically replaced by the tracking number.</source>
-        <target xml:lang="zh-TW">配送追蹤網址：輸入 '@' 來取代追蹤編號的位置，它在顯示時會自動替換成追蹤編號</target>
+        <target xml:lang="zh-TW">配送追蹤網址：輸入 '@' 來取代配送編號的位置，它在顯示時會自動替換成配送編號</target>
         <note>Context:
 File: controllers/admin/AdminCarrierWizardController.php:219</note>
       </trans-unit>
