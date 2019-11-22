@@ -1039,7 +1039,7 @@ File: modules/ps_emailgenerator/templates/core/outofstock.php:7</note>
       </trans-unit>
       <trans-unit id="e57e950cfde3e24c3674f9266753edec">
         <source><![CDATA[Follow your order and download your invoice on our shop, go to the <a href="{history_url}" target="_blank">Order history and details</a> section of your customer account.]]></source>
-        <target xml:lang="en"><![CDATA[If you purchase as a member, follow your order via the 「<a href="{history_url}">Order Histroy</a>」.]]></target>
+        <target xml:lang="en"><![CDATA[You can track your order status via the 「<a href="{guest_tracking_url}">Order Tracking</a>」.]]></target>
         <note>Line: 319</note>
       </trans-unit>
       <trans-unit id="e25d137c27dca2618629678d2df71113" approved="yes">

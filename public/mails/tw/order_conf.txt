@@ -1,4 +1,5 @@
 此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+為了確保能收到信件，請將此信箱加入通訊錄。
 
 {shop_url}
 
@@ -21,8 +22,7 @@
 運費	{total_shipping}
 總計	{total_paid}
 
-會員結帳，查看訂單請至「[訂單記錄]({history_url})」。　　　
-訪客結帳，查看訂單請至「[非會員訂單查詢]({guest_tracking_url}?order_reference={order_name})」。
+查看訂單狀態請至「[訂單查詢]({guest_tracking_url})」。
 
 [{shop_name}]({shop_url})
 

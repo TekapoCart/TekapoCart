@@ -1,4 +1,5 @@
-Please do not reply directly to this email, we will not receive it.
+此信件为系统自动传送，请勿直接回复，感谢您的配合。
+为了确保能收到信件，请将此信箱加入通讯录。
 
 {shop_url}
 
@@ -6,7 +7,7 @@ Please do not reply directly to this email, we will not receive it.
 
 {reply}
 
-Please do not reply directly to this email, we will not receive it. In order to reply, click on the following link: {link}
+此信件为系统自动传送，请勿直接回复，感谢您的配合。 In order to reply, click on the following link: {link}
 
 [{shop_name}]({shop_url})
 

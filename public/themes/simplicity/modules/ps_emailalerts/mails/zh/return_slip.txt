@@ -1,4 +1,5 @@
-Please do not reply directly to this email, we will not receive it.
+此信件为系统自动传送，请勿直接回复，感谢您的配合。
+为了确保能收到信件，请将此信箱加入通讯录。
 
 {shop_url}
 
@@ -26,8 +27,7 @@ Return Details
 
 {message}
 
-会员结帐，查看订单请至「[订单记录]({history_url})」。　　　
-访客结帐，查看订单请至「[非会员订单查询]({guest_tracking_url}?order_reference={order_name})」。
+查看订单状态请至「[订单查询]({guest_tracking_url})」。
 
 [{shop_name}]({shop_url})
 

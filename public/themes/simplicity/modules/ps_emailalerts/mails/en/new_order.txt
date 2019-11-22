@@ -1,4 +1,5 @@
 Please do not reply directly to this email, we will not receive it.
+Adding our email address as a contact to ensure all messages are delivered to your Inbox.
 
 {shop_url}
 
@@ -38,8 +39,7 @@ Customer message:
 
 {message}
 
-If you purchase as a member, follow your order via the 「[Order Histroy]({history_url})」.
-If you purchase as a guest, follow your order via the 「[Guest Tracking]({guest_tracking_url}?order_reference={order_name})」.
+You can track your order status via the 「[Order Tracking]({guest_tracking_url})」.
 
 [{shop_name}]({shop_url})
 

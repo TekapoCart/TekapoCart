@@ -992,7 +992,7 @@ File: modules/ps_emailgenerator/templates/core/outofstock.php:7</note>
       </trans-unit>
       <trans-unit id="e57e950cfde3e24c3674f9266753edec" approved="yes">
         <source><![CDATA[Follow your order and download your invoice on our shop, go to the <a href="{history_url}" target="_blank">Order history and details</a> section of your customer account.]]></source>
-        <target xml:lang="zh-CN"><![CDATA[会员结帐，查看订单请至「<a href="{history_url}">订单记录</a>」。　　　]]></target>
+        <target xml:lang="zh-CN"><![CDATA[查看订单状态请至「<a href="{guest_tracking_url}">订单查询</a>」。]]></target>
         <note>Line: 319</note>
       </trans-unit>
       <trans-unit id="e25d137c27dca2618629678d2df71113" approved="yes">
@@ -1254,7 +1254,31 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailsubscription/newslette
       </trans-unit>
     </body>
   </file>
-  <file original="mails/themes/modern/core/shipped.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+  <file original="mails/themes/modern/core/reply_msg.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="2ddbd3a9b06eadccdea8e1b372830d69" approved="yes">
+        <source>Please do not reply directly to this email, we will not receive it.</source>
+        <target xml:lang="zh-TW">此信件为系统自动传送，请勿直接回复，感谢您的配合。</target>
+        <note>Line: 245</note>
+      </trans-unit>
+      <trans-unit id="25a836f644cf544e8dee516a0a842965" approved="yes">
+        <source>Adding our email address as a contact to ensure all messages are delivered to your Inbox.</source>
+        <target xml:lang="zh-TW">为了确保能收到信件，请将此信箱加入通讯录。</target>
+        <note>Line: 245</note>
+      </trans-unit>
+      <trans-unit id="b0faef9417304909de0960b57582cd1c" approved="yes">
+        <source>Reply msg</source>
+        <target xml:lang="zh-TW">Reply msg</target>
+        <note>Line: 3</note>
+      </trans-unit>
+      <trans-unit id="7e4e256f10a59674290c89dd1bba1312" approved="yes">
+        <source><![CDATA[In order to reply, click on the following link: <a href="{link}" target="_blank">{link}</a>]]></source>
+        <target xml:lang="zh-TW"><![CDATA[In order to reply, click on the following link: <a href="{link}" target="_blank">{link}</a>]]></target>
+        <note>Line: 246</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/core/shipped.html.twig" source-language="en-US" target-language="zh-CN" datatype="plaintext">
     <body>
       <trans-unit id="747cf5c8587184b9e489ff897d97c20d" approved="yes">
         <source>Shipped</source>

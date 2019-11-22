@@ -1,4 +1,5 @@
 Please do not reply directly to this email, we will not receive it.
+Adding our email address as a contact to ensure all messages are delivered to your Inbox.
 
 {shop_url}
 
@@ -39,7 +40,6 @@ Carrier
 {message}
 
 Follow your order and download your invoice on our shop, go to the [Order history and details]({history_url}) section of your customer account.
-If you have a guest account, you can follow your order via the [Guest Tracking]({guest_tracking_url}) section on our shop.
 
 [{shop_name}]({shop_url})
 
