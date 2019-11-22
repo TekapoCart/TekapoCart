@@ -85,26 +85,26 @@ File: modules/ps_emailalerts/ps_emailalerts.php:945
       </trans-unit>
       <trans-unit id="382ba298d6c80b03037629d326811919" approved="yes">
         <source>Receive a notification when an order is placed.</source>
-        <target xml:lang="zh-TW">在訂單建立時會收到一個通知。</target>
+        <target xml:lang="zh-TW">新訂單成立時發送通知信。</target>
         <note>Context:
 File: modules/ps_emailalerts/ps_emailalerts.php:947</note>
       </trans-unit>
       <trans-unit id="b55197a49e8c4cd8c314bc2aa39d6feb" approved="yes">
         <source>Out of stock</source>
-        <target xml:lang="zh-TW">缺貨</target>
+        <target xml:lang="zh-TW">庫存不足</target>
         <note>Context:
 File: modules/ps_emailalerts/ps_emailalerts.php:964
  Comment: retro compat 1.5</note>
       </trans-unit>
       <trans-unit id="c0146c441cd6d5dc9d6e0ea1464b345f" approved="yes">
         <source>Receive a notification if the available quantity of a product is below the following threshold.</source>
-        <target xml:lang="zh-TW">在可用產品數量低於下面設定時會收到一個通知。</target>
+        <target xml:lang="zh-TW">商品庫存低於下方數量時發送通知信。</target>
         <note>Context:
 File: modules/ps_emailalerts/ps_emailalerts.php:966</note>
       </trans-unit>
       <trans-unit id="2a63f555989152ba866b43a1faacd680" approved="yes">
         <source>Threshold</source>
-        <target xml:lang="zh-TW">限制</target>
+        <target xml:lang="zh-TW">庫存數量</target>
         <note>Context:
 File: modules/ps_emailalerts/ps_emailalerts.php:982</note>
       </trans-unit>
@@ -142,7 +142,7 @@ File: modules/ps_emailalerts/ps_emailalerts.php:1021
       </trans-unit>
       <trans-unit id="6408356e699097abbb968b575499f76e" approved="yes">
         <source>Receive a notification when a customer requests a merchandise return.</source>
-        <target xml:lang="zh-TW">客戶要求商品退貨時收到通知。</target>
+        <target xml:lang="zh-TW">客戶要求商品退貨時發送通知信。</target>
         <note>Context:
 File: modules/ps_emailalerts/ps_emailalerts.php:1023</note>
       </trans-unit>
@@ -160,7 +160,7 @@ File: modules/ps_emailalerts/ps_emailalerts.php:1043</note>
       </trans-unit>
       <trans-unit id="6f974bbda9064a9c0836370dbf5a6076" approved="yes">
         <source>Merchant notifications</source>
-        <target xml:lang="zh-TW">商店通知信</target>
+        <target xml:lang="zh-TW">店家通知信</target>
         <note>Context:
 File: modules/ps_emailalerts/ps_emailalerts.php:1049</note>
       </trans-unit>
