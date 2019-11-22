@@ -26,13 +26,13 @@ File: controllers/admin/AdminCustomersController.php:400</note>
       </trans-unit>
       <trans-unit id="6010127763b917fdc47eb0c50a86a6f6" approved="yes">
         <source>Enable or disable customer login.</source>
-        <target xml:lang="zh-TW">允許或禁止客戶登入。</target>
+        <target xml:lang="zh-TW">帳號停權選「否」。</target>
         <note>Context:
 File: controllers/admin/AdminCustomersController.php:431</note>
       </trans-unit>
       <trans-unit id="8c7a8f24423b8519d38fb3ff380e020f" approved="yes">
         <source>This customer will receive your ads via email.</source>
-        <target xml:lang="zh-TW">顧客會透過 E-Mail 收到廣告。</target>
+        <target xml:lang="zh-TW">願意透過 E-Mail 收到我們的合作夥伴的廣告。</target>
         <note>Context:
 File: controllers/admin/AdminCustomersController.php:453</note>
       </trans-unit>

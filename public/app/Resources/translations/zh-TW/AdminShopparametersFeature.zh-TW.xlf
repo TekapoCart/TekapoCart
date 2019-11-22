@@ -1065,19 +1065,19 @@ File: controllers/admin/AdminGroupsController.php:107</note>
       </trans-unit>
       <trans-unit id="fcd4748df327d0e328d0aef8c1d8e756" approved="yes">
         <source>Visitors group</source>
-        <target xml:lang="zh-TW">顧客群組</target>
+        <target xml:lang="zh-TW">訪客群組</target>
         <note>Context:
 File: controllers/admin/AdminGroupsController.php:110</note>
       </trans-unit>
       <trans-unit id="312541921a98c69b0f3ac8f5de1b6bb3" approved="yes">
         <source>Guests group</source>
-        <target xml:lang="zh-TW">訪客群組</target>
+        <target xml:lang="zh-TW">訪客（已結帳）群組</target>
         <note>Context:
 File: controllers/admin/AdminGroupsController.php:118</note>
       </trans-unit>
       <trans-unit id="115041dc1655b3d837ac409e16c87f85" approved="yes">
         <source>Customers group</source>
-        <target xml:lang="zh-TW">客戶群組</target>
+        <target xml:lang="zh-TW">會員群組</target>
         <note>Context:
 File: controllers/admin/AdminGroupsController.php:126</note>
       </trans-unit>
@@ -1637,7 +1637,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
     <body>
       <trans-unit id="f8f1f78351c2864c334a80b706a303b2" approved="yes">
         <source>Display remaining quantities when the quantity is lower than</source>
-        <target xml:lang="zh-TW">顯示剩餘量，當庫存低於</target>
+        <target xml:lang="zh-TW">顯示數量，當庫存低於</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_page.html.twig:43</note>
       </trans-unit>
@@ -1649,7 +1649,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="b58704f2e2e18edc7c903342c2a42dfc" approved="yes">
         <source>Display available quantities on the product page</source>
-        <target xml:lang="zh-TW">在產品頁上顯示可用數量</target>
+        <target xml:lang="zh-TW">在產品頁顯示庫存</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_page.html.twig:37</note>
       </trans-unit>

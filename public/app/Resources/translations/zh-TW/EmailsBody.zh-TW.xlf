@@ -1830,12 +1830,12 @@
       </trans-unit>
       <trans-unit id="fb85495b4c45ce28e7a1521017326c5a" approved="yes">
         <source>Subscribing to newsletter</source>
-        <target xml:lang="zh-TW">Subscribing to newsletter</target>
+        <target xml:lang="zh-TW">電子報訂閱</target>
         <note>Line: 180</note>
       </trans-unit>
       <trans-unit id="f6c3e4834d385f4923121b89bdee29c0" approved="yes">
         <source>Thank you for subscribing to our newsletter. We are pleased to offer you the following voucher:</source>
-        <target xml:lang="zh-TW">Thank you for subscribing to our newsletter. We are pleased to offer you the following voucher:</target>
+        <target xml:lang="zh-TW">感謝您的訂閱。新訂戶即可獲得優惠折扣碼：</target>
         <note>Line: 247</note>
       </trans-unit>
     </body>
