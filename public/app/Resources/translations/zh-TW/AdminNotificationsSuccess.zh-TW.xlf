@@ -44,6 +44,11 @@ File: classes/controller/AdminController.php:484</note>
         <note>Context:
 File: classes/controller/AdminController.php:485</note>
       </trans-unit>
+      <trans-unit id="4a6c326f3ec43e638da38a44a21b5eb7" approved="yes">
+        <source>Comment successfully added.</source>
+        <target xml:lang="zh-TW">訊息新增成功。</target>
+        <note>Line: 480</note>
+      </trans-unit>
     </body>
   </file>
   <file original="admin-dev/themes/default/template/header.tpl" source-language="en" target-language="zh-TW" datatype="plaintext">

@@ -963,7 +963,7 @@ File: modules/ps_imageslider/ps_imageslider.php:746</note>
     <body>
       <trans-unit id="b78a3223503896721cca1303f776159b" approved="yes">
         <source>Title</source>
-        <target xml:lang="zh-TW">稱號</target>
+        <target xml:lang="zh-TW">名稱</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/TwigTemplateForm/bootstrap_4_layout.html.twig:328</note>
       </trans-unit>

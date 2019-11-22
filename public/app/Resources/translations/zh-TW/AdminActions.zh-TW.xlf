@@ -436,7 +436,7 @@ File: controllers/admin/AdminCategoriesController.php:330</note>
     <body>
       <trans-unit id="f8825c9f08ff15b5ef6bc3a3898817e8" approved="yes">
         <source>Save and preview</source>
-        <target xml:lang="zh-TW">儲存並預覽</target>
+        <target xml:lang="zh-TW">儲存並開新頁面瀏覽</target>
         <note>Context:
 File: controllers/admin/AdminCmsController.php:228</note>
       </trans-unit>
