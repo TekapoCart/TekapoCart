@@ -15,6 +15,7 @@ $_MODULE['<{smilepay_c2cup}prestashop>smilepay_c2cup_f12b92133cd8ab74146978d7d6b
 $_MODULE['<{smilepay_c2cup}prestashop>smilepay_c2cup_f020ebc5a2049b79697374eed3935e11'] = 'Store to pickup:';
 $_MODULE['<{smilepay_c2cup}prestashop>smilepay_c2cup_2599301f602fc47d7c5705fe4a224b45'] = 'Reselect store to pickup';
 $_MODULE['<{smilepay_c2cup}prestashop>smilepay_c2cup_29917b9eafbcb81540456f12c701af2a'] = 'Store Name: %s (%s) %sStore Address: %s';
+$_MODULE['<{smilepay_c2cup}prestashop>smilepay_c2cup_dbac152f83c6b74f4c4d948585247992'] = 'The name on the ID must match that of the package\'s label.';
 $_MODULE['<{smilepay_c2cup}prestashop>smilepay_c2cup_0eab61917ac926821ff8174a1aa869c2'] = '當運送方式為：';
 $_MODULE['<{smilepay_c2cup}prestashop>smilepay_c2cup_ff9cf542e065b2e383a4423e36eed53a'] = '請先選擇門市';
 $_MODULE['<{smilepay_c2cup}prestashop>smilepay_c2cup_8dfbf43e22d2456b1f6783d509fbdb37'] = '送貨地址的收件人姓名，不可以大於5個字，純英文姓名不可超過10個字';

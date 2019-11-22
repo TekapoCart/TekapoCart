@@ -417,7 +417,9 @@ class Smilepay_c2cup extends CarrierModule
 
         // suzy: 2018-07-20 拿掉 p style margin-left 20px
         // 加上 class='offset-xs-2 col-xs-10 offset-sm-1 col-sm-11'
-        $template = "<div id='smilepay_c2cup_emap_but' style='margin-left:35px;'><p><button type='button' onclick='window.open(\"$url\",\"_self\");' class='btn btn-primary'>" . $maptext . "</button>"
+        $template = "<div id='smilepay_c2cup_emap_but' style='margin-left:35px;'><p>"
+            . $this->l('The name on the ID must match that of the packages label.')
+            ."</p><p><button type='button' onclick='window.open(\"$url\",\"_self\");' class='btn btn-primary'>" . $maptext . "</button>"
             . $mapstoretext . "</p></div>";
 
 
