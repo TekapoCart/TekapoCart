@@ -267,7 +267,7 @@ File: admin-dev/themes/default/template/controllers/orders/_new_product.tpl:121<
     <body>
       <trans-unit id="f9a5775d7def0b6c57393fc86bb7a730" approved="yes">
         <source>Do not forget to update your exchange rate before making this change.</source>
-        <target xml:lang="zh-TW">在更新之前別忘了先更新貨幣匯率。</target>
+        <target xml:lang="zh-TW">在執行前別忘了將貨幣更新至最新匯率。</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:561</note>
       </trans-unit>

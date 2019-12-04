@@ -2025,25 +2025,25 @@ File: modules/prestafraud/prestafraud.php:196</note>
       </trans-unit>
       <trans-unit id="1d6af794b2599c1407a83029a09d1ecf" approved="yes">
         <source>Carriers</source>
-        <target xml:lang="zh-TW">承運商</target>
+        <target xml:lang="zh-TW">配送方式</target>
         <note>Context:
 File: modules/prestafraud/prestafraud.php:209</note>
       </trans-unit>
       <trans-unit id="914419aa32f04011357d3b604a86d7eb" approved="yes">
         <source>Carrier</source>
-        <target xml:lang="zh-TW">承運商</target>
+        <target xml:lang="zh-TW">配送方式</target>
         <note>Context:
 File: modules/prestafraud/prestafraud.php:212</note>
       </trans-unit>
       <trans-unit id="fecb07f7ab46e23e9b520a9a9af7b97b" approved="yes">
         <source>Carrier Type</source>
-        <target xml:lang="zh-TW">承運商類型</target>
+        <target xml:lang="zh-TW">配送方式類型</target>
         <note>Context:
 File: modules/prestafraud/prestafraud.php:212</note>
       </trans-unit>
       <trans-unit id="b04ad61ad875f6e7149fdd51c2e60ce2" approved="yes">
         <source>Choose a carrier type...</source>
-        <target xml:lang="zh-TW">選擇承運商類型...</target>
+        <target xml:lang="zh-TW">選擇配送方式類型...</target>
         <note>Context:
 File: modules/prestafraud/prestafraud.php:217</note>
       </trans-unit>

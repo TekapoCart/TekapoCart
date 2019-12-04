@@ -654,7 +654,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductShipping.php:134</note>
       </trans-unit>
       <trans-unit id="582d519b697f8d1a558e91220beea671" approved="yes">
         <source>Available carriers</source>
-        <target xml:lang="zh-TW">可使用承運商</target>
+        <target xml:lang="zh-TW">可使用配送方式</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductShipping.php:150</note>
       </trans-unit>
@@ -2793,7 +2793,7 @@ File: admin-dev/themes/default/template/controllers/cart_rules/conditions.tpl:16
       </trans-unit>
       <trans-unit id="46b00dccbc9e441b3fcf567d39975f86" approved="yes">
         <source>Carrier selection</source>
-        <target xml:lang="zh-TW">選擇承運商</target>
+        <target xml:lang="zh-TW">選擇配送方式</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/conditions.tpl:183</note>
       </trans-unit>

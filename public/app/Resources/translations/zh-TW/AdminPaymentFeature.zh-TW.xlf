@@ -28,7 +28,7 @@ File: controllers/admin/AdminPaymentPreferencesController.php:255</note>
       </trans-unit>
       <trans-unit id="1aa915c48859b4638d4048d533bad273" approved="yes">
         <source>Carrier restrictions</source>
-        <target xml:lang="zh-TW">承運商限制</target>
+        <target xml:lang="zh-TW">配送方式限制</target>
         <note>Context:
 File: controllers/admin/AdminPaymentPreferencesController.php:262</note>
       </trans-unit>

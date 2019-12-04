@@ -918,7 +918,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/catalog.htm
     <body>
       <trans-unit id="d6df5e0f6b6204bece3852c0817420e9" approved="yes">
         <source>If no carrier is selected then all the carriers will be available for customers orders.</source>
-        <target xml:lang="zh-TW">若無選取，所有的承運商皆可使用。</target>
+        <target xml:lang="zh-TW">若無選取，所有的配送方式皆可使用。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_shipping.html.twig:148</note>
       </trans-unit>

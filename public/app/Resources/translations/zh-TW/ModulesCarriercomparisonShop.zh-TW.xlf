@@ -28,13 +28,13 @@ File: modules/ps_carriercomparison/template/ps_carriercomparison.tpl:44</note>
       </trans-unit>
       <trans-unit id="9207f4078f515ecc8256bae33fa1f497" approved="yes">
         <source>Needed for certain carriers.</source>
-        <target xml:lang="zh-TW">某些承運商所需的。</target>
+        <target xml:lang="zh-TW">某些配送方式所需的。</target>
         <note>Context:
 File: modules/ps_carriercomparison/template/ps_carriercomparison.tpl:45</note>
       </trans-unit>
       <trans-unit id="914419aa32f04011357d3b604a86d7eb" approved="yes">
         <source>Carrier</source>
-        <target xml:lang="zh-TW">承運商</target>
+        <target xml:lang="zh-TW">配送方式</target>
         <note>Context:
 File: modules/ps_carriercomparison/template/ps_carriercomparison.tpl:51</note>
       </trans-unit>

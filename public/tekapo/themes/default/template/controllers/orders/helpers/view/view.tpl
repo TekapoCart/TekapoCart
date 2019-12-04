@@ -539,7 +539,7 @@
                       {/foreach}
                     </select>
                   </td>
-                  {* suzy: 2018-09-12 隱藏 發票 <td>
+                  <td>
                     {if count($invoices_collection) > 0}
                       <select name="payment_invoice" id="payment_invoice">
                       {foreach from=$invoices_collection item=invoice}
@@ -547,7 +547,7 @@
                       {/foreach}
                       </select>
                     {/if}
-                  </td>*}
+                  </td>
                   <td class="actions">
                     <button class="btn btn-primary" type="submit" name="submitAddPayment">
                       {l s='Add' d='Admin.Actions'}
