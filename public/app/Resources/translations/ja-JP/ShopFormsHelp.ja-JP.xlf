@@ -58,7 +58,7 @@ File: themes/classic/templates/catalog/_partials/product-customization.tpl:56</n
     <body>
       <trans-unit id="863cf84b34def228394c03c156bff42c" approved="yes">
         <source>Select reference</source>
-        <target xml:lang="ja">参照コードを選択してください</target>
+        <target xml:lang="ja">選択してください</target>
         <note>Context:
 File: themes/classic/modules/contactform/views/templates/widget/contactform.tpl:76</note>
       </trans-unit>
@@ -70,7 +70,7 @@ File: themes/classic/modules/contactform/views/templates/widget/contactform.tpl:
       </trans-unit>
       <trans-unit id="8307fac59310d028334df0306c7b29ad" approved="yes">
         <source>How can we help?</source>
-        <target xml:lang="ja">お困りですか？</target>
+        <target xml:lang="ja">ご意見、ご質問、メッセージ等々お気軽くにお問い合わせください</target>
         <note>Context:
 File: themes/classic/modules/contactform/views/templates/widget/contactform.tpl:106</note>
       </trans-unit>

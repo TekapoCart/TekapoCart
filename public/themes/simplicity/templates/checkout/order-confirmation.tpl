@@ -43,7 +43,7 @@
   <section id="content" class="page-content page-order-confirmation card">
     <div class="card-block">
 
-        {* 訂單明細 訂單編號 付款方式 送貨方式 *}
+        {* 訂單明細 訂單編號 付款方式 配送方式 *}
         {block name='order_details'}
           <div id="order-details">
             <div class="row card">
@@ -74,7 +74,7 @@
         {/block}
 
         {block name='hook_order_confirmation'}
-          {if ! empty($HOOK_PAYMENT_RETURN)}
+          {if ! empty($HOOK_ORDER_CONFIRMATION)}
             <div id="content-hook_order_confirmation" class="card definition-list">
               <div class="row">
                 <div class="col-md-12">

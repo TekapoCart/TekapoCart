@@ -562,13 +562,13 @@ File: themes/StarterTheme/templates/checkout/order-confirmation.tpl:62</note>
     <body>
       <trans-unit id="7f21696f11929f5ed55ca5bcb15d2fc1" approved="yes">
         <source>Your order is confirmed</source>
-        <target xml:lang="ja">ご注文手続きが完了しました</target>
+        <target xml:lang="ja">ご注文ありがとうございます</target>
         <note>Context:
 File: themes/classic/templates/checkout/order-confirmation.tpl:11</note>
       </trans-unit>
       <trans-unit id="b8627ccd34529880156129d02a9ca37d" approved="yes">
         <source>An email has been sent to your mail address %email%.</source>
-        <target xml:lang="ja">ご登録のメールアドレス (%email%) にご注文内容の確認メールを送りいたします。</target>
+        <target xml:lang="ja">ご登録のメールアドレス（%email%）にご注文内容の確認メールを送りいたします。</target>
         <note>Context:
 File: themes/classic/templates/checkout/order-confirmation.tpl:16</note>
       </trans-unit>

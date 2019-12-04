@@ -5,9 +5,9 @@
 
 嗨
 
-Subscribing to newsletter
+電子報訂閱
 
-Thank you for subscribing to our newsletter. We are pleased to offer you the following voucher: {discount}
+感謝您的訂閱。新訂戶即可獲得優惠折扣碼： {discount}
 
 [{shop_name}]({shop_url})
 

@@ -278,6 +278,12 @@ File: controllers/admin/AdminStoresController.php:431</note>
         <note>Context:
 File: controllers/admin/AdminStoresController.php:445</note>
       </trans-unit>
+      <trans-unit id="17e5b9e86108a7fd53884cfaa66ddb35" approved="yes">
+        <source>Registration number</source>
+        <target xml:lang="ja">受付時間</target>
+        <note>Context:
+File: controllers/admin/AdminStoresController.php:452</note>
+      </trans-unit>
       <trans-unit id="1b9a36c9acf2ab7a81d67a55432b6c8f" approved="yes">
         <source>Shop address line 1</source>
         <target xml:lang="ja">ショップ住所1行目</target>

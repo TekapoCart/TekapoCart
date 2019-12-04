@@ -5,11 +5,11 @@
 
 嗨 {lastname}{firstname}
 
-Order ID {order_name} - Payment error
+Order ID {order_name} - 付款發生錯誤
 
-We have encountered an error while processing your payment for your order with the reference {order_name} from {shop_name}. Please contact us as soon as possible.
+若您持續無法成功下單 請與我們聯絡。
 
-You can expect delivery as soon as your payment is received.
+在確認款項前我們無法進行出貨作業，造成不便敬請見諒。
 
 [{shop_name}]({shop_url})
 

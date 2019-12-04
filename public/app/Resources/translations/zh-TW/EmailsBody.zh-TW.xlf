@@ -1161,7 +1161,7 @@
       </trans-unit>
       <trans-unit id="15c197c97ee33f7da7df21d315fb7f71" approved="yes">
         <source>You have received a new message from [1]{shop_name}[/1] regarding order with the reference [1]{order_name}[/1].</source>
-        <target xml:lang="zh-TW">You have received a new message from [1]{shop_name}[/1] regarding order with the reference [1]{order_name}[/1].</target>
+        <target xml:lang="zh-TW">您收到了一則由 [1]{shop_name}[/1] 發出關於訂單 [1]{order_name}[/1] 的訊息。</target>
         <note>Line: 247</note>
       </trans-unit>
       <trans-unit id="371e76fdc916e1fc3818f6b96dee5219" approved="yes">
@@ -1285,22 +1285,22 @@
     <body>
       <trans-unit id="b06c5ecc37b9cd61a0cab0534ed1f15d" approved="yes">
         <source>Payment Error</source>
-        <target xml:lang="zh-TW">Payment Error</target>
+        <target xml:lang="zh-TW">付款失敗通知</target>
         <note>Line: 3</note>
       </trans-unit>
       <trans-unit id="1e97d97a923eaddd810e056c828e99ea" approved="yes">
         <source>Payment error</source>
-        <target xml:lang="zh-TW">Payment error</target>
+        <target xml:lang="zh-TW">付款發生錯誤</target>
         <note>Line: 179</note>
       </trans-unit>
       <trans-unit id="e1a66dba9aa7c8399229122ca7528b77" approved="yes">
         <source>We have encountered an error while processing your payment for your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1]. Please contact us as soon as possible.</source>
-        <target xml:lang="zh-TW">We have encountered an error while processing your payment for your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1]. Please contact us as soon as possible.</target>
+        <target xml:lang="zh-TW">若您持續無法成功下單 請與我們聯絡。</target>
         <note>Line: 246</note>
       </trans-unit>
       <trans-unit id="b8dfec752b0cb58a3bc3c7479e4dd44c" approved="yes">
         <source>You can expect delivery as soon as your payment is received.</source>
-        <target xml:lang="zh-TW">You can expect delivery as soon as your payment is received.</target>
+        <target xml:lang="zh-TW">在確認款項前我們無法進行出貨作業，造成不便敬請見諒。</target>
         <note>Line: 248</note>
       </trans-unit>
     </body>
@@ -1697,6 +1697,11 @@
       <trans-unit id="681a0aa2d158085f63f86c84900fa989" approved="yes">
         <source>Your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1] has been changed by the merchant.</source>
         <target xml:lang="zh-TW">Your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1] has been changed by the merchant.</target>
+        <note>Line: 247</note>
+      </trans-unit>
+      <trans-unit id="9435e0068772ec8c135acd33e1b45ee3" approved="yes">
+        <source>We look forward to serving you again.</source>
+        <target xml:lang="zh-TW">希望有機會能再為您服務。</target>
         <note>Line: 247</note>
       </trans-unit>
       <trans-unit id="869a6d7d8b6af1ca14f874356141ac45" approved="yes">

@@ -1,5 +1,5 @@
-Please do not reply directly to this email, we will not receive it.
-Adding our email address as a contact to ensure all messages are delivered to your Inbox.
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
 
 {shop_url}
 
@@ -9,23 +9,23 @@ A new order was placed on {shop_name} by the following customer: {firstname} {la
 
 注文明細
 
-注文 {order_name} 作成日時 {date}
+注文 {order_name} 注文日 {date}
 
-支払い： {payment}
+お支払い： {payment}
 
-番号	商品	単価	数量	合計金額   {items}
+番号	商品	単価	数量	小計   {items}
 商品	{total_products}
 割引	{total_discounts}
 ギフトラッピング	{total_wrapping}
 送料	{total_shipping}
 Including total tax	{total_tax_paid}
-支払い合計	{total_paid}
+合計	{total_paid}
 
 Carrier
 
-配送： {carrier}
+配送方法： {carrier}
 
-支払い： {payment}
+お支払い： {payment}
 
 配送先住所
 
@@ -39,7 +39,7 @@ Carrier
 
 {message}
 
-Follow your order and download your invoice on our shop, go to the [Order history and details]({history_url}) section of your customer account.
+ご注文内容の詳細は「[注文履歴]({guest_tracking_url})」。
 
 [{shop_name}]({shop_url})
 

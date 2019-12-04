@@ -298,7 +298,7 @@ File: themes/classic/modules/ps_contactinfo/ps_contactinfo-rich.tpl:27</note>
       </trans-unit>
       <trans-unit id="1300caaefd15b839f37952dc7cc75d82" approved="yes">
         <source>Call us:</source>
-        <target xml:lang="zh-TW">客服專線：</target>
+        <target xml:lang="zh-TW">客服專線</target>
         <note>Context:
 File: themes/classic/modules/ps_contactinfo/ps_contactinfo-rich.tpl:37</note>
       </trans-unit>

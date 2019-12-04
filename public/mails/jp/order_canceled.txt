@@ -1,17 +1,13 @@
-Please do not reply directly to this email, we will not receive it.
-Adding our email address as a contact to ensure all messages are delivered to your Inbox.
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
 
 {shop_url}
 
 {lastname} {firstname} 様
 
-Order ID {order_name} - 注文はキャンセルされました
+注文番号 {order_name} - ご注文をキャンセルいたしました。
 
-Your order with the reference {order_name} from {shop_name} has been canceled by the merchant.
-
-Go to your customer account to learn more about it.
-
-If you have a guest account, you can follow your order via the [Guest Tracking]({guest_tracking_url}) section on our shop.
+またのご利用をお待ち申し上げております。
 
 [{shop_name}]({shop_url})
 

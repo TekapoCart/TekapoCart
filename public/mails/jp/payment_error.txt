@@ -1,15 +1,15 @@
-Please do not reply directly to this email, we will not receive it.
-Adding our email address as a contact to ensure all messages are delivered to your Inbox.
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
 
 {shop_url}
 
 {lastname} {firstname} 様
 
-Order ID {order_name} - Payment error
+注文番号 {order_name} - 決済に失敗しました
 
-We have encountered an error while processing your payment for your order with the reference {order_name} from {shop_name}. Please contact us as soon as possible.
+エラーが発生し、購入できない方、お問い合わせください。
 
-You can expect delivery as soon as your payment is received.
+ご入金を確認後に商品を発送致します。
 
 [{shop_name}]({shop_url})
 
