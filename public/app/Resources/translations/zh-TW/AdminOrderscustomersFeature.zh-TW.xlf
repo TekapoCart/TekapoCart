@@ -295,7 +295,7 @@ File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.
       </trans-unit>
       <trans-unit id="33c1f4de9458d31b6df40fb7fb52a180" approved="yes">
         <source>for a total amount of %s</source>
-        <target xml:lang="zh-TW">總數為 %s</target>
+        <target xml:lang="zh-TW">總金額為 %s</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.tpl:194</note>
       </trans-unit>
@@ -307,7 +307,7 @@ File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.
       </trans-unit>
       <trans-unit id="25326db0dcb2cf342b3477fbdad373dc" approved="yes">
         <source>Total spent</source>
-        <target xml:lang="zh-TW">總計支付</target>
+        <target xml:lang="zh-TW">總計</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.tpl:246</note>
       </trans-unit>
@@ -2254,6 +2254,15 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/list/list_hea
         <target xml:lang="zh-TW">下載信用單</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/slip/_print_pdf_icon.tpl:30</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="src/PrestaShopBundle/Resources/views/Admin/Sell/Customer/Blocks/View/orders.html.twig" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="d1554912e46f8d36a800ad8b604225f1">
+        <source>Valid orders:</source>
+        <target>有效訂單：</target>
+        <note>Line: 42</note>
       </trans-unit>
     </body>
   </file>
