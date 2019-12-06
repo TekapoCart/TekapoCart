@@ -1994,7 +1994,7 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:39</note>
       </trans-unit>
       <trans-unit id="08f2624d7719fac81f1af3e3e64d5e63" approved="yes">
         <source>Apply new quantity</source>
-        <target xml:lang="zh-TW">套用新的數量</target>
+        <target xml:lang="zh-TW">套用</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:40</note>
       </trans-unit>
@@ -2061,13 +2061,13 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:61</note>
       </trans-unit>
       <trans-unit id="898bed66d82aeaab1d62875fd3657c40" approved="yes">
         <source>Movements</source>
-        <target xml:lang="zh-TW">移動</target>
+        <target xml:lang="zh-TW">變動記錄</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:63</note>
       </trans-unit>
       <trans-unit id="083e99de177243cffe65b7f8724c89ca" approved="yes">
         <source>Search products (search by name, reference, supplier)</source>
-        <target xml:lang="zh-TW">搜尋商品 (以名稱, 編號, 供應商)</target>
+        <target xml:lang="zh-TW">搜尋商品 (名稱、編號、供應商)</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:67</note>
       </trans-unit>
@@ -2091,7 +2091,7 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:70</note>
       </trans-unit>
       <trans-unit id="60ca6b20f2ef2afc178d7e5d7224b5c8" approved="yes">
         <source>Bulk edit quantity</source>
-        <target xml:lang="zh-TW">批次更新數量</target>
+        <target xml:lang="zh-TW">批次更新庫存</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:72</note>
       </trans-unit>
