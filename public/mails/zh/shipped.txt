@@ -8,7 +8,7 @@
 已出货通知
 
 您的订单 {order_name} 已经出货，请留意到货状况。
-配送編號 {tracking_number}。
+配送編號 {tracking_number}
 {extra_info}
 
 查看订单状态请至「[订单查询]({guest_tracking_url})」。

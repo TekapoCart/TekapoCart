@@ -112,7 +112,7 @@ File: modules/statsforecast/statsforecast.php:337</note>
       </trans-unit>
       <trans-unit id="42de3b7ec2450ded7d6c600b359def52" approved="yes">
         <source>On average, each visitor places an order for this amount:</source>
-        <target xml:lang="zh-TW">每位訪客的平均訂單金額：</target>
+        <target xml:lang="zh-TW">每位訪客的平均訂單交易金額：</target>
         <note>Context:
 File: modules/statsforecast/statsforecast.php:386</note>
       </trans-unit>

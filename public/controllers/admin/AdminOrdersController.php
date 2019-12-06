@@ -66,15 +66,28 @@ class AdminOrdersControllerCore extends AdminController
 		os.`color`,
 		IF((SELECT so.id_order FROM `' . _DB_PREFIX_ . 'orders` so WHERE so.id_customer = a.id_customer AND so.id_order < a.id_order LIMIT 1) > 0, 0, 1) as new,
 		country_lang.name as cname,
+		carrier.name as carrier_name,
 		IF(a.valid, 1, 0) badge_success';
+
+        // suzy: 2019-12-06 調整 SQL（新加 carrier）
+//        $this->_join = '
+//		LEFT JOIN `' . _DB_PREFIX_ . 'customer` c ON (c.`id_customer` = a.`id_customer`)
+//		INNER JOIN `' . _DB_PREFIX_ . 'address` address ON address.id_address = a.id_address_delivery
+//		INNER JOIN `' . _DB_PREFIX_ . 'country` country ON address.id_country = country.id_country
+//		INNER JOIN `' . _DB_PREFIX_ . 'country_lang` country_lang ON (country.`id_country` = country_lang.`id_country` AND country_lang.`id_lang` = ' . (int) $this->context->language->id . ')
+//		LEFT JOIN `' . _DB_PREFIX_ . 'order_state` os ON (os.`id_order_state` = a.`current_state`)
+//		LEFT JOIN `' . _DB_PREFIX_ . 'order_state_lang` osl ON (os.`id_order_state` = osl.`id_order_state` AND osl.`id_lang` = ' . (int) $this->context->language->id . ')';
 
         $this->_join = '
 		LEFT JOIN `' . _DB_PREFIX_ . 'customer` c ON (c.`id_customer` = a.`id_customer`)
 		INNER JOIN `' . _DB_PREFIX_ . 'address` address ON address.id_address = a.id_address_delivery
 		INNER JOIN `' . _DB_PREFIX_ . 'country` country ON address.id_country = country.id_country
 		INNER JOIN `' . _DB_PREFIX_ . 'country_lang` country_lang ON (country.`id_country` = country_lang.`id_country` AND country_lang.`id_lang` = ' . (int) $this->context->language->id . ')
+		INNER JOIN `' . _DB_PREFIX_ . 'carrier` carrier ON carrier.id_carrier = a.id_carrier
 		LEFT JOIN `' . _DB_PREFIX_ . 'order_state` os ON (os.`id_order_state` = a.`current_state`)
 		LEFT JOIN `' . _DB_PREFIX_ . 'order_state_lang` osl ON (os.`id_order_state` = osl.`id_order_state` AND osl.`id_lang` = ' . (int) $this->context->language->id . ')';
+
+
         $this->_orderBy = 'id_order';
         $this->_orderWay = 'DESC';
         $this->_use_found_rows = true;
@@ -95,7 +108,7 @@ class AdminOrdersControllerCore extends AdminController
             ),
             'new' => array(
                 // suzy: 2018-10-10 改文字 'title' => $this->trans('New client', array(), 'Admin.Orderscustomers.Feature'),
-                'title' => '訪客結帳',
+                'title' => '訪客',
                 'align' => 'text-center',
                 'type' => 'bool',
                 'tmpTableFilter' => true,
@@ -127,6 +140,13 @@ class AdminOrdersControllerCore extends AdminController
             ),
             'payment' => array(
                 'title' => $this->trans('Payment', array(), 'Admin.Global'),
+            ),
+            // suzy: 2019-12-06 新增 column：配送方式
+            'carrier_name' => array(
+                'title' => '配送方式',
+                'filter_key' => 'carrier!id_carrier',
+                'filter_type' => 'int',
+                'order_key' => 'carrier_name',
             ),
             'osname' => array(
                 'title' => $this->trans('Status', array(), 'Admin.Global'),
@@ -178,7 +198,8 @@ class AdminOrdersControllerCore extends AdminController
                 'filter_type' => 'int',
                 'order_key' => 'cname',
             );
-            $this->fields_list = array_merge($part1, $part2);
+            // suzy: 2019-12-06 隱藏 column：國家
+            // $this->fields_list = array_merge($part1, $part2);
         }
 
         $this->shopLinkType = 'shop';
@@ -421,6 +442,12 @@ class AdminOrdersControllerCore extends AdminController
                                     $templateVars = array('{followup}' => str_replace('@', $order->shipping_number, $carrier->url));
                                 }
 
+                                // suzy: 2018-12-08 在已出貨通知信顯示配送編號
+                                if ($history->id_order_state == Configuration::get('PS_OS_SHIPPING')) {
+                                    $templateVars['{tracking_number}'] = strlen($order->shipping_number) > 0 ? $order->shipping_number : '--';
+                                    $templateVars['{extra_info}'] =  $carrier->shipped_email_info;
+                                }
+
                                 if ($history->addWithemail(true, $templateVars)) {
                                     if (Configuration::get('PS_ADVANCED_STOCK_MANAGEMENT')) {
                                         foreach ($order->getProducts() as $product) {
@@ -460,6 +487,16 @@ class AdminOrdersControllerCore extends AdminController
             $this->tpl_list_vars['order_statuses'] = $this->statuses_array;
             $this->tpl_list_vars['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
             $this->tpl_list_vars['POST'] = $_POST;
+
+            // suzy: 2019-12-05 批次轉狀態限制特定狀態
+            $filter_statuses = [];
+            foreach ($this->statuses_array as $key => $value) {
+                if (in_array($key, [2, 9, 3, 4, 22, 7, 6])) {
+                    $filter_statuses[$key] = $value;
+                }
+            }
+            $this->tpl_list_vars['order_statuses'] = $filter_statuses;
+
         }
 
         return parent::renderList();
@@ -562,7 +599,7 @@ class AdminOrdersControllerCore extends AdminController
 
                         // suzy: 2018-12-08 在已出貨通知信顯示配送編號
                         if ($history->id_order_state == Configuration::get('PS_OS_SHIPPING')) {
-                            $templateVars['{tracking_number}'] = strlen($order->shipping_number) > 0 ? $order->shipping_number : '-';
+                            $templateVars['{tracking_number}'] = strlen($order->shipping_number) > 0 ? $order->shipping_number : '--';
                             $templateVars['{extra_info}'] =  $carrier->shipped_email_info;
                         }
 
@@ -1635,7 +1672,7 @@ class AdminOrdersControllerCore extends AdminController
 
                     // suzy: 2018-12-08 在已出貨通知信顯示配送編號
                     if ($history->id_order_state == Configuration::get('PS_OS_SHIPPING')) {
-                        $templateVars['{tracking_number}'] = strlen($order->shipping_number) > 0 ? $order->shipping_number : '-';
+                        $templateVars['{tracking_number}'] = strlen($order->shipping_number) > 0 ? $order->shipping_number : '--';
                         $templateVars['{extra_info}'] =  $carrier->shipped_email_info;
                     }
 
@@ -1653,76 +1690,75 @@ class AdminOrdersControllerCore extends AdminController
         parent::postProcess();
     }
 
-    // suzy: 2018-09-22 不顯示統計資訊
-//    public function renderKpis()
-//    {
-//        $time = time();
-//        $kpis = array();
-//
-//        /* The data generation is located in AdminStatsControllerCore */
-//
-//        $helper = new HelperKpi();
-//        $helper->id = 'box-conversion-rate';
-//        $helper->icon = 'icon-sort-by-attributes-alt';
-//        //$helper->chart = true;
-//        $helper->color = 'color1';
-//        $helper->title = $this->trans('Conversion Rate', array(), 'Admin.Global');
-//        $helper->subtitle = $this->trans('30 days', array(), 'Admin.Global');
-//        if (ConfigurationKPI::get('CONVERSION_RATE') !== false) {
-//            $helper->value = ConfigurationKPI::get('CONVERSION_RATE');
-//        }
-//        if (ConfigurationKPI::get('CONVERSION_RATE_CHART') !== false) {
-//            $helper->data = ConfigurationKPI::get('CONVERSION_RATE_CHART');
-//        }
-//        $helper->source = $this->context->link->getAdminLink('AdminStats') . '&ajax=1&action=getKpi&kpi=conversion_rate';
-//        $helper->refresh = (bool) (ConfigurationKPI::get('CONVERSION_RATE_EXPIRE') < $time);
-//        $kpis[] = $helper->generate();
-//
-//        $helper = new HelperKpi();
-//        $helper->id = 'box-carts';
-//        $helper->icon = 'icon-shopping-cart';
-//        $helper->color = 'color2';
-//        $helper->title = $this->trans('Abandoned Carts', array(), 'Admin.Global');
-//        $helper->subtitle = $this->trans('Today', array(), 'Admin.Global');
-//        $helper->href = $this->context->link->getAdminLink('AdminCarts') . '&action=filterOnlyAbandonedCarts';
-//        if (ConfigurationKPI::get('ABANDONED_CARTS') !== false) {
-//            $helper->value = ConfigurationKPI::get('ABANDONED_CARTS');
-//        }
-//        $helper->source = $this->context->link->getAdminLink('AdminStats') . '&ajax=1&action=getKpi&kpi=abandoned_cart';
-//        $helper->refresh = (bool) (ConfigurationKPI::get('ABANDONED_CARTS_EXPIRE') < $time);
-//        $kpis[] = $helper->generate();
-//
-//        $helper = new HelperKpi();
-//        $helper->id = 'box-average-order';
-//        $helper->icon = 'icon-money';
-//        $helper->color = 'color3';
-//        $helper->title = $this->trans('Average Order Value', array(), 'Admin.Global');
-//        $helper->subtitle = $this->trans('30 days', array(), 'Admin.Global');
-//        if (ConfigurationKPI::get('AVG_ORDER_VALUE') !== false) {
-//            $helper->value = $this->trans('%amount% tax excl.', array('%amount%' => ConfigurationKPI::get('AVG_ORDER_VALUE')), 'Admin.Orderscustomers.Feature');
-//        }
-//        $helper->source = $this->context->link->getAdminLink('AdminStats') . '&ajax=1&action=getKpi&kpi=average_order_value';
-//        $helper->refresh = (bool) (ConfigurationKPI::get('AVG_ORDER_VALUE_EXPIRE') < $time);
-//        $kpis[] = $helper->generate();
-//
-//        $helper = new HelperKpi();
-//        $helper->id = 'box-net-profit-visit';
-//        $helper->icon = 'icon-user';
-//        $helper->color = 'color4';
-//        $helper->title = $this->trans('Net Profit per Visit', array(), 'Admin.Orderscustomers.Feature');
-//        $helper->subtitle = $this->trans('30 days', array(), 'Admin.Orderscustomers.Feature');
-//        if (ConfigurationKPI::get('NETPROFIT_VISIT') !== false) {
-//            $helper->value = ConfigurationKPI::get('NETPROFIT_VISIT');
-//        }
-//        $helper->source = $this->context->link->getAdminLink('AdminStats') . '&ajax=1&action=getKpi&kpi=netprofit_visit';
-//        $helper->refresh = (bool) (ConfigurationKPI::get('NETPROFIT_VISIT_EXPIRE') < $time);
-//        $kpis[] = $helper->generate();
-//
-//        $helper = new HelperKpiRow();
-//        $helper->kpis = $kpis;
-//
-//        return $helper->generate();
-//    }
+    public function renderKpis()
+    {
+        $time = time();
+        $kpis = array();
+
+        /* The data generation is located in AdminStatsControllerCore */
+
+        $helper = new HelperKpi();
+        $helper->id = 'box-conversion-rate';
+        $helper->icon = 'icon-sort-by-attributes-alt';
+        //$helper->chart = true;
+        $helper->color = 'color1';
+        $helper->title = $this->trans('Conversion Rate', array(), 'Admin.Global');
+        $helper->subtitle = $this->trans('30 days', array(), 'Admin.Global');
+        if (ConfigurationKPI::get('CONVERSION_RATE') !== false) {
+            $helper->value = ConfigurationKPI::get('CONVERSION_RATE');
+        }
+        if (ConfigurationKPI::get('CONVERSION_RATE_CHART') !== false) {
+            $helper->data = ConfigurationKPI::get('CONVERSION_RATE_CHART');
+        }
+        $helper->source = $this->context->link->getAdminLink('AdminStats') . '&ajax=1&action=getKpi&kpi=conversion_rate';
+        $helper->refresh = (bool) (ConfigurationKPI::get('CONVERSION_RATE_EXPIRE') < $time);
+        $kpis[] = $helper->generate();
+
+        $helper = new HelperKpi();
+        $helper->id = 'box-carts';
+        $helper->icon = 'icon-shopping-cart';
+        $helper->color = 'color2';
+        $helper->title = $this->trans('Abandoned Carts', array(), 'Admin.Global');
+        $helper->subtitle = $this->trans('Today', array(), 'Admin.Global');
+        $helper->href = $this->context->link->getAdminLink('AdminCarts') . '&action=filterOnlyAbandonedCarts';
+        if (ConfigurationKPI::get('ABANDONED_CARTS') !== false) {
+            $helper->value = ConfigurationKPI::get('ABANDONED_CARTS');
+        }
+        $helper->source = $this->context->link->getAdminLink('AdminStats') . '&ajax=1&action=getKpi&kpi=abandoned_cart';
+        $helper->refresh = (bool) (ConfigurationKPI::get('ABANDONED_CARTS_EXPIRE') < $time);
+        $kpis[] = $helper->generate();
+
+        $helper = new HelperKpi();
+        $helper->id = 'box-average-order';
+        $helper->icon = 'icon-money';
+        $helper->color = 'color3';
+        $helper->title = $this->trans('Average Order Value', array(), 'Admin.Global');
+        $helper->subtitle = $this->trans('30 days', array(), 'Admin.Global');
+        if (ConfigurationKPI::get('AVG_ORDER_VALUE') !== false) {
+            $helper->value = $this->trans('%amount% tax excl.', array('%amount%' => ConfigurationKPI::get('AVG_ORDER_VALUE')), 'Admin.Orderscustomers.Feature');
+        }
+        $helper->source = $this->context->link->getAdminLink('AdminStats') . '&ajax=1&action=getKpi&kpi=average_order_value';
+        $helper->refresh = (bool) (ConfigurationKPI::get('AVG_ORDER_VALUE_EXPIRE') < $time);
+        $kpis[] = $helper->generate();
+
+        $helper = new HelperKpi();
+        $helper->id = 'box-net-profit-visit';
+        $helper->icon = 'icon-user';
+        $helper->color = 'color4';
+        $helper->title = $this->trans('Net Profit per Visit', array(), 'Admin.Orderscustomers.Feature');
+        $helper->subtitle = $this->trans('30 days', array(), 'Admin.Orderscustomers.Feature');
+        if (ConfigurationKPI::get('NETPROFIT_VISIT') !== false) {
+            $helper->value = ConfigurationKPI::get('NETPROFIT_VISIT');
+        }
+        $helper->source = $this->context->link->getAdminLink('AdminStats') . '&ajax=1&action=getKpi&kpi=netprofit_visit';
+        $helper->refresh = (bool) (ConfigurationKPI::get('NETPROFIT_VISIT_EXPIRE') < $time);
+        $kpis[] = $helper->generate();
+
+        $helper = new HelperKpiRow();
+        $helper->kpis = $kpis;
+
+        return $helper->generate();
+    }
 
     public function renderView()
     {
@@ -1903,7 +1939,7 @@ class AdminOrdersControllerCore extends AdminController
 
         // suzy: 2018-09-14 調整訂單狀態顯示
         $states = OrderState::getOrderStates($this->context->language->id);
-        $unpaid_state_ids = [1, 10, 12, 19, 20, 23, 24, 27, 28, 29, 30, 32, 34];
+        $unpaid_state_ids = [1, 10, 12, 19, 20, 23, 24, 28, 29, 30, 32];
         $processing_state_ids =  [14, 17, 25];
         $paid_state_ids = [2, 9];
         $shipment_state_ids = [3, 4, 5];

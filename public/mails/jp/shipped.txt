@@ -8,7 +8,7 @@
 ご注文頂いた商品を発送致します
 
 注文番号 {order_name} ご注文商品を発送しました。
-お問い合わせ番号 {tracking_number}。
+お問い合わせ番号 {tracking_number}
 {extra_info}
 
 ご注文内容の詳細は「[注文履歴]({guest_tracking_url})」。

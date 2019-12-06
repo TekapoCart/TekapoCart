@@ -330,6 +330,10 @@ class Ps_Wirepayment extends PaymentModule
         return $this->fetch('module:ps_wirepayment/views/templates/hook/order_detail.tpl');
     }
 
+//    public function hookDisplayAdminOrderTabOrder($params) {
+//        echo '1111';exit;
+//        return;
+//    }
 
     public function checkCurrency($cart)
     {

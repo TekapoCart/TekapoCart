@@ -277,7 +277,7 @@ File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.
       </trans-unit>
       <trans-unit id="a39ee61626da77cb9644fa972a8ac5b5" approved="yes">
         <source>Latest Update</source>
-        <target xml:lang="zh-TW">上次更新</target>
+        <target xml:lang="zh-TW">最近更新</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.tpl:140</note>
       </trans-unit>
@@ -331,7 +331,7 @@ File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.
       </trans-unit>
       <trans-unit id="a7136d956fbff49c3912e44722dbf000" approved="yes">
         <source>Add a private note</source>
-        <target xml:lang="zh-TW">新增私人備註</target>
+        <target xml:lang="zh-TW">新增私密備註</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.tpl:362</note>
       </trans-unit>
@@ -839,7 +839,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="f28128b38efbc6134dc40751ee21fd29" approved="yes">
         <source>Documents</source>
-        <target xml:lang="zh-TW">文件</target>
+        <target xml:lang="zh-TW">檔案</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:262</note>
       </trans-unit>
@@ -947,13 +947,13 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="5d9fe8726be08b6e26a0c05319590b01" approved="yes">
         <source>View full details...</source>
-        <target xml:lang="zh-TW">瀏覽詳細資料。。。</target>
+        <target xml:lang="zh-TW">瀏覽客戶詳細資料</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:628</note>
       </trans-unit>
       <trans-unit id="66dc0eb61ab4157d6170494e6841a77a" approved="yes">
         <source>Private note</source>
-        <target xml:lang="zh-TW">私人備註</target>
+        <target xml:lang="zh-TW">私密備註（客戶隱藏）</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:633</note>
       </trans-unit>
@@ -1073,7 +1073,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="1067f7778added234b6064bc8aa0765d" approved="yes">
         <source>Re-stock products</source>
-        <target xml:lang="zh-TW">再入倉產品</target>
+        <target xml:lang="zh-TW">補貨商品</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:1203</note>
       </trans-unit>
@@ -1455,7 +1455,7 @@ File: controllers/admin/AdminCartsController.php:48</note>
       </trans-unit>
       <trans-unit id="121401ccf0e3e23bcefe6a454f0f0601" approved="yes">
         <source>Abandoned cart</source>
-        <target xml:lang="zh-TW">未下單購物車</target>
+        <target xml:lang="zh-TW">未結購物車</target>
         <note>Context:
 File: controllers/admin/AdminCartsController.php:62</note>
       </trans-unit>
@@ -1479,7 +1479,7 @@ File: controllers/admin/AdminCartsController.php:170</note>
       </trans-unit>
       <trans-unit id="ffbb5322a3702b0d8d9c7f506209c540" approved="yes">
         <source>Average Order Value</source>
-        <target xml:lang="zh-TW">平均訂單金額</target>
+        <target xml:lang="zh-TW">平均訂單交易金額</target>
         <note>Context:
 File: controllers/admin/AdminCartsController.php:183</note>
       </trans-unit>

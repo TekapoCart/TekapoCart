@@ -247,7 +247,7 @@
                                         <div style="font-family:Open sans, arial, sans-serif;font-size:14px;line-height:25px;text-align:left;color:#363A41;">
                                           {{ 'Your order with the reference [1]{order_name}[/1] has been shipped.'|trans({'[1]': '<span class="label">', '[/1]': '</span>'}, 'Emails.Body', locale)|raw }}
                                           <br>
-                                          {{ 'Tracking number'|trans({}, 'Emails.Body', locale)|raw }} <span class="label">{tracking_number}</span>。<br>
+                                          {{ 'Tracking number'|trans({}, 'Emails.Body', locale)|raw }} <span class="label">{tracking_number}</span><br>
                                           {extra_info}
                                         </div>
                                       </td>

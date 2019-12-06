@@ -106,7 +106,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-7">
+    <!-- suzy: 2019-12-05 col-lg-7 改 col-lg-12 -->
+    <div class="col-lg-12">
       <div class="panel">
         <div class="panel-heading">
           <i class="icon-credit-card"></i>
@@ -148,10 +149,12 @@
           {/if}
           &nbsp;
           {if $order->delivery_number}
+            {* suzy: 2019-12-05 隱藏 檢視出貨單 按鈕
             <a class="btn btn-default _blank"  href="{$link->getAdminLink('AdminPdf', true, [], ['submitAction' => 'generateDeliverySlipPDF', 'id_order' => $order->id|intval])|escape:'html':'UTF-8'}">
               <i class="icon-truck"></i>
               {l s='View delivery slip' d='Admin.Orderscustomers.Feature'}
             </a>
+            *}
           {else}
             {* suzy: 2018-09-12 隱藏 X 無出貨單
             <span class="span label label-inactive">
@@ -174,23 +177,27 @@
             </a>
             &nbsp;
           {/if}
+          {* suzy: 2019-12-05 隱藏 部份退款 按鈕
           {if $order->hasInvoice()}
             <a id="desc-order-partial_refund" class="btn btn-default" href="#refundForm">
               <i class="icon-exchange"></i>
               {l s='Partial refund' d='Admin.Orderscustomers.Feature'}
             </a>
           {/if}
+          *}
           {hook h='displayBackOfficeOrderActions' id_order=$order->id|intval}
         </div>
+
         <!-- Tab nav -->
         <ul class="nav nav-tabs" id="tabOrder">
-          {$HOOK_TAB_ORDER}
           <li class="active">
             <a href="#status">
               <i class="icon-time"></i>
               {l s='Status' d='Admin.Global'} <span class="badge">{$history|@count}</span>
             </a>
           </li>
+          {* suzy: 2019-12-05 移動 hook 位置 *}
+          {$HOOK_TAB_ORDER}
           <li>
             <a href="#documents">
               <i class="icon-file-text"></i>
@@ -200,7 +207,6 @@
         </ul>
         <!-- Tab content -->
         <div class="tab-content panel">
-          {$HOOK_CONTENT_ORDER}
           <!-- Tab status -->
           <div class="tab-pane active" id="status">
             <h4 class="visible-print">{l s='Status' d='Admin.Global'} <span class="badge">({$history|@count})</span></h4>
@@ -269,6 +275,8 @@
               </div>
             </form>
           </div>
+          {* suzy: 2019-12-05 移動 hook 位置 *}
+          {$HOOK_CONTENT_ORDER}
           <!-- Tab documents -->
           <div class="tab-pane" id="documents">
             <h4 class="visible-print">{l s='Documents' d='Admin.Orderscustomers.Feature'} <span class="badge">({$order_documents|@count})</span></h4>
@@ -441,7 +449,7 @@
                   <th><span class="title_box ">{l s='Payment method' d='Admin.Orderscustomers.Feature'}</span></th>
                   <th><span class="title_box ">{l s='Transaction ID' d='Admin.Orderscustomers.Feature'}</span></th>
                   <th><span class="title_box ">{l s='Amount' d='Admin.Global'}</span></th>
-                  {* suzy: 2018-09-12 隱藏 發票 <th><span class="title_box ">{l s='Invoice' d='Admin.Global'}</span></th>*}
+                  <th><span class="title_box ">{l s='Invoice' d='Admin.Global'}</span></th>
                   <th></th>
                 </tr>
               </thead>
@@ -452,17 +460,19 @@
                   <td>{$payment->payment_method|escape:'html':'UTF-8'}</td>
                   <td>{$payment->transaction_id|escape:'html':'UTF-8'}</td>
                   <td>{displayPrice price=$payment->amount currency=$payment->id_currency}</td>
-                  {* suzy: 2018-09-12 隱藏 發票 <td>
+                  <td>
                   {if $invoice = $payment->getOrderInvoice($order->id)}
                     {$invoice->getInvoiceNumberFormatted($current_id_lang, $order->id_shop)}
                   {else}
                   {/if}
-                  </td>*}
+                  </td>
                   <td class="actions">
+                    {* suzy: 2019-12-05 隱藏無用按鈕
                     <button class="btn btn-default open_payment_information">
                       <i class="icon-search"></i>
                       {l s='Details' d='Admin.Global'}
                     </button>
+                    *}
                   </td>
                 </tr>
                 <tr class="payment_information" style="display: none;">
@@ -581,7 +591,8 @@
       </div>
       {hook h="displayAdminOrderLeft" id_order=$order->id}
     </div>
-    <div class="col-lg-5">
+    <!-- suzy: 2019-12-05 col-lg-5 改 col-lg-12 -->
+    <div class="col-lg-12">
       <!-- Customer informations -->
       <div class="panel">
         {if $customer->id}
@@ -1144,22 +1155,29 @@
                           </div>
                           <input type="text" name="partialRefundShippingCost" value="0" />
                         </div>
-                        <p class="help-block"><i class="icon-warning-sign"></i> {l
-                            s='(Max %s %s)'
-                            sprintf=[Tools::displayPrice(Tools::ps_round($shipping_refundable, 2), $currency->id) , $smarty.capture.TaxMethod]
-                            d='Admin.Orderscustomers.Feature'
-                            }
-                        </p>
-                      </td>
-                    </tr>
-                    {if ($order->getTaxCalculationMethod() == $smarty.const.PS_TAX_EXC)}
-                    {* suzy: 2018-08-01 隱藏 稅
-                    <tr id="total_taxes">
-                      <td class="text-right">{l s='Taxes' d='Admin.Global'}</td>
-                      <td class="amount text-right nowrap" >{displayPrice price=($order->total_paid_tax_incl-$order->total_paid_tax_excl) currency=$currency->id}</td>
-                      <td class="partial_refund_fields current-edit" style="display:none;"></td>
-                    </tr>
-                    *}
+                          {* suzy: 2018-09-12 隱藏「未稅」
+                          <p class="help-block"><i class="icon-warning-sign"></i> {l
+                             s='(Max %s %s)'
+                             sprintf=[Tools::displayPrice(Tools::ps_round($shipping_refundable, 2), $currency->id) , $smarty.capture.TaxMethod]
+                             d='Admin.Orderscustomers.Feature'
+                             }
+                          </p>*}
+                          <p class="help-block"><i class="icon-warning-sign"></i> {l
+                              s='(Max %s)'
+                              sprintf=[Tools::displayPrice(Tools::ps_round($shipping_refundable, 2), $currency->id)]
+                              d='Admin.Orderscustomers.Feature'
+                              }
+                          </p>
+                        </td>
+                      </tr>
+                      {if ($order->getTaxCalculationMethod() == $smarty.const.PS_TAX_EXC)}
+                      {* suzy: 2018-08-01 隱藏 稅
+                      <tr id="total_taxes">
+                        <td class="text-right">{l s='Taxes' d='Admin.Global'}</td>
+                        <td class="amount text-right nowrap" >{displayPrice price=($order->total_paid_tax_incl-$order->total_paid_tax_excl) currency=$currency->id}</td>
+                        <td class="partial_refund_fields current-edit" style="display:none;"></td>
+                      </tr>
+                      *}
                     {/if}
                     {assign var=order_total_price value=$order->total_paid_tax_incl}
                     <tr id="total_order">

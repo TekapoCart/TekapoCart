@@ -292,7 +292,7 @@ class Ecpay extends PaymentModule
 	    switch ($payment_type) {
             case 'Credit':
                 $order_status = array(
-                    'created' => 27,
+                    'created' => 27, // suzy: 2019-12-06 27 -> 19
                     'succeeded' => 2,
                     'failed' => 8,
                 );
@@ -341,7 +341,7 @@ class Ecpay extends PaymentModule
                 break;
             case 'ATM':
                 $order_status = array(
-                    'created' => 34,
+                    'created' => 20, // suzy: 2019-12-06 34 -> 20
                     'succeeded' => 2,
                     'failed' => 8,
                 );

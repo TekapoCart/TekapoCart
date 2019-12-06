@@ -214,7 +214,7 @@
 						<div class="{if $product['quantity_refundable'] > 0}col-lg-8{else}col-lg-12{/if}">
 							<label class="control-label">
 								<span class="title_box ">{l s='Amount:' d='Admin.Orderscustomers.Feature'}</span>
-								<small class="text-muted">({$smarty.capture.TaxMethod})</small>
+                        		{* suzy: 2018-09-12 隱藏「未稅」<small class="text-muted">({$smarty.capture.TaxMethod})</small>*}
 							</label>
 							<div class="input-group">
 								{if $currencySymbolBeforeAmount}<div class="input-group-addon">{$currency->sign}</div>{/if}

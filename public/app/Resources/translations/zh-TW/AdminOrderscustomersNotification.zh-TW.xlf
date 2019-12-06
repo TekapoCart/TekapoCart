@@ -966,7 +966,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="153c7809e6b00b6cbfa01b8aa9db43e3" approved="yes">
         <source>paid instead of</source>
-        <target xml:lang="zh-TW">已支付，而非應付的</target>
+        <target xml:lang="zh-TW">已付款，而非應付款項</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:407</note>
       </trans-unit>

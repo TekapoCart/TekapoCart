@@ -8,7 +8,7 @@ Hi {firstname} {lastname},
 Shipped
 
 Your order with the reference {order_name} has been shipped.
-Tracking number {tracking_number}。
+Tracking number {tracking_number}
 {extra_info}
 
 You can track your order status via the 「[Order Tracking]({guest_tracking_url})」.
