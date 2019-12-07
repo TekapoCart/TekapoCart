@@ -190,7 +190,7 @@ File: themes/classic/templates/customer/_partials/block-address.tpl:40</note>
       </trans-unit>
       <trans-unit id="06933067aafd48425d67bcb01bba5cb6" approved="yes">
         <source>Update</source>
-        <target xml:lang="zh-TW">更新</target>
+        <target xml:lang="zh-TW">修改</target>
         <note>Context:
 File: themes/classic/templates/customer/_partials/block-address.tpl:36</note>
       </trans-unit>

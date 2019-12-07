@@ -3189,7 +3189,7 @@ File: admin-dev/themes/default/template/controllers/modules_positions/list_modul
     <body>
       <trans-unit id="bcca39c6f36c3085c46429511614b227" approved="yes">
         <source>If enabled, the voucher will not apply to products already on sale.</source>
-        <target xml:lang="zh-TW">若啟用，正在特價的商品將無法套用於此活動。</target>
+        <target xml:lang="zh-TW">正在特價的商品將無法套用於此活動。</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/actions.tpl:145</note>
       </trans-unit>

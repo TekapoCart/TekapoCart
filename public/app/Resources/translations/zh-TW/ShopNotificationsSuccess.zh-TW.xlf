@@ -10,7 +10,7 @@ File: controllers/front/AddressController.php:77</note>
       </trans-unit>
       <trans-unit id="e8699fcc0a32d2a30f1506e3ab4e3c5f" approved="yes">
         <source>Address successfully updated!</source>
-        <target xml:lang="zh-TW">地址已成功更新!</target>
+        <target xml:lang="zh-TW">配送資訊修改成功！</target>
         <note>Context:
 File: controllers/front/AddressController.php:62</note>
       </trans-unit>

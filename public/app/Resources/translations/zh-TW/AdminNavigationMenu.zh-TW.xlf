@@ -454,7 +454,7 @@ File: classes/lang/KeysReference/TabLang.php:112</note>
       </trans-unit>
       <trans-unit id="e836c2a96e7ef38a39afe4be2beddddd" approved="yes">
         <source>SQL Manager</source>
-        <target xml:lang="zh-TW">SQL管理器</target>
+        <target xml:lang="zh-TW">SQL 查詢</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:113</note>
       </trans-unit>

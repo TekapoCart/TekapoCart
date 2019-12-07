@@ -446,7 +446,7 @@ File: controllers/admin/AdminCartRulesController.php:221</note>
       </trans-unit>
       <trans-unit id="7f5ef3543345170784cc954cffa697d6" approved="yes">
         <source>This cart rule code is already used (conflict with cart rule %rulename%)</source>
-        <target xml:lang="zh-TW">此折扣碼已使用（和優惠活動 %rulename% 衝突）</target>
+        <target xml:lang="zh-TW">此折扣碼已使用（和其他活動 %rulename% 衝突）</target>
         <note>Context:
 File: controllers/admin/AdminCartRulesController.php:224</note>
       </trans-unit>
@@ -1014,7 +1014,12 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.htm
   </file>
   <file original="admin-dev/themes/default/template/controllers/cart_rules/actions.tpl" source-language="en" target-language="zh-TW" datatype="plaintext">
     <body>
-      
+      <trans-unit id="e602c06958cd934ccc238913f51282aa" approved="yes">
+        <source>You must select some products before</source>
+        <target xml:lang="zh-TW">套用前需先選擇商品</target>
+        <note>Context:
+File: admin-dev/themes/default/template/controllers/cart_rules/actions.tpl:125</note>
+      </trans-unit>
     </body>
   </file>
   <file original="admin-dev/themes/default/template/controllers/manufacturers/helpers/view/view.tpl" source-language="en" target-language="zh-TW" datatype="plaintext">

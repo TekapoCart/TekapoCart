@@ -1208,7 +1208,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/me
     <body>
       <trans-unit id="822376c59b7b86a05a2519f85f88da55" approved="yes">
         <source>SQL query Name</source>
-        <target xml:lang="zh-TW">SQL 查詢名稱</target>
+        <target xml:lang="zh-TW">名稱</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:52</note>
       </trans-unit>
@@ -1232,7 +1232,7 @@ File: controllers/admin/AdminRequestSqlController.php:98</note>
       </trans-unit>
       <trans-unit id="9b5c3d6674b3af1946fb50faae7079e2" approved="yes">
         <source>SQL query name</source>
-        <target xml:lang="zh-TW">SQL 查詢名稱</target>
+        <target xml:lang="zh-TW">名稱</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:143</note>
       </trans-unit>
