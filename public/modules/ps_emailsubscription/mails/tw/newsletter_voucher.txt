@@ -1,9 +1,0 @@
-
-[{shop_url}] 
-
-您好， 
-
-為了感謝您訂閱我們的電子報，我們很高興為您提供以下優惠卷：
-{discount} 
-
-{shop_name} [{shop_url}]

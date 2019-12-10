@@ -68,7 +68,7 @@ class Ps_Linklist extends Module implements WidgetInterface
     {
         $this->name = 'ps_linklist';
         $this->author = 'PrestaShop';
-        $this->version = '3.0.3';
+        $this->version = '3.0.4';
         $this->need_instance = 0;
         $this->tab = 'front_office_features';
         $this->tabs = [
@@ -109,8 +109,7 @@ class Ps_Linklist extends Module implements WidgetInterface
         if ($installed
             && $this->registerHook('displayFooter')
             && $this->registerHook('actionUpdateLangAfter')
-            && $this->installTab()
-        ) {
+            && $this->installTab()) {
             return true;
         }
 
@@ -192,7 +191,7 @@ class Ps_Linklist extends Module implements WidgetInterface
         foreach (Language::getLanguages(true) as $lang) {
             $tab->name[$lang['id_lang']] = 'Link Widget';
         }
-        $tab->id_parent = (int)Tab::getIdFromClassName('AdminParentThemes');
+        $tab->id_parent = (int) Tab::getIdFromClassName('AdminParentThemes');
         $tab->module = $this->name;
 
         return $tab->add();

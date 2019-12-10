@@ -304,7 +304,7 @@ File: themes/classic/modules/ps_contactinfo/ps_contactinfo-rich.tpl:37</note>
       </trans-unit>
       <trans-unit id="a0bfe0853cf82bdf5dcb9b0bac76c357" approved="yes">
         <source>Email us:</source>
-        <target xml:lang="zh-TW">客服信箱：</target>
+        <target xml:lang="zh-TW">客服信箱</target>
         <note>Context:
 File: themes/classic/modules/ps_contactinfo/ps_contactinfo-rich.tpl:57</note>
       </trans-unit>
