@@ -39,10 +39,11 @@
         </button>
         <div class="dropdown-menu">
             {foreach from=$moduleActions item=action key=key}
-                {* suzy: 2018-11-17 隱藏 重新設定、移除 *}
+                {* suzy: 2018-11-17 隱藏 重設、移除 *}
                 {if $action eq 'reset' or $action eq 'uninstall'}
                     {continue}
                 {/if}
+
                 {if ($action != $module.url_active)
                     && !($module.url_active eq 'configure' && $action eq 'enable')
                     && !($module.url_active eq 'enable' && $action eq 'disable')
@@ -50,8 +51,8 @@
                     && !($module.url_active eq 'disable' && $action eq 'configure')
                     && !(!$module.can_configure && $action eq 'configure')
                     && !($action eq 'install')
-                    && !($action eq 'uninstall' && $is_ps_ready)
-                    && !($action eq 'install' && $is_ps_ready)
+                    && !($action eq 'uninstall' && $isPsReady)
+                    && !($action eq 'install' && $isPsReady)
                 }
                 <li>
                     <div data-action="{$action}" data-module_name="{$module.name}" data-module_displayname="{$module.displayName}">
