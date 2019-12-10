@@ -42,9 +42,9 @@ class DoctrineExtractor implements PropertyListExtractorInterface, PropertyTypeE
         try {
             $metadata = $this->classMetadataFactory->getMetadataFor($class);
         } catch (MappingException $exception) {
-            return;
+            return null;
         } catch (OrmMappingException $exception) {
-            return;
+            return null;
         }
 
         $properties = array_merge($metadata->getFieldNames(), $metadata->getAssociationNames());
@@ -68,9 +68,9 @@ class DoctrineExtractor implements PropertyListExtractorInterface, PropertyTypeE
         try {
             $metadata = $this->classMetadataFactory->getMetadataFor($class);
         } catch (MappingException $exception) {
-            return;
+            return null;
         } catch (OrmMappingException $exception) {
-            return;
+            return null;
         }
 
         if ($metadata->hasAssociation($property)) {
@@ -162,12 +162,12 @@ class DoctrineExtractor implements PropertyListExtractorInterface, PropertyTypeE
                     return $builtinType ? [new Type($builtinType, $nullable)] : null;
             }
         }
+
+        return null;
     }
 
     /**
      * Determines whether an association is nullable.
-     *
-     * @param array $associationMapping
      *
      * @return bool
      *
@@ -227,5 +227,7 @@ class DoctrineExtractor implements PropertyListExtractorInterface, PropertyTypeE
             case DBALType::OBJECT:
                 return Type::BUILTIN_TYPE_OBJECT;
         }
+
+        return null;
     }
 }

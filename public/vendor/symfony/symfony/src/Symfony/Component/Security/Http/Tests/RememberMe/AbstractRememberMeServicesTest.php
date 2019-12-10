@@ -40,10 +40,11 @@ class AbstractRememberMeServicesTest extends TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * @group legacy
      */
     public function testAutoLoginThrowsExceptionWhenImplementationDoesNotReturnUserInterface()
     {
+        $this->expectException('RuntimeException');
         $service = $this->getService(null, ['name' => 'foo', 'path' => null, 'domain' => null]);
         $request = new Request();
         $request->cookies->set('foo', 'foo');
@@ -51,7 +52,7 @@ class AbstractRememberMeServicesTest extends TestCase
         $service
             ->expects($this->once())
             ->method('processAutoLoginCookie')
-            ->will($this->returnValue(null))
+            ->willReturn(null)
         ;
 
         $service->autoLogin($request);
@@ -67,13 +68,13 @@ class AbstractRememberMeServicesTest extends TestCase
         $user
             ->expects($this->once())
             ->method('getRoles')
-            ->will($this->returnValue([]))
+            ->willReturn([])
         ;
 
         $service
             ->expects($this->once())
             ->method('processAutoLoginCookie')
-            ->will($this->returnValue($user))
+            ->willReturn($user)
         ;
 
         $returnedToken = $service->autoLogin($request);
@@ -126,12 +127,11 @@ class AbstractRememberMeServicesTest extends TestCase
         $service = $this->getService(null, ['name' => 'foo', 'always_remember_me' => true, 'path' => null, 'domain' => null]);
         $request = new Request();
         $response = new Response();
-        $account = $this->getMockBuilder('Symfony\Component\Security\Core\User\UserInterface')->getMock();
         $token = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\TokenInterface')->getMock();
         $token
             ->expects($this->once())
             ->method('getUser')
-            ->will($this->returnValue('foo'))
+            ->willReturn('foo')
         ;
 
         $service
@@ -154,13 +154,13 @@ class AbstractRememberMeServicesTest extends TestCase
         $token
             ->expects($this->once())
             ->method('getUser')
-            ->will($this->returnValue($account))
+            ->willReturn($account)
         ;
 
         $service
             ->expects($this->never())
             ->method('onLoginSuccess')
-            ->will($this->returnValue(null))
+            ->willReturn(null)
         ;
 
         $this->assertFalse($request->request->has('foo'));
@@ -178,13 +178,13 @@ class AbstractRememberMeServicesTest extends TestCase
         $token
             ->expects($this->once())
             ->method('getUser')
-            ->will($this->returnValue($account))
+            ->willReturn($account)
         ;
 
         $service
             ->expects($this->once())
             ->method('onLoginSuccess')
-            ->will($this->returnValue(null))
+            ->willReturn(null)
         ;
 
         $service->loginSuccess($request, $response, $token);
@@ -205,13 +205,13 @@ class AbstractRememberMeServicesTest extends TestCase
         $token
             ->expects($this->once())
             ->method('getUser')
-            ->will($this->returnValue($account))
+            ->willReturn($account)
         ;
 
         $service
             ->expects($this->once())
             ->method('onLoginSuccess')
-            ->will($this->returnValue(true))
+            ->willReturn(true)
         ;
 
         $service->loginSuccess($request, $response, $token);
@@ -232,13 +232,13 @@ class AbstractRememberMeServicesTest extends TestCase
         $token
             ->expects($this->once())
             ->method('getUser')
-            ->will($this->returnValue($account))
+            ->willReturn($account)
         ;
 
         $service
             ->expects($this->once())
             ->method('onLoginSuccess')
-            ->will($this->returnValue(true))
+            ->willReturn(true)
         ;
 
         $service->loginSuccess($request, $response, $token);
@@ -261,18 +261,16 @@ class AbstractRememberMeServicesTest extends TestCase
         $service = $this->getService();
 
         $encoded = $this->callProtected($service, 'encodeCookie', [$cookieParts]);
-        $this->assertInternalType('string', $encoded);
+        $this->assertIsString($encoded);
 
         $decoded = $this->callProtected($service, 'decodeCookie', [$encoded]);
         $this->assertSame($cookieParts, $decoded);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage cookie delimiter
-     */
     public function testThereShouldBeNoCookieDelimiterInCookieParts()
     {
+        $this->expectException('InvalidArgumentException');
+        $this->expectExceptionMessage('cookie delimiter');
         $cookieParts = ['aa', 'b'.AbstractRememberMeServices::COOKIE_DELIMITER.'b', 'cc'];
         $service = $this->getService();
 
@@ -296,7 +294,7 @@ class AbstractRememberMeServicesTest extends TestCase
         $provider
             ->expects($this->any())
             ->method('supportsClass')
-            ->will($this->returnValue(true))
+            ->willReturn(true)
         ;
 
         return $provider;

@@ -137,6 +137,7 @@ EOF
         $options['show_arguments'] = $input->getOption('show-arguments');
         $options['raw_text'] = $input->getOption('raw');
         $options['output'] = $io;
+        $options['is_debug'] = $this->getApplication()->getKernel()->isDebug();
         $helper->describe($io, $object, $options);
 
         if (!$input->getArgument('name') && !$input->getOption('tag') && !$input->getOption('parameter') && $input->isInteractive()) {
@@ -193,6 +194,7 @@ EOF
             $buildContainer = \Closure::bind(function () { return $this->buildContainer(); }, $kernel, \get_class($kernel));
             $container = $buildContainer();
             $container->getCompilerPassConfig()->setRemovingPasses([]);
+            $container->getCompilerPassConfig()->setAfterRemovingPasses([]);
             $container->compile();
         } else {
             (new XmlFileLoader($container = new ContainerBuilder(), new FileLocator()))->load($kernel->getContainer()->getParameter('debug.container.dump'));

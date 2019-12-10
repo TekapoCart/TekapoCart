@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\SchemaTool;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -53,7 +54,7 @@ class EntityTypeTest extends BaseTypeTest
     private $em;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ManagerRegistry
+     * @var MockObject|ManagerRegistry
      */
     private $emRegistry;
 
@@ -115,19 +116,15 @@ class EntityTypeTest extends BaseTypeTest
         // be managed!
     }
 
-    /**
-     * @expectedException \Symfony\Component\OptionsResolver\Exception\MissingOptionsException
-     */
     public function testClassOptionIsRequired()
     {
+        $this->expectException('Symfony\Component\OptionsResolver\Exception\MissingOptionsException');
         $this->factory->createNamed('name', static::TESTED_TYPE);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Form\Exception\RuntimeException
-     */
     public function testInvalidClassOption()
     {
+        $this->expectException('Symfony\Component\Form\Exception\RuntimeException');
         $this->factory->createNamed('name', static::TESTED_TYPE, null, [
             'class' => 'foo',
         ]);
@@ -187,23 +184,19 @@ class EntityTypeTest extends BaseTypeTest
         $this->assertEquals([1 => new ChoiceView($entity1, '1', 'Foo'), 2 => new ChoiceView($entity2, '2', 'Bar')], $view->vars['choices']);
     }
 
-    /**
-     * @expectedException \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
-     */
     public function testConfigureQueryBuilderWithNonQueryBuilderAndNonClosure()
     {
-        $field = $this->factory->createNamed('name', static::TESTED_TYPE, null, [
+        $this->expectException('Symfony\Component\OptionsResolver\Exception\InvalidOptionsException');
+        $this->factory->createNamed('name', static::TESTED_TYPE, null, [
             'em' => 'default',
             'class' => self::SINGLE_IDENT_CLASS,
             'query_builder' => new \stdClass(),
         ]);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Form\Exception\UnexpectedTypeException
-     */
     public function testConfigureQueryBuilderWithClosureReturningNonQueryBuilder()
     {
+        $this->expectException('Symfony\Component\Form\Exception\UnexpectedTypeException');
         $field = $this->factory->createNamed('name', static::TESTED_TYPE, null, [
             'em' => 'default',
             'class' => self::SINGLE_IDENT_CLASS,
@@ -848,7 +841,8 @@ class EntityTypeTest extends BaseTypeTest
         ]);
 
         $this->assertEquals([3 => new ChoiceView($entity3, '3', 'Baz'), 2 => new ChoiceView($entity2, '2', 'Bar')], $field->createView()->vars['preferred_choices']);
-        $this->assertEquals([1 => new ChoiceView($entity1, '1', 'Foo')], $field->createView()->vars['choices']);
+        $this->assertArrayHasKey(1, $field->createView()->vars['choices']);
+        $this->assertEquals(new ChoiceView($entity1, '1', 'Foo'), $field->createView()->vars['choices'][1]);
     }
 
     public function testOverrideChoicesWithPreferredChoices()
@@ -868,7 +862,8 @@ class EntityTypeTest extends BaseTypeTest
         ]);
 
         $this->assertEquals([3 => new ChoiceView($entity3, '3', 'Baz')], $field->createView()->vars['preferred_choices']);
-        $this->assertEquals([2 => new ChoiceView($entity2, '2', 'Bar')], $field->createView()->vars['choices']);
+        $this->assertArrayHasKey(2, $field->createView()->vars['choices']);
+        $this->assertEquals(new ChoiceView($entity2, '2', 'Bar'), $field->createView()->vars['choices'][2]);
     }
 
     public function testDisallowChoicesThatAreNotIncludedChoicesSingleIdentifier()
@@ -1087,7 +1082,7 @@ class EntityTypeTest extends BaseTypeTest
         $this->emRegistry->expects($this->once())
             ->method('getManagerForClass')
             ->with(self::SINGLE_IDENT_CLASS)
-            ->will($this->returnValue($this->em));
+            ->willReturn($this->em);
 
         $this->factory->createNamed('name', static::TESTED_TYPE, null, [
             'class' => self::SINGLE_IDENT_CLASS,
@@ -1237,7 +1232,7 @@ class EntityTypeTest extends BaseTypeTest
         $registry->expects($this->any())
             ->method('getManager')
             ->with($this->equalTo($name))
-            ->will($this->returnValue($em));
+            ->willReturn($em);
 
         return $registry;
     }
@@ -1461,7 +1456,7 @@ class EntityTypeTest extends BaseTypeTest
         ]);
         $form->setData($emptyArray);
         $form->submit(null);
-        $this->assertInternalType('array', $form->getData());
+        $this->assertIsArray($form->getData());
         $this->assertEquals([], $form->getData());
         $this->assertEquals([], $form->getNormData());
         $this->assertSame([], $form->getViewData(), 'View data is always an array');
@@ -1479,7 +1474,7 @@ class EntityTypeTest extends BaseTypeTest
         $existing = [0 => $entity1];
         $form->setData($existing);
         $form->submit(null);
-        $this->assertInternalType('array', $form->getData());
+        $this->assertIsArray($form->getData());
         $this->assertEquals([], $form->getData());
         $this->assertEquals([], $form->getNormData());
         $this->assertSame([], $form->getViewData(), 'View data is always an array');
