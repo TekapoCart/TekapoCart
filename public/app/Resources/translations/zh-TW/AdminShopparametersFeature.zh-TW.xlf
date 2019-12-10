@@ -1603,7 +1603,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="7dbe88f99044a2b7e37ae992b8651be4" approved="yes">
         <source>Products (general)</source>
-        <target xml:lang="zh-TW">產品 (一般)</target>
+        <target xml:lang="zh-TW">商品 (一般)</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_general.html.twig:31</note>
       </trans-unit>
@@ -1643,7 +1643,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="eb763a2e313718f33f55e1f0d84df6ee" approved="yes">
         <source>Product page</source>
-        <target xml:lang="zh-TW">商品頁面</target>
+        <target xml:lang="zh-TW">商品頁</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_page.html.twig:31</note>
       </trans-unit>
@@ -1655,13 +1655,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="a2ab7db4ee7104a693358c0c9d07c6ce" approved="yes">
         <source>Display unavailable product attributes on the product page</source>
-        <target xml:lang="zh-TW">在商品頁面上顯示售完的商品屬性</target>
+        <target xml:lang="zh-TW">在商品頁上顯示售完的商品屬性</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_page.html.twig:49</note>
       </trans-unit>
       <trans-unit id="01dabe7ae47f9848c5e38f353a8f866f" approved="yes">
         <source>Display the "add to cart" button when a product has attributes</source>
-        <target xml:lang="zh-TW">產品有屬性時顯示 "加入到購物車" 按鈕</target>
+        <target xml:lang="zh-TW">商品有屬性時顯示「加入到購物車」按鈕</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_page.html.twig:55</note>
       </trans-unit>

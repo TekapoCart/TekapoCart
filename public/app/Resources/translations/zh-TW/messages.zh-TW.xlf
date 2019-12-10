@@ -409,13 +409,13 @@ File: modules/ps_themecusto/controllers/admin/AdminPsThemeCustoConfiguration.php
 File: modules/ps_themecusto/controllers/admin/AdminPsThemeCustoConfiguration.php:41</note>
       </trans-unit>
       <trans-unit id="038bd38b5172a9ba90468070bdc4d4f3" approved="yes">
-        <source>Disable Mobile</source>
-        <target xml:lang="zh-TW">只停用手機版</target>
+        <source>Disable mobile</source>
+        <target xml:lang="zh-TW">停用手機版</target>
         <note>Context:
 File: modules/ps_themecusto/controllers/admin/AdminPsThemeCustoConfiguration.php:43</note>
       </trans-unit>
       <trans-unit id="8b1a3613ac33a07ab788b2656755110c" approved="yes">
-        <source>Enable Mobile</source>
+        <source>Enable mobile</source>
         <target xml:lang="zh-TW">啟用手機版</target>
         <note>Context:
 File: modules/ps_themecusto/controllers/admin/AdminPsThemeCustoConfiguration.php:44</note>

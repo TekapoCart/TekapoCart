@@ -268,6 +268,11 @@ File: modules/ps_facetedsearch/views/templates/admin/add.tpl:409</note>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:206</note>
       </trans-unit>
+      <trans-unit id="fc11f4442332d8b86f01335df9d28444" approved="yes">
+        <source>Build attributes and features indexes</source>
+        <target xml:lang="zh-TW">重建屬性＆規格索引</target>
+        <note>Line: 36</note>
+      </trans-unit>
       <trans-unit id="1f0f8b59397f34d499b181297714713a" approved="yes">
         <source>Warning! Your hosting provider is using the Suhosin patch for PHP, which limits the maximum number of fields allowed in a form:</source>
         <target xml:lang="zh-TW">警告: 您的主機服務提供廠商使用Suhosin的PHP修補, 這會限制表格中欄位的最大數字</target>
@@ -316,9 +321,14 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:19</note>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:21</note>
       </trans-unit>
+      <trans-unit id="79c0d6cba080dc90b01c887064c9fc2f" approved="yes">
+        <source>Clear cache</source>
+        <target xml:lang="zh-TW">清除快取</target>
+        <note>Line: 37</note>
+      </trans-unit>
       <trans-unit id="df2bbc994d10995dcffdf96dbb7acbb1" approved="yes">
         <source>Indexes and caches</source>
-        <target xml:lang="zh-TW">索引和緩存</target>
+        <target xml:lang="zh-TW">索引和快取</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:25</note>
       </trans-unit>
@@ -327,6 +337,11 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:25</note>
         <target xml:lang="zh-TW">建立索引中。請不要離開此頁面。</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:27</note>
+      </trans-unit>
+      <trans-unit id="5e2420d2318025812dc3e231ddb66b0b" approved="yes">
+        <source>Index all missing prices</source>
+        <target xml:lang="zh-TW">索引尚未入列的價格</target>
+        <note>Line: 34</note>
       </trans-unit>
       <trans-unit id="9612e005e96ad32b8830be4d0377e7e6" approved="yes">
         <source>Rebuild entire price index</source>
@@ -354,7 +369,7 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:43</note>
       </trans-unit>
       <trans-unit id="16349835364cf839e6670b0de7da6362" approved="yes">
         <source>A nightly rebuild is recommended.</source>
-        <target xml:lang="zh-TW">建議每晚重建。</target>
+        <target xml:lang="zh-TW">當商品有異動時可執行重建動作</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:49</note>
       </trans-unit>
@@ -456,7 +471,7 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:202</note>
       </trans-unit>
       <trans-unit id="7cf7d150dd287df0a8e17eeb4cf2161d" approved="yes">
         <source>(in progress, %s products price to index)</source>
-        <target xml:lang="zh-TW">（進行中，%s商品價格等待索引）</target>
+        <target xml:lang="zh-TW">（進行中，%s 商品價格索引中）</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:203</note>
       </trans-unit>

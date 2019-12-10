@@ -87,7 +87,8 @@
             {else}
                 <p class="alert-text">{l s='By using this method you can override the CSS and html of your theme, and add analytics tags.' mod='ps_themecusto'}</p>
             {/if}
-            <p class="alert-text">{l s='Once uploaded, the child theme will be available in your Theme & Logo section' mod='ps_themecusto'}</p>
+            {* suzy: 2018-08-21 沒空研究為何中文出不來 <p class="alert-text">{l s='Once uploaded, the child theme will be available in your Theme & Logo section' mod='ps_themecusto'}</p>*}
+            <p class="alert-text">當上傳完畢，您的「子佈景」將會出現在「佈景主題＆Logo」。</p>
         </div>
         {include file="./elem/modal.tpl"}
     </div>

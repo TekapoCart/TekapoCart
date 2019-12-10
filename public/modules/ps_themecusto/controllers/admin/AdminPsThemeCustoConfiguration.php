@@ -59,19 +59,20 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             'banner' => $this->l('Banner'),
             'social_newsletter' => $this->l('Social &  Newsletter'),
             'footer' => $this->l('Footer'),
-            'content' => $this->l('content'),
-            'categories' => $this->l('Categories'),
-            'navigation_column' => $this->l('Navigation column'),
-            'product_management' => $this->l('Product management'),
-            'product_detail' => $this->l('Product detail'),
-            'product_block' => $this->l('Product block'),
 
-            // suzy: 2018-08-21 加入其他佈景模組
-            'side'               => '左側欄',
-            'product_additional' => '商品頁 額外資訊',
-            'product_footer'     => '商品頁 頁尾',
-            'cart'               => '結帳頁',
-            'self'               => '獨立頁',
+            // suzy: 2019-12-10 中文翻譯
+            // 'content' => $this->l('content'),
+            // 'categories' => $this->l('Categories'),
+            // 'navigation_column' => $this->l('Navigation column'),
+            // 'product_management' => $this->l('Product management'),
+            // 'product_detail' => $this->l('Product detail'),
+            // 'product_block' => $this->l('Product block'),
+            'content' => '商品區塊',
+            'categories' => '分類',
+            'navigation_column' => '左側欄',
+            'product_management' => '商品',
+            'product_detail' => '商品額外資訊',
+            'product_block' => '推薦商品',
 
         );
     }
@@ -89,6 +90,8 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             $footerModules = array(
                 'blockreassurance' => 22312,
                 'ps_linklist' => 24360,
+                // suzy: 2018-08-21 新增 simplicity_footerbar
+                'simplicity_footerbar' => 0,
             );
         } else {
             $footerModules = array(
@@ -99,6 +102,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
         return array(
             'menu' => array(
                 'pages' => array(
+                    /* suzy: 2018-08-26 隱藏 分類、自訂頁面、品牌
                     'AdminCategories' => array(
                         $this->l('Categories'),
                         $this->l('Create here a full range of categories and subcategories to classify your products and manage your catalog easily.'),
@@ -111,9 +115,15 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                         $this->l('Brands and Suppliers'),
                         $this->l('Manage both your brands and suppliers at the same place !'),
                     ),
+                    */
                 ),
                 'modules' => array(
+                    // suzy: 2018-08-21 新增 ps_customersignin、simplicity_sociallogin、simplicity_headerbar
+                    'simplicity_headerbar' => 0,
+                    'simplicity_logo' => 0,
                     'ps_mainmenu' => 22321,
+                    'ps_customersignin' => 0,
+                    'simplicity_sociallogin' => 0,
                 ),
             ),
             'slider' => array(
@@ -132,6 +142,8 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             'block_text' => array(
                 'modules' => array(
                     'ps_customtext' => 22317,
+                    // suzy: 2018-08-21 新增 simplicity_cmsblock
+                    'simplicity_cmsblock' => 0,
                 ),
             ),
             'banner' => array(
@@ -147,12 +159,14 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             ),
             'footer' => array(
                 'modules' => $footerModules,
+                /* suzy: 2018-09-06 隱藏 聯絡資訊
                 'pages' => array(
                     'AdminStores' => array(
                         $this->l('Shop details'),
                         $this->l('Display additional information about your store or how to contact you to make it easy for your customers to reach you.'),
                     ),
                 ),
+                */
             ),
         );
     }
@@ -170,18 +184,24 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             $category = array(
                 'sfRoutePages' => array(
                     'admin_product_preferences' => array(
-                        $this->l('Pagination'),
-                        $this->l('Set the numbers of products you want to display per page and how.'),
+                        // suzy: 2019-12-10 中文翻譯
+                        // $this->l('Pagination'),
+                        // $this->l('Set the numbers of products you want to display per page and how.'),
+                        '進階設定',
+                        '商品全域設定',
                     ),
                 ),
             );
             $footerModules = array(
                 'blockreassurance' => 22312,
                 'ps_linklist' => 24360,
+                // suzy: 2018-08-21 新增 simplicity_footerbar
+                'simplicity_footerbar' => 0,
             );
 
             $menu = array(
                 'pages' => array(
+                    /* suzy: 2018-08-26 隱藏 自訂頁面、品牌
                     'AdminCmsContent' => array(
                         $this->l('Content pages'),
                         $this->l('Add and manage your content pages to make your store interesting and trustworthy.'),
@@ -190,9 +210,15 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                         $this->l('Brands and Suppliers'),
                         $this->l('Manage both your brands and suppliers at the same place !'),
                     ),
+                    */
                 ),
                 'modules' => array(
+                    // suzy: 2018-08-21 新增 ps_customersignin、simplicity_sociallogin、simplicity_headerbar
+                    'simplicity_headerbar' => 0,
+                    'simplicity_logo' => 0,
                     'ps_mainmenu' => 22321,
+                    'ps_customersignin' => 0,
+                    'simplicity_sociallogin' => 0,
                 ),
             );
         } else {
@@ -231,7 +257,9 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 'pages' => array(
                     'AdminCategories' => array(
                         $this->l('Categories'),
-                        $this->l('Create a full range of Categories and Subcategories to classify your products, add categoryies desciptions and manage your catalog easily.'),
+                        // suzy: 2019-12-10 文字翻譯
+                        // $this->l('Create a full range of Categories and Subcategories to classify your products, add categoryies desciptions and manage your catalog easily.'),
+                        '新增、修改、刪除、排序 商品分類、次分類'
                     ),
                 ),
             ),
@@ -250,12 +278,14 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             ),
             'footer' => array(
                 'modules' => $footerModules,
+                /* suzy: 2018-09-06 隱藏 聯絡資訊
                 'pages' => array(
                     'AdminStores' => array(
                         $this->l('Shop details'),
                         $this->l('Display additional information about your store or how to contact you to make it easy for your customers to reach you.'),
                     ),
                 ),
+                */
             ),
         );
     }
@@ -274,19 +304,25 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 'sfRoutePages' => array(
                     'admin_product_catalog' => array(
                         $this->l('Catalog'),
-                        $this->l('Access your list of products to manage your catalog efficiently.'),
+                        // suzy: 2019-12-10 中文翻譯
+                        // $this->l('Access your list of products to manage your catalog efficiently.'),
+                        '新增、修改、刪除、排序 商品內容、商品圖片'
                     ),
+                    /* suzy: 2019-12-10 隱藏 Stock
                     'admin_stock_overview' => array(
                         $this->l('Stock'),
                         $this->l('Manage your stock and edit product quantities right here.'),
                     ),
+                    */
                 ),
+                /* suzy: 2019-12-10 隱藏 Product attributes
                 'pages' => array(
                     'AdminAttributesGroups' => array(
                         $this->l('Product attributes'),
                         $this->l('Create or manage your attributes : colors, sizes, materials, ...'),
                     ),
                 ),
+                */
             );
             $productDetailsModules = array(
                 'blockreassurance' => 22312,
@@ -326,6 +362,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
         return array(
             'menu' => array(
                 'pages' => array(
+                    /* suzy: 2018-08-26 隱藏 分類、自訂頁面、品牌
                     'AdminCategories' => array(
                         $this->l('Categories'),
                         $this->l('Create here a full range of categories and subcategories to classify your products and manage your catalog easily.'),
@@ -338,9 +375,15 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                         $this->l('Brands and Suppliers'),
                         $this->l('Manage both your brands and suppliers at the same place !'),
                     ),
+                     */
                 ),
                 'modules' => array(
+                    // suzy: 2018-08-21 新增 ps_customersignin、simplicity_sociallogin、simplicity_headerbar
+                    'simplicity_headerbar' => 0,
+                    'simplicity_logo' => 0,
                     'ps_mainmenu' => 22321,
+                    'ps_customersignin' => 0,
+                    'simplicity_sociallogin' => 0,
                 ),
             ),
             'product_management' => $productManagement,
@@ -361,14 +404,18 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 ),
             ),
             'footer' => array(
+                /* suzy: 2018-09-06 隱藏 聯絡資訊
                 'pages' => array(
                     'AdminStores' => array(
                         $this->l('Shop details'),
                         $this->l('Display additional information about your store or how to contact you to make it easy for your customers to reach you.'),
                     ),
                 ),
+                */
                 'modules' => array(
                     'ps_linklist' => 24360,
+                    // suzy: 2018-08-21 新增 simplicity_footerbar
+                    'simplicity_footerbar' => 0,
                 ),
             ),
         );
@@ -444,6 +491,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
         $sUrlActive = $oModule->isEnabled($oModule->name) ? 'configure' : 'enable';
 
         switch ($sModuleAction) {
+            /* suzy: 2018-11-17 不可 uninstall (移除)
             case 'uninstall':
                 if ($this->module->ready === true) {
                     break;
@@ -451,6 +499,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 $oModule->uninstall();
                 $sUrlActive = 'install';
             break;
+            */
             case 'install':
                 if ($this->module->ready === true) {
                     break;
@@ -474,11 +523,13 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 $oModule->enableDevice(Context::DEVICE_MOBILE);
                 $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
             break;
+            /* suzy: 2018-11-17 不可 reset (重新設定)
             case 'reset':
                 $oModule->uninstall();
                 $oModule->install();
                 $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
             break;
+            */
             default:
                 die(0);
             break;
