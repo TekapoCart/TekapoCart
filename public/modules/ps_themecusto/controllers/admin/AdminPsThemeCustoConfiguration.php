@@ -149,6 +149,8 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             'banner' => array(
                 'modules' => array(
                     'ps_banner' => 22313,
+                    // suzy: 2019-12-11 新增 simplicity_igfeed
+                    'simplicity_igfeed' => 0,
                 ),
             ),
             'social_newsletter' => array(

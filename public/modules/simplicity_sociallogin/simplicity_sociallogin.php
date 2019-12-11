@@ -52,29 +52,50 @@ class Simplicity_Sociallogin extends Module
 
     /////// HOOK ////////////////////////////////////////////////////////////////////
 
-    public function hookHeader($params)
+    public function getFbLoginUrl()
     {
-        $this->context->controller->addJS(($this->_path) . 'facebook.js', 'all');
-        $this->context->controller->addCSS(($this->_path) . 'facebook.css', 'all');
+        session_start();
+        $fb = new Facebook\Facebook([
+            'app_id' => Configuration::get('SIMPLICITY_FB_APP_ID'),
+            'app_secret' => Configuration::get('SIMPLICITY_FB_APP_SECRET'),
+            'default_graph_version' => 'v5.0',
+        ]);
 
-        $this->smarty->assign('simplicity_fb_app_id', Configuration::get('SIMPLICITY_FB_APP_ID'));
-        return $this->display(__FILE__, 'hook-header.tpl');
+        $helper = $fb->getRedirectLoginHelper();
+
+        $permissions = ['email']; // Optional permissions
+        $loginUrl = $helper->getLoginUrl(Context::getContext()->shop->getBaseURL(true) . 'modules/simplicity_sociallogin/fb-callback.php', $permissions);
+
+        return $loginUrl;
+
+    }
+
+    public function hookHeader()
+    {
+        $this->context->controller->addCSS(($this->_path) . 'facebook.css', 'all');
     }
 
 
-    public function hookDisplayCustomerLoginLink($params)
+    public function hookDisplayCustomerLoginLink()
     {
+        // $_SESSION['callback_return_url'] = $this->context->link->getPageLink('my-account');
+        $_SESSION['callback_return_url'] = _PS_BASE_URL_SSL_ . $_SERVER['REQUEST_URI'];
+
+        $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
         return $this->display(__FILE__, 'hook-login.tpl');
     }
 
-    public function hookDisplayCheckoutStepOneNotLogged($params)
+    public function hookDisplayCheckoutStepOneNotLogged()
     {
+        $_SESSION['callback_return_url'] = $this->context->link->getPageLink('order');
+
+        $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
         return $this->display(__FILE__, 'hook-checkout.tpl');
     }
 
     /////////////////////////////////////////////////////////////////////////////////
 
-    public function callback($post)
+    public function fbCallback($post)
     {
 
         if (!isset ($post['email'])) {
@@ -98,9 +119,9 @@ class Simplicity_Sociallogin extends Module
             $this->socialAdd($social_id, $customer_id);
         }
 
-        $this->login($customer_id);
-
         $this->updateCustomerIdBySocialId($social_id, $customer_id);
+
+        $this->login($customer_id);
     }
 
     public function getCustomerIdByEmail($email)
@@ -201,20 +222,6 @@ class Simplicity_Sociallogin extends Module
         CartRule::autoRemoveFromCart($this->context);
         CartRule::autoAddToCart($this->context);
 
-        $returnUrl = '';
-        if (Tools::getValue('back')) {
-
-            if (Validate::isAbsoluteUrl(Tools::getValue('back'))) {
-                $returnUrl = Tools::getValue('back');
-            } else {
-                $returnUrl = $this->context->link->getPageLink(Tools::getValue('back'));
-            }
-        }
-
-        echo json_encode([
-            'error' => false,
-            'returnUrl' => $returnUrl,
-        ]);
     }
 
     public function updateCustomerIdBySocialId($social_id, $customer_id)
@@ -231,6 +238,7 @@ class Simplicity_Sociallogin extends Module
     {
         if (Tools::isSubmit('submitModule')) {
             Configuration::updateValue('SIMPLICITY_FB_APP_ID', Tools::getValue('app_id', ''));
+            Configuration::updateValue('SIMPLICITY_FB_APP_SECRET', Tools::getValue('app_secret', ''));
 
             return $this->displayConfirmation($this->trans('The settings have been updated.', array(), 'Admin.Notifications.Success'))
                 . $this->renderForm();
@@ -252,6 +260,12 @@ class Simplicity_Sociallogin extends Module
                         'type' => 'text',
                         'label' => 'Facebook APP ID',
                         'name' => 'app_id',
+                        'desc' => '',
+                    ),
+                    array(
+                        'type' => 'text',
+                        'label' => 'Facebook APP Secret',
+                        'name' => 'app_secret',
                         'desc' => '',
                     ),
                 ),
@@ -283,6 +297,7 @@ class Simplicity_Sociallogin extends Module
     {
         return array(
             'app_id' => Tools::getValue('fb_app_id', Configuration::get('SIMPLICITY_FB_APP_ID')),
+            'app_secret' => Tools::getValue('fb_app_id', Configuration::get('SIMPLICITY_FB_APP_SECRET')),
         );
     }
 
