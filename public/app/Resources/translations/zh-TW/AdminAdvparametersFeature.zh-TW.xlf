@@ -98,7 +98,7 @@ File: controllers/admin/AdminEmailsController.php:126</note>
       </trans-unit>
       <trans-unit id="c098053744ce979cbd030908105d54fe" approved="yes">
         <source>Mail domain name</source>
-        <target xml:lang="zh-TW">信件域名</target>
+        <target xml:lang="zh-TW">寄件者（選填）</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:138</note>
       </trans-unit>
@@ -122,7 +122,7 @@ File: controllers/admin/AdminEmailsController.php:157</note>
       </trans-unit>
       <trans-unit id="d7f2615c71a1567cc13cf3a7f7de0aea" approved="yes">
         <source>Encryption</source>
-        <target xml:lang="zh-TW">加密</target>
+        <target xml:lang="zh-TW">加密格式</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:164</note>
       </trans-unit>

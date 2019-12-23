@@ -206,6 +206,9 @@ class MailCore extends ObjectModel
                 'PS_MAIL_SMTP_ENCRYPTION',
                 'PS_MAIL_SMTP_PORT',
                 'PS_MAIL_TYPE',
+
+                // suzy: 2019-12-22 AWS SES 比較特殊，設定 from
+                'PS_MAIL_DOMAIN',
             ],
             null,
             null,
@@ -240,6 +243,11 @@ class MailCore extends ObjectModel
 
         if (!isset($configuration['PS_MAIL_SMTP_PORT'])) {
             $configuration['PS_MAIL_SMTP_PORT'] = 'default';
+        }
+
+        // suzy: 2019-12-22 AWS SES 比較特殊，設定 from
+        if (strpos($configuration['PS_MAIL_SERVER'], 'amazonaws.com') !== false) {
+            $from = $configuration['PS_MAIL_DOMAIN'];
         }
 
         /*
@@ -487,7 +495,9 @@ class MailCore extends ObjectModel
             $message->setId(Mail::generateId());
 
             if (!($replyTo && Validate::isEmail($replyTo))) {
-                $replyTo = $from;
+                // suzy: 2019-12-22 replyTo 改成一律使用商店 E-Mail
+                // $replyTo = $from;
+                $replyTo = $configuration['PS_SHOP_EMAIL'];
             }
 
             if (isset($replyTo) && $replyTo) {

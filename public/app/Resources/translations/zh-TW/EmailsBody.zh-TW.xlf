@@ -1352,7 +1352,7 @@
       </trans-unit>
       <trans-unit id="25a836f644cf544e8dee516a0a842965" approved="yes">
         <source>Adding our email address as a contact to ensure all messages are delivered to your Inbox.</source>
-        <target xml:lang="zh-TW">為了確保能收到信件，請將此信箱加入通訊錄。</target>
+        <target xml:lang="zh-TW">為了確保能收到信件，可將此信箱加入通訊錄。</target>
         <note>Line: 245</note>
       </trans-unit>
       <trans-unit id="b0faef9417304909de0960b57582cd1c" approved="yes">
