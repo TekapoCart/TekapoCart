@@ -2,6 +2,11 @@
 
 -- Paypal
 
+-- ps_hook_module （98: paypal、44:actionOrderSlipAdd）
+INSERT INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('98', '1', '44', '1');
+
+
+
 INSERT INTO `ps_configuration` (`id_configuration`, `id_shop_group`, `id_shop`, `name`, `value`, `date_add`, `date_upd`) VALUES (NULL, NULL, NULL, 'PAYPAL_REQUIREMENTS', '0', '2019-10-08 15:05:37', '2019-10-08 15:05:37');
 INSERT INTO `ps_configuration` (`id_configuration`, `id_shop_group`, `id_shop`, `name`, `value`, `date_add`, `date_upd`) VALUES (NULL, NULL, NULL, 'PAYPAL_CONNECTION_EC_CONFIGURED', '0', '2019-10-08 15:05:37', '2019-10-08 15:05:37');
 

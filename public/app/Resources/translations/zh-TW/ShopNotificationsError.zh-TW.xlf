@@ -64,6 +64,11 @@ File: modules/trackingfront/trackingfront.php:99</note>
         <note>Context:
 File: classes/form/CustomerForm.php:114</note>
       </trans-unit>
+      <trans-unit id="eefb581d7c421334e62a68223c7a242a">
+        <source>The email is already used, please choose another one or sign in</source>
+        <target xml:lang="zh-TW">E-Mail 已被使用，請用另一個 E-Mail 或登入</target>
+        <note>Line: 112</note>
+      </trans-unit>
     </body>
   </file>
   <file original="classes/stock/SupplyOrderDetail.php" source-language="en" target-language="zh-TW" datatype="plaintext">

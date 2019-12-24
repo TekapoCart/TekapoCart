@@ -1179,7 +1179,7 @@ File: controllers/admin/AdminAddressesController.php:211</note>
       </trans-unit>
       <trans-unit id="b60bb13a87fe3ae5463aeb0980a5a8a1" approved="yes">
         <source>Identification number</source>
-        <target xml:lang="zh-TW">身分證號碼</target>
+        <target xml:lang="zh-TW">身份證字號</target>
         <note>Context:
 File: controllers/admin/AdminAddressesController.php:128</note>
       </trans-unit>

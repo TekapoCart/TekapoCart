@@ -1,10 +1,14 @@
 --- TC_VERSION 1.1.2
 
--- currency
+-- ps_currency
+
+ALTER TABLE `ps_currency` ADD `numeric_iso_code` varchar(3) NOT NULL DEFAULT '0' AFTER `iso_code`;
+ALTER TABLE `ps_currency` ADD `precision` int(2) NOT NULL DEFAULT 6 AFTER `numeric_iso_code`;
+ALTER TABLE `ps_currency` ADD KEY `currency_iso_code` (`iso_code`);
+
+CREATE TABLE `ps_currency_lang` ( `id_currency` int(10) unsigned NOT NULL, `id_lang` int(10) unsigned NOT NULL, `name` varchar(255) NOT NULL, `symbol` varchar(255) NOT NULL, PRIMARY KEY (`id_currency`,`id_lang`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 TRUNCATE TABLE `ps_currency`;
-TRUNCATE TABLE `ps_currency_lang`;
-
 INSERT INTO `ps_currency` (`id_currency`, `name`, `iso_code`, `numeric_iso_code`, `precision`, `conversion_rate`, `deleted`, `active`) VALUES
 (1, '新臺幣', 'TWD', '0', 0, '1.000000', 0, 1),
 (2, '日圓', 'JPY', '0', 0, '3.478374', 0, 0),
@@ -14,6 +18,7 @@ INSERT INTO `ps_currency` (`id_currency`, `name`, `iso_code`, `numeric_iso_code`
 (6, '港幣', 'HKD', '0', 0, '0.255046', 0, 1),
 (7, '人民幣', 'CNY', '0', 2, '0.232285', 0, 1);
 
+TRUNCATE TABLE `ps_currency_lang`;
 INSERT INTO `ps_currency_lang` (`id_currency`, `id_lang`, `name`, `symbol`) VALUES
 (1, 1, '新臺幣', 'NT$'),
 (1, 2, 'New Taiwan Dollar', 'NT$'),

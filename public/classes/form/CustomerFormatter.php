@@ -113,22 +113,24 @@ class CustomerFormatterCore implements FormFormatterInterface
             $format[$genderField->getName()] = $genderField;
         }
 
-        $format['firstname'] = (new FormField())
-            ->setName('firstname')
-            ->setLabel(
-                $this->translator->trans(
-                    'First name',
-                    [],
-                    'Shop.Forms.Labels'
-                )
-            )
-            ->setRequired(true);
+        // suzy: 2019-12-24 調換 lastname, firstname 順序
 
         $format['lastname'] = (new FormField())
             ->setName('lastname')
             ->setLabel(
                 $this->translator->trans(
                     'Last name',
+                    [],
+                    'Shop.Forms.Labels'
+                )
+            )
+            ->setRequired(true);
+
+        $format['firstname'] = (new FormField())
+            ->setName('firstname')
+            ->setLabel(
+                $this->translator->trans(
+                    'First name',
                     [],
                     'Shop.Forms.Labels'
                 )
