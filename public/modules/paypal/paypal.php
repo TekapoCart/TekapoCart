@@ -516,7 +516,8 @@ class PayPal extends \PaymentModule
                         $payment_options->setAction($this->context->link->getModuleLink($this->name, 'ecInit', array('credit_card' => '0'), true));
                     }
                     if (!$is_virtual) {
-                        $payment_options->setAdditionalInformation($this->context->smarty->fetch('module:paypal/views/templates/front/payment_infos.tpl'));
+                        // suzy: 2019-12-25 隱藏 payment_info
+                        // $payment_options->setAdditionalInformation($this->context->smarty->fetch('module:paypal/views/templates/front/payment_infos.tpl'));
                     }
                     $payments_options[] = $payment_options;
 
