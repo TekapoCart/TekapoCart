@@ -290,7 +290,9 @@ class Ps_Linklist extends Module implements WidgetInterface
         if (!$this->isCached($templateFile, $this->getCacheId($key))) {
 
             $id_hook = Hook::getIdByName($hookName);
-            $linkBlocks = $this->linkBlockRepository->getByIdHook($id_hook);
+            // suzy: 2019-12-27 修正新舊程式矛盾
+            // $linkBlocks = $this->linkBlockRepository->getByIdHook($id_hook);
+            $linkBlocks = $this->legacyBlockRepository->getByIdHook($id_hook);
 
             $blocks = [];
             foreach ($linkBlocks as $block) {
