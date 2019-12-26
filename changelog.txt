@@ -4,9 +4,22 @@ TekapoCart <hi@tekapo.io>
 * 1.1.2 (December 24, 2019)
 *******************************************
 Improve
--
+- 升級 1.7.6.1
+- HTML 編輯器允許結構化資料 itemprop、itemscope、itemtype
+- 讓拍立得版型可上 404 圖
+- miniatures/product.tpl 修正結構化資料
+- FB 登入避免發生彈跳問題，改使用 PHP SDK 串接
+- AWS SES 比較特殊，設定 from（借用 PS_MAIL_DOMAIN）
+- MAIL replyTo 改成一律使用商店 E-Mail
 Fix
--
+- 修正 viewed-products 虫
+- tekapo/searchcron.php 不讓 Browser Keep Cache
+- 自訂頁面 不讓 Browser Keep Cache
+- 改寫 classes/Search.php（取自網路）
+- order_reference size 9 改成 15
+- 結帳頁 個人資訊 調換 lastname, firstname 順序
+- 修正 404 頁返回鍵無效問題
+- 模組位置的 $controller 先濾掉 '-' 再檢查 exceptions
 DB
 - 2019-10-20.sql
 - 2019-10-20-change-schema.sql
@@ -21,7 +34,7 @@ Improve
 - 商品貼紙支援「nshift」秘技
 - 後台模組 新增按鈕「返回佈景模組」
 - 後台商品上架 隱藏「新增品牌」
-- 官方社群連結 新增 Tripadvosor
+- 官方社群連結 新增 Tripadvisor
 DB
 - 2019-08-30.sql（後台選單顯示「檔案」）
 
