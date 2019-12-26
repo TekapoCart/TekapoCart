@@ -4303,6 +4303,10 @@ class AdminControllerCore extends Controller
      */
     public function isFresh($file, $timeout = 604800)
     {
+
+        // suzy: 2019-12-26 永遠不要 refresh xml
+        return true;
+
         if (($time = @filemtime(_PS_ROOT_DIR_ . $file)) && filesize(_PS_ROOT_DIR_ . $file) > 0) {
             return (time() - $time) < $timeout;
         }
