@@ -54,10 +54,21 @@ class Simplicity_Sociallogin extends Module
 
     public function getFbLoginUrl()
     {
-        session_start();
+
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $appId = Configuration::get('SIMPLICITY_FB_APP_ID');
+        $appSecret = Configuration::get('SIMPLICITY_FB_APP_SECRET');
+
+        if (empty($appId) || empty($appSecret)) {
+            return;
+        }
+
         $fb = new Facebook\Facebook([
-            'app_id' => Configuration::get('SIMPLICITY_FB_APP_ID'),
-            'app_secret' => Configuration::get('SIMPLICITY_FB_APP_SECRET'),
+            'app_id' => $appId,
+            'app_secret' => $appSecret,
             'default_graph_version' => 'v5.0',
         ]);
 

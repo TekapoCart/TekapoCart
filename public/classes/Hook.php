@@ -870,7 +870,11 @@ class HookCore extends ObjectModel
                     $controller = 'module-' . $controller_obj->module->name . '-' . $controller;
                 }
 
-                if (in_array($controller, $exceptions)) {
+                // suzy: 2019-12-25 先濾掉 '-' 再檢查 exceptions
+//                if (in_array($controller, $exceptions)) {
+//                    continue;
+//                }
+                if (in_array(str_replace('-', '', $controller), $exceptions)) {
                     continue;
                 }
 

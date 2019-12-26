@@ -4132,7 +4132,10 @@ exit;
                 // http://developers.whatwg.org/the-video-element.html#the-video-element
                 if ($def = $config->getHTMLDefinition(true)) {
                     $def->addElement('video', 'Block', 'Optional: (source, Flow) | (Flow, source) | Flow', 'Common', array(
-                        'src' => 'URI',
+                        // suzy: 2019-12-25 'URI' 改成 'Text'
+                        // 'src' => 'URI',
+                        'src' => 'Text',
+
                         'type' => 'Text',
                         'width' => 'Length',
                         'height' => 'Length',

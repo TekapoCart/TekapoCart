@@ -4,10 +4,16 @@ include_once('../../config/config.inc.php');
 include_once('../../init.php');
 include_once('simplicity_sociallogin.php');
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 $appId = Configuration::get('SIMPLICITY_FB_APP_ID');
-$appSecret = 'c7dc12aa22251ff890703b3d4d6d1def';
+$appSecret = Configuration::get('SIMPLICITY_FB_APP_SECRET');
+
+if (empty($appId) || empty($appSecret)) {
+    exit;
+}
 
 $fb = new Facebook\Facebook([
     'app_id' => $appId,
