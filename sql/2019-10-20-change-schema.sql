@@ -1,4 +1,4 @@
---- TC_VERSION 1.1.2
+-- TC_VERSION 1.1.2
 
 -- ps_admin_filter
 ALTER TABLE `ps_admin_filter` ADD `filter_id` VARCHAR(255) NOT NULL AFTER `filter`;
@@ -12,7 +12,7 @@ ALTER TABLE `ps_emailsubscription` ADD `id_lang` INT(10) NOT NULL DEFAULT '0' AF
 ALTER TABLE `ps_emailsubscription` CHANGE `id_lang` `id_lang` INT(10) UNSIGNED NOT NULL DEFAULT '0';
 
 -- ps_facetedsearch
-DROP TABLE IF EXISTS `ps_layered_price_index`
+DROP TABLE IF EXISTS `ps_layered_price_index`;
 CREATE TABLE `ps_layered_price_index` (
   `id_product` int(11) NOT NULL,
   `id_currency` int(11) NOT NULL,
@@ -38,8 +38,6 @@ ALTER TABLE `ps_contact_lang` CHANGE `name` `name` varchar(255) NOT NULL;
 
 ALTER TABLE `ps_category_lang` CHANGE `meta_title` `meta_title` VARCHAR(255) DEFAULT NULL, CHANGE `meta_description` `meta_description` VARCHAR(512) DEFAULT NULL;
 
-
-ALTER TABLE `ps_customer` CHANGE `company` `company` VARCHAR(255), CHANGE `email` `email` VARCHAR(255) NOT NULL, CHANGE `passwd` `passwd` VARCHAR(255) NOT NULL;
 
 ALTER TABLE `ps_customer_thread` CHANGE `email` `email` varchar(255) NOT NULL;
 

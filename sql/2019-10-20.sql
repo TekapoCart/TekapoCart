@@ -1,4 +1,4 @@
---- TC_VERSION 1.1.2
+-- TC_VERSION 1.1.2
 
 -- ps_employee
 UPDATE `ps_employee` SET `reset_password_validity` = NULL;
@@ -60,6 +60,21 @@ INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '96
 INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '970');
 INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '971');
 INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '972');
+
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '925');
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '926');
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '927');
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '928');
+
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '929');
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '930');
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '931');
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '932');
+
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '933');
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '934');
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '935');
+INSERT INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES ('1', '936');
 
 -- ps_configuration
 INSERT INTO `ps_configuration` (`id_shop_group`, `id_shop`, `name`, `value`, `date_add`, `date_upd`) VALUES(NULL, NULL, 'PS_MAIL_THEME', 'modern', '2019-10-11 15:08:37', '2019-10-11 15:08:37');
