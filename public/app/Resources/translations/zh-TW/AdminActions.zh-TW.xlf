@@ -212,6 +212,39 @@ File: modules/statscatalog/statscatalog.php:188</note>
       </trans-unit>
     </body>
   </file>
+  <file original="src/Core/Grid/Definition/Factory/CategoryGridDefinitionFactory.php" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="88e5d5ca0a8d1b109ce64897e3f5a1ad">
+        <source>Search description</source>
+        <target xml:lang="zh-TW">搜尋說明</target>
+        <note>Line: 220</note>
+      </trans-unit>
+      <trans-unit id="9d6abf0161fd44d3390037c48f84207a">
+        <source>Search position</source>
+        <target xml:lang="zh-TW">搜尋位置</target>
+        <note>Line: 246</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="src/Core/Grid/Definition/Factory/CmsPageDefinitionFactory.php" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="d3b206d196cd6be3a2764c1fb90b200f">
+        <source>Delete selected</source>
+        <target xml:lang="zh-TW">Delete selected</target>
+        <note>Line: 345</note>
+      </trans-unit>
+      <trans-unit id="ede4759c9afae620fd586628789fa304">
+        <source>Enable selection</source>
+        <target xml:lang="zh-TW">Enable selection</target>
+        <note>Line: 333</note>
+      </trans-unit>
+      <trans-unit id="ab7fd6e250b64a46027a996088fdff74">
+        <source>Disable selection</source>
+        <target xml:lang="zh-TW">Disable selection</target>
+        <note>Line: 339</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="src/Core/Grid/Definition/Factory/CustomerGridDefinitionFactory.php" source-language="en-US" target-language="en" datatype="plaintext">
     <body>
       <trans-unit id="2459a02ecb2c655956ecb3e39068dc55">
@@ -504,13 +537,30 @@ File: src/PrestaShopBundle/Controller/Admin/ProductController.php:170</note>
       </trans-unit>
     </body>
   </file>
+  <file original="src/PrestaShopBundle/Form/Admin/Improve/Design/Pages/CmsPageType.php" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="2efd89b3ccc76b0b03a34196fc6d1c8b">
+        <source>Add tag</source>
+        <target xml:lang="zh-TW">新增標籤</target>
+        <note>Line: 158</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="src/PrestaShopBundle/Resources/views/Admin/TwigTemplateForm/bootstrap_4_horizontal_layout.html.twig" source-language="en" target-language="zh-TW" datatype="plaintext">
     <body>
       <trans-unit id="c770d8e0d1d1943ce239c64dbd6acc20" approved="yes">
         <source>Add my IP</source>
         <target xml:lang="zh-TW">新增我的 IP</target>
-        <note>Context:
-File: src/PrestaShopBundle/Resources/views/Admin/TwigTemplateForm/bootstrap_4_horizontal_layout.html.twig:112</note>
+        <note>Line: 116</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="src/PrestaShopBundle/Resources/views/Admin/TwigTemplateForm/bootstrap_4_layout.html.twig" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="5f2c094de2848d0d36b59de2ff06e79f">
+        <source>Choose file(s)</source>
+        <target>選擇檔案</target>
+        <note>Line: 720</note>
       </trans-unit>
     </body>
   </file>

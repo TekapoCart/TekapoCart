@@ -452,6 +452,20 @@ File: src/PrestaShopBundle/Controller/Admin/ProductController.php:172</note>
       </trans-unit>
     </body>
   </file>
+  <file original="src/PrestaShopBundle/Form/Admin/Catalog/Category/AbstractCategoryType.php" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="88fe88f4033791ef6f38fbb7f7c58f04">
+        <source>To have a different title from the category name, enter it here.</source>
+        <target xml:lang="zh-TW">若與分類名稱不同請在此處填寫。</target>
+        <note>Line: 136</note>
+      </trans-unit>
+      <trans-unit id="0a7ca3ce7cde025a585cd02d7382b48f">
+        <source>To have a different description than your category summary in search results page, write it here.</source>
+        <target xml:lang="zh-TW">若與分類說明不同請在此處填寫。</target>
+        <note>Line: 169</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig" source-language="en" target-language="zh-TW" datatype="plaintext">
     <body>
       <trans-unit id="607e1d854783c8229998ac2b5b6923d3" approved="yes">
@@ -918,6 +932,15 @@ File: admin-dev/themes/default/template/controllers/categories/helpers/form/form
         <target xml:lang="zh-TW">建議尺寸 (適用於預設主題): %1spx x %2spx</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/categories/helpers/form/form.tpl:60</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="src/PrestaShopBundle/Resources/views/Admin/Sell/Catalog/Categories/Blocks/form.html.twig" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="19318118b1173f172418b3282cb037d7">
+        <source><![CDATA[If you want a category to appear in the menu of your shop, go to [1]Modules > Module Manager[/1] and configure your menu module.]]></source>
+        <target></target>
+        <note>Line: 48</note>
       </trans-unit>
     </body>
   </file>
