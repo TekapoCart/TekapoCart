@@ -2249,8 +2249,12 @@ class AdminControllerCore extends Controller
 
         libxml_use_internal_errors(true);
 
-        $country_module_list = file_get_contents(_PS_ROOT_DIR_ . Module::CACHE_FILE_DEFAULT_COUNTRY_MODULES_LIST);
-        $must_have_module_list = file_get_contents(_PS_ROOT_DIR_ . Module::CACHE_FILE_MUST_HAVE_MODULES_LIST);
+        // suzy: 2019-12-27 xml 檔案不存在
+        // $country_module_list = file_get_contents(_PS_ROOT_DIR_ . Module::CACHE_FILE_DEFAULT_COUNTRY_MODULES_LIST);
+        // $must_have_module_list = file_get_contents(_PS_ROOT_DIR_ . Module::CACHE_FILE_MUST_HAVE_MODULES_LIST);
+        $country_module_list = '';
+        $must_have_module_list = '';
+
         $all_module_list = array();
 
         if (!empty($country_module_list) && $country_module_list_xml = @simplexml_load_string($country_module_list)) {
