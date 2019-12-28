@@ -18,7 +18,7 @@
       </trans-unit>
       <trans-unit id="fb077ecba55e5552916bde26d8b9e794" approved="yes">
         <source>Order confirmation</source>
-        <target xml:lang="zh-TW">訂購通知</target>
+        <target xml:lang="zh-TW">新訂單成立通知</target>
         <note>Line: 655</note>
       </trans-unit>
     </body>

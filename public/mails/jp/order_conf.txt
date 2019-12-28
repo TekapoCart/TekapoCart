@@ -22,6 +22,8 @@
 送料	{total_shipping}
 合計	{total_paid}
 
+The order is confirmed but does not mean that the payment was successful, please go to the website to check the order status. Thank you.
+
 ご注文内容の詳細は「[注文履歴]({guest_tracking_url})」。
 
 [{shop_name}]({shop_url})

@@ -1126,6 +1126,11 @@
         <target xml:lang="zh-TW">感謝您對 [1]{shop_name}[/1] 的支持並承蒙訂購！</target>
         <note>Line: 53</note>
       </trans-unit>
+      <trans-unit id="0c32014af02c2c3002c12e0b2725f1e9" approved="yes">
+        <source>The order is confirmed but does not mean that the payment was successful, please go to the website to check the order status. Thank you.</source>
+        <target xml:lang="zh-TW">訂單成立但不代表付款成功，請至官網確認訂單狀態，謝謝。</target>
+        <note>Line: 53</note>
+      </trans-unit>
     </body>
   </file>
   <file original="mails/themes/modern/core/order_customer_comment.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
@@ -1352,7 +1357,7 @@
       </trans-unit>
       <trans-unit id="25a836f644cf544e8dee516a0a842965" approved="yes">
         <source>Adding our email address as a contact to ensure all messages are delivered to your Inbox.</source>
-        <target xml:lang="zh-TW">為了確保能收到信件，可將此信箱加入通訊錄。</target>
+        <target xml:lang="zh-TW">如要確保收到信件，可將此信箱加入通訊錄。</target>
         <note>Line: 245</note>
       </trans-unit>
       <trans-unit id="b0faef9417304909de0960b57582cd1c" approved="yes">

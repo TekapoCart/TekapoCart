@@ -22,6 +22,8 @@ SKU	Product	Unit price	Qty	Total price  {products_txt} {discounts_txt}
 Shipping	{total_shipping}
 Total paid	{total_paid}
 
+The order is confirmed but does not mean that the payment was successful, please go to the website to check the order status. Thank you.
+
 You can track your order status via the 「[Order Tracking]({guest_tracking_url})」.
 
 [{shop_name}]({shop_url})

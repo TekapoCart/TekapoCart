@@ -1,5 +1,5 @@
 此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
-為了確保能收到信件，請將此信箱加入通訊錄。
+如要確保收到信件，可將此信箱加入通訊錄。
 
 {shop_url}
 
@@ -19,7 +19,7 @@ You have decided to pay by bank wire. Here is the information you need for your 
 
 户名：  {bankwire_owner}
 
-匯款資訊： {bankwire_details}
+付款資訊： {bankwire_details}
 
 銀行名稱： {bankwire_address}
 
