@@ -247,7 +247,33 @@ class Ecpay extends PaymentModule
 			return $payments_desc[$payment_name];
 		}
 	}
-	
+
+	// suzy: 2019-12-28 以 狀態 ID 取得 付款方式
+    public function getPaymentDescByOrderStatusID($order_current_status)
+    {
+        $payments_desc = array(
+            27 => $this->l('Credit')
+        , 28 => $this->l('Credit Card(03 Installments)')
+        , 29 => $this->l('Credit Card(06 Installments)')
+        , 30 => $this->l('Credit Card(12 Installments)')
+        , 31 => $this->l('Credit Card(18 Installments)')
+        , 32 => $this->l('Credit Card(24 Installments)')
+        , 33 => $this->l('WebATM')
+        , 20 => $this->l('ATM')
+        , 36 => $this->l('CVS')
+        , 35 => $this->l('BARCODE')
+        );
+
+        if (!isset($payments_desc[$order_current_status]))
+        {
+            return '';
+        }
+        else
+        {
+            return $payments_desc[$order_current_status];
+        }
+    }
+
 	public function isTestMode($ecpay_merchant_id)
 	{
 		if ($ecpay_merchant_id == '2000132' or $ecpay_merchant_id == '2000214') {
@@ -285,14 +311,14 @@ class Ecpay extends PaymentModule
 		
 		return $cart_order_id;
 	}
-	
+
 	public function getOrderStatusID($status_name, $payment_type = '')
 	{
 	    // suzy: 2019-07-06 自訂狀態 ID
 	    switch ($payment_type) {
             case 'Credit':
                 $order_status = array(
-                    'created' => 27, // suzy: 2019-12-06 27 -> 19
+                    'created' => 27,
                     'succeeded' => 2,
                     'failed' => 8,
                 );

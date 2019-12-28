@@ -83,7 +83,7 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                         $order_current_status = (int)$order->getCurrentState();
 
                         // suzy: 2019-12-28 將 付款方式 顯示在 後台訂單付款訊息
-                        $payment_desc = $this->module->getPaymentDesc($payment_type);
+                        $payment_desc = $this->module->getPaymentDescByOrderStatusID($order_current_status);
                         $payment_result_comments = '[' . $payment_desc . '] ' . $payment_result_comments;
 
                         switch ($ecpay_payment_method) {
