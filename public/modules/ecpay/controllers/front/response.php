@@ -84,7 +84,7 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
 
                         // suzy: 2019-12-28 將 付款方式 顯示在 後台訂單付款訊息
                         $payment_desc = $this->module->getPaymentDesc($payment_type);
-                        $payment_result_comments = $payment_desc . ' ' . $payment_result_comments;
+                        $payment_result_comments = '[' . $payment_desc . '] ' . $payment_result_comments;
 
                         switch ($ecpay_payment_method) {
                             case ECPay_PaymentMethod::Credit:
