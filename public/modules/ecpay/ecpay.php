@@ -224,7 +224,7 @@ class Ecpay extends PaymentModule
 			, 'Credit_06' => $this->l('Credit Card(06 Installments)')
 			, 'Credit_12' => $this->l('Credit Card(12 Installments)')
 //			, 'Credit_18' => $this->l('Credit Card(18 Installments)')
-			, 'Credit_24' => $this->l('Credit Card(24 Installments)')
+//			, 'Credit_24' => $this->l('Credit Card(24 Installments)')
 //			, 'WebATM' => $this->l('WebATM')
 			, 'ATM' => $this->l('ATM')
 //			, 'CVS' => $this->l('CVS')

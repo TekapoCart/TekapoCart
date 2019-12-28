@@ -97,16 +97,25 @@ UPDATE `ps_meta` SET `configurable` = '0' WHERE `ps_meta`.`id_meta` = 19;
 UPDATE `ps_meta_lang` SET `url_rewrite` = 'order-tracking' WHERE `ps_meta_lang`.`id_meta` = 24;
 
 -- ps_order_state
-UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 27;
 
-UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 34;
-UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 26;
-UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 13;
+
+-- 已付款（遠端付款）
 UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 11;
-UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 35;
-UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 36;
+-- 已付款（貨到付款）
+UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 13;
+-- 售完
+UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 26;
+-- 待付款（ECPay 信用卡18期）
 UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 31;
+-- 待付款（ECPay WebATM）
 UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 33;
+-- 待付款（ECPay ATM）
+UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 34;
+-- 待付款（ECPay 超商條碼）
+UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 35;
+-- 待付款（ECPay 超商代碼）
+UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 36;
+
 
 UPDATE `ps_order_state` SET `sort` = '1' WHERE `ps_order_state`.`id_order_state` = 14;
 UPDATE `ps_order_state` SET `sort` = '2' WHERE `ps_order_state`.`id_order_state` = 17;
@@ -123,10 +132,10 @@ UPDATE `ps_order_state_lang` SET `name` = 'Awaiting for SmilePay Credit card pay
 UPDATE `ps_order_state_lang` SET `name` = '待付款（SmilePay 信用卡）' WHERE `ps_order_state_lang`.`id_order_state` = 19 AND `ps_order_state_lang`.`id_lang` = 3;
 UPDATE `ps_order_state_lang` SET `name` = '支払い中（SmilePay クレジットカード）' WHERE `ps_order_state_lang`.`id_order_state` = 19 AND `ps_order_state_lang`.`id_lang` = 4;
 
-UPDATE `ps_order_state_lang` SET `name` = '待付款（SmilePay ATM）' WHERE `ps_order_state_lang`.`id_order_state` = 19 AND `ps_order_state_lang`.`id_lang` = 1;
-UPDATE `ps_order_state_lang` SET `name` = 'Awaiting for SmilePay ATM payment' WHERE `ps_order_state_lang`.`id_order_state` = 19 AND `ps_order_state_lang`.`id_lang` = 2;
-UPDATE `ps_order_state_lang` SET `name` = '待付款（SmilePay ATM）' WHERE `ps_order_state_lang`.`id_order_state` = 19 AND `ps_order_state_lang`.`id_lang` = 3;
-UPDATE `ps_order_state_lang` SET `name` = '支払い中（SmilePay ATM）' WHERE `ps_order_state_lang`.`id_order_state` = 19 AND `ps_order_state_lang`.`id_lang` = 4;
+UPDATE `ps_order_state_lang` SET `name` = '待付款（ATM 虛擬帳號）' WHERE `ps_order_state_lang`.`id_order_state` = 20 AND `ps_order_state_lang`.`id_lang` = 1;
+UPDATE `ps_order_state_lang` SET `name` = 'Awaiting for ATM payment' WHERE `ps_order_state_lang`.`id_order_state` = 20 AND `ps_order_state_lang`.`id_lang` = 2;
+UPDATE `ps_order_state_lang` SET `name` = '待付款（ATM 虚拟帐号）' WHERE `ps_order_state_lang`.`id_order_state` = 20 AND `ps_order_state_lang`.`id_lang` = 3;
+UPDATE `ps_order_state_lang` SET `name` = '支払い中（ATM）' WHERE `ps_order_state_lang`.`id_order_state` = 20 AND `ps_order_state_lang`.`id_lang` = 4;
 
 -- ps_stock_mvt_reason_lang
 UPDATE `ps_stock_mvt_reason_lang` SET `name` = '管理者修改' WHERE `ps_stock_mvt_reason_lang`.`id_stock_mvt_reason` = 11 AND `ps_stock_mvt_reason_lang`.`id_lang` = 1;
