@@ -55,6 +55,7 @@
                   {if !$order.details.is_virtual}
                   <li>{l s='Shipping method: %method%' d='Shop.Theme.Checkout' sprintf=['%method%' => $order.carrier.name]} - {$order.carrier.delay}</em></li>
                   {/if}
+                  <li>{l s='Order status: %state%' d='Shop.Theme.Checkout' sprintf=['%state%' => $order.history.current.ostate_name]}</li>
                 </ul>
               </div>
             </div>

@@ -630,6 +630,12 @@ File: themes/classic/templates/checkout/order-confirmation.tpl:61</note>
         <note>Context:
 File: themes/classic/templates/checkout/order-confirmation.tpl:64</note>
       </trans-unit>
+      <trans-unit id="d4108d6d9bf267ecd5b1f08b6bce2c06" approved="yes">
+        <source>Order status: %state%</source>
+        <target xml:lang="zh-TW">訂單狀態：%state%</target>
+        <note>Context:
+File: themes/classic/templates/checkout/order-confirmation.tpl:64</note>
+      </trans-unit>
     </body>
   </file>
   <file original="themes/classic/templates/customer/discount.tpl" source-language="en" target-language="zh-TW" datatype="plaintext">
