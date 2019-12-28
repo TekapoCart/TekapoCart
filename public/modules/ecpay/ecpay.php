@@ -362,9 +362,9 @@ class Ecpay extends PaymentModule
                 break;
             default:
                 $order_status = array(
-                    'created' => 1,
-                    'succeeded' => 2,
-                    'failed' => 8,
+                    'created' => 1, // 待付款
+                    'succeeded' => 2, // 已付款
+                    'failed' => 8, // 付款失敗
                 );
 
         }

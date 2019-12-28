@@ -81,6 +81,11 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                         $created_status_id = $this->module->getOrderStatusID('created', $payment_type);
                         $succeeded_status_id = $this->module->getOrderStatusID('succeeded');
                         $order_current_status = (int)$order->getCurrentState();
+
+                        // suzy: 2019-12-28 將 付款方式 顯示在 後台訂單付款訊息
+                        $payment_desc = $this->module->getPaymentDesc($payment_type);
+                        $payment_result_comments = $payment_desc . ' ' . $payment_result_comments;
+
                         switch ($ecpay_payment_method) {
                             case ECPay_PaymentMethod::Credit:
                                 // suzy: 2019-07-06 讓信用卡分期訂單狀態通過檢查機制
@@ -193,7 +198,9 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
             if (!empty($order)) {
                 $failed_status_id = $this->module->getOrderStatusID('failed');
                 $comments = sprintf($this->module->l('Paid Failed, Error : %s', 'response'), $error);
-                $this->module->setOrderComments($cart_order_id, $comments);
+                // suzy: 2019-07-09 將 付款結果 顯示在 後台訂單付款訊息
+                // $this->module->setOrderComments($cart_order_id, $comments);
+                $this->module->setPaymentMessage($cart_order_id, $comments);
                 $this->module->updateOrderStatus($cart_order_id, $failed_status_id, true);
             }
 
