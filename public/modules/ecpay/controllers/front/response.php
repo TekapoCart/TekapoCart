@@ -83,7 +83,7 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                         $order_current_status = (int)$order->getCurrentState();
                         switch ($ecpay_payment_method) {
                             case ECPay_PaymentMethod::Credit:
-                                # suzy: 2019-07-06 讓信用卡分期訂單狀態通過檢查機制
+                                // suzy: 2019-07-06 讓信用卡分期訂單狀態通過檢查機制
                                 if (in_array($order_current_status, [28, 29, 30, 31, 32])) {
                                     $order_current_status = 27;
                                 }

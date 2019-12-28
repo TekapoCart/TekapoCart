@@ -34,7 +34,7 @@ File: modules/ps_wirepayment/ps_wirepayment.php:82</note>
       </trans-unit>
       <trans-unit id="bfa43217dfe8261ee7cb040339085677" approved="yes">
         <source>Account details are required.</source>
-        <target xml:lang="zh-TW">匯款資訊為必填。</target>
+        <target xml:lang="zh-TW">付款資訊為必填。</target>
         <note>Context:
 File: modules/ps_wirepayment/ps_wirepayment.php:128</note>
       </trans-unit>
@@ -46,7 +46,7 @@ File: modules/ps_wirepayment/ps_wirepayment.php:130</note>
       </trans-unit>
       <trans-unit id="8bc212f48680748479bbd322d4d73d3f" approved="yes">
         <source>Account details</source>
-        <target xml:lang="zh-TW">匯款資訊</target>
+        <target xml:lang="zh-TW">付款資訊</target>
         <note>Context:
 File: modules/ps_wirepayment/ps_wirepayment.php:296</note>
       </trans-unit>

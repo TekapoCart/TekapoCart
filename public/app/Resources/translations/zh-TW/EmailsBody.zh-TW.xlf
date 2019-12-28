@@ -747,7 +747,7 @@
       </trans-unit>
       <trans-unit id="20a650d87733bd5895c979de29864a73" approved="yes">
         <source>Account details:</source>
-        <target xml:lang="zh-TW">匯款資訊：</target>
+        <target xml:lang="zh-TW">付款資訊：</target>
         <note>Line: 414</note>
       </trans-unit>
       <trans-unit id="312d898d92d8ba90499ef0dac27270be" approved="yes">
