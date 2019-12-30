@@ -54,7 +54,6 @@ class Simplicity_Sociallogin extends Module
 
     public function getGLoginUrl()
     {
-
         $appId = Configuration::get('SIMPLICITY_G_APP_ID');
         $appSecret = Configuration::get('SIMPLICITY_G_APP_SECRET');
 
@@ -78,11 +77,6 @@ class Simplicity_Sociallogin extends Module
 
     public function getFbLoginUrl()
     {
-
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
         $appId = Configuration::get('SIMPLICITY_FB_APP_ID');
         $appSecret = Configuration::get('SIMPLICITY_FB_APP_SECRET');
 
@@ -113,6 +107,10 @@ class Simplicity_Sociallogin extends Module
 
     public function hookDisplayCustomerLoginLink()
     {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
         if (strpos($_SERVER['REQUEST_URI'], 'core.js.map') === false) {
             $_SESSION['social_login_back'] = Tools::getCurrentUrlProtocolPrefix() . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         }
@@ -124,6 +122,10 @@ class Simplicity_Sociallogin extends Module
 
     public function hookDisplayCheckoutStepOneNotLogged()
     {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         $_SESSION['social_login_back'] = $this->context->link->getPageLink('order');
 
         $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
