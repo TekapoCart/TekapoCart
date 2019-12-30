@@ -65,4 +65,10 @@ $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender', $ac
 $user = $response->getGraphUser();
 
 $m = new Simplicity_Sociallogin();
-$m->callback($user, 'facebook');
+
+if (!isset ($user['email'])) {
+    echo $m->l('To login with Facebook you must provide your email address.');
+    exit;
+}
+
+$m->callback($user, 'fb');

@@ -22,6 +22,10 @@ CREATE TABLE `ps_layered_price_index` (
   `id_country` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ps_sociallogin
+ALTER TABLE `ps_sociallogin` ADD UNIQUE( `id_social`, `type`);
+ALTER TABLE `ps_sociallogin` ADD UNIQUE( `id_social`, `type`, `id_customer`);
+
 -- 1.7.5
 
 ALTER TABLE `ps_store` CHANGE `email` `email` VARCHAR(255) DEFAULT NULL;

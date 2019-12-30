@@ -43,14 +43,15 @@ try {
     exit;
 }
 
-
-
 $oauth = new Google_Service_Oauth2($gclient);
-$user = $oauth->userinfo->get();
+$result = $oauth->userinfo->get();
 
-echo '<pre>';
-echo $user['email'] . '<br>';
-echo $user['familyName'] . '<br>';
-echo $user['givenName'] . '<br>';
-echo $user['id'] . '<br>';
-print_r($user);
+$user = [
+    'id' => $result['id'],
+    'email' => $result['email'],
+    'first_name' => $result['givenName'],
+    'last_name' => $result['familyName'],
+];
+
+$m = new Simplicity_Sociallogin();
+$m->callback($user, 'google');

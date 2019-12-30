@@ -132,16 +132,8 @@ class Simplicity_Sociallogin extends Module
 
     /////////////////////////////////////////////////////////////////////////////////
 
-    public function callback($user, $social)
+    public function callback($user, $social_type)
     {
-        if ($social == 'facebook') {
-
-            if (!isset ($user['email'])) {
-                echo $this->l('To login with Facebook you must provide your email address.');
-                exit;
-            }
-        }
-
         $email = $user['email'];
         $social_id = $user['id'];
 
@@ -149,11 +141,11 @@ class Simplicity_Sociallogin extends Module
             $customer_id = $this->customerAdd($user);
         }
 
-        if (!$this->hasMatchedSocialId($social_id)) {
-            $this->socialAdd($social_id, $customer_id);
+        if (!$this->hasMatchedSocialId($social_id, $social_type)) {
+            $this->socialAdd($social_id, $social_type, $customer_id);
+        } else {
+            $this->updateCustomerIdBySocialId($social_id, $customer_id);
         }
-
-        $this->updateCustomerIdBySocialId($social_id, $customer_id);
 
         $this->login($customer_id);
 
@@ -172,11 +164,11 @@ class Simplicity_Sociallogin extends Module
         return false;
     }
 
-    public function hasMatchedSocialId($social_id)
+    public function hasMatchedSocialId($social_id, $social_type)
     {
 
         $sql = 'SELECT id_customer FROM `' . _DB_PREFIX_ .
-            'sociallogin` WHERE id_social="' . $social_id . '"';
+            'sociallogin` WHERE id_social="' . $social_id . '" AND type = "'. $social_type .'"';
 
         if (Db::getInstance()->getRow($sql)) {
             return true;
@@ -209,16 +201,18 @@ class Simplicity_Sociallogin extends Module
             Hook::Exec('actionCustomerAccountAdd', array('newCustomer' => $customer));
         }
         $customer->cleanGroups();
-        $customer->addGroups(array(3, 4));
+        $customer->addGroups(array(3));
 
         return $customer->id;
     }
 
-    public function socialAdd($social_id, $customer_id)
+    public function socialAdd($social_id, $social_type, $customer_id)
     {
         $sql = 'INSERT INTO `' . _DB_PREFIX_ .
-            'sociallogin` (`id_social`,`type`,`id_customer`) VALUES ("' .
-            $social_id . '","fb","' . $customer_id . '")';
+            'sociallogin` (`id_social`,`type`,`id_customer`) VALUES ("'
+            . $social_id . '","'
+            . $social_type . '","'
+            . $customer_id . '")';
         Db::getInstance()->Execute($sql);
     }
 
