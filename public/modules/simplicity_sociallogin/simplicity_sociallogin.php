@@ -110,7 +110,6 @@ class Simplicity_Sociallogin extends Module
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-
         if (strpos($_SERVER['REQUEST_URI'], 'core.js.map') === false) {
             $_SESSION['social_login_back'] = Tools::getCurrentUrlProtocolPrefix() . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         }
@@ -125,7 +124,6 @@ class Simplicity_Sociallogin extends Module
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        
         $_SESSION['social_login_back'] = $this->context->link->getPageLink('order');
 
         $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
@@ -156,6 +154,9 @@ class Simplicity_Sociallogin extends Module
 
         $this->login($customer_id);
 
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         $back = isset($_SESSION['social_login_back']) ? $_SESSION['social_login_back'] : $this->context->link->getPageLink('my-account');
 
         $this->context->controller->success[] = $this->trans('Login Successful', array(), 'Shop.Theme.Customeraccount');
