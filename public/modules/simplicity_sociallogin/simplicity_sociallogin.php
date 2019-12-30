@@ -309,7 +309,7 @@ class Simplicity_Sociallogin extends Module
                     ),
                     array(
                         'type' => 'text',
-                        'label' => 'Google 用戶端密碼',
+                        'label' => 'Google 用戶端密鑰',
                         'name' => 'g_app_secret',
                         'desc' => '',
                     ),
