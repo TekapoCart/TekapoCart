@@ -22,9 +22,25 @@ if (! isset($_GET['code'])) {
 $gclient = new Google_Client();
 $gclient->setClientId($appId);
 $gclient->setClientSecret($appSecret);
+$gclient->setAccessType('offline');
+$gclient->setIncludeGrantedScopes(true);
+$gclient->addScope([Google_Service_Oauth2::USERINFO_EMAIL, Google_Service_Oauth2::USERINFO_PROFILE]);
 
-$token = $gclient->fetchAccessTokenWithAuthCode($_GET['code']);
-$gclient->setAccessToken($token);
+try {
+
+    $token = $gclient->fetchAccessTokenWithAuthCode($_GET['code']);
+    if (array_key_exists('error', $token)) {
+        throw new Exception(join(', ', $token));
+    }
+
+    $gclient->setAccessToken($token);
+
+} catch(Exception $e) {
+    echo 'Google SDK returned an error: ' . $e->getMessage();
+    exit;
+}
+
+
 
 $oauth = new Google_Service_Oauth2($gclient);
 $user = $oauth->userinfo->get();
