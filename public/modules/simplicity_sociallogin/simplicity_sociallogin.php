@@ -74,11 +74,10 @@ class Simplicity_Sociallogin extends Module
 
         $helper = $fb->getRedirectLoginHelper();
 
-        $permissions = ['email']; // Optional permissions
-        $loginUrl = $helper->getLoginUrl(Context::getContext()->shop->getBaseURL(true) . 'modules/simplicity_sociallogin/fb-callback.php', $permissions);
+        $permissions = ['email'];
+        $loginUrl = $helper->getLoginUrl($this->context->shop->getBaseURL(true) . 'modules/simplicity_sociallogin/fb-callback.php', $permissions);
 
         return $loginUrl;
-
     }
 
     public function hookHeader()
@@ -86,11 +85,11 @@ class Simplicity_Sociallogin extends Module
         $this->context->controller->addCSS(($this->_path) . 'facebook.css', 'all');
     }
 
-
     public function hookDisplayCustomerLoginLink()
     {
-        // $_SESSION['callback_return_url'] = $this->context->link->getPageLink('my-account');
-        $_SESSION['callback_return_url'] = _PS_BASE_URL_SSL_ . $_SERVER['REQUEST_URI'];
+        if (strpos($_SERVER['REQUEST_URI'], 'core.js.map') === false) {
+            $_SESSION['fb_login_back'] = Tools::getCurrentUrlProtocolPrefix() . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        }
 
         $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
         return $this->display(__FILE__, 'hook-login.tpl');
@@ -98,7 +97,7 @@ class Simplicity_Sociallogin extends Module
 
     public function hookDisplayCheckoutStepOneNotLogged()
     {
-        $_SESSION['callback_return_url'] = $this->context->link->getPageLink('order');
+        $_SESSION['fb_login_back'] = $this->context->link->getPageLink('order');
 
         $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
         return $this->display(__FILE__, 'hook-checkout.tpl');
@@ -106,24 +105,22 @@ class Simplicity_Sociallogin extends Module
 
     /////////////////////////////////////////////////////////////////////////////////
 
-    public function fbCallback($post)
+    public function callback($user, $social)
     {
+        if ($social == 'facebook') {
 
-        if (!isset ($post['email'])) {
-
-            echo json_encode([
-                'error' => true,
-                'errorMessage' => $this->l('To login with Facebook you must provide your email address.')
-            ]);
-
-            return;
+            if (!isset ($user['email'])) {
+                echo $this->l('To login with Facebook you must provide your email address.');
+                exit;
+            }
         }
 
-        $email = $post['email'];
-        $social_id = $post['id'];
+
+        $email = $user['email'];
+        $social_id = $user['id'];
 
         if (!$customer_id = $this->getCustomerIdByEmail($email)) {
-            $customer_id = $this->customerAdd($post);
+            $customer_id = $this->customerAdd($user);
         }
 
         if (!$this->hasMatchedSocialId($social_id)) {
@@ -133,6 +130,11 @@ class Simplicity_Sociallogin extends Module
         $this->updateCustomerIdBySocialId($social_id, $customer_id);
 
         $this->login($customer_id);
+
+        $back = isset($_SESSION['fb_login_back']) ? $_SESSION['fb_login_back'] : $this->context->link->getPageLink('my-account');
+
+        $this->context->controller->success[] = $this->trans('Login Successful', array(), 'Shop.Theme.Customeraccount');
+        $this->context->controller->redirectWithNotifications($back);
     }
 
     public function getCustomerIdByEmail($email)

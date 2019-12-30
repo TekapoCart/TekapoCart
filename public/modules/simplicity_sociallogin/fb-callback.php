@@ -63,7 +63,4 @@ $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender', $ac
 $user = $response->getGraphUser();
 
 $m = new Simplicity_Sociallogin();
-$m->fbCallback($user);
-
-header('Location: ' . $_SESSION['callback_return_url']);
-exit;
+$m->callback($user, 'facebook');
