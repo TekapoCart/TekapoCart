@@ -137,14 +137,11 @@ class Simplicity_Sociallogin extends Module
         $email = $user['email'];
         $social_id = $user['id'];
 
-        $back = isset($_SESSION['fb_login_back']) ? $_SESSION['fb_login_back'] : $this->context->link->getPageLink('my-account');
-
-
         if (!$customer_id = $this->getCustomerIdByEmail($email)) {
             $customer_id = $this->customerAdd($user);
         } else if (Customer::isBanned($customer_id)) {
             $this->context->controller->success[] = $this->trans('Login Unsuccessful', array(), 'Shop.Theme.Customeraccount');
-            $this->context->controller->redirectWithNotifications($back);
+            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('index'));
         }
 
         if (!$this->hasMatchedSocialId($social_id, $social_type)) {
@@ -154,6 +151,8 @@ class Simplicity_Sociallogin extends Module
         }
 
         $this->login($customer_id);
+
+        $back = isset($_SESSION['fb_login_back']) ? $_SESSION['fb_login_back'] : $this->context->link->getPageLink('my-account');
 
         $this->context->controller->success[] = $this->trans('Login Successful', array(), 'Shop.Theme.Customeraccount');
         $this->context->controller->redirectWithNotifications($back);
