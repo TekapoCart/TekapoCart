@@ -114,7 +114,7 @@ class Simplicity_Sociallogin extends Module
     public function hookDisplayCustomerLoginLink()
     {
         if (strpos($_SERVER['REQUEST_URI'], 'core.js.map') === false) {
-            $_SESSION['fb_login_back'] = Tools::getCurrentUrlProtocolPrefix() . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            $_SESSION['social_login_back'] = Tools::getCurrentUrlProtocolPrefix() . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         }
 
         $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
@@ -124,9 +124,10 @@ class Simplicity_Sociallogin extends Module
 
     public function hookDisplayCheckoutStepOneNotLogged()
     {
-        $_SESSION['fb_login_back'] = $this->context->link->getPageLink('order');
+        $_SESSION['social_login_back'] = $this->context->link->getPageLink('order');
 
         $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
+        $this->smarty->assign('g_login_url', $this->getGLoginUrl());
         return $this->display(__FILE__, 'hook-checkout.tpl');
     }
 
@@ -142,6 +143,7 @@ class Simplicity_Sociallogin extends Module
         } else if (Customer::isBanned($customer_id)) {
             $this->context->controller->success[] = $this->trans('Login Unsuccessful', array(), 'Shop.Theme.Customeraccount');
             $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('index'));
+            return;
         }
 
         if (!$this->hasMatchedSocialId($social_id, $social_type)) {
@@ -152,7 +154,7 @@ class Simplicity_Sociallogin extends Module
 
         $this->login($customer_id);
 
-        $back = isset($_SESSION['fb_login_back']) ? $_SESSION['fb_login_back'] : $this->context->link->getPageLink('my-account');
+        $back = isset($_SESSION['social_login_back']) ? $_SESSION['social_login_back'] : $this->context->link->getPageLink('my-account');
 
         $this->context->controller->success[] = $this->trans('Login Successful', array(), 'Shop.Theme.Customeraccount');
         $this->context->controller->redirectWithNotifications($back);
