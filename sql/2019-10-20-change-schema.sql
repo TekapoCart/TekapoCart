@@ -24,7 +24,6 @@ CREATE TABLE `ps_layered_price_index` (
 
 -- ps_sociallogin
 ALTER TABLE `ps_sociallogin` ADD UNIQUE( `id_social`, `type`);
-ALTER TABLE `ps_sociallogin` ADD UNIQUE( `id_social`, `type`, `id_customer`);
 
 -- 1.7.5
 

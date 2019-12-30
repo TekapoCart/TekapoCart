@@ -144,7 +144,7 @@ class Simplicity_Sociallogin extends Module
         if (!$this->hasMatchedSocialId($social_id, $social_type)) {
             $this->socialAdd($social_id, $social_type, $customer_id);
         } else {
-            $this->updateCustomerIdBySocialId($social_id, $customer_id);
+            $this->socialUpdate($social_id, $social_type, $customer_id);
         }
 
         $this->login($customer_id);
@@ -201,7 +201,7 @@ class Simplicity_Sociallogin extends Module
             Hook::Exec('actionCustomerAccountAdd', array('newCustomer' => $customer));
         }
         $customer->cleanGroups();
-        $customer->addGroups(array(3));
+        $customer->addGroups([3]);
 
         return $customer->id;
     }
@@ -213,6 +213,13 @@ class Simplicity_Sociallogin extends Module
             . $social_id . '","'
             . $social_type . '","'
             . $customer_id . '")';
+        Db::getInstance()->Execute($sql);
+    }
+
+    public function socialUpdate($social_id, $social_type, $customer_id)
+    {
+        $sql = "UPDATE `' . _DB_PREFIX_ . 'sociallogin` SET `id_customer`='" . $customer_id .
+            "' WHERE `id_social`='" . $social_id . "' AND type='" . $social_type . "'";
         Db::getInstance()->Execute($sql);
     }
 
@@ -255,13 +262,6 @@ class Simplicity_Sociallogin extends Module
         CartRule::autoRemoveFromCart($this->context);
         CartRule::autoAddToCart($this->context);
 
-    }
-
-    public function updateCustomerIdBySocialId($social_id, $customer_id)
-    {
-        $sql = 'UPDATE `' . _DB_PREFIX_ . 'sociallogin` SET `id_customer`=' . $customer_id .
-            ' WHERE `id_social`=' . $social_id;
-        Db::getInstance()->Execute($sql);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////
