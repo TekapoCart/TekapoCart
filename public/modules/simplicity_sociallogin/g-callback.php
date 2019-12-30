@@ -49,4 +49,8 @@ $oauth = new Google_Service_Oauth2($gclient);
 $user = $oauth->userinfo->get();
 
 echo '<pre>';
+echo $user['email'] . '<br>';
+echo $user['familyName'] . '<br>';
+echo $user['givenName'] . '<br>';
+echo $user['id'] . '<br>';
 print_r($user);
