@@ -29,6 +29,7 @@ public/modules/*/composer.lock
 public/modules/*/composer.phar
 public/modules/*/Readme.md
 
+public/vendor/*/*/composer.json
 public/vendor/beberlei/DoctrineExtensions/tests/*
 public/vendor/greenlion/php-sql-parser/tests/*
 public/vendor/pear/archive_tar/tests/*
