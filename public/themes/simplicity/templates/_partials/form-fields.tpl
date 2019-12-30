@@ -162,6 +162,26 @@
           </div>
         {/block}
 
+      {elseif $field.type === 'email' && $page.page_name === 'identity'}
+
+          {block name='form_field_item_other'}
+              <input
+                      class="form-control"
+                      name="{$field.name}"
+                      type="email"
+                      value="{$field.value}"
+                      placeholder="{$field.label}{if $field.name == 'phone_mobile' || $field.name == 'firstname' || $field.name == 'lastname'} ({l s='required' d='Shop.Theme.Checkout'}){/if}"
+                      {if isset($field.availableValues.placeholder)}placeholder="{$field.availableValues.placeholder}"{/if}
+                      {if $field.maxLength}maxlength="{$field.maxLength}"{/if}
+                      readonly
+              >
+              {if isset($field.availableValues.comment)}
+                  <span class="form-control-comment">
+              {$field.availableValues.comment}
+            </span>
+              {/if}
+          {/block}
+
       {else}
 
         {block name='form_field_item_other'}
