@@ -7,6 +7,8 @@ include_once('simplicity_sociallogin.php');
 $appId = Configuration::get('SIMPLICITY_G_APP_ID');
 $appSecret = Configuration::get('SIMPLICITY_G_APP_SECRET');
 
+$redirectURI = Context::getContext()->shop->getBaseURL(true) . 'modules/simplicity_sociallogin/g-callback.php';
+
 if (empty($appId) || empty($appSecret)) {
     echo 'Bad request (1)';
     exit;
@@ -25,6 +27,7 @@ $gclient->setClientSecret($appSecret);
 $gclient->setAccessType('offline');
 $gclient->setIncludeGrantedScopes(true);
 $gclient->addScope([Google_Service_Oauth2::USERINFO_EMAIL, Google_Service_Oauth2::USERINFO_PROFILE]);
+$gclient->setRedirectUri($redirectURI);
 
 try {
 
