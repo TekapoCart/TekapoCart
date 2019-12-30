@@ -12,6 +12,8 @@ $appId = Configuration::get('SIMPLICITY_FB_APP_ID');
 $appSecret = Configuration::get('SIMPLICITY_FB_APP_SECRET');
 
 if (empty($appId) || empty($appSecret)) {
+    header('HTTP/1.0 400 Bad Request');
+    echo 'Bad request (1)';
     exit;
 }
 
@@ -44,7 +46,7 @@ if (! isset($accessToken)) {
         echo "Error Description: " . $helper->getErrorDescription() . "\n";
     } else {
         header('HTTP/1.0 400 Bad Request');
-        echo 'Bad request';
+        echo 'Bad request (2)';
     }
     exit;
 }

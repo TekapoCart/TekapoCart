@@ -2,7 +2,6 @@
 
 namespace Pelago\Emogrifier;
 
-use Pelago\Emogrifier\HtmlProcessor\AbstractHtmlProcessor;
 use Symfony\Component\CssSelector\CssSelectorConverter;
 use Symfony\Component\CssSelector\Exception\SyntaxErrorException;
 
@@ -22,7 +21,7 @@ use Symfony\Component\CssSelector\Exception\SyntaxErrorException;
  * @author Sander Kruger <s.kruger@invessel.com>
  * @author Zoli Szabó <zoli.szabo+github@gmail.com>
  */
-class CssInliner extends AbstractHtmlProcessor
+class CssInliner
 {
     /**
      * @var int
@@ -55,9 +54,34 @@ class CssInliner extends AbstractHtmlProcessor
     const PSEUDO_CLASS_MATCHER = '\\S+\\-(?:child|type\\()|not\\([[:ascii:]]*\\)';
 
     /**
+     * @var string
+     */
+    const CONTENT_TYPE_META_TAG = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
+
+    /**
+     * @var string
+     */
+    const DEFAULT_DOCUMENT_TYPE = '<!DOCTYPE html>';
+
+    /**
+     * @var \DOMDocument
+     */
+    protected $domDocument = null;
+
+    /**
+     * @var string
+     */
+    private $css = '';
+
+    /**
      * @var bool[]
      */
     private $excludedSelectors = [];
+
+    /**
+     * @var string[]
+     */
+    private $unprocessableHtmlTags = ['wbr'];
 
     /**
      * @var bool[]
@@ -115,6 +139,14 @@ class CssInliner extends AbstractHtmlProcessor
     private $isStyleBlocksParsingEnabled = true;
 
     /**
+     * Determines whether elements with the `display: none` property are
+     * removed from the DOM.
+     *
+     * @var bool
+     */
+    private $shouldRemoveInvisibleNodes = true;
+
+    /**
      * For calculating selector precedence order.
      * Keys are a regular expression part to match before a CSS name.
      * Values are a multiplier factor per match to weight specificity.
@@ -138,15 +170,90 @@ class CssInliner extends AbstractHtmlProcessor
     private $debug = false;
 
     /**
-     * @return CssSelectorConverter
+     * @param string $unprocessedHtml raw HTML, must be UTF-encoded, must not be empty
+     *
+     * @throws \InvalidArgumentException if $unprocessedHtml is anything other than a non-empty string
      */
-    private function getCssSelectorConverter()
+    public function __construct($unprocessedHtml)
     {
-        if ($this->cssSelectorConverter === null) {
-            $this->cssSelectorConverter = new CssSelectorConverter();
+        if (!\is_string($unprocessedHtml)) {
+            throw new \InvalidArgumentException('The provided HTML must be a string.', 1540403176);
+        }
+        if ($unprocessedHtml === '') {
+            throw new \InvalidArgumentException('The provided HTML must not be empty.', 1540403181);
         }
 
-        return $this->cssSelectorConverter;
+        $this->cssSelectorConverter = new CssSelectorConverter();
+
+        $this->setHtml($unprocessedHtml);
+    }
+
+    /**
+     * Sets the HTML to process.
+     *
+     * @param string $html the HTML to process, must be UTF-8-encoded
+     *
+     * @return void
+     */
+    private function setHtml($html)
+    {
+        $this->createUnifiedDomDocument($html);
+    }
+
+    /**
+     * Provides access to the internal DOMDocument representation of the HTML in its current state.
+     *
+     * @return \DOMDocument
+     */
+    public function getDomDocument()
+    {
+        return $this->domDocument;
+    }
+
+    /**
+     * Sets the CSS to merge with the HTML.
+     *
+     * @param string $css the CSS to merge, must be UTF-8-encoded
+     *
+     * @return void
+     */
+    public function setCss($css)
+    {
+        $this->css = $css;
+    }
+
+    /**
+     * Renders the normalized and processed HTML.
+     *
+     * @return string
+     */
+    public function render()
+    {
+        return $this->domDocument->saveHTML();
+    }
+
+    /**
+     * Renders the content of the BODY element of the normalized and processed HTML.
+     *
+     * @return string
+     */
+    public function renderBodyContent()
+    {
+        $bodyNodeHtml = $this->domDocument->saveHTML($this->getBodyElement());
+
+        return \str_replace(['<body>', '</body>'], '', $bodyNodeHtml);
+    }
+
+    /**
+     * Returns the BODY element.
+     *
+     * This method assumes that there always is a BODY element.
+     *
+     * @return \DOMElement
+     */
+    private function getBodyElement()
+    {
+        return $this->domDocument->getElementsByTagName('body')->item(0);
     }
 
     /**
@@ -162,34 +269,121 @@ class CssInliner extends AbstractHtmlProcessor
     }
 
     /**
-     * Inlines the given CSS into the existing HTML.
+     * Applies $this->css to the given HTML and returns the HTML with the CSS
+     * applied.
      *
-     * @param string $css the CSS to inline, must be UTF-8-encoded
+     * This method places the CSS inline.
      *
-     * @return self fluent interface
+     * @return string
      *
      * @throws SyntaxErrorException
      */
-    public function inlineCss($css)
+    public function emogrify()
+    {
+        $this->process();
+
+        return $this->render();
+    }
+
+    /**
+     * Applies $this->css to the given HTML and returns only the HTML content
+     * within the <body> tag.
+     *
+     * This method places the CSS inline.
+     *
+     * @return string
+     *
+     * @throws SyntaxErrorException
+     */
+    public function emogrifyBodyContent()
+    {
+        $this->process();
+
+        return $this->renderBodyContent();
+    }
+
+    /**
+     * Creates a DOM document from the given HTML and stores it in $this->domDocument.
+     *
+     * The DOM document will always have a BODY element and a document type.
+     *
+     * @param string $html
+     *
+     * @return void
+     */
+    private function createUnifiedDomDocument($html)
+    {
+        $this->createRawDomDocument($html);
+        $this->ensureExistenceOfBodyElement();
+    }
+
+    /**
+     * Creates a DOMDocument instance from the given HTML and stores it in $this->domDocument.
+     *
+     * @param string $html
+     *
+     * @return void
+     */
+    private function createRawDomDocument($html)
+    {
+        $domDocument = new \DOMDocument();
+        $domDocument->encoding = 'UTF-8';
+        $domDocument->strictErrorChecking = false;
+        $domDocument->formatOutput = true;
+        $libXmlState = \libxml_use_internal_errors(true);
+        $domDocument->loadHTML($this->prepareHtmlForDomConversion($html));
+        \libxml_clear_errors();
+        \libxml_use_internal_errors($libXmlState);
+        $domDocument->normalizeDocument();
+
+        $this->domDocument = $domDocument;
+    }
+
+    /**
+     * Returns the HTML with added document type and Content-Type meta tag if needed,
+     * ensuring that the HTML will be good for creating a DOM document from it.
+     *
+     * @param string $html
+     *
+     * @return string the unified HTML
+     */
+    private function prepareHtmlForDomConversion($html)
+    {
+        $htmlWithDocumentType = $this->ensureDocumentType($html);
+
+        return $this->addContentTypeMetaTag($htmlWithDocumentType);
+    }
+
+    /**
+     * Applies $this->css to $this->domDocument.
+     *
+     * This method places the CSS inline.
+     *
+     * @return void
+     *
+     * @throws SyntaxErrorException
+     */
+    protected function process()
     {
         $this->clearAllCaches();
         $this->purgeVisitedNodes();
 
-        $this->normalizeStyleAttributesOfAllNodes();
+        $xPath = new \DOMXPath($this->domDocument);
+        $this->removeUnprocessableTags();
+        $this->normalizeStyleAttributesOfAllNodes($xPath);
 
-        $combinedCss = $css;
-        // grab any existing style blocks from the HTML and append them to the existing CSS
+        // grab any existing style blocks from the html and append them to the existing CSS
         // (these blocks should be appended so as to have precedence over conflicting styles in the existing CSS)
+        $allCss = $this->css;
         if ($this->isStyleBlocksParsingEnabled) {
-            $combinedCss .= $this->getCssFromAllStyleNodes();
+            $allCss .= $this->getCssFromAllStyleNodes($xPath);
         }
 
-        $excludedNodes = $this->getNodesToExclude();
-        $cssRules = $this->parseCssRules($combinedCss);
-        $cssSelectorConverter = $this->getCssSelectorConverter();
+        $excludedNodes = $this->getNodesToExclude($xPath);
+        $cssRules = $this->parseCssRules($allCss);
         foreach ($cssRules['inlineable'] as $cssRule) {
             try {
-                $nodesMatchingCssSelectors = $this->xPath->query($cssSelectorConverter->toXPath($cssRule['selector']));
+                $nodesMatchingCssSelectors = $xPath->query($this->cssSelectorConverter->toXPath($cssRule['selector']));
             } catch (SyntaxErrorException $e) {
                 if ($this->debug) {
                     throw $e;
@@ -209,23 +403,38 @@ class CssInliner extends AbstractHtmlProcessor
         if ($this->isInlineStyleAttributesParsingEnabled) {
             $this->fillStyleAttributesWithMergedStyles();
         }
+        $this->postProcess($xPath);
 
-        $this->removeImportantAnnotationFromAllInlineStyles();
+        $this->removeImportantAnnotationFromAllInlineStyles($xPath);
 
-        $this->copyUninlineableCssToStyleNode($cssRules['uninlineable']);
+        $this->copyUninlineableCssToStyleNode($xPath, $cssRules['uninlineable']);
+    }
 
-        return $this;
+    /**
+     * Applies some optional post-processing to the HTML in the DOM document.
+     *
+     * @param \DOMXPath $xPath
+     *
+     * @return void
+     */
+    private function postProcess(\DOMXPath $xPath)
+    {
+        if ($this->shouldRemoveInvisibleNodes) {
+            $this->removeInvisibleNodes($xPath);
+        }
     }
 
     /**
      * Searches for all nodes with a style attribute and removes the "!important" annotations out of
      * the inline style declarations, eventually by rearranging declarations.
      *
+     * @param \DOMXPath $xPath
+     *
      * @return void
      */
-    private function removeImportantAnnotationFromAllInlineStyles()
+    private function removeImportantAnnotationFromAllInlineStyles(\DOMXPath $xPath)
     {
-        foreach ($this->getAllNodesWithStyleAttribute() as $node) {
+        foreach ($this->getAllNodesWithStyleAttribute($xPath) as $node) {
             $this->removeImportantAnnotationFromNodeInlineStyle($node);
         }
     }
@@ -267,11 +476,13 @@ class CssInliner extends AbstractHtmlProcessor
     /**
      * Returns a list with all DOM nodes that have a style attribute.
      *
+     * @param \DOMXPath $xPath
+     *
      * @return \DOMNodeList
      */
-    private function getAllNodesWithStyleAttribute()
+    private function getAllNodesWithStyleAttribute(\DOMXPath $xPath)
     {
-        return $this->xPath->query('//*[@style]');
+        return $xPath->query('//*[@style]');
     }
 
     /**
@@ -396,6 +607,18 @@ class CssInliner extends AbstractHtmlProcessor
     }
 
     /**
+     * Disables the removal of elements with `display: none` properties.
+     *
+     * @deprecated will be removed in Emogrifier 3.0
+     *
+     * @return void
+     */
+    public function disableInvisibleNodeRemoval()
+    {
+        $this->shouldRemoveInvisibleNodes = false;
+    }
+
+    /**
      * Clears all caches.
      *
      * @return void
@@ -419,6 +642,38 @@ class CssInliner extends AbstractHtmlProcessor
     {
         $this->visitedNodes = [];
         $this->styleAttributesForNodes = [];
+    }
+
+    /**
+     * Marks a tag for removal.
+     *
+     * There are some HTML tags that DOMDocument cannot process, and it will throw an error if it encounters them.
+     * In particular, DOMDocument will complain if you try to use HTML5 tags in an XHTML document.
+     *
+     * Note: The tags will not be removed if they have any content.
+     *
+     * @param string $tagName the tag name, e.g., "p"
+     *
+     * @return void
+     */
+    public function addUnprocessableHtmlTag($tagName)
+    {
+        $this->unprocessableHtmlTags[] = $tagName;
+    }
+
+    /**
+     * Drops a tag from the removal list.
+     *
+     * @param string $tagName the tag name, e.g., "p"
+     *
+     * @return void
+     */
+    public function removeUnprocessableHtmlTag($tagName)
+    {
+        $key = \array_search($tagName, $this->unprocessableHtmlTags, true);
+        if ($key !== false) {
+            unset($this->unprocessableHtmlTags[$key]);
+        }
     }
 
     /**
@@ -476,17 +731,49 @@ class CssInliner extends AbstractHtmlProcessor
     }
 
     /**
+     * This removes styles from your email that contain display:none.
+     * We need to look for display:none, but we need to do a case-insensitive search. Since DOMDocument only
+     * supports XPath 1.0, lower-case() isn't available to us. We've thus far only set attributes to lowercase,
+     * not attribute values. Consequently, we need to translate() the letters that would be in 'NONE' ("NOE")
+     * to lowercase.
+     *
+     * @param \DOMXPath $xPath
+     *
+     * @return void
+     */
+    private function removeInvisibleNodes(\DOMXPath $xPath)
+    {
+        $nodesWithStyleDisplayNone = $xPath->query(
+            '//*[contains(translate(translate(@style," ",""),"NOE","noe"),"display:none")]'
+        );
+        if ($nodesWithStyleDisplayNone->length === 0) {
+            return;
+        }
+
+        // The checks on parentNode and is_callable below ensure that if we've deleted the parent node,
+        // we don't try to call removeChild on a nonexistent child node
+        /** @var \DOMNode $node */
+        foreach ($nodesWithStyleDisplayNone as $node) {
+            if ($node->parentNode && \is_callable([$node->parentNode, 'removeChild'])) {
+                $node->parentNode->removeChild($node);
+            }
+        }
+    }
+
+    /**
      * Parses the document and normalizes all existing CSS attributes.
      * This changes 'DISPLAY: none' to 'display: none'.
      * We wouldn't have to do this if DOMXPath supported XPath 2.0.
      * Also stores a reference of nodes with existing inline styles so we don't overwrite them.
      *
+     * @param \DOMXPath $xPath
+     *
      * @return void
      */
-    private function normalizeStyleAttributesOfAllNodes()
+    private function normalizeStyleAttributesOfAllNodes(\DOMXPath $xPath)
     {
         /** @var \DOMElement $node */
-        foreach ($this->getAllNodesWithStyleAttribute() as $node) {
+        foreach ($this->getAllNodesWithStyleAttribute($xPath) as $node) {
             if ($this->isInlineStyleAttributesParsingEnabled) {
                 $this->normalizeStyleAttributes($node);
             }
@@ -509,7 +796,7 @@ class CssInliner extends AbstractHtmlProcessor
     {
         $normalizedOriginalStyle = \preg_replace_callback(
             '/[A-z\\-]+(?=\\:)/S',
-            static function (array $m) {
+            function (array $m) {
                 return \strtolower($m[0]);
             },
             $node->getAttribute('style')
@@ -620,20 +907,21 @@ class CssInliner extends AbstractHtmlProcessor
     /**
      * Applies $cssRules to $this->domDocument, limited to the rules that actually apply to the document.
      *
+     * @param \DOMXPath $xPath
      * @param string[][] $cssRules The "uninlineable" array of CSS rules returned by `parseCssRules`
      *
      * @return void
      */
-    private function copyUninlineableCssToStyleNode(array $cssRules)
+    private function copyUninlineableCssToStyleNode(\DOMXPath $xPath, array $cssRules)
     {
         $cssRulesRelevantForDocument = \array_filter(
             $cssRules,
-            function (array $cssRule) {
+            function (array $cssRule) use ($xPath) {
                 $selector = $cssRule['selector'];
                 if ($cssRule['hasUnmatchablePseudo']) {
                     $selector = $this->removeUnmatchablePseudoComponents($selector);
                 }
-                return $this->existsMatchForCssSelector($selector);
+                return $this->existsMatchForCssSelector($xPath, $selector);
             }
         );
 
@@ -699,16 +987,17 @@ class CssInliner extends AbstractHtmlProcessor
      * When not in debug mode, it returns true also for invalid selectors (because they may be valid,
      * just not implemented/recognized yet by Emogrifier).
      *
+     * @param \DOMXPath $xPath
      * @param string $cssSelector
      *
      * @return bool
      *
      * @throws SyntaxErrorException
      */
-    private function existsMatchForCssSelector($cssSelector)
+    private function existsMatchForCssSelector(\DOMXPath $xPath, $cssSelector)
     {
         try {
-            $nodesMatchingSelector = $this->xPath->query($this->getCssSelectorConverter()->toXPath($cssSelector));
+            $nodesMatchingSelector = $xPath->query($this->cssSelectorConverter->toXPath($cssSelector));
         } catch (SyntaxErrorException $e) {
             if ($this->debug) {
                 throw $e;
@@ -722,11 +1011,13 @@ class CssInliner extends AbstractHtmlProcessor
     /**
      * Returns CSS content.
      *
+     * @param \DOMXPath $xPath
+     *
      * @return string
      */
-    private function getCssFromAllStyleNodes()
+    private function getCssFromAllStyleNodes(\DOMXPath $xPath)
     {
-        $styleNodes = $this->xPath->query('//style');
+        $styleNodes = $xPath->query('//style');
 
         if ($styleNodes === false) {
             return '';
@@ -747,7 +1038,7 @@ class CssInliner extends AbstractHtmlProcessor
      *
      * This method is protected to allow overriding.
      *
-     * @see https://github.com/MyIntervals/emogrifier/issues/103
+     * @see https://github.com/jjriv/emogrifier/issues/103
      *
      * @param string $css
      *
@@ -762,6 +1053,21 @@ class CssInliner extends AbstractHtmlProcessor
 
         $headElement = $this->getHeadElement();
         $headElement->appendChild($styleElement);
+    }
+
+    /**
+     * Checks that $this->domDocument has a BODY element and adds it if it is missing.
+     *
+     * @return void
+     */
+    private function ensureExistenceOfBodyElement()
+    {
+        if ($this->domDocument->getElementsByTagName('body')->item(0) !== null) {
+            return;
+        }
+
+        $htmlElement = $this->domDocument->getElementsByTagName('html')->item(0);
+        $htmlElement->appendChild($this->domDocument->createElement('body'));
     }
 
     /**
@@ -838,6 +1144,78 @@ class CssInliner extends AbstractHtmlProcessor
             }
         }
         return $splitCss;
+    }
+
+    /**
+     * Removes empty unprocessable tags from the DOM document.
+     *
+     * @return void
+     */
+    private function removeUnprocessableTags()
+    {
+        foreach ($this->unprocessableHtmlTags as $tagName) {
+            $nodes = $this->domDocument->getElementsByTagName($tagName);
+            /** @var \DOMNode $node */
+            foreach ($nodes as $node) {
+                $hasContent = $node->hasChildNodes() || $node->hasChildNodes();
+                if (!$hasContent) {
+                    $node->parentNode->removeChild($node);
+                }
+            }
+        }
+    }
+
+    /**
+     * Makes sure that the passed HTML has a document type.
+     *
+     * @param string $html
+     *
+     * @return string HTML with document type
+     */
+    private function ensureDocumentType($html)
+    {
+        $hasDocumentType = \stripos($html, '<!DOCTYPE') !== false;
+        if ($hasDocumentType) {
+            return $html;
+        }
+
+        return static::DEFAULT_DOCUMENT_TYPE . $html;
+    }
+
+    /**
+     * Adds a Content-Type meta tag for the charset.
+     *
+     * This method also ensures that there is a HEAD element.
+     *
+     * @param string $html
+     *
+     * @return string the HTML with the meta tag added
+     */
+    private function addContentTypeMetaTag($html)
+    {
+        $hasContentTypeMetaTag = \stripos($html, 'Content-Type') !== false;
+        if ($hasContentTypeMetaTag) {
+            return $html;
+        }
+
+        // We are trying to insert the meta tag to the right spot in the DOM.
+        // If we just prepended it to the HTML, we would lose attributes set to the HTML tag.
+        $hasHeadTag = \stripos($html, '<head') !== false;
+        $hasHtmlTag = \stripos($html, '<html') !== false;
+
+        if ($hasHeadTag) {
+            $reworkedHtml = \preg_replace('/<head(.*?)>/i', '<head$1>' . static::CONTENT_TYPE_META_TAG, $html);
+        } elseif ($hasHtmlTag) {
+            $reworkedHtml = \preg_replace(
+                '/<html(.*?)>/i',
+                '<html$1><head>' . static::CONTENT_TYPE_META_TAG . '</head>',
+                $html
+            );
+        } else {
+            $reworkedHtml = static::CONTENT_TYPE_META_TAG . $html;
+        }
+
+        return $reworkedHtml;
     }
 
     /**
@@ -928,16 +1306,18 @@ class CssInliner extends AbstractHtmlProcessor
     /**
      * Find the nodes that are not to be emogrified.
      *
+     * @param \DOMXPath $xPath
+     *
      * @return \DOMElement[]
      *
      * @throws SyntaxErrorException
      */
-    private function getNodesToExclude()
+    private function getNodesToExclude(\DOMXPath $xPath)
     {
         $excludedNodes = [];
         foreach (\array_keys($this->excludedSelectors) as $selectorToExclude) {
             try {
-                $matchingNodes = $this->xPath->query($this->getCssSelectorConverter()->toXPath($selectorToExclude));
+                $matchingNodes = $xPath->query($this->cssSelectorConverter->toXPath($selectorToExclude));
             } catch (SyntaxErrorException $e) {
                 if ($this->debug) {
                     throw $e;

@@ -10,7 +10,10 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         'abede361264e2ae69ec1eee813a101af' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/abs.php',
         '21a5860fbef5be28db5ddfbc3cca67c4' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acos.php',
         '1546e3f9d127f2a9bb2d1b6c31c26ef1' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acosh.php',
@@ -82,6 +85,10 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
     );
 
     public static $prefixLengthsPsr4 = array (
+        'p' => 
+        array (
+            'phpseclib\\' => 10,
+        ),
         'T' => 
         array (
             'Twig\\' => 5,
@@ -118,6 +125,7 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
             'Psr\\Link\\' => 9,
+            'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
             'PrestaShop\\TranslationToolsBundle\\' => 34,
@@ -164,11 +172,14 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
             'GuzzleHttp\\Subscriber\\Log\\' => 26,
             'GuzzleHttp\\Stream\\' => 18,
             'GuzzleHttp\\Ring\\' => 16,
+            'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\' => 11,
+            'Google\\Auth\\' => 12,
             'GeoIp2\\' => 7,
         ),
         'F' => 
         array (
+            'Firebase\\JWT\\' => 13,
             'Fig\\Link\\' => 9,
             'Facebook\\' => 9,
         ),
@@ -192,6 +203,10 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
     );
 
     public static $prefixDirsPsr4 = array (
+        'phpseclib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+        ),
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
@@ -291,6 +306,10 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         'Psr\\Link\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/link/src',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Container\\' => 
         array (
@@ -404,13 +423,25 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/ringphp/src',
         ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'Google\\Auth\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/auth/src',
+        ),
         'GeoIp2\\' => 
         array (
             0 => __DIR__ . '/..' . '/geoip2/geoip2/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Fig\\Link\\' => 
         array (
@@ -494,16 +525,23 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
             array (
                 0 => __DIR__ . '/..' . '/greenlion/php-sql-parser/src',
             ),
-            'PEAR' => 
-            array (
-                0 => __DIR__ . '/..' . '/pear/pear_exception',
-            ),
         ),
         'H' => 
         array (
             'HTMLPurifier' => 
             array (
                 0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
+            ),
+        ),
+        'G' => 
+        array (
+            'Google_Service_' => 
+            array (
+                0 => __DIR__ . '/..' . '/google/apiclient-services/src',
+            ),
+            'Google_' => 
+            array (
+                0 => __DIR__ . '/..' . '/google/apiclient/src',
             ),
         ),
         'D' => 
@@ -586,6 +624,8 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         'DooDigestAuth' => __DIR__ . '/..' . '/mrclay/minify/min/lib/DooDigestAuth.php',
         'Error' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/Error.php',
         'FirePHP' => __DIR__ . '/..' . '/mrclay/minify/min/lib/FirePHP.php',
+        'Google_Service_Exception' => __DIR__ . '/..' . '/google/apiclient/src/Google/Service/Exception.php',
+        'Google_Service_Resource' => __DIR__ . '/..' . '/google/apiclient/src/Google/Service/Resource.php',
         'HTTP_ConditionalGet' => __DIR__ . '/..' . '/mrclay/minify/min/lib/HTTP/ConditionalGet.php',
         'HTTP_Encoder' => __DIR__ . '/..' . '/mrclay/minify/min/lib/HTTP/Encoder.php',
         'IntlDateFormatter' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/IntlDateFormatter.php',
@@ -640,6 +680,7 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         'MrClay\\Cli\\Arg' => __DIR__ . '/..' . '/mrclay/minify/min/lib/MrClay/Cli/Arg.php',
         'NumberFormatter' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/NumberFormatter.php',
         'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
+        'PEAR_Exception' => __DIR__ . '/..' . '/pear/pear_exception/PEAR/Exception.php',
         'ParseError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ParseError.php',
         'Ps_Facetedsearch' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/ps_facetedsearch.php',
         'Ps_Linklist' => __DIR__ . '/../..' . '/modules/ps_linklist/ps_linklist.php',

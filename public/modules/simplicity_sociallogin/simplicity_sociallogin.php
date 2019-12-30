@@ -14,7 +14,7 @@ class Simplicity_Sociallogin extends Module
         parent::__construct();
 
         $this->displayName = 'Social Login 社群登入';
-        $this->description = '支援使用 Facebook 帳號登入。';
+        $this->description = '支援使用 Google、Facebook 會員登入。';
     }
 
     public function install()
@@ -52,6 +52,30 @@ class Simplicity_Sociallogin extends Module
 
     /////// HOOK ////////////////////////////////////////////////////////////////////
 
+    public function getGLoginUrl()
+    {
+
+        $appId = Configuration::get('SIMPLICITY_G_APP_ID');
+        $appSecret = Configuration::get('SIMPLICITY_G_APP_SECRET');
+
+        $redirectURI = $this->context->shop->getBaseURL(true) . 'modules/simplicity_sociallogin/g-callback.php';
+
+        if (empty($appId) || empty($appSecret)) {
+            return;
+        }
+
+        $gclient = new Google_Client();
+        $gclient->setClientId($appId);
+        $gclient->setClientSecret($appSecret);
+        $gclient->setAccessType('offline');
+        $gclient->setIncludeGrantedScopes(true);
+        $gclient->addScope([Google_Service_Oauth2::USERINFO_EMAIL, Google_Service_Oauth2::USERINFO_PROFILE]);
+        $gclient->setRedirectUri($redirectURI);
+
+        $loginUrl = $gclient->createAuthUrl();
+        return $loginUrl;
+    }
+
     public function getFbLoginUrl()
     {
 
@@ -61,6 +85,8 @@ class Simplicity_Sociallogin extends Module
 
         $appId = Configuration::get('SIMPLICITY_FB_APP_ID');
         $appSecret = Configuration::get('SIMPLICITY_FB_APP_SECRET');
+
+        $redirectURI = $this->context->shop->getBaseURL(true) . 'modules/simplicity_sociallogin/fb-callback.php';
 
         if (empty($appId) || empty($appSecret)) {
             return;
@@ -75,7 +101,7 @@ class Simplicity_Sociallogin extends Module
         $helper = $fb->getRedirectLoginHelper();
 
         $permissions = ['email'];
-        $loginUrl = $helper->getLoginUrl($this->context->shop->getBaseURL(true) . 'modules/simplicity_sociallogin/fb-callback.php', $permissions);
+        $loginUrl = $helper->getLoginUrl($redirectURI, $permissions);
 
         return $loginUrl;
     }
@@ -92,6 +118,7 @@ class Simplicity_Sociallogin extends Module
         }
 
         $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
+        $this->smarty->assign('g_login_url', $this->getGLoginUrl());
         return $this->display(__FILE__, 'hook-login.tpl');
     }
 
@@ -114,7 +141,6 @@ class Simplicity_Sociallogin extends Module
                 exit;
             }
         }
-
 
         $email = $user['email'];
         $social_id = $user['id'];
@@ -250,6 +276,10 @@ class Simplicity_Sociallogin extends Module
     public function getContent()
     {
         if (Tools::isSubmit('submitModule')) {
+
+            Configuration::updateValue('SIMPLICITY_G_APP_ID', Tools::getValue('g_app_id', ''));
+            Configuration::updateValue('SIMPLICITY_G_APP_SECRET', Tools::getValue('g_app_secret', ''));
+
             Configuration::updateValue('SIMPLICITY_FB_APP_ID', Tools::getValue('app_id', ''));
             Configuration::updateValue('SIMPLICITY_FB_APP_SECRET', Tools::getValue('app_secret', ''));
 
@@ -269,6 +299,18 @@ class Simplicity_Sociallogin extends Module
                     'icon' => 'icon-cogs'
                 ),
                 'input' => array(
+                    array(
+                        'type' => 'text',
+                        'label' => 'Google 用戶端 ID',
+                        'name' => 'g_app_id',
+                        'desc' => '',
+                    ),
+                    array(
+                        'type' => 'text',
+                        'label' => 'Google 用戶端密碼',
+                        'name' => 'g_app_secret',
+                        'desc' => '',
+                    ),
                     array(
                         'type' => 'text',
                         'label' => 'Facebook APP ID',
@@ -309,6 +351,8 @@ class Simplicity_Sociallogin extends Module
     public function getConfigFieldsValues()
     {
         return array(
+            'g_app_id' => Tools::getValue('g_app_id', Configuration::get('SIMPLICITY_G_APP_ID')),
+            'g_app_secret' => Tools::getValue('g_app_secret', Configuration::get('SIMPLICITY_G_APP_SECRET')),
             'app_id' => Tools::getValue('fb_app_id', Configuration::get('SIMPLICITY_FB_APP_ID')),
             'app_secret' => Tools::getValue('fb_app_id', Configuration::get('SIMPLICITY_FB_APP_SECRET')),
         );
