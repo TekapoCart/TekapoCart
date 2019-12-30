@@ -105,16 +105,6 @@ UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_sta
 UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 13;
 -- 售完
 UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 26;
--- 待付款（ECPay 信用卡18期）
-UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 31;
--- 待付款（ECPay WebATM）
-UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 33;
--- 待付款（ECPay ATM）
-UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 34;
--- 待付款（ECPay 超商條碼）
-UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 35;
--- 待付款（ECPay 超商代碼）
-UPDATE `ps_order_state` SET `deleted` = '1' WHERE `ps_order_state`.`id_order_state` = 36;
 
 
 UPDATE `ps_order_state` SET `sort` = '1' WHERE `ps_order_state`.`id_order_state` = 14;

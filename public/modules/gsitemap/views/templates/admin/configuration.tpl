@@ -30,7 +30,7 @@
    </button>
    <p class="alert-text">
       {*{l s='Your sitemaps were successfully created. Please do not forget to setup the URL' d='Modules.Gsitemap.Admin'} <a class="alert-link" href="{$gsitemap_store_url|escape:'htmlall':'UTF-8'}{$shop->id|intval}_index_sitemap.xml" target="_blank">{$gsitemap_store_url|escape:'htmlall':'UTF-8'}{$shop->id|intval}_index_sitemap.xml</a> {l s='in your Google Webmaster account.' d='Modules.Gsitemap.Admin'} *}
-      Sitemap 網址已完成建立。若還未在 Google Webmaster 帳戶設定網址，請記得前往設定喔。
+      Sitemap 網址已完成建立。若還未在 Google Search Console 帳戶設定網址，請記得前往設定喔。
    </p>
 </div>
 {/if}
