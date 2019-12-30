@@ -100,10 +100,10 @@ class Simplicity_Sociallogin extends Module
         return $loginUrl;
     }
 
-    public function hookHeader()
-    {
-        $this->context->controller->addCSS(($this->_path) . 'facebook.css', 'all');
-    }
+//    public function hookHeader()
+//    {
+//        $this->context->controller->addCSS(($this->_path) . 'facebook.css', 'all');
+//    }
 
     public function hookDisplayCustomerLoginLink()
     {

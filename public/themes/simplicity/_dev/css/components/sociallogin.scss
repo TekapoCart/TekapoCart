@@ -1,0 +1,33 @@
+a.sociallogin-btn {
+  border: 1px solid $brand-border-color;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-bottom: 5px;
+  font-size: 15px;
+  line-height: 25px;
+  color: $gray-darker;
+  display: inline-block;
+
+  &:nth-child(2) {
+    margin-left: 5px;
+  }
+
+  &:hover {
+    color: $gray-darker;
+  }
+
+  svg {
+    vertical-align: bottom;
+    margin-right: 4px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  a.sociallogin-icon {
+
+    &:nth-child(1) {
+      margin-right: 4px;
+    }
+
+  }
+}
