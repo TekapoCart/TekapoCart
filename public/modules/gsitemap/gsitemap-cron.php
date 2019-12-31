@@ -31,13 +31,15 @@
 include(dirname(__FILE__) . '/../../config/config.inc.php');
 include(dirname(__FILE__) . '/../../init.php');
 
+// suzy: 2019-12-31 改寫 cron 檢查條件
 /* Check security token */
-if (!Tools::isPHPCLI()) {
-    // suzy: 2018-07-30 normalize token: substr(_COOKIE_KEY_, 34, 8)
-    // if (Tools::substr(Tools::encrypt('gsitemap/cron'), 0, 10) != Tools::getValue('token') || !Module::isInstalled('gsitemap')) {
-    if (substr(_COOKIE_KEY_, 34, 8) != Tools::getValue('token') || !Module::isInstalled('gsitemap')) {
-        die('Bad token');
-    }
+//if (!Tools::isPHPCLI()) {
+//    if (Tools::substr(Tools::encrypt('gsitemap/cron'), 0, 10) != Tools::getValue('token') || !Module::isInstalled('gsitemap')) {
+//        die('Bad token');
+//    }
+//}
+if ($_SERVER['REMOTE_ADDR'] !== file_get_contents("http://ipecho.net/plain")) {
+    die('Bad token');
 }
 
 $gsitemap = Module::getInstanceByName('gsitemap');
