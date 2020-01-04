@@ -123,7 +123,8 @@
             {* suzy: 2018-08-12 換 shop version <span id="shop_version">{$ps_version}</span>*}
 
 			{* Quick access *}
-			{if count($quick_access) >= 0}
+			{* suzy: 2019-01-01 quick_access 加上 is_array 判斷 *}
+			{if is_array($quick_access) && count($quick_access) >= 0}
 				<div id="header_quick" class="component">
 					<div class="dropdown">
 						<button

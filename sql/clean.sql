@@ -47,6 +47,8 @@ TRUNCATE TABLE `ps_paypal_processlogger`;
 
 --
 
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='SIMPLICITY_G_APP_ID';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='SIMPLICITY_G_APP_SECRET';
 UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='SIMPLICITY_FB_APP_ID';
 UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='SIMPLICITY_FB_APP_SECRET';
 
