@@ -235,10 +235,12 @@ public/img/cms/sticker/funny.svg
 public/img/cms/sticker/environmentally-friendly.svg
 public/img/cms/sticker/cruelty-free.svg
 
-
 #### 其他
 public/img/logo_mail.jpg
 public/modules/ps_banner/img/sample.png
+public/modules/ps_imageslider/images/1.png
+public/modules/ps_imageslider/images/2.png
+public/modules/ps_imageslider/images/3.png
 
 
 ######## 以下參考 https://github.com/PrestaShop/PrestaShop/blob/1.7.4.2/.gitignore
