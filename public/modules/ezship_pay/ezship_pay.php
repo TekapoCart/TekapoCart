@@ -54,6 +54,7 @@ class EzShip_Pay extends PaymentModule
             $carrier->active = 1;
             $carrier->shipping_handling = 0;
             $carrier->shipping_external = 0;
+            $carrier->shipping_method = 2;
             $carrier->is_module = 1;
             $carrier->external_module_name = $this->name;
 
@@ -66,7 +67,8 @@ class EzShip_Pay extends PaymentModule
                 $groups = Group::getGroups(true);
                 foreach ($groups as $group) {
                     Db::getInstance()->insert('carrier_group', [
-                        'id_carrier' => (int)$carrier->id, 'id_group' => (int)$group['id_group']
+                        'id_carrier' => (int)$carrier->id,
+                        'id_group' => (int)$group['id_group']
                     ]);
                 }
                 $c1 = true;
@@ -80,6 +82,7 @@ class EzShip_Pay extends PaymentModule
             $carrier->active = 1;
             $carrier->shipping_handling = 0;
             $carrier->shipping_external = 0;
+            $carrier->shipping_method = 2;
             $carrier->is_module = 1;
             $carrier->external_module_name = $this->name;
 
@@ -92,7 +95,8 @@ class EzShip_Pay extends PaymentModule
                 $groups = Group::getGroups(true);
                 foreach ($groups as $group) {
                     Db::getInstance()->insert('carrier_group', [
-                        'id_carrier' => (int)$carrier->id, 'id_group' => (int)$group['id_group']
+                        'id_carrier' => (int)$carrier->id,
+                        'id_group' => (int)$group['id_group']
                     ]);
                 }
                 $c2 = true;
@@ -113,7 +117,6 @@ class EzShip_Pay extends PaymentModule
         }
 
         $payment_options = [];
-
         if (Configuration::get('ezship_enable_payment') == 'on') {
 
             $payment_option = new PaymentOption();
@@ -128,9 +131,7 @@ class EzShip_Pay extends PaymentModule
                 ->setAction($this->context->link->getModuleLink($this->name, 'validation', [], true));
 
             $payment_options[] = $payment_option;
-
         }
-
 
         return $payment_options;
     }

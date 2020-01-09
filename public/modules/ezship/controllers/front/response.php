@@ -33,19 +33,24 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                 } else {
 
                     # Log ecpay feedback
-                    EzShip::logMessage(json_encode($ezship_feedback), true);
+                    // EzShip::logMessage(json_encode($ezship_feedback), true);
 
-                    # Get cart order id
-                    $order_id = $ezship_feedback['order_id'];
-                    $response_type = ((int) $order_id > 0) ? EzShip_ResponseType::CHECKOUT : EzShip_ResponseType::STORE;
+
+                    $response_type = null;
+                    if (isset($ezship_feedback['order_id'])) {
+                        $response_type = EzShip_ResponseType::CHECKOUT;
+                    } elseif (isset($ezship_feedback['processID'])) {
+                        $response_type = EzShip_ResponseType::STORE;
+                    }
 
                     switch ($response_type) {
                         case EzShip_ResponseType::STORE:
 
-                            $cart_id = (int)$ezship_feedback['processID'];
 
+
+                            $cart_id = (int)$ezship_feedback['processID'];
                             if ($this->context->cart->id !== $cart_id) {
-                                $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('cart'));
+                                Tools::redirect($this->context->link->getPageLink('index', true));
                             }
 
                             $store_data = [
@@ -57,7 +62,10 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                             ];
                             EzShip::saveStoreData($store_data);
 
-                            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order'));
+
+                            $returnUrl = $this->context->link->getPageLink('order', true, $this->context->language->id);
+                            header('Location: ' . $returnUrl);
+                            exit;
 
                             break;
                         case EzShip_ResponseType::CHECKOUT:

@@ -11,8 +11,6 @@ class EzShip extends CarrierModule
 
     private $ezShipParams = [];
 
-    private $ezShipLog = 'ezShipLog';
-
     public function __construct()
     {
         $this->name = 'ezship';
@@ -23,19 +21,15 @@ class EzShip extends CarrierModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('ezShip pickup in-store');
+        $this->displayName = $this->l('ezShip CVS pickup in-store');
         $this->description = 'https://www.tekapo.io/';
         $this->confirmUninstall = $this->l('Do you want to uninstall ezShip module?');
 
         $this->ezShipParams = [
             'ezship_su_id',
             'ezship_secret',
-            'ezship_enable_store_pickup',
-            'ezship_enable_home_delivery',
-            'ezship_enable_payment',
         ];
 
-        $this->ezShipLog = _PS_LOG_DIR_ . 'ezship.log';
     }
 
     public function install()
@@ -94,16 +88,19 @@ class EzShip extends CarrierModule
     public function installCarrier()
     {
         $carrier = new Carrier();
-        $carrier->name = $this->l('CVS Pickup in-store');
+        $carrier->name = $this->l('OK Mart, HiLife, FamilyMart pickup in-store');
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
         $carrier->shipping_external = 0;
+        $carrier->shipping_method = 2;
         $carrier->is_module = 1;
+        $carrier->need_range = 1;
+        $carrier->range_behavior = 1;
         $carrier->external_module_name = $this->name;
 
         $languages = Language::getLanguages(true);
         foreach ($languages as $language) {
-            $carrier->delay[(int)$language['id_lang']] = 'days';
+            $carrier->delay[(int)$language['id_lang']] = $this->l('2-3 days');
         }
 
         if ($carrier->add()) {
@@ -121,6 +118,7 @@ class EzShip extends CarrierModule
     // 電子地圖連結掛在這裡
     public function hookDisplayCarrierExtraContent($params)
     {
+
         $carrier = new Carrier($params['carrier']['id']);
         if ($carrier->external_module_name !== $this->name) {
             return false;
@@ -313,7 +311,7 @@ class EzShip extends CarrierModule
     private function postValidation()
     {
         $required_fields = array(
-            'ezship_su_id' => $this->l('Su ID'),
+            'ezship_su_id' => $this->l('ezShip account (suID)'),
         );
 
         foreach ($required_fields as $field_name => $field_desc) {
@@ -327,39 +325,28 @@ class EzShip extends CarrierModule
 
     private function displayForm()
     {
-        # Set the payment methods options
-        $payment_methods = array();
-        $payments_desc = $this->getPaymentsDesc();
-        foreach ($payments_desc as $payment_name => $payment_desc) {
-            array_push($payment_methods, array('id_option' => strtolower($payment_name), 'name' => $payment_desc));
-        }
-
         # Set the configurations for generating a setting form
         $fields_form[0]['form'] = array(
             'legend' => array(
                 'title' => $this->l('ezShip configuration'),
-                'image' => '../modules/ezship/images/ezship_setting_logo.png'
             ),
             'input' => array(
                 array(
                     'type' => 'text',
-                    'label' => $this->l('Su ID'),
-                    'name' => 'ecpay_merchant_id',
-                    'required' => true
+                    'label' => $this->l('ezShip account (suID)'),
+                    'name' => 'ezship_su_id',
+                    'required' => true,
                 ),
                 array(
-                    'type' => 'checkbox',
-                    'label' => $this->l('Payment Methods'),
-                    'name' => 'ecpay_payment',
-                    'values' => array(
-                        'query' => $payment_methods,
-                        'name' => 'name',
-                        'id' => 'id_option'
-                    )
-                )
+                    'type' => 'text',
+                    'label' => $this->l('Secret key'),
+                    'name' => 'ezship_secret',
+                    'desc' => $this->l('auto generated'),
+                    'readonly' => true,
+                ),
             ),
             'submit' => array(
-                'name' => 'ecpay_submit',
+                'name' => 'ezship_submit',
                 'title' => $this->l('Save'),
                 'class' => 'button'
             )
@@ -381,7 +368,7 @@ class EzShip extends CarrierModule
         $helper->allow_employee_form_lang = $default_lang;
 
         # Load the current settings
-        foreach ($this->ezshipParams as $param_name) {
+        foreach ($this->ezShipParams as $param_name) {
             $helper->fields_value[$param_name] = Configuration::get($param_name);
         }
 
@@ -390,13 +377,19 @@ class EzShip extends CarrierModule
 
     private function postProcess()
     {
-        foreach ($this->ezshipParams as $param_name) {
+
+        if (strlen(Tools::getValue('ezship_secret')) === 0) {
+            $_POST['ezship_secret'] = sha1(openssl_random_pseudo_bytes(1024));
+        }
+
+        foreach ($this->ezShipParams as $param_name) {
+
             if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
                 return $this->displayError($param_name . ' ' . $this->l('updated failed'));
             }
         }
 
-        return $this->displayConfirmation($this->l('Settings updated'));
+        return $this->displayConfirmation($this->trans('Settings updated.', array(), 'Admin.Notifications.Success'));
     }
 
     public function getOrderShippingCost($params, $shipping_cost)

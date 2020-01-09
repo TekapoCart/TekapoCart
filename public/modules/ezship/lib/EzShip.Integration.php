@@ -255,7 +255,7 @@ abstract class EzShip_Aio
     }
 }
 
-class EzShip_Send extends ECPay_Aio
+class EzShip_Send extends EzShip_Aio
 {
     public static $ShippingObj;
 
@@ -478,7 +478,7 @@ Abstract class EzShip_Verification
     }
 }
 
-class EzShip_CVS extends ECPay_Verification
+class EzShip_CVS extends EzShip_Verification
 {
     public $arShippingExtend = array(
         'stCode' => '',
@@ -492,7 +492,7 @@ class EzShip_CVS extends ECPay_Verification
     }
 }
 
-class EzShip_Home extends ECPay_Verification
+class EzShip_Home extends EzShip_Verification
 {
     public $arShippingExtend = array(
         'rvAddr' => '',
