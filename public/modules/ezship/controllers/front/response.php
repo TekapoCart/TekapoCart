@@ -1,0 +1,123 @@
+<?php
+
+class EzShipResponseModuleFrontController extends ModuleFrontController
+{
+    public $ssl = true;
+
+    public function initContent()
+    {
+        parent::initContent();
+    }
+
+    public function postProcess()
+    {
+        $result_message = '';
+        $order_id = null;
+        $order = null;
+        try {
+            # Include the ezShip integration class
+            $invoke_result = $this->module->invokeEzShipSDK();
+            if (!$invoke_result) {
+                throw new Exception('ezShip SDK is missing.');
+            } else {
+                # Retrieve the checkout result
+                $aio = new Ezship_AllInOne();
+                $aio->suID = Configuration::get('ezship_su_id');
+                $aio->secret = Configuration::get('ezship_secret');
+                $ezship_feedback = $aio->CheckOutFeedback();
+                unset($aio);
+
+                # Process ECPay feedback
+                if (count($ezship_feedback) < 1) {
+                    throw new Exception('Get ezShip feedback failed.');
+                } else {
+
+                    # Log ecpay feedback
+                    EzShip::logMessage(json_encode($ezship_feedback), true);
+
+                    # Get cart order id
+                    $order_id = $ezship_feedback['order_id'];
+                    $response_type = ((int) $order_id > 0) ? EzShip_ResponseType::CHECKOUT : EzShip_ResponseType::STORE;
+
+                    switch ($response_type) {
+                        case EzShip_ResponseType::STORE:
+
+                            $cart_id = (int)$ezship_feedback['processID'];
+
+                            if ($this->context->cart->id !== $cart_id) {
+                                $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('cart'));
+                            }
+
+                            $store_data = [
+                                'stCate' => $ezship_feedback['stCate'],
+                                'stCode' => $ezship_feedback['stCode'],
+                                'stName' => $ezship_feedback['stName'],
+                                'stAddr' => $ezship_feedback['stAddr'],
+                                'stTel' => $ezship_feedback['stTel'],
+                            ];
+                            EzShip::saveStoreData($store_data);
+
+                            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order'));
+
+                            break;
+                        case EzShip_ResponseType::CHECKOUT:
+
+                            # Get the cart order amount
+                            $order = new Order((int)$order_id);
+                            if (empty($order)) {
+                                throw new Exception('Order is invalid.');
+                            }
+
+                            ShippingLogger::updateLogger(
+                                $ezship_feedback['sn_id'],
+                                $ezship_feedback['order_status'],
+                                EzShip_OrderStatus::getDescription($ezship_feedback['order_status']),
+                                $order_id
+                            );
+
+                            $order_status = $ezship_feedback['order_status'];
+
+                            switch ($order_status) {
+                                case EzShip_ReturnOrderStatus::S01:
+
+                                    $order->shipping_number = $ezship_feedback['sn_id'];
+                                    $order->update();
+
+                                    $result_message = sprintf('orderStatus: %s, sn_id: %s.', $ezship_feedback['order_status'], $ezship_feedback['sn_id']);
+                                    break;
+
+                                case EzShip_ReturnOrderStatus::E00:
+                                case EzShip_ReturnOrderStatus::E01:
+                                case EzShip_ReturnOrderStatus::E02:
+                                case EzShip_ReturnOrderStatus::E03:
+                                case EzShip_ReturnOrderStatus::E04:
+                                case EzShip_ReturnOrderStatus::E05:
+                                case EzShip_ReturnOrderStatus::E06:
+                                case EzShip_ReturnOrderStatus::E07:
+                                case EzShip_ReturnOrderStatus::E08:
+                                case EzShip_ReturnOrderStatus::E09:
+                                case EzShip_ReturnOrderStatus::E10:
+                                case EzShip_ReturnOrderStatus::E11:
+                                    throw new Exception(sprintf('%s %s.', $order_status, EzShip_ReturnOrderStatus::getDescription($order_status)));
+                                    break;
+                                default:
+                                    throw new Exception('Order status is invalid.');
+                                    break;
+                            }
+                            break;
+                        default:
+                            throw new Exception('Response type is invalid.');
+                            break;
+                    }
+                }
+            }
+        } catch (Exception $e) {
+
+            $result_message = $e->getMessage();
+
+        }
+
+        EzShip::logMessage(sprintf('Order %s response exception: %s', $order_id, $result_message), true);
+
+    }
+}
