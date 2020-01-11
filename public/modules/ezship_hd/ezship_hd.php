@@ -54,7 +54,7 @@ class EzShip_Hd extends CarrierModule
 
         $languages = Language::getLanguages(true);
         foreach ($languages as $language) {
-            $carrier->delay[(int)$language['id_lang']] = 'days';
+            $carrier->delay[(int)$language['id_lang']] = $this->l('2-3 days');;
         }
 
         if ($carrier->add()) {
@@ -71,7 +71,7 @@ class EzShip_Hd extends CarrierModule
 
     public function hookDisplayOrderConfirmation($params)
     {
-        $carrier = new Carrier($params['carrier']['id']);
+        $carrier = new Carrier($params['order']->id_carrier);
         if ($carrier->external_module_name !== $this->name) {
             return false;
         }
@@ -83,7 +83,7 @@ class EzShip_Hd extends CarrierModule
             $phone = $address->phone;
         }
 
-        $shippingLogger = ShippingLogger::getLoggerByOrderId($params['order']->reference);
+        $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
         if ($shippingLogger) {
             $store_data['stCate'] = $shippingLogger['store_type'];
             $store_data['stCode'] = $shippingLogger['store_code'];
@@ -288,7 +288,7 @@ class EzShip_Hd extends CarrierModule
                     ];
                 }
 
-                $shippingLogger->save();
+                // $shippingLogger->save();
 
                 $res = $aio->CheckOutXml();
                 EzShip::logMessage('Result: ' . $res, true);

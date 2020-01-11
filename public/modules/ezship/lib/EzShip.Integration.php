@@ -215,8 +215,6 @@ abstract class EzShip_Aio
             throw new Exception('curl failed to initialize');
         }
 
-        ini_set('display_errors', TRUE);
-
         curl_setopt($ch, CURLOPT_URL, $ServiceURL);
         curl_setopt($ch, CURLOPT_HEADER, false);
         // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
