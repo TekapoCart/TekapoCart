@@ -42,13 +42,15 @@ class EzShip_Hd extends CarrierModule
     public function installCarrier()
     {
         $carrier = new Carrier();
-        $carrier->name = $this->l('Home delivery');
+        $carrier->name = $this->l('ezShip Home delivery');
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
         $carrier->shipping_external = 0;
         $carrier->shipping_method = 2;
         $carrier->is_module = 1;
         $carrier->external_module_name = $this->name;
+        $carrier->need_range = 1;
+        $carrier->range_behavior = 1;
 
         $languages = Language::getLanguages(true);
         foreach ($languages as $language) {
@@ -81,24 +83,19 @@ class EzShip_Hd extends CarrierModule
             $phone = $address->phone;
         }
 
-        $shippingLogger = ShippingLogger::getLoggerByOrderId($params['order']->id);
+        $shippingLogger = ShippingLogger::getLoggerByOrderId($params['order']->reference);
         if ($shippingLogger) {
             $store_data['stCate'] = $shippingLogger['store_type'];
             $store_data['stCode'] = $shippingLogger['store_code'];
             $store_data['stName'] = $shippingLogger['store_name'];
             $store_data['stAddr'] = $shippingLogger['store_addr'];
         } else {
-            $store_data = self::getStoreData();
             $this->createEzShipOrder($params);
         }
 
         $this->smarty->assign(array(
             'receiver_name' => $address->lastname . $address->firstname,
             'receiver_phone' => $phone,
-            'store_cate' => $store_data['stCate'],
-            'store_code' => $store_data['stCode'],
-            'store_name' => $store_data['stName'],
-            'store_address' => $store_data['stAddr'],
         ));
 
         return $this->display(__FILE__, 'display_order_confirmation.tpl');
@@ -107,7 +104,7 @@ class EzShip_Hd extends CarrierModule
     // 前台選擇承運商
     public function hookActionCarrierProcess($params)
     {
-        if (!in_array($params['cart']->id_carrier, $this->ezShipCarrierIds) || !Tools::isSubmit('confirmDeliveryOption')) {
+        if (!Tools::isSubmit('confirmDeliveryOption')) {
             return;
         }
 
@@ -138,7 +135,7 @@ class EzShip_Hd extends CarrierModule
             return false;
         }
 
-        $shippingLogger = ShippingLogger::getLoggerByOrderId($params['order']->id);
+        $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
         if ($shippingLogger) {
             return $this->display(__FILE__, '/views/templates/hook/tab_order.tpl');
         }
@@ -156,7 +153,7 @@ class EzShip_Hd extends CarrierModule
             return false;
         }
 
-        $shippingLogger = ShippingLogger::getLoggerByOrderId($params['order']->id);
+        $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
         if ($shippingLogger) {
             $ezship_shipment_query_url = 'https://www.ezship.com.tw/receiver_query/ezship_query_shipstatus_2017.jsp';
 
@@ -226,12 +223,13 @@ class EzShip_Hd extends CarrierModule
         $order_id = null;
         $order = null;
         try {
-            $invoke_result = $this->module->invokeEzShipSDK();
+            $invoke_result = $this->invokeEzShipSDK();
             if (!$invoke_result) {
-                throw new Exception($this->module->l('EzShip SDK is missing.'));
+                throw new Exception($this->l('EzShip SDK is missing.'));
             } else {
 
                 $order_id = $params['order']->id;
+
                 $order = new Order((int)$order_id);
                 if (empty($order)) {
                     throw new Exception(sprintf('Order %s is not found.', $order_id));
@@ -244,11 +242,15 @@ class EzShip_Hd extends CarrierModule
                 $aio->ServiceURL = 'https://www.ezship.com.tw/emap/ezship_xml_order_api.jsp';
                 $aio->Send['rtURL'] = $this->context->link->getModuleLink('ezship', 'response', []);
                 $aio->Send['orderAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
-                $aio->Send['orderID'] = $order_id;
                 $aio->Send['orderType'] = ($order->module == 'ezship_pay') ? EzShip_OrderType::PAY : EzShip_OrderType::NO_PAY;
+                $aio->Send['orderID'] = $order->reference;
 
                 $shippingLogger = new ShippingLogger();
+
                 $shippingLogger->pay_type = $aio->Send['orderType'];
+                $shippingLogger->id_order = $order_id;
+                $shippingLogger->order_reference = $aio->Send['orderID'];
+                $shippingLogger->module = $this->name;
 
                 $customer = new Customer(intval($order->id_customer));
                 $aio->Send['rvEmail'] = $customer->email;;
@@ -287,7 +289,9 @@ class EzShip_Hd extends CarrierModule
                 }
 
                 $shippingLogger->save();
-                $aio->CheckOutXml();
+
+                $res = $aio->CheckOutXml();
+                EzShip::logMessage('Result: ' . $res, true);
                 unset($aio);
 
             }

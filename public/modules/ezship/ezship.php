@@ -95,9 +95,9 @@ class EzShip extends CarrierModule
         $carrier->shipping_external = 0;
         $carrier->shipping_method = 2;
         $carrier->is_module = 1;
+        $carrier->external_module_name = $this->name;
         $carrier->need_range = 1;
         $carrier->range_behavior = 1;
-        $carrier->external_module_name = $this->name;
 
         $languages = Language::getLanguages(true);
         foreach ($languages as $language) {
