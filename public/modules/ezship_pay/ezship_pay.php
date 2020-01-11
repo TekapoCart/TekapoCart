@@ -1,7 +1,5 @@
 <?php
 
-use PrestaShop\PrestaShop\Core\Addon\Module\ModuleManagerBuilder;
-
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -33,77 +31,11 @@ class EzShip_Pay extends PaymentModule
     {
         if (!parent::install()
             OR !$this->registerHook('paymentOptions')
-            OR !$this->installCarrier()
         ) {
             return false;
         }
 
         return true;
-    }
-
-    public function installCarrier()
-    {
-
-        $moduleManagerBuilder = ModuleManagerBuilder::getInstance();
-        $moduleManager = $moduleManagerBuilder->build();
-
-        $c1 = false;
-        if ($moduleManager->isInstalled('ezship')) {
-            $carrier = new Carrier();
-            $carrier->name = $this->l('Home delivery');
-            $carrier->active = 1;
-            $carrier->shipping_handling = 0;
-            $carrier->shipping_external = 0;
-            $carrier->shipping_method = 2;
-            $carrier->is_module = 1;
-            $carrier->external_module_name = $this->name;
-
-            $languages = Language::getLanguages(true);
-            foreach ($languages as $language) {
-                $carrier->delay[(int)$language['id_lang']] = 'days';
-            }
-
-            if ($carrier->add()) {
-                $groups = Group::getGroups(true);
-                foreach ($groups as $group) {
-                    Db::getInstance()->insert('carrier_group', [
-                        'id_carrier' => (int)$carrier->id,
-                        'id_group' => (int)$group['id_group']
-                    ]);
-                }
-                $c1 = true;
-            }
-        }
-
-        $c2 = false;
-        if ($moduleManager->isInstalled('ezship_hd')) {
-            $carrier = new Carrier();
-            $carrier->name = $this->l('Home delivery');
-            $carrier->active = 1;
-            $carrier->shipping_handling = 0;
-            $carrier->shipping_external = 0;
-            $carrier->shipping_method = 2;
-            $carrier->is_module = 1;
-            $carrier->external_module_name = $this->name;
-
-            $languages = Language::getLanguages(true);
-            foreach ($languages as $language) {
-                $carrier->delay[(int)$language['id_lang']] = 'days';
-            }
-
-            if ($carrier->add()) {
-                $groups = Group::getGroups(true);
-                foreach ($groups as $group) {
-                    Db::getInstance()->insert('carrier_group', [
-                        'id_carrier' => (int)$carrier->id,
-                        'id_group' => (int)$group['id_group']
-                    ]);
-                }
-                $c2 = true;
-            }
-        }
-
-        return $c1 && $c2;
     }
 
     public function hookPaymentOptions($params)
@@ -117,21 +49,19 @@ class EzShip_Pay extends PaymentModule
         }
 
         $payment_options = [];
-        if (Configuration::get('ezship_enable_payment') == 'on') {
+        $payment_option = new PaymentOption();
+        $payment_option->setCallToActionText($this->l('ezShip Payment on Delivery'))
+            ->setInputs([
+                'payment_type' => [
+                    'name' => 'payment_type',
+                    'type' => 'hidden',
+                    'value' => 'pay_on_ezship',
+                ],
+            ])
+            ->setAction($this->context->link->getModuleLink($this->name, 'validation', [], true));
 
-            $payment_option = new PaymentOption();
-            $payment_option->setCallToActionText($this->l('Payment on Delivery'))
-                ->setInputs([
-                    'payment_type' => [
-                        'name' => 'payment_type',
-                        'type' => 'hidden',
-                        'value' => 'pay_on_ezship',
-                    ],
-                ])
-                ->setAction($this->context->link->getModuleLink($this->name, 'validation', [], true));
+        $payment_options[] = $payment_option;
 
-            $payment_options[] = $payment_option;
-        }
 
         return $payment_options;
     }

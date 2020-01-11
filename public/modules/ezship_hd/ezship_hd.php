@@ -21,7 +21,7 @@ class EzShip_Hd extends CarrierModule
 
         $this->displayName = $this->l('ezShip home delivery');
         $this->description = 'https://www.tekapo.io/';
-        $this->confirmUninstall = $this->l('Do you want to uninstall ezShip module?');
+        $this->confirmUninstall = $this->l('Do you want to uninstall ezShip hd module?');
 
     }
 
@@ -93,12 +93,14 @@ class EzShip_Hd extends CarrierModule
             $this->createEzShipOrder($params);
         }
 
-        $this->smarty->assign(array(
-            'receiver_name' => $address->lastname . $address->firstname,
-            'receiver_phone' => $phone,
-        ));
+        return;
 
-        return $this->display(__FILE__, 'display_order_confirmation.tpl');
+//        $this->smarty->assign(array(
+//            'receiver_name' => $address->lastname . $address->firstname,
+//            'receiver_phone' => $phone,
+//        ));
+//
+//        return $this->display(__FILE__, 'display_order_confirmation.tpl');
     }
 
     // 前台選擇承運商
