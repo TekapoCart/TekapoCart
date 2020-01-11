@@ -5,6 +5,9 @@ class ShippingLogger extends ObjectModel
     /** @var integer Prestashop Order generated ID */
     public $id_order;
 
+    /** @var string order reference */
+    public $order_reference;
+
     /** @var string module ezship, smilepay, ecpay */
     public $module;
 
@@ -45,7 +48,7 @@ class ShippingLogger extends ObjectModel
     public $serial_number;
 
     /** @var string return status returned by API */
-    public $return=_status;
+    public $return_status;
 
     /** @var string return message returned by API */
     public $return_message;
@@ -65,6 +68,7 @@ class ShippingLogger extends ObjectModel
         'multilang' => false,
         'fields' => array(
             'id_order' => array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
+            'order_reference' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
             'module' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
             'send_status' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
             'pay_type' => array('type' => self::TYPE_STRING),
@@ -86,15 +90,15 @@ class ShippingLogger extends ObjectModel
     );
 
     /**
-     * Get ShippingLogger by order ID
-     * @param integer $id_order Order ID
+     * Get ShippingLogger by order reference
+     * @param string $order_ref Order reference
      * @return array|bool ShippingLogger
      */
-    public static function getLoggerByOrderId($id_order)
+    public static function getLoggerByOrderRef($order_ref)
     {
         $query = new DBQuery();
         $query->from('shipping_logger');
-        $query->where('id_order = ' . (int) $id_order);
+        $query->where("order_reference = '" . pSQL($order_ref) . "'");
         $rowOrder = Db::getInstance()->getRow($query);
 
         if (is_array($rowOrder)) {

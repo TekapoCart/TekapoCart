@@ -27,14 +27,13 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                 $ezship_feedback = $aio->CheckOutFeedback();
                 unset($aio);
 
-                # Process ECPay feedback
+                # Process ezShip feedback
                 if (count($ezship_feedback) < 1) {
                     throw new Exception('Get ezShip feedback failed.');
                 } else {
 
-                    # Log ecpay feedback
-                    // EzShip::logMessage(json_encode($ezship_feedback), true);
-
+                    # Log ezShip feedback
+                    EzShip::logMessage('Feedback: ' . json_encode($ezship_feedback), true);
 
                     $response_type = null;
                     if (isset($ezship_feedback['order_id'])) {

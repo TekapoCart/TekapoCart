@@ -168,7 +168,7 @@ class EzShip_AllInOne
     {
 
         $this->Send = [
-            "orderId" => '',
+            "orderID" => '',
             "orderStatus" => '',
             "orderType" => '',
             "orderAmount" => '',
@@ -189,21 +189,15 @@ class EzShip_AllInOne
 
     }
 
-    function CheckOut()
-    {
-        $arParameters = array_merge(array('suID' => $this->suID, 'EncryptType' => $this->EncryptType), $this->Send);
-        EzShip_Send::CheckOut($arParameters, $this->SendExtend, $this->suID, $this->secret, $this->ServiceURL);
-    }
-
     function CheckOutXml()
     {
         $arParameters = array_merge(array('suID' => $this->suID, 'EncryptType' => $this->EncryptType), $this->Send);
-        EzShip_Send::CheckOutXml($arParameters, $this->SendExtend, $this->suID, $this->secret, $this->ServiceURL);
+        return EzShip_Send::CheckOutXml($arParameters, $this->SendExtend, $this->suID, $this->secret, $this->ServiceURL);
     }
 
     function CheckOutFeedback()
     {
-        return $arFeedback = EzShip_CheckOutFeedback::CheckOut(array_merge($_POST, ['EncryptType' => $this->EncryptType]), $this->suID, $this->secret);
+        return EzShip_CheckOutFeedback::CheckOut(array_merge($_POST, ['EncryptType' => $this->EncryptType]), $this->suID, $this->secret);
     }
 }
 
@@ -221,10 +215,12 @@ abstract class EzShip_Aio
             throw new Exception('curl failed to initialize');
         }
 
+        ini_set('display_errors', TRUE);
+
         curl_setopt($ch, CURLOPT_URL, $ServiceURL);
         curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
         $rs = curl_exec($ch);
@@ -238,15 +234,16 @@ abstract class EzShip_Aio
         return $rs;
     }
 
-    protected static function XmlEncode($arParameters, $cdataParameters) {
+    protected static function XmlEncode($arParameters, $cdataParameters)
+    {
 
         $szXml = '';
         foreach ($arParameters as $key => $value) {
             if (is_array($value) === true) {
                 $szXml .= sprintf('<%s>%s</%s>', $key, self::XmlEncode($value, $cdataParameters), $key);
             } else {
-                if (empty($value) === false && (in_array($key, $cdataParameters, true) === true || (bool) preg_match('/[<>&]/', $value) === true)) {
-                    $value = '<![CDATA['.$value.']]>';
+                if (empty($value) === false && (in_array($key, $cdataParameters, true) === true || (bool)preg_match('/[<>&]/', $value) === true)) {
+                    $value = '<![CDATA[' . $value . ']]>';
                 }
                 $szXml .= sprintf('<%s>%s</%s>', $key, $value, $key);
             }
@@ -264,6 +261,8 @@ class EzShip_Send extends EzShip_Aio
         $shippingMethod = 'EzShip_' . $arParameters['ChooseShipping'];
         self::$ShippingObj = new $shippingMethod;
 
+        unset($arParameters['ChooseShipping']);
+
         // 檢查參數
         $arParameters = self::$ShippingObj->check_string($arParameters);
 
@@ -280,20 +279,6 @@ class EzShip_Send extends EzShip_Aio
         return array_merge($arParameters, $arExtend);
     }
 
-
-    static function CheckOut($arParameters = [], $arExtend = [], $suID = '', $secret = '', $ServiceURL = '')
-    {
-
-        $arParameters = self::process($arParameters, $arExtend);
-
-        // 產生檢查碼
-        $szCheckMacValue = EzShip_CheckMacValue::generate($arParameters, $suID, $secret, $arParameters['EncryptType']);
-
-        $arParameters = array_merge($arParameters, ['webPara' => $szCheckMacValue]);
-
-        return parent::ServerPost($arParameters, $ServiceURL);
-    }
-
     static function CheckOutXml($arParameters = [], $arExtend = [], $suID = '', $secret = '', $ServiceURL = '')
     {
 
@@ -304,16 +289,22 @@ class EzShip_Send extends EzShip_Aio
 
         $arParameters = array_merge($arParameters, array('webPara' => $szCheckMacValue));
 
-        $detailXml = '<Detail>' . parent::XmlEncode($arParameters['Items'], ['prodNo', 'prodName', 'prodSpec']) . '</Detail>';
+        $detailXml = '';
+
+        foreach ($arParameters['Items'] as $item) {
+            $detailXml .= '<Detail>' . parent::XmlEncode($item, ['prodNo', 'prodName', 'prodSpec']) . '</Detail>';
+        }
+
         unset($arParameters['Items']);
+        unset($arParameters['EncryptType']);
 
         // 生成 xml
         $postParameters = [
             'web_map_xml' => '<ORDER>' . parent::XmlEncode($arParameters, ['rvName', 'rvAddr']) . $detailXml . '</ORDER>',
         ];
 
-        $szXml = parent::ServerPost($postParameters, $ServiceURL);
-        return $szXml;
+
+        return parent::ServerPost($postParameters, $ServiceURL);
     }
 }
 
@@ -321,14 +312,14 @@ class EzShip_CheckOutFeedback extends EzShip_Aio
 {
     static function CheckOut($arParameters = [], $suID = '', $secret = '')
     {
-        // 變數宣告。
-        $arErrors = array();
-        $arFeedback = array();
+        // 變數宣告
+        $arErrors = [];
+        $arFeedback = [];
 
         $EncryptType = $arParameters["EncryptType"];
         unset($arParameters["EncryptType"]);
 
-        // 重新整理回傳參數。
+        // 重新整理回傳參數
         foreach ($arParameters as $keys => $value) {
             if ($keys != 'webPara') {
                 $arFeedback[$keys] = $value;
@@ -438,16 +429,15 @@ Abstract class EzShip_Verification
     // 檢查商品
     public function check_goods($arParameters = [])
     {
-        // 檢查產品名稱。
-        $szItemName = '';
+        // 檢查產品名稱
         $arErrors = [];
         if (sizeof($arParameters['Items']) > 0) {
-            foreach ($arParameters['Items'] as $key => $value) {
-                $szItemName .= vsprintf('#%s %d %s x %u', $arParameters['Items'][$key]);
-
-                if (in_array($key, ['prodName', 'prodSpec'])) {
-                    if (strlen($value) > 0) {
-                        $arParameters['Items'][$key] = mb_substr($value, 1, 40);
+            foreach ($arParameters['Items'] as $key => $product) {
+                foreach ($product as $field => $value) {
+                    if (in_array($field, ['prodName', 'prodSpec'])) {
+                        if (strlen($value) > 0) {
+                            $arParameters['Items'][$key][$field] = mb_substr($value, 0, 40);
+                        }
                     }
                 }
             }
@@ -460,7 +450,6 @@ Abstract class EzShip_Verification
             throw new Exception(join('<br>', $arErrors));
         }
 
-        unset($arParameters['Items']);
         return $arParameters;
     }
 
@@ -521,6 +510,7 @@ if (!class_exists('EzShip_CheckMacValue', false)) {
 
             if (isset($arParameters)) {
                 unset($arParameters['webPara']);
+                unset($arParameters['Items']);
                 uksort($arParameters, array('EzShip_CheckMacValue', 'merchantSort'));
 
                 // 組合字串
@@ -548,12 +538,12 @@ if (!class_exists('EzShip_CheckMacValue', false)) {
 
                 // 編碼
                 switch ($encType) {
-                    case ECPay_EncryptType::ENC_SHA256:
+                    case EzShip_EncryptType::ENC_SHA256:
                         // SHA256 編碼
                         $sMacValue = hash('sha256', $sMacValue);
                         break;
 
-                    case ECPay_EncryptType::ENC_MD5:
+                    case EzShip_EncryptType::ENC_MD5:
                     default:
                         // MD5 編碼
                         $sMacValue = md5($sMacValue);
