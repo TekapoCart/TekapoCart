@@ -186,13 +186,14 @@
         </div>
       {/if}
 
+      {*
       <div class="col-lg-6 col-md-6 col-sm-6">
         <article id="invoice-address" class="box">
-          {* suzy: 2018-08-01 不要 alias <h4>{l s='Invoice address %alias%' d='Shop.Theme.Checkout' sprintf=['%alias%' => $order.addresses.invoice.alias]}</h4>*}
           <h4>{l s='Invoice address %alias%' d='Shop.Theme.Checkout' sprintf=['%alias%' => '']}</h4>
           <address>{$order.addresses.invoice.formatted nofilter}</address>
         </article>
       </div>
+      *}
       <div class="clearfix"></div>
     </div>
   {/block}
