@@ -19,7 +19,7 @@ class EzShip_Hd extends CarrierModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('ezShip home delivery');
+        $this->displayName = $this->l('ezShip Home delivery');
         $this->description = 'https://www.tekapo.io/';
         $this->confirmUninstall = $this->l('Do you want to uninstall ezShip hd module?');
 
@@ -42,7 +42,7 @@ class EzShip_Hd extends CarrierModule
     public function installCarrier()
     {
         $carrier = new Carrier();
-        $carrier->name = $this->l('ezShip Home delivery');
+        $carrier->name = $this->l('Home delivery');
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
         $carrier->shipping_external = 0;
