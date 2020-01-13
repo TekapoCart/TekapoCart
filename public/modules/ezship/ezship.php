@@ -193,6 +193,11 @@ class EzShip extends CarrierModule
             return;
         }
 
+        $carrier = new Carrier($params['cart']->id_carrier);
+        if ($carrier->external_module_name !== $this->name) {
+            return false;
+        }
+
         if (!$this->checkShippingInput($params)) {
             $rawData = Db::getInstance()->getValue(
                 'SELECT checkout_session_data FROM ' . _DB_PREFIX_ . 'cart WHERE id_cart = ' . (int)$this->context->cart->id

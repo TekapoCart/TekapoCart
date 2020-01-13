@@ -76,31 +76,12 @@ class EzShip_Hd extends CarrierModule
             return false;
         }
 
-        $address = new Address(intval($params['order']->id_address_delivery));
-        if (!is_null($address->phone_mobile) && !empty($address->phone_mobile)) {
-            $phone = $address->phone_mobile;
-        } else {
-            $phone = $address->phone;
-        }
-
         $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
-        if ($shippingLogger) {
-            $store_data['stCate'] = $shippingLogger['store_type'];
-            $store_data['stCode'] = $shippingLogger['store_code'];
-            $store_data['stName'] = $shippingLogger['store_name'];
-            $store_data['stAddr'] = $shippingLogger['store_addr'];
-        } else {
+        if (! $shippingLogger) {
             $this->createEzShipOrder($params);
         }
 
         return;
-
-//        $this->smarty->assign(array(
-//            'receiver_name' => $address->lastname . $address->firstname,
-//            'receiver_phone' => $phone,
-//        ));
-//
-//        return $this->display(__FILE__, 'display_order_confirmation.tpl');
     }
 
     // 前台選擇承運商
@@ -108,6 +89,11 @@ class EzShip_Hd extends CarrierModule
     {
         if (!Tools::isSubmit('confirmDeliveryOption')) {
             return;
+        }
+
+        $carrier = new Carrier($params['cart']->id_carrier);
+        if ($carrier->external_module_name !== $this->name) {
+            return false;
         }
 
         if (!$this->checkShippingInput($params)) {
@@ -290,7 +276,7 @@ class EzShip_Hd extends CarrierModule
                     ];
                 }
 
-                // $shippingLogger->save();
+                $shippingLogger->save();
 
                 $res = $aio->CheckOutXml();
                 EzShip::logMessage('Result: ' . $res, true);
