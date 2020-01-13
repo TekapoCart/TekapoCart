@@ -28,7 +28,7 @@ $orderWay = 0; // Configuration::get(PS_ORDER_PROCESS_STANDARD);
 if ($orderWay == 1) {
     $order_url = Context::getContext()->link->getPageLink('order-opc');
 } elseif ($orderWay == 0) {
-    $order_url = Context::getContext()->link->getPageLink('order', true, $context->language->id);
+    $order_url = Context::getContext()->link->getPageLink('order');
 }
 
 

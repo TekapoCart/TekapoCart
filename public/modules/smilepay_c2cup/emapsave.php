@@ -25,12 +25,12 @@ $smilepayc2cup_obj->saveStoreData($result);
 
 //$data=$smilepayc2cup_obj->getStoreData();
 
-
 $orderWay = 0; // =Configuration::get(PS_ORDER_PROCESS_STANDARD);
 if ($orderWay == 1) {
     $order_url = Context::getContext()->link->getPageLink('order-opc');
 } elseif ($orderWay == 0) {
-    $order_url = Context::getContext()->link->getPageLink('order', true, $context->language->id, "step=2");
+    // $order_url = Context::getContext()->link->getPageLink('order', true, $context->language->id, "step=2");
+    $order_url = Context::getContext()->link->getPageLink('order');
 }
 
 

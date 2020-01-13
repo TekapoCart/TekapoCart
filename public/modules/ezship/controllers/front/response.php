@@ -62,7 +62,7 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                             EzShip::saveStoreData($store_data);
 
 
-                            $returnUrl = $this->context->link->getPageLink('order', true, $this->context->language->id);
+                            $returnUrl = $this->context->link->getPageLink('order');
                             header('Location: ' . $returnUrl);
                             exit;
 
