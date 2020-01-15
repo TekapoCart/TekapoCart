@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-    <name>ezship_logistics</name>
-    <displayName><![CDATA[ezShip 物流配送 - 宅配通]]></displayName>
+    <name>tc_pod</name>
+    <displayName><![CDATA[貨到付款]]></displayName>
     <version><![CDATA[1.0]]></version>
-    <description><![CDATA[店到宅寄件、直寄宅配]]></description>
+    <description><![CDATA[超商取貨付款、宅配貨到付款]]></description>
     <author><![CDATA[TekapoCart]]></author>
-    <tab><![CDATA[shipping_logistics]]></tab>
+    <tab><![CDATA[payments_gateways]]></tab>
     <confirmUninstall><![CDATA[Are you sure you want to delete your details ?]]></confirmUninstall>
     <is_configurable>1</is_configurable>
     <need_instance>1</need_instance>

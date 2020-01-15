@@ -4,16 +4,16 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-include_once(_PS_MODULE_DIR_ . 'ezship/classes/ShippingLogger.php');
+include_once(_PS_MODULE_DIR_ . 'ecpay_cvs/classes/ShippingLogger.php');
 
-class EzShip extends CarrierModule
+class Ecpay_Cvs extends CarrierModule
 {
 
-    private $ezShipParams = [];
+    private $ecpayParams = [];
 
     public function __construct()
     {
-        $this->name = 'ezship';
+        $this->name = 'ecpay_cvs';
         $this->tab = 'shipping_logistics';
         $this->version = '1.0';
         $this->author = 'TekapoCart';
@@ -21,13 +21,16 @@ class EzShip extends CarrierModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('ezShip CVS pickup in-store');
+        $this->displayName = $this->l('ECPay cvs pickup in-store');
         $this->description = 'https://www.tekapo.io/';
-        $this->confirmUninstall = $this->l('Do you want to uninstall ezShip module?');
+        $this->confirmUninstall = $this->l('Do you want to uninstall ECPay cvs module?');
 
-        $this->ezShipParams = [
-            'ezship_su_id',
-            'ezship_secret',
+        $this->ecpayParams = [
+            'ecpay_merchant_id',
+            'ecpay_hash_key',
+            'ecpay_hash_iv',
+            'ecpay_sender_name',
+            'ecpay_sender_cellphone',
         ];
 
     }
@@ -89,7 +92,7 @@ class EzShip extends CarrierModule
     public function installCarrier()
     {
         $carrier = new Carrier();
-        $carrier->name = $this->l('OK Mart, HiLife, FamilyMart pickup in-store');
+        $carrier->name = $this->l('711 pickup in-store');
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
         $carrier->shipping_external = 0;
@@ -108,7 +111,8 @@ class EzShip extends CarrierModule
             $groups = Group::getGroups(true);
             foreach ($groups as $group) {
                 Db::getInstance()->insert('carrier_group', [
-                    'id_carrier' => (int)$carrier->id, 'id_group' => (int)$group['id_group']
+                    'id_carrier' => (int)$carrier->id,
+                    'id_group' => (int)$group['id_group']
                 ]);
             }
             return true;
@@ -125,27 +129,35 @@ class EzShip extends CarrierModule
             return false;
         }
 
-        $store_data = self::getStoreData();
+        try {
+            $invoke_result = $this->invokeEcpaySDK();
+            if (!$invoke_result) {
+                throw new Exception($this->l('ECPay SDK is missing.'));
+            } else {
+                $AL = new EcpayLogistics();
+                $AL->Send = array(
+                    'MerchantID' => Configuration::get('ecpay_merchant_id'),
+                    'MerchantTradeNo' => 'T' . date('YmdHis'),
+                    'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
+                    'IsCollection' => EcpayIsCollection::NO,
+                    'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'store', []),
+                    'ExtraData' => $this->context->cart->id,
+                );
+                $map_html = $AL->CvsMap('Select Store Map');
 
-        $map_url = 'https://map.ezship.com.tw/ezship_map_web.jsp';
-        $query = [
-            'suID' => Configuration::get('ezship_su_id'),
-            'processID' => $this->context->cart->id,
-            'stCate' => $store_data ? $store_data['stCate'] : '',
-            'stCode' => $store_data ? $store_data['stCode'] : '',
-            'rtURL' => $this->context->link->getModuleLink('ezship', 'response', []),
-            'webPara' => '',
-        ];
-        $map_url .= '?' . http_build_query($query);
-        $map_title = $store_data ? $this->l('Reselect Store Map') : $this->l('Select Store Map');
+                $store_data = self::getStoreData();
 
-        $this->smarty->assign(array(
-            'map_url' => $map_url,
-            'map_title' => $map_title,
-            'store_data' => $store_data,
-        ));
+                $this->smarty->assign(array(
+                    'map_html' => $map_html,
+                    'store_data' => $store_data,
+                ));
 
-        return $this->display(__FILE__, 'display_carrier_extra_content.tpl');
+                return $this->display(__FILE__, 'display_carrier_extra_content.tpl');
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
     }
 
     public function hookDisplayOrderConfirmation($params)
@@ -242,10 +254,9 @@ class EzShip extends CarrierModule
 
         $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
         if ($shippingLogger) {
-            $ezship_shipment_query_url = 'https://www.ezship.com.tw/receiver_query/ezship_query_shipstatus_2017.jsp';
 
             $this->smarty->assign(array(
-                'ezship_shipment_query_url' => $ezship_shipment_query_url,
+                'shipping_message' => $shippingLogger->return_message,
             ));
 
             return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
@@ -264,13 +275,17 @@ class EzShip extends CarrierModule
             $phone = $address->phone;
         }
         if (!preg_match("/[^a-zA-Z0-9 ]/", $address->lastname . $address->firstname)) {
-            $limit_name_number = 60;
+            $limit_name_number = 10;
         } else {
-            $limit_name_number = 20;
+            $limit_name_number = 5;
         }
 
         if (mb_strlen($address->lastname . $address->firstname, "utf-8") > $limit_name_number) {
             $this->context->controller->errors[] = $this->l('Receiver name over limit');
+        }
+
+        if (preg_match('/^\'!@#%&*+\"<>|_[],，、]/', $address->lastname . $address->firstname)) {
+            $this->context->controller->errors[] = $this->l('Invalid receiver name format');
         }
 
         if (!preg_match("/^[0][9][0-9]{8,8}\$/", $phone)) {
@@ -293,7 +308,7 @@ class EzShip extends CarrierModule
         $html_content = '';
 
         # Update the settings
-        if (Tools::isSubmit('ezship_submit')) {
+        if (Tools::isSubmit('ecpay_submit')) {
             # Validate the POST parameters
             $this->postValidation();
 
@@ -314,7 +329,11 @@ class EzShip extends CarrierModule
     private function postValidation()
     {
         $required_fields = array(
-            'ezship_su_id' => $this->l('ezShip account (suID)'),
+            'ecpay_merchant_id' => $this->l('ECPay MerchantID'),
+            'ecpay_hash_key' => $this->l('ECPay HashKey'),
+            'ecpay_hash_iv' => $this->l('ECPay HashIV'),
+            'ecpay_sender_name' => $this->l('ECPay Sender'),
+            'ecpay_sender_cellphone' => $this->l('ECPay Sender Mobile'),
         );
 
         foreach ($required_fields as $field_name => $field_desc) {
@@ -331,25 +350,44 @@ class EzShip extends CarrierModule
         # Set the configurations for generating a setting form
         $fields_form[0]['form'] = array(
             'legend' => array(
-                'title' => $this->l('ezShip configuration'),
+                'title' => $this->l('ECPay configuration'),
             ),
             'input' => array(
                 array(
                     'type' => 'text',
-                    'label' => $this->l('ezShip account (suID)'),
-                    'name' => 'ezship_su_id',
+                    'label' => $this->l('ECPay MerchantID'),
+                    'name' => 'ecpay_merchant_id',
                     'required' => true,
                 ),
                 array(
                     'type' => 'text',
-                    'label' => $this->l('Secret key'),
-                    'name' => 'ezship_secret',
-                    'desc' => $this->l('auto generated'),
-                    'readonly' => true,
+                    'label' => $this->l('ECPay HashKey'),
+                    'name' => 'ecpay_hash_key',
+                    'required' => true,
                 ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('ECPay HashIV'),
+                    'name' => 'ecpay_hash_iv',
+                    'required' => true,
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('ECPay Sender'),
+                    'name' => 'ecpay_sender_name',
+                    'required' => true,
+                    'hint' => '不可有符號^ \' ` ! @# % & * + \ " < >|_ [ ] , 及，、不可有 空白',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('ECPay Sender Mobile'),
+                    'name' => 'ecpay_sender_cellphone',
+                    'required' => true,
+                ),
+
             ),
             'submit' => array(
-                'name' => 'ezship_submit',
+                'name' => 'ecpay_submit',
                 'title' => $this->l('Save'),
                 'class' => 'button'
             )
@@ -371,7 +409,7 @@ class EzShip extends CarrierModule
         $helper->allow_employee_form_lang = $default_lang;
 
         # Load the current settings
-        foreach ($this->ezShipParams as $param_name) {
+        foreach ($this->ecpayParams as $param_name) {
             $helper->fields_value[$param_name] = Configuration::get($param_name);
         }
 
@@ -381,11 +419,7 @@ class EzShip extends CarrierModule
     private function postProcess()
     {
 
-        if (strlen(Tools::getValue('ezship_secret')) === 0) {
-            $_POST['ezship_secret'] = sha1(openssl_random_pseudo_bytes(1024));
-        }
-
-        foreach ($this->ezShipParams as $param_name) {
+        foreach ($this->ecpayParams as $param_name) {
 
             if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
                 return $this->displayError($param_name . ' ' . $this->l('updated failed'));
@@ -405,10 +439,10 @@ class EzShip extends CarrierModule
         return 0;
     }
 
-    public function invokeEzShipSDK()
+    public function invokeEcpaySDK()
     {
-        if (!class_exists('EzShip_AllInOne', false)) {
-            if (!include(_PS_MODULE_DIR_ . '/ezship/lib/EzShip.Integration.php')) {
+        if (!class_exists('EcpayLogistics', false)) {
+            if (!include(_PS_MODULE_DIR_ . '/ecpay_cvs/lib/Ecpay.Logistic.Integration.php')) {
                 return false;
             }
         }
@@ -421,9 +455,9 @@ class EzShip extends CarrierModule
         $order_id = null;
         $order = null;
         try {
-            $invoke_result = $this->invokeEzShipSDK();
+            $invoke_result = $this->invokeEcpaySDK();
             if (!$invoke_result) {
-                throw new Exception($this->l('EzShip SDK is missing.'));
+                throw new Exception($this->l('ECPay SDK is missing.'));
             } else {
 
                 $order_id = $params['order']->id;
@@ -433,43 +467,56 @@ class EzShip extends CarrierModule
                     throw new Exception(sprintf('Order %s is not found.', $order_id));
                 }
 
-                $aio = new EzShip_AllInOne();
-                $aio->suID = Configuration::get('ezship_su_id');
-                $aio->secret = Configuration::get('ezship_secret');
-                $aio->ServiceURL = 'https://www.ezship.com.tw/emap/ezship_xml_order_api.jsp';
-                $aio->Send['rtURL'] = $this->context->link->getModuleLink('ezship', 'response', []);
-                $aio->Send['orderAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
-                $aio->Send['orderType'] = ($order->module == 'tc_pod') ? EzShip_OrderType::PAY : EzShip_OrderType::NO_PAY;
-                $aio->Send['orderID'] = $order->reference;
+                $AL = new EcpayLogistics();
+                $AL->HashKey = Configuration::get('ecpay_hash_key');
+                $AL->HashIV = Configuration::get('ecpay_hash_iv');
+                $AL->Send['MerchantID'] = Configuration::get('ecpay_merchant_id');
+                $AL->Send['MerchantTradeNo'] = $order->reference . str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
 
                 $shippingLogger = new ShippingLogger();
-
-                $shippingLogger->pay_type = $aio->Send['orderType'];
                 $shippingLogger->id_order = $order_id;
-                $shippingLogger->order_reference = $aio->Send['orderID'];
+                $shippingLogger->order_reference = $order->reference;
                 $shippingLogger->module = $this->name;
 
-                $customer = new Customer(intval($order->id_customer));
-                $aio->Send['rvEmail'] = $customer->email;;
+                $AL->Send['MerchantTradeDate'] = $order->date_add;
+
+                $AL->Send['LogisticsType'] = EcpayLogisticsType::CVS;
+                $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::UNIMART_C2C;
+                $shippingLogger->send_status = $AL->Send['LogisticsSubType'];
+
+                $AL->Send['GoodsAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
+
+                if ($order->module == 'tc_pod') {
+                    $AL->Send['IsCollection'] = EcpayIsCollection::YES;
+                    $AL->Send['CollectionAmount'] = $AL->Send['GoodsAmount'];
+                } else {
+                    $AL->Send['IsCollection'] = EcpayIsCollection::NO;
+                    $AL->Send['CollectionAmount'] = 0;
+                }
+                $shippingLogger->pay_type = $AL->Send['IsCollection'];
+
+                $AL->Send['GoodsName'] = $this->l('A Package Of Online Goods');
+
+                $AL->Send['SenderName'] = Configuration::get('ecpay_sender_name');
+                $AL->Send['SenderCellPhone'] = Configuration::get('ecpay_sender_cellphone');
 
                 $address = new Address(intval($order->id_address_delivery));
-                $aio->Send['rvName'] = $address->lastname . $address->firstname;;
-                if (!is_null($address->phone_mobile) && !empty($address->phone_mobile)) {
-                    $phone = $address->phone_mobile;
-                } else {
-                    $phone = $address->phone;
-                }
-                $aio->Send['rvMobile'] = $phone;
+                $AL->Send['ReceiverName'] = $address->lastname . $address->firstname;
+                $shippingLogger->rv_name = $AL->Send['ReceiverName'];
 
-                $shippingLogger->rv_name = $aio->Send['rvName'];
-                $shippingLogger->rv_mobile = $aio->Send['rvMobile'];
+                $AL->Send['ReceiverCellPhone'] = $address->phone_mobile;
+                $shippingLogger->rv_mobile = $AL->Send['ReceiverCellPhone'];
 
-                $aio->Send['ChooseShipping'] = EzShip_ShippingMethod::CVS;
-                $aio->Send['orderStatus'] = EzShip_SendOrderStatus::A02;
-                $shippingLogger->send_status = $aio->Send['orderStatus'];
+                $customer = new Customer(intval($order->id_customer));
+                $AL->Send['ReceiverEmail'] = $customer->email;
+
+                $AL->Send['TradeDesc'] = '';
+                $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'response', []);
+                $AL->Send['LogisticsC2CReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'change_store', []);
+                $AL->Send['Remark'] = '';
 
                 $store_data = self::getStoreData();
-                $aio->SendExtend['stCode'] = $store_data['stCate'] . $store_data['stCode'];
+                $AL->SendExtend['ReceiverStoreID'] = $store_data['stCode'];
 
                 $shippingLogger->store_type = $store_data['stCate'];
                 $shippingLogger->store_code = $store_data['stCode'];
@@ -477,22 +524,14 @@ class EzShip extends CarrierModule
                 $shippingLogger->store_addr = $store_data['stAddr'];
                 $shippingLogger->store_tel = $store_data['stTel'];
 
-                foreach ($order->getProductsDetail() as $detail) {
-                    $aio->Send['Items'][] = [
-                        'prodItem' => '',
-                        'prodNo' => $detail['product_reference'],
-                        'prodName' => $detail['product_name'],
-                        'prodPrice' => $detail['product_price'],
-                        'prodQty' => $detail['product_quantity'],
-                        'prodSpec' => '',
-                    ];
-                }
-
                 $shippingLogger->save();
 
-                $aio->CheckOutXml();
-                unset($aio);
+                $res = $AL->BGCreateShippingOrder();
+                unset($AL);
 
+                if (isset($res['ErrorMessage'])) {
+                    throw new Exception($res['ErrorMessage']);
+                }
             }
 
         } catch (Exception $e) {
@@ -508,7 +547,7 @@ class EzShip extends CarrierModule
 
     public static function logMessage($message, $is_append = false)
     {
-        $path = _PS_LOG_DIR_ . 'ezship.log';
+        $path = _PS_LOG_DIR_ . 'ecpay.log';
 
         if (!$is_append) {
             return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
@@ -519,7 +558,7 @@ class EzShip extends CarrierModule
 
     public static function getStoreData()
     {
-        $cookie = new Cookie('ezship_store_data');
+        $cookie = new Cookie('ecpay_cvs_store_data');
         $data = $cookie->getAll();
 
         try {
@@ -539,7 +578,7 @@ class EzShip extends CarrierModule
 
     public static function saveStoreData($store_data)
     {
-        $cookie = new Cookie('ezship_store_data');
+        $cookie = new Cookie('ecpay_cvs_store_data');
         $cookie->setExpire(time() + 60 * 60 * 2);
         foreach ($store_data as $key => $val) {
             $cookie->__set($key, $val);
@@ -548,7 +587,7 @@ class EzShip extends CarrierModule
 
     public static function clearStoreData()
     {
-        $cookie = new Cookie('ezship_store_data');
+        $cookie = new Cookie('ecpay_cvs_store_data');
 
         $cookie->__unset('stCate');
         $cookie->__unset('stCode');

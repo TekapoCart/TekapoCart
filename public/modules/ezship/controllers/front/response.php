@@ -11,7 +11,6 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
 
     public function postProcess()
     {
-        $result_message = '';
         $order_id = null;
         $order = null;
         try {
@@ -32,7 +31,6 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                     throw new Exception('Get ezShip feedback failed.');
                 } else {
 
-                    # Log ezShip feedback
                     EzShip::logMessage('Feedback: ' . json_encode($ezship_feedback), true);
 
                     $response_type = null;
@@ -44,8 +42,6 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
 
                     switch ($response_type) {
                         case EzShip_ResponseType::STORE:
-
-
 
                             $cart_id = (int)$ezship_feedback['processID'];
                             if ($this->context->cart->id !== $cart_id) {
@@ -62,18 +58,21 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                             EzShip::saveStoreData($store_data);
 
 
-                            $returnUrl = $this->context->link->getPageLink('order');
+                            $returnUrl = $this->context->link->getPageLink('order', true);
                             header('Location: ' . $returnUrl);
                             exit;
 
                             break;
                         case EzShip_ResponseType::CHECKOUT:
 
-                            # Get the cart order amount
-                            $order = new Order((int)$order_id);
+                            $order_reference = $ezship_feedback['order_id'];
+
+                            $order = Order::getByReference($order_reference);
                             if (empty($order)) {
                                 throw new Exception('Order is invalid.');
                             }
+
+                            $order_id = $order->id;
 
                             ShippingLogger::updateLogger(
                                 $ezship_feedback['sn_id'],
@@ -90,7 +89,6 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                                     $order->shipping_number = $ezship_feedback['sn_id'];
                                     $order->update();
 
-                                    $result_message = sprintf('orderStatus: %s, sn_id: %s.', $ezship_feedback['order_status'], $ezship_feedback['sn_id']);
                                     break;
 
                                 case EzShip_ReturnOrderStatus::E00:
@@ -119,12 +117,9 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                 }
             }
         } catch (Exception $e) {
-
             $result_message = $e->getMessage();
-
+            EzShip::logMessage(sprintf('Order %s response exception: %s', $order_id, $result_message), true);
         }
-
-        EzShip::logMessage(sprintf('Order %s response exception: %s', $order_id, $result_message), true);
 
     }
 }

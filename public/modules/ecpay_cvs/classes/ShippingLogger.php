@@ -112,7 +112,7 @@ class ShippingLogger extends ObjectModel
      * Update ShippingLogger
      * @param string $serial_number
      * @param string $return_status
-     * * @param string $return_message
+     * @param string $return_message
      * @param integer $id_order
      */
     public static function updateLogger($serial_number, $return_status, $return_message, $id_order)

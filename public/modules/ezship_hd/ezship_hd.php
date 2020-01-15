@@ -117,19 +117,16 @@ class EzShip_Hd extends CarrierModule
     // 後台訂單詳細頁籤
     public function hookDisplayAdminOrderTabOrder($params)
     {
-
         $carrier = new Carrier($params['order']->id_carrier);
         if ($carrier->external_module_name !== $this->name) {
             return false;
         }
 
-        $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
-        if ($shippingLogger) {
-            return $this->display(__FILE__, '/views/templates/hook/tab_order.tpl');
-        }
+        $this->smarty->assign(array(
+            'tab_title' => $carrier->name,
+        ));
 
-        return false;
-
+        return $this->display(__FILE__, '/views/templates/hook/tab_order.tpl');
     }
 
     // 後台訂單詳細頁籤內容
@@ -175,7 +172,7 @@ class EzShip_Hd extends CarrierModule
         }
 
         if (!preg_match("/^[0][9][0-9]{8,8}\$/", $phone)) {
-            $this->context->controller->errors[] = $this->l('Invalid phone format');
+            $this->context->controller->errors[] = $this->l('Invalid mobile phone format');
         }
 
         if ($this->context->controller->errors) {
