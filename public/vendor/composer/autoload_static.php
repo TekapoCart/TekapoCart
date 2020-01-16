@@ -81,6 +81,7 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
         'e40631d46120a9c38ea139981f8dab26' => __DIR__ . '/..' . '/ircmaxell/password-compat/lib/password.php',
         'b45b351e6b6f7487d819961fef2fda77' => __DIR__ . '/..' . '/jakeasmith/http_build_url/src/http_build_url.php',
+        'dc1275c308c5b416beb314b6317daca2' => __DIR__ . '/..' . '/overtrue/pinyin/src/const.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
     );
 
@@ -118,6 +119,8 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         ),
         'R' => 
         array (
+            'Recca0120\\Twzipcode\\' => 20,
+            'Recca0120\\Lodash\\' => 17,
             'React\\Promise\\' => 14,
         ),
         'P' => 
@@ -142,6 +145,7 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         ),
         'O' => 
         array (
+            'Overtrue\\Pinyin\\' => 16,
             'OnBoarding\\' => 11,
         ),
         'M' => 
@@ -291,6 +295,14 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         array (
             0 => __DIR__ . '/..' . '/sensiolabs/security-checker/SensioLabs/Security',
         ),
+        'Recca0120\\Twzipcode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/recca0120/twzipcode/src',
+        ),
+        'Recca0120\\Lodash\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/recca0120/lodash/src',
+        ),
         'React\\Promise\\' => 
         array (
             0 => __DIR__ . '/..' . '/react/promise/src',
@@ -362,6 +374,10 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         'Pelago\\' => 
         array (
             0 => __DIR__ . '/..' . '/pelago/emogrifier/src',
+        ),
+        'Overtrue\\Pinyin\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/overtrue/pinyin/src',
         ),
         'OnBoarding\\' => 
         array (
@@ -12408,6 +12424,11 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         'MrClay\\Cli\\Arg' => __DIR__ . '/..' . '/mrclay/minify/min/lib/MrClay/Cli/Arg.php',
         'NumberFormatter' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/NumberFormatter.php',
         'OS_Guess' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/OS/Guess.php',
+        'Overtrue\\Pinyin\\DictLoaderInterface' => __DIR__ . '/..' . '/overtrue/pinyin/src/DictLoaderInterface.php',
+        'Overtrue\\Pinyin\\FileDictLoader' => __DIR__ . '/..' . '/overtrue/pinyin/src/FileDictLoader.php',
+        'Overtrue\\Pinyin\\GeneratorFileDictLoader' => __DIR__ . '/..' . '/overtrue/pinyin/src/GeneratorFileDictLoader.php',
+        'Overtrue\\Pinyin\\MemoryFileDictLoader' => __DIR__ . '/..' . '/overtrue/pinyin/src/MemoryFileDictLoader.php',
+        'Overtrue\\Pinyin\\Pinyin' => __DIR__ . '/..' . '/overtrue/pinyin/src/Pinyin.php',
         'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
         'PEAR' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR.php',
         'PEAR_Error' => __DIR__ . '/..' . '/pear/pear-core-minimal/src/PEAR.php',
@@ -13514,6 +13535,13 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         'PrestaShop\\Module\\FacetedSearch\\Hook\\SpecificPrice' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/src/Hook/SpecificPrice.php',
         'PrestaShop\\Module\\FacetedSearch\\Product\\Search' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/src/Product/Search.php',
         'PrestaShop\\Module\\FacetedSearch\\Product\\SearchProvider' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/src/Product/SearchProvider.php',
+        'PrestaShop\\Module\\FacetedSearch\\Tests\\Adapter\\MySQLTest' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/tests/php/FacetedSearch/Adapter/MySQLTest.php',
+        'PrestaShop\\Module\\FacetedSearch\\Tests\\Filters\\BlockTest' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/tests/php/FacetedSearch/Filters/BlockTest.php',
+        'PrestaShop\\Module\\FacetedSearch\\Tests\\Filters\\ConverterTest' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/tests/php/FacetedSearch/Filters/ConverterTest.php',
+        'PrestaShop\\Module\\FacetedSearch\\Tests\\HookDispatcherTest' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/tests/php/FacetedSearch/HookDispatcherTest.php',
+        'PrestaShop\\Module\\FacetedSearch\\Tests\\Product\\SearchProviderTest' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/tests/php/FacetedSearch/Product/SearchProviderTest.php',
+        'PrestaShop\\Module\\FacetedSearch\\Tests\\Product\\SearchTest' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/tests/php/FacetedSearch/Product/SearchTest.php',
+        'PrestaShop\\Module\\FacetedSearch\\Tests\\URLSerializerTest' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/tests/php/FacetedSearch/URLSerializerTest.php',
         'PrestaShop\\Module\\FacetedSearch\\URLSerializer' => __DIR__ . '/../..' . '/modules/ps_facetedsearch/src/URLSerializer.php',
         'PrestaShop\\Module\\LinkList\\Cache\\LegacyLinkBlockCache' => __DIR__ . '/../..' . '/modules/ps_linklist/src/Cache/LegacyLinkBlockCache.php',
         'PrestaShop\\Module\\LinkList\\Cache\\LinkBlockCacheInterface' => __DIR__ . '/../..' . '/modules/ps_linklist/src/Cache/LinkBlockCacheInterface.php',
@@ -15208,6 +15236,22 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         'React\\Promise\\PromisorInterface' => __DIR__ . '/..' . '/react/promise/src/PromisorInterface.php',
         'React\\Promise\\RejectedPromise' => __DIR__ . '/..' . '/react/promise/src/RejectedPromise.php',
         'React\\Promise\\UnhandledRejectionException' => __DIR__ . '/..' . '/react/promise/src/UnhandledRejectionException.php',
+        'Recca0120\\Lodash\\JArray' => __DIR__ . '/..' . '/recca0120/lodash/src/JArray.php',
+        'Recca0120\\Lodash\\JArray\\Javascript' => __DIR__ . '/..' . '/recca0120/lodash/src/JArray/Javascript.php',
+        'Recca0120\\Lodash\\JString' => __DIR__ . '/..' . '/recca0120/lodash/src/JString.php',
+        'Recca0120\\Lodash\\JString\\Extensions\\Chinese' => __DIR__ . '/..' . '/recca0120/lodash/src/JString/Extensions/Chinese.php',
+        'Recca0120\\Lodash\\JString\\Extensions\\Converter' => __DIR__ . '/..' . '/recca0120/lodash/src/JString/Extensions/Converter.php',
+        'Recca0120\\Lodash\\JString\\Extensions\\FullCase' => __DIR__ . '/..' . '/recca0120/lodash/src/JString/Extensions/FullCase.php',
+        'Recca0120\\Lodash\\JString\\Javascript' => __DIR__ . '/..' . '/recca0120/lodash/src/JString/Javascript.php',
+        'Recca0120\\Lodash\\JString\\PHP' => __DIR__ . '/..' . '/recca0120/lodash/src/JString/PHP.php',
+        'Recca0120\\Twzipcode\\Address' => __DIR__ . '/..' . '/recca0120/twzipcode/src/Address.php',
+        'Recca0120\\Twzipcode\\Contracts\\Storage' => __DIR__ . '/..' . '/recca0120/twzipcode/src/Contracts/Storage.php',
+        'Recca0120\\Twzipcode\\Normalizer' => __DIR__ . '/..' . '/recca0120/twzipcode/src/Normalizer.php',
+        'Recca0120\\Twzipcode\\Point' => __DIR__ . '/..' . '/recca0120/twzipcode/src/Point.php',
+        'Recca0120\\Twzipcode\\Rule' => __DIR__ . '/..' . '/recca0120/twzipcode/src/Rule.php',
+        'Recca0120\\Twzipcode\\Rules' => __DIR__ . '/..' . '/recca0120/twzipcode/src/Rules.php',
+        'Recca0120\\Twzipcode\\Storages\\File' => __DIR__ . '/..' . '/recca0120/twzipcode/src/Storages/File.php',
+        'Recca0120\\Twzipcode\\Zipcode' => __DIR__ . '/..' . '/recca0120/twzipcode/src/Zipcode.php',
         'SecurityLib\\AbstractFactory' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/AbstractFactory.php',
         'SecurityLib\\BaseConverter' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/BaseConverter.php',
         'SecurityLib\\BigMath' => __DIR__ . '/..' . '/ircmaxell/security-lib/lib/SecurityLib/BigMath.php',
