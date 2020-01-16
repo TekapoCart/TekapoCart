@@ -70,13 +70,20 @@ class Ecpay_Cvs extends CarrierModule
                 `rv_mobile` VARCHAR(32) NULL DEFAULT NULL,
                 `rv_zip` VARCHAR(12) NULL DEFAULT NULL,
                 `rv_address` VARCHAR(255) NULL DEFAULT NULL,
-                `serial_number` VARCHAR(64) NULL DEFAULT NULL,
+                `sn_id` VARCHAR(64) NULL DEFAULT NULL,
                 `return_status` VARCHAR(50) NULL DEFAULT NULL,
                 `return_message` TEXT NULL DEFAULT NULL,
+                `cvs_shipping_number` VARCHAR(50) NULL DEFAULT NULL,
+                `cvs_validation_number` VARCHAR(50) NULL DEFAULT NULL,
+                `home_shipping_number` VARCHAR(50) NULL DEFAULT NULL,
+                `cvs_change_status` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,                
+                `cvs_change_message` TEXT NULL DEFAULT NULL,
                 `date_add` DATETIME NOT NULL,
                 `date_upd` DATETIME NOT NULL,                
                 PRIMARY KEY (`id_shipping_logger`),
-                INDEX `id_order` (`id_order`)
+                KEY `order_reference` (`order_reference`),
+                KEY `id_order` (`id_order`),
+                KEY `sn_id` (`sn_id`)
             )
             ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET utf8 COLLATE utf8_general_ci;';
 
@@ -331,6 +338,7 @@ class Ecpay_Cvs extends CarrierModule
             'ecpay_sender_cellphone' => $this->l('ECPay Sender Mobile'),
             'ecpay_sender_address' => $this->l('ECPay Sender Address'),
             'ecpay_sender_postcode' => $this->l('ECPay Sender Postcode'),
+            'ecpay_parcel_pickup_time' => $this->l('ECPay Parcel Pickup time'),
         );
 
         foreach ($required_fields as $field_name => $field_desc) {
@@ -543,7 +551,7 @@ class Ecpay_Cvs extends CarrierModule
 
     public static function logMessage($message, $is_append = false)
     {
-        $path = _PS_LOG_DIR_ . 'ecpay.log';
+        $path = _PS_LOG_DIR_ . 'ecpay_logistics.log';
 
         if (!$is_append) {
             return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
@@ -591,4 +599,7 @@ class Ecpay_Cvs extends CarrierModule
         $cookie->__unset('stAddr');
         $cookie->__unset('stTel');
     }
+
+
+
 }

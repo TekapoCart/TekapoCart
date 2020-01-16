@@ -12,8 +12,8 @@ class EcpayCvsChangeStoreModuleFrontController extends ModuleFrontController
     public function postProcess()
     {
 
-        $result_message = '';
-        $cart_id = null;
+        $result_message = '1|OK';
+        $sn_id = null;
         try {
             # Include the ECPay integration class
             $invoke_result = $this->module->invokeEcpaySDK();
@@ -24,44 +24,53 @@ class EcpayCvsChangeStoreModuleFrontController extends ModuleFrontController
                 $AL = new EcpayLogistics();
                 $AL->HashKey = Configuration::get('ecpay_hash_key');
                 $AL->HashIV = Configuration::get('ecpay_hash_iv');
-                $ecpay_feedback = $AL->CheckOutFeedback($_POST);
+                $AL->CheckOutFeedback($_POST);
                 unset($AL);
+                unset($_POST['CheckMacValue']);
+
+                $ecpay_feedback = $_POST;
 
                 # Process ECPay feedback
                 if (count($ecpay_feedback) < 1) {
                     throw new Exception('Get ECPay feedback failed.');
                 } else {
 
-                    # Log ECPay feedback
                     Ecpay_Cvs::logMessage('Feedback: ' . json_encode($ecpay_feedback), true);
 
+                    $sn_id = $ecpay_feedback['AllPayLogisticsID'];
 
-                    $cart_id = (int)$ecpay_feedback['ExtraData'];
-                    if ($this->context->cart->id !== $cart_id) {
-                        Tools::redirect($this->context->link->getPageLink('index', true));
+                    $shippingLogger = ShippingLogger::getLoggerBySnId($sn_id);
+                    if (empty($shippingLogger)) {
+                        throw new Exception('Shipping Logger is invalid.');
                     }
 
-                    $store_data = [
-                        'stCate' => $ecpay_feedback['LogisticsSubType'],
-                        'stCode' => $ecpay_feedback['CVSStoreID'],
-                        'stName' => $ecpay_feedback['CVSStoreName'],
-                        'stAddr' => $ecpay_feedback['CVSAddress'],
-                        'stTel' => $ecpay_feedback['CVSTelephone'],
-                    ];
-                    Ecpay_Cvs::saveStoreData($store_data);
+                    $order_id = $shippingLogger['id_order'];
 
-                    $returnUrl = $this->context->link->getPageLink('order');
-                    header('Location: ' . $returnUrl);
-                    exit;
+                    $status = $ecpay_feedback['Status'];
+
+                    switch ($status) {
+                        case '01':
+                            // 門市關轉店
+                            ShippingLogger::changeStore($status, $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store is closed'), $order_id);
+                            break;
+                        case '02':
+                            // 門市舊店號更新(同樣一間門市，但是更換店號)
+                            ShippingLogger::changeStore($status, $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store id is changed (same store)'), $order_id);
+                            break;
+                        default:
+                            ShippingLogger::changeStore($status, $ecpay_feedback['StoreID'], $order_id);
+                    }
                 }
             }
         } catch (Exception $e) {
 
-            $result_message = $e->getMessage();
+            $error = $e->getMessage();
+            Ecpay_Cvs::logMessage(sprintf('Change store %s response exception: %s', $sn_id, $error), true);
 
+            $result_message = '0|' . $error;
         }
 
-        Ecpay_Cvs::logMessage(sprintf('Cart %s response exception: %s', $cart_id, $result_message), true);
-
+        echo $result_message;
+        exit;
     }
 }

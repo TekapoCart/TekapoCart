@@ -12,6 +12,7 @@ class EcpayCvsResponseModuleFrontController extends ModuleFrontController
     public function postProcess()
     {
 
+        $result_message = '1|OK';
         $cart_id = null;
         try {
             # Include the ECPay integration class
@@ -25,7 +26,13 @@ class EcpayCvsResponseModuleFrontController extends ModuleFrontController
                 $AL->HashIV = Configuration::get('ecpay_hash_iv');
                 $AL->CheckOutFeedback($_POST);
                 unset($AL);
+
                 unset($_POST['CheckMacValue']);
+                unset($_POST['ReceiverName']);
+                unset($_POST['ReceiverPhone']);
+                unset($_POST['ReceiverCellPhone']);
+                unset($_POST['ReceiverEmail']);
+                unset($_POST['ReceiverAddress']);
 
                 $ecpay_feedback = $_POST;
 
@@ -34,11 +41,6 @@ class EcpayCvsResponseModuleFrontController extends ModuleFrontController
                     throw new Exception('Get ECPay feedback failed.');
                 } else {
 
-                    unset($ecpay_feedback['ReceiverName']);
-                    unset($ecpay_feedback['ReceiverPhone']);
-                    unset($ecpay_feedback['ReceiverCellPhone']);
-                    unset($ecpay_feedback['ReceiverEmail']);
-                    unset($ecpay_feedback['ReceiverAddress']);
                     Ecpay_Cvs::logMessage('Feedback: ' . json_encode($ecpay_feedback), true);
 
                     $order_reference = substr($ecpay_feedback['MerchantTradeNo'], 0, 16);
@@ -50,35 +52,64 @@ class EcpayCvsResponseModuleFrontController extends ModuleFrontController
 
                     $order_id = $order->id;
 
-                    ShippingLogger::updateLogger(
+                    ShippingLogger::updateLog(
+                        $order_id,
                         $ecpay_feedback['AllPayLogisticsID'],
                         $ecpay_feedback['RtnCode'],
                         $ecpay_feedback['UpdateStatusDate'] . ' - ' . $ecpay_feedback['RtnMsg'],
-                        $order_id
+                        $ecpay_feedback['CVSPaymentNo'],
+                        $ecpay_feedback['CVSValidationNo'],
+                        $ecpay_feedback['BookingNote']
                     );
 
                     $order_status = $ecpay_feedback['RtnCode'];
 
                     switch ($order_status) {
-                        case 300: // 訂單處理中（已收到訂單資料）
-                        case 310: // 上傳電子訂單檔處理中
-                        case 2063: // 門市配達
-                        case 2073: // 商品配達買家取貨門市
 
-                            if (strlen($order->shipping_number) === 0) {
-                                $order->shipping_number = $ecpay_feedback['AllPayLogisticsID'];
+                        // 商品已送至物流中心
+                        case 2030:
+                        case 3024:
+
+                        // 商品已送達門市
+                        case 2063:
+                        case 2073:
+                        case 3018:
+
+                            if ($ecpay_feedback['LogisticsType'] == EcpayLogisticsType::CVS) {
+                                $order->shipping_number = $ecpay_feedback['CVSPaymentNo'];
+                                $order->update();
+                            } elseif ($ecpay_feedback['LogisticsType'] == EcpayLogisticsType::HOME) {
+                                $order->shipping_number = $ecpay_feedback['BookingNote'];
                                 $order->update();
                             }
+
+                            break;
+
+                        // 消費者成功取件
+                        case 2067:
+                        case 3022:
+
+                            break;
+
+                        // 消費者七天未取件
+                        case 2074:
+                        case 3020:
+
+                            break;
+
                     }
                 }
             }
+
         } catch (Exception $e) {
 
-            $result_message = $e->getMessage();
-            Ecpay_Cvs::logMessage(sprintf('Cart %s response exception: %s', $cart_id, $result_message), true);
+            $error = $e->getMessage();
+            Ecpay_Cvs::logMessage(sprintf('Order %s response exception: %s', $order_id, $error), true);
+
+            $result_message = '0|' . $error;
         }
 
-
-
+        echo $result_message;
+        exit;
     }
 }

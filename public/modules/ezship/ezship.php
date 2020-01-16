@@ -67,13 +67,20 @@ class EzShip extends CarrierModule
                 `rv_mobile` VARCHAR(32) NULL DEFAULT NULL,
                 `rv_zip` VARCHAR(12) NULL DEFAULT NULL,
                 `rv_address` VARCHAR(255) NULL DEFAULT NULL,
-                `serial_number` VARCHAR(64) NULL DEFAULT NULL,
+                `sn_id` VARCHAR(64) NULL DEFAULT NULL,
                 `return_status` VARCHAR(50) NULL DEFAULT NULL,
                 `return_message` TEXT NULL DEFAULT NULL,
+                `cvs_shipping_number` VARCHAR(50) NULL DEFAULT NULL,
+                `cvs_validation_number` VARCHAR(50) NULL DEFAULT NULL,
+                `home_shipping_number` VARCHAR(50) NULL DEFAULT NULL,
+                `cvs_change_status` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,                
+                `cvs_change_message` TEXT NULL DEFAULT NULL,
                 `date_add` DATETIME NOT NULL,
                 `date_upd` DATETIME NOT NULL,                
                 PRIMARY KEY (`id_shipping_logger`),
-                INDEX `id_order` (`id_order`)
+                KEY `order_reference` (`order_reference`),
+                KEY `id_order` (`id_order`),
+                KEY `sn_id` (`sn_id`)
             )
             ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET utf8 COLLATE utf8_general_ci;';
 

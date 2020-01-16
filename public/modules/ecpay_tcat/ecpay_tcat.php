@@ -4,6 +4,8 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+use Recca0120\Twzipcode\Zipcode;
+
 include_once(_PS_MODULE_DIR_ . 'ecpay_cvs/classes/ShippingLogger.php');
 
 class Ecpay_Tcat extends CarrierModule
@@ -70,6 +72,31 @@ class Ecpay_Tcat extends CarrierModule
         return false;
     }
 
+    // 預定送達時段在這裡
+    public function hookDisplayCarrierExtraContent($params)
+    {
+        $carrier = new Carrier($params['carrier']['id']);
+        if ($carrier->external_module_name !== $this->name) {
+            return false;
+        }
+
+        $dropdown_options = [
+            EcpayScheduledDeliveryTime::TIME_9_12 => '9~12時',
+            EcpayScheduledDeliveryTime::TIME_12_17 => '12~17時',
+            EcpayScheduledDeliveryTime::TIME_17_20 => '17~20時',
+            EcpayScheduledDeliveryTime::UNLIMITED => '不限時',
+        ];
+
+        $scheduled_data = self::getScheduledData();
+
+        $this->smarty->assign([
+            'scheduled_data' => $scheduled_data,
+            'dropdown_options' => $dropdown_options,
+        ]);
+
+        return $this->display(__FILE__, 'display_carrier_extra_content.tpl');
+    }
+
     public function hookDisplayOrderConfirmation($params)
     {
         $carrier = new Carrier($params['order']->id_carrier);
@@ -113,6 +140,12 @@ class Ecpay_Tcat extends CarrierModule
 
             $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order'));
         }
+
+        $scheduled_data = [
+            'delivery_time' => Tools::getValue('scheduled_delivery_time', EcpayScheduledDeliveryTime::UNLIMITED),
+        ];
+        Ecpay_Tcat::saveScheduledData($scheduled_data);
+
     }
 
     // 後台訂單詳細頁籤
@@ -267,8 +300,8 @@ class Ecpay_Tcat extends CarrierModule
                 $AL->Send['LogisticsC2CReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'change_store', []);
                 $AL->Send['Remark'] = '';
 
-                $AL->Send['SenderZipCode'] = Configuration::get('ecpay_sender_postcode');;
-                $AL->Send['SenderAddress'] = Configuration::get('ecpay_sender_address');;
+                $AL->Send['SenderZipCode'] = Configuration::get('ecpay_sender_postcode');
+                $AL->Send['SenderAddress'] = Configuration::get('ecpay_sender_address');
 
                 $AL->Send['ReceiverZipCode'] = $address->postcode;
                 $AL->Send['ReceiverAddress'] = $address->city . $address->address1 . $address->address2;
@@ -278,12 +311,41 @@ class Ecpay_Tcat extends CarrierModule
 
                 $AL->Send['Temperature'] = EcpayTemperature::ROOM;
 
-                //
-                $AL->Send['Distance'] = EcpayDistance::SAME;
-                $AL->Send['Specification'] = EcpaySpecification::CM_60;
-                $AL->Send['ScheduledPickupTime'] = EcpayScheduledPickupTime::UNLIMITED;
+                $senderZipcode = Zipcode::parse($AL->Send['SenderAddress']);
+                $senderCity = $senderZipcode->county();
+                $receiverZipcode = Zipcode::parse($AL->Send['ReceiverAddress']);
+                $receiverCity = $receiverZipcode->county();
+                $islandZipcode = [
+                    209, 210, 211, 212, // 連江縣
+                    261, // 龜山島
+                    290, // 釣魚台列嶼
+                    817, 819, // 南海諸島
+                    880, 881, 882, 883, 884, 885, // 澎湖縣
+                    890, 891, 892, 893, 894, 896, // 金門縣
+                    952, // 蘭嶼
+                ];
+                if ($senderCity === $receiverCity) {
+                    $AL->Send['Distance'] = EcpayDistance::SAME;
+                } elseif (in_array($receiverZipcode->zip3(), $islandZipcode)) {
+                    $AL->Send['Distance'] = EcpayDistance::ISLAND;
+                } else {
+                    $AL->Send['Distance'] = EcpayDistance::OTHER;
+                }
+
+                $carrier = new Carrier($params['order']->id_carrier);
+                $dimension = $carrier->max_width + $carrier->max_height + $carrier->max_depth;
+                if ($dimension <= 60) {
+                    $AL->Send['Specification'] = EcpaySpecification::CM_60;
+                } else if ($dimension <= 90) {
+                    $AL->Send['Specification'] = EcpaySpecification::CM_90;
+                } else if ($dimension <= 120) {
+                    $AL->Send['Specification'] = EcpaySpecification::CM_120;
+                } else if ($dimension <= 150) {
+                    $AL->Send['Specification'] = EcpaySpecification::CM_150;
+                }
+
+                $AL->Send['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
                 $AL->Send['ScheduledDeliveryTime'] = EcpayScheduledDeliveryTime::UNLIMITED;
-                //
 
                 $shippingLogger->save();
 
@@ -298,13 +360,56 @@ class Ecpay_Tcat extends CarrierModule
 
         } catch (Exception $e) {
 
-            Ecpay_Cvs::logMessage(sprintf('Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
+            Ecpay_Tcat::logMessage(sprintf('Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
         }
     }
 
     public function formatOrderTotal($order_total)
     {
         return intval(round($order_total));
+    }
+
+    public static function logMessage($message, $is_append = false)
+    {
+        $path = _PS_LOG_DIR_ . 'ecpay_logistics.log';
+
+        if (!$is_append) {
+            return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+        } else {
+            return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+        }
+    }
+
+    public static function getScheduledData()
+    {
+        $cookie = new Cookie('ecpay_tcat_scheduled_data');
+        $data = $cookie->getAll();
+
+        try {
+            $result['delivery_time'] = $data['delivery_time'];
+            self::saveScheduledData($result);
+        } catch (Exception $e) {
+            self::clearScheduledData();
+            return false;
+        }
+
+        return $result;
+    }
+
+    public static function saveScheduledData($store_data)
+    {
+        $cookie = new Cookie('ecpay_tcat_scheduled_data');
+        $cookie->setExpire(time() + 60 * 60 * 2);
+        foreach ($store_data as $key => $val) {
+            $cookie->__set($key, $val);
+        }
+    }
+
+    public static function clearScheduledData()
+    {
+        $cookie = new Cookie('ecpay_tcat_scheduled_data');
+
+        $cookie->__unset('stCate');
     }
 
 }

@@ -74,11 +74,11 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
 
                             $order_id = $order->id;
 
-                            ShippingLogger::updateLogger(
+                            ShippingLogger::updateLog(
+                                $order_id,
                                 $ezship_feedback['sn_id'],
                                 $ezship_feedback['order_status'],
-                                EzShip_OrderStatus::getDescription($ezship_feedback['order_status']),
-                                $order_id
+                                EzShip_OrderStatus::getDescription($ezship_feedback['order_status'])
                             );
 
                             $order_status = $ezship_feedback['order_status'];
