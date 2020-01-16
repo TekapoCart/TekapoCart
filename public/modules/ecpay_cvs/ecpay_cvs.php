@@ -162,7 +162,6 @@ class Ecpay_Cvs extends CarrierModule
 
     public function hookDisplayOrderConfirmation($params)
     {
-
         $carrier = new Carrier($params['order']->id_carrier);
         if ($carrier->external_module_name !== $this->name) {
             return false;
@@ -269,11 +268,7 @@ class Ecpay_Cvs extends CarrierModule
     private function checkShippingInput($params)
     {
         $address = new Address(intval($params['cart']->id_address_delivery));
-        if (!is_null($address->phone_mobile) && !empty($address->phone_mobile)) {
-            $phone = $address->phone_mobile;
-        } else {
-            $phone = $address->phone;
-        }
+
         if (!preg_match("/[^a-zA-Z0-9 ]/", $address->lastname . $address->firstname)) {
             $limit_name_number = 10;
         } else {
@@ -288,7 +283,7 @@ class Ecpay_Cvs extends CarrierModule
             $this->context->controller->errors[] = $this->l('Invalid receiver name format');
         }
 
-        if (!preg_match("/^[0][9][0-9]{8,8}\$/", $phone)) {
+        if (!preg_match("/^[0][9][0-9]{8,8}\$/", $address->phone_mobile)) {
             $this->context->controller->errors[] = $this->l('Invalid mobile phone format');
         }
 
@@ -334,6 +329,8 @@ class Ecpay_Cvs extends CarrierModule
             'ecpay_hash_iv' => $this->l('ECPay HashIV'),
             'ecpay_sender_name' => $this->l('ECPay Sender'),
             'ecpay_sender_cellphone' => $this->l('ECPay Sender Mobile'),
+            'ecpay_sender_address' => $this->l('ECPay Sender Address'),
+            'ecpay_sender_postcode' => $this->l('ECPay Sender Postcode'),
         );
 
         foreach ($required_fields as $field_name => $field_desc) {
@@ -502,9 +499,8 @@ class Ecpay_Cvs extends CarrierModule
 
                 $address = new Address(intval($order->id_address_delivery));
                 $AL->Send['ReceiverName'] = $address->lastname . $address->firstname;
-                $shippingLogger->rv_name = $AL->Send['ReceiverName'];
-
                 $AL->Send['ReceiverCellPhone'] = $address->phone_mobile;
+                $shippingLogger->rv_name = $AL->Send['ReceiverName'];
                 $shippingLogger->rv_mobile = $AL->Send['ReceiverCellPhone'];
 
                 $customer = new Customer(intval($order->id_customer));
@@ -536,7 +532,7 @@ class Ecpay_Cvs extends CarrierModule
 
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
+            Ecpay_Cvs::logMessage(sprintf('Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
         }
     }
 

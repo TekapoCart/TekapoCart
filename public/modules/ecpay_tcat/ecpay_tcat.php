@@ -4,14 +4,14 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-include_once(_PS_MODULE_DIR_ . 'ezship/classes/ShippingLogger.php');
+include_once(_PS_MODULE_DIR_ . 'ecpay_cvs/classes/ShippingLogger.php');
 
-class EzShip_Hd extends CarrierModule
+class Ecpay_Tcat extends CarrierModule
 {
 
     public function __construct()
     {
-        $this->name = 'ezship_hd';
+        $this->name = 'ecpay_tcat';
         $this->tab = 'shipping_logistics';
         $this->version = '1.0';
         $this->author = 'TekapoCart';
@@ -19,7 +19,7 @@ class EzShip_Hd extends CarrierModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('ezShip Home delivery');
+        $this->displayName = $this->l('ECPay Tcat Home delivery');
         $this->description = 'https://www.tekapo.io/';
         $this->confirmUninstall = $this->l('Do you want to uninstall ezShip hd module?');
 
@@ -141,10 +141,9 @@ class EzShip_Hd extends CarrierModule
 
         $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
         if ($shippingLogger) {
-            $ezship_shipment_query_url = 'https://www.ezship.com.tw/receiver_query/ezship_query_shipstatus_2017.jsp';
 
             $this->smarty->assign(array(
-                'ezship_shipment_query_url' => $ezship_shipment_query_url,
+                'shipping_message' => $shippingLogger->return_message,
             ));
 
             return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
@@ -159,13 +158,17 @@ class EzShip_Hd extends CarrierModule
         $address = new Address(intval($params['cart']->id_address_delivery));
 
         if (!preg_match("/[^a-zA-Z0-9 ]/", $address->lastname . $address->firstname)) {
-            $limit_name_number = 60;
+            $limit_name_number = 10;
         } else {
-            $limit_name_number = 20;
+            $limit_name_number = 5;
         }
 
         if (mb_strlen($address->lastname . $address->firstname, "utf-8") > $limit_name_number) {
             $this->context->controller->errors[] = $this->l('Receiver name over limit');
+        }
+
+        if (preg_match('/^\'!@#%&*+\"<>|_[],，、/', $address->lastname . $address->firstname)) {
+            $this->context->controller->errors[] = $this->l('Invalid receiver name format');
         }
 
         if (!preg_match("/^[0][9][0-9]{8,8}\$/", $address->phone_mobile)) {
@@ -189,10 +192,10 @@ class EzShip_Hd extends CarrierModule
         return 0;
     }
 
-    public function invokeEzShipSDK()
+    public function invokeEcpaySDK()
     {
-        if (!class_exists('EzShip_AllInOne', false)) {
-            if (!include(_PS_MODULE_DIR_ . '/ezship/lib/EzShip.Integration.php')) {
+        if (!class_exists('EcpayLogistics', false)) {
+            if (!include(_PS_MODULE_DIR_ . '/ecpay_cvs/lib/Ecpay.Logistic.Integration.php')) {
                 return false;
             }
         }
@@ -205,9 +208,9 @@ class EzShip_Hd extends CarrierModule
         $order_id = null;
         $order = null;
         try {
-            $invoke_result = $this->invokeEzShipSDK();
+            $invoke_result = $this->invokeEcpaySDK();
             if (!$invoke_result) {
-                throw new Exception($this->l('EzShip SDK is missing.'));
+                throw new Exception($this->l('ECPay SDK is missing.'));
             } else {
 
                 $order_id = $params['order']->id;
@@ -217,68 +220,85 @@ class EzShip_Hd extends CarrierModule
                     throw new Exception(sprintf('Order %s is not found.', $order_id));
                 }
 
-                # Retrieve the checkout result
-                $aio = new EzShip_AllInOne();
-                $aio->suID = Configuration::get('ezship_su_id');
-                $aio->secret = Configuration::get('ezship_secret');
-                $aio->ServiceURL = 'https://www.ezship.com.tw/emap/ezship_xml_order_api.jsp';
-                $aio->Send['rtURL'] = $this->context->link->getModuleLink('ezship', 'response', []);
-                $aio->Send['orderAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
-                $aio->Send['orderID'] = $order->reference;
+                $AL = new EcpayLogistics();
+                $AL->HashKey = Configuration::get('ecpay_hash_key');
+                $AL->HashIV = Configuration::get('ecpay_hash_iv');
+                $AL->Send['MerchantID'] = Configuration::get('ecpay_merchant_id');
+                $AL->Send['MerchantTradeNo'] = $order->reference . str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
 
                 $shippingLogger = new ShippingLogger();
-
-                if ($order->module == 'tc_pod') {
-                    $aio->Send['orderType'] = EzShip_OrderType::PAY;
-                } else {
-                    $aio->Send['orderType'] = EzShip_OrderType::NO_PAY;
-                }
-                $shippingLogger->pay_type = $aio->Send['orderType'];
-
                 $shippingLogger->id_order = $order_id;
-                $shippingLogger->order_reference = $aio->Send['orderID'];
+                $shippingLogger->order_reference = $order->reference;
                 $shippingLogger->module = $this->name;
 
-                $customer = new Customer(intval($order->id_customer));
-                $aio->Send['rvEmail'] = $customer->email;
+                $AL->Send['MerchantTradeDate'] = $order->date_add;
+
+                $AL->Send['LogisticsType'] = EcpayLogisticsType::Home;
+                $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::TCAT;
+                $shippingLogger->send_status = $AL->Send['LogisticsSubType'];
+
+                $AL->Send['GoodsAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
+
+                if ($order->module == 'tc_pod') {
+                    $AL->Send['IsCollection'] = EcpayIsCollection::YES;
+                    $AL->Send['CollectionAmount'] = $AL->Send['GoodsAmount'];
+                } else {
+                    $AL->Send['IsCollection'] = EcpayIsCollection::NO;
+                    $AL->Send['CollectionAmount'] = 0;
+                }
+                $shippingLogger->pay_type = $AL->Send['IsCollection'];
+
+                $AL->Send['GoodsName'] = $this->l('A Package Of Online Goods');
+
+                $AL->Send['SenderName'] = Configuration::get('ecpay_sender_name');
+                $AL->Send['SenderCellPhone'] = Configuration::get('ecpay_sender_cellphone');
 
                 $address = new Address(intval($order->id_address_delivery));
-                $aio->Send['rvName'] = $address->lastname . $address->firstname;;
-                $aio->Send['rvMobile'] = $address->phone_mobile;
-                $shippingLogger->rv_name = $aio->Send['rvName'];
-                $shippingLogger->rv_mobile = $aio->Send['rvMobile'];
+                $AL->Send['ReceiverName'] = $address->lastname . $address->firstname;
+                $AL->Send['ReceiverCellPhone'] = $address->phone_mobile;
+                $shippingLogger->rv_name = $AL->Send['ReceiverName'];
+                $shippingLogger->rv_mobile = $AL->Send['ReceiverCellPhone'];
 
-                $aio->Send['ChooseShipping'] = EzShip_ShippingMethod::HOME;
-                $aio->Send['orderStatus'] = EzShip_SendOrderStatus::A06;
-                $shippingLogger->send_status = $aio->Send['orderStatus'];
+                $customer = new Customer(intval($order->id_customer));
+                $AL->Send['ReceiverEmail'] = $customer->email;
 
-                $aio->SendExtend['rvAddr'] = $address->city . $address->address1 . $address->address2;
-                $aio->SendExtend['rvZip'] = $address->postcode;
-                $shippingLogger->rv_address = $aio->SendExtend['rvAddr'];
-                $shippingLogger->rv_zip = $aio->SendExtend['rvZip'];
+                $AL->Send['TradeDesc'] = '';
+                $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'response', []);
+                $AL->Send['LogisticsC2CReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'change_store', []);
+                $AL->Send['Remark'] = '';
 
-                foreach ($order->getProductsDetail() as $detail) {
-                    $aio->Send['Items'][] = [
-                        'prodItem' => '',
-                        'prodNo' => $detail['product_reference'],
-                        'prodName' => $detail['product_name'],
-                        'prodPrice' => $detail['product_price'],
-                        'prodQty' => $detail['product_quantity'],
-                        'prodSpec' => '',
-                    ];
-                }
+                $AL->Send['SenderZipCode'] = Configuration::get('ecpay_sender_postcode');;
+                $AL->Send['SenderAddress'] = Configuration::get('ecpay_sender_address');;
+
+                $AL->Send['ReceiverZipCode'] = $address->postcode;
+                $AL->Send['ReceiverAddress'] = $address->city . $address->address1 . $address->address2;
+
+                $shippingLogger->rv_zip = $AL->Send['ReceiverZipCode'];
+                $shippingLogger->rv_address = $AL->Send['ReceiverAddress'];
+
+                $AL->Send['Temperature'] = EcpayTemperature::ROOM;
+
+                //
+                $AL->Send['Distance'] = EcpayDistance::SAME;
+                $AL->Send['Specification'] = EcpaySpecification::CM_60;
+                $AL->Send['ScheduledPickupTime'] = EcpayScheduledPickupTime::UNLIMITED;
+                $AL->Send['ScheduledDeliveryTime'] = EcpayScheduledDeliveryTime::UNLIMITED;
+                //
 
                 $shippingLogger->save();
 
-                $res = $aio->CheckOutXml();
-                EzShip::logMessage('Result: ' . $res, true);
-                unset($aio);
+                $res = $AL->BGCreateShippingOrder();
+                unset($AL);
+
+                if (isset($res['ErrorMessage'])) {
+                    throw new Exception($res['ErrorMessage']);
+                }
 
             }
 
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
+            Ecpay_Cvs::logMessage(sprintf('Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
         }
     }
 

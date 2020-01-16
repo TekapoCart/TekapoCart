@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>ezship</name>
-    <displayName><![CDATA[ezShip 物流配送]]></displayName>
+    <displayName><![CDATA[ezShip 物流配送 - 3大超商]]></displayName>
     <version><![CDATA[1.0]]></version>
     <description><![CDATA[店到店寄件、直寄店配]]></description>
     <author><![CDATA[TekapoCart]]></author>

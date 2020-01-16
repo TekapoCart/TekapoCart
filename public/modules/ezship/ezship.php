@@ -258,11 +258,7 @@ class EzShip extends CarrierModule
     private function checkShippingInput($params)
     {
         $address = new Address(intval($params['cart']->id_address_delivery));
-        if (!is_null($address->phone_mobile) && !empty($address->phone_mobile)) {
-            $phone = $address->phone_mobile;
-        } else {
-            $phone = $address->phone;
-        }
+
         if (!preg_match("/[^a-zA-Z0-9 ]/", $address->lastname . $address->firstname)) {
             $limit_name_number = 60;
         } else {
@@ -273,7 +269,7 @@ class EzShip extends CarrierModule
             $this->context->controller->errors[] = $this->l('Receiver name over limit');
         }
 
-        if (!preg_match("/^[0][9][0-9]{8,8}\$/", $phone)) {
+        if (!preg_match("/^[0][9][0-9]{8,8}\$/", $address->phone_mobile)) {
             $this->context->controller->errors[] = $this->l('Invalid mobile phone format');
         }
 
@@ -439,12 +435,18 @@ class EzShip extends CarrierModule
                 $aio->ServiceURL = 'https://www.ezship.com.tw/emap/ezship_xml_order_api.jsp';
                 $aio->Send['rtURL'] = $this->context->link->getModuleLink('ezship', 'response', []);
                 $aio->Send['orderAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
-                $aio->Send['orderType'] = ($order->module == 'tc_pod') ? EzShip_OrderType::PAY : EzShip_OrderType::NO_PAY;
+
                 $aio->Send['orderID'] = $order->reference;
 
                 $shippingLogger = new ShippingLogger();
 
+                if ($order->module == 'tc_pod') {
+                    $aio->Send['orderType'] = EzShip_OrderType::PAY;
+                } else {
+                    $aio->Send['orderType'] = EzShip_OrderType::NO_PAY;
+                }
                 $shippingLogger->pay_type = $aio->Send['orderType'];
+
                 $shippingLogger->id_order = $order_id;
                 $shippingLogger->order_reference = $aio->Send['orderID'];
                 $shippingLogger->module = $this->name;
@@ -454,13 +456,7 @@ class EzShip extends CarrierModule
 
                 $address = new Address(intval($order->id_address_delivery));
                 $aio->Send['rvName'] = $address->lastname . $address->firstname;;
-                if (!is_null($address->phone_mobile) && !empty($address->phone_mobile)) {
-                    $phone = $address->phone_mobile;
-                } else {
-                    $phone = $address->phone;
-                }
-                $aio->Send['rvMobile'] = $phone;
-
+                $aio->Send['rvMobile'] = $address->phone_mobile;
                 $shippingLogger->rv_name = $aio->Send['rvName'];
                 $shippingLogger->rv_mobile = $aio->Send['rvMobile'];
 
