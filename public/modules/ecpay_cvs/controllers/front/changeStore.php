@@ -1,6 +1,6 @@
 <?php
 
-class EcpayCvsChangeStoreModuleFrontController extends ModuleFrontController
+class EcpayCvsUpdateStoreModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 
@@ -51,14 +51,16 @@ class EcpayCvsChangeStoreModuleFrontController extends ModuleFrontController
                     switch ($status) {
                         case '01':
                             // 門市關轉店
-                            ShippingLogger::changeStore($status, $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store is closed'), $order_id);
+                            ShippingLogger::changeStore($order_id, $status,
+                                $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store is closed'));
                             break;
                         case '02':
                             // 門市舊店號更新(同樣一間門市，但是更換店號)
-                            ShippingLogger::changeStore($status, $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store id is changed (same store)'), $order_id);
+                            ShippingLogger::changeStore($order_id, $status,
+                                $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store id is changed (same store)'));
                             break;
                         default:
-                            ShippingLogger::changeStore($status, $ecpay_feedback['StoreID'], $order_id);
+                            ShippingLogger::changeStore($order_id, $status, $ecpay_feedback['StoreID']);
                     }
                 }
             }

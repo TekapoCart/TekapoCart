@@ -109,11 +109,6 @@ class ShippingLogger extends ObjectModel
         )
     );
 
-    /**
-     * Get ShippingLogger by order reference
-     * @param string $order_ref Order reference
-     * @return array|bool ShippingLogger
-     */
     public static function getLoggerByOrderRef($order_ref)
     {
         $query = new DBQuery();
@@ -128,11 +123,6 @@ class ShippingLogger extends ObjectModel
         }
     }
 
-    /**
-     * Get ShippingLogger by sn_id
-     * @param string $sn_id
-     * @return array|bool ShippingLogger
-     */
     public static function getLoggerBySnId($sn_id)
     {
         $query = new DBQuery();
@@ -147,16 +137,6 @@ class ShippingLogger extends ObjectModel
         }
     }
 
-    /**
-     * Update ShippingLogger
-     * @param integer $id_order
-     * @param string $sn_id
-     * @param string $return_status
-     * @param string $return_message
-     * @param string $cvs_shipping_number
-     * @param string $cvs_validation_number
-     * @param string $home_shipping_number
-     */
     public static function updateLog($id_order, $sn_id, $return_status, $return_message, $cvs_shipping_number = NULL, $cvs_validation_number = NULL, $home_shipping_number = NULL)
     {
         $query = new DBQuery();
@@ -185,7 +165,7 @@ class ShippingLogger extends ObjectModel
 
     }
 
-    public static function changeStore($change_status, $change_message, $id_order)
+    public static function changeStore($id_order, $change_status, $change_message)
     {
         $query = new DBQuery();
         $query->from('shipping_logger');
@@ -207,4 +187,33 @@ class ShippingLogger extends ObjectModel
 
         }
     }
+
+    public static function replyChangeStore($id_order, $change_status, $change_message, $store_type, $store_id, $store_name, $store_address, $store_tel)
+    {
+        $query = new DBQuery();
+        $query->from('shipping_logger');
+        $query->where("order_id = '" . pSQL($id_order) . "'");
+        $rowOrder = Db::getInstance()->getRow($query);
+
+        if (is_array($rowOrder)) {
+
+            $change_message = strlen($rowOrder['cvs_change_message']) > 0 ? $change_message . '<br>' . $rowOrder['cvs_change_message'] : $change_message;
+
+            Db::getInstance()->update(
+                'shipping_logger',
+                array(
+                    'store_type' => pSQL($store_type),
+                    'store_id' => pSQL($store_id),
+                    'store_name' => pSQL($store_name),
+                    'store_address' => pSQL($store_address),
+                    'store_tel' => pSQL($store_tel),
+                    'cvs_change_status' => pSQL($change_status),
+                    'cvs_change_message' => pSQL($change_message),
+                ),
+                'id_order = '.(int)$id_order
+            );
+
+        }
+    }
+
 }

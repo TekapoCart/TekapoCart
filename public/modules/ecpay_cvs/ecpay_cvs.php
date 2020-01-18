@@ -144,7 +144,6 @@ class Ecpay_Cvs extends CarrierModule
                 $AL = new EcpayLogistics();
                 $AL->Send = array(
                     'MerchantID' => Configuration::get('ecpay_merchant_id'),
-                    'MerchantTradeNo' => 'T' . date('YmdHis'),
                     'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
                     'IsCollection' => EcpayIsCollection::NO,
                     'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'store', []),
@@ -154,10 +153,10 @@ class Ecpay_Cvs extends CarrierModule
 
                 $store_data = self::getStoreData();
 
-                $this->smarty->assign(array(
+                $this->smarty->assign([
                     'map_html' => $map_html,
                     'store_data' => $store_data,
-                ));
+                ]);
 
                 return $this->display(__FILE__, 'display_carrier_extra_content.tpl');
             }
@@ -261,9 +260,38 @@ class Ecpay_Cvs extends CarrierModule
         $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
         if ($shippingLogger) {
 
-            $this->smarty->assign(array(
+            if ($shippingLogger->change_status) {
+                try {
+                    $invoke_result = $this->invokeEcpaySDK();
+                    if (!$invoke_result) {
+                        throw new Exception($this->l('ECPay SDK is missing.'));
+                    } else {
+                        $AL = new EcpayLogistics();
+                        $AL->Send = array(
+                            'MerchantID' => Configuration::get('ecpay_merchant_id'),
+                            'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
+                            'IsCollection' => EcpayIsCollection::NO,
+                            'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'replyChangeStore', []),
+                            'ExtraData' => $shippingLogger->sn_id,
+                        );
+                        $map_html = $AL->CvsMap('Select Store Map');
+
+                        $store_data = self::getStoreData();
+
+                        $this->smarty->assign([
+                            'map_html' => $map_html,
+                            'store_data' => $store_data,
+                        ]);
+
+                    }
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            }
+
+            $this->smarty->assign([
                 'shipping_message' => $shippingLogger->return_message,
-            ));
+            ]);
 
             return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
         }

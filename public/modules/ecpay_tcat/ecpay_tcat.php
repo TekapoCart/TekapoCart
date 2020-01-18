@@ -316,12 +316,26 @@ class Ecpay_Tcat extends CarrierModule
                 $receiverZipcode = Zipcode::parse($AL->Send['ReceiverAddress']);
                 $receiverCity = $receiverZipcode->county();
                 $islandZipcode = [
-                    209, 210, 211, 212, // 連江縣
+                    209,
+                    210,
+                    211,
+                    212, // 連江縣
                     261, // 龜山島
                     290, // 釣魚台列嶼
-                    817, 819, // 南海諸島
-                    880, 881, 882, 883, 884, 885, // 澎湖縣
-                    890, 891, 892, 893, 894, 896, // 金門縣
+                    817,
+                    819, // 南海諸島
+                    880,
+                    881,
+                    882,
+                    883,
+                    884,
+                    885, // 澎湖縣
+                    890,
+                    891,
+                    892,
+                    893,
+                    894,
+                    896, // 金門縣
                     952, // 蘭嶼
                 ];
                 if ($senderCity === $receiverCity) {
@@ -336,12 +350,18 @@ class Ecpay_Tcat extends CarrierModule
                 $dimension = $carrier->max_width + $carrier->max_height + $carrier->max_depth;
                 if ($dimension <= 60) {
                     $AL->Send['Specification'] = EcpaySpecification::CM_60;
-                } else if ($dimension <= 90) {
-                    $AL->Send['Specification'] = EcpaySpecification::CM_90;
-                } else if ($dimension <= 120) {
-                    $AL->Send['Specification'] = EcpaySpecification::CM_120;
-                } else if ($dimension <= 150) {
-                    $AL->Send['Specification'] = EcpaySpecification::CM_150;
+                } else {
+                    if ($dimension <= 90) {
+                        $AL->Send['Specification'] = EcpaySpecification::CM_90;
+                    } else {
+                        if ($dimension <= 120) {
+                            $AL->Send['Specification'] = EcpaySpecification::CM_120;
+                        } else {
+                            if ($dimension <= 150) {
+                                $AL->Send['Specification'] = EcpaySpecification::CM_150;
+                            }
+                        }
+                    }
                 }
 
                 $AL->Send['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');

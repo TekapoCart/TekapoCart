@@ -4,8 +4,8 @@
 <p style="margin-left: 35px;">
     {$map_html nofilter}
     {if $store_data}<br>
-        {l s='Store Name' mod='ezship'}：{$store_data['stName']} ({$store_data['stCate']}{$store_data['stCode']})<br>
-        {l s='Store Address' mod='ezship'}：{$store_data['stAddr']}
+        {l s='Store Name' mod='ecpay_cvs'}：{$store_data['stName']} ({$store_data['stCate']}{$store_data['stCode']})<br>
+        {l s='Store Address' mod='ecpay_cvs'}：{$store_data['stAddr']}
     {/if}
 </p>
 
