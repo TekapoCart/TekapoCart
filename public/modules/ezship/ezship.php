@@ -144,11 +144,9 @@ class EzShip extends CarrierModule
             'webPara' => '',
         ];
         $map_url .= '?' . http_build_query($query);
-        $map_title = $store_data ? $this->l('Reselect Store Map') : $this->l('Select Store Map');
 
         $this->smarty->assign(array(
             'map_url' => $map_url,
-            'map_title' => $map_title,
             'store_data' => $store_data,
         ));
 
@@ -500,7 +498,7 @@ class EzShip extends CarrierModule
 
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
+            EzShip::logMessage(sprintf('CVS Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
         }
     }
 

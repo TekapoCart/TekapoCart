@@ -254,17 +254,17 @@ class Ecpay_Tcat extends CarrierModule
                 }
 
                 $AL = new EcpayLogistics();
-                $AL->HashKey = Configuration::get('ecpay_hash_key');
-                $AL->HashIV = Configuration::get('ecpay_hash_iv');
-                $AL->Send['MerchantID'] = Configuration::get('ecpay_merchant_id');
-                $AL->Send['MerchantTradeNo'] = $order->reference . str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
+                $AL->HashKey = Configuration::get('ecpay_c2c_hash_key');
+                $AL->HashIV = Configuration::get('ecpay_c2c_hash_iv');
+                $AL->Send['MerchantID'] = Configuration::get('ecpay_c2c_merchant_id');
+                $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
                 $shippingLogger = new ShippingLogger();
                 $shippingLogger->id_order = $order_id;
                 $shippingLogger->order_reference = $order->reference;
                 $shippingLogger->module = $this->name;
 
-                $AL->Send['MerchantTradeDate'] = $order->date_add;
+                $AL->Send['MerchantTradeDate'] = date('Y/m/d H:i:s', strtotime($order->date_add));
 
                 $AL->Send['LogisticsType'] = EcpayLogisticsType::Home;
                 $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::TCAT;
@@ -297,7 +297,6 @@ class Ecpay_Tcat extends CarrierModule
 
                 $AL->Send['TradeDesc'] = '';
                 $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'response', []);
-                $AL->Send['LogisticsC2CReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'change_store', []);
                 $AL->Send['Remark'] = '';
 
                 $AL->Send['SenderZipCode'] = Configuration::get('ecpay_sender_postcode');
@@ -387,7 +386,7 @@ class Ecpay_Tcat extends CarrierModule
 
         } catch (Exception $e) {
 
-            Ecpay_Tcat::logMessage(sprintf('Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
+            Ecpay_Tcat::logMessage(sprintf('TCAT Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
         }
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-class EcpayCvsUpdateStoreModuleFrontController extends ModuleFrontController
+class Ecpay_CvsUpdateStoreModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 
@@ -22,8 +22,8 @@ class EcpayCvsUpdateStoreModuleFrontController extends ModuleFrontController
             } else {
                 # Retrieve the checkout result
                 $AL = new EcpayLogistics();
-                $AL->HashKey = Configuration::get('ecpay_hash_key');
-                $AL->HashIV = Configuration::get('ecpay_hash_iv');
+                $AL->HashKey = Configuration::get('ecpay_c2c_hash_key');
+                $AL->HashIV = Configuration::get('ecpay_c2c_hash_iv');
                 $AL->CheckOutFeedback($_POST);
                 unset($AL);
                 unset($_POST['CheckMacValue']);

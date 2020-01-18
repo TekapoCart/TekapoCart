@@ -26,11 +26,14 @@ class Ecpay_Cvs extends CarrierModule
         $this->confirmUninstall = $this->l('Do you want to uninstall ecpay_cvs module?');
 
         $this->ecpayParams = [
-            'ecpay_merchant_id',
-            'ecpay_hash_key',
-            'ecpay_hash_iv',
+            'ecpay_c2c_merchant_id',
+            'ecpay_c2c_hash_key',
+            'ecpay_c2c_hash_iv',
             'ecpay_sender_name',
             'ecpay_sender_cellphone',
+            'ecpay_sender_address',
+            'ecpay_sender_postcode',
+            'ecpay_parcel_pickup_time',
         ];
 
     }
@@ -142,19 +145,21 @@ class Ecpay_Cvs extends CarrierModule
                 throw new Exception($this->l('ECPay SDK is missing.'));
             } else {
                 $AL = new EcpayLogistics();
-                $AL->Send = array(
-                    'MerchantID' => Configuration::get('ecpay_merchant_id'),
+                $AL->Send['MerchantID'] = Configuration::get('ecpay_c2c_merchant_id');
+                $AL->Send = [
+                    'MerchantID' => Configuration::get('ecpay_c2c_merchant_id'),
                     'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
                     'IsCollection' => EcpayIsCollection::NO,
                     'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'store', []),
                     'ExtraData' => $this->context->cart->id,
-                );
-                $map_html = $AL->CvsMap('Select Store Map');
+                ];
+
+                $map_url = $AL->CvsMap($this->l('Select Store Map'));
 
                 $store_data = self::getStoreData();
 
                 $this->smarty->assign([
-                    'map_html' => $map_html,
+                    'map_url' => $map_url,
                     'store_data' => $store_data,
                 ]);
 
@@ -268,7 +273,7 @@ class Ecpay_Cvs extends CarrierModule
                     } else {
                         $AL = new EcpayLogistics();
                         $AL->Send = array(
-                            'MerchantID' => Configuration::get('ecpay_merchant_id'),
+                            'MerchantID' => Configuration::get('ecpay_c2c_merchant_id'),
                             'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
                             'IsCollection' => EcpayIsCollection::NO,
                             'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'replyChangeStore', []),
@@ -359,14 +364,11 @@ class Ecpay_Cvs extends CarrierModule
     private function postValidation()
     {
         $required_fields = array(
-            'ecpay_merchant_id' => $this->l('ECPay MerchantID'),
-            'ecpay_hash_key' => $this->l('ECPay HashKey'),
-            'ecpay_hash_iv' => $this->l('ECPay HashIV'),
+            'ecpay_c2c_merchant_id' => $this->l('ECPay MerchantID'),
+            'ecpay_c2c_hash_key' => $this->l('ECPay HashKey'),
+            'ecpay_c2c_hash_iv' => $this->l('ECPay HashIV'),
             'ecpay_sender_name' => $this->l('ECPay Sender'),
             'ecpay_sender_cellphone' => $this->l('ECPay Sender Mobile'),
-            'ecpay_sender_address' => $this->l('ECPay Sender Address'),
-            'ecpay_sender_postcode' => $this->l('ECPay Sender Postcode'),
-            'ecpay_parcel_pickup_time' => $this->l('ECPay Parcel Pickup time'),
         );
 
         foreach ($required_fields as $field_name => $field_desc) {
@@ -389,41 +391,46 @@ class Ecpay_Cvs extends CarrierModule
                 array(
                     'type' => 'text',
                     'label' => $this->l('ECPay MerchantID'),
-                    'name' => 'ecpay_merchant_id',
+                    'name' => 'ecpay_c2c_merchant_id',
                     'required' => true,
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('ECPay HashKey'),
-                    'name' => 'ecpay_hash_key',
+                    'name' => 'ecpay_c2c_hash_key',
                     'required' => true,
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('ECPay HashIV'),
-                    'name' => 'ecpay_hash_iv',
+                    'name' => 'ecpay_c2c_hash_iv',
                     'required' => true,
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('ECPay Sender'),
                     'name' => 'ecpay_sender_name',
-                    'hint' => '不可有符號^ \' ` ! @ # % & * + \ " < > | _ [ ] , ， 、及不可有空白',
+                    'required' => true,
+                    'desc' => '不可有符號^ \' ` ! @ # % & * + \ " < > | _ [ ] , ， 、及不可有空白',
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('ECPay Sender Mobile'),
+                    'required' => true,
                     'name' => 'ecpay_sender_cellphone',
+                    'desc' => '只允許數字、10 碼、09 開頭',
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('ECPay Sender Address'),
                     'name' => 'ecpay_sender_address',
+                    'desc' => '若啟用宅配，此欄位為必填'
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('ECPay Sender Postcode'),
                     'name' => 'ecpay_sender_postcode',
+                    'desc' => '若啟用宅配，此欄位為必填'
                 ),
                 array(
                     'type' => 'select',
@@ -432,9 +439,9 @@ class Ecpay_Cvs extends CarrierModule
                     'options' => array(
                         'query' => array(
                             array('id' => '4', 'name' => '不限時'),
-                            array('id' => '1', 'name' => '9~12'),
-                            array('id' => '2', 'name' => '12~17'),
-                            array('id' => '3', 'name' => '17~20'),
+                            array('id' => '1', 'name' => '9~12時'),
+                            array('id' => '2', 'name' => '12~17時'),
+                            array('id' => '3', 'name' => '17~20時'),
                         ),
                         'id' => 'id',
                         'name' => 'name'
@@ -524,17 +531,17 @@ class Ecpay_Cvs extends CarrierModule
                 }
 
                 $AL = new EcpayLogistics();
-                $AL->HashKey = Configuration::get('ecpay_hash_key');
-                $AL->HashIV = Configuration::get('ecpay_hash_iv');
-                $AL->Send['MerchantID'] = Configuration::get('ecpay_merchant_id');
-                $AL->Send['MerchantTradeNo'] = $order->reference . str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
+                $AL->HashKey = Configuration::get('ecpay_c2c_hash_key');
+                $AL->HashIV = Configuration::get('ecpay_c2c_hash_iv');
+                $AL->Send['MerchantID'] = Configuration::get('ecpay_c2c_merchant_id');
+                $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
                 $shippingLogger = new ShippingLogger();
                 $shippingLogger->id_order = $order_id;
                 $shippingLogger->order_reference = $order->reference;
                 $shippingLogger->module = $this->name;
 
-                $AL->Send['MerchantTradeDate'] = $order->date_add;
+                $AL->Send['MerchantTradeDate'] = date('Y/m/d H:i:s', strtotime($order->date_add));
 
                 $AL->Send['LogisticsType'] = EcpayLogisticsType::CVS;
                 $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::UNIMART_C2C;
@@ -570,7 +577,11 @@ class Ecpay_Cvs extends CarrierModule
                 $AL->Send['LogisticsC2CReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'change_store', []);
                 $AL->Send['Remark'] = '';
 
+
+
                 $store_data = self::getStoreData();
+
+                $AL->SendExtend = [];
                 $AL->SendExtend['ReceiverStoreID'] = $store_data['stCode'];
 
                 $shippingLogger->store_type = $store_data['stCate'];
@@ -591,7 +602,7 @@ class Ecpay_Cvs extends CarrierModule
 
         } catch (Exception $e) {
 
-            Ecpay_Cvs::logMessage(sprintf('Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
+            Ecpay_Cvs::logMessage(sprintf('711 Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
         }
     }
 

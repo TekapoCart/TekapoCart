@@ -232,7 +232,9 @@ if (!class_exists('EcpayLogistics', false)) {
             $this->ValidateString('ExtraData', $this->PostParams['ExtraData'], 20, true);
             $this->ValidateDevice();
 
-            return $this->GenPostHTML($ButtonDesc, $Target);
+            // suzy: 2019-01-18 產生 Map 連結
+            // return $this->GenPostHTML($ButtonDesc, $Target);
+            return $this->GenHttpUrl();
         }
 
         /**
@@ -2149,6 +2151,17 @@ if (!class_exists('EcpayLogistics', false)) {
             $PostHTML .= $this->AddNextLine('</div>');
 
             return $PostHTML;
+        }
+
+        /**
+         * suzy: 2019-01-18 產生 GET 連結
+         * @return string
+         */
+        public function GenHttpUrl()
+        {
+            $url = $this->ServiceURL;
+            $url .= '?' . http_build_query($this->PostParams);
+            return $url;
         }
 
         /**

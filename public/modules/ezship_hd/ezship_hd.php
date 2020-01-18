@@ -278,7 +278,7 @@ class EzShip_Hd extends CarrierModule
 
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
+            EzShip::logMessage(sprintf('HD Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
         }
     }
 

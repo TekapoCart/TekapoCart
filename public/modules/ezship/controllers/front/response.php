@@ -43,14 +43,6 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                     switch ($response_type) {
                         case EzShip_ResponseType::STORE:
 
-                            $cart_id = (int)$ezship_feedback['processID'];
-
-                            if ($this->context->cart->id != $cart_id) {
-                                $returnUrl = $this->context->link->getPageLink('index', true);
-                                header('Location: ' . $returnUrl);
-                                exit;
-                            }
-
                             $store_data = [
                                 'stCate' => $ezship_feedback['stCate'],
                                 'stCode' => $ezship_feedback['stCode'],
@@ -59,7 +51,6 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                                 'stTel' => $ezship_feedback['stTel'],
                             ];
                             EzShip::saveStoreData($store_data);
-
 
                             $returnUrl = $this->context->link->getPageLink('order', true);
                             header('Location: ' . $returnUrl);
@@ -123,6 +114,8 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
             $result_message = $e->getMessage();
             EzShip::logMessage(sprintf('Order %s response exception: %s', $order_id, $result_message), true);
         }
+
+        exit;
 
     }
 }

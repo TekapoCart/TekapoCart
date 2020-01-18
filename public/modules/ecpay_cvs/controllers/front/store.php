@@ -1,6 +1,6 @@
 <?php
 
-class EcpayCvsStoreModuleFrontController extends ModuleFrontController
+class Ecpay_CvsStoreModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 
@@ -12,19 +12,12 @@ class EcpayCvsStoreModuleFrontController extends ModuleFrontController
     public function postProcess()
     {
 
-        $cart_id = null;
         try {
             # Include the ECPay integration class
             $invoke_result = $this->module->invokeEcpaySDK();
             if (!$invoke_result) {
                 throw new Exception('ECPay SDK is missing.');
             } else {
-                # Retrieve the checkout result
-                $AL = new EcpayLogistics();
-                $AL->HashKey = Configuration::get('ecpay_hash_key');
-                $AL->HashIV = Configuration::get('ecpay_hash_iv');
-                $AL->CheckOutFeedback($_POST);
-                unset($AL);
 
                 $ecpay_feedback = $_POST;
 
@@ -34,14 +27,6 @@ class EcpayCvsStoreModuleFrontController extends ModuleFrontController
                 } else {
 
                     Ecpay_Cvs::logMessage('Feedback: ' . json_encode($ecpay_feedback), true);
-
-
-                    $cart_id = (int)$ecpay_feedback['ExtraData'];
-                    if ($this->context->cart->id != $cart_id) {
-                        $returnUrl = $this->context->link->getPageLink('index', true);
-                        header('Location: ' . $returnUrl);
-                        exit;
-                    }
 
                     $store_data = [
                         'stCate' => $ecpay_feedback['LogisticsSubType'],
@@ -60,8 +45,9 @@ class EcpayCvsStoreModuleFrontController extends ModuleFrontController
         } catch (Exception $e) {
 
             $result_message = $e->getMessage();
-            Ecpay_Cvs::logMessage(sprintf('Store %s response exception: %s', $cart_id, $result_message), true);
+            Ecpay_Cvs::logMessage(sprintf('Store response exception: %s', $result_message), true);
         }
 
+        exit;
     }
 }

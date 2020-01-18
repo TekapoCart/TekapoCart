@@ -1,6 +1,6 @@
 <?php
 
-class EcpayCvsReplyChangeStoreModuleFrontController extends ModuleFrontController
+class Ecpay_CvsReplyChangeStoreModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 
@@ -21,8 +21,8 @@ class EcpayCvsReplyChangeStoreModuleFrontController extends ModuleFrontControlle
             } else {
                 # Retrieve the checkout result
                 $AL = new EcpayLogistics();
-                $AL->HashKey = Configuration::get('ecpay_hash_key');
-                $AL->HashIV = Configuration::get('ecpay_hash_iv');
+                $AL->HashKey = Configuration::get('ecpay_c2c_hash_key');
+                $AL->HashIV = Configuration::get('ecpay_c2c_hash_iv');
                 $AL->CheckOutFeedback($_POST);
                 unset($AL);
 
