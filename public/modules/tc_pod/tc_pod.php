@@ -23,7 +23,7 @@ class Tc_Pod extends PaymentModule
 
         $this->displayName = $this->l('Payment on Delivery');
         $this->description = 'https://www.tekapo.io/';
-        $this->confirmUninstall = $this->l('Do you want to uninstall ezShip pay module?');
+        $this->confirmUninstall = $this->l('Do you want to uninstall TekapoCart POD module?');
 
     }
 
@@ -111,6 +111,17 @@ class Tc_Pod extends PaymentModule
         ];
 
         return $order_status[$status_name];
+    }
+
+    public static function logMessage($message, $is_append = false)
+    {
+        $path = _PS_LOG_DIR_ . 'pod.log';
+
+        if (!$is_append) {
+            return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+        } else {
+            return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+        }
     }
 
 }

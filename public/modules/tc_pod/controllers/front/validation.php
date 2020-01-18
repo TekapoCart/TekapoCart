@@ -1,6 +1,6 @@
 <?php
 
-class EzShip_PayValidationModuleFrontController extends ModuleFrontController
+class Tc_PodValidationModuleFrontController extends ModuleFrontController
 {
     public function postProcess()
     {
@@ -57,7 +57,7 @@ class EzShip_PayValidationModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('Cart %s validation exception: %s', $cart->id, $e->getMessage()), true);
+            Tc_Pod::logMessage(sprintf('Validation %s validation exception: %s', $cart->id, $e->getMessage()), true);
 
         }
 

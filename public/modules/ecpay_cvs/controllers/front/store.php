@@ -37,8 +37,10 @@ class EcpayCvsStoreModuleFrontController extends ModuleFrontController
 
 
                     $cart_id = (int)$ecpay_feedback['ExtraData'];
-                    if ($this->context->cart->id !== $cart_id) {
-                        Tools::redirect($this->context->link->getPageLink('index', true));
+                    if ($this->context->cart->id != $cart_id) {
+                        $returnUrl = $this->context->link->getPageLink('index', true);
+                        header('Location: ' . $returnUrl);
+                        exit;
                     }
 
                     $store_data = [
