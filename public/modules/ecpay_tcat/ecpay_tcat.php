@@ -21,9 +21,9 @@ class Ecpay_Tcat extends CarrierModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('ECPay Tcat Home delivery');
+        $this->displayName = $this->l('ECPay TCAT Home delivery');
         $this->description = 'https://www.tekapo.io/';
-        $this->confirmUninstall = $this->l('Do you want to uninstall ezShip hd module?');
+        $this->confirmUninstall = $this->l('Do you want to uninstall ecpay_tcat module?');
 
     }
 
@@ -81,10 +81,10 @@ class Ecpay_Tcat extends CarrierModule
         }
 
         $dropdown_options = [
-            EcpayScheduledDeliveryTime::TIME_9_12 => '9~12時',
-            EcpayScheduledDeliveryTime::TIME_12_17 => '12~17時',
-            EcpayScheduledDeliveryTime::TIME_17_20 => '17~20時',
-            EcpayScheduledDeliveryTime::UNLIMITED => '不限時',
+            EcpayScheduledDeliveryTime::TIME_9_12 => $this->l('9~12AM'),
+            EcpayScheduledDeliveryTime::TIME_12_17 => $this->l('12~17PM'),
+            EcpayScheduledDeliveryTime::TIME_17_20 => $this->l('17~20PM'),
+            EcpayScheduledDeliveryTime::UNLIMITED => $this->l('No Limit'),
         ];
 
         $scheduled_data = self::getScheduledData();
@@ -316,27 +316,34 @@ class Ecpay_Tcat extends CarrierModule
                 $receiverZipcode = Zipcode::parse($AL->Send['ReceiverAddress']);
                 $receiverCity = $receiverZipcode->county();
                 $islandZipcode = [
+                    // 連江縣
                     209,
                     210,
                     211,
-                    212, // 連江縣
-                    261, // 龜山島
-                    290, // 釣魚台列嶼
+                    212,
+                    // 龜山島
+                    261,
+                    290,
+                    // 釣魚台列嶼
                     817,
-                    819, // 南海諸島
+                    819,
+                    // 南海諸島
                     880,
                     881,
                     882,
                     883,
                     884,
-                    885, // 澎湖縣
+                    // 澎湖縣
+                    885,
                     890,
                     891,
                     892,
                     893,
                     894,
-                    896, // 金門縣
-                    952, // 蘭嶼
+                    // 金門縣
+                    896,
+                    // 蘭嶼
+                    952,
                 ];
                 if ($senderCity === $receiverCity) {
                     $AL->Send['Distance'] = EcpayDistance::SAME;

@@ -21,9 +21,9 @@ class Ecpay_Cvs extends CarrierModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('ECPay cvs pickup in-store');
+        $this->displayName = $this->l('ECPay CVS pickup in-store');
         $this->description = 'https://www.tekapo.io/';
-        $this->confirmUninstall = $this->l('Do you want to uninstall ECPay cvs module?');
+        $this->confirmUninstall = $this->l('Do you want to uninstall ecpay_cvs module?');
 
         $this->ecpayParams = [
             'ecpay_merchant_id',
@@ -408,14 +408,37 @@ class Ecpay_Cvs extends CarrierModule
                     'type' => 'text',
                     'label' => $this->l('ECPay Sender'),
                     'name' => 'ecpay_sender_name',
-                    'required' => true,
-                    'hint' => '不可有符號^ \' ` ! @# % & * + \ " < >|_ [ ] , 及，、不可有 空白',
+                    'hint' => '不可有符號^ \' ` ! @ # % & * + \ " < > | _ [ ] , ， 、及不可有空白',
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('ECPay Sender Mobile'),
                     'name' => 'ecpay_sender_cellphone',
-                    'required' => true,
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('ECPay Sender Address'),
+                    'name' => 'ecpay_sender_address',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('ECPay Sender Postcode'),
+                    'name' => 'ecpay_sender_postcode',
+                ),
+                array(
+                    'type' => 'select',
+                    'name' => 'ecpay_parcel_pickup_time',
+                    'label' => $this->l('ECPay Parcel Pickup time'),
+                    'options' => array(
+                        'query' => array(
+                            array('id' => '4', 'name' => '不限時'),
+                            array('id' => '1', 'name' => '9~12'),
+                            array('id' => '2', 'name' => '12~17'),
+                            array('id' => '3', 'name' => '17~20'),
+                        ),
+                        'id' => 'id',
+                        'name' => 'name'
+                    ),
                 ),
 
             ),

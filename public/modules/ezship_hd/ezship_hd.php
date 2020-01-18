@@ -21,7 +21,7 @@ class EzShip_Hd extends CarrierModule
 
         $this->displayName = $this->l('ezShip Home delivery');
         $this->description = 'https://www.tekapo.io/';
-        $this->confirmUninstall = $this->l('Do you want to uninstall ezShip hd module?');
+        $this->confirmUninstall = $this->l('Do you want to uninstall ezship_hd module?');
 
     }
 

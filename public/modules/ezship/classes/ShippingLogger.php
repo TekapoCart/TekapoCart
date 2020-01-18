@@ -1,6 +1,7 @@
 <?php
 
 if (!class_exists('ShippingLogger')) {
+
     class ShippingLogger extends ObjectModel
     {
         /** @var integer Prestashop Order generated ID */
@@ -138,8 +139,15 @@ if (!class_exists('ShippingLogger')) {
             }
         }
 
-        public static function updateLog($id_order, $sn_id, $return_status, $return_message, $cvs_shipping_number = NULL, $cvs_validation_number = NULL, $home_shipping_number = NULL)
-        {
+        public static function updateLog(
+            $id_order,
+            $sn_id,
+            $return_status,
+            $return_message,
+            $cvs_shipping_number = null,
+            $cvs_validation_number = null,
+            $home_shipping_number = null
+        ) {
             $query = new DBQuery();
             $query->from('shipping_logger');
             $query->where("order_id = '" . pSQL($id_order) . "'");
@@ -159,7 +167,7 @@ if (!class_exists('ShippingLogger')) {
                         'cvs_validation_number' => pSQL($cvs_validation_number),
                         'home_shipping_number' => pSQL($home_shipping_number),
                     ),
-                    'id_order = '.(int)$id_order
+                    'id_order = ' . (int)$id_order
                 );
 
             }
@@ -183,14 +191,22 @@ if (!class_exists('ShippingLogger')) {
                         'change_status' => pSQL($change_status),
                         'change_message' => pSQL($change_message),
                     ),
-                    'id_order = '.(int)$id_order
+                    'id_order = ' . (int)$id_order
                 );
 
             }
         }
 
-        public static function replyChangeStore($id_order, $change_status, $change_message, $store_type, $store_id, $store_name, $store_address, $store_tel)
-        {
+        public static function replyChangeStore(
+            $id_order,
+            $change_status,
+            $change_message,
+            $store_type,
+            $store_id,
+            $store_name,
+            $store_address,
+            $store_tel
+        ) {
             $query = new DBQuery();
             $query->from('shipping_logger');
             $query->where("order_id = '" . pSQL($id_order) . "'");
@@ -211,13 +227,12 @@ if (!class_exists('ShippingLogger')) {
                         'change_status' => pSQL($change_status),
                         'change_message' => pSQL($change_message),
                     ),
-                    'id_order = '.(int)$id_order
+                    'id_order = ' . (int)$id_order
                 );
 
             }
         }
 
     }
-
 }
 

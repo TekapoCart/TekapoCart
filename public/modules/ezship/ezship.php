@@ -23,7 +23,7 @@ class EzShip extends CarrierModule
 
         $this->displayName = $this->l('ezShip CVS pickup in-store');
         $this->description = 'https://www.tekapo.io/';
-        $this->confirmUninstall = $this->l('Do you want to uninstall ezShip module?');
+        $this->confirmUninstall = $this->l('Do you want to uninstall ezship module?');
 
         $this->ezShipParams = [
             'ezship_su_id',
