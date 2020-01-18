@@ -307,7 +307,7 @@ File: controllers/admin/AdminStoresController.php:426</note>
       </trans-unit>
       <trans-unit id="ffea2d321be109fc7243cfeb515fe257" approved="yes">
         <source>Choose your state (if applicable)</source>
-        <target xml:lang="zh-TW">縣/市(如適用)</target>
+        <target xml:lang="zh-TW">州/省（如適用）</target>
         <note>Context:
 File: controllers/admin/AdminStoresController.php:431</note>
       </trans-unit>

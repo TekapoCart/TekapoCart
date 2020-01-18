@@ -30,6 +30,7 @@ class Ecpay_Tcat extends CarrierModule
     public function install()
     {
         if (!parent::install()
+            OR !$this->registerHook('displayCarrierExtraContent')
             OR !$this->registerHook('actionCarrierProcess')
             OR !$this->registerHook('displayOrderConfirmation')
             OR !$this->registerHook('displayAdminOrderTabOrder')
@@ -81,10 +82,9 @@ class Ecpay_Tcat extends CarrierModule
         }
 
         $dropdown_options = [
-            EcpayScheduledDeliveryTime::TIME_9_12 => $this->l('9~12AM'),
-            EcpayScheduledDeliveryTime::TIME_12_17 => $this->l('12~17PM'),
-            EcpayScheduledDeliveryTime::TIME_17_20 => $this->l('17~20PM'),
             EcpayScheduledDeliveryTime::UNLIMITED => $this->l('No Limit'),
+            EcpayScheduledDeliveryTime::TIME_B4_13 => $this->l('Before 1PM'),
+            EcpayScheduledDeliveryTime::TIME_14_18 => $this->l('2~6PM'),
         ];
 
         $scheduled_data = self::getScheduledData();
@@ -144,6 +144,7 @@ class Ecpay_Tcat extends CarrierModule
         $scheduled_data = [
             'delivery_time' => Tools::getValue('scheduled_delivery_time', EcpayScheduledDeliveryTime::UNLIMITED),
         ];
+
         Ecpay_Tcat::saveScheduledData($scheduled_data);
 
     }
@@ -200,7 +201,8 @@ class Ecpay_Tcat extends CarrierModule
             $this->context->controller->errors[] = $this->l('Receiver name over limit');
         }
 
-        if (preg_match('/^\'!@#%&*+\"<>|_[],，、/', $address->lastname . $address->firstname)) {
+        $Pattern = '/^([\x{4e00}-\x{9fff}\x{3400}-\x{4dbf}]{2,5}|[a-zA-Z]{4,10})$/u';
+        if (!preg_match($Pattern, $address->lastname . $address->firstname)) {
             $this->context->controller->errors[] = $this->l('Invalid receiver name format');
         }
 
@@ -266,19 +268,14 @@ class Ecpay_Tcat extends CarrierModule
 
                 $AL->Send['MerchantTradeDate'] = date('Y/m/d H:i:s', strtotime($order->date_add));
 
-                $AL->Send['LogisticsType'] = EcpayLogisticsType::Home;
+                $AL->Send['LogisticsType'] = EcpayLogisticsType::HOME;
                 $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::TCAT;
                 $shippingLogger->send_status = $AL->Send['LogisticsSubType'];
 
                 $AL->Send['GoodsAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
 
-                if ($order->module == 'tc_pod') {
-                    $AL->Send['IsCollection'] = EcpayIsCollection::YES;
-                    $AL->Send['CollectionAmount'] = $AL->Send['GoodsAmount'];
-                } else {
-                    $AL->Send['IsCollection'] = EcpayIsCollection::NO;
-                    $AL->Send['CollectionAmount'] = 0;
-                }
+                $AL->Send['IsCollection'] = EcpayIsCollection::NO;
+                $AL->Send['CollectionAmount'] = 0;
                 $shippingLogger->pay_type = $AL->Send['IsCollection'];
 
                 $AL->Send['GoodsName'] = $this->l('A Package Of Online Goods');
@@ -299,21 +296,24 @@ class Ecpay_Tcat extends CarrierModule
                 $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'response', []);
                 $AL->Send['Remark'] = '';
 
-                $AL->Send['SenderZipCode'] = Configuration::get('ecpay_sender_postcode');
-                $AL->Send['SenderAddress'] = Configuration::get('ecpay_sender_address');
+                $AL->SendExtend = [];
+                $AL->SendExtend['SenderZipCode'] = Configuration::get('ecpay_sender_postcode');
+                $AL->SendExtend['SenderAddress'] = Configuration::get('ecpay_sender_address');
 
-                $AL->Send['ReceiverZipCode'] = $address->postcode;
-                $AL->Send['ReceiverAddress'] = $address->city . $address->address1 . $address->address2;
+                $AL->SendExtend['ReceiverZipCode'] = $address->postcode;
+                $AL->SendExtend['ReceiverAddress'] = $address->city . $address->address1 . $address->address2;
 
-                $shippingLogger->rv_zip = $AL->Send['ReceiverZipCode'];
-                $shippingLogger->rv_address = $AL->Send['ReceiverAddress'];
+                $shippingLogger->rv_zip = $AL->SendExtend['ReceiverZipCode'];
+                $shippingLogger->rv_address = $AL->SendExtend['ReceiverAddress'];
 
-                $AL->Send['Temperature'] = EcpayTemperature::ROOM;
+                $AL->SendExtend['Temperature'] = EcpayTemperature::ROOM;
 
-                $senderZipcode = Zipcode::parse($AL->Send['SenderAddress']);
+                $senderZipcode = Zipcode::parse($AL->SendExtend['SenderAddress']);
                 $senderCity = $senderZipcode->county();
-                $receiverZipcode = Zipcode::parse($AL->Send['ReceiverAddress']);
+
+                $receiverZipcode = Zipcode::parse($AL->SendExtend['ReceiverAddress']);
                 $receiverCity = $receiverZipcode->county();
+
                 $islandZipcode = [
                     // 連江縣
                     209,
@@ -344,36 +344,36 @@ class Ecpay_Tcat extends CarrierModule
                     // 蘭嶼
                     952,
                 ];
-                if ($senderCity === $receiverCity) {
-                    $AL->Send['Distance'] = EcpayDistance::SAME;
+                if ($senderCity == $receiverCity) {
+                    $AL->SendExtend['Distance'] = EcpayDistance::SAME;
                 } elseif (in_array($receiverZipcode->zip3(), $islandZipcode)) {
-                    $AL->Send['Distance'] = EcpayDistance::ISLAND;
+                    $AL->SendExtend['Distance'] = EcpayDistance::ISLAND;
                 } else {
-                    $AL->Send['Distance'] = EcpayDistance::OTHER;
+                    $AL->SendExtend['Distance'] = EcpayDistance::OTHER;
                 }
+                $shippingLogger->distance = $AL->SendExtend['Distance'];
 
                 $carrier = new Carrier($params['order']->id_carrier);
                 $dimension = $carrier->max_width + $carrier->max_height + $carrier->max_depth;
                 if ($dimension <= 60) {
-                    $AL->Send['Specification'] = EcpaySpecification::CM_60;
-                } else {
-                    if ($dimension <= 90) {
-                        $AL->Send['Specification'] = EcpaySpecification::CM_90;
-                    } else {
-                        if ($dimension <= 120) {
-                            $AL->Send['Specification'] = EcpaySpecification::CM_120;
-                        } else {
-                            if ($dimension <= 150) {
-                                $AL->Send['Specification'] = EcpaySpecification::CM_150;
-                            }
-                        }
-                    }
+                    $AL->SendExtend['Specification'] = EcpaySpecification::CM_60;
+                } elseif ($dimension <= 90) {
+                    $AL->SendExtend['Specification'] = EcpaySpecification::CM_90;
+                } elseif ($dimension <= 120) {
+                    $AL->SendExtend['Specification'] = EcpaySpecification::CM_120;
+                } elseif ($dimension <= 150) {
+                    $AL->SendExtend['Specification'] = EcpaySpecification::CM_150;
                 }
+                $shippingLogger->specification = $AL->SendExtend['Specification'];
 
-                $AL->Send['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
-                $AL->Send['ScheduledDeliveryTime'] = EcpayScheduledDeliveryTime::UNLIMITED;
+                $AL->SendExtend['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
 
-                $shippingLogger->save();
+                $scheduled_data = self::getScheduledData();
+
+                $AL->SendExtend['ScheduledDeliveryTime'] = $scheduled_data['delivery_time'];
+                $shippingLogger->delivery_time = $AL->SendExtend['ScheduledDeliveryTime'];
+
+                // $shippingLogger->save();
 
                 $res = $AL->BGCreateShippingOrder();
                 unset($AL);
@@ -435,7 +435,7 @@ class Ecpay_Tcat extends CarrierModule
     {
         $cookie = new Cookie('ecpay_tcat_scheduled_data');
 
-        $cookie->__unset('stCate');
+        $cookie->__unset('delivery_time');
     }
 
 }

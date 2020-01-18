@@ -46,6 +46,15 @@ if (!class_exists('ShippingLogger')) {
         /** @var string receiver address */
         public $rv_address;
 
+        /** @var string parcel distance requested by ECPay API */
+        public $distance;
+
+        /** @var string parcel specification requested by ECPay API */
+        public $specification;
+
+        /** @var string parcel delivery time requested by ECPay API */
+        public $delivery_time;
+
         /** @var string sn id returned by API */
         public $sn_id;
 
@@ -98,6 +107,9 @@ if (!class_exists('ShippingLogger')) {
                 'rv_mobile' => array('type' => self::TYPE_STRING),
                 'rv_zip' => array('type' => self::TYPE_STRING),
                 'rv_address' => array('type' => self::TYPE_STRING),
+                'distance' => array('type' => self::TYPE_STRING),
+                'specification' => array('type' => self::TYPE_STRING),
+                'delivery_time' => array('type' => self::TYPE_STRING),
                 'sn_id' => array('type' => self::TYPE_STRING),
                 'return_status' => array('type' => self::TYPE_STRING),
                 'return_message' => array('type' => self::TYPE_STRING),

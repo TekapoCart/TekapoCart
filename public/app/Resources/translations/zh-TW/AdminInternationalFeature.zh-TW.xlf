@@ -360,7 +360,7 @@ File: controllers/admin/AdminStatesController.php:153</note>
       </trans-unit>
       <trans-unit id="71777469a202cba33a8985f7d5bf1d97" approved="yes">
         <source>Add new state</source>
-        <target xml:lang="zh-TW">新增縣/市</target>
+        <target xml:lang="zh-TW">新增州/省</target>
         <note>Context:
 File: controllers/admin/AdminStatesController.php:118</note>
       </trans-unit>

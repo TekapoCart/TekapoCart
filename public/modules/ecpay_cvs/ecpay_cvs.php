@@ -73,6 +73,9 @@ class Ecpay_Cvs extends CarrierModule
                 `rv_mobile` VARCHAR(32) NULL DEFAULT NULL,
                 `rv_zip` VARCHAR(12) NULL DEFAULT NULL,
                 `rv_address` VARCHAR(255) NULL DEFAULT NULL,
+                `distance` VARCHAR(2) NULL DEFAULT NULL,
+                `specification` VARCHAR(4) NULL DEFAULT NULL,
+                `delivery_time` VARCHAR(2) NULL DEFAULT NULL,
                 `sn_id` VARCHAR(64) NULL DEFAULT NULL,
                 `return_status` VARCHAR(50) NULL DEFAULT NULL,
                 `return_message` TEXT NULL DEFAULT NULL,
@@ -439,9 +442,8 @@ class Ecpay_Cvs extends CarrierModule
                     'options' => array(
                         'query' => array(
                             array('id' => '4', 'name' => '不限時'),
-                            array('id' => '1', 'name' => '9~12時'),
-                            array('id' => '2', 'name' => '12~17時'),
-                            array('id' => '3', 'name' => '17~20時'),
+                            array('id' => '1', 'name' => '13 前'),
+                            array('id' => '3', 'name' => '14~18時'),
                         ),
                         'id' => 'id',
                         'name' => 'name'

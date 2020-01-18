@@ -1021,7 +1021,7 @@ File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:
     <body>
       <trans-unit id="46a2a41cc6e552044816a2d04634545d" approved="yes">
         <source>State</source>
-        <target xml:lang="zh-TW">縣/市</target>
+        <target xml:lang="zh-TW">州</target>
         <note>Context:
 File: controllers/admin/AdminStoresController.php:489</note>
       </trans-unit>
