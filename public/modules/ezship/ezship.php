@@ -523,15 +523,13 @@ class EzShip extends CarrierModule
 
     public static function getStoreData()
     {
-        $cookie = new Cookie('ezship_store_data');
-        $data = $cookie->getAll();
-
+        $context = Context::getContext();
         try {
-            $result['stCate'] = $data['stCate'];
-            $result['stCode'] = $data['stCode'];
-            $result['stName'] = $data['stName'];
-            $result['stAddr'] = $data['stAddr'];
-            $result['stTel'] = $data['stTel'];
+            $result['stCate'] = $context->cookie->__get('ezship_' . 'stCate');
+            $result['stCode'] = $context->cookie->__get('ezship_' . 'stCode');
+            $result['stName'] = $context->cookie->__get('ezship_' . 'stName');
+            $result['stAddr'] = $context->cookie->__get('ezship_' . 'stAddr');
+            $result['stTel'] = $context->cookie->__get('ezship_' . 'stTel');
             self::saveStoreData($result);
         } catch (Exception $e) {
             self::clearStoreData();
@@ -543,21 +541,19 @@ class EzShip extends CarrierModule
 
     public static function saveStoreData($store_data)
     {
-        $cookie = new Cookie('ezship_store_data');
-        $cookie->setExpire(time() + 60 * 60 * 2);
+        $context = Context::getContext();
         foreach ($store_data as $key => $val) {
-            $cookie->__set($key, $val);
+            $context->cookie->__set('ezship_' . $key, $val);
         }
     }
 
     public static function clearStoreData()
     {
-        $cookie = new Cookie('ezship_store_data');
-
-        $cookie->__unset('stCate');
-        $cookie->__unset('stCode');
-        $cookie->__unset('stName');
-        $cookie->__unset('stAddr');
-        $cookie->__unset('stTel');
+        $context = Context::getContext();
+        $context->cookie->__unset('ezship_' . 'stCate');
+        $context->cookie->__unset('ezship_' . 'stCode');
+        $context->cookie->__unset('ezship_' . 'stName');
+        $context->cookie->__unset('ezship_' . 'stAddr');
+        $context->cookie->__unset('ezship_' . 'stTel');
     }
 }

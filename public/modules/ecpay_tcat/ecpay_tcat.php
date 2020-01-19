@@ -124,21 +124,27 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
-        if (!$this->checkShippingInput($params)) {
+        if (!$this->checkAddressInput($params)) {
             $rawData = Db::getInstance()->getValue(
                 'SELECT checkout_session_data FROM ' . _DB_PREFIX_ . 'cart WHERE id_cart = ' . (int)$this->context->cart->id
             );
             $data = json_decode($rawData, true);
 
-            if (isset($data['checkout-delivery-step'])) {
-                $data['checkout-delivery-step']['step_is_complete'] = '';
-                Db::getInstance()->execute(
-                    'UPDATE ' . _DB_PREFIX_ . 'cart SET checkout_session_data = "' . pSQL(json_encode($data)) . '"
-                                WHERE id_cart = ' . (int)$this->context->cart->id
-                );
+            if (isset($data['checkout-addresses-step'])) {
+                $data['checkout-addresses-step']['step_is_complete'] = '';
             }
 
-            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order'));
+            if (isset($data['checkout-delivery-step'])) {
+                $data['checkout-delivery-step']['step_is_reachable'] = '';
+                $data['checkout-delivery-step']['step_is_complete'] = '';
+            }
+
+            Db::getInstance()->execute(
+                'UPDATE ' . _DB_PREFIX_ . 'cart SET checkout_session_data = "' . pSQL(json_encode($data)) . '"
+                                WHERE id_cart = ' . (int)$this->context->cart->id
+            );
+
+            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order', true, null, null, array('step'=>2)));
         }
 
         $scheduled_data = [
@@ -187,7 +193,7 @@ class Ecpay_Tcat extends CarrierModule
 
     }
 
-    private function checkShippingInput($params)
+    private function checkAddressInput($params)
     {
         $address = new Address(intval($params['cart']->id_address_delivery));
 
@@ -208,6 +214,12 @@ class Ecpay_Tcat extends CarrierModule
 
         if (!preg_match("/^[0][9][0-9]{8,8}\$/", $address->phone_mobile)) {
             $this->context->controller->errors[] = $this->l('Invalid mobile phone format');
+        }
+
+        $receiverZipcode = Zipcode::parse($address->city . $address->address1 . $address->address2);
+        $receiverCity = $receiverZipcode->county();
+        if (strlen($receiverCity) === 0) {
+            $this->context->controller->errors[] = $this->l('Invalid address format');
         }
 
         if ($this->context->controller->errors) {
@@ -408,11 +420,9 @@ class Ecpay_Tcat extends CarrierModule
 
     public static function getScheduledData()
     {
-        $cookie = new Cookie('ecpay_tcat_scheduled_data');
-        $data = $cookie->getAll();
-
+        $context = Context::getContext();
         try {
-            $result['delivery_time'] = $data['delivery_time'];
+            $result['delivery_time'] = $context->cookie->__get('ecpay_tcat_' . 'delivery_time');
             self::saveScheduledData($result);
         } catch (Exception $e) {
             self::clearScheduledData();
@@ -422,20 +432,18 @@ class Ecpay_Tcat extends CarrierModule
         return $result;
     }
 
-    public static function saveScheduledData($store_data)
+    public static function saveScheduledData($scheduled_data)
     {
-        $cookie = new Cookie('ecpay_tcat_scheduled_data');
-        $cookie->setExpire(time() + 60 * 60 * 2);
-        foreach ($store_data as $key => $val) {
-            $cookie->__set($key, $val);
+        $context = Context::getContext();
+        foreach ($scheduled_data as $key => $val) {
+            $context->cookie->__set('ecpay_tcat_' . $key, $val);
         }
     }
 
     public static function clearScheduledData()
     {
-        $cookie = new Cookie('ecpay_tcat_scheduled_data');
-
-        $cookie->__unset('delivery_time');
+        $context = Context::getContext();
+        $context->cookie->__unset('ecpay_tcat_' . 'delivery_time');
     }
 
 }

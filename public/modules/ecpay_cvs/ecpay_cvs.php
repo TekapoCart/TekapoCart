@@ -157,7 +157,7 @@ class Ecpay_Cvs extends CarrierModule
                     'ExtraData' => $this->context->cart->id,
                 ];
 
-                $map_url = $AL->CvsMap($this->l('Select Store Map'));
+                $map_url = $AL->CvsMap();
 
                 $store_data = self::getStoreData();
 
@@ -223,7 +223,31 @@ class Ecpay_Cvs extends CarrierModule
             return false;
         }
 
-        if (!$this->checkShippingInput($params)) {
+        if (!$this->checkAddressInput($params)) {
+            $rawData = Db::getInstance()->getValue(
+                'SELECT checkout_session_data FROM ' . _DB_PREFIX_ . 'cart WHERE id_cart = ' . (int)$this->context->cart->id
+            );
+            $data = json_decode($rawData, true);
+
+            if (isset($data['checkout-addresses-step'])) {
+                $data['checkout-addresses-step']['step_is_complete'] = '';
+            }
+
+            if (isset($data['checkout-delivery-step'])) {
+                $data['checkout-delivery-step']['step_is_reachable'] = '';
+                $data['checkout-delivery-step']['step_is_complete'] = '';
+            }
+
+            Db::getInstance()->execute(
+                'UPDATE ' . _DB_PREFIX_ . 'cart SET checkout_session_data = "' . pSQL(json_encode($data)) . '"
+                                WHERE id_cart = ' . (int)$this->context->cart->id
+            );
+
+            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order', true, null, null, array('step'=>2)));
+            return;
+        }
+
+        if (!$this->checkDeliveryInput($params)) {
             $rawData = Db::getInstance()->getValue(
                 'SELECT checkout_session_data FROM ' . _DB_PREFIX_ . 'cart WHERE id_cart = ' . (int)$this->context->cart->id
             );
@@ -238,6 +262,7 @@ class Ecpay_Cvs extends CarrierModule
             }
 
             $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order', true));
+            return;
         }
     }
 
@@ -268,7 +293,7 @@ class Ecpay_Cvs extends CarrierModule
         $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
         if ($shippingLogger) {
 
-            if ($shippingLogger->change_status) {
+            if ($shippingLogger['change_status'] == 1) {
                 try {
                     $invoke_result = $this->invokeEcpaySDK();
                     if (!$invoke_result) {
@@ -279,16 +304,13 @@ class Ecpay_Cvs extends CarrierModule
                             'MerchantID' => Configuration::get('ecpay_c2c_merchant_id'),
                             'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
                             'IsCollection' => EcpayIsCollection::NO,
-                            'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'replyChangeStore', []),
-                            'ExtraData' => $shippingLogger->sn_id,
+                            'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'updateStore', []),
+                            'ExtraData' => $shippingLogger['sn_id'],
                         );
-                        $map_html = $AL->CvsMap('Select Store Map');
-
-                        $store_data = self::getStoreData();
+                        $map_url = $AL->CvsMap();
 
                         $this->smarty->assign([
-                            'map_html' => $map_html,
-                            'store_data' => $store_data,
+                            'map_url' => $map_url,
                         ]);
 
                     }
@@ -297,8 +319,11 @@ class Ecpay_Cvs extends CarrierModule
                 }
             }
 
+            $store_data = self::getStoreData();
+
             $this->smarty->assign([
-                'shipping_message' => $shippingLogger->return_message,
+                'store_data' => $store_data,
+                'shipping_message' => $shippingLogger['return_message'],
             ]);
 
             return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
@@ -308,7 +333,7 @@ class Ecpay_Cvs extends CarrierModule
 
     }
 
-    private function checkShippingInput($params)
+    private function checkAddressInput($params)
     {
         $address = new Address(intval($params['cart']->id_address_delivery));
 
@@ -329,6 +354,17 @@ class Ecpay_Cvs extends CarrierModule
         if (!preg_match("/^[0][9][0-9]{8,8}\$/", $address->phone_mobile)) {
             $this->context->controller->errors[] = $this->l('Invalid mobile phone format');
         }
+
+        if ($this->context->controller->errors) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private function checkDeliveryInput($params)
+    {
 
         if (!self::getStoreData()) {
             $this->context->controller->errors[] = $this->l('CVS store is NOT selected');
@@ -576,7 +612,7 @@ class Ecpay_Cvs extends CarrierModule
 
                 $AL->Send['TradeDesc'] = '';
                 $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'response', []);
-                $AL->Send['LogisticsC2CReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'change_store', []);
+                $AL->Send['LogisticsC2CReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'notifyChangeStore', []);
                 $AL->Send['Remark'] = '';
 
 
@@ -626,15 +662,13 @@ class Ecpay_Cvs extends CarrierModule
 
     public static function getStoreData()
     {
-        $cookie = new Cookie('ecpay_cvs_store_data');
-        $data = $cookie->getAll();
-
+        $context = Context::getContext();
         try {
-            $result['stCate'] = $data['stCate'];
-            $result['stCode'] = $data['stCode'];
-            $result['stName'] = $data['stName'];
-            $result['stAddr'] = $data['stAddr'];
-            $result['stTel'] = $data['stTel'];
+            $result['stCate'] = $context->cookie->__get('ecpay_cvs_' . 'stCate');
+            $result['stCode'] = $context->cookie->__get('ecpay_cvs_' . 'stCode');
+            $result['stName'] = $context->cookie->__get('ecpay_cvs_' . 'stName');
+            $result['stAddr'] = $context->cookie->__get('ecpay_cvs_' . 'stAddr');
+            $result['stTel'] = $context->cookie->__get('ecpay_cvs_' . 'stTel');
             self::saveStoreData($result);
         } catch (Exception $e) {
             self::clearStoreData();
@@ -646,22 +680,20 @@ class Ecpay_Cvs extends CarrierModule
 
     public static function saveStoreData($store_data)
     {
-        $cookie = new Cookie('ecpay_cvs_store_data');
-        $cookie->setExpire(time() + 60 * 60 * 2);
+        $context = Context::getContext();
         foreach ($store_data as $key => $val) {
-            $cookie->__set($key, $val);
+            $context->cookie->__set('ecpay_cvs_' . $key, $val);
         }
     }
 
     public static function clearStoreData()
     {
-        $cookie = new Cookie('ecpay_cvs_store_data');
-
-        $cookie->__unset('stCate');
-        $cookie->__unset('stCode');
-        $cookie->__unset('stName');
-        $cookie->__unset('stAddr');
-        $cookie->__unset('stTel');
+        $context = Context::getContext();
+        $context->cookie->__unset('ecpay_cvs_' . 'stCate');
+        $context->cookie->__unset('ecpay_cvs_' . 'stCode');
+        $context->cookie->__unset('ecpay_cvs_' . 'stName');
+        $context->cookie->__unset('ecpay_cvs_' . 'stAddr');
+        $context->cookie->__unset('ecpay_cvs_' . 'stTel');
     }
 
 

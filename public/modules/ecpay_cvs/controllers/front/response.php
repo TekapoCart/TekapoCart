@@ -4,11 +4,6 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 
-    public function initContent()
-    {
-        parent::initContent();
-    }
-
     public function postProcess()
     {
 
@@ -26,7 +21,6 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
                 $AL->HashIV = Configuration::get('ecpay_c2c_hash_iv');
                 $AL->CheckOutFeedback($_POST);
                 unset($AL);
-
                 unset($_POST['CheckMacValue']);
                 unset($_POST['ReceiverName']);
                 unset($_POST['ReceiverPhone']);
@@ -35,8 +29,6 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
                 unset($_POST['ReceiverAddress']);
 
                 $ecpay_feedback = $_POST;
-
-                # Process ECPay feedback
                 if (count($ecpay_feedback) < 1) {
                     throw new Exception('Get ECPay feedback failed.');
                 } else {

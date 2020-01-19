@@ -186,7 +186,7 @@ if (!class_exists('ShippingLogger')) {
 
         }
 
-        public static function changeStore($id_order, $change_status, $change_message)
+        public static function notifyChangeStore($id_order, $change_status, $change_message)
         {
             $query = new DBQuery();
             $query->from('shipping_logger');
@@ -195,7 +195,7 @@ if (!class_exists('ShippingLogger')) {
 
             if (is_array($rowOrder)) {
 
-                $change_message = strlen($rowOrder['cvs_change_message']) > 0 ? $change_message . '<br>' . $rowOrder['cvs_change_message'] : $change_message;
+                $change_message = strlen($rowOrder['change_message']) > 0 ? $change_message . '<br>' . $rowOrder['change_message'] : $change_message;
 
                 Db::getInstance()->update(
                     'shipping_logger',
@@ -209,11 +209,10 @@ if (!class_exists('ShippingLogger')) {
             }
         }
 
-        public static function replyChangeStore(
+        public static function updateStore(
             $id_order,
             $change_status,
             $change_message,
-            $store_type,
             $store_id,
             $store_name,
             $store_address,
@@ -231,7 +230,6 @@ if (!class_exists('ShippingLogger')) {
                 Db::getInstance()->update(
                     'shipping_logger',
                     array(
-                        'store_type' => pSQL($store_type),
                         'store_code' => pSQL($store_id),
                         'store_name' => pSQL($store_name),
                         'store_addr' => pSQL($store_address),
