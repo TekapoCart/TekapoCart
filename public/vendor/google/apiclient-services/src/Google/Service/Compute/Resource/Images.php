@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_Images extends Google_Service_Resource
 {
   /**
-   * Deletes the specified image. (== suppress_warning http-rest-shadowed ==)
-   * (images.delete)
+   * Deletes the specified image. (images.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $image Name of the image resource to delete.
@@ -56,8 +55,8 @@ class Google_Service_Compute_Resource_Images extends Google_Service_Resource
   /**
    * Sets the deprecation status of an image.
    *
-   * If an empty request body is given, clears the deprecation status instead. (==
-   * suppress_warning http-rest-shadowed ==) (images.deprecate)
+   * If an empty request body is given, clears the deprecation status instead.
+   * (images.deprecate)
    *
    * @param string $project Project ID for this request.
    * @param string $image Image name.
@@ -86,7 +85,7 @@ class Google_Service_Compute_Resource_Images extends Google_Service_Resource
   }
   /**
    * Returns the specified image. Gets a list of available images by making a
-   * list() request. (== suppress_warning http-rest-shadowed ==) (images.get)
+   * list() request. (images.get)
    *
    * @param string $project Project ID for this request.
    * @param string $image Name of the image resource to return.
@@ -101,8 +100,7 @@ class Google_Service_Compute_Resource_Images extends Google_Service_Resource
   }
   /**
    * Returns the latest image that is part of an image family and is not
-   * deprecated. (== suppress_warning http-rest-shadowed ==)
-   * (images.getFromFamily)
+   * deprecated. (images.getFromFamily)
    *
    * @param string $project Project ID for this request.
    * @param string $family Name of the image family to search for.
@@ -117,8 +115,7 @@ class Google_Service_Compute_Resource_Images extends Google_Service_Resource
   }
   /**
    * Gets the access control policy for a resource. May be empty if no such policy
-   * or resource exists. (== suppress_warning http-rest-shadowed ==)
-   * (images.getIamPolicy)
+   * or resource exists. (images.getIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name or id of the resource for this request.
@@ -133,7 +130,7 @@ class Google_Service_Compute_Resource_Images extends Google_Service_Resource
   }
   /**
    * Creates an image in the specified project using the data included in the
-   * request. (== suppress_warning http-rest-shadowed ==) (images.insert)
+   * request. (images.insert)
    *
    * @param string $project Project ID for this request.
    * @param Google_Service_Compute_Image $postBody
@@ -166,8 +163,7 @@ class Google_Service_Compute_Resource_Images extends Google_Service_Resource
    * does not get any images that belong to other projects, including publicly-
    * available images, like Debian 8. If you want to get a list of publicly-
    * available images, use this method to make a request to the respective image
-   * project, such as debian-cloud or windows-cloud. (== suppress_warning http-
-   * rest-shadowed ==) (images.listImages)
+   * project, such as debian-cloud or windows-cloud. (images.listImages)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -220,8 +216,7 @@ class Google_Service_Compute_Resource_Images extends Google_Service_Resource
   }
   /**
    * Sets the access control policy on the specified resource. Replaces any
-   * existing policy. (== suppress_warning http-rest-shadowed ==)
-   * (images.setIamPolicy)
+   * existing policy. (images.setIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name or id of the resource for this request.
@@ -237,8 +232,7 @@ class Google_Service_Compute_Resource_Images extends Google_Service_Resource
   }
   /**
    * Sets the labels on an image. To learn more about labels, read the Labeling
-   * Resources documentation. (== suppress_warning http-rest-shadowed ==)
-   * (images.setLabels)
+   * Resources documentation. (images.setLabels)
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name or id of the resource for this request.
@@ -253,8 +247,8 @@ class Google_Service_Compute_Resource_Images extends Google_Service_Resource
     return $this->call('setLabels', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Returns permissions that a caller has on the specified resource. (==
-   * suppress_warning http-rest-shadowed ==) (images.testIamPermissions)
+   * Returns permissions that a caller has on the specified resource.
+   * (images.testIamPermissions)
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name or id of the resource for this request.

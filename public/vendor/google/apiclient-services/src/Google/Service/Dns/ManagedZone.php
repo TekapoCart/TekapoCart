@@ -31,6 +31,8 @@ class Google_Service_Dns_ManagedZone extends Google_Collection
   public $name;
   public $nameServerSet;
   public $nameServers;
+  protected $peeringConfigType = 'Google_Service_Dns_ManagedZonePeeringConfig';
+  protected $peeringConfigDataType = '';
   protected $privateVisibilityConfigType = 'Google_Service_Dns_ManagedZonePrivateVisibilityConfig';
   protected $privateVisibilityConfigDataType = '';
   public $visibility;
@@ -134,6 +136,20 @@ class Google_Service_Dns_ManagedZone extends Google_Collection
   public function getNameServers()
   {
     return $this->nameServers;
+  }
+  /**
+   * @param Google_Service_Dns_ManagedZonePeeringConfig
+   */
+  public function setPeeringConfig(Google_Service_Dns_ManagedZonePeeringConfig $peeringConfig)
+  {
+    $this->peeringConfig = $peeringConfig;
+  }
+  /**
+   * @return Google_Service_Dns_ManagedZonePeeringConfig
+   */
+  public function getPeeringConfig()
+  {
+    return $this->peeringConfig;
   }
   /**
    * @param Google_Service_Dns_ManagedZonePrivateVisibilityConfig

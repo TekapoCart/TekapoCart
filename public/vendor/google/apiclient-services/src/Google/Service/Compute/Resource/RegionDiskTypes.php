@@ -27,8 +27,7 @@ class Google_Service_Compute_Resource_RegionDiskTypes extends Google_Service_Res
 {
   /**
    * Returns the specified regional disk type. Gets a list of available disk types
-   * by making a list() request. (== suppress_warning http-rest-shadowed ==)
-   * (regionDiskTypes.get)
+   * by making a list() request. (regionDiskTypes.get)
    *
    * @param string $project Project ID for this request.
    * @param string $region The name of the region for this request.
@@ -44,7 +43,6 @@ class Google_Service_Compute_Resource_RegionDiskTypes extends Google_Service_Res
   }
   /**
    * Retrieves a list of regional disk types available to the specified project.
-   * (== suppress_warning http-rest-shadowed ==)
    * (regionDiskTypes.listRegionDiskTypes)
    *
    * @param string $project Project ID for this request.

@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_Autoscalers extends Google_Service_Resource
 {
   /**
-   * Retrieves an aggregated list of autoscalers. (== suppress_warning http-rest-
-   * shadowed ==) (autoscalers.aggregatedList)
+   * Retrieves an aggregated list of autoscalers. (autoscalers.aggregatedList)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -79,8 +78,7 @@ class Google_Service_Compute_Resource_Autoscalers extends Google_Service_Resourc
     return $this->call('aggregatedList', array($params), "Google_Service_Compute_AutoscalerAggregatedList");
   }
   /**
-   * Deletes the specified autoscaler. (== suppress_warning http-rest-shadowed ==)
-   * (autoscalers.delete)
+   * Deletes the specified autoscaler. (autoscalers.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone for this request.
@@ -109,8 +107,7 @@ class Google_Service_Compute_Resource_Autoscalers extends Google_Service_Resourc
   }
   /**
    * Returns the specified autoscaler resource. Gets a list of available
-   * autoscalers by making a list() request. (== suppress_warning http-rest-
-   * shadowed ==) (autoscalers.get)
+   * autoscalers by making a list() request. (autoscalers.get)
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone for this request.
@@ -126,7 +123,7 @@ class Google_Service_Compute_Resource_Autoscalers extends Google_Service_Resourc
   }
   /**
    * Creates an autoscaler in the specified project using the data included in the
-   * request. (== suppress_warning http-rest-shadowed ==) (autoscalers.insert)
+   * request. (autoscalers.insert)
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone for this request.
@@ -154,8 +151,8 @@ class Google_Service_Compute_Resource_Autoscalers extends Google_Service_Resourc
     return $this->call('insert', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Retrieves a list of autoscalers contained within the specified zone. (==
-   * suppress_warning http-rest-shadowed ==) (autoscalers.listAutoscalers)
+   * Retrieves a list of autoscalers contained within the specified zone.
+   * (autoscalers.listAutoscalers)
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone for this request.
@@ -210,8 +207,7 @@ class Google_Service_Compute_Resource_Autoscalers extends Google_Service_Resourc
   /**
    * Updates an autoscaler in the specified project using the data included in the
    * request. This method supports PATCH semantics and uses the JSON merge patch
-   * format and processing rules. (== suppress_warning http-rest-shadowed ==)
-   * (autoscalers.patch)
+   * format and processing rules. (autoscalers.patch)
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone for this request.
@@ -241,7 +237,7 @@ class Google_Service_Compute_Resource_Autoscalers extends Google_Service_Resourc
   }
   /**
    * Updates an autoscaler in the specified project using the data included in the
-   * request. (== suppress_warning http-rest-shadowed ==) (autoscalers.update)
+   * request. (autoscalers.update)
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone for this request.

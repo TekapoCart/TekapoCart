@@ -18,6 +18,8 @@
 class Google_Service_CloudVideoIntelligence_GoogleCloudVideointelligenceV1p3beta1VideoAnnotationResults extends Google_Collection
 {
   protected $collection_key = 'textAnnotations';
+  protected $celebrityRecognitionAnnotationsType = 'Google_Service_CloudVideoIntelligence_GoogleCloudVideointelligenceV1p3beta1CelebrityRecognitionAnnotation';
+  protected $celebrityRecognitionAnnotationsDataType = '';
   protected $errorType = 'Google_Service_CloudVideoIntelligence_GoogleRpcStatus';
   protected $errorDataType = '';
   protected $explicitAnnotationType = 'Google_Service_CloudVideoIntelligence_GoogleCloudVideointelligenceV1p3beta1ExplicitContentAnnotation';
@@ -46,6 +48,20 @@ class Google_Service_CloudVideoIntelligence_GoogleCloudVideointelligenceV1p3beta
   protected $textAnnotationsType = 'Google_Service_CloudVideoIntelligence_GoogleCloudVideointelligenceV1p3beta1TextAnnotation';
   protected $textAnnotationsDataType = 'array';
 
+  /**
+   * @param Google_Service_CloudVideoIntelligence_GoogleCloudVideointelligenceV1p3beta1CelebrityRecognitionAnnotation
+   */
+  public function setCelebrityRecognitionAnnotations(Google_Service_CloudVideoIntelligence_GoogleCloudVideointelligenceV1p3beta1CelebrityRecognitionAnnotation $celebrityRecognitionAnnotations)
+  {
+    $this->celebrityRecognitionAnnotations = $celebrityRecognitionAnnotations;
+  }
+  /**
+   * @return Google_Service_CloudVideoIntelligence_GoogleCloudVideointelligenceV1p3beta1CelebrityRecognitionAnnotation
+   */
+  public function getCelebrityRecognitionAnnotations()
+  {
+    return $this->celebrityRecognitionAnnotations;
+  }
   /**
    * @param Google_Service_CloudVideoIntelligence_GoogleRpcStatus
    */

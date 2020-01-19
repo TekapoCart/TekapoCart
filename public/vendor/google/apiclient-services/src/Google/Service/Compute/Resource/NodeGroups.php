@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
 {
   /**
-   * Adds specified number of nodes to the node group. (== suppress_warning http-
-   * rest-shadowed ==) (nodeGroups.addNodes)
+   * Adds specified number of nodes to the node group. (nodeGroups.addNodes)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -57,8 +56,7 @@ class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
   }
   /**
    * Retrieves an aggregated list of node groups. Note: use nodeGroups.listNodes
-   * for more details about each group. (== suppress_warning http-rest-shadowed
-   * ==) (nodeGroups.aggregatedList)
+   * for more details about each group. (nodeGroups.aggregatedList)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -110,8 +108,7 @@ class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
     return $this->call('aggregatedList', array($params), "Google_Service_Compute_NodeGroupAggregatedList");
   }
   /**
-   * Deletes the specified NodeGroup resource. (== suppress_warning http-rest-
-   * shadowed ==) (nodeGroups.delete)
+   * Deletes the specified NodeGroup resource. (nodeGroups.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -139,8 +136,7 @@ class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
     return $this->call('delete', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Deletes specified nodes from the node group. (== suppress_warning http-rest-
-   * shadowed ==) (nodeGroups.deleteNodes)
+   * Deletes specified nodes from the node group. (nodeGroups.deleteNodes)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -172,8 +168,7 @@ class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
   /**
    * Returns the specified NodeGroup. Get a list of available NodeGroups by making
    * a list() request. Note: the "nodes" field should not be used. Use
-   * nodeGroups.listNodes instead. (== suppress_warning http-rest-shadowed ==)
-   * (nodeGroups.get)
+   * nodeGroups.listNodes instead. (nodeGroups.get)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -189,8 +184,7 @@ class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
   }
   /**
    * Gets the access control policy for a resource. May be empty if no such policy
-   * or resource exists. (== suppress_warning http-rest-shadowed ==)
-   * (nodeGroups.getIamPolicy)
+   * or resource exists. (nodeGroups.getIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -206,8 +200,7 @@ class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
   }
   /**
    * Creates a NodeGroup resource in the specified project using the data included
-   * in the request. (== suppress_warning http-rest-shadowed ==)
-   * (nodeGroups.insert)
+   * in the request. (nodeGroups.insert)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -237,8 +230,8 @@ class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
   }
   /**
    * Retrieves a list of node groups available to the specified project. Note: use
-   * nodeGroups.listNodes for more details about each group. (== suppress_warning
-   * http-rest-shadowed ==) (nodeGroups.listNodeGroups)
+   * nodeGroups.listNodes for more details about each group.
+   * (nodeGroups.listNodeGroups)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -291,8 +284,7 @@ class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
     return $this->call('list', array($params), "Google_Service_Compute_NodeGroupList");
   }
   /**
-   * Lists nodes in the node group. (== suppress_warning http-rest-shadowed ==)
-   * (nodeGroups.listNodes)
+   * Lists nodes in the node group. (nodeGroups.listNodes)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -348,8 +340,7 @@ class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
   }
   /**
    * Sets the access control policy on the specified resource. Replaces any
-   * existing policy. (== suppress_warning http-rest-shadowed ==)
-   * (nodeGroups.setIamPolicy)
+   * existing policy. (nodeGroups.setIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -365,8 +356,7 @@ class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
     return $this->call('setIamPolicy', array($params), "Google_Service_Compute_Policy");
   }
   /**
-   * Updates the node template of the node group. (== suppress_warning http-rest-
-   * shadowed ==) (nodeGroups.setNodeTemplate)
+   * Updates the node template of the node group. (nodeGroups.setNodeTemplate)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -395,8 +385,8 @@ class Google_Service_Compute_Resource_NodeGroups extends Google_Service_Resource
     return $this->call('setNodeTemplate', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Returns permissions that a caller has on the specified resource. (==
-   * suppress_warning http-rest-shadowed ==) (nodeGroups.testIamPermissions)
+   * Returns permissions that a caller has on the specified resource.
+   * (nodeGroups.testIamPermissions)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.

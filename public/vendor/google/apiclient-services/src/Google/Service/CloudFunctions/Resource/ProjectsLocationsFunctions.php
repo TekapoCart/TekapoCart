@@ -181,7 +181,10 @@ class Google_Service_CloudFunctions_Resource_ProjectsLocationsFunctions extends 
    *
    * @param string $parent The project and location from which the function should
    * be listed, specified in the format `projects/locations` If you want to list
-   * functions in all locations, use "-" in place of a location.
+   * functions in all locations, use "-" in place of a location. When listing
+   * functions in all locations, if one or more location(s) are unreachable, the
+   * response will contain functions from all reachable locations along with the
+   * names of any unreachable locations.
    * @param array $optParams Optional parameters.
    *
    * @opt_param string pageToken The value returned by the last

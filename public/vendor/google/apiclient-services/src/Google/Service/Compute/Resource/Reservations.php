@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_Reservations extends Google_Service_Resource
 {
   /**
-   * Retrieves an aggregated list of reservations. (== suppress_warning http-rest-
-   * shadowed ==) (reservations.aggregatedList)
+   * Retrieves an aggregated list of reservations. (reservations.aggregatedList)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -79,8 +78,7 @@ class Google_Service_Compute_Resource_Reservations extends Google_Service_Resour
     return $this->call('aggregatedList', array($params), "Google_Service_Compute_ReservationAggregatedList");
   }
   /**
-   * Deletes the specified reservation. (== suppress_warning http-rest-shadowed
-   * ==) (reservations.delete)
+   * Deletes the specified reservation. (reservations.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone for this request.
@@ -108,8 +106,7 @@ class Google_Service_Compute_Resource_Reservations extends Google_Service_Resour
     return $this->call('delete', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Retrieves information about the specified reservation. (== suppress_warning
-   * http-rest-shadowed ==) (reservations.get)
+   * Retrieves information about the specified reservation. (reservations.get)
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone for this request.
@@ -125,8 +122,7 @@ class Google_Service_Compute_Resource_Reservations extends Google_Service_Resour
   }
   /**
    * Gets the access control policy for a resource. May be empty if no such policy
-   * or resource exists. (== suppress_warning http-rest-shadowed ==)
-   * (reservations.getIamPolicy)
+   * or resource exists. (reservations.getIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -142,7 +138,7 @@ class Google_Service_Compute_Resource_Reservations extends Google_Service_Resour
   }
   /**
    * Creates a new reservation. For more information, read Reserving zonal
-   * resources. (== suppress_warning http-rest-shadowed ==) (reservations.insert)
+   * resources. (reservations.insert)
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone for this request.
@@ -171,8 +167,7 @@ class Google_Service_Compute_Resource_Reservations extends Google_Service_Resour
   }
   /**
    * A list of all the reservations that have been configured for the specified
-   * project in specified zone. (== suppress_warning http-rest-shadowed ==)
-   * (reservations.listReservations)
+   * project in specified zone. (reservations.listReservations)
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone for this request.
@@ -226,8 +221,7 @@ class Google_Service_Compute_Resource_Reservations extends Google_Service_Resour
   }
   /**
    * Resizes the reservation (applicable to standalone reservations only). For
-   * more information, read Modifying reservations. (== suppress_warning http-
-   * rest-shadowed ==) (reservations.resize)
+   * more information, read Modifying reservations. (reservations.resize)
    *
    * @param string $project Project ID for this request.
    * @param string $zone Name of the zone for this request.
@@ -257,8 +251,7 @@ class Google_Service_Compute_Resource_Reservations extends Google_Service_Resour
   }
   /**
    * Sets the access control policy on the specified resource. Replaces any
-   * existing policy. (== suppress_warning http-rest-shadowed ==)
-   * (reservations.setIamPolicy)
+   * existing policy. (reservations.setIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.
@@ -274,8 +267,8 @@ class Google_Service_Compute_Resource_Reservations extends Google_Service_Resour
     return $this->call('setIamPolicy', array($params), "Google_Service_Compute_Policy");
   }
   /**
-   * Returns permissions that a caller has on the specified resource. (==
-   * suppress_warning http-rest-shadowed ==) (reservations.testIamPermissions)
+   * Returns permissions that a caller has on the specified resource.
+   * (reservations.testIamPermissions)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone for this request.

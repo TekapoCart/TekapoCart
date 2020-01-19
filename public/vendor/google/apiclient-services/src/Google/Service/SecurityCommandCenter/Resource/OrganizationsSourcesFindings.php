@@ -50,11 +50,12 @@ class Google_Service_SecurityCommandCenter_Resource_OrganizationsSourcesFindings
    * specified properties.
    *
    * To group across all sources provide a `-` as the source id. Example:
-   * /v1/organizations/123/sources/-/findings (findings.group)
+   * /v1/organizations/{organization_id}/sources/-/findings (findings.group)
    *
    * @param string $parent Required. Name of the source to groupBy. Its format is
    * "organizations/[organization_id]/sources/[source_id]". To groupBy across all
-   * sources provide a source_id of `-`. For example: organizations/123/sources/-
+   * sources provide a source_id of `-`. For example:
+   * organizations/{organization_id}/sources/-
    * @param Google_Service_SecurityCommandCenter_GroupFindingsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_SecurityCommandCenter_GroupFindingsResponse
@@ -69,54 +70,15 @@ class Google_Service_SecurityCommandCenter_Resource_OrganizationsSourcesFindings
    * Lists an organization or source's findings.
    *
    * To list across all sources provide a `-` as the source id. Example:
-   * /v1/organizations/123/sources/-/findings
+   * /v1/organizations/{organization_id}/sources/-/findings
    * (findings.listOrganizationsSourcesFindings)
    *
    * @param string $parent Required. Name of the source the findings belong to.
    * Its format is "organizations/[organization_id]/sources/[source_id]". To list
    * across all sources provide a source_id of `-`. For example:
-   * organizations/123/sources/-
+   * organizations/{organization_id}/sources/-
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string readTime Time used as a reference point when filtering
-   * findings. The filter is limited to findings existing at the supplied time and
-   * their values are those at that specific time. Absence of this field will
-   * default to the API's version of NOW.
-   * @opt_param string orderBy Expression that defines what fields and order to
-   * use for sorting. The string value should follow SQL syntax: comma separated
-   * list of fields. For example: "name,resource_properties.a_property". The
-   * default sorting order is ascending. To specify descending order for a field,
-   * a suffix " desc" should be appended to the field name. For example: "name
-   * desc,source_properties.a_property". Redundant space characters in the syntax
-   * are insignificant. "name desc,source_properties.a_property" and " name
-   * desc  ,   source_properties.a_property  " are equivalent.
-   *
-   * The following fields are supported: name parent state category resource_name
-   * event_time source_properties security_marks.marks
-   * @opt_param string compareDuration When compare_duration is set, the
-   * ListFindingsResult's "state_change" attribute is updated to indicate whether
-   * the finding had its state changed, the finding's state remained unchanged, or
-   * if the finding was added in any state during the compare_duration period of
-   * time that precedes the read_time. This is the time between (read_time -
-   * compare_duration) and read_time.
-   *
-   * The state_change value is derived based on the presence and state of the
-   * finding at the two points in time. Intermediate state changes between the two
-   * times don't affect the result. For example, the results aren't affected if
-   * the finding is made inactive and then active again.
-   *
-   * Possible "state_change" values when compare_duration is specified:
-   *
-   * * "CHANGED":   indicates that the finding was present at the start of
-   * compare_duration, but changed its state at read_time. * "UNCHANGED":
-   * indicates that the finding was present at the start of
-   * compare_duration and did not change state at read_time. * "ADDED":
-   * indicates that the finding was not present at the start                  of
-   * compare_duration, but was present at read_time.
-   *
-   * If compare_duration is not specified, then the only possible state_change is
-   * "UNUSED", which will be the state_change set for all findings present at
-   * read_time.
    * @opt_param string filter Expression that defines the filter to apply across
    * findings. The expression is a list of one or more restrictions combined via
    * logical operators `AND` and `OR`. Parentheses are supported, and `OR` has
@@ -158,6 +120,45 @@ class Google_Service_SecurityCommandCenter_Resource_OrganizationsSourcesFindings
    * fields.
    * @opt_param int pageSize The maximum number of results to return in a single
    * response. Default is 10, minimum is 1, maximum is 1000.
+   * @opt_param string readTime Time used as a reference point when filtering
+   * findings. The filter is limited to findings existing at the supplied time and
+   * their values are those at that specific time. Absence of this field will
+   * default to the API's version of NOW.
+   * @opt_param string orderBy Expression that defines what fields and order to
+   * use for sorting. The string value should follow SQL syntax: comma separated
+   * list of fields. For example: "name,resource_properties.a_property". The
+   * default sorting order is ascending. To specify descending order for a field,
+   * a suffix " desc" should be appended to the field name. For example: "name
+   * desc,source_properties.a_property". Redundant space characters in the syntax
+   * are insignificant. "name desc,source_properties.a_property" and " name
+   * desc  ,   source_properties.a_property  " are equivalent.
+   *
+   * The following fields are supported: name parent state category resource_name
+   * event_time source_properties security_marks.marks
+   * @opt_param string compareDuration When compare_duration is set, the
+   * ListFindingsResult's "state_change" attribute is updated to indicate whether
+   * the finding had its state changed, the finding's state remained unchanged, or
+   * if the finding was added in any state during the compare_duration period of
+   * time that precedes the read_time. This is the time between (read_time -
+   * compare_duration) and read_time.
+   *
+   * The state_change value is derived based on the presence and state of the
+   * finding at the two points in time. Intermediate state changes between the two
+   * times don't affect the result. For example, the results aren't affected if
+   * the finding is made inactive and then active again.
+   *
+   * Possible "state_change" values when compare_duration is specified:
+   *
+   * * "CHANGED":   indicates that the finding was present at the start of
+   * compare_duration, but changed its state at read_time. * "UNCHANGED":
+   * indicates that the finding was present at the start of
+   * compare_duration and did not change state at read_time. * "ADDED":
+   * indicates that the finding was not present at the start                  of
+   * compare_duration, but was present at read_time.
+   *
+   * If compare_duration is not specified, then the only possible state_change is
+   * "UNUSED", which will be the state_change set for all findings present at
+   * read_time.
    * @return Google_Service_SecurityCommandCenter_ListFindingsResponse
    */
   public function listOrganizationsSourcesFindings($parent, $optParams = array())
@@ -172,7 +173,8 @@ class Google_Service_SecurityCommandCenter_Resource_OrganizationsSourcesFindings
    *
    * @param string $name The relative resource name of this finding. See:
    * https://cloud.google.com/apis/design/resource_names#relative_resource_name
-   * Example: "organizations/123/sources/456/findings/789"
+   * Example:
+   * "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"
    * @param Google_Service_SecurityCommandCenter_Finding $postBody
    * @param array $optParams Optional parameters.
    *
@@ -195,7 +197,8 @@ class Google_Service_SecurityCommandCenter_Resource_OrganizationsSourcesFindings
    *
    * @param string $name Required. The relative resource name of the finding. See:
    * https://cloud.google.com/apis/design/resource_names#relative_resource_name
-   * Example: "organizations/123/sources/456/finding/789".
+   * Example:
+   * "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}".
    * @param Google_Service_SecurityCommandCenter_SetFindingStateRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_SecurityCommandCenter_Finding
@@ -211,19 +214,20 @@ class Google_Service_SecurityCommandCenter_Resource_OrganizationsSourcesFindings
    *
    * @param string $name The relative resource name of the SecurityMarks. See:
    * https://cloud.google.com/apis/design/resource_names#relative_resource_name
-   * Examples: "organizations/123/assets/456/securityMarks"
-   * "organizations/123/sources/456/findings/789/securityMarks".
+   * Examples: "organizations/{organization_id}/assets/{asset_id}/securityMarks" "
+   * organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/sec
+   * urityMarks".
    * @param Google_Service_SecurityCommandCenter_SecurityMarks $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string startTime The time at which the updated SecurityMarks take
-   * effect. If not set uses current server time.  Updates will be applied to the
-   * SecurityMarks that are active immediately preceding this time.
    * @opt_param string updateMask The FieldMask to use when updating the security
    * marks resource.
    *
    * The field mask must not contain duplicate fields. If empty or set to "marks",
    * all marks will be replaced.  Individual marks can be updated using "marks.".
+   * @opt_param string startTime The time at which the updated SecurityMarks take
+   * effect. If not set uses current server time.  Updates will be applied to the
+   * SecurityMarks that are active immediately preceding this time.
    * @return Google_Service_SecurityCommandCenter_SecurityMarks
    */
   public function updateSecurityMarks($name, Google_Service_SecurityCommandCenter_SecurityMarks $postBody, $optParams = array())

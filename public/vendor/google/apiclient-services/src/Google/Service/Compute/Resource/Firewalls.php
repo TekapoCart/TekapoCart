@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_Firewalls extends Google_Service_Resource
 {
   /**
-   * Deletes the specified firewall. (== suppress_warning http-rest-shadowed ==)
-   * (firewalls.delete)
+   * Deletes the specified firewall. (firewalls.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $firewall Name of the firewall rule to delete.
@@ -54,8 +53,7 @@ class Google_Service_Compute_Resource_Firewalls extends Google_Service_Resource
     return $this->call('delete', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Returns the specified firewall. (== suppress_warning http-rest-shadowed ==)
-   * (firewalls.get)
+   * Returns the specified firewall. (firewalls.get)
    *
    * @param string $project Project ID for this request.
    * @param string $firewall Name of the firewall rule to return.
@@ -70,7 +68,7 @@ class Google_Service_Compute_Resource_Firewalls extends Google_Service_Resource
   }
   /**
    * Creates a firewall rule in the specified project using the data included in
-   * the request. (== suppress_warning http-rest-shadowed ==) (firewalls.insert)
+   * the request. (firewalls.insert)
    *
    * @param string $project Project ID for this request.
    * @param Google_Service_Compute_Firewall $postBody
@@ -97,8 +95,8 @@ class Google_Service_Compute_Resource_Firewalls extends Google_Service_Resource
     return $this->call('insert', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Retrieves the list of firewall rules available to the specified project. (==
-   * suppress_warning http-rest-shadowed ==) (firewalls.listFirewalls)
+   * Retrieves the list of firewall rules available to the specified project.
+   * (firewalls.listFirewalls)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -152,8 +150,7 @@ class Google_Service_Compute_Resource_Firewalls extends Google_Service_Resource
   /**
    * Updates the specified firewall rule with the data included in the request.
    * This method supports PATCH semantics and uses the JSON merge patch format and
-   * processing rules. (== suppress_warning http-rest-shadowed ==)
-   * (firewalls.patch)
+   * processing rules. (firewalls.patch)
    *
    * @param string $project Project ID for this request.
    * @param string $firewall Name of the firewall rule to patch.
@@ -183,8 +180,8 @@ class Google_Service_Compute_Resource_Firewalls extends Google_Service_Resource
   /**
    * Updates the specified firewall rule with the data included in the request.
    * Note that all fields will be updated if using PUT, even fields that are not
-   * specified. To update individual fields, please use PATCH instead. (==
-   * suppress_warning http-rest-shadowed ==) (firewalls.update)
+   * specified. To update individual fields, please use PATCH instead.
+   * (firewalls.update)
    *
    * @param string $project Project ID for this request.
    * @param string $firewall Name of the firewall rule to update.

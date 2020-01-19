@@ -39,8 +39,7 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
    * draining, it can take up to 60 seconds after the connection draining duration
    * has elapsed before the VM instance is removed or deleted.
    *
-   * You can specify a maximum of 1000 instances with this method per request. (==
-   * suppress_warning http-rest-shadowed ==)
+   * You can specify a maximum of 1000 instances with this method per request.
    * (regionInstanceGroupManagers.abandonInstances)
    *
    * @param string $project Project ID for this request.
@@ -70,9 +69,43 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
     return $this->call('abandonInstances', array($params), "Google_Service_Compute_Operation");
   }
   /**
+   * Creates instances with per-instance configs in this regional managed instance
+   * group. Instances are created using the current instance template. The create
+   * instances operation is marked DONE if the createInstances request is
+   * successful. The underlying actions take additional time. You must separately
+   * verify the status of the creating or actions with the listmanagedinstances
+   * method. (regionInstanceGroupManagers.createInstances)
+   *
+   * @param string $project Project ID for this request.
+   * @param string $region The name of the region where the managed instance group
+   * is located. It should conform to RFC1035.
+   * @param string $instanceGroupManager The name of the managed instance group.
+   * It should conform to RFC1035.
+   * @param Google_Service_Compute_RegionInstanceGroupManagersCreateInstancesRequest $postBody
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string requestId An optional request ID to identify requests.
+   * Specify a unique request ID so that if you must retry your request, the
+   * server will know to ignore the request if it has already been completed.
+   *
+   * For example, consider a situation where you make an initial request and the
+   * request times out. If you make the request again with the same request ID,
+   * the server can check if original operation with the same request ID was
+   * received, and if so, will ignore the second request.
+   *
+   * The request ID must be a valid UUID with the exception that zero UUID is not
+   * supported (00000000-0000-0000-0000-000000000000).
+   * @return Google_Service_Compute_Operation
+   */
+  public function createInstances($project, $region, $instanceGroupManager, Google_Service_Compute_RegionInstanceGroupManagersCreateInstancesRequest $postBody, $optParams = array())
+  {
+    $params = array('project' => $project, 'region' => $region, 'instanceGroupManager' => $instanceGroupManager, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('createInstances', array($params), "Google_Service_Compute_Operation");
+  }
+  /**
    * Deletes the specified managed instance group and all of the instances in that
-   * group. (== suppress_warning http-rest-shadowed ==)
-   * (regionInstanceGroupManagers.delete)
+   * group. (regionInstanceGroupManagers.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -113,8 +146,7 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
    * draining, it can take up to 60 seconds after the connection draining duration
    * has elapsed before the VM instance is removed or deleted.
    *
-   * You can specify a maximum of 1000 instances with this method per request. (==
-   * suppress_warning http-rest-shadowed ==)
+   * You can specify a maximum of 1000 instances with this method per request.
    * (regionInstanceGroupManagers.deleteInstances)
    *
    * @param string $project Project ID for this request.
@@ -144,8 +176,8 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
     return $this->call('deleteInstances', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Returns all of the details about the specified managed instance group. (==
-   * suppress_warning http-rest-shadowed ==) (regionInstanceGroupManagers.get)
+   * Returns all of the details about the specified managed instance group.
+   * (regionInstanceGroupManagers.get)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -168,8 +200,8 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
    * created. You must separately verify the status of the individual instances
    * with the listmanagedinstances method.
    *
-   * A regional managed instance group can contain up to 2000 instances. (==
-   * suppress_warning http-rest-shadowed ==) (regionInstanceGroupManagers.insert)
+   * A regional managed instance group can contain up to 2000 instances.
+   * (regionInstanceGroupManagers.insert)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -198,7 +230,7 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
   }
   /**
    * Retrieves the list of managed instance groups that are contained within the
-   * specified region. (== suppress_warning http-rest-shadowed ==)
+   * specified region.
    * (regionInstanceGroupManagers.listRegionInstanceGroupManagers)
    *
    * @param string $project Project ID for this request.
@@ -254,7 +286,7 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
   /**
    * Lists the instances in the managed instance group and instances that are
    * scheduled to be created. The list includes any current actions that the group
-   * has scheduled for its instances. (== suppress_warning http-rest-shadowed ==)
+   * has scheduled for its instances.
    * (regionInstanceGroupManagers.listManagedInstances)
    *
    * @param string $project Project ID for this request.
@@ -314,8 +346,8 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
    * if the instances in the group are still in the process of being patched. You
    * must separately verify the status of the individual instances with the
    * listmanagedinstances method. This method supports PATCH semantics and uses
-   * the JSON merge patch format and processing rules. (== suppress_warning http-
-   * rest-shadowed ==) (regionInstanceGroupManagers.patch)
+   * the JSON merge patch format and processing rules.
+   * (regionInstanceGroupManagers.patch)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -355,8 +387,7 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
    * draining, it can take up to 60 seconds after the connection draining duration
    * has elapsed before the VM instance is removed or deleted.
    *
-   * You can specify a maximum of 1000 instances with this method per request. (==
-   * suppress_warning http-rest-shadowed ==)
+   * You can specify a maximum of 1000 instances with this method per request.
    * (regionInstanceGroupManagers.recreateInstances)
    *
    * @param string $project Project ID for this request.
@@ -397,8 +428,8 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
    *
    * If the group is part of a backend service that has enabled connection
    * draining, it can take up to 60 seconds after the connection draining duration
-   * has elapsed before the VM instance is removed or deleted. (==
-   * suppress_warning http-rest-shadowed ==) (regionInstanceGroupManagers.resize)
+   * has elapsed before the VM instance is removed or deleted.
+   * (regionInstanceGroupManagers.resize)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -429,8 +460,7 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
   }
   /**
    * Sets the instance template to use when creating new instances or recreating
-   * instances in this group. Existing instances are not affected. (==
-   * suppress_warning http-rest-shadowed ==)
+   * instances in this group. Existing instances are not affected.
    * (regionInstanceGroupManagers.setInstanceTemplate)
    *
    * @param string $project Project ID for this request.
@@ -461,8 +491,7 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
   }
   /**
    * Modifies the target pools to which all new instances in this group are
-   * assigned. Existing instances in the group are not affected. (==
-   * suppress_warning http-rest-shadowed ==)
+   * assigned. Existing instances in the group are not affected.
    * (regionInstanceGroupManagers.setTargetPools)
    *
    * @param string $project Project ID for this request.

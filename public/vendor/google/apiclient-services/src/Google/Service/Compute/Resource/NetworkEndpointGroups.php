@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_NetworkEndpointGroups extends Google_Service_Resource
 {
   /**
-   * Retrieves the list of network endpoint groups and sorts them by zone. (==
-   * suppress_warning http-rest-shadowed ==)
+   * Retrieves the list of network endpoint groups and sorts them by zone.
    * (networkEndpointGroups.aggregatedList)
    *
    * @param string $project Project ID for this request.
@@ -81,7 +80,6 @@ class Google_Service_Compute_Resource_NetworkEndpointGroups extends Google_Servi
   }
   /**
    * Attach a list of network endpoints to the specified network endpoint group.
-   * (== suppress_warning http-rest-shadowed ==)
    * (networkEndpointGroups.attachNetworkEndpoints)
    *
    * @param string $project Project ID for this request.
@@ -116,8 +114,7 @@ class Google_Service_Compute_Resource_NetworkEndpointGroups extends Google_Servi
    * Deletes the specified network endpoint group. The network endpoints in the
    * NEG and the VM instances they belong to are not terminated when the NEG is
    * deleted. Note that the NEG cannot be deleted if there are backend services
-   * referencing it. (== suppress_warning http-rest-shadowed ==)
-   * (networkEndpointGroups.delete)
+   * referencing it. (networkEndpointGroups.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone where the network endpoint group is
@@ -148,7 +145,6 @@ class Google_Service_Compute_Resource_NetworkEndpointGroups extends Google_Servi
   }
   /**
    * Detach a list of network endpoints from the specified network endpoint group.
-   * (== suppress_warning http-rest-shadowed ==)
    * (networkEndpointGroups.detachNetworkEndpoints)
    *
    * @param string $project Project ID for this request.
@@ -181,8 +177,8 @@ class Google_Service_Compute_Resource_NetworkEndpointGroups extends Google_Servi
   }
   /**
    * Returns the specified network endpoint group. Gets a list of available
-   * network endpoint groups by making a list() request. (== suppress_warning
-   * http-rest-shadowed ==) (networkEndpointGroups.get)
+   * network endpoint groups by making a list() request.
+   * (networkEndpointGroups.get)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone where the network endpoint group is
@@ -200,8 +196,7 @@ class Google_Service_Compute_Resource_NetworkEndpointGroups extends Google_Servi
   }
   /**
    * Creates a network endpoint group in the specified project using the
-   * parameters that are included in the request. (== suppress_warning http-rest-
-   * shadowed ==) (networkEndpointGroups.insert)
+   * parameters that are included in the request. (networkEndpointGroups.insert)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone where you want to create the network
@@ -231,8 +226,7 @@ class Google_Service_Compute_Resource_NetworkEndpointGroups extends Google_Servi
   }
   /**
    * Retrieves the list of network endpoint groups that are located in the
-   * specified project and zone. (== suppress_warning http-rest-shadowed ==)
-   * (networkEndpointGroups.listNetworkEndpointGroups)
+   * specified project and zone. (networkEndpointGroups.listNetworkEndpointGroups)
    *
    * @param string $project Project ID for this request.
    * @param string $zone The name of the zone where the network endpoint group is
@@ -286,8 +280,7 @@ class Google_Service_Compute_Resource_NetworkEndpointGroups extends Google_Servi
     return $this->call('list', array($params), "Google_Service_Compute_NetworkEndpointGroupList");
   }
   /**
-   * Lists the network endpoints in the specified network endpoint group. (==
-   * suppress_warning http-rest-shadowed ==)
+   * Lists the network endpoints in the specified network endpoint group.
    * (networkEndpointGroups.listNetworkEndpoints)
    *
    * @param string $project Project ID for this request.
@@ -346,8 +339,7 @@ class Google_Service_Compute_Resource_NetworkEndpointGroups extends Google_Servi
     return $this->call('listNetworkEndpoints', array($params), "Google_Service_Compute_NetworkEndpointGroupsListNetworkEndpoints");
   }
   /**
-   * Returns permissions that a caller has on the specified resource. (==
-   * suppress_warning http-rest-shadowed ==)
+   * Returns permissions that a caller has on the specified resource.
    * (networkEndpointGroups.testIamPermissions)
    *
    * @param string $project Project ID for this request.

@@ -24,6 +24,7 @@ class Google_Service_CloudHealthcare_FhirStore extends Google_Model
   public $name;
   protected $notificationConfigType = 'Google_Service_CloudHealthcare_NotificationConfig';
   protected $notificationConfigDataType = '';
+  public $version;
 
   public function setDisableReferentialIntegrity($disableReferentialIntegrity)
   {
@@ -78,5 +79,13 @@ class Google_Service_CloudHealthcare_FhirStore extends Google_Model
   public function getNotificationConfig()
   {
     return $this->notificationConfig;
+  }
+  public function setVersion($version)
+  {
+    $this->version = $version;
+  }
+  public function getVersion()
+  {
+    return $this->version;
   }
 }

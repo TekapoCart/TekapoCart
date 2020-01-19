@@ -97,7 +97,7 @@ class Google_Service_SecurityCommandCenter_Resource_OrganizationsSources extends
    *
    * @param string $name The relative resource name of this source. See:
    * https://cloud.google.com/apis/design/resource_names#relative_resource_name
-   * Example: "organizations/123/sources/456"
+   * Example: "organizations/{organization_id}/sources/{source_id}"
    * @param Google_Service_SecurityCommandCenter_Source $postBody
    * @param array $optParams Optional parameters.
    *

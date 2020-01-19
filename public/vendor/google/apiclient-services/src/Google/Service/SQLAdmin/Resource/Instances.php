@@ -78,6 +78,9 @@ class Google_Service_SQLAdmin_Resource_Instances extends Google_Service_Resource
    * @param string $instance Cloud SQL instance ID. This does not include the
    * project ID.
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param string resourceName The name of database instance to delete.
+   * Format: projects/{project}/locations/{location}/instances/{instance}
    * @return Google_Service_SQLAdmin_Operation
    */
   public function delete($project, $instance, $optParams = array())
@@ -207,19 +210,18 @@ class Google_Service_SQLAdmin_Resource_Instances extends Google_Service_Resource
     return $this->call('insert', array($params), "Google_Service_SQLAdmin_Operation");
   }
   /**
-   * Lists instances under a given project in the alphabetical order of the
-   * instance name. (instances.listInstances)
+   * Lists instances under a given project. (instances.listInstances)
    *
    * @param string $project Project ID of the project for which to list Cloud SQL
    * instances.
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string filter An expression for filtering the results of the
+   * request, such as by name or label.
    * @opt_param string pageToken A previously-returned page token representing
    * part of the larger set of results to view.
    * @opt_param string maxResults The maximum number of results to return per
    * response.
-   * @opt_param string filter An expression for filtering the results of the
-   * request, such as by name or label.
    * @return Google_Service_SQLAdmin_InstancesListResponse
    */
   public function listInstances($project, $optParams = array())
@@ -259,6 +261,10 @@ class Google_Service_SQLAdmin_Resource_Instances extends Google_Service_Resource
    * project ID.
    * @param Google_Service_SQLAdmin_DatabaseInstance $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param string resourceName The name of the database instance for Cloud
+   * SQL to update. Format:
+   * projects/{project}/locations/{location}/instances/{instance}
    * @return Google_Service_SQLAdmin_Operation
    */
   public function patch($project, $instance, Google_Service_SQLAdmin_DatabaseInstance $postBody, $optParams = array())
@@ -431,6 +437,10 @@ class Google_Service_SQLAdmin_Resource_Instances extends Google_Service_Resource
    * project ID.
    * @param Google_Service_SQLAdmin_DatabaseInstance $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param string resourceName The name of the database instance for Cloud
+   * SQL to update. Format:
+   * projects/{project}/locations/{location}/instances/{instance}
    * @return Google_Service_SQLAdmin_Operation
    */
   public function update($project, $instance, Google_Service_SQLAdmin_DatabaseInstance $postBody, $optParams = array())

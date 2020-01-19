@@ -27,6 +27,7 @@ class Google_Service_AndroidPublisher_ProductPurchase extends Google_Model
   public $purchaseTimeMillis;
   public $purchaseToken;
   public $purchaseType;
+  public $quantity;
 
   public function setAcknowledgementState($acknowledgementState)
   {
@@ -107,5 +108,13 @@ class Google_Service_AndroidPublisher_ProductPurchase extends Google_Model
   public function getPurchaseType()
   {
     return $this->purchaseType;
+  }
+  public function setQuantity($quantity)
+  {
+    $this->quantity = $quantity;
+  }
+  public function getQuantity()
+  {
+    return $this->quantity;
   }
 }

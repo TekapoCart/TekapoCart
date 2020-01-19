@@ -221,6 +221,11 @@ class Worksheet extends WriterPart
             $objWriter->writeAttribute('zoomScaleNormal', $pSheet->getSheetView()->getZoomScaleNormal());
         }
 
+        // Show zeros (Excel also writes this attribute only if set to false)
+        if ($pSheet->getSheetView()->getShowZeros() === false) {
+            $objWriter->writeAttribute('showZeros', 0);
+        }
+
         // View Layout Type
         if ($pSheet->getSheetView()->getView() !== SheetView::SHEETVIEW_NORMAL) {
             $objWriter->writeAttribute('view', $pSheet->getSheetView()->getView());
@@ -251,7 +256,7 @@ class Worksheet extends WriterPart
         // Pane
         $pane = '';
         if ($pSheet->getFreezePane()) {
-            list($xSplit, $ySplit) = Coordinate::coordinateFromString($pSheet->getFreezePane());
+            [$xSplit, $ySplit] = Coordinate::coordinateFromString($pSheet->getFreezePane());
             $xSplit = Coordinate::columnIndexFromString($xSplit);
             --$xSplit;
             --$ySplit;
@@ -752,7 +757,7 @@ class Worksheet extends WriterPart
             $range = Coordinate::splitRange($autoFilterRange);
             $range = $range[0];
             //    Strip any worksheet ref
-            list($ws, $range[0]) = PhpspreadsheetWorksheet::extractSheetTitle($range[0], true);
+            [$ws, $range[0]] = PhpspreadsheetWorksheet::extractSheetTitle($range[0], true);
             $range = implode(':', $range);
 
             $objWriter->writeAttribute('ref', str_replace('$', '', $range));
@@ -1105,7 +1110,7 @@ class Worksheet extends WriterPart
                     break;
                 case 'f':            // Formula
                     $attributes = $pCell->getFormulaAttributes();
-                    if ($attributes['t'] === 'array') {
+                    if (($attributes['t'] ?? null) === 'array') {
                         $objWriter->startElement('f');
                         $objWriter->writeAttribute('t', 'array');
                         $objWriter->writeAttribute('ref', $pCellAddress);
@@ -1130,6 +1135,13 @@ class Worksheet extends WriterPart
 
                     break;
                 case 'n':            // Numeric
+                    //force a decimal to be written if the type is float
+                    if (is_float($cellValue)) {
+                        $cellValue = (string) $cellValue;
+                        if (strpos($cellValue, '.') === false) {
+                            $cellValue = $cellValue . '.0';
+                        }
+                    }
                     // force point as decimal separator in case current locale uses comma
                     $objWriter->writeElement('v', str_replace(',', '.', $cellValue));
 

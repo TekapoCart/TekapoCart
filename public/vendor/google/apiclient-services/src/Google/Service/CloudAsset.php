@@ -34,6 +34,7 @@ class Google_Service_CloudAsset extends Google_Service
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
+  public $feeds;
   public $operations;
   public $v1;
   
@@ -52,6 +53,66 @@ class Google_Service_CloudAsset extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'cloudasset';
 
+    $this->feeds = new Google_Service_CloudAsset_Resource_Feeds(
+        $this,
+        $this->serviceName,
+        'feeds',
+        array(
+          'methods' => array(
+            'create' => array(
+              'path' => 'v1/{+parent}/feeds',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'delete' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'DELETE',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'get' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'v1/{+parent}/feeds',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'patch' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),
+          )
+        )
+    );
     $this->operations = new Google_Service_CloudAsset_Resource_Operations(
         $this,
         $this->serviceName,
@@ -87,6 +148,14 @@ class Google_Service_CloudAsset extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'contentType' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'readTimeWindow.endTime' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'readTimeWindow.startTime' => array(
                   'location' => 'query',
                   'type' => 'string',
@@ -95,14 +164,6 @@ class Google_Service_CloudAsset extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                   'repeated' => true,
-                ),
-                'contentType' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'readTimeWindow.endTime' => array(
-                  'location' => 'query',
-                  'type' => 'string',
                 ),
               ),
             ),'exportAssets' => array(

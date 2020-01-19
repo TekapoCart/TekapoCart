@@ -26,8 +26,8 @@
 class Google_Service_Compute_Resource_RegionTargetHttpsProxies extends Google_Service_Resource
 {
   /**
-   * Deletes the specified TargetHttpsProxy resource. (== suppress_warning http-
-   * rest-shadowed ==) (regionTargetHttpsProxies.delete)
+   * Deletes the specified TargetHttpsProxy resource.
+   * (regionTargetHttpsProxies.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -57,8 +57,8 @@ class Google_Service_Compute_Resource_RegionTargetHttpsProxies extends Google_Se
   }
   /**
    * Returns the specified TargetHttpsProxy resource in the specified region. Gets
-   * a list of available target HTTP proxies by making a list() request. (==
-   * suppress_warning http-rest-shadowed ==) (regionTargetHttpsProxies.get)
+   * a list of available target HTTP proxies by making a list() request.
+   * (regionTargetHttpsProxies.get)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -75,8 +75,7 @@ class Google_Service_Compute_Resource_RegionTargetHttpsProxies extends Google_Se
   }
   /**
    * Creates a TargetHttpsProxy resource in the specified project and region using
-   * the data included in the request. (== suppress_warning http-rest-shadowed ==)
-   * (regionTargetHttpsProxies.insert)
+   * the data included in the request. (regionTargetHttpsProxies.insert)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -105,7 +104,7 @@ class Google_Service_Compute_Resource_RegionTargetHttpsProxies extends Google_Se
   }
   /**
    * Retrieves the list of TargetHttpsProxy resources available to the specified
-   * project in the specified region. (== suppress_warning http-rest-shadowed ==)
+   * project in the specified region.
    * (regionTargetHttpsProxies.listRegionTargetHttpsProxies)
    *
    * @param string $project Project ID for this request.
@@ -159,8 +158,8 @@ class Google_Service_Compute_Resource_RegionTargetHttpsProxies extends Google_Se
     return $this->call('list', array($params), "Google_Service_Compute_TargetHttpsProxyList");
   }
   /**
-   * Replaces SslCertificates for TargetHttpsProxy. (== suppress_warning http-
-   * rest-shadowed ==) (regionTargetHttpsProxies.setSslCertificates)
+   * Replaces SslCertificates for TargetHttpsProxy.
+   * (regionTargetHttpsProxies.setSslCertificates)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -190,8 +189,8 @@ class Google_Service_Compute_Resource_RegionTargetHttpsProxies extends Google_Se
     return $this->call('setSslCertificates', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Changes the URL map for TargetHttpsProxy. (== suppress_warning http-rest-
-   * shadowed ==) (regionTargetHttpsProxies.setUrlMap)
+   * Changes the URL map for TargetHttpsProxy.
+   * (regionTargetHttpsProxies.setUrlMap)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.

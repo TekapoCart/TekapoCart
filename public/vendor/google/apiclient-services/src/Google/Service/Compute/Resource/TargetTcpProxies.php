@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_TargetTcpProxies extends Google_Service_Resource
 {
   /**
-   * Deletes the specified TargetTcpProxy resource. (== suppress_warning http-
-   * rest-shadowed ==) (targetTcpProxies.delete)
+   * Deletes the specified TargetTcpProxy resource. (targetTcpProxies.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $targetTcpProxy Name of the TargetTcpProxy resource to delete.
@@ -55,8 +54,7 @@ class Google_Service_Compute_Resource_TargetTcpProxies extends Google_Service_Re
   }
   /**
    * Returns the specified TargetTcpProxy resource. Gets a list of available
-   * target TCP proxies by making a list() request. (== suppress_warning http-
-   * rest-shadowed ==) (targetTcpProxies.get)
+   * target TCP proxies by making a list() request. (targetTcpProxies.get)
    *
    * @param string $project Project ID for this request.
    * @param string $targetTcpProxy Name of the TargetTcpProxy resource to return.
@@ -71,8 +69,7 @@ class Google_Service_Compute_Resource_TargetTcpProxies extends Google_Service_Re
   }
   /**
    * Creates a TargetTcpProxy resource in the specified project using the data
-   * included in the request. (== suppress_warning http-rest-shadowed ==)
-   * (targetTcpProxies.insert)
+   * included in the request. (targetTcpProxies.insert)
    *
    * @param string $project Project ID for this request.
    * @param Google_Service_Compute_TargetTcpProxy $postBody
@@ -100,8 +97,7 @@ class Google_Service_Compute_Resource_TargetTcpProxies extends Google_Service_Re
   }
   /**
    * Retrieves the list of TargetTcpProxy resources available to the specified
-   * project. (== suppress_warning http-rest-shadowed ==)
-   * (targetTcpProxies.listTargetTcpProxies)
+   * project. (targetTcpProxies.listTargetTcpProxies)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -153,8 +149,8 @@ class Google_Service_Compute_Resource_TargetTcpProxies extends Google_Service_Re
     return $this->call('list', array($params), "Google_Service_Compute_TargetTcpProxyList");
   }
   /**
-   * Changes the BackendService for TargetTcpProxy. (== suppress_warning http-
-   * rest-shadowed ==) (targetTcpProxies.setBackendService)
+   * Changes the BackendService for TargetTcpProxy.
+   * (targetTcpProxies.setBackendService)
    *
    * @param string $project Project ID for this request.
    * @param string $targetTcpProxy Name of the TargetTcpProxy resource whose
@@ -183,8 +179,8 @@ class Google_Service_Compute_Resource_TargetTcpProxies extends Google_Service_Re
     return $this->call('setBackendService', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Changes the ProxyHeaderType for TargetTcpProxy. (== suppress_warning http-
-   * rest-shadowed ==) (targetTcpProxies.setProxyHeader)
+   * Changes the ProxyHeaderType for TargetTcpProxy.
+   * (targetTcpProxies.setProxyHeader)
    *
    * @param string $project Project ID for this request.
    * @param string $targetTcpProxy Name of the TargetTcpProxy resource whose

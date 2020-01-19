@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_RegionHealthChecks extends Google_Service_Resource
 {
   /**
-   * Deletes the specified HealthCheck resource. (== suppress_warning http-rest-
-   * shadowed ==) (regionHealthChecks.delete)
+   * Deletes the specified HealthCheck resource. (regionHealthChecks.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -56,8 +55,7 @@ class Google_Service_Compute_Resource_RegionHealthChecks extends Google_Service_
   }
   /**
    * Returns the specified HealthCheck resource. Gets a list of available health
-   * checks by making a list() request. (== suppress_warning http-rest-shadowed
-   * ==) (regionHealthChecks.get)
+   * checks by making a list() request. (regionHealthChecks.get)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -73,8 +71,7 @@ class Google_Service_Compute_Resource_RegionHealthChecks extends Google_Service_
   }
   /**
    * Creates a HealthCheck resource in the specified project using the data
-   * included in the request. (== suppress_warning http-rest-shadowed ==)
-   * (regionHealthChecks.insert)
+   * included in the request. (regionHealthChecks.insert)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -103,8 +100,7 @@ class Google_Service_Compute_Resource_RegionHealthChecks extends Google_Service_
   }
   /**
    * Retrieves the list of HealthCheck resources available to the specified
-   * project. (== suppress_warning http-rest-shadowed ==)
-   * (regionHealthChecks.listRegionHealthChecks)
+   * project. (regionHealthChecks.listRegionHealthChecks)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -159,8 +155,7 @@ class Google_Service_Compute_Resource_RegionHealthChecks extends Google_Service_
   /**
    * Updates a HealthCheck resource in the specified project using the data
    * included in the request. This method supports PATCH semantics and uses the
-   * JSON merge patch format and processing rules. (== suppress_warning http-rest-
-   * shadowed ==) (regionHealthChecks.patch)
+   * JSON merge patch format and processing rules. (regionHealthChecks.patch)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -190,8 +185,7 @@ class Google_Service_Compute_Resource_RegionHealthChecks extends Google_Service_
   }
   /**
    * Updates a HealthCheck resource in the specified project using the data
-   * included in the request. (== suppress_warning http-rest-shadowed ==)
-   * (regionHealthChecks.update)
+   * included in the request. (regionHealthChecks.update)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.

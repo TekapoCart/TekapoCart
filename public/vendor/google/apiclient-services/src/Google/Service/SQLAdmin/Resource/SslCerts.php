@@ -57,6 +57,10 @@ class Google_Service_SQLAdmin_Resource_SslCerts extends Google_Service_Resource
    * project ID.
    * @param string $sha1Fingerprint Sha1 FingerPrint.
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param string resourceName The name of SSL certificate to delete. Format:
+   * projects/{project}/locations/{location}/instances/{instance}/sslCerts/{sslCer
+   * t}
    * @return Google_Service_SQLAdmin_Operation
    */
   public function delete($project, $instance, $sha1Fingerprint, $optParams = array())

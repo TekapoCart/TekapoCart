@@ -28,8 +28,7 @@ class Google_Service_Compute_Resource_InstanceTemplates extends Google_Service_R
   /**
    * Deletes the specified instance template. Deleting an instance template is
    * permanent and cannot be undone. It is not possible to delete templates that
-   * are already in use by a managed instance group. (== suppress_warning http-
-   * rest-shadowed ==) (instanceTemplates.delete)
+   * are already in use by a managed instance group. (instanceTemplates.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $instanceTemplate The name of the instance template to delete.
@@ -57,8 +56,7 @@ class Google_Service_Compute_Resource_InstanceTemplates extends Google_Service_R
   }
   /**
    * Returns the specified instance template. Gets a list of available instance
-   * templates by making a list() request. (== suppress_warning http-rest-shadowed
-   * ==) (instanceTemplates.get)
+   * templates by making a list() request. (instanceTemplates.get)
    *
    * @param string $project Project ID for this request.
    * @param string $instanceTemplate The name of the instance template.
@@ -73,8 +71,7 @@ class Google_Service_Compute_Resource_InstanceTemplates extends Google_Service_R
   }
   /**
    * Gets the access control policy for a resource. May be empty if no such policy
-   * or resource exists. (== suppress_warning http-rest-shadowed ==)
-   * (instanceTemplates.getIamPolicy)
+   * or resource exists. (instanceTemplates.getIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name or id of the resource for this request.
@@ -91,8 +88,8 @@ class Google_Service_Compute_Resource_InstanceTemplates extends Google_Service_R
    * Creates an instance template in the specified project using the data that is
    * included in the request. If you are creating a new template to update an
    * existing instance group, your new instance template must use the same network
-   * or, if applicable, the same subnetwork as the original template. (==
-   * suppress_warning http-rest-shadowed ==) (instanceTemplates.insert)
+   * or, if applicable, the same subnetwork as the original template.
+   * (instanceTemplates.insert)
    *
    * @param string $project Project ID for this request.
    * @param Google_Service_Compute_InstanceTemplate $postBody
@@ -120,8 +117,7 @@ class Google_Service_Compute_Resource_InstanceTemplates extends Google_Service_R
   }
   /**
    * Retrieves a list of instance templates that are contained within the
-   * specified project. (== suppress_warning http-rest-shadowed ==)
-   * (instanceTemplates.listInstanceTemplates)
+   * specified project. (instanceTemplates.listInstanceTemplates)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -174,8 +170,7 @@ class Google_Service_Compute_Resource_InstanceTemplates extends Google_Service_R
   }
   /**
    * Sets the access control policy on the specified resource. Replaces any
-   * existing policy. (== suppress_warning http-rest-shadowed ==)
-   * (instanceTemplates.setIamPolicy)
+   * existing policy. (instanceTemplates.setIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name or id of the resource for this request.
@@ -190,8 +185,7 @@ class Google_Service_Compute_Resource_InstanceTemplates extends Google_Service_R
     return $this->call('setIamPolicy', array($params), "Google_Service_Compute_Policy");
   }
   /**
-   * Returns permissions that a caller has on the specified resource. (==
-   * suppress_warning http-rest-shadowed ==)
+   * Returns permissions that a caller has on the specified resource.
    * (instanceTemplates.testIamPermissions)
    *
    * @param string $project Project ID for this request.

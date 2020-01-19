@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_Routes extends Google_Service_Resource
 {
   /**
-   * Deletes the specified Route resource. (== suppress_warning http-rest-shadowed
-   * ==) (routes.delete)
+   * Deletes the specified Route resource. (routes.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $route Name of the Route resource to delete.
@@ -55,8 +54,7 @@ class Google_Service_Compute_Resource_Routes extends Google_Service_Resource
   }
   /**
    * Returns the specified Route resource. Gets a list of available routes by
-   * making a list() request. (== suppress_warning http-rest-shadowed ==)
-   * (routes.get)
+   * making a list() request. (routes.get)
    *
    * @param string $project Project ID for this request.
    * @param string $route Name of the Route resource to return.
@@ -71,7 +69,7 @@ class Google_Service_Compute_Resource_Routes extends Google_Service_Resource
   }
   /**
    * Creates a Route resource in the specified project using the data included in
-   * the request. (== suppress_warning http-rest-shadowed ==) (routes.insert)
+   * the request. (routes.insert)
    *
    * @param string $project Project ID for this request.
    * @param Google_Service_Compute_Route $postBody
@@ -98,8 +96,8 @@ class Google_Service_Compute_Resource_Routes extends Google_Service_Resource
     return $this->call('insert', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Retrieves the list of Route resources available to the specified project. (==
-   * suppress_warning http-rest-shadowed ==) (routes.listRoutes)
+   * Retrieves the list of Route resources available to the specified project.
+   * (routes.listRoutes)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.

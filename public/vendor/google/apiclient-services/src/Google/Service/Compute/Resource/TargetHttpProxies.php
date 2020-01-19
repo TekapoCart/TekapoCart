@@ -27,8 +27,7 @@ class Google_Service_Compute_Resource_TargetHttpProxies extends Google_Service_R
 {
   /**
    * Retrieves the list of all TargetHttpProxy resources, regional and global,
-   * available to the specified project. (== suppress_warning http-rest-shadowed
-   * ==) (targetHttpProxies.aggregatedList)
+   * available to the specified project. (targetHttpProxies.aggregatedList)
    *
    * @param string $project Name of the project scoping this request.
    * @param array $optParams Optional parameters.
@@ -80,8 +79,7 @@ class Google_Service_Compute_Resource_TargetHttpProxies extends Google_Service_R
     return $this->call('aggregatedList', array($params), "Google_Service_Compute_TargetHttpProxyAggregatedList");
   }
   /**
-   * Deletes the specified TargetHttpProxy resource. (== suppress_warning http-
-   * rest-shadowed ==) (targetHttpProxies.delete)
+   * Deletes the specified TargetHttpProxy resource. (targetHttpProxies.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $targetHttpProxy Name of the TargetHttpProxy resource to
@@ -110,8 +108,7 @@ class Google_Service_Compute_Resource_TargetHttpProxies extends Google_Service_R
   }
   /**
    * Returns the specified TargetHttpProxy resource. Gets a list of available
-   * target HTTP proxies by making a list() request. (== suppress_warning http-
-   * rest-shadowed ==) (targetHttpProxies.get)
+   * target HTTP proxies by making a list() request. (targetHttpProxies.get)
    *
    * @param string $project Project ID for this request.
    * @param string $targetHttpProxy Name of the TargetHttpProxy resource to
@@ -127,8 +124,7 @@ class Google_Service_Compute_Resource_TargetHttpProxies extends Google_Service_R
   }
   /**
    * Creates a TargetHttpProxy resource in the specified project using the data
-   * included in the request. (== suppress_warning http-rest-shadowed ==)
-   * (targetHttpProxies.insert)
+   * included in the request. (targetHttpProxies.insert)
    *
    * @param string $project Project ID for this request.
    * @param Google_Service_Compute_TargetHttpProxy $postBody
@@ -156,8 +152,7 @@ class Google_Service_Compute_Resource_TargetHttpProxies extends Google_Service_R
   }
   /**
    * Retrieves the list of TargetHttpProxy resources available to the specified
-   * project. (== suppress_warning http-rest-shadowed ==)
-   * (targetHttpProxies.listTargetHttpProxies)
+   * project. (targetHttpProxies.listTargetHttpProxies)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -209,8 +204,7 @@ class Google_Service_Compute_Resource_TargetHttpProxies extends Google_Service_R
     return $this->call('list', array($params), "Google_Service_Compute_TargetHttpProxyList");
   }
   /**
-   * Changes the URL map for TargetHttpProxy. (== suppress_warning http-rest-
-   * shadowed ==) (targetHttpProxies.setUrlMap)
+   * Changes the URL map for TargetHttpProxy. (targetHttpProxies.setUrlMap)
    *
    * @param string $project Project ID for this request.
    * @param string $targetHttpProxy Name of the TargetHttpProxy to set a URL map

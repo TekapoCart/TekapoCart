@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_TargetSslProxies extends Google_Service_Resource
 {
   /**
-   * Deletes the specified TargetSslProxy resource. (== suppress_warning http-
-   * rest-shadowed ==) (targetSslProxies.delete)
+   * Deletes the specified TargetSslProxy resource. (targetSslProxies.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $targetSslProxy Name of the TargetSslProxy resource to delete.
@@ -55,8 +54,7 @@ class Google_Service_Compute_Resource_TargetSslProxies extends Google_Service_Re
   }
   /**
    * Returns the specified TargetSslProxy resource. Gets a list of available
-   * target SSL proxies by making a list() request. (== suppress_warning http-
-   * rest-shadowed ==) (targetSslProxies.get)
+   * target SSL proxies by making a list() request. (targetSslProxies.get)
    *
    * @param string $project Project ID for this request.
    * @param string $targetSslProxy Name of the TargetSslProxy resource to return.
@@ -71,8 +69,7 @@ class Google_Service_Compute_Resource_TargetSslProxies extends Google_Service_Re
   }
   /**
    * Creates a TargetSslProxy resource in the specified project using the data
-   * included in the request. (== suppress_warning http-rest-shadowed ==)
-   * (targetSslProxies.insert)
+   * included in the request. (targetSslProxies.insert)
    *
    * @param string $project Project ID for this request.
    * @param Google_Service_Compute_TargetSslProxy $postBody
@@ -100,8 +97,7 @@ class Google_Service_Compute_Resource_TargetSslProxies extends Google_Service_Re
   }
   /**
    * Retrieves the list of TargetSslProxy resources available to the specified
-   * project. (== suppress_warning http-rest-shadowed ==)
-   * (targetSslProxies.listTargetSslProxies)
+   * project. (targetSslProxies.listTargetSslProxies)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -153,8 +149,8 @@ class Google_Service_Compute_Resource_TargetSslProxies extends Google_Service_Re
     return $this->call('list', array($params), "Google_Service_Compute_TargetSslProxyList");
   }
   /**
-   * Changes the BackendService for TargetSslProxy. (== suppress_warning http-
-   * rest-shadowed ==) (targetSslProxies.setBackendService)
+   * Changes the BackendService for TargetSslProxy.
+   * (targetSslProxies.setBackendService)
    *
    * @param string $project Project ID for this request.
    * @param string $targetSslProxy Name of the TargetSslProxy resource whose
@@ -183,8 +179,8 @@ class Google_Service_Compute_Resource_TargetSslProxies extends Google_Service_Re
     return $this->call('setBackendService', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Changes the ProxyHeaderType for TargetSslProxy. (== suppress_warning http-
-   * rest-shadowed ==) (targetSslProxies.setProxyHeader)
+   * Changes the ProxyHeaderType for TargetSslProxy.
+   * (targetSslProxies.setProxyHeader)
    *
    * @param string $project Project ID for this request.
    * @param string $targetSslProxy Name of the TargetSslProxy resource whose
@@ -213,8 +209,8 @@ class Google_Service_Compute_Resource_TargetSslProxies extends Google_Service_Re
     return $this->call('setProxyHeader', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Changes SslCertificates for TargetSslProxy. (== suppress_warning http-rest-
-   * shadowed ==) (targetSslProxies.setSslCertificates)
+   * Changes SslCertificates for TargetSslProxy.
+   * (targetSslProxies.setSslCertificates)
    *
    * @param string $project Project ID for this request.
    * @param string $targetSslProxy Name of the TargetSslProxy resource whose
@@ -246,8 +242,7 @@ class Google_Service_Compute_Resource_TargetSslProxies extends Google_Service_Re
    * Sets the SSL policy for TargetSslProxy. The SSL policy specifies the server-
    * side support for SSL features. This affects connections between clients and
    * the SSL proxy load balancer. They do not affect the connection between the
-   * load balancer and the backends. (== suppress_warning http-rest-shadowed ==)
-   * (targetSslProxies.setSslPolicy)
+   * load balancer and the backends. (targetSslProxies.setSslPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $targetSslProxy Name of the TargetSslProxy resource whose SSL

@@ -30,6 +30,8 @@ class Google_Service_Container_NodeConfig extends Google_Collection
   public $minCpuPlatform;
   public $oauthScopes;
   public $preemptible;
+  protected $reservationAffinityType = 'Google_Service_Container_ReservationAffinity';
+  protected $reservationAffinityDataType = '';
   public $serviceAccount;
   protected $shieldedInstanceConfigType = 'Google_Service_Container_ShieldedInstanceConfig';
   protected $shieldedInstanceConfigDataType = '';
@@ -130,6 +132,20 @@ class Google_Service_Container_NodeConfig extends Google_Collection
   public function getPreemptible()
   {
     return $this->preemptible;
+  }
+  /**
+   * @param Google_Service_Container_ReservationAffinity
+   */
+  public function setReservationAffinity(Google_Service_Container_ReservationAffinity $reservationAffinity)
+  {
+    $this->reservationAffinity = $reservationAffinity;
+  }
+  /**
+   * @return Google_Service_Container_ReservationAffinity
+   */
+  public function getReservationAffinity()
+  {
+    return $this->reservationAffinity;
   }
   public function setServiceAccount($serviceAccount)
   {

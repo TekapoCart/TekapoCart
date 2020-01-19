@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_GlobalAddresses extends Google_Service_Resource
 {
   /**
-   * Deletes the specified address resource. (== suppress_warning http-rest-
-   * shadowed ==) (globalAddresses.delete)
+   * Deletes the specified address resource. (globalAddresses.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $address Name of the address resource to delete.
@@ -55,8 +54,7 @@ class Google_Service_Compute_Resource_GlobalAddresses extends Google_Service_Res
   }
   /**
    * Returns the specified address resource. Gets a list of available addresses by
-   * making a list() request. (== suppress_warning http-rest-shadowed ==)
-   * (globalAddresses.get)
+   * making a list() request. (globalAddresses.get)
    *
    * @param string $project Project ID for this request.
    * @param string $address Name of the address resource to return.
@@ -71,8 +69,7 @@ class Google_Service_Compute_Resource_GlobalAddresses extends Google_Service_Res
   }
   /**
    * Creates an address resource in the specified project by using the data
-   * included in the request. (== suppress_warning http-rest-shadowed ==)
-   * (globalAddresses.insert)
+   * included in the request. (globalAddresses.insert)
    *
    * @param string $project Project ID for this request.
    * @param Google_Service_Compute_Address $postBody
@@ -99,8 +96,7 @@ class Google_Service_Compute_Resource_GlobalAddresses extends Google_Service_Res
     return $this->call('insert', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Retrieves a list of global addresses. (== suppress_warning http-rest-shadowed
-   * ==) (globalAddresses.listGlobalAddresses)
+   * Retrieves a list of global addresses. (globalAddresses.listGlobalAddresses)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.

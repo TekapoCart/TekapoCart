@@ -47,7 +47,7 @@ class Google_Service_SecurityCommandCenter_Resource_Organizations extends Google
    *
    * @param string $name The relative resource name of the settings. See:
    * https://cloud.google.com/apis/design/resource_names#relative_resource_name
-   * Example: "organizations/123/organizationSettings".
+   * Example: "organizations/{organization_id}/organizationSettings".
    * @param Google_Service_SecurityCommandCenter_OrganizationSettings $postBody
    * @param array $optParams Optional parameters.
    *

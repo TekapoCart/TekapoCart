@@ -64,7 +64,7 @@ class Google_Service_CloudHealthcare_Resource_ProjectsLocationsDatasetsHl7V2Stor
    * @param array $optParams Optional parameters.
    *
    * @opt_param string view Specifies which parts of the Message resource to
-   * return in the response.
+   * return in the response. When unspecified, equivalent to FULL.
    * @return Google_Service_CloudHealthcare_Message
    */
   public function get($name, $optParams = array())
@@ -76,9 +76,7 @@ class Google_Service_CloudHealthcare_Resource_ProjectsLocationsDatasetsHl7V2Stor
   /**
    * Ingests a new HL7v2 message from the hospital and sends a notification to the
    * Cloud Pub/Sub topic. Return is an HL7v2 ACK message if the message was
-   * successfully stored. Otherwise an error is returned.  If an identical HL7v2
-   * message is created twice only one resource is created on the server and no
-   * error is reported. (messages.ingest)
+   * successfully stored. Otherwise an error is returned. (messages.ingest)
    *
    * @param string $parent The name of the HL7v2 store this message belongs to.
    * @param Google_Service_CloudHealthcare_IngestMessageRequest $postBody

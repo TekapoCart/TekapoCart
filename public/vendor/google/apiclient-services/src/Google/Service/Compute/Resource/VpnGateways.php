@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_VpnGateways extends Google_Service_Resource
 {
   /**
-   * Retrieves an aggregated list of VPN gateways. (== suppress_warning http-rest-
-   * shadowed ==) (vpnGateways.aggregatedList)
+   * Retrieves an aggregated list of VPN gateways. (vpnGateways.aggregatedList)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -79,8 +78,7 @@ class Google_Service_Compute_Resource_VpnGateways extends Google_Service_Resourc
     return $this->call('aggregatedList', array($params), "Google_Service_Compute_VpnGatewayAggregatedList");
   }
   /**
-   * Deletes the specified VPN gateway. (== suppress_warning http-rest-shadowed
-   * ==) (vpnGateways.delete)
+   * Deletes the specified VPN gateway. (vpnGateways.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region for this request.
@@ -109,8 +107,7 @@ class Google_Service_Compute_Resource_VpnGateways extends Google_Service_Resourc
   }
   /**
    * Returns the specified VPN gateway. Gets a list of available VPN gateways by
-   * making a list() request. (== suppress_warning http-rest-shadowed ==)
-   * (vpnGateways.get)
+   * making a list() request. (vpnGateways.get)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region for this request.
@@ -125,8 +122,7 @@ class Google_Service_Compute_Resource_VpnGateways extends Google_Service_Resourc
     return $this->call('get', array($params), "Google_Service_Compute_VpnGateway");
   }
   /**
-   * Returns the status for the specified VPN gateway. (== suppress_warning http-
-   * rest-shadowed ==) (vpnGateways.getStatus)
+   * Returns the status for the specified VPN gateway. (vpnGateways.getStatus)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region for this request.
@@ -142,8 +138,7 @@ class Google_Service_Compute_Resource_VpnGateways extends Google_Service_Resourc
   }
   /**
    * Creates a VPN gateway in the specified project and region using the data
-   * included in the request. (== suppress_warning http-rest-shadowed ==)
-   * (vpnGateways.insert)
+   * included in the request. (vpnGateways.insert)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region for this request.
@@ -172,8 +167,7 @@ class Google_Service_Compute_Resource_VpnGateways extends Google_Service_Resourc
   }
   /**
    * Retrieves a list of VPN gateways available to the specified project and
-   * region. (== suppress_warning http-rest-shadowed ==)
-   * (vpnGateways.listVpnGateways)
+   * region. (vpnGateways.listVpnGateways)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region for this request.
@@ -227,8 +221,7 @@ class Google_Service_Compute_Resource_VpnGateways extends Google_Service_Resourc
   }
   /**
    * Sets the labels on a VpnGateway. To learn more about labels, read the
-   * Labeling Resources documentation. (== suppress_warning http-rest-shadowed ==)
-   * (vpnGateways.setLabels)
+   * Labeling Resources documentation. (vpnGateways.setLabels)
    *
    * @param string $project Project ID for this request.
    * @param string $region The region for this request.
@@ -257,8 +250,8 @@ class Google_Service_Compute_Resource_VpnGateways extends Google_Service_Resourc
     return $this->call('setLabels', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Returns permissions that a caller has on the specified resource. (==
-   * suppress_warning http-rest-shadowed ==) (vpnGateways.testIamPermissions)
+   * Returns permissions that a caller has on the specified resource.
+   * (vpnGateways.testIamPermissions)
    *
    * @param string $project Project ID for this request.
    * @param string $region The name of the region for this request.

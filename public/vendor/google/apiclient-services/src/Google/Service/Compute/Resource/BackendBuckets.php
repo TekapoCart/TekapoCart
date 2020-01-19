@@ -27,7 +27,7 @@ class Google_Service_Compute_Resource_BackendBuckets extends Google_Service_Reso
 {
   /**
    * Adds a key for validating requests with signed URLs for this backend bucket.
-   * (== suppress_warning http-rest-shadowed ==) (backendBuckets.addSignedUrlKey)
+   * (backendBuckets.addSignedUrlKey)
    *
    * @param string $project Project ID for this request.
    * @param string $backendBucket Name of the BackendBucket resource to which the
@@ -56,8 +56,7 @@ class Google_Service_Compute_Resource_BackendBuckets extends Google_Service_Reso
     return $this->call('addSignedUrlKey', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Deletes the specified BackendBucket resource. (== suppress_warning http-rest-
-   * shadowed ==) (backendBuckets.delete)
+   * Deletes the specified BackendBucket resource. (backendBuckets.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $backendBucket Name of the BackendBucket resource to delete.
@@ -85,8 +84,7 @@ class Google_Service_Compute_Resource_BackendBuckets extends Google_Service_Reso
   }
   /**
    * Deletes a key for validating requests with signed URLs for this backend
-   * bucket. (== suppress_warning http-rest-shadowed ==)
-   * (backendBuckets.deleteSignedUrlKey)
+   * bucket. (backendBuckets.deleteSignedUrlKey)
    *
    * @param string $project Project ID for this request.
    * @param string $backendBucket Name of the BackendBucket resource to which the
@@ -116,8 +114,7 @@ class Google_Service_Compute_Resource_BackendBuckets extends Google_Service_Reso
   }
   /**
    * Returns the specified BackendBucket resource. Gets a list of available
-   * backend buckets by making a list() request. (== suppress_warning http-rest-
-   * shadowed ==) (backendBuckets.get)
+   * backend buckets by making a list() request. (backendBuckets.get)
    *
    * @param string $project Project ID for this request.
    * @param string $backendBucket Name of the BackendBucket resource to return.
@@ -132,8 +129,7 @@ class Google_Service_Compute_Resource_BackendBuckets extends Google_Service_Reso
   }
   /**
    * Creates a BackendBucket resource in the specified project using the data
-   * included in the request. (== suppress_warning http-rest-shadowed ==)
-   * (backendBuckets.insert)
+   * included in the request. (backendBuckets.insert)
    *
    * @param string $project Project ID for this request.
    * @param Google_Service_Compute_BackendBucket $postBody
@@ -161,8 +157,7 @@ class Google_Service_Compute_Resource_BackendBuckets extends Google_Service_Reso
   }
   /**
    * Retrieves the list of BackendBucket resources available to the specified
-   * project. (== suppress_warning http-rest-shadowed ==)
-   * (backendBuckets.listBackendBuckets)
+   * project. (backendBuckets.listBackendBuckets)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -216,8 +211,7 @@ class Google_Service_Compute_Resource_BackendBuckets extends Google_Service_Reso
   /**
    * Updates the specified BackendBucket resource with the data included in the
    * request. This method supports PATCH semantics and uses the JSON merge patch
-   * format and processing rules. (== suppress_warning http-rest-shadowed ==)
-   * (backendBuckets.patch)
+   * format and processing rules. (backendBuckets.patch)
    *
    * @param string $project Project ID for this request.
    * @param string $backendBucket Name of the BackendBucket resource to patch.
@@ -246,7 +240,7 @@ class Google_Service_Compute_Resource_BackendBuckets extends Google_Service_Reso
   }
   /**
    * Updates the specified BackendBucket resource with the data included in the
-   * request. (== suppress_warning http-rest-shadowed ==) (backendBuckets.update)
+   * request. (backendBuckets.update)
    *
    * @param string $project Project ID for this request.
    * @param string $backendBucket Name of the BackendBucket resource to update.

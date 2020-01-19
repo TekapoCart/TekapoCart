@@ -26,6 +26,7 @@ class Google_Service_DataFusion_Instance extends Google_Collection
   public $displayName;
   public $enableStackdriverLogging;
   public $enableStackdriverMonitoring;
+  public $gcsBucket;
   public $labels;
   public $name;
   protected $networkConfigType = 'Google_Service_DataFusion_NetworkConfig';
@@ -102,6 +103,14 @@ class Google_Service_DataFusion_Instance extends Google_Collection
   public function getEnableStackdriverMonitoring()
   {
     return $this->enableStackdriverMonitoring;
+  }
+  public function setGcsBucket($gcsBucket)
+  {
+    $this->gcsBucket = $gcsBucket;
+  }
+  public function getGcsBucket()
+  {
+    return $this->gcsBucket;
   }
   public function setLabels($labels)
   {

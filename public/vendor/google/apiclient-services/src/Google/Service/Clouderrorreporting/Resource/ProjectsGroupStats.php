@@ -29,12 +29,20 @@ class Google_Service_Clouderrorreporting_Resource_ProjectsGroupStats extends Goo
    * Lists the specified groups. (groupStats.listProjectsGroupStats)
    *
    * @param string $projectName Required. The resource name of the Google Cloud
-   * Platform project. Written as projects/ plus the Google Cloud Platform project
-   * ID.
+   * Platform project. Written as `projects/{projectID}`, where `{projectID}` is
+   * the [Google Cloud Platform project
+   * ID](https://support.google.com/cloud/answer/6158840).
    *
-   * Example: projects/my-project-123.
+   * Example: `projects/my-project-123`.
    * @param array $optParams Optional parameters.
    *
+   * @opt_param int pageSize Optional. The maximum number of results to return per
+   * response. Default is 20.
+   * @opt_param string serviceFilter.version Optional. The exact value to match
+   * against [`ServiceContext.version`](/error-
+   * reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
+   * @opt_param string order Optional. The sort order in which the results are
+   * returned. Default is `COUNT_DESC`.
    * @opt_param string serviceFilter.resourceType Optional. The exact value to
    * match against [`ServiceContext.resource_type`](/error-
    * reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
@@ -53,13 +61,6 @@ class Google_Service_Clouderrorreporting_Resource_ProjectsGroupStats extends Goo
    * @opt_param string serviceFilter.service Optional. The exact value to match
    * against [`ServiceContext.service`](/error-
    * reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
-   * @opt_param int pageSize Optional. The maximum number of results to return per
-   * response. Default is 20.
-   * @opt_param string order Optional. The sort order in which the results are
-   * returned. Default is `COUNT_DESC`.
-   * @opt_param string serviceFilter.version Optional. The exact value to match
-   * against [`ServiceContext.version`](/error-
-   * reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
    * @return Google_Service_Clouderrorreporting_ListGroupStatsResponse
    */
   public function listProjectsGroupStats($projectName, $optParams = array())

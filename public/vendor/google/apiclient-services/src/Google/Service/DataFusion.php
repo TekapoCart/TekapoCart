@@ -88,6 +88,10 @@ class Google_Service_DataFusion extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
+                'includeUnrevealedLocations' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',

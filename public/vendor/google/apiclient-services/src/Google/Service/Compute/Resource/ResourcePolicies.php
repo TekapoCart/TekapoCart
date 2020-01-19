@@ -26,8 +26,8 @@
 class Google_Service_Compute_Resource_ResourcePolicies extends Google_Service_Resource
 {
   /**
-   * Retrieves an aggregated list of resource policies. (== suppress_warning http-
-   * rest-shadowed ==) (resourcePolicies.aggregatedList)
+   * Retrieves an aggregated list of resource policies.
+   * (resourcePolicies.aggregatedList)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -79,8 +79,7 @@ class Google_Service_Compute_Resource_ResourcePolicies extends Google_Service_Re
     return $this->call('aggregatedList', array($params), "Google_Service_Compute_ResourcePolicyAggregatedList");
   }
   /**
-   * Deletes the specified resource policy. (== suppress_warning http-rest-
-   * shadowed ==) (resourcePolicies.delete)
+   * Deletes the specified resource policy. (resourcePolicies.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region for this request.
@@ -108,8 +107,8 @@ class Google_Service_Compute_Resource_ResourcePolicies extends Google_Service_Re
     return $this->call('delete', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Retrieves all information of the specified resource policy. (==
-   * suppress_warning http-rest-shadowed ==) (resourcePolicies.get)
+   * Retrieves all information of the specified resource policy.
+   * (resourcePolicies.get)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region for this request.
@@ -125,8 +124,7 @@ class Google_Service_Compute_Resource_ResourcePolicies extends Google_Service_Re
   }
   /**
    * Gets the access control policy for a resource. May be empty if no such policy
-   * or resource exists. (== suppress_warning http-rest-shadowed ==)
-   * (resourcePolicies.getIamPolicy)
+   * or resource exists. (resourcePolicies.getIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $region The name of the region for this request.
@@ -141,8 +139,7 @@ class Google_Service_Compute_Resource_ResourcePolicies extends Google_Service_Re
     return $this->call('getIamPolicy', array($params), "Google_Service_Compute_Policy");
   }
   /**
-   * Creates a new resource policy. (== suppress_warning http-rest-shadowed ==)
-   * (resourcePolicies.insert)
+   * Creates a new resource policy. (resourcePolicies.insert)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region for this request.
@@ -171,8 +168,7 @@ class Google_Service_Compute_Resource_ResourcePolicies extends Google_Service_Re
   }
   /**
    * A list all the resource policies that have been configured for the specified
-   * project in specified region. (== suppress_warning http-rest-shadowed ==)
-   * (resourcePolicies.listResourcePolicies)
+   * project in specified region. (resourcePolicies.listResourcePolicies)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region for this request.
@@ -226,8 +222,7 @@ class Google_Service_Compute_Resource_ResourcePolicies extends Google_Service_Re
   }
   /**
    * Sets the access control policy on the specified resource. Replaces any
-   * existing policy. (== suppress_warning http-rest-shadowed ==)
-   * (resourcePolicies.setIamPolicy)
+   * existing policy. (resourcePolicies.setIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $region The name of the region for this request.
@@ -243,8 +238,8 @@ class Google_Service_Compute_Resource_ResourcePolicies extends Google_Service_Re
     return $this->call('setIamPolicy', array($params), "Google_Service_Compute_Policy");
   }
   /**
-   * Returns permissions that a caller has on the specified resource. (==
-   * suppress_warning http-rest-shadowed ==) (resourcePolicies.testIamPermissions)
+   * Returns permissions that a caller has on the specified resource.
+   * (resourcePolicies.testIamPermissions)
    *
    * @param string $project Project ID for this request.
    * @param string $region The name of the region for this request.

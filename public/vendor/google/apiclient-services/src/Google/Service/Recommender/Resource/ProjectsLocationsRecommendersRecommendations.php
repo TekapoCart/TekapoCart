@@ -29,7 +29,7 @@ class Google_Service_Recommender_Resource_ProjectsLocationsRecommendersRecommend
    * Gets the requested recommendation. Requires the recommender.*.get IAM
    * permission for the specified recommender. (recommendations.get)
    *
-   * @param string $name Name of the recommendation.
+   * @param string $name Required. Name of the recommendation.
    * @param array $optParams Optional parameters.
    * @return Google_Service_Recommender_GoogleCloudRecommenderV1beta1Recommendation
    */
@@ -59,7 +59,7 @@ class Google_Service_Recommender_Resource_ProjectsLocationsRecommendersRecommend
    * value of `next_page_token` from the previous response. The values of other
    * method parameters must be identical to those in the previous call.
    * @opt_param int pageSize Optional. The maximum number of results to return
-   * from this request. Non-positive values are ignored. If not specified, the
+   * from this request.  Non-positive values are ignored. If not specified, the
    * server will determine the number of results to return.
    * @opt_param string filter Filter expression to restrict the recommendations
    * returned. Supported filter fields: state_info.state Eg:
@@ -73,18 +73,18 @@ class Google_Service_Recommender_Resource_ProjectsLocationsRecommendersRecommend
     return $this->call('list', array($params), "Google_Service_Recommender_GoogleCloudRecommenderV1beta1ListRecommendationsResponse");
   }
   /**
-   * Mark the Recommendation State as Claimed. Users can use this method to
+   * Marks the Recommendation State as Claimed. Users can use this method to
    * indicate to the Recommender API that they are starting to apply the
    * recommendation themselves. This stops the recommendation content from being
-   * updated.
+   * updated. Associated insights are frozen and placed in the ACCEPTED state.
    *
-   * MarkRecommendationClaimed can be applied to recommendations in CLAIMED,
-   * SUCCEEDED, FAILED, or ACTIVE state.
+   * MarkRecommendationClaimed can be applied to recommendations in CLAIMED or
+   * ACTIVE state.
    *
    * Requires the recommender.*.update IAM permission for the specified
    * recommender. (recommendations.markClaimed)
    *
-   * @param string $name Name of the recommendation.
+   * @param string $name Required. Name of the recommendation.
    * @param Google_Service_Recommender_GoogleCloudRecommenderV1beta1MarkRecommendationClaimedRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_Recommender_GoogleCloudRecommenderV1beta1Recommendation
@@ -96,10 +96,11 @@ class Google_Service_Recommender_Resource_ProjectsLocationsRecommendersRecommend
     return $this->call('markClaimed', array($params), "Google_Service_Recommender_GoogleCloudRecommenderV1beta1Recommendation");
   }
   /**
-   * Mark the Recommendation State as Failed. Users can use this method to
+   * Marks the Recommendation State as Failed. Users can use this method to
    * indicate to the Recommender API that they have applied the recommendation
    * themselves, and the operation failed. This stops the recommendation content
-   * from being updated.
+   * from being updated. Associated insights are frozen and placed in the ACCEPTED
+   * state.
    *
    * MarkRecommendationFailed can be applied to recommendations in ACTIVE,
    * CLAIMED, SUCCEEDED, or FAILED state.
@@ -107,7 +108,7 @@ class Google_Service_Recommender_Resource_ProjectsLocationsRecommendersRecommend
    * Requires the recommender.*.update IAM permission for the specified
    * recommender. (recommendations.markFailed)
    *
-   * @param string $name Name of the recommendation.
+   * @param string $name Required. Name of the recommendation.
    * @param Google_Service_Recommender_GoogleCloudRecommenderV1beta1MarkRecommendationFailedRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_Recommender_GoogleCloudRecommenderV1beta1Recommendation
@@ -119,10 +120,11 @@ class Google_Service_Recommender_Resource_ProjectsLocationsRecommendersRecommend
     return $this->call('markFailed', array($params), "Google_Service_Recommender_GoogleCloudRecommenderV1beta1Recommendation");
   }
   /**
-   * Mark the Recommendation State as Succeeded. Users can use this method to
+   * Marks the Recommendation State as Succeeded. Users can use this method to
    * indicate to the Recommender API that they have applied the recommendation
    * themselves, and the operation was successful. This stops the recommendation
-   * content from being updated.
+   * content from being updated. Associated insights are frozen and placed in the
+   * ACCEPTED state.
    *
    * MarkRecommendationSucceeded can be applied to recommendations in ACTIVE,
    * CLAIMED, SUCCEEDED, or FAILED state.
@@ -130,7 +132,7 @@ class Google_Service_Recommender_Resource_ProjectsLocationsRecommendersRecommend
    * Requires the recommender.*.update IAM permission for the specified
    * recommender. (recommendations.markSucceeded)
    *
-   * @param string $name Name of the recommendation.
+   * @param string $name Required. Name of the recommendation.
    * @param Google_Service_Recommender_GoogleCloudRecommenderV1beta1MarkRecommendationSucceededRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_Recommender_GoogleCloudRecommenderV1beta1Recommendation

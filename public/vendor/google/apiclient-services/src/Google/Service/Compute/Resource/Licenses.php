@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_Licenses extends Google_Service_Resource
 {
   /**
-   * Deletes the specified license. (== suppress_warning http-rest-shadowed ==)
-   * (licenses.delete)
+   * Deletes the specified license. (licenses.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $license Name of the license resource to delete.
@@ -54,8 +53,7 @@ class Google_Service_Compute_Resource_Licenses extends Google_Service_Resource
     return $this->call('delete', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Returns the specified License resource. (== suppress_warning http-rest-
-   * shadowed ==) (licenses.get)
+   * Returns the specified License resource. (licenses.get)
    *
    * @param string $project Project ID for this request.
    * @param string $license Name of the License resource to return.
@@ -70,8 +68,7 @@ class Google_Service_Compute_Resource_Licenses extends Google_Service_Resource
   }
   /**
    * Gets the access control policy for a resource. May be empty if no such policy
-   * or resource exists. (== suppress_warning http-rest-shadowed ==)
-   * (licenses.getIamPolicy)
+   * or resource exists. (licenses.getIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name or id of the resource for this request.
@@ -85,8 +82,7 @@ class Google_Service_Compute_Resource_Licenses extends Google_Service_Resource
     return $this->call('getIamPolicy', array($params), "Google_Service_Compute_Policy");
   }
   /**
-   * Create a License resource in the specified project. (== suppress_warning
-   * http-rest-shadowed ==) (licenses.insert)
+   * Create a License resource in the specified project. (licenses.insert)
    *
    * @param string $project Project ID for this request.
    * @param Google_Service_Compute_License $postBody
@@ -117,8 +113,8 @@ class Google_Service_Compute_Resource_Licenses extends Google_Service_Resource
    * method does not get any licenses that belong to other projects, including
    * licenses attached to publicly-available images, like Debian 9. If you want to
    * get a list of publicly-available licenses, use this method to make a request
-   * to the respective image project, such as debian-cloud or windows-cloud. (==
-   * suppress_warning http-rest-shadowed ==) (licenses.listLicenses)
+   * to the respective image project, such as debian-cloud or windows-cloud.
+   * (licenses.listLicenses)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -171,8 +167,7 @@ class Google_Service_Compute_Resource_Licenses extends Google_Service_Resource
   }
   /**
    * Sets the access control policy on the specified resource. Replaces any
-   * existing policy. (== suppress_warning http-rest-shadowed ==)
-   * (licenses.setIamPolicy)
+   * existing policy. (licenses.setIamPolicy)
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name or id of the resource for this request.
@@ -187,8 +182,8 @@ class Google_Service_Compute_Resource_Licenses extends Google_Service_Resource
     return $this->call('setIamPolicy', array($params), "Google_Service_Compute_Policy");
   }
   /**
-   * Returns permissions that a caller has on the specified resource. (==
-   * suppress_warning http-rest-shadowed ==) (licenses.testIamPermissions)
+   * Returns permissions that a caller has on the specified resource.
+   * (licenses.testIamPermissions)
    *
    * @param string $project Project ID for this request.
    * @param string $resource Name or id of the resource for this request.

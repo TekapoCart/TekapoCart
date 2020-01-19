@@ -27,8 +27,7 @@ class Google_Service_Compute_Resource_UrlMaps extends Google_Service_Resource
 {
   /**
    * Retrieves the list of all UrlMap resources, regional and global, available to
-   * the specified project. (== suppress_warning http-rest-shadowed ==)
-   * (urlMaps.aggregatedList)
+   * the specified project. (urlMaps.aggregatedList)
    *
    * @param string $project Name of the project scoping this request.
    * @param array $optParams Optional parameters.
@@ -80,8 +79,7 @@ class Google_Service_Compute_Resource_UrlMaps extends Google_Service_Resource
     return $this->call('aggregatedList', array($params), "Google_Service_Compute_UrlMapsAggregatedList");
   }
   /**
-   * Deletes the specified UrlMap resource. (== suppress_warning http-rest-
-   * shadowed ==) (urlMaps.delete)
+   * Deletes the specified UrlMap resource. (urlMaps.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $urlMap Name of the UrlMap resource to delete.
@@ -109,8 +107,7 @@ class Google_Service_Compute_Resource_UrlMaps extends Google_Service_Resource
   }
   /**
    * Returns the specified UrlMap resource. Gets a list of available URL maps by
-   * making a list() request. (== suppress_warning http-rest-shadowed ==)
-   * (urlMaps.get)
+   * making a list() request. (urlMaps.get)
    *
    * @param string $project Project ID for this request.
    * @param string $urlMap Name of the UrlMap resource to return.
@@ -125,7 +122,7 @@ class Google_Service_Compute_Resource_UrlMaps extends Google_Service_Resource
   }
   /**
    * Creates a UrlMap resource in the specified project using the data included in
-   * the request. (== suppress_warning http-rest-shadowed ==) (urlMaps.insert)
+   * the request. (urlMaps.insert)
    *
    * @param string $project Project ID for this request.
    * @param Google_Service_Compute_UrlMap $postBody
@@ -153,8 +150,7 @@ class Google_Service_Compute_Resource_UrlMaps extends Google_Service_Resource
   }
   /**
    * Initiates a cache invalidation operation, invalidating the specified path,
-   * scoped to the specified UrlMap. (== suppress_warning http-rest-shadowed ==)
-   * (urlMaps.invalidateCache)
+   * scoped to the specified UrlMap. (urlMaps.invalidateCache)
    *
    * @param string $project Project ID for this request.
    * @param string $urlMap Name of the UrlMap scoping this request.
@@ -183,7 +179,7 @@ class Google_Service_Compute_Resource_UrlMaps extends Google_Service_Resource
   }
   /**
    * Retrieves the list of UrlMap resources available to the specified project.
-   * (== suppress_warning http-rest-shadowed ==) (urlMaps.listUrlMaps)
+   * (urlMaps.listUrlMaps)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
@@ -237,7 +233,7 @@ class Google_Service_Compute_Resource_UrlMaps extends Google_Service_Resource
   /**
    * Patches the specified UrlMap resource with the data included in the request.
    * This method supports PATCH semantics and uses the JSON merge patch format and
-   * processing rules. (== suppress_warning http-rest-shadowed ==) (urlMaps.patch)
+   * processing rules. (urlMaps.patch)
    *
    * @param string $project Project ID for this request.
    * @param string $urlMap Name of the UrlMap resource to patch.
@@ -266,7 +262,7 @@ class Google_Service_Compute_Resource_UrlMaps extends Google_Service_Resource
   }
   /**
    * Updates the specified UrlMap resource with the data included in the request.
-   * (== suppress_warning http-rest-shadowed ==) (urlMaps.update)
+   * (urlMaps.update)
    *
    * @param string $project Project ID for this request.
    * @param string $urlMap Name of the UrlMap resource to update.
@@ -296,7 +292,7 @@ class Google_Service_Compute_Resource_UrlMaps extends Google_Service_Resource
   /**
    * Runs static validation for the UrlMap. In particular, the tests of the
    * provided UrlMap will be run. Calling this method does NOT create the UrlMap.
-   * (== suppress_warning http-rest-shadowed ==) (urlMaps.validate)
+   * (urlMaps.validate)
    *
    * @param string $project Project ID for this request.
    * @param string $urlMap Name of the UrlMap resource to be validated as.

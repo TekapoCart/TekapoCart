@@ -26,8 +26,8 @@
 class Google_Service_Compute_Resource_RegionTargetHttpProxies extends Google_Service_Resource
 {
   /**
-   * Deletes the specified TargetHttpProxy resource. (== suppress_warning http-
-   * rest-shadowed ==) (regionTargetHttpProxies.delete)
+   * Deletes the specified TargetHttpProxy resource.
+   * (regionTargetHttpProxies.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -57,8 +57,8 @@ class Google_Service_Compute_Resource_RegionTargetHttpProxies extends Google_Ser
   }
   /**
    * Returns the specified TargetHttpProxy resource in the specified region. Gets
-   * a list of available target HTTP proxies by making a list() request. (==
-   * suppress_warning http-rest-shadowed ==) (regionTargetHttpProxies.get)
+   * a list of available target HTTP proxies by making a list() request.
+   * (regionTargetHttpProxies.get)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -75,8 +75,7 @@ class Google_Service_Compute_Resource_RegionTargetHttpProxies extends Google_Ser
   }
   /**
    * Creates a TargetHttpProxy resource in the specified project and region using
-   * the data included in the request. (== suppress_warning http-rest-shadowed ==)
-   * (regionTargetHttpProxies.insert)
+   * the data included in the request. (regionTargetHttpProxies.insert)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -105,7 +104,7 @@ class Google_Service_Compute_Resource_RegionTargetHttpProxies extends Google_Ser
   }
   /**
    * Retrieves the list of TargetHttpProxy resources available to the specified
-   * project in the specified region. (== suppress_warning http-rest-shadowed ==)
+   * project in the specified region.
    * (regionTargetHttpProxies.listRegionTargetHttpProxies)
    *
    * @param string $project Project ID for this request.
@@ -159,8 +158,7 @@ class Google_Service_Compute_Resource_RegionTargetHttpProxies extends Google_Ser
     return $this->call('list', array($params), "Google_Service_Compute_TargetHttpProxyList");
   }
   /**
-   * Changes the URL map for TargetHttpProxy. (== suppress_warning http-rest-
-   * shadowed ==) (regionTargetHttpProxies.setUrlMap)
+   * Changes the URL map for TargetHttpProxy. (regionTargetHttpProxies.setUrlMap)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.

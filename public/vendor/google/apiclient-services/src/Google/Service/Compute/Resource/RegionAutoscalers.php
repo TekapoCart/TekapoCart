@@ -26,8 +26,7 @@
 class Google_Service_Compute_Resource_RegionAutoscalers extends Google_Service_Resource
 {
   /**
-   * Deletes the specified autoscaler. (== suppress_warning http-rest-shadowed ==)
-   * (regionAutoscalers.delete)
+   * Deletes the specified autoscaler. (regionAutoscalers.delete)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -55,8 +54,7 @@ class Google_Service_Compute_Resource_RegionAutoscalers extends Google_Service_R
     return $this->call('delete', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Returns the specified autoscaler. (== suppress_warning http-rest-shadowed ==)
-   * (regionAutoscalers.get)
+   * Returns the specified autoscaler. (regionAutoscalers.get)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -72,8 +70,7 @@ class Google_Service_Compute_Resource_RegionAutoscalers extends Google_Service_R
   }
   /**
    * Creates an autoscaler in the specified project using the data included in the
-   * request. (== suppress_warning http-rest-shadowed ==)
-   * (regionAutoscalers.insert)
+   * request. (regionAutoscalers.insert)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -101,8 +98,7 @@ class Google_Service_Compute_Resource_RegionAutoscalers extends Google_Service_R
     return $this->call('insert', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Retrieves a list of autoscalers contained within the specified region. (==
-   * suppress_warning http-rest-shadowed ==)
+   * Retrieves a list of autoscalers contained within the specified region.
    * (regionAutoscalers.listRegionAutoscalers)
    *
    * @param string $project Project ID for this request.
@@ -158,8 +154,7 @@ class Google_Service_Compute_Resource_RegionAutoscalers extends Google_Service_R
   /**
    * Updates an autoscaler in the specified project using the data included in the
    * request. This method supports PATCH semantics and uses the JSON merge patch
-   * format and processing rules. (== suppress_warning http-rest-shadowed ==)
-   * (regionAutoscalers.patch)
+   * format and processing rules. (regionAutoscalers.patch)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.
@@ -189,8 +184,7 @@ class Google_Service_Compute_Resource_RegionAutoscalers extends Google_Service_R
   }
   /**
    * Updates an autoscaler in the specified project using the data included in the
-   * request. (== suppress_warning http-rest-shadowed ==)
-   * (regionAutoscalers.update)
+   * request. (regionAutoscalers.update)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request.

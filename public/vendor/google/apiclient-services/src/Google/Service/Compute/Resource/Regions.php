@@ -27,8 +27,7 @@ class Google_Service_Compute_Resource_Regions extends Google_Service_Resource
 {
   /**
    * Returns the specified Region resource. Gets a list of available regions by
-   * making a list() request. (== suppress_warning http-rest-shadowed ==)
-   * (regions.get)
+   * making a list() request. (regions.get)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region resource to return.
@@ -43,7 +42,7 @@ class Google_Service_Compute_Resource_Regions extends Google_Service_Resource
   }
   /**
    * Retrieves the list of region resources available to the specified project.
-   * (== suppress_warning http-rest-shadowed ==) (regions.listRegions)
+   * (regions.listRegions)
    *
    * @param string $project Project ID for this request.
    * @param array $optParams Optional parameters.
