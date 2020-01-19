@@ -1,6 +1,6 @@
 <?php
 
-namespace DoctrineExtensions\Query\Sqlite;
+namespace DoctrineExtensions\Query\Postgresql;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
@@ -8,11 +8,13 @@ use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 
 /**
- * Class Least
+ * Class Greatest
  *
  * @author Vas N <phpvas@gmail.com>
+ * @author Guven Atbakan <guven@atbakan.com>
+ * @author Leonardo B Motyczka <leomoty@gmail.com>
  */
-class Least extends FunctionNode
+class Greatest extends FunctionNode
 {
     private $field = null;
 
@@ -43,7 +45,7 @@ class Least extends FunctionNode
      */
     public function getSql(SqlWalker $sqlWalker)
     {
-        $query = 'MIN(';
+        $query = 'GREATEST(';
 
         $query .= $this->field->dispatch($sqlWalker);
 

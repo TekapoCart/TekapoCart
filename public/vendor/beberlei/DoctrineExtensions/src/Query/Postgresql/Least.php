@@ -1,6 +1,6 @@
 <?php
 
-namespace DoctrineExtensions\Query\Sqlite;
+namespace DoctrineExtensions\Query\Postgresql;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
@@ -11,6 +11,7 @@ use Doctrine\ORM\Query\SqlWalker;
  * Class Least
  *
  * @author Vas N <phpvas@gmail.com>
+ * @author Leonardo B Motyczka <leomoty@gmail.com>
  */
 class Least extends FunctionNode
 {
@@ -43,7 +44,7 @@ class Least extends FunctionNode
      */
     public function getSql(SqlWalker $sqlWalker)
     {
-        $query = 'MIN(';
+        $query = 'LEAST(';
 
         $query .= $this->field->dispatch($sqlWalker);
 
