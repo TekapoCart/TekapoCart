@@ -115,7 +115,7 @@ class Tc_Pod extends PaymentModule
 
     public static function logMessage($message, $is_append = false)
     {
-        $path = _PS_LOG_DIR_ . 'pod.log';
+        $path = _PS_LOG_DIR_ . 'tc_pod.log';
 
         if (!$is_append) {
             return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", LOCK_EX);

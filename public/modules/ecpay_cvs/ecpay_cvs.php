@@ -293,6 +293,18 @@ class Ecpay_Cvs extends CarrierModule
         $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
         if ($shippingLogger) {
 
+            $store_data = [
+                'stName' => $shippingLogger['store_name'],
+                'stCate' => $shippingLogger['store_type'],
+                'stCode' => $shippingLogger['store_code'],
+                'stAddr' => $shippingLogger['store_addr'],
+            ];
+
+            $this->smarty->assign([
+                'store_data' => $store_data,
+                'shipping_message' => $shippingLogger['return_message'],
+            ]);
+
             if ($shippingLogger['change_status'] == 1) {
                 try {
                     $invoke_result = $this->invokeEcpaySDK();
@@ -318,13 +330,6 @@ class Ecpay_Cvs extends CarrierModule
                     echo $e->getMessage();
                 }
             }
-
-            $store_data = self::getStoreData();
-
-            $this->smarty->assign([
-                'store_data' => $store_data,
-                'shipping_message' => $shippingLogger['return_message'],
-            ]);
 
             return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
         }
