@@ -6,13 +6,18 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
     'ad155f8f1cf0d418fe49e248db8c661b' => $vendorDir . '/react/promise/src/functions_include.php',
     '320cde22f66dd4f5d3fd621d3e88b98f' => $vendorDir . '/symfony/polyfill-ctype/bootstrap.php',
+    '25072dd6e2470089de65ae7bf11d3109' => $vendorDir . '/symfony/polyfill-php72/bootstrap.php',
+    'f598d06aa772fa33d905e87be6398fb1' => $vendorDir . '/symfony/polyfill-intl-idn/bootstrap.php',
+    'def43f6c87e4f8dfd0c9e1b1bab14fe8' => $vendorDir . '/symfony/polyfill-iconv/bootstrap.php',
     '2c102faa651ef8ea5874edb585946bce' => $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
     '7b11c4dc42b3b3023073cb14e519683c' => $vendorDir . '/ralouphie/getallheaders/src/getallheaders.php',
     'a0edc8309cc5e1d60e3047b5df6b7052' => $vendorDir . '/guzzlehttp/psr7/src/functions_include.php',
     '5255c38a0faeba867671b61dfda6d864' => $vendorDir . '/paragonie/random_compat/lib/random.php',
     'decc78cc4436b1292c6c0d151b19445c' => $vendorDir . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
+    '0d59ee240a4cd96ddbb4ff164fccea4d' => $vendorDir . '/symfony/polyfill-php73/bootstrap.php',
     'abede361264e2ae69ec1eee813a101af' => $vendorDir . '/markbaker/complex/classes/src/functions/abs.php',
     '21a5860fbef5be28db5ddfbc3cca67c4' => $vendorDir . '/markbaker/complex/classes/src/functions/acos.php',
     '1546e3f9d127f2a9bb2d1b6c31c26ef1' => $vendorDir . '/markbaker/complex/classes/src/functions/acosh.php',
@@ -73,7 +78,6 @@ return array(
     '6ab8ad87a734f276a6bcd5a0fe1289be' => $vendorDir . '/markbaker/matrix/classes/src/operations/divideinto.php',
     '32dcc8afd4335739640db7d200c1971d' => $vendorDir . '/symfony/polyfill-apcu/bootstrap.php',
     '6a47392539ca2329373e0d33e1dba053' => $vendorDir . '/symfony/polyfill-intl-icu/bootstrap.php',
-    '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
     'bd9634f2d41831496de0d3dfe4c94881' => $vendorDir . '/symfony/polyfill-php56/bootstrap.php',
     '023d27dca8066ef29e6739335ea73bad' => $vendorDir . '/symfony/polyfill-php70/bootstrap.php',
     '2cffec82183ee1cea088009cef9a6fc3' => $vendorDir . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
@@ -81,5 +85,4 @@ return array(
     'e40631d46120a9c38ea139981f8dab26' => $vendorDir . '/ircmaxell/password-compat/lib/password.php',
     'b45b351e6b6f7487d819961fef2fda77' => $vendorDir . '/jakeasmith/http_build_url/src/http_build_url.php',
     'dc1275c308c5b416beb314b6317daca2' => $vendorDir . '/overtrue/pinyin/src/const.php',
-    '0d59ee240a4cd96ddbb4ff164fccea4d' => $vendorDir . '/symfony/polyfill-php73/bootstrap.php',
 );

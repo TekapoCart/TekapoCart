@@ -15,8 +15,6 @@ return array(
     'Google_' => array($vendorDir . '/google/apiclient/src'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
-    'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
-    'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib'),
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib'),
     'Detection' => array($vendorDir . '/mobiledetect/mobiledetectlib/namespaced'),
     'Curl' => array($vendorDir . '/curl/curl/src'),
