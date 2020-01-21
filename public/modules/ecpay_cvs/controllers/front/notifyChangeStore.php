@@ -34,28 +34,30 @@ class Ecpay_CvsNotifyChangeStoreModuleFrontController extends ModuleFrontControl
 
                     $sn_id = $ecpay_feedback['AllPayLogisticsID'];
 
-                    $shippingLogger = ShippingLogger::getLoggerBySnId($sn_id);
-                    if (empty($shippingLogger)) {
+                    $tcOrderShipping = TcOrderShipping::getLoggerBySnId($sn_id);
+                    if (empty($tcOrderShipping)) {
                         throw new Exception('Shipping Logger is invalid.');
                     }
-
-                    $order_id = $shippingLogger['id_order'];
 
                     $status = $ecpay_feedback['Status'];
 
                     switch ($status) {
                         case '01':
                             // 門市關轉店
-                            ShippingLogger::notifyChangeStore($order_id, 1,
-                                $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store is closed'));
+                            $tcOrderShipping->change_store_status = 1;
+                            $tcOrderShipping->change_store_message = date('Y-m-d H:i:s') . '-' . $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store is closed') . '\n' . $tcOrderShipping->change_store_message;
+                            $tcOrderShipping->save();
                             break;
                         case '02':
                             // 門市舊店號更新(同樣一間門市，但是更換店號)
-                            ShippingLogger::notifyChangeStore($order_id, 1,
-                                $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store id is changed (same store)'));
+                            $tcOrderShipping->change_store_status = 1;
+                            $tcOrderShipping->change_store_message = date('Y-m-d H:i:s') . '-' . $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store id is changed (same store)') . '\n' . $tcOrderShipping->change_store_message;
+                            $tcOrderShipping->save();
                             break;
                         default:
-                            ShippingLogger::notifyChangeStore($order_id, 1, $ecpay_feedback['StoreID']);
+                            $tcOrderShipping->change_store_status = 1;
+                            $tcOrderShipping->change_store_message = date('Y-m-d H:i:s') . '-' . $ecpay_feedback['StoreID'] . '\n' . $tcOrderShipping->change_store_message;
+                            $tcOrderShipping->save();
                     }
 
                     // TODO: 通知店家
@@ -64,10 +66,9 @@ class Ecpay_CvsNotifyChangeStoreModuleFrontController extends ModuleFrontControl
             }
         } catch (Exception $e) {
 
-            $error = $e->getMessage();
-            Ecpay_Cvs::logMessage(sprintf('notifyChangeStore %s response exception: %s', $sn_id, $error), true);
+            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsNotifyChangeStore %s response exception: %s', $sn_id, $e->getMessage()), true);
 
-            $result_message = '0|' . $error;
+            $result_message = '0|' . $e->getMessage();
         }
 
         echo $result_message;

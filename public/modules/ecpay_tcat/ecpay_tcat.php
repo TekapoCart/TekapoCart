@@ -6,7 +6,7 @@ if (!defined('_PS_VERSION_')) {
 
 use Recca0120\Twzipcode\Zipcode;
 
-include_once(_PS_MODULE_DIR_ . 'ecpay_cvs/classes/ShippingLogger.php');
+include_once _PS_MODULE_DIR_ . 'ecpay_cvs/classes/TcOrderShipping.php';
 
 class Ecpay_Tcat extends CarrierModule
 {
@@ -104,8 +104,8 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
-        $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
-        if (!$shippingLogger) {
+        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        if (!$tcOrderShipping) {
             $this->createShippingOrder($params);
         }
 
@@ -144,7 +144,7 @@ class Ecpay_Tcat extends CarrierModule
                                 WHERE id_cart = ' . (int)$this->context->cart->id
             );
 
-            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order', true, null, null, array('step'=>2)));
+            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order', true, null, null, array('step' => 2)));
         }
 
         $scheduled_data = [
@@ -179,11 +179,11 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
-        $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
-        if ($shippingLogger) {
+        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        if ($tcOrderShipping) {
 
             $this->smarty->assign(array(
-                'shipping_message' => $shippingLogger->return_message,
+                'return_message' => $tcOrderShipping->return_message,
             ));
 
             return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
@@ -273,22 +273,22 @@ class Ecpay_Tcat extends CarrierModule
                 $AL->Send['MerchantID'] = Configuration::get('ecpay_c2c_merchant_id');
                 $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
-                $shippingLogger = new ShippingLogger();
-                $shippingLogger->id_order = $order_id;
-                $shippingLogger->order_reference = $order->reference;
-                $shippingLogger->module = $this->name;
+                $tcOrderShipping = new TcOrderShipping();
+                $tcOrderShipping->id_order = $order_id;
+                $tcOrderShipping->order_reference = $order->reference;
+                $tcOrderShipping->module = $this->name;
 
                 $AL->Send['MerchantTradeDate'] = date('Y/m/d H:i:s', strtotime($order->date_add));
 
                 $AL->Send['LogisticsType'] = EcpayLogisticsType::HOME;
                 $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::TCAT;
-                $shippingLogger->send_status = $AL->Send['LogisticsSubType'];
+                $tcOrderShipping->send_status = $AL->Send['LogisticsSubType'];
 
                 $AL->Send['GoodsAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
 
                 $AL->Send['IsCollection'] = EcpayIsCollection::NO;
                 $AL->Send['CollectionAmount'] = 0;
-                $shippingLogger->pay_type = $AL->Send['IsCollection'];
+                $tcOrderShipping->pay_type = $AL->Send['IsCollection'];
 
                 $AL->Send['GoodsName'] = $this->l('A Package Of Online Goods');
 
@@ -298,8 +298,8 @@ class Ecpay_Tcat extends CarrierModule
                 $address = new Address(intval($order->id_address_delivery));
                 $AL->Send['ReceiverName'] = $address->lastname . $address->firstname;
                 $AL->Send['ReceiverCellPhone'] = $address->phone_mobile;
-                $shippingLogger->rv_name = $AL->Send['ReceiverName'];
-                $shippingLogger->rv_mobile = $AL->Send['ReceiverCellPhone'];
+                $tcOrderShipping->rv_name = $AL->Send['ReceiverName'];
+                $tcOrderShipping->rv_mobile = $AL->Send['ReceiverCellPhone'];
 
                 $customer = new Customer(intval($order->id_customer));
                 $AL->Send['ReceiverEmail'] = $customer->email;
@@ -315,8 +315,8 @@ class Ecpay_Tcat extends CarrierModule
                 $AL->SendExtend['ReceiverZipCode'] = $address->postcode;
                 $AL->SendExtend['ReceiverAddress'] = $address->city . $address->address1 . $address->address2;
 
-                $shippingLogger->rv_zip = $AL->SendExtend['ReceiverZipCode'];
-                $shippingLogger->rv_address = $AL->SendExtend['ReceiverAddress'];
+                $tcOrderShipping->rv_zip = $AL->SendExtend['ReceiverZipCode'];
+                $tcOrderShipping->rv_address = $AL->SendExtend['ReceiverAddress'];
 
                 $AL->SendExtend['Temperature'] = EcpayTemperature::ROOM;
 
@@ -363,7 +363,7 @@ class Ecpay_Tcat extends CarrierModule
                 } else {
                     $AL->SendExtend['Distance'] = EcpayDistance::OTHER;
                 }
-                $shippingLogger->distance = $AL->SendExtend['Distance'];
+                $tcOrderShipping->distance = $AL->SendExtend['Distance'];
 
                 $carrier = new Carrier($params['order']->id_carrier);
                 $dimension = $carrier->max_width + $carrier->max_height + $carrier->max_depth;
@@ -376,17 +376,18 @@ class Ecpay_Tcat extends CarrierModule
                 } elseif ($dimension <= 150) {
                     $AL->SendExtend['Specification'] = EcpaySpecification::CM_150;
                 }
-                $shippingLogger->specification = $AL->SendExtend['Specification'];
+                $tcOrderShipping->specification = $AL->SendExtend['Specification'];
 
                 $AL->SendExtend['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
 
                 $scheduled_data = self::getScheduledData();
 
                 $AL->SendExtend['ScheduledDeliveryTime'] = $scheduled_data['delivery_time'];
-                $shippingLogger->delivery_time = $AL->SendExtend['ScheduledDeliveryTime'];
+                $tcOrderShipping->delivery_time = $AL->SendExtend['ScheduledDeliveryTime'];
 
-                // $shippingLogger->save();
+                $tcOrderShipping->save();
 
+                // 注意 request timeout 可能
                 $res = $AL->BGCreateShippingOrder();
                 unset($AL);
 
@@ -394,6 +395,12 @@ class Ecpay_Tcat extends CarrierModule
                     throw new Exception($res['ErrorMessage']);
                 }
 
+                $tcOrderShipping->sn_id = $res['AllPayLogisticsID'];
+                $tcOrderShipping->return_status = $res['RtnCode'];
+                $tcOrderShipping->return_message = $res['UpdateStatusDate'] . ' - ' . $res['RtnMsg'];
+                $tcOrderShipping->cvs_shipping_number = $res['CVSPaymentNo'];
+                $tcOrderShipping->cvs_validation_number = $res['CVSValidationNo'];
+                $tcOrderShipping->save();
             }
 
         } catch (Exception $e) {

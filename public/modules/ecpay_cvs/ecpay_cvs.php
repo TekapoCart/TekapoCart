@@ -4,7 +4,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-include_once(_PS_MODULE_DIR_ . 'ecpay_cvs/classes/ShippingLogger.php');
+include_once _PS_MODULE_DIR_ . 'ecpay_cvs/classes/TcOrderShipping.php';
 
 class Ecpay_Cvs extends CarrierModule
 {
@@ -57,15 +57,16 @@ class Ecpay_Cvs extends CarrierModule
     public function installDb()
     {
         $sql = [];
-        $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'shipping_logger` (
-                `id_shipping_logger` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+
+        $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'tc_order_shipping` (
+                `id_tc_order_shipping` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
                 `id_order` INT(10) UNSIGNED NULL DEFAULT NULL,
                 `order_reference` VARCHAR(16) NULL DEFAULT NULL,
                 `module` VARCHAR(255) NULL DEFAULT NULL,
-                `send_status` VARCHAR(50) NULL DEFAULT NULL,
-                `pay_type` VARCHAR(50) NULL DEFAULT NULL,
+                `send_status` VARCHAR(50) NULL DEFAULT NULL COMMENT "ezship: 訂單狀態, ecpay: 物流子類型",
+                `pay_type` VARCHAR(50) NULL DEFAULT NULL COMMENT "ezship: 訂單類別, ecpay: 是否代收貨款",
                 `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
-                `store_code` VARCHAR(50) NULL DEFAULT NULL,
+                `store_code` INT(10) UNSIGNED NULL DEFAULT NULL,
                 `store_name` VARCHAR(255) NULL DEFAULT NULL,
                 `store_addr` VARCHAR(255) NULL DEFAULT NULL,
                 `store_tel` VARCHAR(32) NULL DEFAULT NULL,
@@ -73,17 +74,17 @@ class Ecpay_Cvs extends CarrierModule
                 `rv_mobile` VARCHAR(32) NULL DEFAULT NULL,
                 `rv_zip` VARCHAR(12) NULL DEFAULT NULL,
                 `rv_address` VARCHAR(255) NULL DEFAULT NULL,
-                `distance` VARCHAR(2) NULL DEFAULT NULL,
-                `specification` VARCHAR(4) NULL DEFAULT NULL,
-                `delivery_time` VARCHAR(2) NULL DEFAULT NULL,
-                `sn_id` VARCHAR(64) NULL DEFAULT NULL,
+                `distance` VARCHAR(2) NULL DEFAULT NULL COMMENT "ecpay: 宅配距離",
+                `specification` VARCHAR(4) NULL DEFAULT NULL COMMENT "ecpay: 包裹規格",
+                `delivery_time` VARCHAR(2) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達時段",
+                `sn_id` VARCHAR(64) NULL DEFAULT NULL COMMENT "ezship: 店到店編號, ecpay: 物流交易編號",
                 `return_status` VARCHAR(50) NULL DEFAULT NULL,
                 `return_message` TEXT NULL DEFAULT NULL,
-                `cvs_shipping_number` VARCHAR(50) NULL DEFAULT NULL,
-                `cvs_validation_number` VARCHAR(50) NULL DEFAULT NULL,
-                `home_shipping_number` VARCHAR(50) NULL DEFAULT NULL,
-                `change_status` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,                
-                `change_message` TEXT NULL DEFAULT NULL,
+                `cvs_shipping_number` VARCHAR(50) NULL DEFAULT NULL COMMENT "ecpay: 寄貨編號",
+                `cvs_validation_number` VARCHAR(50) NULL DEFAULT NULL COMMENT "ecpay: 驗證碼",
+                `home_shipping_number` VARCHAR(50) NULL DEFAULT NULL COMMENT "ecpay: 托運單號",
+                `change_store_status` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT "ecpay: 更新門市通知",                
+                `change_store_message` TEXT NULL DEFAULT NULL COMMENT "ecpay: 更新門市訊息",
                 `date_add` DATETIME NOT NULL,
                 `date_upd` DATETIME NOT NULL,                
                 PRIMARY KEY (`id_shipping_logger`),
@@ -153,7 +154,7 @@ class Ecpay_Cvs extends CarrierModule
                     'MerchantID' => Configuration::get('ecpay_c2c_merchant_id'),
                     'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
                     'IsCollection' => EcpayIsCollection::NO,
-                    'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'store', []),
+                    'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'selectStore', []),
                     'ExtraData' => $this->context->cart->id,
                 ];
 
@@ -188,12 +189,12 @@ class Ecpay_Cvs extends CarrierModule
             $phone = $address->phone;
         }
 
-        $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
-        if ($shippingLogger) {
-            $store_data['stCate'] = $shippingLogger['store_type'];
-            $store_data['stCode'] = $shippingLogger['store_code'];
-            $store_data['stName'] = $shippingLogger['store_name'];
-            $store_data['stAddr'] = $shippingLogger['store_addr'];
+        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        if ($tcOrderShipping) {
+            $store_data['stCate'] = $tcOrderShipping->store_type;
+            $store_data['stCode'] = $tcOrderShipping->store_code;
+            $store_data['stName'] = $tcOrderShipping->store_name;
+            $store_data['stAddr'] = $tcOrderShipping->store_addr;
         } else {
             $store_data = self::getStoreData();
             $this->createShippingOrder($params);
@@ -243,7 +244,7 @@ class Ecpay_Cvs extends CarrierModule
                                 WHERE id_cart = ' . (int)$this->context->cart->id
             );
 
-            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order', true, null, null, array('step'=>2)));
+            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order', true, null, null, array('step' => 2)));
             return;
         }
 
@@ -290,22 +291,22 @@ class Ecpay_Cvs extends CarrierModule
             return false;
         }
 
-        $shippingLogger = ShippingLogger::getLoggerByOrderRef($params['order']->reference);
-        if ($shippingLogger) {
+        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        if ($tcOrderShipping) {
 
             $store_data = [
-                'stName' => $shippingLogger['store_name'],
-                'stCate' => $shippingLogger['store_type'],
-                'stCode' => $shippingLogger['store_code'],
-                'stAddr' => $shippingLogger['store_addr'],
+                'stName' => $tcOrderShipping->store_name,
+                'stCate' => $tcOrderShipping->store_type,
+                'stCode' => $tcOrderShipping->store_code,
+                'stAddr' => $tcOrderShipping->store_addr,
             ];
 
             $this->smarty->assign([
                 'store_data' => $store_data,
-                'shipping_message' => $shippingLogger['return_message'],
+                'return_message' => $tcOrderShipping['return_message'],
             ]);
 
-            if ($shippingLogger['change_status'] == 1) {
+            if ($tcOrderShipping['change_status'] == 1) {
                 try {
                     $invoke_result = $this->invokeEcpaySDK();
                     if (!$invoke_result) {
@@ -316,8 +317,8 @@ class Ecpay_Cvs extends CarrierModule
                             'MerchantID' => Configuration::get('ecpay_c2c_merchant_id'),
                             'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
                             'IsCollection' => EcpayIsCollection::NO,
-                            'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'updateStore', []),
-                            'ExtraData' => $shippingLogger['sn_id'],
+                            'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'changeStore', []),
+                            'ExtraData' => $tcOrderShipping->sn_id,
                         );
                         $map_url = $AL->CvsMap();
 
@@ -579,16 +580,16 @@ class Ecpay_Cvs extends CarrierModule
                 $AL->Send['MerchantID'] = Configuration::get('ecpay_c2c_merchant_id');
                 $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
-                $shippingLogger = new ShippingLogger();
-                $shippingLogger->id_order = $order_id;
-                $shippingLogger->order_reference = $order->reference;
-                $shippingLogger->module = $this->name;
+                $tcOrderShipping = new TcOrderShipping();
+                $tcOrderShipping->id_order = $order_id;
+                $tcOrderShipping->order_reference = $order->reference;
+                $tcOrderShipping->module = $this->name;
 
                 $AL->Send['MerchantTradeDate'] = date('Y/m/d H:i:s', strtotime($order->date_add));
 
                 $AL->Send['LogisticsType'] = EcpayLogisticsType::CVS;
                 $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::UNIMART_C2C;
-                $shippingLogger->send_status = $AL->Send['LogisticsSubType'];
+                $tcOrderShipping->send_status = $AL->Send['LogisticsSubType'];
 
                 $AL->Send['GoodsAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
 
@@ -599,7 +600,7 @@ class Ecpay_Cvs extends CarrierModule
                     $AL->Send['IsCollection'] = EcpayIsCollection::NO;
                     $AL->Send['CollectionAmount'] = 0;
                 }
-                $shippingLogger->pay_type = $AL->Send['IsCollection'];
+                $tcOrderShipping->pay_type = $AL->Send['IsCollection'];
 
                 $AL->Send['GoodsName'] = $this->l('A Package Of Online Goods');
 
@@ -609,8 +610,8 @@ class Ecpay_Cvs extends CarrierModule
                 $address = new Address(intval($order->id_address_delivery));
                 $AL->Send['ReceiverName'] = $address->lastname . $address->firstname;
                 $AL->Send['ReceiverCellPhone'] = $address->phone_mobile;
-                $shippingLogger->rv_name = $AL->Send['ReceiverName'];
-                $shippingLogger->rv_mobile = $AL->Send['ReceiverCellPhone'];
+                $tcOrderShipping->rv_name = $AL->Send['ReceiverName'];
+                $tcOrderShipping->rv_mobile = $AL->Send['ReceiverCellPhone'];
 
                 $customer = new Customer(intval($order->id_customer));
                 $AL->Send['ReceiverEmail'] = $customer->email;
@@ -620,27 +621,33 @@ class Ecpay_Cvs extends CarrierModule
                 $AL->Send['LogisticsC2CReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'notifyChangeStore', []);
                 $AL->Send['Remark'] = '';
 
-
-
                 $store_data = self::getStoreData();
 
                 $AL->SendExtend = [];
                 $AL->SendExtend['ReceiverStoreID'] = $store_data['stCode'];
 
-                $shippingLogger->store_type = $store_data['stCate'];
-                $shippingLogger->store_code = $store_data['stCode'];
-                $shippingLogger->store_name = $store_data['stName'];
-                $shippingLogger->store_addr = $store_data['stAddr'];
-                $shippingLogger->store_tel = $store_data['stTel'];
+                $tcOrderShipping->store_type = $store_data['stCate'];
+                $tcOrderShipping->store_code = $store_data['stCode'];
+                $tcOrderShipping->store_name = $store_data['stName'];
+                $tcOrderShipping->store_addr = $store_data['stAddr'];
+                $tcOrderShipping->store_tel = $store_data['stTel'];
 
-                $shippingLogger->save();
+                $tcOrderShipping->save();
 
+                // 注意 request timeout 可能
                 $res = $AL->BGCreateShippingOrder();
                 unset($AL);
 
                 if (isset($res['ErrorMessage'])) {
                     throw new Exception($res['ErrorMessage']);
                 }
+
+                $tcOrderShipping->sn_id = $res['AllPayLogisticsID'];
+                $tcOrderShipping->return_status = $res['RtnCode'];
+                $tcOrderShipping->return_message = $res['UpdateStatusDate'] . ' - ' . $res['RtnMsg'];
+                $tcOrderShipping->cvs_shipping_number = $res['CVSPaymentNo'];
+                $tcOrderShipping->cvs_validation_number = $res['CVSValidationNo'];
+                $tcOrderShipping->save();
             }
 
         } catch (Exception $e) {
@@ -700,7 +707,4 @@ class Ecpay_Cvs extends CarrierModule
         $context->cookie->__unset('ecpay_cvs_' . 'stAddr');
         $context->cookie->__unset('ecpay_cvs_' . 'stTel');
     }
-
-
-
 }

@@ -4,16 +4,16 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-include_once _PS_MODULE_DIR_ . 'ezship/classes/TcOrderShipping.php';
+include_once _PS_MODULE_DIR_ . 'tc_cvs/classes/TcOrderShipping.php';
 
-class EzShip extends CarrierModule
+class Tc_Cvs extends CarrierModule
 {
 
-    private $ezShipParams = [];
+    private $tcCvsParams = [];
 
     public function __construct()
     {
-        $this->name = 'ezship';
+        $this->name = 'tc_cvs';
         $this->tab = 'shipping_logistics';
         $this->version = '1.0';
         $this->author = 'TekapoCart';
@@ -21,13 +21,15 @@ class EzShip extends CarrierModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('ezShip CVS pickup in-store');
+        $this->displayName = $this->l('TekapoCart 711 pickup in-store');
         $this->description = 'https://www.tekapo.io/';
-        $this->confirmUninstall = $this->l('Do you want to uninstall ezship module?');
+        $this->confirmUninstall = $this->l('Do you want to uninstall tc_cvs module?');
 
-        $this->ezShipParams = [
-            'ezship_su_id',
-            'ezship_secret',
+        $this->tcCvsParams = [
+            'tc_cvs_sender_location',
+            'tc_cvs_island_fee',
+            'tc_cvs_kinmen_store_ids',
+            'tc_cvs_penghu_store_ids',
         ];
 
     }
@@ -100,7 +102,7 @@ class EzShip extends CarrierModule
     public function installCarrier()
     {
         $carrier = new Carrier();
-        $carrier->name = $this->l('OK Mart, HiLife, FamilyMart pickup in-store');
+        $carrier->name = $this->l('711 pickup in-store');
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
         $carrier->shipping_external = 0;
@@ -139,14 +141,10 @@ class EzShip extends CarrierModule
 
         $store_data = self::getStoreData();
 
-        $map_url = 'https://map.ezship.com.tw/ezship_map_web.jsp';
+        $map_url = $this->context->isMobile() ? 'https://emap.presco.com.tw/c2cemapm-u.ashx' : 'https://emap.presco.com.tw/c2cemap.ashx';
         $query = [
-            'suID' => Configuration::get('ezship_su_id'),
-            'processID' => $this->context->cart->id,
-            'stCate' => $store_data ? $store_data['stCate'] : '',
-            'stCode' => $store_data ? $store_data['stCode'] : '',
-            'rtURL' => $this->context->link->getModuleLink('ezship', 'selectStore', []),
-            'webPara' => '',
+            'tempvar' => $this->context->cart->id,
+            'url' => $this->context->link->getModuleLink('tc_cvs', 'selectStore', []),
         ];
         $map_url .= '?' . http_build_query($query);
 
@@ -174,10 +172,10 @@ class EzShip extends CarrierModule
 
         $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
         if ($tcOrderShipping) {
-            $store_data['stCate'] = $tcOrderShipping->store_type;
-            $store_data['stCode'] = $tcOrderShipping->store_code;
-            $store_data['stName'] = $tcOrderShipping->store_name;
-            $store_data['stAddr'] = $tcOrderShipping->store_addr;
+            $store_data['stCate'] = $tcOrderShipping['store_type'];
+            $store_data['stCode'] = $tcOrderShipping['store_code'];
+            $store_data['stName'] = $tcOrderShipping['store_name'];
+            $store_data['stAddr'] = $tcOrderShipping['store_addr'];
         } else {
             $store_data = self::getStoreData();
             $this->createShippingOrder($params);
@@ -278,16 +276,27 @@ class EzShip extends CarrierModule
         if ($tcOrderShipping) {
 
             $store_data = [
-                'stName' => $tcOrderShipping->store_name,
-                'stCate' => $tcOrderShipping->store_type,
-                'stCode' => $tcOrderShipping->store_code,
-                'stAddr' => $tcOrderShipping->store_addr,
+                'stName' => $tcOrderShipping['store_name'],
+                'stCate' => $tcOrderShipping['store_type'],
+                'stCode' => $tcOrderShipping['store_code'],
+                'stAddr' => $tcOrderShipping['store_addr'],
             ];
 
             $this->smarty->assign([
                 'store_data' => $store_data,
-                'return_message' => $tcOrderShipping->return_message,
+                'return_message' => $tcOrderShipping['return_message'],
             ]);
+
+            $map_url = $this->context->isMobile() ? 'https://emap.presco.com.tw/c2cemapm-u.ashx' : 'https://emap.presco.com.tw/c2cemap.ashx';
+            $query = [
+                'tempvar' => $this->context->cart->id,
+                'url' => $this->context->link->getModuleLink('tc_cvs', 'changeStore', []),
+            ];
+            $map_url .= '?' . http_build_query($query);
+
+            $this->smarty->assign(array(
+                'map_url' => $map_url,
+            ));
 
             return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
         }
@@ -325,6 +334,7 @@ class EzShip extends CarrierModule
         return true;
     }
 
+
     private function checkDeliveryInput($params)
     {
 
@@ -344,7 +354,7 @@ class EzShip extends CarrierModule
         $html_content = '';
 
         # Update the settings
-        if (Tools::isSubmit('ezship_submit')) {
+        if (Tools::isSubmit('tc_cvs_submit')) {
             # Validate the POST parameters
             $this->postValidation();
 
@@ -365,7 +375,10 @@ class EzShip extends CarrierModule
     private function postValidation()
     {
         $required_fields = array(
-            'ezship_su_id' => $this->l('ezShip account (suID)'),
+            'tc_cvs_sender_location' => $this->l('TekapoCart CVS Sender Location'),
+            'tc_cvs_island_fee' => $this->l('TekapoCart CVS island fee'),
+            'tc_cvs_kinmen_store_ids' => $this->l('TekapoCart CVS Kinmen store ids'),
+            'tc_cvs_penghu_store_ids' => $this->l('TekapoCart CVS Penghu store ids'),
         );
 
         foreach ($required_fields as $field_name => $field_desc) {
@@ -382,25 +395,43 @@ class EzShip extends CarrierModule
         # Set the configurations for generating a setting form
         $fields_form[0]['form'] = array(
             'legend' => array(
-                'title' => $this->l('ezShip configuration'),
+                'title' => $this->l('configuration'),
             ),
             'input' => array(
                 array(
                     'type' => 'text',
-                    'label' => $this->l('ezShip account (suID)'),
-                    'name' => 'ezship_su_id',
+                    'label' => $this->l('TekapoCart CVS Sender Location'),
+                    'name' => 'tc_cvs_sender_location',
+                    'required' => true,
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('TekapoCart CVS island fee'),
+                    'name' => 'tc_cvs_island_fee',
+                    'required' => true,
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('TekapoCart CVS Kinmen store ids'),
+                    'name' => 'tc_cvs_kinmen_store_ids',
+                    'required' => true,
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => $this->l('TekapoCart CVS Penghu store ids'),
+                    'name' => 'tc_cvs_penghu_store_ids',
                     'required' => true,
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('Secret key'),
-                    'name' => 'ezship_secret',
+                    'name' => 'tc_cvs_secret',
                     'desc' => $this->l('auto generated'),
                     'readonly' => true,
                 ),
             ),
             'submit' => array(
-                'name' => 'ezship_submit',
+                'name' => 'tc_cvs_submit',
                 'title' => $this->l('Save'),
                 'class' => 'button'
             )
@@ -422,7 +453,7 @@ class EzShip extends CarrierModule
         $helper->allow_employee_form_lang = $default_lang;
 
         # Load the current settings
-        foreach ($this->ezShipParams as $param_name) {
+        foreach ($this->tcCvsParams as $param_name) {
             $helper->fields_value[$param_name] = Configuration::get($param_name);
         }
 
@@ -432,11 +463,11 @@ class EzShip extends CarrierModule
     private function postProcess()
     {
 
-        if (strlen(Tools::getValue('ezship_secret')) === 0) {
-            $_POST['ezship_secret'] = sha1(openssl_random_pseudo_bytes(1024));
+        if (strlen(Tools::getValue('tc_cvs_secret')) === 0) {
+            $_POST['tc_cvs_secret'] = sha1(openssl_random_pseudo_bytes(1024));
         }
 
-        foreach ($this->ezShipParams as $param_name) {
+        foreach ($this->tcCvsParams as $param_name) {
 
             if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
                 return $this->displayError($param_name . ' ' . $this->l('updated failed'));
@@ -456,10 +487,10 @@ class EzShip extends CarrierModule
         return 0;
     }
 
-    public function invokeEzShipSDK()
+    public function invokeTCSDK()
     {
-        if (!class_exists('EzShip_AllInOne', false)) {
-            if (!include(_PS_MODULE_DIR_ . '/ezship/lib/EzShip.Integration.php')) {
+        if (!class_exists('TC_ShippingMethod', false)) {
+            if (!include(_PS_MODULE_DIR_ . '/tc_cvs/lib/TC.Integration.php')) {
                 return false;
             }
         }
@@ -472,9 +503,9 @@ class EzShip extends CarrierModule
         $order_id = null;
         $order = null;
         try {
-            $invoke_result = $this->invokeEzShipSDK();
+            $invoke_result = $this->invokeTCSDK();
             if (!$invoke_result) {
-                throw new Exception($this->l('EzShip SDK is missing.'));
+                throw new Exception($this->l('TC SDK is missing.'));
             } else {
 
                 $order_id = $params['order']->id;
@@ -484,43 +515,23 @@ class EzShip extends CarrierModule
                     throw new Exception(sprintf('Order %s is not found.', $order_id));
                 }
 
-                $aio = new EzShip_AllInOne();
-                $aio->suID = Configuration::get('ezship_su_id');
-                $aio->secret = Configuration::get('ezship_secret');
-                $aio->ServiceURL = 'https://www.ezship.com.tw/emap/ezship_xml_order_api.jsp';
-                $aio->Send['rtURL'] = $this->context->link->getModuleLink('ezship', 'response', []);
-                $aio->Send['orderAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
-                $aio->Send['orderID'] = $order->reference;
-
                 $tcOrderShipping = new TcOrderShipping();
 
                 if ($order->module == 'tc_pod') {
-                    $aio->Send['orderType'] = EzShip_OrderType::PAY;
+                    $tcOrderShipping->pay_type = TC_OrderType::PAY;
                 } else {
-                    $aio->Send['orderType'] = EzShip_OrderType::NO_PAY;
+                    $tcOrderShipping->pay_type = TC_OrderType::NO_PAY;
                 }
-                $tcOrderShipping->pay_type = $aio->Send['orderType'];
 
                 $tcOrderShipping->id_order = $order_id;
-                $tcOrderShipping->order_reference = $aio->Send['orderID'];
+                $tcOrderShipping->order_reference = $order->reference;
                 $tcOrderShipping->module = $this->name;
 
-                $customer = new Customer(intval($order->id_customer));
-                $aio->Send['rvEmail'] = $customer->email;;
-
                 $address = new Address(intval($order->id_address_delivery));
-                $aio->Send['rvName'] = $address->lastname . $address->firstname;;
-                $aio->Send['rvMobile'] = $address->phone_mobile;
-                $tcOrderShipping->rv_name = $aio->Send['rvName'];
-                $tcOrderShipping->rv_mobile = $aio->Send['rvMobile'];
-
-                $aio->Send['ChooseShipping'] = EzShip_ShippingMethod::CVS;
-                $aio->Send['orderStatus'] = EzShip_SendOrderStatus::A02;
-                $tcOrderShipping->send_status = $aio->Send['orderStatus'];
+                $tcOrderShipping->rv_name = $address->lastname . $address->firstname;
+                $tcOrderShipping->rv_mobile = $address->phone_mobile;
 
                 $store_data = self::getStoreData();
-                $aio->SendExtend['stCode'] = $store_data['stCate'] . $store_data['stCode'];
-
                 $tcOrderShipping->store_type = $store_data['stCate'];
                 $tcOrderShipping->store_code = $store_data['stCode'];
                 $tcOrderShipping->store_name = $store_data['stName'];
@@ -529,25 +540,11 @@ class EzShip extends CarrierModule
 
                 $tcOrderShipping->save();
 
-                foreach ($order->getProductsDetail() as $detail) {
-                    $aio->Send['Items'][] = [
-                        'prodItem' => '',
-                        'prodNo' => $detail['product_reference'],
-                        'prodName' => $detail['product_name'],
-                        'prodPrice' => $detail['product_price'],
-                        'prodQty' => $detail['product_quantity'],
-                        'prodSpec' => '',
-                    ];
-                }
-
-                $aio->CheckOutXml();
-                unset($aio);
-
             }
 
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('createShippingOrder %s exception: %s', $params['order']->id, $e->getMessage()), true);
+            Tc_Cvs::logMessage(sprintf('createShippingOrder %s exception: %s', $params['order']->id, $e->getMessage()), true);
         }
     }
 
@@ -558,7 +555,7 @@ class EzShip extends CarrierModule
 
     public static function logMessage($message, $is_append = false)
     {
-        $path = _PS_LOG_DIR_ . 'ezship_logistics.log';
+        $path = _PS_LOG_DIR_ . 'tc_logistics.log';
 
         if (!$is_append) {
             return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
@@ -571,11 +568,11 @@ class EzShip extends CarrierModule
     {
         $context = Context::getContext();
         try {
-            $result['stCate'] = $context->cookie->__get('ezship_' . 'stCate');
-            $result['stCode'] = $context->cookie->__get('ezship_' . 'stCode');
-            $result['stName'] = $context->cookie->__get('ezship_' . 'stName');
-            $result['stAddr'] = $context->cookie->__get('ezship_' . 'stAddr');
-            $result['stTel'] = $context->cookie->__get('ezship_' . 'stTel');
+            $result['stCate'] = $context->cookie->__get('tc_cvs_' . 'stCate');
+            $result['stCode'] = $context->cookie->__get('tc_cvs_' . 'stCode');
+            $result['stName'] = $context->cookie->__get('tc_cvs_' . 'stName');
+            $result['stAddr'] = $context->cookie->__get('tc_cvs_' . 'stAddr');
+            $result['stTel'] = $context->cookie->__get('tc_cvs_' . 'stTel');
             self::saveStoreData($result);
         } catch (Exception $e) {
             self::clearStoreData();
@@ -589,17 +586,17 @@ class EzShip extends CarrierModule
     {
         $context = Context::getContext();
         foreach ($store_data as $key => $val) {
-            $context->cookie->__set('ezship_' . $key, $val);
+            $context->cookie->__set('tc_cvs_' . $key, $val);
         }
     }
 
     public static function clearStoreData()
     {
         $context = Context::getContext();
-        $context->cookie->__unset('ezship_' . 'stCate');
-        $context->cookie->__unset('ezship_' . 'stCode');
-        $context->cookie->__unset('ezship_' . 'stName');
-        $context->cookie->__unset('ezship_' . 'stAddr');
-        $context->cookie->__unset('ezship_' . 'stTel');
+        $context->cookie->__unset('tc_cvs_' . 'stCate');
+        $context->cookie->__unset('tc_cvs_' . 'stCode');
+        $context->cookie->__unset('tc_cvs_' . 'stName');
+        $context->cookie->__unset('tc_cvs_' . 'stAddr');
+        $context->cookie->__unset('tc_cvs_' . 'stTel');
     }
 }
