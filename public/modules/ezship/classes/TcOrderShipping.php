@@ -22,7 +22,7 @@ if (!class_exists('TcOrderShipping')) {
         /** @var string store type */
         public $store_type;
 
-        /** @var integer store code */
+        /** @var string store code */
         public $store_code;
 
         /** @var string store name */
@@ -96,7 +96,7 @@ if (!class_exists('TcOrderShipping')) {
                 'send_status' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
                 'pay_type' => array('type' => self::TYPE_STRING),
                 'store_type' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
-                'store_code' => array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
+                'store_code' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'store_name' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'store_addr' => array('type' => self::TYPE_STRING, 'validate' => 'isAddress'),
                 'rv_name' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),

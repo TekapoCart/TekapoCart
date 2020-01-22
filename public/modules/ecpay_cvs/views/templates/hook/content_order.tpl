@@ -13,6 +13,9 @@
             <button type="button" onclick="window.open('{$map_url nofilter}', '_self');" class="btn btn-primary">
                 {l s='Reselect Store Map' mod='ecpay_cvs'}
             </button>
+            {if strlen($change_store_message) > 0}
+                <p>更新門市記錄：<br>{$change_store_message|nl2br}</p>
+            {/if}
         {/if}
         <br>
         {$print_html nofilter}

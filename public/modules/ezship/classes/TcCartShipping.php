@@ -10,13 +10,10 @@ if (!class_exists('TcCartShipping')) {
         /** @var integer carrier id */
         public $id_carrier;
 
-        /** @var string logistics module ezship, ezship_home, ecpay_cvs, ecpay_cat, tc_cvs ... */
-        public $module;
-
         /** @var string store type */
         public $store_type;
 
-        /** @var integer store code */
+        /** @var string store code */
         public $store_code;
 
         /** @var string store name */
@@ -45,11 +42,10 @@ if (!class_exists('TcCartShipping')) {
             'primary' => 'id_tc_cart_shipping',
             'multilang' => false,
             'fields' => array(
-                'id_order' => array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
+                'id_cart' => array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
                 'id_carrier' => array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
-                'module' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
                 'store_type' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
-                'store_code' => array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
+                'store_code' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'store_name' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'store_addr' => array('type' => self::TYPE_STRING, 'validate' => 'isAddress'),
                 'delivery_date' => array('type' => self::TYPE_STRING),
@@ -84,16 +80,16 @@ if (!class_exists('TcCartShipping')) {
 
             if (is_array($rowOrder)) {
                 $tcCartShipping = new TcCartShipping($rowOrder['id_tc_cart_shipping']);
-                $tcCartShipping->id_cart = $cart_id;
-                $tcCartShipping->id_carrier = $carrier_id;
-                $tcCartShipping->store_type = $store_data['type'];
-                $tcCartShipping->store_code = $store_data['code'];
-                $tcCartShipping->store_name = $store_data['name'];
-                $tcCartShipping->store_addr = $store_data['addr'];
-                $tcCartShipping->save();
             } else {
-                return false;
+                $tcCartShipping = new TcCartShipping();
             }
+            $tcCartShipping->id_cart = $cart_id;
+            $tcCartShipping->id_carrier = $carrier_id;
+            $tcCartShipping->store_type = $store_data['type'];
+            $tcCartShipping->store_code = $store_data['code'];
+            $tcCartShipping->store_name = $store_data['name'];
+            $tcCartShipping->store_addr = $store_data['addr'];
+            $tcCartShipping->save();
         }
 
         public static function getScheduledData($cart_id, $carrier_id)
@@ -121,12 +117,14 @@ if (!class_exists('TcCartShipping')) {
 
             if (is_array($rowOrder)) {
                 $tcCartShipping = new TcCartShipping($rowOrder['id_tc_cart_shipping']);
+            } else {
+                $tcCartShipping = new TcCartShipping();
+            }
+            if (empty($rowOrder)) {
                 $tcCartShipping->id_cart = $cart_id;
                 $tcCartShipping->id_carrier = $carrier_id;
                 $tcCartShipping->delivery_time = $scheduled_data['delivery_time'];
                 $tcCartShipping->save();
-            } else {
-                return false;
             }
         }
 

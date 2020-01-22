@@ -1,6 +1,6 @@
 <?php
 
-class Tc_Cvs_SelectStoreModuleFrontController extends ModuleFrontController
+class Tc_CvsSelectStoreModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 
@@ -19,9 +19,10 @@ class Tc_Cvs_SelectStoreModuleFrontController extends ModuleFrontController
                 }
 
                 $store_data = [
-                    'stCode' => $tc_cvs_feedback['storeid'],
-                    'stName' => $tc_cvs_feedback['storename'],
-                    'stAddr' => $tc_cvs_feedback['storeaddress'],
+                    'type' => '711',
+                    'code' => $tc_cvs_feedback['storeid'],
+                    'name' => $tc_cvs_feedback['storename'],
+                    'addr' => $tc_cvs_feedback['storeaddress'],
                 ];
                 $this->module->saveStoreData($store_data);
                 Tools::redirect($this->context->link->getPageLink('order', true));
@@ -29,7 +30,7 @@ class Tc_Cvs_SelectStoreModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Tc_Cvs::logMessage(sprintf('Tc_Cvs_AddStore exception: %s', $e->getMessage()), true);
+            Tc_Cvs::logMessage(sprintf('Tc_CvsSelectStore exception: %s', $e->getMessage()), true);
         }
 
         exit;

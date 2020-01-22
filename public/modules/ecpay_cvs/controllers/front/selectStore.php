@@ -19,11 +19,10 @@ class Ecpay_CvsSelectStoreModuleFrontController extends ModuleFrontController
                 }
 
                 $store_data = [
-                    'stCate' => $ecpay_feedback['LogisticsSubType'],
-                    'stCode' => $ecpay_feedback['CVSStoreID'],
-                    'stName' => $ecpay_feedback['CVSStoreName'],
-                    'stAddr' => $ecpay_feedback['CVSAddress'],
-                    'stTel' => $ecpay_feedback['CVSTelephone'],
+                    'type' => $ecpay_feedback['LogisticsSubType'],
+                    'code' => $ecpay_feedback['CVSStoreID'],
+                    'name' => $ecpay_feedback['CVSStoreName'],
+                    'addr' => $ecpay_feedback['CVSAddress'],
                 ];
                 $this->module->saveStoreData($store_data);
                 Tools::redirect($this->context->link->getPageLink('order', true));

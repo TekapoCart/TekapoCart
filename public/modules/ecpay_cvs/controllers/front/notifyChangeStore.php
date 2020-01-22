@@ -45,18 +45,18 @@ class Ecpay_CvsNotifyChangeStoreModuleFrontController extends ModuleFrontControl
                         case '01':
                             // 門市關轉店
                             $tcOrderShipping->change_store_status = 1;
-                            $tcOrderShipping->change_store_message = date('Y-m-d H:i:s') . '-' . $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store is closed') . '\n' . $tcOrderShipping->change_store_message;
+                            $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . ' - [' . $ecpay_feedback['StoreID'] . '] ' . $this->module->l('CVS store is closed') . "\n" . $tcOrderShipping->change_store_message;
                             $tcOrderShipping->save();
                             break;
                         case '02':
                             // 門市舊店號更新(同樣一間門市，但是更換店號)
                             $tcOrderShipping->change_store_status = 1;
-                            $tcOrderShipping->change_store_message = date('Y-m-d H:i:s') . '-' . $ecpay_feedback['StoreID'] . ' - ' . $this->module->l('CVS store id is changed (same store)') . '\n' . $tcOrderShipping->change_store_message;
+                            $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . ' - [' . $ecpay_feedback['StoreID'] . '] ' . $this->module->l('CVS store id is changed (same store)') . "\n" . $tcOrderShipping->change_store_message;
                             $tcOrderShipping->save();
                             break;
                         default:
                             $tcOrderShipping->change_store_status = 1;
-                            $tcOrderShipping->change_store_message = date('Y-m-d H:i:s') . '-' . $ecpay_feedback['StoreID'] . '\n' . $tcOrderShipping->change_store_message;
+                            $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . ' - [' . $ecpay_feedback['StoreID'] . "] \n" . $tcOrderShipping->change_store_message;
                             $tcOrderShipping->save();
                     }
 

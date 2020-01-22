@@ -58,20 +58,18 @@ class Tc_Cvs extends CarrierModule
         $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'tc_cart_shipping` (
                 `id_tc_cart_shipping` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
                 `id_cart` INT(10) UNSIGNED NULL DEFAULT NULL,
-                `id_carrier` INT(10) UNSIGNED NULL DEFAULT NULL
+                `id_carrier` INT(10) UNSIGNED NULL DEFAULT NULL,
                 `module` VARCHAR(255) NULL DEFAULT NULL,
                 `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
-                `store_code` INT(10) UNSIGNED NULL DEFAULT NULL,
+                `store_code` VARCHAR(10) NULL DEFAULT NULL,
                 `store_name` VARCHAR(255) NULL DEFAULT NULL,
                 `store_addr` VARCHAR(255) NULL DEFAULT NULL,
                 `delivery_date` VARCHAR(10) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達日",
                 `delivery_time` VARCHAR(2) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達時段",
                 `date_add` DATETIME NOT NULL,
                 `date_upd` DATETIME NOT NULL,                
-                PRIMARY KEY (`id_shipping_logger`),
-                KEY `order_reference` (`order_reference`),
-                KEY `id_order` (`id_order`),
-                KEY `sn_id` (`sn_id`)
+                PRIMARY KEY (`id_tc_cart_shipping`),
+                KEY `id_carrier` (`id_cart`,`id_carrier`),
             )
             ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET utf8 COLLATE utf8_general_ci;';
 
@@ -83,7 +81,7 @@ class Tc_Cvs extends CarrierModule
                 `send_status` VARCHAR(50) NULL DEFAULT NULL COMMENT "ezship: 訂單狀態, ecpay: 物流子類型",
                 `pay_type` VARCHAR(50) NULL DEFAULT NULL COMMENT "ezship: 訂單類別, ecpay: 是否代收貨款",
                 `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
-                `store_code` INT(10) UNSIGNED NULL DEFAULT NULL,
+                `store_code` VARCHAR(10) NULL DEFAULT NULL,
                 `store_name` VARCHAR(255) NULL DEFAULT NULL,
                 `store_addr` VARCHAR(255) NULL DEFAULT NULL,
                 `rv_name` VARCHAR(255) NULL DEFAULT NULL,
@@ -103,7 +101,7 @@ class Tc_Cvs extends CarrierModule
                 `change_store_message` TEXT NULL DEFAULT NULL COMMENT "ecpay: 更新門市訊息",
                 `date_add` DATETIME NOT NULL,
                 `date_upd` DATETIME NOT NULL,                
-                PRIMARY KEY (`id_shipping_logger`),
+                PRIMARY KEY (`id_tc_order_shipping`),
                 KEY `order_reference` (`order_reference`),
                 KEY `id_order` (`id_order`),
                 KEY `sn_id` (`sn_id`)
@@ -159,7 +157,7 @@ class Tc_Cvs extends CarrierModule
             return false;
         }
 
-        $store_data = $this->getStoreData();
+        $store_data = $this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier);
 
         $map_url = $this->context->isMobile() ? 'https://emap.presco.com.tw/c2cemapm-u.ashx' : 'https://emap.presco.com.tw/c2cemap.ashx';
         $query = [
@@ -197,7 +195,7 @@ class Tc_Cvs extends CarrierModule
             $store_data['name'] = $tcOrderShipping->store_name;
             $store_data['addr'] = $tcOrderShipping->store_addr;
         } else {
-            $store_data = $this->getStoreData();
+            $store_data = $this->getStoreData($params['order']->id_cart, $params['order']->id_carrier);
             $this->createShippingOrder($params['order']->id);
         }
 
@@ -307,13 +305,14 @@ class Tc_Cvs extends CarrierModule
             // 更新門市
             $map_url = $this->context->isMobile() ? 'https://emap.presco.com.tw/c2cemapm-u.ashx' : 'https://emap.presco.com.tw/c2cemap.ashx';
             $query = [
-                'tempvar' => $this->context->cart->id,
+                'tempvar' => $tcOrderShipping->id,
                 'url' => $this->context->link->getModuleLink('tc_cvs', 'changeStore', []),
             ];
             $map_url .= '?' . http_build_query($query);
 
             $this->smarty->assign(array(
                 'map_url' => $map_url,
+                'change_store_message' => $tcOrderShipping->change_store_message,
             ));
 
             return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
@@ -356,7 +355,7 @@ class Tc_Cvs extends CarrierModule
     private function checkDeliveryInput($params)
     {
 
-        if (!$this->getStoreData()) {
+        if (!$this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier)) {
             $this->context->controller->errors[] = $this->l('CVS store is NOT selected');
         }
 
@@ -525,11 +524,15 @@ class Tc_Cvs extends CarrierModule
             } else {
 
                 $order = new Order((int)$order_id);
-                if (empty($order)) {
+                if (empty($order->id)) {
                     throw new Exception(sprintf('Order %s is not found.', $order_id));
                 }
 
                 $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
+
+                if ($tc_order_shipping_id > 0 && $tcOrderShipping->id_order != $order_id) {
+                    throw new Exception('Invalid input values.');
+                }
 
                 if ($order->module == 'tc_pod') {
                     $tcOrderShipping->pay_type = TC_OrderType::PAY;
@@ -545,11 +548,15 @@ class Tc_Cvs extends CarrierModule
                 $tcOrderShipping->rv_name = $address->lastname . $address->firstname;
                 $tcOrderShipping->rv_mobile = $address->phone_mobile;
 
-                $store_data = $this->getStoreData();
-                $tcOrderShipping->store_type = $store_data['type'];
-                $tcOrderShipping->store_code = $store_data['code'];
-                $tcOrderShipping->store_name = $store_data['name'];
-                $tcOrderShipping->store_addr = $store_data['addr'];
+                if ($tc_order_shipping_id) {
+
+                } else {
+                    $store_data = $this->getStoreData($order->id_cart, $order->id_carrier);
+                    $tcOrderShipping->store_type = $store_data['type'];
+                    $tcOrderShipping->store_code = $store_data['code'];
+                    $tcOrderShipping->store_name = $store_data['name'];
+                    $tcOrderShipping->store_addr = $store_data['addr'];
+                }
 
                 $tcOrderShipping->save();
 
@@ -577,10 +584,8 @@ class Tc_Cvs extends CarrierModule
         }
     }
 
-    public function getStoreData()
+    public function getStoreData($cart_id, $carrier_id)
     {
-        $cart_id = $this->context->cart->id;
-        $carrier_id = $this->context->cart->id_carrier;
         $tcCartShipping = TcCartShipping::getStoreData($cart_id, $carrier_id);
 
         if ($tcCartShipping) {

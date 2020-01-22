@@ -1,6 +1,6 @@
 <?php
 
-class EzShip_ResendShippingOrderModuleFrontController extends ModuleFrontController
+class EzShipResendShippingOrderModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 
@@ -21,12 +21,12 @@ class EzShip_ResendShippingOrderModuleFrontController extends ModuleFrontControl
             $order_id = Tools::getValue('order_id');
 
             $order = new Order((int)$order_id);
-            if (empty($order)) {
+            if (empty($order->id)) {
                 throw new Exception(sprintf('Order %s is not found.', $order_id));
             }
 
             $tcOrderShipping = TcOrderShipping::getLogByOrderRef($order->reference);
-            if (empty($tcOrderShipping)) {
+            if (empty($tcOrderShipping->id)) {
                 $tc_order_shipping_id = null;
             } else {
                 $tc_order_shipping_id = $tcOrderShipping->id;
@@ -34,9 +34,14 @@ class EzShip_ResendShippingOrderModuleFrontController extends ModuleFrontControl
 
             $this->module->createShippingOrder($order_id, $tc_order_shipping_id);
 
+            $employee = new Employee($cookie->id_employee);
+            $this->context->employee = $employee;
+            Tools::redirectAdmin('/tekapo/index.php?controller=AdminOrders&id_order=' . (int)$order_id . '&vieworder=1&token='.Tools::getAdminTokenLite('AdminOrders'));
+
+
         } catch (Exception $e) {
 
-            Ecpay_Cvs::logMessage(sprintf('EzShip_ResendShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
+            EzShip::logMessage(sprintf('EzShip_ResendShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
         }
 
         exit;

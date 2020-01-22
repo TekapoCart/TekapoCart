@@ -29,7 +29,7 @@ class Ecpay_CvsChangeStoreModuleFrontController extends ModuleFrontController
                 $sn_id = (int)$ecpay_feedback['ExtraData'];
 
                 $tcOrderShipping = TcOrderShipping::getLogBySnId($sn_id);
-                if (!$tcOrderShipping) {
+                if (empty($tcOrderShipping->id)) {
                     throw new Exception('TcOrderShipping is invalid.');
                 }
 
@@ -60,7 +60,7 @@ class Ecpay_CvsChangeStoreModuleFrontController extends ModuleFrontController
                         $tcOrderShipping->store_addr = $ecpay_feedback['CVSAddress'];
                         $tcOrderShipping->store_tel = $ecpay_feedback['CVSTelephone'];
                         $tcOrderShipping->change_store_status = 0;
-                        $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . '-' . $this->module->l('Admin User Change Store') . '\n' . $tcOrderShipping->change_store_message;
+                        $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . ' - [' . $ecpay_feedback['CVSStoreID'] . '] ' . $this->module->l('Admin User Change Store') . "\n" . $tcOrderShipping->change_store_message;
                         $tcOrderShipping->save();
 
                         Tools::redirect($this->context->link->getAdminLink('AdminOrders',

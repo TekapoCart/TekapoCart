@@ -10,8 +10,8 @@
         {/if}
     </button>
     {if $store_data}<br>
-        {l s='Store Name' mod='ecpay_cvs'}：{$store_data['stName']} ({$store_data['stCate']}{$store_data['stCode']})<br>
-        {l s='Store Address' mod='ecpay_cvs'}：{$store_data['stAddr']}
+        {l s='Store Name' mod='ecpay_cvs'}：{$store_data['name']} ({$store_data['type']}{$store_data['code']})<br>
+        {l s='Store Address' mod='ecpay_cvs'}：{$store_data['addr']}
     {/if}
 </p>
 

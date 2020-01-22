@@ -146,10 +146,15 @@ class EzShip_Home extends CarrierModule
                 'return_message' => $tcOrderShipping->return_message,
             ));
 
-            return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
         }
 
-        return false;
+        // 建立物流訂單 / 重新取號
+        $resend_url = $this->context->link->getModuleLink('ecpay_cvs', 'resendShippingOrder', []);
+        $this->smarty->assign([
+            'resend_url' => $resend_url,
+        ]);
+
+        return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
 
     }
 
@@ -208,7 +213,7 @@ class EzShip_Home extends CarrierModule
             } else {
 
                 $order = new Order((int)$order_id);
-                if (empty($order)) {
+                if (empty($order->id)) {
                     throw new Exception(sprintf('Order %s is not found.', $order_id));
                 }
 
@@ -221,6 +226,10 @@ class EzShip_Home extends CarrierModule
                 $aio->Send['orderID'] = $order->reference;
 
                 $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
+
+                if ($tc_order_shipping_id > 0 && $tcOrderShipping->id_order != $order_id) {
+                    throw new Exception('Invalid input values.');
+                }
 
                 if ($order->module == 'tc_pod') {
                     $aio->Send['orderType'] = EzShip_OrderType::PAY;

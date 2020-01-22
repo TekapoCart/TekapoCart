@@ -88,7 +88,7 @@ class Ecpay_Tcat extends CarrierModule
             EcpayScheduledDeliveryTime::TIME_14_18 => $this->l('2~6PM'),
         ];
 
-        $scheduled_data = self::getScheduledData();
+        $scheduled_data = $this->getScheduledData($this->context->cart->id, $this->context->cart->id_carrier);
 
         $this->smarty->assign([
             'scheduled_data' => $scheduled_data,
@@ -281,7 +281,7 @@ class Ecpay_Tcat extends CarrierModule
             } else {
 
                 $order = new Order((int)$order_id);
-                if (empty($order)) {
+                if (empty($order->id)) {
                     throw new Exception(sprintf('Order %s is not found.', $order_id));
                 }
 
@@ -292,6 +292,11 @@ class Ecpay_Tcat extends CarrierModule
                 $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
                 $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
+
+                if ($tc_order_shipping_id > 0 && $tcOrderShipping->id_order != $order_id) {
+                    throw new Exception('Invalid input values.');
+                }
+
                 $tcOrderShipping->id_order = $order_id;
                 $tcOrderShipping->order_reference = $order->reference;
                 $tcOrderShipping->module = $this->name;
@@ -398,9 +403,13 @@ class Ecpay_Tcat extends CarrierModule
 
                 $AL->SendExtend['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
 
-                $scheduled_data = self::getScheduledData();
-                $AL->SendExtend['ScheduledDeliveryTime'] = $scheduled_data['delivery_time'];
-                $tcOrderShipping->delivery_time = $AL->SendExtend['ScheduledDeliveryTime'];
+                if ($tc_order_shipping_id) {
+                    $AL->SendExtend['ScheduledDeliveryTime'] = $tcOrderShipping->delivery_time;
+                } else {
+                    $scheduled_data = $this->getScheduledData($order->id_cart, $order->id_carrier);
+                    $AL->SendExtend['ScheduledDeliveryTime'] = $scheduled_data['delivery_time'];
+                    $tcOrderShipping->delivery_time = $AL->SendExtend['ScheduledDeliveryTime'];
+                }
 
                 $tcOrderShipping->save();
 
@@ -414,7 +423,7 @@ class Ecpay_Tcat extends CarrierModule
 
                 $tcOrderShipping->sn_id = $res['AllPayLogisticsID'];
                 $tcOrderShipping->return_status = $res['RtnCode'];
-                $tcOrderShipping->return_message = $res['UpdateStatusDate'] . ' - ' . $res['RtnMsg'] . '\n' . $tcOrderShipping->return_message;
+                $tcOrderShipping->return_message = $res['UpdateStatusDate'] . ' - ' . $res['RtnMsg'] . "\n" . $tcOrderShipping->return_message;
                 $tcOrderShipping->cvs_shipping_number = $res['CVSPaymentNo'];
                 $tcOrderShipping->cvs_validation_number = $res['CVSValidationNo'];
                 $tcOrderShipping->save();
@@ -442,10 +451,8 @@ class Ecpay_Tcat extends CarrierModule
         }
     }
 
-    public function getScheduledData()
+    public function getScheduledData($cart_id, $carrier_id)
     {
-        $cart_id = $this->context->cart->id;
-        $carrier_id = $this->context->cart->id_carrier;
         $tcCartShipping = TcCartShipping::getScheduledData($cart_id, $carrier_id);
 
         if ($tcCartShipping) {

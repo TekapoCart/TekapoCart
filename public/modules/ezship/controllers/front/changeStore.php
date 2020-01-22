@@ -1,6 +1,6 @@
 <?php
 
-class Tc_CvsChangeStoreModuleFrontController extends ModuleFrontController
+class EzShipChangeStoreModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 
@@ -22,9 +22,9 @@ class Tc_CvsChangeStoreModuleFrontController extends ModuleFrontController
                 throw new Exception('Get feedback failed.');
             } else {
 
-                Tc_Cvs::logMessage('Feedback: ' . json_encode($tc_cvs_feedback), true);
+                EzShip::logMessage('Feedback: ' . json_encode($tc_cvs_feedback), true);
 
-                $id_tc_order_shipping = $tc_cvs_feedback['TempVar'];
+                $id_tc_order_shipping = $tc_cvs_feedback['processID'];
 
                 $tcOrderShipping = new TcOrderShipping((int)$id_tc_order_shipping);
                 if (empty($tcOrderShipping->id)) {
@@ -35,21 +35,25 @@ class Tc_CvsChangeStoreModuleFrontController extends ModuleFrontController
                     throw new Exception(sprintf('Module %s is invalid.', $tcOrderShipping->module));
                 }
 
-                $tcOrderShipping->store_type = '711';
-                $tcOrderShipping->store_code = $tc_cvs_feedback['storeid'];
-                $tcOrderShipping->store_name = $tc_cvs_feedback['storename'];
-                $tcOrderShipping->store_addr = $tc_cvs_feedback['storeaddress'];
+                $tcOrderShipping->store_type = $tc_cvs_feedback['stCate'];
+                $tcOrderShipping->store_code = $tc_cvs_feedback['stCode'];
+                $tcOrderShipping->store_name = $tc_cvs_feedback['stName'];
+                $tcOrderShipping->store_addr = $tc_cvs_feedback['stAddr'];
                 $tcOrderShipping->change_store_status = 0;
-                $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . ' - [' . $tc_cvs_feedback['storeid'] . '] ' . $this->module->l('Admin User Change Store') . "\n" . $tcOrderShipping->change_store_message;
+                $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . ' - [' . $tc_cvs_feedback['stCode'] . '] ' . $this->module->l('Admin User Change Store') . "\n" . $tcOrderShipping->change_store_message;
                 $tcOrderShipping->save();
 
-                Tools::redirect($this->context->link->getAdminLink('AdminOrders',
-                            true) . '&id_order=' . $id_tc_order_shipping->id_order . '&viewOrder=1');
+                $this->module->createShippingOrder($tcOrderShipping->id_order, $tcOrderShipping->id);
+
+                $employee = new Employee($cookie->id_employee);
+                $this->context->employee = $employee;
+                Tools::redirectAdmin('/tekapo/index.php?controller=AdminOrders&id_order=' . (int)$tcOrderShipping->id_order . '&vieworder=1&token='.Tools::getAdminTokenLite('AdminOrders'));
+
             }
 
         } catch (Exception $e) {
 
-            Tc_Cvs::logMessage(sprintf('Tc_Cvs_ChangeStore exception: %s', $e->getMessage()), true);
+            EzShip::logMessage(sprintf('EzShipChangeStore exception: %s', $e->getMessage()), true);
         }
 
         exit;

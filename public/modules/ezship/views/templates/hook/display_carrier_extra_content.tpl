@@ -11,8 +11,8 @@
     </button>
     {if $store_data}
         <br>
-        {l s='Store Name' mod='ezship'}：{$store_data['stName']} ({$store_data['stCate']}{$store_data['stCode']})
+        {l s='Store Name' mod='ezship'}：{$store_data['name']} ({$store_data['type']}{$store_data['code']})
         <br>
-        {l s='Store Address' mod='ezship'}：{$store_data['stAddr']}
+        {l s='Store Address' mod='ezship'}：{$store_data['addr']}
     {/if}
 </p>

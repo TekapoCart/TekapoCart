@@ -12,25 +12,24 @@ class EzShipSelectStoreModuleFrontController extends ModuleFrontController
                 throw new Exception('Get feedback failed.');
             } else {
 
-                Ecpay_Cvs::logMessage('Feedback: ' . json_encode($ezship_feedback), true);
+                Ezship::logMessage('Feedback: ' . json_encode($ezship_feedback), true);
 
-                if ($this->context->cart->id !== (int)$ezship_feedback['ExtraData']) {
+                if ($this->context->cart->id !== (int)$ezship_feedback['processID']) {
                     throw new Exception('Verify feedback failed.');
                 }
 
                 $store_data = [
-                    'stCate' => $ezship_feedback['stCate'],
-                    'stCode' => $ezship_feedback['stCode'],
-                    'stName' => $ezship_feedback['stName'],
-                    'stAddr' => $ezship_feedback['stAddr'],
-                    'stTel' => $ezship_feedback['stTel'],
+                    'type' => $ezship_feedback['stCate'],
+                    'code' => $ezship_feedback['stCode'],
+                    'name' => $ezship_feedback['stName'],
+                    'addr' => $ezship_feedback['stAddr'],
                 ];
                 $this->module->saveStoreData($store_data);
                 Tools::redirect($this->context->link->getPageLink('order', true));
             }
 
         } catch (Exception $e) {
-            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsStore exception: %s', $e->getMessage()), true);
+            Ezship::logMessage(sprintf('EzShipSelectStore exception: %s', $e->getMessage()), true);
         }
 
         exit;

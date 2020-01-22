@@ -50,7 +50,7 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
 
                     $tcOrderShipping->sn_id = $ecpay_feedback['AllPayLogisticsID'];
                     $tcOrderShipping->return_status = $ecpay_feedback['RtnCode'];
-                    $tcOrderShipping->return_message = $ecpay_feedback['UpdateStatusDate'] . ' - ' . $ecpay_feedback['RtnMsg'] . '\n' . $tcOrderShipping->return_message;
+                    $tcOrderShipping->return_message = $ecpay_feedback['UpdateStatusDate'] . ' - ' . $ecpay_feedback['RtnMsg'] . "\n" . $tcOrderShipping->return_message;
                     $tcOrderShipping->cvs_shipping_number = $ecpay_feedback['CVSPaymentNo'];
                     $tcOrderShipping->cvs_validation_number = $ecpay_feedback['CVSValidationNo'];
                     $tcOrderShipping->home_shipping_number = $ecpay_feedback['BookingNote'];

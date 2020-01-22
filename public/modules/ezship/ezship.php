@@ -28,6 +28,7 @@ class EzShip extends CarrierModule
 
         $this->ezShipParams = [
             'ezship_su_id',
+            'ezship_confirm_order',
             'ezship_secret',
         ];
 
@@ -56,20 +57,18 @@ class EzShip extends CarrierModule
         $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'tc_cart_shipping` (
                 `id_tc_cart_shipping` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
                 `id_cart` INT(10) UNSIGNED NULL DEFAULT NULL,
-                `id_carrier` INT(10) UNSIGNED NULL DEFAULT NULL
+                `id_carrier` INT(10) UNSIGNED NULL DEFAULT NULL,
                 `module` VARCHAR(255) NULL DEFAULT NULL,
                 `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
-                `store_code` INT(10) UNSIGNED NULL DEFAULT NULL,
+                `store_code` VARCHAR(10) NULL DEFAULT NULL,
                 `store_name` VARCHAR(255) NULL DEFAULT NULL,
                 `store_addr` VARCHAR(255) NULL DEFAULT NULL,
                 `delivery_date` VARCHAR(10) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達日",
                 `delivery_time` VARCHAR(2) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達時段",
                 `date_add` DATETIME NOT NULL,
                 `date_upd` DATETIME NOT NULL,                
-                PRIMARY KEY (`id_shipping_logger`),
-                KEY `order_reference` (`order_reference`),
-                KEY `id_order` (`id_order`),
-                KEY `sn_id` (`sn_id`)
+                PRIMARY KEY (`id_tc_cart_shipping`),
+                KEY `id_carrier` (`id_cart`,`id_carrier`),
             )
             ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET utf8 COLLATE utf8_general_ci;';
 
@@ -81,7 +80,7 @@ class EzShip extends CarrierModule
                 `send_status` VARCHAR(50) NULL DEFAULT NULL COMMENT "ezship: 訂單狀態, ecpay: 物流子類型",
                 `pay_type` VARCHAR(50) NULL DEFAULT NULL COMMENT "ezship: 訂單類別, ecpay: 是否代收貨款",
                 `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
-                `store_code` INT(10) UNSIGNED NULL DEFAULT NULL,
+                `store_code` VARCHAR(10) NULL DEFAULT NULL,
                 `store_name` VARCHAR(255) NULL DEFAULT NULL,
                 `store_addr` VARCHAR(255) NULL DEFAULT NULL,
                 `rv_name` VARCHAR(255) NULL DEFAULT NULL,
@@ -101,7 +100,7 @@ class EzShip extends CarrierModule
                 `change_store_message` TEXT NULL DEFAULT NULL COMMENT "ecpay: 更新門市訊息",
                 `date_add` DATETIME NOT NULL,
                 `date_upd` DATETIME NOT NULL,                
-                PRIMARY KEY (`id_shipping_logger`),
+                PRIMARY KEY (`id_tc_order_shipping`),
                 KEY `order_reference` (`order_reference`),
                 KEY `id_order` (`id_order`),
                 KEY `sn_id` (`sn_id`)
@@ -157,7 +156,7 @@ class EzShip extends CarrierModule
             return false;
         }
 
-        $store_data = $this->getStoreData();
+        $store_data = $this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier);
 
         $map_url = 'https://map.ezship.com.tw/ezship_map_web.jsp';
         $query = [
@@ -199,7 +198,7 @@ class EzShip extends CarrierModule
             $store_data['name'] = $tcOrderShipping->store_name;
             $store_data['addr'] = $tcOrderShipping->store_addr;
         } else {
-            $store_data = $this->getStoreData();
+            $store_data = $this->getStoreData($params['order']->id_cart, $params['order']->id_carrier);
             $this->createShippingOrder($params['order']->id);
         }
 
@@ -306,10 +305,31 @@ class EzShip extends CarrierModule
                 'return_message' => $tcOrderShipping->return_message,
             ]);
 
-            return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
+            // 更新門市
+            $map_url = 'https://map.ezship.com.tw/ezship_map_web.jsp';
+            $query = [
+                'suID' => Configuration::get('ezship_su_id'),
+                'processID' => $tcOrderShipping->id,
+                'stCate' => $store_data ? $store_data['type'] : '',
+                'stCode' => $store_data ? $store_data['code'] : '',
+                'rtURL' => $this->context->link->getModuleLink('ezship', 'changeStore', []),
+                'webPara' => '',
+            ];
+            $map_url .= '?' . http_build_query($query);
+
+            $this->smarty->assign(array(
+                'map_url' => $map_url,
+                'change_store_message' => $tcOrderShipping->change_store_message,
+            ));
         }
 
-        return false;
+        // 建立物流訂單 / 重新取號
+        $resend_url = $this->context->link->getModuleLink('ezship', 'resendShippingOrder', ['order_id' => $params['order']->id]);
+        $this->smarty->assign([
+            'resend_url' => $resend_url,
+        ]);
+
+        return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
 
     }
 
@@ -345,7 +365,7 @@ class EzShip extends CarrierModule
     private function checkDeliveryInput($params)
     {
 
-        if (!$this->getStoreData()) {
+        if (!$this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier)) {
             $this->context->controller->errors[] = $this->l('CVS store is NOT selected');
         }
 
@@ -506,7 +526,7 @@ class EzShip extends CarrierModule
             } else {
 
                 $order = new Order((int)$order_id);
-                if (empty($order)) {
+                if (empty($order->id)) {
                     throw new Exception(sprintf('Order %s is not found.', $order_id));
                 }
 
@@ -519,6 +539,10 @@ class EzShip extends CarrierModule
                 $aio->Send['orderID'] = $order->reference;
 
                 $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
+
+                if ($tc_order_shipping_id > 0 && $tcOrderShipping->id_order != $order_id) {
+                    throw new Exception('Invalid input values.');
+                }
 
                 if ($order->module == 'tc_pod') {
                     $aio->Send['orderType'] = EzShip_OrderType::PAY;
@@ -548,12 +572,16 @@ class EzShip extends CarrierModule
                 }
                 $tcOrderShipping->send_status = $aio->Send['orderStatus'];
 
-                $store_data = $this->getStoreData();
-                $aio->SendExtend['stCode'] = $store_data['type'] . $store_data['code'];
-                $tcOrderShipping->store_type = $store_data['type'];
-                $tcOrderShipping->store_code = $store_data['code'];
-                $tcOrderShipping->store_name = $store_data['name'];
-                $tcOrderShipping->store_addr = $store_data['addr'];
+                if ($tc_order_shipping_id) {
+                    $aio->SendExtend['stCode'] = $tcOrderShipping->store_type . $tcOrderShipping->store_code;
+                } else {
+                    $store_data = $this->getStoreData($order->id_cart, $order->id_carrier);
+                    $aio->SendExtend['stCode'] = $store_data['type'] . $store_data['code'];
+                    $tcOrderShipping->store_type = $store_data['type'];
+                    $tcOrderShipping->store_code = $store_data['code'];
+                    $tcOrderShipping->store_name = $store_data['name'];
+                    $tcOrderShipping->store_addr = $store_data['addr'];
+                }
 
                 $tcOrderShipping->save();
 
@@ -595,10 +623,8 @@ class EzShip extends CarrierModule
         }
     }
 
-    public function getStoreData()
+    public function getStoreData($cart_id, $carrier_id)
     {
-        $cart_id = $this->context->cart->id;
-        $carrier_id = $this->context->cart->id_carrier;
         $tcCartShipping = TcCartShipping::getStoreData($cart_id, $carrier_id);
 
         if ($tcCartShipping) {
