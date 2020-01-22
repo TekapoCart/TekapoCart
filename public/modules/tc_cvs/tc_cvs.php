@@ -5,6 +5,7 @@ if (!defined('_PS_VERSION_')) {
 }
 
 include_once _PS_MODULE_DIR_ . 'tc_cvs/classes/TcOrderShipping.php';
+include_once _PS_MODULE_DIR_ . 'tc_cvs/classes/TcOrderShipping.php';
 
 class Tc_Cvs extends CarrierModule
 {
@@ -63,7 +64,6 @@ class Tc_Cvs extends CarrierModule
                 `store_code` INT(10) UNSIGNED NULL DEFAULT NULL,
                 `store_name` VARCHAR(255) NULL DEFAULT NULL,
                 `store_addr` VARCHAR(255) NULL DEFAULT NULL,
-                `store_tel` VARCHAR(32) NULL DEFAULT NULL,
                 `delivery_date` VARCHAR(10) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達日",
                 `delivery_time` VARCHAR(2) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達時段",
                 `date_add` DATETIME NOT NULL,
@@ -86,7 +86,6 @@ class Tc_Cvs extends CarrierModule
                 `store_code` INT(10) UNSIGNED NULL DEFAULT NULL,
                 `store_name` VARCHAR(255) NULL DEFAULT NULL,
                 `store_addr` VARCHAR(255) NULL DEFAULT NULL,
-                `store_tel` VARCHAR(32) NULL DEFAULT NULL,
                 `rv_name` VARCHAR(255) NULL DEFAULT NULL,
                 `rv_mobile` VARCHAR(32) NULL DEFAULT NULL,
                 `rv_zip` VARCHAR(12) NULL DEFAULT NULL,
@@ -160,7 +159,7 @@ class Tc_Cvs extends CarrierModule
             return false;
         }
 
-        $store_data = self::getStoreData();
+        $store_data = $this->getStoreData();
 
         $map_url = $this->context->isMobile() ? 'https://emap.presco.com.tw/c2cemapm-u.ashx' : 'https://emap.presco.com.tw/c2cemap.ashx';
         $query = [
@@ -193,22 +192,19 @@ class Tc_Cvs extends CarrierModule
 
         $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
         if ($tcOrderShipping) {
-            $store_data['stCate'] = $tcOrderShipping['store_type'];
-            $store_data['stCode'] = $tcOrderShipping['store_code'];
-            $store_data['stName'] = $tcOrderShipping['store_name'];
-            $store_data['stAddr'] = $tcOrderShipping['store_addr'];
+            $store_data['type'] = $tcOrderShipping->store_type;
+            $store_data['code'] = $tcOrderShipping->store_code;
+            $store_data['name'] = $tcOrderShipping->store_name;
+            $store_data['addr'] = $tcOrderShipping->store_addr;
         } else {
-            $store_data = self::getStoreData();
+            $store_data = $this->getStoreData();
             $this->createShippingOrder($params);
         }
 
         $this->smarty->assign(array(
             'receiver_name' => $address->lastname . $address->firstname,
             'receiver_phone' => $phone,
-            'store_cate' => $store_data['stCate'],
-            'store_code' => $store_data['stCode'],
-            'store_name' => $store_data['stName'],
-            'store_address' => $store_data['stAddr'],
+            'store_data' => $store_data,
         ));
 
         return $this->display(__FILE__, 'display_order_confirmation.tpl');
@@ -297,17 +293,18 @@ class Tc_Cvs extends CarrierModule
         if ($tcOrderShipping) {
 
             $store_data = [
-                'stName' => $tcOrderShipping['store_name'],
-                'stCate' => $tcOrderShipping['store_type'],
-                'stCode' => $tcOrderShipping['store_code'],
-                'stAddr' => $tcOrderShipping['store_addr'],
+                'type' => $tcOrderShipping->store_type,
+                'code' => $tcOrderShipping->store_code,
+                'name' => $tcOrderShipping->store_name,
+                'addr' => $tcOrderShipping->store_addr,
             ];
 
             $this->smarty->assign([
                 'store_data' => $store_data,
-                'return_message' => $tcOrderShipping['return_message'],
+                'return_message' => $tcOrderShipping->return_message,
             ]);
 
+            // 更新門市
             $map_url = $this->context->isMobile() ? 'https://emap.presco.com.tw/c2cemapm-u.ashx' : 'https://emap.presco.com.tw/c2cemap.ashx';
             $query = [
                 'tempvar' => $this->context->cart->id,
@@ -359,7 +356,7 @@ class Tc_Cvs extends CarrierModule
     private function checkDeliveryInput($params)
     {
 
-        if (!self::getStoreData()) {
+        if (!$this->getStoreData()) {
             $this->context->controller->errors[] = $this->l('CVS store is NOT selected');
         }
 
@@ -519,24 +516,20 @@ class Tc_Cvs extends CarrierModule
         return true;
     }
 
-    public function createShippingOrder($params)
+    public function createShippingOrder($order_id = null, $tc_order_shipping_id = null)
     {
-        $order_id = null;
-        $order = null;
         try {
             $invoke_result = $this->invokeTCSDK();
             if (!$invoke_result) {
                 throw new Exception($this->l('TC SDK is missing.'));
             } else {
 
-                $order_id = $params['order']->id;
-
                 $order = new Order((int)$order_id);
                 if (empty($order)) {
                     throw new Exception(sprintf('Order %s is not found.', $order_id));
                 }
 
-                $tcOrderShipping = new TcOrderShipping();
+                $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
 
                 if ($order->module == 'tc_pod') {
                     $tcOrderShipping->pay_type = TC_OrderType::PAY;
@@ -552,12 +545,11 @@ class Tc_Cvs extends CarrierModule
                 $tcOrderShipping->rv_name = $address->lastname . $address->firstname;
                 $tcOrderShipping->rv_mobile = $address->phone_mobile;
 
-                $store_data = self::getStoreData();
-                $tcOrderShipping->store_type = $store_data['stCate'];
-                $tcOrderShipping->store_code = $store_data['stCode'];
-                $tcOrderShipping->store_name = $store_data['stName'];
-                $tcOrderShipping->store_addr = $store_data['stAddr'];
-                $tcOrderShipping->store_tel = $store_data['stTel'];
+                $store_data = $this->getStoreData();
+                $tcOrderShipping->store_type = $store_data['type'];
+                $tcOrderShipping->store_code = $store_data['code'];
+                $tcOrderShipping->store_name = $store_data['name'];
+                $tcOrderShipping->store_addr = $store_data['addr'];
 
                 $tcOrderShipping->save();
 
@@ -565,7 +557,7 @@ class Tc_Cvs extends CarrierModule
 
         } catch (Exception $e) {
 
-            Tc_Cvs::logMessage(sprintf('createShippingOrder %s exception: %s', $params['order']->id, $e->getMessage()), true);
+            Tc_Cvs::logMessage(sprintf('Tc_Cvs createShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
         }
     }
 
@@ -579,45 +571,35 @@ class Tc_Cvs extends CarrierModule
         $path = _PS_LOG_DIR_ . 'tc_logistics.log';
 
         if (!$is_append) {
-            return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
         } else {
-            return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
         }
     }
 
-    public static function getStoreData()
+    public function getStoreData()
     {
-        $context = Context::getContext();
-        try {
-            $result['stCate'] = $context->cookie->__get('tc_cvs_' . 'stCate');
-            $result['stCode'] = $context->cookie->__get('tc_cvs_' . 'stCode');
-            $result['stName'] = $context->cookie->__get('tc_cvs_' . 'stName');
-            $result['stAddr'] = $context->cookie->__get('tc_cvs_' . 'stAddr');
-            $result['stTel'] = $context->cookie->__get('tc_cvs_' . 'stTel');
-            self::saveStoreData($result);
-        } catch (Exception $e) {
-            self::clearStoreData();
+        $cart_id = $this->context->cart->id;
+        $carrier_id = $this->context->cart->id_carrier;
+        $tcCartShipping = TcCartShipping::getStoreData($cart_id, $carrier_id);
+
+        if ($tcCartShipping) {
+            return [
+                'type' => $tcCartShipping['store_type'],
+                'code' => $tcCartShipping['store_code'],
+                'name' => $tcCartShipping['store_name'],
+                'addr' => $tcCartShipping['store_addr'],
+            ];
+        } else {
             return false;
         }
-
-        return $result;
     }
 
-    public static function saveStoreData($store_data)
+    public function saveStoreData($store_data)
     {
-        $context = Context::getContext();
-        foreach ($store_data as $key => $val) {
-            $context->cookie->__set('tc_cvs_' . $key, $val);
-        }
+        $cart_id = $this->context->cart->id;
+        $carrier_id = $this->context->cart->id_carrier;
+        TcCartShipping::saveStoreData($cart_id, $carrier_id, $store_data);
     }
 
-    public static function clearStoreData()
-    {
-        $context = Context::getContext();
-        $context->cookie->__unset('tc_cvs_' . 'stCate');
-        $context->cookie->__unset('tc_cvs_' . 'stCode');
-        $context->cookie->__unset('tc_cvs_' . 'stName');
-        $context->cookie->__unset('tc_cvs_' . 'stAddr');
-        $context->cookie->__unset('tc_cvs_' . 'stTel');
-    }
 }

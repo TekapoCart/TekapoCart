@@ -152,7 +152,7 @@ class Ecpay_Tcat extends CarrierModule
             'delivery_time' => Tools::getValue('scheduled_delivery_time', EcpayScheduledDeliveryTime::UNLIMITED),
         ];
 
-        Ecpay_Tcat::saveScheduledData($scheduled_data);
+        $this->saveScheduledData($scheduled_data);
 
     }
 
@@ -272,17 +272,13 @@ class Ecpay_Tcat extends CarrierModule
         return true;
     }
 
-    public function createShippingOrder($params)
+    public function createShippingOrder($order_id = null, $tc_order_shipping_id = null)
     {
-        $order_id = null;
-        $order = null;
         try {
             $invoke_result = $this->invokeEcpaySDK();
             if (!$invoke_result) {
                 throw new Exception($this->l('ECPay SDK is missing.'));
             } else {
-
-                $order_id = $params['order']->id;
 
                 $order = new Order((int)$order_id);
                 if (empty($order)) {
@@ -295,7 +291,7 @@ class Ecpay_Tcat extends CarrierModule
                 $AL->Send['MerchantID'] = Configuration::get('ecpay_c2c_merchant_id');
                 $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
-                $tcOrderShipping = new TcOrderShipping();
+                $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
                 $tcOrderShipping->id_order = $order_id;
                 $tcOrderShipping->order_reference = $order->reference;
                 $tcOrderShipping->module = $this->name;
@@ -387,7 +383,7 @@ class Ecpay_Tcat extends CarrierModule
                 }
                 $tcOrderShipping->distance = $AL->SendExtend['Distance'];
 
-                $carrier = new Carrier($params['order']->id_carrier);
+                $carrier = new Carrier($order->id_carrier);
                 $dimension = $carrier->max_width + $carrier->max_height + $carrier->max_depth;
                 if ($dimension <= 60) {
                     $AL->SendExtend['Specification'] = EcpaySpecification::CM_60;
@@ -403,7 +399,6 @@ class Ecpay_Tcat extends CarrierModule
                 $AL->SendExtend['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
 
                 $scheduled_data = self::getScheduledData();
-
                 $AL->SendExtend['ScheduledDeliveryTime'] = $scheduled_data['delivery_time'];
                 $tcOrderShipping->delivery_time = $AL->SendExtend['ScheduledDeliveryTime'];
 
@@ -419,7 +414,7 @@ class Ecpay_Tcat extends CarrierModule
 
                 $tcOrderShipping->sn_id = $res['AllPayLogisticsID'];
                 $tcOrderShipping->return_status = $res['RtnCode'];
-                $tcOrderShipping->return_message = $res['UpdateStatusDate'] . ' - ' . $res['RtnMsg'];
+                $tcOrderShipping->return_message = $res['UpdateStatusDate'] . ' - ' . $res['RtnMsg'] . '\n' . $tcOrderShipping->return_message;
                 $tcOrderShipping->cvs_shipping_number = $res['CVSPaymentNo'];
                 $tcOrderShipping->cvs_validation_number = $res['CVSValidationNo'];
                 $tcOrderShipping->save();
@@ -427,7 +422,7 @@ class Ecpay_Tcat extends CarrierModule
 
         } catch (Exception $e) {
 
-            Ecpay_Tcat::logMessage(sprintf('TCAT Order %s exception: %s', $params['order']->id, $e->getMessage()), true);
+            Ecpay_Tcat::logMessage(sprintf('Ecpay_Tcat createShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
         }
     }
 
@@ -441,38 +436,32 @@ class Ecpay_Tcat extends CarrierModule
         $path = _PS_LOG_DIR_ . 'ecpay_logistics.log';
 
         if (!$is_append) {
-            return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
         } else {
-            return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
         }
     }
 
-    public static function getScheduledData()
+    public function getScheduledData()
     {
-        $context = Context::getContext();
-        try {
-            $result['delivery_time'] = $context->cookie->__get('ecpay_tcat_' . 'delivery_time');
-            self::saveScheduledData($result);
-        } catch (Exception $e) {
-            self::clearScheduledData();
+        $cart_id = $this->context->cart->id;
+        $carrier_id = $this->context->cart->id_carrier;
+        $tcCartShipping = TcCartShipping::getScheduledData($cart_id, $carrier_id);
+
+        if ($tcCartShipping) {
+            return [
+                'delivery_time' => $tcCartShipping['delivery_time'],
+            ];
+        } else {
             return false;
         }
-
-        return $result;
     }
 
-    public static function saveScheduledData($scheduled_data)
+    public function saveScheduledData($scheduled_data)
     {
-        $context = Context::getContext();
-        foreach ($scheduled_data as $key => $val) {
-            $context->cookie->__set('ecpay_tcat_' . $key, $val);
-        }
-    }
-
-    public static function clearScheduledData()
-    {
-        $context = Context::getContext();
-        $context->cookie->__unset('ecpay_tcat_' . 'delivery_time');
+        $cart_id = $this->context->cart->id;
+        $carrier_id = $this->context->cart->id_carrier;
+        TcCartShipping::saveScheduledData($cart_id, $carrier_id, $scheduled_data);
     }
 
 }

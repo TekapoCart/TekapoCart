@@ -25,7 +25,7 @@ class Ecpay_CvsSelectStoreModuleFrontController extends ModuleFrontController
                     'stAddr' => $ecpay_feedback['CVSAddress'],
                     'stTel' => $ecpay_feedback['CVSTelephone'],
                 ];
-                Ecpay_Cvs::saveStoreData($store_data);
+                $this->module->saveStoreData($store_data);
                 Tools::redirect($this->context->link->getPageLink('order', true));
             }
 

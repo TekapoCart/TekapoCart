@@ -118,9 +118,9 @@ class Tc_Pod extends PaymentModule
         $path = _PS_LOG_DIR_ . 'tc_pod.log';
 
         if (!$is_append) {
-            return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
         } else {
-            return file_put_contents($path, date('Y-m-d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
         }
     }
 

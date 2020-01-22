@@ -25,9 +25,6 @@ if (!class_exists('TcCartShipping')) {
         /** @var string store address */
         public $store_addr;
 
-        /** @var string store telephone */
-        public $store_tel;
-
         /** @var string parcel delivery date requested by ECPay API */
         public $delivery_date;
 
@@ -55,7 +52,6 @@ if (!class_exists('TcCartShipping')) {
                 'store_code' => array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
                 'store_name' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'store_addr' => array('type' => self::TYPE_STRING, 'validate' => 'isAddress'),
-                'store_tel' => array('type' => self::TYPE_STRING, 'validate' => 'isPhoneNumber'),
                 'delivery_date' => array('type' => self::TYPE_STRING),
                 'delivery_time' => array('type' => self::TYPE_STRING),
                 'date_add' => array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
@@ -63,16 +59,72 @@ if (!class_exists('TcCartShipping')) {
             )
         );
 
-        public static function getLogByCartIdAndCarrierId($cart_id, $carrier_id)
+        public static function getStoreData($cart_id, $carrier_id)
         {
             $query = new DBQuery();
-            $query->from('tc_order_shipping');
+            $query->from('tc_cart_shipping');
             $query->where("id_cart = '" . pSQL($cart_id) . "'");
             $query->where("id_carrier = '" . pSQL($carrier_id) . "'");
             $rowOrder = Db::getInstance()->getRow($query);
 
             if (is_array($rowOrder)) {
-                return new TcCartShipping($rowOrder['id_tc_cart_shipping']);
+                return $rowOrder;
+            } else {
+                return false;
+            }
+        }
+
+        public static function saveStoreData($cart_id, $carrier_id, $store_data)
+        {
+            $query = new DBQuery();
+            $query->from('tc_cart_shipping');
+            $query->where("id_cart = '" . pSQL($cart_id) . "'");
+            $query->where("id_carrier = '" . pSQL($carrier_id) . "'");
+            $rowOrder = Db::getInstance()->getRow($query);
+
+            if (is_array($rowOrder)) {
+                $tcCartShipping = new TcCartShipping($rowOrder['id_tc_cart_shipping']);
+                $tcCartShipping->id_cart = $cart_id;
+                $tcCartShipping->id_carrier = $carrier_id;
+                $tcCartShipping->store_type = $store_data['type'];
+                $tcCartShipping->store_code = $store_data['code'];
+                $tcCartShipping->store_name = $store_data['name'];
+                $tcCartShipping->store_addr = $store_data['addr'];
+                $tcCartShipping->save();
+            } else {
+                return false;
+            }
+        }
+
+        public static function getScheduledData($cart_id, $carrier_id)
+        {
+            $query = new DBQuery();
+            $query->from('tc_cart_shipping');
+            $query->where("id_cart = '" . pSQL($cart_id) . "'");
+            $query->where("id_carrier = '" . pSQL($carrier_id) . "'");
+            $rowOrder = Db::getInstance()->getRow($query);
+
+            if (is_array($rowOrder)) {
+                return $rowOrder;
+            } else {
+                return false;
+            }
+        }
+
+        public static function saveScheduledData($cart_id, $carrier_id, $scheduled_data)
+        {
+            $query = new DBQuery();
+            $query->from('tc_cart_shipping');
+            $query->where("id_cart = '" . pSQL($cart_id) . "'");
+            $query->where("id_carrier = '" . pSQL($carrier_id) . "'");
+            $rowOrder = Db::getInstance()->getRow($query);
+
+            if (is_array($rowOrder)) {
+                $tcCartShipping = new TcCartShipping($rowOrder['id_tc_cart_shipping']);
+                $tcCartShipping->id_cart = $cart_id;
+                $tcCartShipping->id_carrier = $carrier_id;
+                $tcCartShipping->delivery_time = $scheduled_data['delivery_time'];
+                $tcCartShipping->save();
             } else {
                 return false;
             }

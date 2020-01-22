@@ -1,4 +1,7 @@
 <div class="tab-pane" id="ezship">
-    <p><a href="{$ezship_shipment_query_url}" target="_blank">貨態查詢網址</a></p>
-    <p>操作說明：商品寄出後，請確認「店到店編號」填寫於下方「配送編號」欄無誤，再將右方「狀態」更新為「已出貨」。</p>
+    門市店名：{$store_data['name']}<br>
+    門市地址：{$store_data['addr']}<br>
+    門市類型：{$store_data['type']}<br>
+    門市代號：{$store_data['code']}<br>
+    <p>{$return_message nofilter}</p>
 </div>

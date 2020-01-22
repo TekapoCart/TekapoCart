@@ -39,7 +39,7 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                     $tcOrderShipping = TcOrderShipping::getLogByOrderRef($order_reference);
                     $tcOrderShipping->sn_id = $ezship_feedback['sn_id'];
                     $tcOrderShipping->return_status = $ezship_feedback['order_status'];
-                    $tcOrderShipping->return_message = date('Y-m-d H:i:s') . '-' . $ezship_feedback['order_status'];
+                    $tcOrderShipping->return_message = date('Y/m/d H:i:s') . '-' . $ezship_feedback['order_status'] . '\n' . $tcOrderShipping->return_message;;
                     $tcOrderShipping->save();
 
                     $shipping_status = $ezship_feedback['order_status'];

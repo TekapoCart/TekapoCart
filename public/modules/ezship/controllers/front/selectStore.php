@@ -25,7 +25,7 @@ class EzShipSelectStoreModuleFrontController extends ModuleFrontController
                     'stAddr' => $ezship_feedback['stAddr'],
                     'stTel' => $ezship_feedback['stTel'],
                 ];
-                Ecpay_Cvs::saveStoreData($store_data);
+                $this->module->saveStoreData($store_data);
                 Tools::redirect($this->context->link->getPageLink('order', true));
             }
 

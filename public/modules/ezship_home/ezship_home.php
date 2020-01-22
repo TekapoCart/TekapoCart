@@ -199,17 +199,13 @@ class EzShip_Home extends CarrierModule
         return true;
     }
 
-    public function createShippingOrder($params)
+    public function createShippingOrder($order_id = null, $tc_order_shipping_id = null)
     {
-        $order_id = null;
-        $order = null;
         try {
             $invoke_result = $this->invokeEzShipSDK();
             if (!$invoke_result) {
                 throw new Exception($this->l('EzShip SDK is missing.'));
             } else {
-
-                $order_id = $params['order']->id;
 
                 $order = new Order((int)$order_id);
                 if (empty($order)) {
@@ -224,7 +220,7 @@ class EzShip_Home extends CarrierModule
                 $aio->Send['orderAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
                 $aio->Send['orderID'] = $order->reference;
 
-                $tcOrderShipping = new TcOrderShipping();
+                $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
 
                 if ($order->module == 'tc_pod') {
                     $aio->Send['orderType'] = EzShip_OrderType::PAY;
@@ -275,7 +271,7 @@ class EzShip_Home extends CarrierModule
 
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('createShippingOrder %s exception: %s', $params['order']->id, $e->getMessage()), true);
+            EzShip::logMessage(sprintf('EzShip_Home createShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
         }
     }
 

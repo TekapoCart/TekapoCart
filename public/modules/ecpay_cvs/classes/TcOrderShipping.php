@@ -31,9 +31,6 @@ if (!class_exists('TcOrderShipping')) {
         /** @var string store address */
         public $store_addr;
 
-        /** @var string store telephone */
-        public $store_tel;
-
         /** @var string receiver name */
         public $rv_name;
 
@@ -102,7 +99,6 @@ if (!class_exists('TcOrderShipping')) {
                 'store_code' => array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
                 'store_name' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'store_addr' => array('type' => self::TYPE_STRING, 'validate' => 'isAddress'),
-                'store_tel' => array('type' => self::TYPE_STRING, 'validate' => 'isPhoneNumber'),
                 'rv_name' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'rv_mobile' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'rv_zip' => array('type' => self::TYPE_STRING, 'validate' => 'isPostCode'),

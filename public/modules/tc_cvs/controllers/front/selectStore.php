@@ -23,7 +23,7 @@ class Tc_Cvs_SelectStoreModuleFrontController extends ModuleFrontController
                     'stName' => $tc_cvs_feedback['storename'],
                     'stAddr' => $tc_cvs_feedback['storeaddress'],
                 ];
-                Tc_Cvs::saveStoreData($store_data);
+                $this->module->saveStoreData($store_data);
                 Tools::redirect($this->context->link->getPageLink('order', true));
             }
 
