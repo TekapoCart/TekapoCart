@@ -40,10 +40,10 @@ class Ecpay_CvsChangeStoreModuleFrontController extends ModuleFrontController
                 } else {
 
                     $AL = new EcpayLogistics();
-                    $AL->HashKey = Configuration::get('ecpay_c2c_hash_key');
-                    $AL->HashIV = Configuration::get('ecpay_c2c_hash_iv');
+                    $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
+                    $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
 
-                    $AL->Send['MerchantID'] = Configuration::get('ecpay_c2c_merchant_id');
+                    $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
                     $AL->Send['AllPayLogisticsID'] = $sn_id;
                     $AL->Send['CVSPaymentNo'] = $tcOrderShipping->cvs_shipping_number;
                     $AL->Send['CVSValidationNo'] = $tcOrderShipping->cvs_validation_number;

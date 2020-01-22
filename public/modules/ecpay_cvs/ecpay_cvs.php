@@ -27,9 +27,10 @@ class Ecpay_Cvs extends CarrierModule
         $this->confirmUninstall = $this->l('Do you want to uninstall ecpay_cvs module?');
 
         $this->ecpayParams = [
-            'ecpay_c2c_merchant_id',
-            'ecpay_c2c_hash_key',
-            'ecpay_c2c_hash_iv',
+            'ecpay_logistics_merchant_id',
+            'ecpay_logistics_hash_key',
+            'ecpay_logistics_hash_iv',
+            'ecpay_logistics_type',
             'ecpay_sender_name',
             'ecpay_sender_cellphone',
             'ecpay_sender_address',
@@ -169,9 +170,9 @@ class Ecpay_Cvs extends CarrierModule
                 throw new Exception($this->l('ECPay SDK is missing.'));
             } else {
                 $AL = new EcpayLogistics();
-                $AL->Send['MerchantID'] = Configuration::get('ecpay_c2c_merchant_id');
+                $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
                 $AL->Send = [
-                    'MerchantID' => Configuration::get('ecpay_c2c_merchant_id'),
+                    'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
                     'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
                     'IsCollection' => EcpayIsCollection::NO,
                     'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'selectStore', []),
@@ -217,7 +218,7 @@ class Ecpay_Cvs extends CarrierModule
             $store_data['addr'] = $tcOrderShipping->store_addr;
         } else {
             $store_data = $this->getStoreData();
-            $this->createShippingOrder($params);
+            $this->createShippingOrder($params['order']->id);
         }
 
         $this->smarty->assign(array(
@@ -332,7 +333,7 @@ class Ecpay_Cvs extends CarrierModule
                     } else {
                         $AL = new EcpayLogistics();
                         $AL->Send = array(
-                            'MerchantID' => Configuration::get('ecpay_c2c_merchant_id'),
+                            'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
                             'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
                             'IsCollection' => EcpayIsCollection::NO,
                             'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'changeStore', []),
@@ -358,7 +359,7 @@ class Ecpay_Cvs extends CarrierModule
                 } else {
                     $AL = new EcpayLogistics();
                     $AL->Send = array(
-                        'MerchantID' => Configuration::get('ecpay_c2c_merchant_id'),
+                        'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
                         'AllPayLogisticsID' => $tcOrderShipping->sn_id,
                         'CVSPaymentNo' => $tcOrderShipping->cvs_shipping_number,
                         'CVSValidationNo' => $tcOrderShipping->cvs_validation_number,
@@ -372,11 +373,15 @@ class Ecpay_Cvs extends CarrierModule
             } catch (Exception $e) {
                 echo $e->getMessage();
             }
-
-            return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
         }
 
-        return false;
+        // 建立物流訂單 / 重新取號
+        $resend_url = $this->context->link->getModuleLink('ecpay_cvs', 'resendShippingOrder', []);
+        $this->smarty->assign([
+            'resend_url' => $resend_url,
+        ]);
+
+        return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
 
     }
 
@@ -450,9 +455,9 @@ class Ecpay_Cvs extends CarrierModule
     private function postValidation()
     {
         $required_fields = array(
-            'ecpay_c2c_merchant_id' => $this->l('ECPay MerchantID'),
-            'ecpay_c2c_hash_key' => $this->l('ECPay HashKey'),
-            'ecpay_c2c_hash_iv' => $this->l('ECPay HashIV'),
+            'ecpay_logistics_merchant_id' => $this->l('ECPay MerchantID'),
+            'ecpay_logistics_hash_key' => $this->l('ECPay HashKey'),
+            'ecpay_logistics_hash_iv' => $this->l('ECPay HashIV'),
             'ecpay_sender_name' => $this->l('ECPay Sender'),
             'ecpay_sender_cellphone' => $this->l('ECPay Sender Mobile'),
         );
@@ -477,20 +482,33 @@ class Ecpay_Cvs extends CarrierModule
                 array(
                     'type' => 'text',
                     'label' => $this->l('ECPay MerchantID'),
-                    'name' => 'ecpay_c2c_merchant_id',
+                    'name' => 'ecpay_logistics_merchant_id',
                     'required' => true,
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('ECPay HashKey'),
-                    'name' => 'ecpay_c2c_hash_key',
+                    'name' => 'ecpay_logistics_hash_key',
                     'required' => true,
                 ),
                 array(
                     'type' => 'text',
                     'label' => $this->l('ECPay HashIV'),
-                    'name' => 'ecpay_c2c_hash_iv',
+                    'name' => 'ecpay_logistics_hash_iv',
                     'required' => true,
+                ),
+                array(
+                    'type' => 'select',
+                    'label' => $this->l('ECPay Logistics Type'),
+                    'name' => 'ecpay_logistics_type',
+                    'options' => array(
+                        'query' => array(
+                            array('id' => 'c2c', 'name' => 'C2C'),
+                            array('id' => 'b2c', 'name' => 'B2C'),
+                        ),
+                        'id' => 'id',
+                        'name' => 'name'
+                    ),
                 ),
                 array(
                     'type' => 'text',
@@ -520,8 +538,8 @@ class Ecpay_Cvs extends CarrierModule
                 ),
                 array(
                     'type' => 'select',
-                    'name' => 'ecpay_parcel_pickup_time',
                     'label' => $this->l('ECPay Parcel Pickup time'),
+                    'name' => 'ecpay_parcel_pickup_time',
                     'options' => array(
                         'query' => array(
                             array('id' => '4', 'name' => '不限時'),
@@ -612,9 +630,9 @@ class Ecpay_Cvs extends CarrierModule
                 }
 
                 $AL = new EcpayLogistics();
-                $AL->HashKey = Configuration::get('ecpay_c2c_hash_key');
-                $AL->HashIV = Configuration::get('ecpay_c2c_hash_iv');
-                $AL->Send['MerchantID'] = Configuration::get('ecpay_c2c_merchant_id');
+                $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
+                $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
+                $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
                 $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
                 $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
@@ -625,7 +643,13 @@ class Ecpay_Cvs extends CarrierModule
                 $AL->Send['MerchantTradeDate'] = date('Y/m/d H:i:s', strtotime($order->date_add));
 
                 $AL->Send['LogisticsType'] = EcpayLogisticsType::CVS;
-                $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::UNIMART_C2C;
+                if (Configuration::get('ecpay_logistics_type') == 'c2c') {
+                    $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::UNIMART_C2C;
+                } elseif (Configuration::get('ecpay_logistics_type') == 'b2c') {
+                    $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::UNIMART;
+                } else {
+                    throw new Exception(sprintf('LogisticsSubType is not found.', $order_id));
+                }
                 $tcOrderShipping->send_status = $AL->Send['LogisticsSubType'];
 
                 $AL->Send['GoodsAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());

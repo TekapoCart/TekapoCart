@@ -107,7 +107,7 @@ class Ecpay_Tcat extends CarrierModule
 
         $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
         if (!$tcOrderShipping) {
-            $this->createShippingOrder($params);
+            $this->createShippingOrder($params['order']->id);
         }
 
         return;
@@ -198,7 +198,7 @@ class Ecpay_Tcat extends CarrierModule
             } else {
                 $AL = new EcpayLogistics();
                 $AL->Send = array(
-                    'MerchantID' => Configuration::get('ecpay_c2c_merchant_id'),
+                    'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
                     'AllPayLogisticsID' => $tcOrderShipping->sn_id,
                 );
                 $print_html = $AL->PrintTradeDoc('產生托運單');
@@ -286,9 +286,9 @@ class Ecpay_Tcat extends CarrierModule
                 }
 
                 $AL = new EcpayLogistics();
-                $AL->HashKey = Configuration::get('ecpay_c2c_hash_key');
-                $AL->HashIV = Configuration::get('ecpay_c2c_hash_iv');
-                $AL->Send['MerchantID'] = Configuration::get('ecpay_c2c_merchant_id');
+                $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
+                $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
+                $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
                 $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
                 $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);

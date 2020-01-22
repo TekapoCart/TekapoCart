@@ -79,7 +79,7 @@ class EzShip_Home extends CarrierModule
 
         $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
         if (!$tcOrderShipping) {
-            $this->createShippingOrder($params);
+            $this->createShippingOrder($params['order']->id);
         }
 
         return;
@@ -243,7 +243,11 @@ class EzShip_Home extends CarrierModule
                 $tcOrderShipping->rv_mobile = $aio->Send['rvMobile'];
 
                 $aio->Send['ChooseShipping'] = EzShip_ShippingMethod::HOME;
-                $aio->Send['orderStatus'] = EzShip_SendOrderStatus::A06;
+                if (Configuration::get('ezship_confirm_order')) {
+                    $aio->Send['orderStatus'] = EzShip_SendOrderStatus::A06;
+                } else {
+                    $aio->Send['orderStatus'] = EzShip_SendOrderStatus::A05;
+                }
                 $tcOrderShipping->send_status = $aio->Send['orderStatus'];
 
                 $aio->SendExtend['rvAddr'] = $address->city . $address->address1 . $address->address2;

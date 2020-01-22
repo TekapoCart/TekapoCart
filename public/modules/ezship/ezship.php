@@ -200,7 +200,7 @@ class EzShip extends CarrierModule
             $store_data['addr'] = $tcOrderShipping->store_addr;
         } else {
             $store_data = $this->getStoreData();
-            $this->createShippingOrder($params);
+            $this->createShippingOrder($params['order']->id);
         }
 
         $this->smarty->assign(array(
@@ -409,6 +409,19 @@ class EzShip extends CarrierModule
                     'required' => true,
                 ),
                 array(
+                    'type' => 'select',
+                    'label' => $this->l('ezShip Confirm Order'),
+                    'name' => 'ezship_confirm_order',
+                    'options' => array(
+                        'query' => array(
+                            array('id' => '1', 'name' => '需在 ezShip 上確認訂單'),
+                            array('id' => '0', 'name' => '不需在 ezShip 上確認訂單'),
+                        ),
+                        'id' => 'id',
+                        'name' => 'name'
+                    ),
+                ),
+                array(
                     'type' => 'text',
                     'label' => $this->l('Secret key'),
                     'name' => 'ezship_secret',
@@ -528,7 +541,11 @@ class EzShip extends CarrierModule
                 $tcOrderShipping->rv_mobile = $aio->Send['rvMobile'];
 
                 $aio->Send['ChooseShipping'] = EzShip_ShippingMethod::CVS;
-                $aio->Send['orderStatus'] = EzShip_SendOrderStatus::A02;
+                if (Configuration::get('ezship_confirm_order')) {
+                    $aio->Send['orderStatus'] = EzShip_SendOrderStatus::A02;
+                } else {
+                    $aio->Send['orderStatus'] = EzShip_SendOrderStatus::A01;
+                }
                 $tcOrderShipping->send_status = $aio->Send['orderStatus'];
 
                 $store_data = $this->getStoreData();

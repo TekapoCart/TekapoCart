@@ -198,7 +198,7 @@ class Tc_Cvs extends CarrierModule
             $store_data['addr'] = $tcOrderShipping->store_addr;
         } else {
             $store_data = $this->getStoreData();
-            $this->createShippingOrder($params);
+            $this->createShippingOrder($params['order']->id);
         }
 
         $this->smarty->assign(array(

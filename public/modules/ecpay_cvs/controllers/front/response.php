@@ -16,8 +16,8 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
             } else {
                 # Retrieve the checkout result
                 $AL = new EcpayLogistics();
-                $AL->HashKey = Configuration::get('ecpay_c2c_hash_key');
-                $AL->HashIV = Configuration::get('ecpay_c2c_hash_iv');
+                $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
+                $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
                 $AL->CheckOutFeedback($_POST);
                 unset($AL);
                 unset($_POST['CheckMacValue']);
@@ -44,6 +44,10 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
                     $order_id = $order->id;
 
                     $tcOrderShipping = TcOrderShipping::getLogByOrderRef($order_reference);
+                    if (empty($tcOrderShipping)) {
+                        throw new Exception('TcOrderShipping is invalid.');
+                    }
+
                     $tcOrderShipping->sn_id = $ecpay_feedback['AllPayLogisticsID'];
                     $tcOrderShipping->return_status = $ecpay_feedback['RtnCode'];
                     $tcOrderShipping->return_message = $ecpay_feedback['UpdateStatusDate'] . ' - ' . $ecpay_feedback['RtnMsg'] . '\n' . $tcOrderShipping->return_message;

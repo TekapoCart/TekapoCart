@@ -1,4 +1,14 @@
-<div class="tab-pane" id="ezship_hd">
-    <p><a href="{$ezship_shipment_query_url}" target="_blank">貨態查詢網址</a></p>
-    <p>操作說明：商品寄出後，請確認「店到店編號」填寫於下方「配送編號」欄無誤，再將右方「狀態」更新為「已出貨」。</p>
+<div class="tab-pane" id="ezship_home">
+    {if isset($print_html)}
+        <p>{$return_message|nl2br}</p>
+        {$print_html nofilter}
+        <br>
+        <button type="button" onclick="window.open('{$resend_url nofilter}', '_self');" class="btn btn-primary">
+            重新取號
+        </button>
+    {else}
+        <button type="button" onclick="window.open('{$resend_url nofilter}', '_self');" class="btn btn-primary">
+            重建物流訂單
+        </button>
+    {/if}
 </div>

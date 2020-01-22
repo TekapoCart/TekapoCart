@@ -37,6 +37,10 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                     $order_id = $order->id;
 
                     $tcOrderShipping = TcOrderShipping::getLogByOrderRef($order_reference);
+                    if (empty($tcOrderShipping)) {
+                        throw new Exception('TcOrderShipping is invalid.');
+                    }
+
                     $tcOrderShipping->sn_id = $ezship_feedback['sn_id'];
                     $tcOrderShipping->return_status = $ezship_feedback['order_status'];
                     $tcOrderShipping->return_message = date('Y/m/d H:i:s') . '-' . $ezship_feedback['order_status'] . '\n' . $tcOrderShipping->return_message;;

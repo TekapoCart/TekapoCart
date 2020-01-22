@@ -127,7 +127,7 @@ if (!class_exists('TcOrderShipping')) {
             $rowOrder = Db::getInstance()->getRow($query);
 
             if (is_array($rowOrder)) {
-                return $rowOrder;
+                return new TcOrderShipping($rowOrder['id_tc_order_shipping']);
             } else {
                 return false;
             }
@@ -141,7 +141,7 @@ if (!class_exists('TcOrderShipping')) {
             $rowOrder = Db::getInstance()->getRow($query);
 
             if (is_array($rowOrder)) {
-                return $rowOrder;
+                return new TcOrderShipping($rowOrder['id_tc_order_shipping']);
             } else {
                 return false;
             }
