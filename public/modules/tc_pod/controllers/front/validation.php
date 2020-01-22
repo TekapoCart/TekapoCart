@@ -57,7 +57,7 @@ class Tc_PodValidationModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Tc_Pod::logMessage(sprintf('Validation %s validation exception: %s', $cart->id, $e->getMessage()), true);
+            Tc_Pod::logMessage(sprintf('Tc_PodValidation %s exception: %s', $cart->id, $e->getMessage()), true);
 
         }
 

@@ -50,6 +50,17 @@ class Tc_Pod extends PaymentModule
             return;
         }
 
+        // 允許的物流模組 ezship, ezship_home, ecpay_cvs
+        $carrier = new Carrier($this->context->cart->id_carrier);
+        if (!in_array($carrier->external_module_name, [
+            'ezship',
+            'ezship_home',
+            'ecpay_cvs',
+        ])
+        ) {
+            return false;
+        }
+
         $payment_options = [];
         $payment_option = new PaymentOption();
         $payment_option->setCallToActionText($this->l('Payment on Delivery'))
