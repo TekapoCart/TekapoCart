@@ -9,5 +9,8 @@
             {l s='Reselect Store Map' mod='ecpay_cvs'}
         </button>
     {/if}
+    {if isset($print_html)}
+        {$print_html nofilter}
+    {/if}
 </div>
 

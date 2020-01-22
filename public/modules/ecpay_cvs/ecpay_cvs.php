@@ -5,6 +5,7 @@ if (!defined('_PS_VERSION_')) {
 }
 
 include_once _PS_MODULE_DIR_ . 'ecpay_cvs/classes/TcOrderShipping.php';
+include_once _PS_MODULE_DIR_ . 'ecpay_cvs/classes/TcCartShipping.php';
 
 class Ecpay_Cvs extends CarrierModule
 {
@@ -57,6 +58,27 @@ class Ecpay_Cvs extends CarrierModule
     public function installDb()
     {
         $sql = [];
+
+        $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'tc_cart_shipping` (
+                `id_tc_cart_shipping` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+                `id_cart` INT(10) UNSIGNED NULL DEFAULT NULL,
+                `id_carrier` INT(10) UNSIGNED NULL DEFAULT NULL
+                `module` VARCHAR(255) NULL DEFAULT NULL,
+                `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
+                `store_code` INT(10) UNSIGNED NULL DEFAULT NULL,
+                `store_name` VARCHAR(255) NULL DEFAULT NULL,
+                `store_addr` VARCHAR(255) NULL DEFAULT NULL,
+                `store_tel` VARCHAR(32) NULL DEFAULT NULL,
+                `delivery_date` VARCHAR(10) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達日",
+                `delivery_time` VARCHAR(2) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達時段",
+                `date_add` DATETIME NOT NULL,
+                `date_upd` DATETIME NOT NULL,                
+                PRIMARY KEY (`id_shipping_logger`),
+                KEY `order_reference` (`order_reference`),
+                KEY `id_order` (`id_order`),
+                KEY `sn_id` (`sn_id`)
+            )
+            ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET utf8 COLLATE utf8_general_ci;';
 
         $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'tc_order_shipping` (
                 `id_tc_order_shipping` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -303,9 +325,10 @@ class Ecpay_Cvs extends CarrierModule
 
             $this->smarty->assign([
                 'store_data' => $store_data,
-                'return_message' => $tcOrderShipping['return_message'],
+                'return_message' => $tcOrderShipping->return_message,
             ]);
 
+            // 更新門市
             if ($tcOrderShipping['change_status'] == 1) {
                 try {
                     $invoke_result = $this->invokeEcpaySDK();
@@ -330,6 +353,29 @@ class Ecpay_Cvs extends CarrierModule
                 } catch (Exception $e) {
                     echo $e->getMessage();
                 }
+            }
+
+            // 列印繳款單
+            try {
+                $invoke_result = $this->invokeEcpaySDK();
+                if (!$invoke_result) {
+                    throw new Exception($this->l('ECPay SDK is missing.'));
+                } else {
+                    $AL = new EcpayLogistics();
+                    $AL->Send = array(
+                        'MerchantID' => Configuration::get('ecpay_c2c_merchant_id'),
+                        'AllPayLogisticsID' => $tcOrderShipping->sn_id,
+                        'CVSPaymentNo' => $tcOrderShipping->cvs_shipping_number,
+                        'CVSValidationNo' => $tcOrderShipping->cvs_validation_number,
+                    );
+                    $print_html = $AL->PrintUnimartC2CBill('列印繳款單');
+
+                    $this->smarty->assign([
+                        'print_html' => $print_html,
+                    ]);
+                }
+            } catch (Exception $e) {
+                echo $e->getMessage();
             }
 
             return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');

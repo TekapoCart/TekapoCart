@@ -7,6 +7,7 @@ if (!defined('_PS_VERSION_')) {
 use Recca0120\Twzipcode\Zipcode;
 
 include_once _PS_MODULE_DIR_ . 'ecpay_cvs/classes/TcOrderShipping.php';
+include_once _PS_MODULE_DIR_ . 'ecpay_cvs/classes/TcCartShipping.php';
 
 class Ecpay_Tcat extends CarrierModule
 {
@@ -187,6 +188,27 @@ class Ecpay_Tcat extends CarrierModule
             ));
 
             return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
+        }
+
+        // 列印繳款單
+        try {
+            $invoke_result = $this->invokeEcpaySDK();
+            if (!$invoke_result) {
+                throw new Exception($this->l('ECPay SDK is missing.'));
+            } else {
+                $AL = new EcpayLogistics();
+                $AL->Send = array(
+                    'MerchantID' => Configuration::get('ecpay_c2c_merchant_id'),
+                    'AllPayLogisticsID' => $tcOrderShipping->sn_id,
+                );
+                $print_html = $AL->PrintTradeDoc('產生托運單');
+
+                $this->smarty->assign([
+                    'print_html' => $print_html,
+                ]);
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
 
         return false;
