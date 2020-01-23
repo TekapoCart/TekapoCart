@@ -300,6 +300,7 @@ class Tc_Cvs extends CarrierModule
             $this->smarty->assign([
                 'store_data' => $store_data,
                 'return_message' => $tcOrderShipping->return_message,
+                'change_store_message' => $tcOrderShipping->change_store_message,
             ]);
 
             // 更新門市
@@ -312,12 +313,11 @@ class Tc_Cvs extends CarrierModule
 
             $this->smarty->assign(array(
                 'map_url' => $map_url,
-                'change_store_message' => $tcOrderShipping->change_store_message,
             ));
 
         }
 
-        // 建立物流訂單 / 重新取號
+        // 建立新物流訂單 / 重送物流訂單
         $resend_url = $this->context->link->getModuleLink('tc_cvs', 'resendShippingOrder', ['order_id' => $params['order']->id]);
         $this->smarty->assign([
             'resend_url' => $resend_url,

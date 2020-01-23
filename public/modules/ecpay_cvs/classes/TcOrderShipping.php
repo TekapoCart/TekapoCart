@@ -155,6 +155,13 @@ if (!class_exists('TcOrderShipping')) {
             }
         }
 
+        public static function getNotifyChangeStoreOrders()
+        {
+            $collection = new PrestaShopCollection('TcOrderShipping');
+            $collection->where('change_store_status', '=', '1');
+            return $collection->getResults();
+        }
+
     }
 }
 

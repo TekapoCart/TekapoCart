@@ -7,7 +7,6 @@ class Tc_CvsChangeStoreModuleFrontController extends ModuleFrontController
     public function postProcess()
     {
         try {
-
             $cookie_lifetime = (int)Configuration::get('PS_COOKIE_LIFETIME_BO');
             if ($cookie_lifetime > 0) {
                 $cookie_lifetime = time() + (max($cookie_lifetime, 1) * 3600);
@@ -17,16 +16,16 @@ class Tc_CvsChangeStoreModuleFrontController extends ModuleFrontController
                 throw new Exception($this->l('Unauthorized access.'));
             }
 
-            $tc_cvs_feedback = $_POST;
-            if (count($tc_cvs_feedback) < 1) {
+            $feedback = $_POST;
+            if (count($feedback) < 1) {
                 throw new Exception('Get feedback failed.');
             } else {
 
-                Tc_Cvs::logMessage('Feedback: ' . json_encode($tc_cvs_feedback), true);
+                Tc_Cvs::logMessage('Feedback: ' . json_encode($feedback), true);
 
-                $id_tc_order_shipping = $tc_cvs_feedback['TempVar'];
+                $id_tc_order_shipping = (int)$feedback['TempVar'];
 
-                $tcOrderShipping = new TcOrderShipping((int)$id_tc_order_shipping);
+                $tcOrderShipping = new TcOrderShipping($id_tc_order_shipping);
                 if (empty($tcOrderShipping->id)) {
                     throw new Exception(sprintf('TcOrderShipping %s is not found.', $id_tc_order_shipping));
                 }
@@ -36,18 +35,20 @@ class Tc_CvsChangeStoreModuleFrontController extends ModuleFrontController
                 }
 
                 $tcOrderShipping->store_type = '711';
-                $tcOrderShipping->store_code = $tc_cvs_feedback['storeid'];
-                $tcOrderShipping->store_name = $tc_cvs_feedback['storename'];
-                $tcOrderShipping->store_addr = $tc_cvs_feedback['storeaddress'];
+                $tcOrderShipping->store_code = $feedback['storeid'];
+                $tcOrderShipping->store_name = $feedback['storename'];
+                $tcOrderShipping->store_addr = $feedback['storeaddress'];
                 $tcOrderShipping->change_store_status = 0;
                 $tcOrderShipping->appendMessage('change_store_message',
                     $this->module->l('Admin User Change Store') . ' ' .
-                    $tc_cvs_feedback['storeid']
+                    $feedback['storeid']
                 );
                 $tcOrderShipping->save();
 
-                Tools::redirect($this->context->link->getAdminLink('AdminOrders',
-                            true) . '&id_order=' . $id_tc_order_shipping->id_order . '&viewOrder=1');
+                $employee = new Employee($cookie->id_employee);
+                $this->context->employee = $employee;
+                Tools::redirectAdmin('/tekapo/index.php?controller=AdminOrders&id_order=' . (int)$tcOrderShipping->id_order . '&vieworder=1&token='.Tools::getAdminTokenLite('AdminOrders'));
+
             }
 
         } catch (Exception $e) {

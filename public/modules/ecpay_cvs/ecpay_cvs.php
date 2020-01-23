@@ -48,6 +48,7 @@ class Ecpay_Cvs extends CarrierModule
             OR !$this->registerHook('displayOrderConfirmation')
             OR !$this->registerHook('displayAdminOrderTabOrder')
             OR !$this->registerHook('displayAdminOrderContentOrder')
+            OR !$this->registerHook('dashboardZoneTwo')
             OR !$this->installDb()
             OR !$this->installCarrier()
         ) {
@@ -168,7 +169,6 @@ class Ecpay_Cvs extends CarrierModule
                 throw new Exception($this->l('ECPay SDK is missing.'));
             } else {
                 $AL = new EcpayLogistics();
-                $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
                 $AL->Send = [
                     'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
                     'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
@@ -320,28 +320,30 @@ class Ecpay_Cvs extends CarrierModule
             $this->smarty->assign([
                 'store_data' => $store_data,
                 'return_message' => $tcOrderShipping->return_message,
+                'change_store_message' => $tcOrderShipping->change_store_message,
             ]);
 
             // 更新門市
-            if ($tcOrderShipping['change_status'] == 1) {
+            if ($tcOrderShipping->change_store_status == 1 && !empty($tcOrderShipping->sn_id)) {
                 try {
                     $invoke_result = $this->invokeEcpaySDK();
                     if (!$invoke_result) {
                         throw new Exception($this->l('ECPay SDK is missing.'));
                     } else {
                         $AL = new EcpayLogistics();
+                        $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
+                        $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
                         $AL->Send = array(
                             'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
                             'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
                             'IsCollection' => EcpayIsCollection::NO,
                             'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'changeStore', []),
-                            'ExtraData' => $tcOrderShipping->sn_id,
+                            'ExtraData' => $tcOrderShipping->id,
                         );
                         $map_url = $AL->CvsMap();
 
                         $this->smarty->assign([
                             'map_url' => $map_url,
-                            'change_store_message' => $tcOrderShipping->change_store_message,
                         ]);
 
                     }
@@ -351,37 +353,54 @@ class Ecpay_Cvs extends CarrierModule
             }
 
             // 列印繳款單
-            try {
-                $invoke_result = $this->invokeEcpaySDK();
-                if (!$invoke_result) {
-                    throw new Exception($this->l('ECPay SDK is missing.'));
-                } else {
-                    $AL = new EcpayLogistics();
-                    $AL->Send = array(
-                        'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
-                        'AllPayLogisticsID' => $tcOrderShipping->sn_id,
-                        'CVSPaymentNo' => $tcOrderShipping->cvs_shipping_number,
-                        'CVSValidationNo' => $tcOrderShipping->cvs_validation_number,
-                    );
-                    $print_html = $AL->PrintUnimartC2CBill('列印繳款單');
+            if (!empty($tcOrderShipping->sn_id)) {
+                try {
+                    $invoke_result = $this->invokeEcpaySDK();
+                    if (!$invoke_result) {
+                        throw new Exception($this->l('ECPay SDK is missing.'));
+                    } else {
+                        $AL = new EcpayLogistics();
+                        $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
+                        $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
+                        $AL->Send = array(
+                            'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
+                            'AllPayLogisticsID' => $tcOrderShipping->sn_id,
+                            'CVSPaymentNo' => $tcOrderShipping->cvs_shipping_number,
+                            'CVSValidationNo' => $tcOrderShipping->cvs_validation_number,
+                        );
+                        $print_html = $AL->PrintUnimartC2CBill('列印繳款單');
 
-                    $this->smarty->assign([
-                        'print_html' => $print_html,
-                    ]);
+                        $this->smarty->assign([
+                            'print_html' => $print_html,
+                        ]);
+                    }
+                } catch (Exception $e) {
+                    echo $e->getMessage();
                 }
-            } catch (Exception $e) {
-                echo $e->getMessage();
             }
+
         }
 
-        // 建立物流訂單 / 重新取號
-        $resend_url = $this->context->link->getModuleLink('ecpay_cvs', 'resendShippingOrder', []);
+        // 建立新 ECPay 訂單 / 重送 ECPay 訂單
+        $resend_url = $this->context->link->getModuleLink('ecpay_cvs', 'resendShippingOrder', ['order_id' => $params['order']->id]);
         $this->smarty->assign([
             'resend_url' => $resend_url,
         ]);
 
         return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
 
+    }
+
+    public function hookDashboardZoneTwo($params)
+    {
+        $results = TcOrderShipping::getNotifyChangeStoreOrders();
+        if (count($results) == 0) {
+            return false;
+        }
+        $this->smarty->assign([
+            'results' => $results,
+        ]);
+        return $this->display(__FILE__, '/views/templates/hook/dashboard_zone_two.tpl');
     }
 
     private function checkAddressInput($params)

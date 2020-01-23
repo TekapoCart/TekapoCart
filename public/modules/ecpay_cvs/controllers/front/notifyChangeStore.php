@@ -6,7 +6,6 @@ class Ecpay_CvsNotifyChangeStoreModuleFrontController extends ModuleFrontControl
 
     public function postProcess()
     {
-
         $result_message = '1|OK';
         $sn_id = null;
         try {
@@ -23,51 +22,58 @@ class Ecpay_CvsNotifyChangeStoreModuleFrontController extends ModuleFrontControl
                 unset($AL);
                 unset($_POST['CheckMacValue']);
 
-                $ecpay_feedback = $_POST;
+                $feedback = $_POST;
 
                 # Process ECPay feedback
-                if (count($ecpay_feedback) < 1) {
+                if (count($feedback) < 1) {
                     throw new Exception('Get ECPay feedback failed.');
                 } else {
 
-                    Ecpay_Cvs::logMessage('Feedback: ' . json_encode($ecpay_feedback), true);
+                    Ecpay_Cvs::logMessage('Feedback: ' . json_encode($feedback), true);
 
-                    $sn_id = $ecpay_feedback['AllPayLogisticsID'];
+                    $sn_id = $feedback['AllPayLogisticsID'];
 
                     $tcOrderShipping = TcOrderShipping::getLoggerBySnId($sn_id);
-                    if (empty($tcOrderShipping)) {
-                        throw new Exception('Shipping Logger is invalid.');
+                    if (empty($tcOrderShipping->id)) {
+                        throw new Exception('TcOrderShipping is not found.');
                     }
 
-                    $status = $ecpay_feedback['Status'];
-
+                    $status = $feedback['Status'];
                     switch ($status) {
                         case '01':
                             // 門市關轉店
                             $tcOrderShipping->change_store_status = 1;
-                            $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . ' - [' . $ecpay_feedback['StoreID'] . '] ' . $this->module->l('CVS store is closed') . "\n" . $tcOrderShipping->change_store_message;
+                            $tcOrderShipping->appendMessage('change_store_message',
+                                $this->module->l('ECPay Notify Change Store') . ' ' .
+                                $this->module->l('CVS store is closed') . ' ' .
+                                $feedback['StoreID']
+                            );
                             $tcOrderShipping->save();
                             break;
                         case '02':
                             // 門市舊店號更新(同樣一間門市，但是更換店號)
                             $tcOrderShipping->change_store_status = 1;
-                            $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . ' - [' . $ecpay_feedback['StoreID'] . '] ' . $this->module->l('CVS store id is changed (same store)') . "\n" . $tcOrderShipping->change_store_message;
+                            $tcOrderShipping->appendMessage('change_store_message',
+                                $this->module->l('ECPay Notify Change Store') . ' ' .
+                                $this->module->l('CVS store id is changed (same store)') . ' ' .
+                                $feedback['StoreID']
+                            );
                             $tcOrderShipping->save();
                             break;
                         default:
                             $tcOrderShipping->change_store_status = 1;
-                            $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . ' - [' . $ecpay_feedback['StoreID'] . "] \n" . $tcOrderShipping->change_store_message;
+                            $tcOrderShipping->appendMessage('change_store_message',
+                                $this->module->l('ECPay Notify Change Store') . ' ' .
+                                $feedback['StoreID']
+                            );
                             $tcOrderShipping->save();
                     }
-
-                    // TODO: 通知店家
 
                 }
             }
         } catch (Exception $e) {
 
-            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsNotifyChangeStore %s response exception: %s', $sn_id, $e->getMessage()), true);
-
+            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsNotifyChangeStore response exception: %s %s', $sn_id, $e->getMessage()), true);
             $result_message = '0|' . $e->getMessage();
         }
 

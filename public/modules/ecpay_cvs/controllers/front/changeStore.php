@@ -8,7 +8,6 @@ class Ecpay_CvsChangeStoreModuleFrontController extends ModuleFrontController
     {
         $sn_id = null;
         try {
-
             $cookie_lifetime = (int)Configuration::get('PS_COOKIE_LIFETIME_BO');
             if ($cookie_lifetime > 0) {
                 $cookie_lifetime = time() + (max($cookie_lifetime, 1) * 3600);
@@ -18,20 +17,29 @@ class Ecpay_CvsChangeStoreModuleFrontController extends ModuleFrontController
                 throw new Exception($this->l('Unauthorized access.'));
             }
 
-            $ecpay_feedback = $_POST;
-            if (count($ecpay_feedback) < 1) {
-                throw new Exception('Get ECPay feedback failed.');
+            $feedback = $_POST;
+            if (count($feedback) < 1) {
+                throw new Exception('Get feedback failed.');
             } else {
 
-                Ecpay_Cvs::logMessage('Feedback: ' . json_encode($ecpay_feedback), true);
+                Ecpay_Cvs::logMessage('Feedback: ' . json_encode($feedback), true);
 
-                $storeId = $ecpay_feedback['CVSStoreID'];
-                $sn_id = (int)$ecpay_feedback['ExtraData'];
+                $id_tc_order_shipping = (int)$feedback['ExtraData'];
 
-                $tcOrderShipping = TcOrderShipping::getLogBySnId($sn_id);
+                $tcOrderShipping = new TcOrderShipping($id_tc_order_shipping);
                 if (empty($tcOrderShipping->id)) {
-                    throw new Exception('TcOrderShipping is invalid.');
+                    throw new Exception(sprintf('TcOrderShipping %s is not found.', $id_tc_order_shipping));
                 }
+
+                if ($tcOrderShipping->module !== $this->module->name) {
+                    throw new Exception(sprintf('Module %s is invalid.', $tcOrderShipping->module));
+                }
+
+                if (empty($tcOrderShipping->sn_id)) {
+                    throw new Exception('TcOrderShipping sn_id is not found.');
+                }
+
+                $sn_id = $tcOrderShipping->sn_id;
 
                 # Include the ECPay integration class
                 $invoke_result = $this->module->invokeEcpaySDK();
@@ -48,39 +56,36 @@ class Ecpay_CvsChangeStoreModuleFrontController extends ModuleFrontController
                     $AL->Send['CVSPaymentNo'] = $tcOrderShipping->cvs_shipping_number;
                     $AL->Send['CVSValidationNo'] = $tcOrderShipping->cvs_validation_number;
                     $AL->Send['StoreType'] = EcpayStoreType::RECIVE_STORE;
-                    $AL->Send['ReceiverStoreID'] = $storeId;
+                    $AL->Send['ReceiverStoreID'] = $feedback['CVSStoreID'];
 
                     $Result = $AL->UpdateUnimartStore();
                     Ecpay_Cvs::logMessage('Feedback: ' . json_encode($Result), true);
 
                     if ($Result == ' 1|OK') {
-
-                        $tcOrderShipping->store_code = $ecpay_feedback['CVSStoreID'];
-                        $tcOrderShipping->store_name = $ecpay_feedback['CVSStoreName'];
-                        $tcOrderShipping->store_addr = $ecpay_feedback['CVSAddress'];
-                        $tcOrderShipping->store_tel = $ecpay_feedback['CVSTelephone'];
+                        $tcOrderShipping->store_code = $feedback['CVSStoreID'];
+                        $tcOrderShipping->store_name = $feedback['CVSStoreName'];
+                        $tcOrderShipping->store_addr = $feedback['CVSAddress'];
                         $tcOrderShipping->change_store_status = 0;
                         $tcOrderShipping->appendMessage('change_store_message',
                             $this->module->l('Admin User Change Store') . ' ' .
-                            $ecpay_feedback['CVSStoreID']
+                            $feedback['CVSStoreID']
                         );
                         $tcOrderShipping->save();
 
-                        Tools::redirect($this->context->link->getAdminLink('AdminOrders',
-                                true) . '&id_order=' . $tcOrderShipping['id_order'] . '&viewOrder=1');
+                        $employee = new Employee($cookie->id_employee);
+                        $this->context->employee = $employee;
+                        Tools::redirectAdmin('/tekapo/index.php?controller=AdminOrders&id_order=' . (int)$tcOrderShipping->id_order . '&vieworder=1&token='.Tools::getAdminTokenLite('AdminOrders'));
 
                     } else {
 
-                        throw new Exception('Update store failed.');
+                        throw new Exception('Change store failed.');
                     }
-
                 }
-
             }
 
         } catch (Exception $e) {
 
-            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsChangeStore %s exception: %s', $sn_id, $e->getMessage()), true);
+            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsChangeStore exception: %s %s', $sn_id, $e->getMessage()), true);
         }
 
         exit;

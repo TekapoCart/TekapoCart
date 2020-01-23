@@ -304,6 +304,7 @@ class EzShip extends CarrierModule
             $this->smarty->assign([
                 'store_data' => $store_data,
                 'return_message' => $tcOrderShipping->return_message,
+                'change_store_message' => $tcOrderShipping->change_store_message,
             ]);
 
             // 更新門市
@@ -320,7 +321,6 @@ class EzShip extends CarrierModule
 
             $this->smarty->assign(array(
                 'map_url' => $map_url,
-                'change_store_message' => $tcOrderShipping->change_store_message,
             ));
         }
 
