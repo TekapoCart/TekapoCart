@@ -2134,20 +2134,22 @@ if (!class_exists('EcpayLogistics', false)) {
          */
         public function GenPostHTML($ButtonDesc = '', $Target = '_self')
         {
-            $PostHTML = $this->AddNextLine('<div style="text-align:center;">');
-            $PostHTML .= $this->AddNextLine('  <form id="ECPayForm" method="POST" action="' . $this->ServiceURL . '" target="' . $Target . '">');
+            // suzy: 2019-01-23 調整 HTML 樣式
+            $PostHTML = '';
+            // $PostHTML = $this->AddNextLine('<div style="text-align:center;">');
+            $PostHTML .= $this->AddNextLine('  <form id="ECPayForm" method="POST" action="' . $this->ServiceURL . '" target="' . $Target . '" style="display: inline;">');
             foreach ($this->PostParams as $Name => $Value) {
                 $PostHTML .= $this->AddNextLine('    <input type="hidden" name="' . $Name . '" value="' . $Value . '" />');
             }
             if (!empty($ButtonDesc)) {
                 // 手動
-                $PostHTML .= $this->AddNextLine('    <input type="submit" id="__paymentButton" value="' . $ButtonDesc . '" />');
+                $PostHTML .= $this->AddNextLine('    <input type="submit" id="__paymentButton" value="' . $ButtonDesc . '" class="btn btn-primary" />');
             } else {
                 // 自動
                 $PostHTML .= $this->AddNextLine('    <script>document.getElementById("ECPayForm").submit();</script>');
             }
             $PostHTML .= $this->AddNextLine('  </form>');
-            $PostHTML .= $this->AddNextLine('</div>');
+            // $PostHTML .= $this->AddNextLine('</div>');
 
             return $PostHTML;
         }

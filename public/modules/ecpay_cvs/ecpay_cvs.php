@@ -717,6 +717,7 @@ class Ecpay_Cvs extends CarrierModule
                     $tcOrderShipping->store_addr = $store_data['addr'];
                 }
 
+                $tcOrderShipping->change_store_message = 0;
                 $tcOrderShipping->save();
 
                 // 注意 request timeout 可能

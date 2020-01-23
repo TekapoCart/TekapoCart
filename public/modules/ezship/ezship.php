@@ -598,6 +598,7 @@ class EzShip extends CarrierModule
                     $tcOrderShipping->store_addr = $store_data['addr'];
                 }
 
+                $tcOrderShipping->change_store_message = 0;
                 $tcOrderShipping->save();
 
                 foreach ($order->getProductsDetail() as $detail) {
