@@ -12,6 +12,8 @@ include_once _PS_MODULE_DIR_ . 'ecpay_cvs/classes/TcCartShipping.php';
 class Ecpay_Tcat extends CarrierModule
 {
 
+    private $deliveryTimeOptions = [];
+
     public function __construct()
     {
         $this->name = 'ecpay_tcat';
@@ -26,6 +28,16 @@ class Ecpay_Tcat extends CarrierModule
         $this->description = 'https://www.tekapo.io/';
         $this->confirmUninstall = $this->l('Do you want to uninstall ecpay_tcat module?');
 
+        $invoke_result = $this->invokeEcpaySDK();
+        if (!$invoke_result) {
+            throw new Exception($this->l('ECPay SDK is missing.'));
+        }
+
+        $this->deliveryTimeOptions = [
+            EcpayScheduledDeliveryTime::UNLIMITED => $this->l('No Limit'),
+            EcpayScheduledDeliveryTime::TIME_B4_13 => $this->l('Before 1PM'),
+            EcpayScheduledDeliveryTime::TIME_14_18 => $this->l('2~6PM'),
+        ];
     }
 
     public function install()
@@ -82,17 +94,11 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
-        $dropdown_options = [
-            EcpayScheduledDeliveryTime::UNLIMITED => $this->l('No Limit'),
-            EcpayScheduledDeliveryTime::TIME_B4_13 => $this->l('Before 1PM'),
-            EcpayScheduledDeliveryTime::TIME_14_18 => $this->l('2~6PM'),
-        ];
-
         $scheduled_data = $this->getScheduledData($this->context->cart->id, $this->context->cart->id_carrier);
 
         $this->smarty->assign([
             'scheduled_data' => $scheduled_data,
-            'dropdown_options' => $dropdown_options,
+            'dropdown_options' => $this->deliveryTimeOptions,
         ]);
 
         return $this->display(__FILE__, 'display_carrier_extra_content.tpl');
@@ -183,7 +189,12 @@ class Ecpay_Tcat extends CarrierModule
         $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
         if ($tcOrderShipping) {
 
+            $scheduled_data = [
+                'delivery_time' => $this->deliveryTimeOptions[$tcOrderShipping->delivery_time],
+            ];
+
             $this->smarty->assign(array(
+                'scheduled_data' => $scheduled_data,
                 'return_message' => $tcOrderShipping->return_message,
             ));
 
@@ -191,23 +202,18 @@ class Ecpay_Tcat extends CarrierModule
 
                 // 產生托運單
                 try {
-                    $invoke_result = $this->invokeEcpaySDK();
-                    if (!$invoke_result) {
-                        throw new Exception($this->l('ECPay SDK is missing.'));
-                    } else {
-                        $AL = new EcpayLogistics();
-                        $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
-                        $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
-                        $AL->Send = array(
-                            'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
-                            'AllPayLogisticsID' => $tcOrderShipping->sn_id,
-                        );
-                        $print_html = $AL->PrintTradeDoc('產生托運單');
+                    $AL = new EcpayLogistics();
+                    $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
+                    $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
+                    $AL->Send = array(
+                        'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
+                        'AllPayLogisticsID' => $tcOrderShipping->sn_id,
+                    );
+                    $print_html = $AL->PrintTradeDoc('產生托運單');
 
-                        $this->smarty->assign([
-                            'print_html' => $print_html,
-                        ]);
-                    }
+                    $this->smarty->assign([
+                        'print_html' => $print_html,
+                    ]);
                 } catch (Exception $e) {
                     echo $e->getMessage();
                 }
@@ -289,166 +295,160 @@ class Ecpay_Tcat extends CarrierModule
     public function createShippingOrder($order_id = null, $tc_order_shipping_id = null)
     {
         try {
-            $invoke_result = $this->invokeEcpaySDK();
-            if (!$invoke_result) {
-                throw new Exception($this->l('ECPay SDK is missing.'));
+            $order = new Order((int)$order_id);
+            if (empty($order->id)) {
+                throw new Exception(sprintf('Order %s is not found.', $order_id));
+            }
+
+            $AL = new EcpayLogistics();
+            $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
+            $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
+            $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
+            $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
+
+            $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
+
+            if ($tc_order_shipping_id > 0 && $tcOrderShipping->id_order != $order_id) {
+                throw new Exception('Invalid input values.');
+            }
+
+            if (strlen($tcOrderShipping->module) > 0 && $tcOrderShipping->module != $this->name) {
+                throw new Exception('Invalid operation.');
+            }
+
+            $tcOrderShipping->id_order = $order_id;
+            $tcOrderShipping->order_reference = $order->reference;
+            $tcOrderShipping->module = $this->name;
+
+            $AL->Send['MerchantTradeDate'] = date('Y/m/d H:i:s', strtotime($order->date_add));
+
+            $AL->Send['LogisticsType'] = EcpayLogisticsType::HOME;
+            $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::TCAT;
+            $tcOrderShipping->send_status = $AL->Send['LogisticsSubType'];
+
+            $AL->Send['GoodsAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
+
+            $AL->Send['IsCollection'] = EcpayIsCollection::NO;
+            $AL->Send['CollectionAmount'] = 0;
+            $tcOrderShipping->pay_type = $AL->Send['IsCollection'];
+
+            $AL->Send['GoodsName'] = $this->l('A Package Of Online Goods');
+
+            $AL->Send['SenderName'] = Configuration::get('ecpay_sender_name');
+            $AL->Send['SenderCellPhone'] = Configuration::get('ecpay_sender_cellphone');
+
+            $address = new Address(intval($order->id_address_delivery));
+            $AL->Send['ReceiverName'] = $address->lastname . $address->firstname;
+            $AL->Send['ReceiverCellPhone'] = $address->phone_mobile;
+            $tcOrderShipping->rv_name = $AL->Send['ReceiverName'];
+            $tcOrderShipping->rv_mobile = $AL->Send['ReceiverCellPhone'];
+
+            $customer = new Customer(intval($order->id_customer));
+            $AL->Send['ReceiverEmail'] = $customer->email;
+
+            $AL->Send['TradeDesc'] = '';
+            $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'response', []);
+            $AL->Send['Remark'] = '';
+
+            $AL->SendExtend = [];
+            $AL->SendExtend['SenderZipCode'] = Configuration::get('ecpay_sender_postcode');
+            $AL->SendExtend['SenderAddress'] = Configuration::get('ecpay_sender_address');
+
+            $AL->SendExtend['ReceiverZipCode'] = $address->postcode;
+            $AL->SendExtend['ReceiverAddress'] = $address->city . $address->address1 . $address->address2;
+
+            $tcOrderShipping->rv_zip = $AL->SendExtend['ReceiverZipCode'];
+            $tcOrderShipping->rv_address = $AL->SendExtend['ReceiverAddress'];
+
+            $AL->SendExtend['Temperature'] = EcpayTemperature::ROOM;
+
+            $senderZipcode = Zipcode::parse($AL->SendExtend['SenderAddress']);
+            $senderCity = $senderZipcode->county();
+
+            $receiverZipcode = Zipcode::parse($AL->SendExtend['ReceiverAddress']);
+            $receiverCity = $receiverZipcode->county();
+
+            $islandZipcode = [
+                // 連江縣
+                209,
+                210,
+                211,
+                212,
+                // 龜山島
+                261,
+                290,
+                // 釣魚台列嶼
+                817,
+                819,
+                // 南海諸島
+                880,
+                881,
+                882,
+                883,
+                884,
+                // 澎湖縣
+                885,
+                890,
+                891,
+                892,
+                893,
+                894,
+                // 金門縣
+                896,
+                // 蘭嶼
+                952,
+            ];
+            if ($senderCity == $receiverCity) {
+                $AL->SendExtend['Distance'] = EcpayDistance::SAME;
+            } elseif (in_array($receiverZipcode->zip3(), $islandZipcode)) {
+                $AL->SendExtend['Distance'] = EcpayDistance::ISLAND;
             } else {
+                $AL->SendExtend['Distance'] = EcpayDistance::OTHER;
+            }
+            $tcOrderShipping->distance = $AL->SendExtend['Distance'];
 
-                $order = new Order((int)$order_id);
-                if (empty($order->id)) {
-                    throw new Exception(sprintf('Order %s is not found.', $order_id));
-                }
+            $carrier = new Carrier($order->id_carrier);
+            $dimension = $carrier->max_width + $carrier->max_height + $carrier->max_depth;
+            if ($dimension <= 60) {
+                $AL->SendExtend['Specification'] = EcpaySpecification::CM_60;
+            } elseif ($dimension <= 90) {
+                $AL->SendExtend['Specification'] = EcpaySpecification::CM_90;
+            } elseif ($dimension <= 120) {
+                $AL->SendExtend['Specification'] = EcpaySpecification::CM_120;
+            } elseif ($dimension <= 150) {
+                $AL->SendExtend['Specification'] = EcpaySpecification::CM_150;
+            }
+            $tcOrderShipping->specification = $AL->SendExtend['Specification'];
 
-                $AL = new EcpayLogistics();
-                $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
-                $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
-                $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
-                $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
+            $AL->SendExtend['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
 
-                $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
+            if ($tc_order_shipping_id) {
+                $AL->SendExtend['ScheduledDeliveryTime'] = $tcOrderShipping->delivery_time;
+            } else {
+                $scheduled_data = $this->getScheduledData($order->id_cart, $order->id_carrier);
+                $AL->SendExtend['ScheduledDeliveryTime'] = $scheduled_data['delivery_time'];
+                $tcOrderShipping->delivery_time = $AL->SendExtend['ScheduledDeliveryTime'];
+            }
 
-                if ($tc_order_shipping_id > 0 && $tcOrderShipping->id_order != $order_id) {
-                    throw new Exception('Invalid input values.');
-                }
+            $tcOrderShipping->save();
 
-                if (strlen($tcOrderShipping->module) > 0 && $tcOrderShipping->module != $this->name) {
-                    throw new Exception('Invalid operation.');
-                }
+            // 注意 request timeout 可能
+            $feedback = $AL->BGCreateShippingOrder();
+            unset($AL);
 
-                $tcOrderShipping->id_order = $order_id;
-                $tcOrderShipping->order_reference = $order->reference;
-                $tcOrderShipping->module = $this->name;
+            if (isset($feedback['ErrorMessage'])) {
+                throw new Exception($feedback['ErrorMessage']);
+            }
 
-                $AL->Send['MerchantTradeDate'] = date('Y/m/d H:i:s', strtotime($order->date_add));
+            $tcOrderShipping->sn_id = $feedback['AllPayLogisticsID'];
+            $tcOrderShipping->return_status = $feedback['RtnCode'];
+            $tcOrderShipping->appendMessage('return_message', $feedback['RtnMsg'], $feedback['UpdateStatusDate']);
+            $tcOrderShipping->cvs_shipping_number = $feedback['CVSPaymentNo'];
+            $tcOrderShipping->cvs_validation_number = $feedback['CVSValidationNo'];
+            $tcOrderShipping->save();
 
-                $AL->Send['LogisticsType'] = EcpayLogisticsType::HOME;
-                $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::TCAT;
-                $tcOrderShipping->send_status = $AL->Send['LogisticsSubType'];
-
-                $AL->Send['GoodsAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
-
-                $AL->Send['IsCollection'] = EcpayIsCollection::NO;
-                $AL->Send['CollectionAmount'] = 0;
-                $tcOrderShipping->pay_type = $AL->Send['IsCollection'];
-
-                $AL->Send['GoodsName'] = $this->l('A Package Of Online Goods');
-
-                $AL->Send['SenderName'] = Configuration::get('ecpay_sender_name');
-                $AL->Send['SenderCellPhone'] = Configuration::get('ecpay_sender_cellphone');
-
-                $address = new Address(intval($order->id_address_delivery));
-                $AL->Send['ReceiverName'] = $address->lastname . $address->firstname;
-                $AL->Send['ReceiverCellPhone'] = $address->phone_mobile;
-                $tcOrderShipping->rv_name = $AL->Send['ReceiverName'];
-                $tcOrderShipping->rv_mobile = $AL->Send['ReceiverCellPhone'];
-
-                $customer = new Customer(intval($order->id_customer));
-                $AL->Send['ReceiverEmail'] = $customer->email;
-
-                $AL->Send['TradeDesc'] = '';
-                $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'response', []);
-                $AL->Send['Remark'] = '';
-
-                $AL->SendExtend = [];
-                $AL->SendExtend['SenderZipCode'] = Configuration::get('ecpay_sender_postcode');
-                $AL->SendExtend['SenderAddress'] = Configuration::get('ecpay_sender_address');
-
-                $AL->SendExtend['ReceiverZipCode'] = $address->postcode;
-                $AL->SendExtend['ReceiverAddress'] = $address->city . $address->address1 . $address->address2;
-
-                $tcOrderShipping->rv_zip = $AL->SendExtend['ReceiverZipCode'];
-                $tcOrderShipping->rv_address = $AL->SendExtend['ReceiverAddress'];
-
-                $AL->SendExtend['Temperature'] = EcpayTemperature::ROOM;
-
-                $senderZipcode = Zipcode::parse($AL->SendExtend['SenderAddress']);
-                $senderCity = $senderZipcode->county();
-
-                $receiverZipcode = Zipcode::parse($AL->SendExtend['ReceiverAddress']);
-                $receiverCity = $receiverZipcode->county();
-
-                $islandZipcode = [
-                    // 連江縣
-                    209,
-                    210,
-                    211,
-                    212,
-                    // 龜山島
-                    261,
-                    290,
-                    // 釣魚台列嶼
-                    817,
-                    819,
-                    // 南海諸島
-                    880,
-                    881,
-                    882,
-                    883,
-                    884,
-                    // 澎湖縣
-                    885,
-                    890,
-                    891,
-                    892,
-                    893,
-                    894,
-                    // 金門縣
-                    896,
-                    // 蘭嶼
-                    952,
-                ];
-                if ($senderCity == $receiverCity) {
-                    $AL->SendExtend['Distance'] = EcpayDistance::SAME;
-                } elseif (in_array($receiverZipcode->zip3(), $islandZipcode)) {
-                    $AL->SendExtend['Distance'] = EcpayDistance::ISLAND;
-                } else {
-                    $AL->SendExtend['Distance'] = EcpayDistance::OTHER;
-                }
-                $tcOrderShipping->distance = $AL->SendExtend['Distance'];
-
-                $carrier = new Carrier($order->id_carrier);
-                $dimension = $carrier->max_width + $carrier->max_height + $carrier->max_depth;
-                if ($dimension <= 60) {
-                    $AL->SendExtend['Specification'] = EcpaySpecification::CM_60;
-                } elseif ($dimension <= 90) {
-                    $AL->SendExtend['Specification'] = EcpaySpecification::CM_90;
-                } elseif ($dimension <= 120) {
-                    $AL->SendExtend['Specification'] = EcpaySpecification::CM_120;
-                } elseif ($dimension <= 150) {
-                    $AL->SendExtend['Specification'] = EcpaySpecification::CM_150;
-                }
-                $tcOrderShipping->specification = $AL->SendExtend['Specification'];
-
-                $AL->SendExtend['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
-
-                if ($tc_order_shipping_id) {
-                    $AL->SendExtend['ScheduledDeliveryTime'] = $tcOrderShipping->delivery_time;
-                } else {
-                    $scheduled_data = $this->getScheduledData($order->id_cart, $order->id_carrier);
-                    $AL->SendExtend['ScheduledDeliveryTime'] = $scheduled_data['delivery_time'];
-                    $tcOrderShipping->delivery_time = $AL->SendExtend['ScheduledDeliveryTime'];
-                }
-
-                $tcOrderShipping->save();
-
-                // 注意 request timeout 可能
-                $feedback = $AL->BGCreateShippingOrder();
-                unset($AL);
-
-                if (isset($feedback['ErrorMessage'])) {
-                    throw new Exception($feedback['ErrorMessage']);
-                }
-
-                $tcOrderShipping->sn_id = $feedback['AllPayLogisticsID'];
-                $tcOrderShipping->return_status = $feedback['RtnCode'];
-                $tcOrderShipping->appendMessage('return_message', $feedback['RtnMsg'], $feedback['UpdateStatusDate']);
-                $tcOrderShipping->cvs_shipping_number = $feedback['CVSPaymentNo'];
-                $tcOrderShipping->cvs_validation_number = $feedback['CVSValidationNo'];
-                $tcOrderShipping->save();
-
-                if ($order->getWsShippingNumber() != $feedback['BookingNote']) {
-                    $order->setWsShippingNumber($feedback['BookingNote']);
-                }
+            if ($order->getWsShippingNumber() != $feedback['BookingNote']) {
+                $order->setWsShippingNumber($feedback['BookingNote']);
             }
 
         } catch (Exception $e) {

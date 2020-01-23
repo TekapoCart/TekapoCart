@@ -1,7 +1,10 @@
 <div class="tab-pane" id="ecpay_tcat">
-    {if isset($return_message)}
+    {if isset($scheduled_data)}
         <div class="row">
             <div class="col-md-6">
+                預定送達時段：{$scheduled_data['delivery_time']}
+                <br>
+                <br>
                 {if isset($print_html)}
                     {$print_html nofilter}
                 {/if}

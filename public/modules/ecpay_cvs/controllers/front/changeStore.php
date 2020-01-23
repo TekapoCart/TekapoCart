@@ -41,45 +41,38 @@ class Ecpay_CvsChangeStoreModuleFrontController extends ModuleFrontController
 
                 $sn_id = $tcOrderShipping->sn_id;
 
-                # Include the ECPay integration class
-                $invoke_result = $this->module->invokeEcpaySDK();
-                if (!$invoke_result) {
-                    throw new Exception('ECPay SDK is missing.');
+                $AL = new EcpayLogistics();
+                $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
+                $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
+
+                $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
+                $AL->Send['AllPayLogisticsID'] = $sn_id;
+                $AL->Send['CVSPaymentNo'] = $tcOrderShipping->cvs_shipping_number;
+                $AL->Send['CVSValidationNo'] = $tcOrderShipping->cvs_validation_number;
+                $AL->Send['StoreType'] = EcpayStoreType::RECIVE_STORE;
+                $AL->Send['ReceiverStoreID'] = $feedback['CVSStoreID'];
+
+                $Result = $AL->UpdateUnimartStore();
+                Ecpay_Cvs::logMessage('Feedback: ' . json_encode($Result), true);
+
+                if ($Result == ' 1|OK') {
+                    $tcOrderShipping->store_code = $feedback['CVSStoreID'];
+                    $tcOrderShipping->store_name = $feedback['CVSStoreName'];
+                    $tcOrderShipping->store_addr = $feedback['CVSAddress'];
+                    $tcOrderShipping->change_store_status = 0;
+                    $tcOrderShipping->appendMessage('change_store_message',
+                        $this->module->l('Admin User Change Store') . ' ' .
+                        $feedback['CVSStoreID']
+                    );
+                    $tcOrderShipping->save();
+
+                    $employee = new Employee($cookie->id_employee);
+                    $this->context->employee = $employee;
+                    Tools::redirectAdmin('/tekapo/index.php?controller=AdminOrders&id_order=' . (int)$tcOrderShipping->id_order . '&vieworder=1&token='.Tools::getAdminTokenLite('AdminOrders'));
+
                 } else {
 
-                    $AL = new EcpayLogistics();
-                    $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
-                    $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
-
-                    $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
-                    $AL->Send['AllPayLogisticsID'] = $sn_id;
-                    $AL->Send['CVSPaymentNo'] = $tcOrderShipping->cvs_shipping_number;
-                    $AL->Send['CVSValidationNo'] = $tcOrderShipping->cvs_validation_number;
-                    $AL->Send['StoreType'] = EcpayStoreType::RECIVE_STORE;
-                    $AL->Send['ReceiverStoreID'] = $feedback['CVSStoreID'];
-
-                    $Result = $AL->UpdateUnimartStore();
-                    Ecpay_Cvs::logMessage('Feedback: ' . json_encode($Result), true);
-
-                    if ($Result == ' 1|OK') {
-                        $tcOrderShipping->store_code = $feedback['CVSStoreID'];
-                        $tcOrderShipping->store_name = $feedback['CVSStoreName'];
-                        $tcOrderShipping->store_addr = $feedback['CVSAddress'];
-                        $tcOrderShipping->change_store_status = 0;
-                        $tcOrderShipping->appendMessage('change_store_message',
-                            $this->module->l('Admin User Change Store') . ' ' .
-                            $feedback['CVSStoreID']
-                        );
-                        $tcOrderShipping->save();
-
-                        $employee = new Employee($cookie->id_employee);
-                        $this->context->employee = $employee;
-                        Tools::redirectAdmin('/tekapo/index.php?controller=AdminOrders&id_order=' . (int)$tcOrderShipping->id_order . '&vieworder=1&token='.Tools::getAdminTokenLite('AdminOrders'));
-
-                    } else {
-
-                        throw new Exception('Change store failed.');
-                    }
+                    throw new Exception('Change store failed.');
                 }
             }
 
