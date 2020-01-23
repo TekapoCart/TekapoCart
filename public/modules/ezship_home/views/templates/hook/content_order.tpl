@@ -7,6 +7,9 @@
             </button>
         </div>
         <div class="col-md-6">
+            {if !empty($sn_id) && $sn_id != '00000000'}
+                <p>店到店編號：{$sn_id}</p>
+            {/if}
             {if strlen($return_message) > 0}
                 <p>物流狀態回傳：<br>{$return_message|nl2br}</p>
             {/if}

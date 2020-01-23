@@ -34,9 +34,14 @@ class Ecpay_TcatResendShippingOrderModuleFrontController extends ModuleFrontCont
 
             $this->module->createShippingOrder($order_id, $tc_order_shipping_id);
 
+            $employee = new Employee($cookie->id_employee);
+            $this->context->employee = $employee;
+            Tools::redirectAdmin('/tekapo/index.php?controller=AdminOrders&id_order=' . (int)$order_id . '&vieworder=1&token='.Tools::getAdminTokenLite('AdminOrders'));
+
+
         } catch (Exception $e) {
 
-            Ecpay_Cvs::logMessage(sprintf('Ecpay_TcatResendShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
+            Ecpay_Tcat::logMessage(sprintf('Ecpay_TcatResendShippingOrder exception: %s %s', $order_id, $e->getMessage()), true);
         }
 
         exit;

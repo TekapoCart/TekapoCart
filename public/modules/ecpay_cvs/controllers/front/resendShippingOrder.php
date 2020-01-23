@@ -31,6 +31,10 @@ class Ecpay_CvsResendShippingOrderModuleFrontController extends ModuleFrontContr
                 $tc_order_shipping_id = $tcOrderShipping->id;
             }
 
+            if ($tcOrderShipping->module !== $this->module->name) {
+                throw new Exception(sprintf('Module %s is invalid.', $tcOrderShipping->module));
+            }
+
             $this->module->createShippingOrder($order_id, $tc_order_shipping_id);
 
             $employee = new Employee($cookie->id_employee);

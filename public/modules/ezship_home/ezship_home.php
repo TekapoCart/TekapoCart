@@ -230,6 +230,10 @@ class EzShip_Home extends CarrierModule
                     throw new Exception('Invalid input values.');
                 }
 
+                if (strlen($tcOrderShipping->module) > 0 && $tcOrderShipping->module != $this->name) {
+                    throw new Exception('Invalid operation.');
+                }
+
                 if ($order->module == 'tc_pod') {
                     $aio->Send['orderType'] = EzShip_OrderType::PAY;
                 } else {
@@ -290,6 +294,17 @@ class EzShip_Home extends CarrierModule
     public function formatOrderTotal($order_total)
     {
         return intval(round($order_total));
+    }
+
+    public static function logMessage($message, $is_append = false)
+    {
+        $path = _PS_LOG_DIR_ . 'ezship_logistics.log';
+
+        if (!$is_append) {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+        } else {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+        }
     }
 
 }

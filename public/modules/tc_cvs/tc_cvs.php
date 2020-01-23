@@ -539,6 +539,10 @@ class Tc_Cvs extends CarrierModule
                     throw new Exception('Invalid input values.');
                 }
 
+                if (strlen($tcOrderShipping->module) > 0 && $tcOrderShipping->module != $this->name) {
+                    throw new Exception('Invalid operation.');
+                }
+
                 if ($order->module == 'tc_pod') {
                     $tcOrderShipping->pay_type = TC_OrderType::PAY;
                 } else {
@@ -563,7 +567,7 @@ class Tc_Cvs extends CarrierModule
                     $tcOrderShipping->store_addr = $store_data['addr'];
                 }
 
-                $tcOrderShipping->change_store_message = 0;
+                $tcOrderShipping->change_store_status = 0;
                 $tcOrderShipping->save();
 
             }

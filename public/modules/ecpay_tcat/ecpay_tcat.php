@@ -187,31 +187,45 @@ class Ecpay_Tcat extends CarrierModule
                 'return_message' => $tcOrderShipping->return_message,
             ));
 
-            return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
-        }
+            if (!empty($tcOrderShipping->sn_id)) {
 
-        // 列印繳款單
-        try {
-            $invoke_result = $this->invokeEcpaySDK();
-            if (!$invoke_result) {
-                throw new Exception($this->l('ECPay SDK is missing.'));
-            } else {
-                $AL = new EcpayLogistics();
-                $AL->Send = array(
-                    'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
-                    'AllPayLogisticsID' => $tcOrderShipping->sn_id,
-                );
-                $print_html = $AL->PrintTradeDoc('產生托運單');
+                // 產生托運單
+                try {
+                    $invoke_result = $this->invokeEcpaySDK();
+                    if (!$invoke_result) {
+                        throw new Exception($this->l('ECPay SDK is missing.'));
+                    } else {
+                        $AL = new EcpayLogistics();
+                        $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
+                        $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
+                        $AL->Send = array(
+                            'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
+                            'AllPayLogisticsID' => $tcOrderShipping->sn_id,
+                        );
+                        $print_html = $AL->PrintTradeDoc('產生托運單');
+
+                        $this->smarty->assign([
+                            'print_html' => $print_html,
+                        ]);
+                    }
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
 
                 $this->smarty->assign([
-                    'print_html' => $print_html,
+                    'sn_id' => $tcOrderShipping->sn_id,
                 ]);
             }
-        } catch (Exception $e) {
-            echo $e->getMessage();
+
         }
 
-        return false;
+        // 建立新 ECPay 訂單 / 重送 ECPay 訂單
+        $resend_url = $this->context->link->getModuleLink('ecpay_tcat', 'resendShippingOrder', ['order_id' => $params['order']->id]);
+        $this->smarty->assign([
+            'resend_url' => $resend_url,
+        ]);
+
+        return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
 
     }
 
@@ -295,6 +309,10 @@ class Ecpay_Tcat extends CarrierModule
 
                 if ($tc_order_shipping_id > 0 && $tcOrderShipping->id_order != $order_id) {
                     throw new Exception('Invalid input values.');
+                }
+
+                if (strlen($tcOrderShipping->module) > 0 && $tcOrderShipping->module != $this->name) {
+                    throw new Exception('Invalid operation.');
                 }
 
                 $tcOrderShipping->id_order = $order_id;
@@ -414,19 +432,23 @@ class Ecpay_Tcat extends CarrierModule
                 $tcOrderShipping->save();
 
                 // 注意 request timeout 可能
-                $res = $AL->BGCreateShippingOrder();
+                $feedback = $AL->BGCreateShippingOrder();
                 unset($AL);
 
-                if (isset($res['ErrorMessage'])) {
-                    throw new Exception($res['ErrorMessage']);
+                if (isset($feedback['ErrorMessage'])) {
+                    throw new Exception($feedback['ErrorMessage']);
                 }
 
-                $tcOrderShipping->sn_id = $res['AllPayLogisticsID'];
-                $tcOrderShipping->return_status = $res['RtnCode'];
-                $tcOrderShipping->return_message = $res['UpdateStatusDate'] . ' - ' . $res['RtnMsg'] . "\n" . $tcOrderShipping->return_message;
-                $tcOrderShipping->cvs_shipping_number = $res['CVSPaymentNo'];
-                $tcOrderShipping->cvs_validation_number = $res['CVSValidationNo'];
+                $tcOrderShipping->sn_id = $feedback['AllPayLogisticsID'];
+                $tcOrderShipping->return_status = $feedback['RtnCode'];
+                $tcOrderShipping->appendMessage('return_message', $feedback['RtnMsg'], $feedback['UpdateStatusDate']);
+                $tcOrderShipping->cvs_shipping_number = $feedback['CVSPaymentNo'];
+                $tcOrderShipping->cvs_validation_number = $feedback['CVSValidationNo'];
                 $tcOrderShipping->save();
+
+                if ($order->getWsShippingNumber() != $feedback['BookingNote']) {
+                    $order->setWsShippingNumber($feedback['BookingNote']);
+                }
             }
 
         } catch (Exception $e) {

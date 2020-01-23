@@ -323,37 +323,38 @@ class Ecpay_Cvs extends CarrierModule
                 'change_store_message' => $tcOrderShipping->change_store_message,
             ]);
 
-            // 更新門市
-            if ($tcOrderShipping->change_store_status == 1 && !empty($tcOrderShipping->sn_id)) {
-                try {
-                    $invoke_result = $this->invokeEcpaySDK();
-                    if (!$invoke_result) {
-                        throw new Exception($this->l('ECPay SDK is missing.'));
-                    } else {
-                        $AL = new EcpayLogistics();
-                        $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
-                        $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
-                        $AL->Send = array(
-                            'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
-                            'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
-                            'IsCollection' => EcpayIsCollection::NO,
-                            'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'changeStore', []),
-                            'ExtraData' => $tcOrderShipping->id,
-                        );
-                        $map_url = $AL->CvsMap();
-
-                        $this->smarty->assign([
-                            'map_url' => $map_url,
-                        ]);
-
-                    }
-                } catch (Exception $e) {
-                    echo $e->getMessage();
-                }
-            }
-
-            // 列印繳款單
             if (!empty($tcOrderShipping->sn_id)) {
+
+                // 更新門市
+                if ($tcOrderShipping->change_store_status == 1) {
+                    try {
+                        $invoke_result = $this->invokeEcpaySDK();
+                        if (!$invoke_result) {
+                            throw new Exception($this->l('ECPay SDK is missing.'));
+                        } else {
+                            $AL = new EcpayLogistics();
+                            $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
+                            $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
+                            $AL->Send = array(
+                                'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
+                                'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
+                                'IsCollection' => EcpayIsCollection::NO,
+                                'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'changeStore', []),
+                                'ExtraData' => $tcOrderShipping->id,
+                            );
+                            $map_url = $AL->CvsMap();
+
+                            $this->smarty->assign([
+                                'map_url' => $map_url,
+                            ]);
+
+                        }
+                    } catch (Exception $e) {
+                        echo $e->getMessage();
+                    }
+                }
+
+                // 列印繳款單
                 try {
                     $invoke_result = $this->invokeEcpaySDK();
                     if (!$invoke_result) {
@@ -377,8 +378,11 @@ class Ecpay_Cvs extends CarrierModule
                 } catch (Exception $e) {
                     echo $e->getMessage();
                 }
-            }
 
+                $this->smarty->assign([
+                    'sn_id' => $tcOrderShipping->sn_id,
+                ]);
+            }
         }
 
         // 建立新 ECPay 訂單 / 重送 ECPay 訂單
@@ -659,6 +663,10 @@ class Ecpay_Cvs extends CarrierModule
                     throw new Exception('Invalid input values.');
                 }
 
+                if (strlen($tcOrderShipping->module) > 0 && $tcOrderShipping->module != $this->name) {
+                    throw new Exception('Invalid operation.');
+                }
+
                 $tcOrderShipping->id_order = $order_id;
                 $tcOrderShipping->order_reference = $order->reference;
                 $tcOrderShipping->module = $this->name;
@@ -717,23 +725,27 @@ class Ecpay_Cvs extends CarrierModule
                     $tcOrderShipping->store_addr = $store_data['addr'];
                 }
 
-                $tcOrderShipping->change_store_message = 0;
+                $tcOrderShipping->change_store_status = 0;
                 $tcOrderShipping->save();
 
                 // 注意 request timeout 可能
-                $res = $AL->BGCreateShippingOrder();
+                $feedback = $AL->BGCreateShippingOrder();
                 unset($AL);
 
-                if (isset($res['ErrorMessage'])) {
-                    throw new Exception($res['ErrorMessage']);
+                if (isset($feedback['ErrorMessage'])) {
+                    throw new Exception($feedback['ErrorMessage']);
                 }
 
-                $tcOrderShipping->sn_id = $res['AllPayLogisticsID'];
-                $tcOrderShipping->return_status = $res['RtnCode'];
-                $tcOrderShipping->return_message = $res['UpdateStatusDate'] . ' - ' . $res['RtnMsg'] . "\n" . $tcOrderShipping->return_message;
-                $tcOrderShipping->cvs_shipping_number = $res['CVSPaymentNo'];
-                $tcOrderShipping->cvs_validation_number = $res['CVSValidationNo'];
+                $tcOrderShipping->sn_id = $feedback['AllPayLogisticsID'];
+                $tcOrderShipping->return_status = $feedback['RtnCode'];
+                $tcOrderShipping->appendMessage('return_message', $feedback['RtnMsg'], $feedback['UpdateStatusDate']);
+                $tcOrderShipping->cvs_shipping_number = $feedback['CVSPaymentNo'];
+                $tcOrderShipping->cvs_validation_number = $feedback['CVSValidationNo'];
                 $tcOrderShipping->save();
+
+                if ($order->getWsShippingNumber() != ($feedback['CVSPaymentNo'])) {
+                    $order->setWsShippingNumber($feedback['CVSPaymentNo']);
+                }
             }
 
         } catch (Exception $e) {

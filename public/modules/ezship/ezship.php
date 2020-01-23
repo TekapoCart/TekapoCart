@@ -322,6 +322,10 @@ class EzShip extends CarrierModule
             $this->smarty->assign(array(
                 'map_url' => $map_url,
             ));
+
+            $this->smarty->assign([
+                'sn_id' => $tcOrderShipping->sn_id,
+            ]);
         }
 
         // 建立新 ezShip 訂單 / 重送 ezShip 訂單
@@ -559,6 +563,10 @@ class EzShip extends CarrierModule
                     throw new Exception('Invalid input values.');
                 }
 
+                if (strlen($tcOrderShipping->module) > 0 && $tcOrderShipping->module != $this->name) {
+                    throw new Exception('Invalid operation.');
+                }
+
                 if ($order->module == 'tc_pod') {
                     $aio->Send['orderType'] = EzShip_OrderType::PAY;
                 } else {
@@ -598,7 +606,7 @@ class EzShip extends CarrierModule
                     $tcOrderShipping->store_addr = $store_data['addr'];
                 }
 
-                $tcOrderShipping->change_store_message = 0;
+                $tcOrderShipping->change_store_status = 0;
                 $tcOrderShipping->save();
 
                 foreach ($order->getProductsDetail() as $detail) {

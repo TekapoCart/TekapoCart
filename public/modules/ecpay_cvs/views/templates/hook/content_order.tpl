@@ -25,6 +25,9 @@
                 </button>
             </div>
             <div class="col-md-6">
+                {if isset($sn_id)}
+                    <p>ECPay 物流交易編號：{$sn_id}</p>
+                {/if}
                 {if strlen($return_message) > 0}
                     <p>物流狀態回傳：<br>{$return_message|nl2br}</p>
                 {/if}
