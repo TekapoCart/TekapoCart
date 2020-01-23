@@ -32,7 +32,7 @@ class EzShip_HomeResendShippingOrderModuleFrontController extends ModuleFrontCon
                 $tc_order_shipping_id = $tcOrderShipping->id;
             }
 
-            $this->module->createShippingOrder($order_id, $tc_order_shipping_id);
+//            $this->module->createShippingOrder($order_id, $tc_order_shipping_id);
 
             $employee = new Employee($cookie->id_employee);
             $this->context->employee = $employee;

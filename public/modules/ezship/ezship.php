@@ -29,6 +29,7 @@ class EzShip extends CarrierModule
         $this->ezShipParams = [
             'ezship_su_id',
             'ezship_confirm_order',
+            'ezship_enable_pod',
             'ezship_secret',
         ];
 
@@ -440,6 +441,20 @@ class EzShip extends CarrierModule
                         'id' => 'id',
                         'name' => 'name'
                     ),
+                ),
+                array(
+                    'type' => 'select',
+                    'label' => $this->l('ezShip Enable Payment on delivery'),
+                    'name' => 'ezship_enable_pod',
+                    'options' => array(
+                        'query' => array(
+                            array('id' => '1', 'name' => '啟用貨到付款'),
+                            array('id' => '0', 'name' => '停用貨到付款'),
+                        ),
+                        'id' => 'id',
+                        'name' => 'name'
+                    ),
+                    'desc' => '須為 ezShip 商務會員方可啟用',
                 ),
                 array(
                     'type' => 'text',

@@ -61,6 +61,12 @@ class Tc_Pod extends PaymentModule
             return false;
         }
 
+        if (in_array($carrier->external_module_name, ['ezship', 'ezship_home'])) {
+            if (!Configuration::get('ezship_enable_pod')) {
+                return false;
+            }
+        }
+
         $payment_options = [];
         $payment_option = new PaymentOption();
         $payment_option->setCallToActionText($this->l('Payment on Delivery'))
