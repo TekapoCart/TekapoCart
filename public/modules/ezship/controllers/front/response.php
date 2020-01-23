@@ -43,7 +43,10 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
 
                     $tcOrderShipping->sn_id = $ezship_feedback['sn_id'];
                     $tcOrderShipping->return_status = $ezship_feedback['order_status'];
-                    $tcOrderShipping->return_message = date('Y/m/d H:i:s') . ' - ' . $ezship_feedback['order_status'] . "\n" . $tcOrderShipping->return_message;;
+                    $tcOrderShipping->appendMessage('return_message',
+                        $this->module->l('ezShip Return') . ' ' .
+                        $ezship_feedback['order_status']
+                    );
                     $tcOrderShipping->save();
 
                     $shipping_status = $ezship_feedback['order_status'];
@@ -72,12 +75,11 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                             throw new Exception('Order status is invalid.');
                             break;
                     }
-
                 }
             }
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('EzShipResponse %s exception: %s', $order_id, $e->getMessage()), true);
+            EzShip::logMessage(sprintf('EzShipResponse exception: %s %s', $order_id, $e->getMessage()), true);
         }
 
         exit;

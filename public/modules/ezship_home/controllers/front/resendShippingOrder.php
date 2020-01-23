@@ -32,7 +32,7 @@ class EzShip_HomeResendShippingOrderModuleFrontController extends ModuleFrontCon
                 $tc_order_shipping_id = $tcOrderShipping->id;
             }
 
-//            $this->module->createShippingOrder($order_id, $tc_order_shipping_id);
+            $this->module->createShippingOrder($order_id, $tc_order_shipping_id);
 
             $employee = new Employee($cookie->id_employee);
             $this->context->employee = $employee;
@@ -40,7 +40,7 @@ class EzShip_HomeResendShippingOrderModuleFrontController extends ModuleFrontCon
 
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('EzShip_HomeResendShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
+            EzShip::logMessage(sprintf('EzShip_HomeResendShippingOrder exception: %s %s', $order_id, $e->getMessage()), true);
         }
 
         exit;

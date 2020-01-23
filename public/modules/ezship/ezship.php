@@ -324,7 +324,7 @@ class EzShip extends CarrierModule
             ));
         }
 
-        // 建立物流訂單 / 重新取號
+        // 建立新 ezShip 訂單 / 重送 ezShip 訂單
         $resend_url = $this->context->link->getModuleLink('ezship', 'resendShippingOrder', ['order_id' => $params['order']->id]);
         $this->smarty->assign([
             'resend_url' => $resend_url,

@@ -40,7 +40,10 @@ class Tc_CvsChangeStoreModuleFrontController extends ModuleFrontController
                 $tcOrderShipping->store_name = $tc_cvs_feedback['storename'];
                 $tcOrderShipping->store_addr = $tc_cvs_feedback['storeaddress'];
                 $tcOrderShipping->change_store_status = 0;
-                $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . ' - [' . $tc_cvs_feedback['storeid'] . '] ' . $this->module->l('Admin User Change Store') . "\n" . $tcOrderShipping->change_store_message;
+                $tcOrderShipping->appendMessage('change_store_message',
+                    $this->module->l('Admin User Change Store') . ' ' .
+                    $tc_cvs_feedback['storeid']
+                );
                 $tcOrderShipping->save();
 
                 Tools::redirect($this->context->link->getAdminLink('AdminOrders',

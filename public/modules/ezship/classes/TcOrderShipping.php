@@ -119,6 +119,14 @@ if (!class_exists('TcOrderShipping')) {
             )
         );
 
+        public function appendMessage($field, $message, $date = null)
+        {
+            if (empty($date)) {
+                $date = date('Y/m/d H:i:s');
+            }
+            $this->$field =  $date . ' - ' . $message . "\n" . $this->$field;
+        }
+
         public static function getLogByOrderRef($order_ref)
         {
             $query = new DBQuery();

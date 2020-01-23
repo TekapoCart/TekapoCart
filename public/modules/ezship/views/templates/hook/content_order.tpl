@@ -11,11 +11,9 @@
                 門市代號：{$store_data['code']}
                 <br>
                 <br>
-                {if isset($map_url)}
-                    <button type="button" onclick="window.open('{$map_url nofilter}', '_self');" class="btn btn-primary">
-                        更新門市
-                    </button>
-                {/if}
+                <button type="button" onclick="window.open('{$map_url nofilter}', '_self');" class="btn btn-primary">
+                    更新門市
+                </button>
                 <button type="button" onclick="window.open('{$resend_url nofilter}', '_self');" class="btn btn-primary">
                     重送 ezShip 訂單
                 </button>

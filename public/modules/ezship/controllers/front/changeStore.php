@@ -7,7 +7,6 @@ class EzShipChangeStoreModuleFrontController extends ModuleFrontController
     public function postProcess()
     {
         try {
-
             $cookie_lifetime = (int)Configuration::get('PS_COOKIE_LIFETIME_BO');
             if ($cookie_lifetime > 0) {
                 $cookie_lifetime = time() + (max($cookie_lifetime, 1) * 3600);
@@ -40,10 +39,11 @@ class EzShipChangeStoreModuleFrontController extends ModuleFrontController
                 $tcOrderShipping->store_name = $tc_cvs_feedback['stName'];
                 $tcOrderShipping->store_addr = $tc_cvs_feedback['stAddr'];
                 $tcOrderShipping->change_store_status = 0;
-                $tcOrderShipping->change_store_message = date('Y/m/d H:i:s') . ' - ' . $this->module->l('Admin User Change Store') . ' ' . $tc_cvs_feedback['stCate'] . $tc_cvs_feedback['stCode'] . "\n" . $tcOrderShipping->change_store_message;
+                $tcOrderShipping->appendMessage('change_store_message',
+                    $this->module->l('Admin User Change Store') . ' ' .
+                    $tc_cvs_feedback['stCate'] . $tc_cvs_feedback['stCode']
+                );
                 $tcOrderShipping->save();
-
-                $this->module->createShippingOrder($tcOrderShipping->id_order, $tcOrderShipping->id);
 
                 $employee = new Employee($cookie->id_employee);
                 $this->context->employee = $employee;

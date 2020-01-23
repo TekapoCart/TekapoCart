@@ -22,7 +22,7 @@ if (!class_exists('TcOrderShipping')) {
         /** @var string store type */
         public $store_type;
 
-        /** @var integer store code */
+        /** @var string store code */
         public $store_code;
 
         /** @var string store name */
@@ -118,6 +118,14 @@ if (!class_exists('TcOrderShipping')) {
                 'date_upd' => array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
             )
         );
+
+        public function appendMessage($field, $message, $date = null)
+        {
+            if (empty($date)) {
+                $date = date('Y/m/d H:i:s');
+            }
+            $this->$field =  $date . ' - ' . $message . "\n" . $this->$field;
+        }
 
         public static function getLogByOrderRef($order_ref)
         {

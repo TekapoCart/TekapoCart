@@ -82,9 +82,9 @@ if (!class_exists('TcCartShipping')) {
                 $tcCartShipping = new TcCartShipping($rowOrder['id_tc_cart_shipping']);
             } else {
                 $tcCartShipping = new TcCartShipping();
+                $tcCartShipping->id_cart = $cart_id;
+                $tcCartShipping->id_carrier = $carrier_id;
             }
-            $tcCartShipping->id_cart = $cart_id;
-            $tcCartShipping->id_carrier = $carrier_id;
             $tcCartShipping->store_type = $store_data['type'];
             $tcCartShipping->store_code = $store_data['code'];
             $tcCartShipping->store_name = $store_data['name'];
@@ -119,10 +119,10 @@ if (!class_exists('TcCartShipping')) {
                 $tcCartShipping = new TcCartShipping($rowOrder['id_tc_cart_shipping']);
             } else {
                 $tcCartShipping = new TcCartShipping();
-            }
-            if (empty($rowOrder)) {
                 $tcCartShipping->id_cart = $cart_id;
                 $tcCartShipping->id_carrier = $carrier_id;
+            }
+            if (empty($rowOrder)) {
                 $tcCartShipping->delivery_time = $scheduled_data['delivery_time'];
                 $tcCartShipping->save();
             }

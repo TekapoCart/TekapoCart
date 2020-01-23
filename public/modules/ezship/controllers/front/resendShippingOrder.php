@@ -8,7 +8,6 @@ class EzShipResendShippingOrderModuleFrontController extends ModuleFrontControll
     {
         $order_id = null;
         try {
-
             $cookie_lifetime = (int)Configuration::get('PS_COOKIE_LIFETIME_BO');
             if ($cookie_lifetime > 0) {
                 $cookie_lifetime = time() + (max($cookie_lifetime, 1) * 3600);
@@ -32,7 +31,7 @@ class EzShipResendShippingOrderModuleFrontController extends ModuleFrontControll
                 $tc_order_shipping_id = $tcOrderShipping->id;
             }
 
-//            $this->module->createShippingOrder($order_id, $tc_order_shipping_id);
+            $this->module->createShippingOrder($order_id, $tc_order_shipping_id);
 
             $employee = new Employee($cookie->id_employee);
             $this->context->employee = $employee;
@@ -41,7 +40,7 @@ class EzShipResendShippingOrderModuleFrontController extends ModuleFrontControll
 
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('EzShip_ResendShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
+            EzShip::logMessage(sprintf('EzShip_ResendShippingOrder exception: %s %s', $order_id, $e->getMessage()), true);
         }
 
         exit;
