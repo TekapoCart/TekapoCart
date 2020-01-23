@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>tc_pod</name>
-    <displayName><![CDATA[貨到付款]]></displayName>
+    <displayName><![CDATA[TekapoCart 貨到付款]]></displayName>
     <version><![CDATA[1.0]]></version>
     <description><![CDATA[超商取貨付款、宅配貨到付款]]></description>
     <author><![CDATA[TekapoCart]]></author>

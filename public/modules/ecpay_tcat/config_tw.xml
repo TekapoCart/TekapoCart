@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>ecpay_tcat</name>
-    <displayName><![CDATA[ECPay 物流配送 - 黑貓宅配 常溫]]></displayName>
+    <displayName><![CDATA[ECPay 黑貓宅配]]></displayName>
     <version><![CDATA[1.0]]></version>
     <description><![CDATA[店到宅寄件、直寄宅配]]></description>
     <author><![CDATA[TekapoCart]]></author>

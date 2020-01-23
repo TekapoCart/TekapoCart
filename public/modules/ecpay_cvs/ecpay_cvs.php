@@ -22,7 +22,7 @@ class Ecpay_Cvs extends CarrierModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('ECPay CVS pickup in-store');
+        $this->displayName = $this->l('ECPay 7-11 pickup in-store');
         $this->description = 'https://www.tekapo.io/';
         $this->confirmUninstall = $this->l('Do you want to uninstall ecpay_cvs module?');
 
@@ -132,7 +132,7 @@ class Ecpay_Cvs extends CarrierModule
     public function installCarrier()
     {
         $carrier = new Carrier();
-        $carrier->name = $this->l('711 pickup in-store');
+        $carrier->name = $this->l('7-11 pickup in-store');
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
         $carrier->shipping_external = 0;

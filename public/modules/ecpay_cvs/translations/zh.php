@@ -2,7 +2,7 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_108b9f245d771497a31ab2cb94695295'] = 'ECPay 711 取货';
+$_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_73e864dcf7bac19424feb50c21a2bb95'] = 'ECPay 7-11 取货';
 $_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_560c7dd45f44a78faa1aa6ca1c2ebae2'] = 'ECPay 设定';
 $_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_0a52705fa22f830ab8ed2a0ef93995b6'] = 'ECPay 会员编号（MerchantID）';
 $_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_3a218abceb7424f4d1689b3a415bc289'] = 'ECPay 物流介接 HashKey';
@@ -12,7 +12,7 @@ $_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_b1efea90f2883ee09d3e721bdfcae04c'] = 
 $_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_0b12ab5636a57ded14f5fdace0d0ad1a'] = '（宅配）寄件人地址';
 $_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_167ed41b0e95ffdd281369f3d4ff0bee'] = '（宅配）寄件人邮递区号';
 $_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_5799e416addfb3a258d53c9014556010'] = '（宅配）预定取件时段';
-$_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_236c2519d6afd39437c4a59fb310c8ce'] = '711 取货';
+$_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_ec78599673a1903245e79c0daa83f129'] = '7-11 取货';
 $_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_ebc1c8328f25c6ccb2ff00dd27b56693'] = ' 为必填栏位。';
 $_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_ad0322901b80cf443ba23c6544946ef9'] = '2-3 天';
 $_MODULE['<{ecpay_cvs}prestashop>ecpay_cvs_2084d4d72acfc24b948650eec4baf1c4'] = '取件人姓名字数超过限制';

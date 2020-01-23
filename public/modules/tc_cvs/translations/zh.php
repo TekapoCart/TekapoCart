@@ -2,9 +2,9 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{tc_cvs}prestashop>tc_cvs_27efe0abc98206e386e00e2197c3df57'] = 'TekapoCart 711 交货便';
+$_MODULE['<{tc_cvs}prestashop>tc_cvs_e09b90a101c37461478d9adc5758d761'] = 'TekapoCart 7-11 交货便';
 $_MODULE['<{tc_cvs}prestashop>tc_cvs_8847a0edc2ff4671f20536a8b39a18aa'] = '设定';
-$_MODULE['<{tc_cvs}prestashop>tc_cvs_236c2519d6afd39437c4a59fb310c8ce'] = '711 超商取货';
+$_MODULE['<{tc_cvs}prestashop>tc_cvs_ec78599673a1903245e79c0daa83f129'] = '7-11 交货便';
 $_MODULE['<{tc_cvs}prestashop>tc_cvs_ad0322901b80cf443ba23c6544946ef9'] = '2-3 天';
 $_MODULE['<{tc_cvs}prestashop>tc_cvs_2084d4d72acfc24b948650eec4baf1c4'] = '取件人姓名字数超过限制';
 $_MODULE['<{tc_cvs}prestashop>tc_cvs_d8879c62708a902f3274d4277bcacd90'] = '取件人行动电话格式不正确';
