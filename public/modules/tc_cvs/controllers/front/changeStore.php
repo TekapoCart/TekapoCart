@@ -53,7 +53,7 @@ class Tc_CvsChangeStoreModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Tc_Cvs::logMessage(sprintf('Tc_Cvs_ChangeStore exception: Line: %s. %s', $e->getLine(), $e->getMessage()), true);
+            Tc_Cvs::logMessage(sprintf('Tc_Cvs_ChangeStore exception: %s', $e->getMessage()), true);
         }
 
         exit;

@@ -41,6 +41,7 @@ class EzShip extends CarrierModule
             OR !$this->registerHook('displayCarrierExtraContent')
             OR !$this->registerHook('actionCarrierProcess')
             OR !$this->registerHook('displayOrderConfirmation')
+            OR !$this->registerHook('displayOrderDetail')
             OR !$this->registerHook('displayAdminOrderTabOrder')
             OR !$this->registerHook('displayAdminOrderContentOrder')
             OR !$this->installDb()
@@ -210,6 +211,28 @@ class EzShip extends CarrierModule
         ));
 
         return $this->display(__FILE__, 'display_order_confirmation.tpl');
+    }
+
+    public function hookDisplayOrderDetail($params)
+    {
+        $carrier = new Carrier($params['order']->id_carrier);
+        if ($carrier->external_module_name !== $this->name) {
+            return false;
+        }
+
+        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        if ($tcOrderShipping) {
+            $store_data['type'] = $tcOrderShipping->store_type;
+            $store_data['code'] = $tcOrderShipping->store_code;
+            $store_data['name'] = $tcOrderShipping->store_name;
+            $store_data['addr'] = $tcOrderShipping->store_addr;
+
+            $this->smarty->assign(array(
+                'store_data' => $store_data,
+            ));
+        }
+
+        return $this->display(__FILE__, 'display_order_detail.tpl');
     }
 
     // 前台選擇承運商
