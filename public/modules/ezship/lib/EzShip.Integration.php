@@ -256,7 +256,7 @@ class EzShip_Send extends EzShip_Aio
 
     protected static function process($arParameters = array(), $arExtend = array())
     {
-        $shippingMethod = 'EzShip_' . $arParameters['ChooseShipping'];
+        $shippingMethod = 'EzShip_Verification_' . $arParameters['ChooseShipping'];
         self::$ShippingObj = new $shippingMethod;
 
         unset($arParameters['ChooseShipping']);
@@ -465,7 +465,7 @@ Abstract class EzShip_Verification
     }
 }
 
-class EzShip_CVS extends EzShip_Verification
+class EzShip_Verification_CVS extends EzShip_Verification
 {
     public $arShippingExtend = array(
         'stCode' => '',
@@ -479,7 +479,7 @@ class EzShip_CVS extends EzShip_Verification
     }
 }
 
-class EzShip_Home extends EzShip_Verification
+class EzShip_Verification_Home extends EzShip_Verification
 {
     public $arShippingExtend = array(
         'rvAddr' => '',

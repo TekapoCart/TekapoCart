@@ -133,7 +133,6 @@ class EzShip_Home extends CarrierModule
     // 後台訂單詳細頁籤內容
     public function hookDisplayAdminOrderContentOrder($params)
     {
-
         $carrier = new Carrier($params['order']->id_carrier);
         if ($carrier->external_module_name !== $this->name) {
             return false;
@@ -149,7 +148,7 @@ class EzShip_Home extends CarrierModule
         }
 
         // 建立物流訂單 / 重新取號
-        $resend_url = $this->context->link->getModuleLink('ecpay_cvs', 'resendShippingOrder', []);
+        $resend_url = $this->context->link->getModuleLink('ezship_home', 'resendShippingOrder', ['order_id' => $params['order']->id]);
         $this->smarty->assign([
             'resend_url' => $resend_url,
         ]);

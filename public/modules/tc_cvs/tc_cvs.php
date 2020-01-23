@@ -315,10 +315,15 @@ class Tc_Cvs extends CarrierModule
                 'change_store_message' => $tcOrderShipping->change_store_message,
             ));
 
-            return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
         }
 
-        return false;
+        // 建立物流訂單 / 重新取號
+        $resend_url = $this->context->link->getModuleLink('tc_cvs', 'resendShippingOrder', ['order_id' => $params['order']->id]);
+        $this->smarty->assign([
+            'resend_url' => $resend_url,
+        ]);
+
+        return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
 
     }
 
