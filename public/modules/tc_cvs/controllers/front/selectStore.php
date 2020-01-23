@@ -7,22 +7,22 @@ class Tc_CvsSelectStoreModuleFrontController extends ModuleFrontController
     public function postProcess()
     {
         try {
-            $tc_cvs_feedback = $_POST;
-            if (count($tc_cvs_feedback) < 1) {
+            $feedback = $_POST;
+            if (count($feedback) < 1) {
                 throw new Exception('Get feedback failed.');
             } else {
 
-                Tc_Cvs::logMessage('Feedback: ' . json_encode($tc_cvs_feedback), true);
+                Tc_Cvs::logMessage('Feedback: ' . json_encode($feedback), true);
 
-                if ($this->context->cart->id !== (int)$tc_cvs_feedback['TempVar']) {
+                if ($this->context->cart->id !== (int)$feedback['TempVar']) {
                     throw new Exception('Verify feedback failed.');
                 }
 
                 $store_data = [
                     'type' => '711',
-                    'code' => $tc_cvs_feedback['storeid'],
-                    'name' => $tc_cvs_feedback['storename'],
-                    'addr' => $tc_cvs_feedback['storeaddress'],
+                    'code' => $feedback['storeid'],
+                    'name' => $feedback['storename'],
+                    'addr' => $feedback['storeaddress'],
                 ];
                 $this->module->saveStoreData($store_data);
                 Tools::redirect($this->context->link->getPageLink('order', true));

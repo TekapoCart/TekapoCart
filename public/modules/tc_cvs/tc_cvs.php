@@ -5,7 +5,7 @@ if (!defined('_PS_VERSION_')) {
 }
 
 include_once _PS_MODULE_DIR_ . 'tc_cvs/classes/TcOrderShipping.php';
-include_once _PS_MODULE_DIR_ . 'tc_cvs/classes/TcOrderShipping.php';
+include_once _PS_MODULE_DIR_ . 'tc_cvs/classes/TcCartShipping.php';
 
 class Tc_Cvs extends CarrierModule
 {
@@ -69,7 +69,7 @@ class Tc_Cvs extends CarrierModule
                 `date_add` DATETIME NOT NULL,
                 `date_upd` DATETIME NOT NULL,                
                 PRIMARY KEY (`id_tc_cart_shipping`),
-                KEY `id_carrier` (`id_cart`,`id_carrier`),
+                KEY `id_cart_carrier` (`id_cart`,`id_carrier`)
             )
             ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET utf8 COLLATE utf8_general_ci;';
 
@@ -369,134 +369,6 @@ class Tc_Cvs extends CarrierModule
         }
 
         return true;
-    }
-
-    public function getContent()
-    {
-        $html_content = '';
-
-        # Update the settings
-        if (Tools::isSubmit('tc_cvs_submit')) {
-            # Validate the POST parameters
-            $this->postValidation();
-
-            if (!empty($this->postError)) {
-                # Display the POST error
-                $html_content .= $this->displayError($this->postError);
-            } else {
-                $html_content .= $this->postProcess();
-            }
-        }
-
-        # Display the setting form
-        $html_content .= $this->displayForm();
-
-        return $html_content;
-    }
-
-    private function postValidation()
-    {
-        $required_fields = array(
-            'tc_cvs_sender_location' => $this->l('TekapoCart CVS Sender Location'),
-            'tc_cvs_island_fee' => $this->l('TekapoCart CVS island fee'),
-            'tc_cvs_kinmen_store_ids' => $this->l('TekapoCart CVS Kinmen store ids'),
-            'tc_cvs_penghu_store_ids' => $this->l('TekapoCart CVS Penghu store ids'),
-        );
-
-        foreach ($required_fields as $field_name => $field_desc) {
-            $tmp_field_value = Tools::getValue($field_name);
-            if (empty($tmp_field_value)) {
-                $this->postError = $field_desc . $this->l(' is required');
-                return;
-            }
-        }
-    }
-
-    private function displayForm()
-    {
-        # Set the configurations for generating a setting form
-        $fields_form[0]['form'] = array(
-            'legend' => array(
-                'title' => $this->l('configuration'),
-            ),
-            'input' => array(
-                array(
-                    'type' => 'text',
-                    'label' => $this->l('TekapoCart CVS Sender Location'),
-                    'name' => 'tc_cvs_sender_location',
-                    'required' => true,
-                ),
-                array(
-                    'type' => 'text',
-                    'label' => $this->l('TekapoCart CVS island fee'),
-                    'name' => 'tc_cvs_island_fee',
-                    'required' => true,
-                ),
-                array(
-                    'type' => 'text',
-                    'label' => $this->l('TekapoCart CVS Kinmen store ids'),
-                    'name' => 'tc_cvs_kinmen_store_ids',
-                    'required' => true,
-                ),
-                array(
-                    'type' => 'text',
-                    'label' => $this->l('TekapoCart CVS Penghu store ids'),
-                    'name' => 'tc_cvs_penghu_store_ids',
-                    'required' => true,
-                ),
-                array(
-                    'type' => 'text',
-                    'label' => $this->l('Secret key'),
-                    'name' => 'tc_cvs_secret',
-                    'desc' => $this->l('auto generated'),
-                    'readonly' => true,
-                ),
-            ),
-            'submit' => array(
-                'name' => 'tc_cvs_submit',
-                'title' => $this->l('Save'),
-                'class' => 'button'
-            )
-        );
-
-        $helper = new HelperForm();
-
-        # Module, token and currentIndex
-        $helper->module = $this;
-        $helper->name_controller = $this->name;
-        $helper->token = Tools::getAdminTokenLite('AdminModules');
-        $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
-
-        # Get the default language
-        $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
-
-        # Language
-        $helper->default_form_language = $default_lang;
-        $helper->allow_employee_form_lang = $default_lang;
-
-        # Load the current settings
-        foreach ($this->tcCvsParams as $param_name) {
-            $helper->fields_value[$param_name] = Configuration::get($param_name);
-        }
-
-        return $helper->generateForm($fields_form);
-    }
-
-    private function postProcess()
-    {
-
-        if (strlen(Tools::getValue('tc_cvs_secret')) === 0) {
-            $_POST['tc_cvs_secret'] = sha1(openssl_random_pseudo_bytes(1024));
-        }
-
-        foreach ($this->tcCvsParams as $param_name) {
-
-            if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
-                return $this->displayError($param_name . ' ' . $this->l('updated failed'));
-            }
-        }
-
-        return $this->displayConfirmation($this->trans('Settings updated.', array(), 'Admin.Notifications.Success'));
     }
 
     public function getOrderShippingCost($params, $shipping_cost)

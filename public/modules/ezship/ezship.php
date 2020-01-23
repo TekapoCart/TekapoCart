@@ -69,7 +69,7 @@ class EzShip extends CarrierModule
                 `date_add` DATETIME NOT NULL,
                 `date_upd` DATETIME NOT NULL,                
                 PRIMARY KEY (`id_tc_cart_shipping`),
-                KEY `id_carrier` (`id_cart`,`id_carrier`),
+                KEY `id_cart_carrier` (`id_cart`,`id_carrier`)
             )
             ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET utf8 COLLATE utf8_general_ci;';
 

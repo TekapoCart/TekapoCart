@@ -98,7 +98,7 @@ if (!class_exists('TcOrderShipping')) {
                 'store_type' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'store_code' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'store_name' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
-                'store_addr' => array('type' => self::TYPE_STRING, 'validate' => 'isAddress'),
+                'store_addr' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'rv_name' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'rv_mobile' => array('type' => self::TYPE_STRING, 'validate' => 'isGenericName'),
                 'rv_zip' => array('type' => self::TYPE_STRING, 'validate' => 'isPostCode'),
