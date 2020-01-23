@@ -30,7 +30,7 @@ class Tc_CvsSelectStoreModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Tc_Cvs::logMessage(sprintf('Tc_CvsSelectStore exception: %s', $e->getMessage()), true);
+            Tc_Cvs::logMessage(sprintf('Tc_CvsSelectStore exception: Line %s. %s', $e->getLine(), $e->getMessage()), true);
         }
 
         exit;

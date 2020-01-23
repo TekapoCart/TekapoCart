@@ -29,7 +29,7 @@ class Ecpay_CvsSelectStoreModuleFrontController extends ModuleFrontController
             }
 
         } catch (Exception $e) {
-            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsStore exception: %s', $e->getMessage()), true);
+            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsSelectStore exception: Line: %s. %s', $e->getLine(), $e->getMessage()), true);
         }
 
         exit;

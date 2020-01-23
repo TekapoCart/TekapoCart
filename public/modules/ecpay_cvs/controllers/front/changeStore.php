@@ -78,7 +78,7 @@ class Ecpay_CvsChangeStoreModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsChangeStore exception: %s %s', $sn_id, $e->getMessage()), true);
+            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsChangeStore exception: %s. Line: %s. %s', $sn_id, $e->getLine(), $e->getMessage()), true);
         }
 
         exit;

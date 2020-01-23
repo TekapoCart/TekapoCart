@@ -334,14 +334,6 @@ class Ecpay_Cvs extends CarrierModule
                         $AL = new EcpayLogistics();
                         $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
                         $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
-                        $AL->Send = array(
-                            'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
-                            'LogisticsSubType' => EcpayLogisticsSubType::UNIMART_C2C,
-                            'IsCollection' => EcpayIsCollection::NO,
-                            'ServerReplyURL' => $this->context->link->getModuleLink('ecpay_cvs', 'changeStore', []),
-                            'ExtraData' => $tcOrderShipping->id,
-                        );
-
                         $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
                         $AL->Send['LogisticsSubType'] = $tcOrderShipping->send_status;
                         $AL->Send['IsCollection'] = EcpayIsCollection::NO;
