@@ -292,7 +292,7 @@ class Ecpay_Tcat extends CarrierModule
         return true;
     }
 
-    public function createShippingOrder($order_id = null, $tc_order_shipping_id = null)
+    public function createShippingOrder($order_id)
     {
         try {
             $order = new Order((int)$order_id);
@@ -306,10 +306,9 @@ class Ecpay_Tcat extends CarrierModule
             $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
             $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
-            $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
-
-            if ($tc_order_shipping_id > 0 && $tcOrderShipping->id_order != $order_id) {
-                throw new Exception('Invalid input values.');
+            $tcOrderShipping = TcOrderShipping::getLogByOrderId($order_id);
+            if (empty($tcOrderShipping)) {
+                $tcOrderShipping = new TcOrderShipping();
             }
 
             if (strlen($tcOrderShipping->module) > 0 && $tcOrderShipping->module != $this->name) {
@@ -437,6 +436,8 @@ class Ecpay_Tcat extends CarrierModule
             unset($AL);
 
             if (isset($feedback['ErrorMessage'])) {
+                $tcOrderShipping->appendMessage('return_message', $feedback['ErrorMessage']);
+                $tcOrderShipping->save();
                 throw new Exception($feedback['ErrorMessage']);
             }
 

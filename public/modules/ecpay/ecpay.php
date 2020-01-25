@@ -5,6 +5,8 @@ if (!defined('_PS_VERSION_'))
 
 use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 
+include_once _PS_MODULE_DIR_ . 'ecpay/classes/TcOrderPayment.php';
+
 class Ecpay extends PaymentModule
 {
 	# Custom variables: POST error
@@ -47,19 +49,19 @@ class Ecpay extends PaymentModule
 		
 		# Custom variables: ECPay parameters
 		$this->ecpayParams = array(
-			'ecpay_merchant_id'
-			, 'ecpay_hash_key'
-			, 'ecpay_hash_iv'
-			, 'ecpay_payment_credit'
-			, 'ecpay_payment_credit_03'
-			, 'ecpay_payment_credit_06'
-			, 'ecpay_payment_credit_12'
-            , 'ecpay_payment_credit_18'
-			, 'ecpay_payment_credit_24'
-            , 'ecpay_payment_webatm'
-            , 'ecpay_payment_atm'
-            , 'ecpay_payment_cvs'
-			, 'ecpay_payment_barcode'
+			'ecpay_merchant_id',
+            'ecpay_hash_key',
+            'ecpay_hash_iv',
+            'ecpay_payment_credit',
+            'ecpay_payment_credit_03',
+            'ecpay_payment_credit_06',
+            'ecpay_payment_credit_12',
+            'ecpay_payment_credit_18',
+            'ecpay_payment_credit_24',
+            'ecpay_payment_webatm',
+            'ecpay_payment_atm',
+            'ecpay_payment_cvs',
+            'ecpay_payment_barcode',
 		);
 
 		# Custom variables: ECPay log
@@ -70,12 +72,54 @@ class Ecpay extends PaymentModule
 	public function install()
 	{
 		# Register PrestaShop hooks
-		if (!parent::install() OR !$this->registerHook('paymentOptions') or !$this->registerHook('paymentReturn')) {
+		if (!parent::install()
+            OR !$this->registerHook('paymentOptions')
+            OR !$this->registerHook('paymentReturn')
+            OR !$this->registerHook('displayAdminOrderTabOrder')
+            OR !$this->registerHook('displayAdminOrderContentOrder')
+            OR !$this->installDb()
+        ) {
 			return false;
 		}
 
         return true;
 	}
+
+    public function installDb()
+    {
+        $sql = [];
+
+        $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'tc_order_payment` (
+                `id_tc_order_payment` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+                `id_order` INT(10) UNSIGNED NULL DEFAULT NULL,
+                `order_reference` VARCHAR(16) NULL DEFAULT NULL,
+                `module` VARCHAR(64) NULL DEFAULT NULL,
+                `payment_type` VARCHAR(20) NULL DEFAULT NULL,      
+                `installment` VARCHAR(2) NULL DEFAULT NULL,                                             
+                `return_status` VARCHAR(50) NULL DEFAULT NULL,
+                `return_message` TEXT NULL DEFAULT NULL,
+                `expire_date` VARCHAR(20) NULL DEFAULT NULL,  
+                `atm_bank_code` VARCHAR(3) NULL DEFAULT NULL,      
+                `atm_v_account` VARCHAR(16) NULL DEFAULT NULL,  
+                `cvs_payment_no` VARCHAR(14) NULL DEFAULT NULL,      
+                `barcode_1` VARCHAR(20) NULL DEFAULT NULL,  
+                `barcode_2` VARCHAR(20) NULL DEFAULT NULL,      
+                `barcode_3` VARCHAR(20) NULL DEFAULT NULL,  
+                `date_add` DATETIME NOT NULL,
+                `date_upd` DATETIME NOT NULL,                
+                PRIMARY KEY (`id_tc_cart_shipping`),
+                KEY `id_cart_carrier` (`id_cart`,`id_carrier`)
+            )
+            ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET utf8 COLLATE utf8_general_ci;';
+
+        foreach ($sql as $s) {
+            if (!Db::getInstance()->execute($s)) {
+                return false;
+            }
+        }
+        return true;
+
+    }
 
 	public function uninstall()
 	{
@@ -194,7 +238,27 @@ class Ecpay extends PaymentModule
 
         return $this->display(__FILE__, 'display_order_detail.tpl');
     }
-	
+
+    // 後台訂單詳細頁籤
+    public function hookDisplayAdminOrderTabOrder($params)
+    {
+        if ($params['order']->module === 'ecpay') {
+            $this->smarty->assign(array(
+                'tab_title' => $this->l('Payment on Delivery'),
+            ));
+            return $this->display(__FILE__, '/views/templates/hook/tab_order.tpl');
+        }
+
+    }
+
+    // 後台訂單詳細頁籤內容
+    public function hookDisplayAdminOrderContentOrder($params)
+    {
+        if ($params['order']->module === 'ecpay') {
+            return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
+        }
+    }
+
 	public function checkCurrency($cart)
 	{
 		$currency_order = new Currency($cart->id_currency);
@@ -213,8 +277,7 @@ class Ecpay extends PaymentModule
 			
 		return false;
 	}
-	
-	
+
 	# Public custom function
 	public function getPaymentsDesc()
 	{
@@ -611,5 +674,16 @@ class Ecpay extends PaymentModule
 		
 		return true;
 	}
+
+    public static function logMessage($message, $is_append = false)
+    {
+        $path = _PS_LOG_DIR_ . 'ecpay.log';
+
+        if (!$is_append) {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+        } else {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+        }
+    }
 
 }

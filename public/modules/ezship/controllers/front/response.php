@@ -29,24 +29,25 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
 
                     $order_reference = $ezship_feedback['order_id'];
 
-                    $order = Order::getByReference($order_reference);
-                    if (empty($order->id)) {
-                        throw new Exception('Order is invalid.');
-                    }
-
-                    $order_id = $order->id;
-
                     $tcOrderShipping = TcOrderShipping::getLogByOrderRef($order_reference);
                     if (empty($tcOrderShipping->id)) {
                         throw new Exception('TcOrderShipping is invalid.');
                     }
 
+                    if (!in_array($tcOrderShipping->module, ['ezship', 'ezship_home'])) {
+                        throw new Exception('TcOrderShipping module is invalid.');
+                    }
+
+                    $order_id = $tcOrderShipping->id_order;
+                    $order = new Order($order_id);
+
+                    if ($order->reference !== $order_reference) {
+                        throw new Exception('Order reference is invalid.');
+                    }
+
                     $tcOrderShipping->sn_id = $ezship_feedback['sn_id'];
                     $tcOrderShipping->return_status = $ezship_feedback['order_status'];
-                    $tcOrderShipping->appendMessage('return_message',
-                        $this->module->l('ezShip Return') . ' ' .
-                        $ezship_feedback['order_status']
-                    );
+                    $tcOrderShipping->appendMessage('return_message', EzShip_ReturnOrderStatus::getDescription($ezship_feedback['order_status']));
                     $tcOrderShipping->save();
 
                     $shipping_status = $ezship_feedback['order_status'];
@@ -69,10 +70,9 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
                         case EzShip_ReturnOrderStatus::E09:
                         case EzShip_ReturnOrderStatus::E10:
                         case EzShip_ReturnOrderStatus::E11:
-                            throw new Exception(sprintf('%s %s.', $shipping_status, EzShip_ReturnOrderStatus::getDescription($shipping_status)));
                             break;
                         default:
-                            throw new Exception('Order status is invalid.');
+                            throw new Exception('ezShip Order status is not found.');
                             break;
                     }
                 }

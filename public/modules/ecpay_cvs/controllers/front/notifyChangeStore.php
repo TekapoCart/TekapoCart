@@ -9,7 +9,7 @@ class Ecpay_CvsNotifyChangeStoreModuleFrontController extends ModuleFrontControl
         $result_message = '1|OK';
         $sn_id = null;
         try {
-# Retrieve the checkout result
+            # Retrieve the checkout result
             $AL = new EcpayLogistics();
             $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
             $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
@@ -31,6 +31,10 @@ class Ecpay_CvsNotifyChangeStoreModuleFrontController extends ModuleFrontControl
                 $tcOrderShipping = TcOrderShipping::getLoggerBySnId($sn_id);
                 if (empty($tcOrderShipping->id)) {
                     throw new Exception('TcOrderShipping is not found.');
+                }
+
+                if ($tcOrderShipping->module !== $this->module->name) {
+                    throw new Exception(sprintf('Module %s is invalid.', $tcOrderShipping->module));
                 }
 
                 $status = $feedback['Status'];

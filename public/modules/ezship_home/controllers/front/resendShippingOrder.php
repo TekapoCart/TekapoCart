@@ -25,14 +25,7 @@ class EzShip_HomeResendShippingOrderModuleFrontController extends ModuleFrontCon
                 throw new Exception(sprintf('Order %s is not found.', $order_id));
             }
 
-            $tcOrderShipping = TcOrderShipping::getLogByOrderRef($order->reference);
-            if (empty($tcOrderShipping->id)) {
-                $tc_order_shipping_id = null;
-            } else {
-                $tc_order_shipping_id = $tcOrderShipping->id;
-            }
-
-            $this->module->createShippingOrder($order_id, $tc_order_shipping_id);
+            $this->module->createShippingOrder($order_id);
 
             $employee = new Employee($cookie->id_employee);
             $this->context->employee = $employee;

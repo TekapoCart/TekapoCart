@@ -203,7 +203,7 @@ class EzShip_Home extends CarrierModule
         return true;
     }
 
-    public function createShippingOrder($order_id = null, $tc_order_shipping_id = null)
+    public function createShippingOrder($order_id)
     {
         try {
             $invoke_result = $this->invokeEzShipSDK();
@@ -224,10 +224,9 @@ class EzShip_Home extends CarrierModule
                 $aio->Send['orderAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
                 $aio->Send['orderID'] = $order->reference;
 
-                $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
-
-                if ($tc_order_shipping_id > 0 && $tcOrderShipping->id_order != $order_id) {
-                    throw new Exception('Invalid input values.');
+                $tcOrderShipping = TcOrderShipping::getLogByOrderId($order_id);
+                if (empty($tcOrderShipping)) {
+                    $tcOrderShipping = new TcOrderShipping();
                 }
 
                 if (strlen($tcOrderShipping->module) > 0 && $tcOrderShipping->module != $this->name) {

@@ -9,7 +9,7 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
         $result_message = '1|OK';
         $order_id = null;
         try {
-# Retrieve the checkout result
+            # Retrieve the checkout result
             $AL = new EcpayLogistics();
             $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
             $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
@@ -31,16 +31,20 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
 
                 $order_reference = substr($feedback['MerchantTradeNo'], 0, 16);
 
-                $order = Order::getByReference($order_reference);
-                if (empty($order)) {
-                    throw new Exception('Order is invalid.');
+                $tcOrderShipping = TcOrderShipping::getLogByOrderRef($order_reference);
+                if (empty($tcOrderShipping->id)) {
+                    throw new Exception('TcOrderShipping is invalid.');
                 }
 
-                $order_id = $order->id;
+                if (!in_array($tcOrderShipping->module, ['ecpay_cvs', 'ecpay_tcat'])) {
+                    throw new Exception('TcOrderShipping module is invalid.');
+                }
 
-                $tcOrderShipping = TcOrderShipping::getLogByOrderRef($order_reference);
-                if (empty($tcOrderShipping)) {
-                    throw new Exception('TcOrderShipping is invalid.');
+                $order_id = $tcOrderShipping->id_order;
+                $order = new Order($order_id);
+
+                if ($order->reference !== $order_reference) {
+                    throw new Exception('Order reference is invalid.');
                 }
 
                 $shipping_status = $feedback['RtnCode'];

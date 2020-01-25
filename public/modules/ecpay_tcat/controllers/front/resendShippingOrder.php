@@ -8,7 +8,6 @@ class Ecpay_TcatResendShippingOrderModuleFrontController extends ModuleFrontCont
     {
         $order_id = null;
         try {
-
             $cookie_lifetime = (int)Configuration::get('PS_COOKIE_LIFETIME_BO');
             if ($cookie_lifetime > 0) {
                 $cookie_lifetime = time() + (max($cookie_lifetime, 1) * 3600);
@@ -21,18 +20,11 @@ class Ecpay_TcatResendShippingOrderModuleFrontController extends ModuleFrontCont
             $order_id = Tools::getValue('order_id');
 
             $order = new Order((int)$order_id);
-            if (empty($order)) {
+            if (empty($order->id)) {
                 throw new Exception(sprintf('Order %s is not found.', $order_id));
             }
 
-            $tcOrderShipping = TcOrderShipping::getLogByOrderRef($order->reference);
-            if (empty($tcOrderShipping)) {
-                $tc_order_shipping_id = null;
-            } else {
-                $tc_order_shipping_id = $tcOrderShipping->id;
-            }
-
-            $this->module->createShippingOrder($order_id, $tc_order_shipping_id);
+            $this->module->createShippingOrder($order_id);
 
             $employee = new Employee($cookie->id_employee);
             $this->context->employee = $employee;

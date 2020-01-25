@@ -98,25 +98,31 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
 
                     # Set ECPay parameters
                     $aio = new ECPay_AllInOne();
-                    $aio->Send['MerchantTradeNo'] = '';
-                    $aio->MerchantID = Configuration::get('ecpay_merchant_id');
-                    if ($this->module->isTestMode($aio->MerchantID)) {
-                        $service_url = 'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut';
-                        $aio->Send['MerchantTradeNo'] = date('YmdHis');
-                    } else {
-                        $service_url = 'https://payment.ecpay.com.tw/Cashier/AioCheckOut';
-                    }
                     $aio->HashKey = Configuration::get('ecpay_hash_key');
                     $aio->HashIV = Configuration::get('ecpay_hash_iv');
-                    $aio->ServiceURL = $service_url;
-                    $aio->Send['ReturnURL'] = $this->context->link->getModuleLink('ecpay', 'response', array());
+                    $aio->MerchantID = Configuration::get('ecpay_merchant_id');
 
-                    # Get the currency object
-                    $currency = $this->context->currency;
+                    if ($this->module->isTestMode($aio->MerchantID)) {
+                        $aio->ServiceURL = 'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut';
+                        $aio->Send['MerchantTradeNo'] = date('YmdHis');
+                    } else {
+                        $aio->ServiceURL = 'https://payment.ecpay.com.tw/Cashier/AioCheckOut';
+                        $aio->Send['MerchantTradeNo'] = '';
+                    }
+
+                    $tcOrderPayment = new TcOrderPayment();
+
+                    $aio->Send['StoreID'] = 'TekapoCart';
 
                     # Set the product info
                     $order_total = $cart->getOrderTotal(true, Cart::BOTH);
                     $aio->Send['TotalAmount'] = $this->module->formatOrderTotal($order_total);
+
+                    # Set the trade description
+                    $aio->Send['TradeDesc'] = 'ecpay_module_prestashop_1_0_0922';
+
+                    # Get the currency object
+                    $currency = $this->context->currency;
                     array_push(
                         $aio->Send['Items'],
                         array(
@@ -128,12 +134,13 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                         )
                     );
 
-                    # Set the trade description
-                    $aio->Send['TradeDesc'] = 'ecpay_module_prestashop_1_0_0922';
+                    $aio->Send['ReturnURL'] = $this->context->link->getModuleLink('ecpay', 'response', array());
 
                     # Get the chosen payment and installment
                     $type_pieces = explode('_', $payment_type);
                     $aio->Send['ChoosePayment'] = $type_pieces[0];
+                    $tcOrderPayment->payment_type = $aio->Send['ChoosePayment'];
+
                     $choose_installment = 0;
                     if (isset($type_pieces[1])) {
                         $choose_installment = $type_pieces[1];
@@ -148,6 +155,8 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                             # Credit installment parameters
                             if (!empty($choose_installment)) {
                                 $aio->SendExtend['CreditInstallment'] = $choose_installment;
+                                $tcOrderPayment->installment = $aio->SendExtend['CreditInstallment'];
+
                                 $aio->SendExtend['InstallmentAmount'] = $aio->Send['TotalAmount'];
                                 $aio->SendExtend['Redeem'] = false;
                             }
@@ -185,6 +194,12 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                         . '&id_order=' . $this->module->currentOrder
                         . '&key=' . $customer->secure_key
                     ;
+
+                    $order = new Order($this->module->currentOrder);
+                    $tcOrderPayment->id_order = $order->id;
+                    $tcOrderPayment->order_reference = $order->reference;
+                    $tcOrderPayment->module = $this->name;
+                    $tcOrderPayment->save();
 
                     # Get the redirect html
                     $aio->CheckOut();

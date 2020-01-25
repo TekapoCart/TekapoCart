@@ -302,7 +302,7 @@ class EzShip_Send extends EzShip_Aio
         ];
 
 
-        return parent::ServerPost($postParameters, $ServiceURL);
+        return static::ServerPost($postParameters, $ServiceURL);
     }
 }
 
@@ -502,7 +502,7 @@ if (!class_exists('EzShip_CheckMacValue', false)) {
     class EzShip_CheckMacValue
     {
 
-        static function generate($arParameters = array(), $suID = '', $secret = '', $encType = 0)
+        public static function generate($arParameters = array(), $suID = '', $secret = '', $encType = 0)
         {
             $sMacValue = '';
 

@@ -127,6 +127,20 @@ if (!class_exists('TcOrderShipping')) {
             $this->$field =  $date . ' - ' . $message . "\n" . $this->$field;
         }
 
+        public static function getLogByOrderId($order_id)
+        {
+            $query = new DBQuery();
+            $query->from('tc_order_shipping');
+            $query->where("id_order = '" . pSQL($order_id) . "'");
+            $rowOrder = Db::getInstance()->getRow($query);
+
+            if (is_array($rowOrder)) {
+                return new TcOrderShipping($rowOrder['id_tc_order_shipping']);
+            } else {
+                return false;
+            }
+        }
+
         public static function getLogByOrderRef($order_ref)
         {
             $query = new DBQuery();

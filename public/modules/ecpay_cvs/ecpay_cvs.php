@@ -71,7 +71,7 @@ class Ecpay_Cvs extends CarrierModule
                 `id_tc_cart_shipping` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
                 `id_cart` INT(10) UNSIGNED NULL DEFAULT NULL,
                 `id_carrier` INT(10) UNSIGNED NULL DEFAULT NULL,
-                `module` VARCHAR(255) NULL DEFAULT NULL,
+                `module` VARCHAR(64) NULL DEFAULT NULL,
                 `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
                 `store_code` VARCHAR(10) NULL DEFAULT NULL,
                 `store_name` VARCHAR(255) NULL DEFAULT NULL,
@@ -89,7 +89,7 @@ class Ecpay_Cvs extends CarrierModule
                 `id_tc_order_shipping` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
                 `id_order` INT(10) UNSIGNED NULL DEFAULT NULL,
                 `order_reference` VARCHAR(16) NULL DEFAULT NULL,
-                `module` VARCHAR(255) NULL DEFAULT NULL,
+                `module` VARCHAR(64) NULL DEFAULT NULL,
                 `send_status` VARCHAR(50) NULL DEFAULT NULL COMMENT "ezship: 訂單狀態, ecpay: 物流子類型",
                 `pay_type` VARCHAR(50) NULL DEFAULT NULL COMMENT "ezship: 訂單類別, ecpay: 是否代收貨款",
                 `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
@@ -671,7 +671,7 @@ class Ecpay_Cvs extends CarrierModule
         return true;
     }
 
-    public function createShippingOrder($order_id = null, $tc_order_shipping_id = null)
+    public function createShippingOrder($order_id)
     {
         try {
             $order = new Order((int)$order_id);
@@ -685,10 +685,9 @@ class Ecpay_Cvs extends CarrierModule
             $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
             $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
-            $tcOrderShipping = new TcOrderShipping($tc_order_shipping_id);
-
-            if ($tc_order_shipping_id > 0 && $tcOrderShipping->id_order != $order_id) {
-                throw new Exception('Invalid input values.');
+            $tcOrderShipping = TcOrderShipping::getLogByOrderId($order_id);
+            if (empty($tcOrderShipping)) {
+                $tcOrderShipping = new TcOrderShipping();
             }
 
             if (strlen($tcOrderShipping->module) > 0 && $tcOrderShipping->module != $this->name) {
@@ -761,6 +760,8 @@ class Ecpay_Cvs extends CarrierModule
             unset($AL);
 
             if (isset($feedback['ErrorMessage'])) {
+                $tcOrderShipping->appendMessage('return_message', $feedback['ErrorMessage']);
+                $tcOrderShipping->save();
                 throw new Exception($feedback['ErrorMessage']);
             }
 
