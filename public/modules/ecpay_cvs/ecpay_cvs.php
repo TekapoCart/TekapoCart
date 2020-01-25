@@ -212,7 +212,7 @@ class Ecpay_Cvs extends CarrierModule
             $phone = $address->phone;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
         if ($tcOrderShipping) {
             $store_data['type'] = $tcOrderShipping->store_type;
             $store_data['code'] = $tcOrderShipping->store_code;
@@ -239,7 +239,7 @@ class Ecpay_Cvs extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
         if ($tcOrderShipping) {
             $store_data['type'] = $tcOrderShipping->store_type;
             $store_data['code'] = $tcOrderShipping->store_code;
@@ -333,7 +333,7 @@ class Ecpay_Cvs extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
         if ($tcOrderShipping) {
 
             $store_data = [

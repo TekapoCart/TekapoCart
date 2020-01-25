@@ -77,7 +77,7 @@ class EzShip_Home extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
         if (!$tcOrderShipping) {
             $this->createShippingOrder($params['order']->id);
         }
@@ -138,13 +138,11 @@ class EzShip_Home extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
         if ($tcOrderShipping) {
-
             $this->smarty->assign(array(
                 'return_message' => $tcOrderShipping->return_message,
             ));
-
         }
 
         // 建立物流訂單 / 重新取號

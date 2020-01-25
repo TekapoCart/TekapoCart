@@ -111,7 +111,7 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
         if (!$tcOrderShipping) {
             $this->createShippingOrder($params['order']->id);
         }
@@ -186,7 +186,7 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderRef($params['order']->reference);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
         if ($tcOrderShipping) {
 
             $scheduled_data = [

@@ -75,6 +75,7 @@ class Ecpay extends PaymentModule
 		if (!parent::install()
             OR !$this->registerHook('paymentOptions')
             OR !$this->registerHook('paymentReturn')
+            OR !$this->registerHook('displayOrderDetail')
             OR !$this->registerHook('displayAdminOrderTabOrder')
             OR !$this->registerHook('displayAdminOrderContentOrder')
             OR !$this->installDb()
@@ -244,7 +245,7 @@ class Ecpay extends PaymentModule
     {
         if ($params['order']->module === 'ecpay') {
             $this->smarty->assign(array(
-                'tab_title' => $this->l('Payment on Delivery'),
+                'tab_title' => $this->l('ECPay Integration Payment'),
             ));
             return $this->display(__FILE__, '/views/templates/hook/tab_order.tpl');
         }
@@ -254,9 +255,11 @@ class Ecpay extends PaymentModule
     // 後台訂單詳細頁籤內容
     public function hookDisplayAdminOrderContentOrder($params)
     {
-        if ($params['order']->module === 'ecpay') {
-            return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
+        if ($params['order']->module !== 'ecpay') {
+            return false;
         }
+
+        return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
     }
 
 	public function checkCurrency($cart)

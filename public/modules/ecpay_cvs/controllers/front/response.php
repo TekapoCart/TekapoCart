@@ -32,7 +32,7 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
                 $order_reference = substr($feedback['MerchantTradeNo'], 0, 16);
 
                 $tcOrderShipping = TcOrderShipping::getLogByOrderRef($order_reference);
-                if (empty($tcOrderShipping->id)) {
+                if (!$tcOrderShipping) {
                     throw new Exception('TcOrderShipping is invalid.');
                 }
 
