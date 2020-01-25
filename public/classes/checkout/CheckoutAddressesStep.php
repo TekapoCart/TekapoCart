@@ -216,7 +216,9 @@ class CheckoutAddressesStepCore extends AbstractCheckoutStep
             }
         }
 
-        $this->setTitle($this->getTranslator()->trans('Addresses', array(), 'Shop.Theme.Checkout'));
+        // suzy: 2018-07-08 Shipping Address 改成 Shipping Information
+        // $this->setTitle($this->getTranslator()->trans('Addresses', array(), 'Shop.Theme.Checkout'));
+        $this->setTitle($this->getTranslator()->trans('Shipping Information', array(), 'Shop.Theme.Checkout'));
 
         return $this;
     }

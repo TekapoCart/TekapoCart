@@ -93,6 +93,10 @@ $(document).ready(() => {
     setUpCheckout();
     toggleImage();
     toggleTotal();
+    // suzy: 2020-01-25 twzipcode
+    $('#twzipcode').twzipcode({
+        'zipcodeName'  : 'postcode'
+    });
   }
 
   prestashop.on('updatedDeliveryForm', (params) => {
@@ -115,7 +119,15 @@ $(document).ready(() => {
           toggleTotal();
       });
   }
-
-
+  // suzy: 2020-01-25 twzipcode
+  else if ($('.js-current-step').attr('id') == 'checkout-addresses-step') {
+      $(document).ajaxComplete(function() {
+          $('#twzipcode').twzipcode({
+              'zipcodeName'  : 'postcode'
+          });
+      });
+  }
 
 });
+
+

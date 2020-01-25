@@ -86,7 +86,8 @@ let config = {
     ]
 };
 
-if (process.env.NODE_ENV === 'production') {
+// suzy: 2020-01-25 js 直接壓
+// if (process.env.NODE_ENV === 'production') {
     config.plugins.push(
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: false,
@@ -104,6 +105,6 @@ if (process.env.NODE_ENV === 'production') {
             minimize: true
         })
     );
-}
+// }
 
 module.exports = config;

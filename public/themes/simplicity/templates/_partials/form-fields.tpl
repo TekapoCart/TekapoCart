@@ -30,7 +30,7 @@
 
 {else}
 
-  <div class="form-group row {if !empty($field.errors)}has-error{/if}{if !empty($field.type == 'password')}hidden-xs-up{/if}">
+  <div class="form-group row {if !empty($field.errors)}has-error{/if}{if $field.type == 'password'}hidden-xs-up{/if}">
     {if $field.type !== 'checkbox' &&
         $field.type !== 'radio-buttons' &&
         $field.type !== 'password' &&
@@ -183,6 +183,13 @@
           {/block}
 
       {else}
+
+
+        {if isset($formFields.id_country) && $formFields.id_country.value == 203 && $field.name == 'city'}
+            <select name="county" class="form-control form-control-select half"></select>
+            <select name="district" class="form-control form-control-select half"></select>
+            {$field.type='hidden'}
+        {/if}
 
         {block name='form_field_item_other'}
           <input

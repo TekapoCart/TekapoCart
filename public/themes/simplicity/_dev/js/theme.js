@@ -45,6 +45,8 @@ import EventEmitter from 'events';
 
 import './lib/bootstrap-filestyle.min';
 import './lib/jquery.scrollbox.min';
+// suzy: 2020-01-25 twzipcode
+import './lib/jquery.twzipcode';
 
 import './components/block-cart';
 
@@ -67,7 +69,7 @@ $(document).ready(() => {
   productMinitature.init();
   productSelect.init();
 
-  // msc start
+  // suzy: msc start
   let pack;
   if (typeof navigator.scriptList == 'undefined') {
     navigator.scriptList = [];

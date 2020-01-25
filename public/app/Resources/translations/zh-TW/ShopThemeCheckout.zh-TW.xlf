@@ -508,7 +508,7 @@ File: themes/classic/templates/checkout/_partials/steps/addresses.tpl:82</note>
       </trans-unit>
       <trans-unit id="baa63a898921164abe2d1d532ab27e79" approved="yes">
         <source>Your Invoice Address</source>
-        <target xml:lang="zh-TW">您的發票地址</target>
+        <target xml:lang="zh-TW">配送地址</target>
         <note>Context:
 File: themes/classic/templates/checkout/_partials/steps/addresses.tpl:91</note>
       </trans-unit>

@@ -28,13 +28,13 @@ File: classes/form/CustomerAddressFormatter.php:200</note>
       </trans-unit>
       <trans-unit id="57d056ed0984166336b7879c2af3657f" approved="yes">
         <source>City</source>
-        <target xml:lang="zh-TW">市</target>
+        <target xml:lang="zh-TW">縣市鄉鎮市區</target>
         <note>Context:
 File: classes/form/CustomerAddressFormatter.php:202</note>
       </trans-unit>
       <trans-unit id="59716c97497eb9694541f7c3d37b1a4d" approved="yes">
         <source>Country</source>
-        <target xml:lang="zh-TW">國家</target>
+        <target xml:lang="zh-TW">國家/區域</target>
         <note>Context:
 File: classes/form/CustomerAddressFormatter.php:204</note>
       </trans-unit>
@@ -163,7 +163,7 @@ File: themes/classic/templates/customer/_partials/order-messages.tpl:59</note>
       </trans-unit>
       <trans-unit id="1625e29c02062efe5dbc42c3efeeebd5">
         <source>-- please choose country --</source>
-        <target xml:lang="zh-TW">-- 請選擇國家</target>
+        <target xml:lang="zh-TW">-- 請選擇國家/區域</target>
         <note>Line: 59</note>
       </trans-unit>
       <trans-unit id="deb10517653c255364175796ace3553f" approved="yes">

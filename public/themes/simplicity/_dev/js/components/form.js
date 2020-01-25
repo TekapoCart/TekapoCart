@@ -28,9 +28,6 @@ export default class Form {
   init(){
     this.parentFocus();
     this.togglePasswordVisibility();
-
-    // suzy: 2018-07-08 地址欄位可略過
-    this.bypassAddress();
   }
 
   parentFocus() {
@@ -52,16 +49,6 @@ export default class Form {
         elm.attr('type', 'password');
         $(this).text($(this).data('textShow'));
       }
-
-    });
-  }
-
-  bypassAddress() {
-    $('.js-bypass-address').on('click', function() {
-      $('input[name=address1]').val('N/A');
-      $('input[name=city]').val('N/A');
-      $('input[name=postcode]').val('00');
-      $('button[name=confirm-addresses]').trigger('click');
     });
   }
 

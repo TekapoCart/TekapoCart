@@ -517,7 +517,7 @@ File: controllers/front/OrderController.php:67</note>
     <body>
       <trans-unit id="ea34b5c6cf6511c7c9e23cf7bf5d6792" approved="yes">
         <source>Your address is incomplete, please update it.</source>
-        <target xml:lang="zh-TW">您的地址不完整，請更新。</target>
+        <target xml:lang="zh-TW">配送資訊格式有誤，請重新編輯。</target>
         <note>Context:
 File: themes/classic/templates/checkout/_partials/steps/addresses.tpl:116</note>
       </trans-unit>

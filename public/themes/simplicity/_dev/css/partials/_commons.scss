@@ -275,12 +275,14 @@ input[type=number] {
   -moz-appearance: none;
   -webkit-appearance: none;
   background: $gray-light url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAPklEQVR4Ae3TwREAEBQD0V/6do4SXPZg7EsBhsQ8IEmSMOsiuEfg3gL3oXC7wK0bd1G4o8X9F4yIkyQfSrIByQBjp7QuND8AAAAASUVORK5CYII=") no-repeat scroll right 0.5rem center / 1.25rem 1.25rem;
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   &:focus {
     outline: none;
     border: $input-btn-border-width solid $input-border-color;
   }
-
+  &.half {
+    width: 49%; display: inline;
+  }
 }
 
 .form-control-valign {
