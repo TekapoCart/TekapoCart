@@ -87,6 +87,23 @@ if (!class_exists('TcOrderPayment')) {
             $this->$field =  $date . ' - ' . $message . "\n" . $this->$field;
         }
 
+        public static function getLogByOrderId($order_id, $format = 'object')
+        {
+            $query = new DBQuery();
+            $query->from('tc_order_payment');
+            $query->where("id_order = '" . pSQL($order_id) . "'");
+            $rowOrder = Db::getInstance()->getRow($query);
+
+            if (is_array($rowOrder)) {
+                if ($format == 'array') {
+                    return $rowOrder;
+                }
+                return new TcOrderPayment($rowOrder['id_tc_order_payment']);
+            } else {
+                return false;
+            }
+        }
+
         public static function getLogByOrderRef($order_ref)
         {
             $query = new DBQuery();

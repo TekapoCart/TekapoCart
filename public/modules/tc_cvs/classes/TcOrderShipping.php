@@ -127,7 +127,7 @@ if (!class_exists('TcOrderShipping')) {
             $this->$field =  $date . ' - ' . $message . "\n" . $this->$field;
         }
 
-        public static function getLogByOrderId($order_id)
+        public static function getLogByOrderId($order_id, $format = 'object')
         {
             $query = new DBQuery();
             $query->from('tc_order_shipping');
@@ -135,6 +135,9 @@ if (!class_exists('TcOrderShipping')) {
             $rowOrder = Db::getInstance()->getRow($query);
 
             if (is_array($rowOrder)) {
+                if ($format == 'array') {
+                    return $rowOrder;
+                }
                 return new TcOrderShipping($rowOrder['id_tc_order_shipping']);
             } else {
                 return false;

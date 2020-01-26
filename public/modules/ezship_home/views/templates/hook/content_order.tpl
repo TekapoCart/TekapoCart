@@ -10,8 +10,11 @@
             {if !empty($sn_id) && $sn_id != '00000000'}
                 <p>店到店編號：{$sn_id}</p>
             {/if}
+            {if strlen($return_code) > 0}
+                <p>物流狀態：<br>{$return_code|nl2br}</p>
+            {/if}
             {if strlen($return_message) > 0}
-                <p>物流狀態回傳：<br>{$return_message|nl2br}</p>
+                <p>物流狀態說明：<br>{$return_message|nl2br}</p>
             {/if}
         </div>
     </div>

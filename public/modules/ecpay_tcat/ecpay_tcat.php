@@ -186,19 +186,18 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
-
             $scheduled_data = [
-                'delivery_time' => $this->deliveryTimeOptions[$tcOrderShipping->delivery_time],
+                'delivery_time' => $this->deliveryTimeOptions[$tcOrderShipping['delivery_time']],
             ];
 
             $this->smarty->assign(array(
                 'scheduled_data' => $scheduled_data,
-                'return_message' => $tcOrderShipping->return_message,
+                'return_message' => $tcOrderShipping['return_message'],
             ));
 
-            if (!empty($tcOrderShipping->sn_id)) {
+            if (!empty($tcOrderShipping['sn_id'])) {
 
                 // 產生托運單
                 try {
@@ -207,7 +206,7 @@ class Ecpay_Tcat extends CarrierModule
                     $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
                     $AL->Send = array(
                         'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
-                        'AllPayLogisticsID' => $tcOrderShipping->sn_id,
+                        'AllPayLogisticsID' => $tcOrderShipping['sn_id'],
                     );
                     $print_html = $AL->PrintTradeDoc('產生托運單');
 
@@ -219,7 +218,7 @@ class Ecpay_Tcat extends CarrierModule
                 }
 
                 $this->smarty->assign([
-                    'sn_id' => $tcOrderShipping->sn_id,
+                    'sn_id' => $tcOrderShipping['sn_id'],
                 ]);
             }
 
@@ -307,7 +306,7 @@ class Ecpay_Tcat extends CarrierModule
             $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
             $tcOrderShipping = TcOrderShipping::getLogByOrderId($order_id);
-            if (empty($tcOrderShipping)) {
+            if (!$tcOrderShipping) {
                 $tcOrderShipping = new TcOrderShipping();
             }
 

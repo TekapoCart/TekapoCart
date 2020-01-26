@@ -212,12 +212,12 @@ class Ecpay_Cvs extends CarrierModule
             $phone = $address->phone;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
-            $store_data['type'] = $tcOrderShipping->store_type;
-            $store_data['code'] = $tcOrderShipping->store_code;
-            $store_data['name'] = $tcOrderShipping->store_name;
-            $store_data['addr'] = $tcOrderShipping->store_addr;
+            $store_data['type'] = $tcOrderShipping['store_type'];
+            $store_data['code'] = $tcOrderShipping['store_code'];
+            $store_data['name'] = $tcOrderShipping['store_name'];
+            $store_data['addr'] = $tcOrderShipping['store_addr'];
         } else {
             $store_data = $this->getStoreData($params['order']->id_cart, $params['order']->id_carrier);
             $this->createShippingOrder($params['order']->id);
@@ -239,12 +239,12 @@ class Ecpay_Cvs extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
-            $store_data['type'] = $tcOrderShipping->store_type;
-            $store_data['code'] = $tcOrderShipping->store_code;
-            $store_data['name'] = $tcOrderShipping->store_name;
-            $store_data['addr'] = $tcOrderShipping->store_addr;
+            $store_data['type'] = $tcOrderShipping['store_type'];
+            $store_data['code'] = $tcOrderShipping['store_code'];
+            $store_data['name'] = $tcOrderShipping['store_name'];
+            $store_data['addr'] = $tcOrderShipping['store_addr'];
 
             $this->smarty->assign(array(
                 'store_data' => $store_data,
@@ -333,32 +333,31 @@ class Ecpay_Cvs extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
-
             $store_data = [
-                'type' => $tcOrderShipping->store_type,
-                'code' => $tcOrderShipping->store_code,
-                'name' => $tcOrderShipping->store_name,
-                'addr' => $tcOrderShipping->store_addr,
+                'type' => $tcOrderShipping['store_type'],
+                'code' => $tcOrderShipping['store_code'],
+                'name' => $tcOrderShipping['store_name'],
+                'addr' => $tcOrderShipping['store_addr'],
             ];
 
             $this->smarty->assign([
                 'store_data' => $store_data,
-                'return_message' => $tcOrderShipping->return_message,
-                'change_store_message' => $tcOrderShipping->change_store_message,
+                'return_message' => $tcOrderShipping['return_message'],
+                'change_store_message' => $tcOrderShipping['change_store_message'],
             ]);
 
-            if (!empty($tcOrderShipping->sn_id)) {
+            if (!empty($tcOrderShipping['sn_id'])) {
 
                 // 更新門市
-                if ($tcOrderShipping->change_store_status == 1) {
+                if ($tcOrderShipping['change_store_status'] == 1) {
                     try {
                         $AL = new EcpayLogistics();
                         $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
                         $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
                         $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
-                        $AL->Send['LogisticsSubType'] = $tcOrderShipping->send_status;
+                        $AL->Send['LogisticsSubType'] = $tcOrderShipping['send_status'];
                         $AL->Send['IsCollection'] = EcpayIsCollection::NO;
                         $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'selectStore', []);
                         $AL->Send['ExtraData'] = $this->context->cart->id;
@@ -372,7 +371,7 @@ class Ecpay_Cvs extends CarrierModule
                     }
                 }
 
-                if ($tcOrderShipping->send_status == EcpayLogisticsSubType::UNIMART_C2C) {
+                if ($tcOrderShipping['send_status'] == EcpayLogisticsSubType::UNIMART_C2C) {
                     // 列印繳款單
                     try {
                         $AL = new EcpayLogistics();
@@ -380,9 +379,9 @@ class Ecpay_Cvs extends CarrierModule
                         $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
                         $AL->Send = array(
                             'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
-                            'AllPayLogisticsID' => $tcOrderShipping->sn_id,
-                            'CVSPaymentNo' => $tcOrderShipping->cvs_shipping_number,
-                            'CVSValidationNo' => $tcOrderShipping->cvs_validation_number,
+                            'AllPayLogisticsID' => $tcOrderShipping['sn_id'],
+                            'CVSPaymentNo' => $tcOrderShipping['cvs_shipping_number'],
+                            'CVSValidationNo' => $tcOrderShipping['cvs_validation_number'],
                         );
                         $print_html = $AL->PrintUnimartC2CBill('列印繳款單');
 
@@ -392,7 +391,7 @@ class Ecpay_Cvs extends CarrierModule
                     } catch (Exception $e) {
                         echo $e->getMessage();
                     }
-                } elseif ($tcOrderShipping->send_status == EcpayLogisticsSubType::UNIMART) {
+                } elseif ($tcOrderShipping['send_status'] == EcpayLogisticsSubType::UNIMART) {
                     // 產生一段標
                     try {
                         $AL = new EcpayLogistics();
@@ -400,7 +399,7 @@ class Ecpay_Cvs extends CarrierModule
                         $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
                         $AL->Send = array(
                             'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
-                            'AllPayLogisticsID' => $tcOrderShipping->sn_id,
+                            'AllPayLogisticsID' => $tcOrderShipping['sn_id'],
                         );
                         $print_html = $AL->PrintTradeDoc('產生一段標');
 
@@ -413,7 +412,7 @@ class Ecpay_Cvs extends CarrierModule
                 }
 
                 $this->smarty->assign([
-                    'sn_id' => $tcOrderShipping->sn_id,
+                    'sn_id' => $tcOrderShipping['sn_id'],
                 ]);
             }
         }
@@ -686,7 +685,7 @@ class Ecpay_Cvs extends CarrierModule
             $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
 
             $tcOrderShipping = TcOrderShipping::getLogByOrderId($order_id);
-            if (empty($tcOrderShipping)) {
+            if (!$tcOrderShipping) {
                 $tcOrderShipping = new TcOrderShipping();
             }
 

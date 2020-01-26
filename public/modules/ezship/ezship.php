@@ -193,12 +193,12 @@ class EzShip extends CarrierModule
             $phone = $address->phone;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
-            $store_data['type'] = $tcOrderShipping->store_type;
-            $store_data['code'] = $tcOrderShipping->store_code;
-            $store_data['name'] = $tcOrderShipping->store_name;
-            $store_data['addr'] = $tcOrderShipping->store_addr;
+            $store_data['type'] = $tcOrderShipping['store_type'];
+            $store_data['code'] = $tcOrderShipping['store_code'];
+            $store_data['name'] = $tcOrderShipping['store_name'];
+            $store_data['addr'] = $tcOrderShipping['store_addr'];
         } else {
             $store_data = $this->getStoreData($params['order']->id_cart, $params['order']->id_carrier);
             $this->createShippingOrder($params['order']->id);
@@ -220,12 +220,12 @@ class EzShip extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
-            $store_data['type'] = $tcOrderShipping->store_type;
-            $store_data['code'] = $tcOrderShipping->store_code;
-            $store_data['name'] = $tcOrderShipping->store_name;
-            $store_data['addr'] = $tcOrderShipping->store_addr;
+            $store_data['type'] = $tcOrderShipping['store_type'];
+            $store_data['code'] = $tcOrderShipping['store_code'];
+            $store_data['name'] = $tcOrderShipping['store_name'];
+            $store_data['addr'] = $tcOrderShipping['store_addr'];
 
             $this->smarty->assign(array(
                 'store_data' => $store_data,
@@ -314,19 +314,19 @@ class EzShip extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
             $store_data = [
-                'type' => $tcOrderShipping->store_type,
-                'code' => $tcOrderShipping->store_code,
-                'name' => $tcOrderShipping->store_name,
-                'addr' => $tcOrderShipping->store_addr,
+                'type' => $tcOrderShipping['store_type'],
+                'code' => $tcOrderShipping['store_code'],
+                'name' => $tcOrderShipping['store_name'],
+                'addr' => $tcOrderShipping['store_addr'],
             ];
 
             $this->smarty->assign([
                 'store_data' => $store_data,
-                'return_message' => $tcOrderShipping->return_message,
-                'change_store_message' => $tcOrderShipping->change_store_message,
+                'return_message' => $tcOrderShipping['return_message'],
+                'change_store_message' => $tcOrderShipping['change_store_message'],
             ]);
 
             // 更新門市
@@ -346,7 +346,7 @@ class EzShip extends CarrierModule
             ));
 
             $this->smarty->assign([
-                'sn_id' => $tcOrderShipping->sn_id,
+                'sn_id' => $tcOrderShipping['sn_id'],
             ]);
         }
 
@@ -580,7 +580,7 @@ class EzShip extends CarrierModule
                 $aio->Send['orderID'] = $order->reference;
 
                 $tcOrderShipping = TcOrderShipping::getLogByOrderId($order_id);
-                if (empty($tcOrderShipping)) {
+                if (!$tcOrderShipping) {
                     $tcOrderShipping = new TcOrderShipping();
                 }
 

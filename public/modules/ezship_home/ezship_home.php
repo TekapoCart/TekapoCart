@@ -138,10 +138,10 @@ class EzShip_Home extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
             $this->smarty->assign(array(
-                'return_message' => $tcOrderShipping->return_message,
+                'return_message' => $tcOrderShipping['return_message'],
             ));
         }
 
@@ -223,7 +223,7 @@ class EzShip_Home extends CarrierModule
                 $aio->Send['orderID'] = $order->reference;
 
                 $tcOrderShipping = TcOrderShipping::getLogByOrderId($order_id);
-                if (empty($tcOrderShipping)) {
+                if (!$tcOrderShipping) {
                     $tcOrderShipping = new TcOrderShipping();
                 }
 

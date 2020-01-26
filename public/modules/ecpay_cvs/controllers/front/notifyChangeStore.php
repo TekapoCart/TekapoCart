@@ -28,7 +28,7 @@ class Ecpay_CvsNotifyChangeStoreModuleFrontController extends ModuleFrontControl
 
                 $sn_id = $feedback['AllPayLogisticsID'];
 
-                $tcOrderShipping = TcOrderShipping::getLoggerBySnId($sn_id);
+                $tcOrderShipping = TcOrderShipping::getLogBySnId($sn_id);
                 if (empty($tcOrderShipping->id)) {
                     throw new Exception('TcOrderShipping is not found.');
                 }
