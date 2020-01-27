@@ -245,6 +245,7 @@ class Ecpay_Cvs extends CarrierModule
             $store_data['code'] = $tcOrderShipping['store_code'];
             $store_data['name'] = $tcOrderShipping['store_name'];
             $store_data['addr'] = $tcOrderShipping['store_addr'];
+            $store_data['return_message'] = $tcOrderShipping['return_message'];
 
             $this->smarty->assign(array(
                 'store_data' => $store_data,
@@ -467,7 +468,6 @@ class Ecpay_Cvs extends CarrierModule
 
         return true;
     }
-
 
     private function checkDeliveryInput($params)
     {
@@ -740,7 +740,7 @@ class Ecpay_Cvs extends CarrierModule
             $AL->Send['Remark'] = '';
 
             $AL->SendExtend = [];
-            if ($tc_order_shipping_id) {
+            if (empty($tcOrderShipping->id)) {
                 $AL->SendExtend['ReceiverStoreID'] = $tcOrderShipping->store_code;
             } else {
                 $store_data = $this->getStoreData($order->id_cart, $order->id_carrier);
@@ -786,17 +786,6 @@ class Ecpay_Cvs extends CarrierModule
         return intval(round($order_total));
     }
 
-    public static function logMessage($message, $is_append = false)
-    {
-        $path = _PS_LOG_DIR_ . 'ecpay_logistics.log';
-
-        if (!$is_append) {
-            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
-        } else {
-            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
-        }
-    }
-
     public function getStoreData($cart_id, $carrier_id)
     {
         $tcCartShipping = TcCartShipping::getStoreData($cart_id, $carrier_id);
@@ -820,5 +809,45 @@ class Ecpay_Cvs extends CarrierModule
         TcCartShipping::saveStoreData($cart_id, $carrier_id, $store_data);
     }
 
+    public function getShippingDescription($return_code) {
+        switch ($return_code) {
+            // 商品已送至物流中心
+            case 2030:
+            case 3024:
+                return '商品已送至物流中心';
+                break;
+            // 商品已送達門市
+            case 2063:
+            case 2073:
+            case 3018:
+                return '商品已送達門市';
+                break;
+            // 消費者成功取件
+            case 2067:
+            case 3022:
+                return '消費者成功取件';
+                break;
+            // 消費者七天未取件
+            case 2074:
+            case 3020:
+                return '消費者七天未取件';
+                break;
+            // 門市關轉
+            case 2037:
+                return '門市關轉';
+                break;
+        }
+    }
+
+    public static function logMessage($message, $is_append = false)
+    {
+        $path = _PS_LOG_DIR_ . 'ecpay_logistics.log';
+
+        if (!$is_append) {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+        } else {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+        }
+    }
 
 }

@@ -38,3 +38,6 @@ $_MODULE['<{ecpay}prestashop>payment_return_6ccb75f3173e1dd2a4e42a1ea1ea318c'] =
 $_MODULE['<{ecpay}prestashop>payment_return_292f535a3b6fe8853df2f03c8ed890a1'] = 'ATM';
 $_MODULE['<{ecpay}prestashop>payment_return_51332b8fec73c1f1aeb5259d61fabb3a'] = 'CVS';
 $_MODULE['<{ecpay}prestashop>payment_return_294ebdec6ae91e8d0e0a2168af57a518'] = 'BARCODE';
+$_MODULE['<{ecpay}prestashop>payment_return_844b576f828ae4d7005489f92c70a361'] = 'ECPay Return status';
+$_MODULE['<{ecpay}prestashop>payment_return_9b5638a72c8871a45d0499853e7e6906'] = 'Payment success';
+$_MODULE['<{ecpay}prestashop>payment_return_e3f59aca200687def611191ad53cf742'] = 'Take a number success';

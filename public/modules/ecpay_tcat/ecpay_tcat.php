@@ -420,7 +420,7 @@ class Ecpay_Tcat extends CarrierModule
 
             $AL->SendExtend['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
 
-            if ($tc_order_shipping_id) {
+            if (empty($tcOrderShipping->id)) {
                 $AL->SendExtend['ScheduledDeliveryTime'] = $tcOrderShipping->delivery_time;
             } else {
                 $scheduled_data = $this->getScheduledData($order->id_cart, $order->id_carrier);
@@ -462,17 +462,6 @@ class Ecpay_Tcat extends CarrierModule
         return intval(round($order_total));
     }
 
-    public static function logMessage($message, $is_append = false)
-    {
-        $path = _PS_LOG_DIR_ . 'ecpay_logistics.log';
-
-        if (!$is_append) {
-            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
-        } else {
-            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
-        }
-    }
-
     public function getScheduledData($cart_id, $carrier_id)
     {
         $tcCartShipping = TcCartShipping::getScheduledData($cart_id, $carrier_id);
@@ -493,4 +482,16 @@ class Ecpay_Tcat extends CarrierModule
         TcCartShipping::saveScheduledData($cart_id, $carrier_id, $scheduled_data);
     }
 
+
+
+    public static function logMessage($message, $is_append = false)
+    {
+        $path = _PS_LOG_DIR_ . 'ecpay_logistics.log';
+
+        if (!$is_append) {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+        } else {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+        }
+    }
 }

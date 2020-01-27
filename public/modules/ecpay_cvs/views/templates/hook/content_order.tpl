@@ -29,7 +29,7 @@
                     <p>ECPay 物流交易編號：{$sn_id}</p>
                 {/if}
                 {if strlen($return_code) > 0}
-                    <p>物流狀態：<br>{$return_code|nl2br}</p>
+                    <p>物流回傳狀態：<br>{$return_code}</p>
                 {/if}
                 {if strlen($return_message) > 0}
                     <p>物流狀態說明：<br>{$return_message|nl2br}</p>

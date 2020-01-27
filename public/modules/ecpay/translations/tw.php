@@ -24,7 +24,7 @@ $_MODULE['<{ecpay}prestashop>ecpay_c9cc8cce247e49bae79f15173ce97354'] = '儲存'
 $_MODULE['<{ecpay}prestashop>ecpay_61b0554433c43ddb1564bef46c32e664'] = '更新失敗';
 $_MODULE['<{ecpay}prestashop>ecpay_c888438d14855d7d96a2724ee9c306bd'] = '設定已儲存';
 
-$_MODULE['<{ecpay}prestashop>payment_return_707436a5aa13b82a4d777f64c717a625'] = '付款方式';
+$_MODULE['<{ecpay}prestashop>payment_return_f0aaaae189e9c7711931a65ffcd22543'] = '付款方式';
 $_MODULE['<{ecpay}prestashop>payment_return_ba5376b5ba3216a7a51eabb18265d921'] = '分期';
 $_MODULE['<{ecpay}prestashop>payment_return_250cb2b1b886e024b1ed5e9b976c6d30'] = '繳費銀行代碼';
 $_MODULE['<{ecpay}prestashop>payment_return_b1b7e2c59ccf0246836b5627a45df951'] = '繳費虛擬帳號';
@@ -38,3 +38,6 @@ $_MODULE['<{ecpay}prestashop>payment_return_6ccb75f3173e1dd2a4e42a1ea1ea318c'] =
 $_MODULE['<{ecpay}prestashop>payment_return_292f535a3b6fe8853df2f03c8ed890a1'] = 'ATM 虛擬帳號';
 $_MODULE['<{ecpay}prestashop>payment_return_51332b8fec73c1f1aeb5259d61fabb3a'] = '超商代碼';
 $_MODULE['<{ecpay}prestashop>payment_return_294ebdec6ae91e8d0e0a2168af57a518'] = '超商條碼';
+$_MODULE['<{ecpay}prestashop>payment_return_844b576f828ae4d7005489f92c70a361'] = '金流回傳狀態';
+$_MODULE['<{ecpay}prestashop>payment_return_9b5638a72c8871a45d0499853e7e6906'] = '付款成功';
+$_MODULE['<{ecpay}prestashop>payment_return_e3f59aca200687def611191ad53cf742'] = '付款成功';

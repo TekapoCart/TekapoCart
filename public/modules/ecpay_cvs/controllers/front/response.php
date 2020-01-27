@@ -53,7 +53,8 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
                     // 商品已送至物流中心
                     case 2030:
                     case 3024:
-                        // 商品已送達門市
+                        break;
+                    // 商品已送達門市
                     case 2063:
                     case 2073:
                     case 3018:

@@ -11,5 +11,9 @@
         </dl>
         {* 商品抵達指定門市後，將會有簡訊通知取貨 *}
         <p>{l s='SMS notification will be sent when the goods arrive.' mod='tc_cvs'}</p>
+
+        {if strlen(return_message) > 0}
+            <p>物流追蹤：<br>{$return_message|nl2br}</p>
+        {/if}
     </div>
 {/if}
