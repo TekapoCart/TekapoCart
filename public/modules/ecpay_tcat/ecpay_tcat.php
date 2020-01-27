@@ -25,7 +25,7 @@ class Ecpay_Tcat extends CarrierModule
         parent::__construct();
 
         $this->displayName = $this->l('ECPay TCAT Home delivery');
-        $this->description = 'https://www.tekapo.io/';
+        $this->description = '不支援貨到付款。';
         $this->confirmUninstall = $this->l('Do you want to uninstall ecpay_tcat module?');
 
         $invoke_result = $this->invokeEcpaySDK();

@@ -23,7 +23,7 @@ class EzShip extends CarrierModule
         parent::__construct();
 
         $this->displayName = $this->l('ezShip CVS pickup in-store');
-        $this->description = 'https://www.tekapo.io/';
+        $this->description = 'OK超商 / 萊爾富 / 全家取貨，支援取貨付款。';
         $this->confirmUninstall = $this->l('Do you want to uninstall ezship module?');
 
         $this->ezShipParams = [

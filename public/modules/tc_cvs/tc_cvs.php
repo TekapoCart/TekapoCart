@@ -23,7 +23,7 @@ class Tc_Cvs extends CarrierModule
         parent::__construct();
 
         $this->displayName = $this->l('TekapoCart 7-11 pickup in-store');
-        $this->description = 'https://www.tekapo.io/';
+        $this->description = '無需申請物流平台，商家自行申請交貨便代碼，不支援取貨付款。';
         $this->confirmUninstall = $this->l('Do you want to uninstall tc_cvs module?');
 
         $this->tcCvsParams = [

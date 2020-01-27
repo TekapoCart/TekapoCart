@@ -23,7 +23,7 @@ class Ecpay_Cvs extends CarrierModule
         parent::__construct();
 
         $this->displayName = $this->l('ECPay 7-11 pickup in-store');
-        $this->description = 'https://www.tekapo.io/';
+        $this->description = '支援貨到付款，店到店 / 大宗寄倉。';
         $this->confirmUninstall = $this->l('Do you want to uninstall ecpay_cvs module?');
 
         $invoke_result = $this->invokeEcpaySDK();

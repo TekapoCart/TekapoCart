@@ -20,7 +20,7 @@ class EzShip_Home extends CarrierModule
         parent::__construct();
 
         $this->displayName = $this->l('ezShip Home delivery');
-        $this->description = 'https://www.tekapo.io/';
+        $this->description = '宅配通，支援貨到付款。';
         $this->confirmUninstall = $this->l('Do you want to uninstall ezship_home module?');
 
     }
@@ -120,22 +120,6 @@ class EzShip_Home extends CarrierModule
             $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order', true, null, null, array('step' => 2)));
         }
 
-//        if (!$this->checkShippingInput($params)) {
-//            $rawData = Db::getInstance()->getValue(
-//                'SELECT checkout_session_data FROM ' . _DB_PREFIX_ . 'cart WHERE id_cart = ' . (int)$this->context->cart->id
-//            );
-//            $data = json_decode($rawData, true);
-//
-//            if (isset($data['checkout-delivery-step'])) {
-//                $data['checkout-delivery-step']['step_is_complete'] = '';
-//                Db::getInstance()->execute(
-//                    'UPDATE ' . _DB_PREFIX_ . 'cart SET checkout_session_data = "' . pSQL(json_encode($data)) . '"
-//                                WHERE id_cart = ' . (int)$this->context->cart->id
-//                );
-//            }
-//
-//            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order'));
-//        }
     }
 
     // 後台訂單詳細頁籤

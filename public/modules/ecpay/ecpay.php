@@ -19,13 +19,13 @@ class Ecpay extends PaymentModule
         $this->name = 'ecpay';
         $this->tab = 'payments_gateways';
         $this->version = '1.0';
-        $this->author = 'ECPay x TekapoCart';
+        $this->author = 'ECPay X TekapoCart';
         $this->bootstrap = true;
 
         parent::__construct();
 
         $this->displayName = $this->l('ECPay Payment');
-        $this->description = 'https://www.ecpay.com.tw/ X https://www.tekapo.io/';
+        $this->description = '信用卡、分期、網路 ATM、ATM 虛擬帳號、超商代碼、超商條碼。';
         $this->confirmUninstall = $this->l('Do you want to uninstall ECPay payment module?');
 
         $this->ecpayParams = array(

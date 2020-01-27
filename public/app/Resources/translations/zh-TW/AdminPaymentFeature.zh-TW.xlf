@@ -38,7 +38,7 @@ File: controllers/admin/AdminPaymentPreferencesController.php:262</note>
     <body>
       <trans-unit id="c2aa74ac66698f48002031386e2d8776" approved="yes">
         <source>Active payment</source>
-        <target xml:lang="zh-TW">如欲使用 SmilePay 模組，請先至 SmilePay 線上申請一般商家帳號；刷卡服務需申請成為特店商家。詳細差異及收費方式請見 SmilePay 官網。</target>
+        <target xml:lang="zh-TW">可用模組</target>
         <note>Context:
 File: controllers/admin/AdminPaymentController.php:125</note>
       </trans-unit>
