@@ -181,7 +181,7 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                     }
 
                     # Create an order
-                    $order_status_id = $this->module->getOrderStatusID('created', $payment_type); # Preparation in progress
+                    $order_status_id = $this->module->getOrderStatusID('created'); # Preparation in progress
                     $this->module->validateOrder($cart_id, $order_status_id, $order_total, $this->module->displayName, $chosen_payment_desc, array(),
                         (int)$currency->id, false, $customer->secure_key);
 

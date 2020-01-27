@@ -249,6 +249,7 @@ class Ecpay_Cvs extends CarrierModule
 
             $this->smarty->assign(array(
                 'store_data' => $store_data,
+                'return_message' => $tcOrderShipping['return_message'],
             ));
         }
 
@@ -345,6 +346,7 @@ class Ecpay_Cvs extends CarrierModule
 
             $this->smarty->assign([
                 'store_data' => $store_data,
+                'return_status' => $tcOrderShipping['return_status'],
                 'return_message' => $tcOrderShipping['return_message'],
                 'change_store_message' => $tcOrderShipping['change_store_message'],
             ]);
@@ -740,7 +742,7 @@ class Ecpay_Cvs extends CarrierModule
             $AL->Send['Remark'] = '';
 
             $AL->SendExtend = [];
-            if (empty($tcOrderShipping->id)) {
+            if (!empty($tcOrderShipping->id)) {
                 $AL->SendExtend['ReceiverStoreID'] = $tcOrderShipping->store_code;
             } else {
                 $store_data = $this->getStoreData($order->id_cart, $order->id_carrier);
@@ -771,7 +773,7 @@ class Ecpay_Cvs extends CarrierModule
             $tcOrderShipping->cvs_validation_number = $feedback['CVSValidationNo'];
             $tcOrderShipping->save();
 
-            if ($order->getWsShippingNumber() != ($feedback['CVSPaymentNo'])) {
+            if ($order->getWsShippingNumber() != $feedback['CVSPaymentNo']) {
                 $order->setWsShippingNumber($feedback['CVSPaymentNo']);
             }
 
@@ -784,6 +786,31 @@ class Ecpay_Cvs extends CarrierModule
     public function formatOrderTotal($order_total)
     {
         return intval(round($order_total));
+    }
+
+    public function getOrderStatusID($status_name)
+    {
+        $order_status = array(
+            'shipped' => 4, // 已出貨
+            'delivered' => 5, // 已送達門市
+            'pickedup' => 37, // 已取件
+            'notpickedup' => 38, // 未取件
+        );
+
+        return $order_status[$status_name];
+    }
+
+    public function updateOrderStatus($order_id, $status_id, $send_mail = false)
+    {
+        # Update the order status
+        $order_history = new OrderHistory();
+        $order_history->id_order = (int)$order_id;
+        $order_history->changeIdOrderState((int)$status_id, (int)$order_id);
+
+        # Send a mail
+        if ($send_mail) {
+            $order_history->addWithemail();
+        }
     }
 
     public function getStoreData($cart_id, $carrier_id)
@@ -807,36 +834,6 @@ class Ecpay_Cvs extends CarrierModule
         $cart_id = $this->context->cart->id;
         $carrier_id = $this->context->cart->id_carrier;
         TcCartShipping::saveStoreData($cart_id, $carrier_id, $store_data);
-    }
-
-    public function getShippingDescription($return_code) {
-        switch ($return_code) {
-            // 商品已送至物流中心
-            case 2030:
-            case 3024:
-                return '商品已送至物流中心';
-                break;
-            // 商品已送達門市
-            case 2063:
-            case 2073:
-            case 3018:
-                return '商品已送達門市';
-                break;
-            // 消費者成功取件
-            case 2067:
-            case 3022:
-                return '消費者成功取件';
-                break;
-            // 消費者七天未取件
-            case 2074:
-            case 3020:
-                return '消費者七天未取件';
-                break;
-            // 門市關轉
-            case 2037:
-                return '門市關轉';
-                break;
-        }
     }
 
     public static function logMessage($message, $is_append = false)

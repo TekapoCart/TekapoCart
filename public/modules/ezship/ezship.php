@@ -226,9 +226,11 @@ class EzShip extends CarrierModule
             $store_data['code'] = $tcOrderShipping['store_code'];
             $store_data['name'] = $tcOrderShipping['store_name'];
             $store_data['addr'] = $tcOrderShipping['store_addr'];
+            $store_data['return_message'] = $tcOrderShipping['return_message'];
 
             $this->smarty->assign(array(
                 'store_data' => $store_data,
+                'return_message' => $tcOrderShipping['return_message'],
             ));
         }
 
@@ -313,7 +315,6 @@ class EzShip extends CarrierModule
         if ($carrier->external_module_name !== $this->name) {
             return false;
         }
-
         $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
             $store_data = [
@@ -325,6 +326,7 @@ class EzShip extends CarrierModule
 
             $this->smarty->assign([
                 'store_data' => $store_data,
+                'return_status' => $tcOrderShipping['return_status'],
                 'return_message' => $tcOrderShipping['return_message'],
                 'change_store_message' => $tcOrderShipping['change_store_message'],
             ]);
@@ -333,7 +335,7 @@ class EzShip extends CarrierModule
             $map_url = 'https://map.ezship.com.tw/ezship_map_web.jsp';
             $query = [
                 'suID' => Configuration::get('ezship_su_id'),
-                'processID' => $tcOrderShipping->id,
+                'processID' => $tcOrderShipping['id_tc_order_shipping'],
                 'stCate' => $store_data ? $store_data['type'] : '',
                 'stCode' => $store_data ? $store_data['code'] : '',
                 'rtURL' => $this->context->link->getModuleLink('ezship', 'changeStore', []),
@@ -616,7 +618,7 @@ class EzShip extends CarrierModule
                 }
                 $tcOrderShipping->send_status = $aio->Send['orderStatus'];
 
-                if ($tc_order_shipping_id) {
+                if (!empty($tcOrderShipping->id)) {
                     $aio->SendExtend['stCode'] = $tcOrderShipping->store_type . $tcOrderShipping->store_code;
                 } else {
                     $store_data = $this->getStoreData($order->id_cart, $order->id_carrier);

@@ -54,80 +54,58 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                     $type_pieces = explode('_', $feedback['PaymentType']);
                     $payment_type = $type_pieces[0];
 
-                    $created_status_id = $this->module->getOrderStatusID('created', $payment_type);
+                    $created_status_id = $this->module->getOrderStatusID('created');
                     $succeeded_status_id = $this->module->getOrderStatusID('succeeded');
+                    $failed_status_id = $this->module->getOrderStatusID('failed');
                     $order_current_status = (int)$order->getCurrentState();
 
                     switch ($payment_type) {
                         case ECPay_PaymentMethod::Credit:
-                            // suzy: 2019-07-06 讓信用卡分期訂單狀態通過檢查機制
-                            if (in_array($order_current_status, [28, 29, 30, 31, 32])) {
-                                $order_current_status = 27;
-                            }
                         case ECPay_PaymentMethod::WebATM:
                             if ($feedback['RtnCode'] == 1) {
                                 // 付款成功
                                 if ($order_current_status == $created_status_id) {
                                     $this->module->updateOrderStatus($order_id, $succeeded_status_id, true);
-                                    $tcOrderPayment->return_status = $feedback['RtnCode'];
-                                    $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
                                 }
                             } else {
                                 // 交易失敗
-                                $failed_status_id = $this->module->getOrderStatusID('failed');
                                 $this->module->updateOrderStatus($order_id, $failed_status_id, true);
-                                $tcOrderPayment->return_status = $feedback['RtnCode'];
-                                $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
                             }
-
                             break;
+
                         case ECPay_PaymentMethod::ATM:
                             if ($feedback['RtnCode'] == 2) {
                                 // 取號成功
                                 $tcOrderPayment->atm_bank_code = $feedback['BankCode'];
                                 $tcOrderPayment->atm_v_account = $feedback['vAccount'];
                                 $tcOrderPayment->expire_date = $feedback['ExpireDate'];
-                                $tcOrderPayment->return_status = $feedback['RtnCode'];
-                                $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
                             } elseif ($feedback['RtnCode'] == 1) {
                                 // 付款成功
                                 if ($order_current_status == $created_status_id) {
                                     $this->module->updateOrderStatus($order_id, $succeeded_status_id, true);
-                                    $tcOrderPayment->return_status = $feedback['RtnCode'];
-                                    $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
                                 }
                             } else {
                                 // 交易失敗
-                                $failed_status_id = $this->module->getOrderStatusID('failed');
                                 $this->module->updateOrderStatus($order_id, $failed_status_id, true);
-                                $tcOrderPayment->return_status = $feedback['RtnCode'];
-                                $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
                             }
-
                             break;
+
                         case ECPay_PaymentMethod::CVS:
                             if ($feedback['RtnCode'] == 10100073) {
                                 // 取號成功
                                 $tcOrderPayment->cvs_payment_no = $feedback['PaymentNo'];
                                 $tcOrderPayment->expire_date = $feedback['ExpireDate'];
-                                $tcOrderPayment->return_status = $feedback['RtnCode'];
-                                $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
                             } elseif ($feedback['RtnCode'] == 1) {
                                 // 付款成功
                                 if ($order_current_status == $created_status_id) {
                                     $this->module->updateOrderStatus($order_id, $succeeded_status_id, true);
-                                    $tcOrderPayment->return_status = $feedback['RtnCode'];
-                                    $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
                                 }
                             } else {
                                 // 交易失敗
-                                $failed_status_id = $this->module->getOrderStatusID('failed');
                                 $this->module->updateOrderStatus($order_id, $failed_status_id, true);
-                                $tcOrderPayment->return_status = $feedback['RtnCode'];
-                                $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
                             }
-
                             break;
+
                         case ECPay_PaymentMethod::BARCODE:
                             if ($feedback['RtnCode'] == 10100073) {
                                 // 取號成功
@@ -135,29 +113,24 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
                                 $tcOrderPayment->barcode_2 = $feedback['Barcode2'];
                                 $tcOrderPayment->barcode_3 = $feedback['Barcode3'];
                                 $tcOrderPayment->expire_date = $feedback['ExpireDate'];
-                                $tcOrderPayment->return_status = $feedback['RtnCode'];
-                                $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
                             } elseif ($feedback['RtnCode'] == 1) {
                                 // 付款成功
                                 if ($order_current_status == $created_status_id) {
                                     $this->module->updateOrderStatus($order_id, $succeeded_status_id, true);
-                                    $tcOrderPayment->return_status = $feedback['RtnCode'];
-                                    $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
                                 }
                             } else {
                                 // 交易失敗
-                                $failed_status_id = $this->module->getOrderStatusID('failed');
                                 $this->module->updateOrderStatus($order_id, $failed_status_id, true);
-                                $tcOrderPayment->return_status = $feedback['RtnCode'];
-                                $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
-                            }
 
+                            }
                             break;
+
                         default:
                             throw new Exception('Payment type is invalid.');
                             break;
                     }
-
+                    $tcOrderPayment->return_status = $feedback['RtnCode'];
+                    $tcOrderPayment->appendMessage('return_message', $feedback['RtnMsg']);
                     $tcOrderPayment->save();
                 }
             }

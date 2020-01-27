@@ -1,7 +1,5 @@
 <h3 class="card-title h3">{l s='Pickup Info' mod='ezship'}</h3>
 <dl>
-    <dt>物流回傳狀態</dt>
-    <dd>xxx</dd>
     <dt>{l s='Receiver Name' mod='ezship'}：</dt>
     <dd>{$receiver_name}</dd>
     <dt>{l s='Receiver Phone' mod='ezship'}：</dt>

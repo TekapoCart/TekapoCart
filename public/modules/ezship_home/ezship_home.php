@@ -97,22 +97,45 @@ class EzShip_Home extends CarrierModule
             return false;
         }
 
-        if (!$this->checkShippingInput($params)) {
+        if (!$this->checkAddressInput($params)) {
             $rawData = Db::getInstance()->getValue(
                 'SELECT checkout_session_data FROM ' . _DB_PREFIX_ . 'cart WHERE id_cart = ' . (int)$this->context->cart->id
             );
             $data = json_decode($rawData, true);
 
-            if (isset($data['checkout-delivery-step'])) {
-                $data['checkout-delivery-step']['step_is_complete'] = '';
-                Db::getInstance()->execute(
-                    'UPDATE ' . _DB_PREFIX_ . 'cart SET checkout_session_data = "' . pSQL(json_encode($data)) . '"
-                                WHERE id_cart = ' . (int)$this->context->cart->id
-                );
+            if (isset($data['checkout-addresses-step'])) {
+                $data['checkout-addresses-step']['step_is_complete'] = '';
             }
 
-            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order'));
+            if (isset($data['checkout-delivery-step'])) {
+                $data['checkout-delivery-step']['step_is_reachable'] = '';
+                $data['checkout-delivery-step']['step_is_complete'] = '';
+            }
+
+            Db::getInstance()->execute(
+                'UPDATE ' . _DB_PREFIX_ . 'cart SET checkout_session_data = "' . pSQL(json_encode($data)) . '"
+                                WHERE id_cart = ' . (int)$this->context->cart->id
+            );
+
+            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order', true, null, null, array('step' => 2)));
         }
+
+//        if (!$this->checkShippingInput($params)) {
+//            $rawData = Db::getInstance()->getValue(
+//                'SELECT checkout_session_data FROM ' . _DB_PREFIX_ . 'cart WHERE id_cart = ' . (int)$this->context->cart->id
+//            );
+//            $data = json_decode($rawData, true);
+//
+//            if (isset($data['checkout-delivery-step'])) {
+//                $data['checkout-delivery-step']['step_is_complete'] = '';
+//                Db::getInstance()->execute(
+//                    'UPDATE ' . _DB_PREFIX_ . 'cart SET checkout_session_data = "' . pSQL(json_encode($data)) . '"
+//                                WHERE id_cart = ' . (int)$this->context->cart->id
+//                );
+//            }
+//
+//            $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order'));
+//        }
     }
 
     // 後台訂單詳細頁籤
@@ -141,6 +164,7 @@ class EzShip_Home extends CarrierModule
         $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
             $this->smarty->assign(array(
+                'return_status' => $tcOrderShipping['return_status'],
                 'return_message' => $tcOrderShipping['return_message'],
             ));
         }
@@ -155,22 +179,32 @@ class EzShip_Home extends CarrierModule
 
     }
 
-    private function checkShippingInput($params)
+    private function checkAddressInput($params)
     {
         $address = new Address(intval($params['cart']->id_address_delivery));
 
         if (!preg_match("/[^a-zA-Z0-9 ]/", $address->lastname . $address->firstname)) {
-            $limit_name_number = 60;
+            $limit_name_number = 10;
         } else {
-            $limit_name_number = 20;
+            $limit_name_number = 5;
         }
 
         if (mb_strlen($address->lastname . $address->firstname, "utf-8") > $limit_name_number) {
             $this->context->controller->errors[] = $this->l('Receiver name over limit');
         }
 
+        $Pattern = '/^([\x{4e00}-\x{9fff}\x{3400}-\x{4dbf}]{2,5}|[a-zA-Z]{4,10})$/u';
+        if (!preg_match($Pattern, $address->lastname . $address->firstname)) {
+            $this->context->controller->errors[] = $this->l('Invalid receiver name format');
+        }
+
         if (!preg_match("/^[0][9][0-9]{8,8}\$/", $address->phone_mobile)) {
             $this->context->controller->errors[] = $this->l('Invalid mobile phone format');
+        }
+
+        $country = new Country($address->id_country);
+        if ($country->iso_code !== 'TW') {
+            $this->context->controller->errors[] = $this->l('Invalid delivery address');
         }
 
         if ($this->context->controller->errors) {

@@ -252,59 +252,6 @@ class Ecpay extends PaymentModule
         return false;
     }
 
-    # Public custom function
-    public function getPaymentsDesc()
-    {
-        $payments_desc = array(
-            'Credit' => $this->l('Credit card'),
-            'Credit_03' => $this->l('Credit card (03 installments)'),
-            'Credit_06' => $this->l('Credit card (06 installments)'),
-            'Credit_12' => $this->l('Credit card (12 installments)'),
-//            'Credit_18' => $this->l('Credit card (18 installments)'),
-//            'Credit_24' => $this->l('Credit card (24 installments)'),
-//            'WebATM' => $this->l('WebATM'),
-            'ATM' => $this->l('ATM'),
-            'CVS' => $this->l('CVS'),
-//            'BARCODE' => $this->l('BARCODE'),
-        );
-
-        return $payments_desc;
-    }
-
-    public function getPaymentDesc($payment_name)
-    {
-        $payments_desc = $this->getPaymentsDesc();
-
-        if (!isset($payments_desc[$payment_name])) {
-            return '';
-        } else {
-            return $payments_desc[$payment_name];
-        }
-    }
-
-    // suzy: 2019-12-28 以 狀態 ID 取得 付款方式
-    public function getPaymentDescByOrderStatusID($order_current_status)
-    {
-        $payments_desc = array(
-            27 => $this->l('Credit card'),
-            28 => $this->l('Credit card (03 installments)'),
-            29 => $this->l('Credit card (06 installments)'),
-            30 => $this->l('Credit card (12 installments)'),
-            31 => $this->l('Credit card (18 installments)'),
-            32 => $this->l('Credit card (24 installments)'),
-            33 => $this->l('WebATM'),
-            20 => $this->l('ATM'),
-            36 => $this->l('CVS'),
-            35 => $this->l('BARCODE'),
-        );
-
-        if (!isset($payments_desc[$order_current_status])) {
-            return '';
-        } else {
-            return $payments_desc[$order_current_status];
-        }
-    }
-
     public function isTestMode($ecpay_merchant_id)
     {
         if ($ecpay_merchant_id == '2000132' || $ecpay_merchant_id == '2000214') {
@@ -340,95 +287,42 @@ class Ecpay extends PaymentModule
         return $cart_order_id;
     }
 
-    public function getOrderStatusID($status_name, $payment_type = '')
+    public function getPaymentsDesc()
     {
-        // suzy: 2019-07-06 自訂狀態 ID
-        switch ($payment_type) {
-            case 'Credit':
-                $order_status = array(
-                    'created' => 27,
-                    'succeeded' => 2,
-                    'failed' => 8,
-                );
-                break;
-            case 'Credit_03':
-                $order_status = array(
-                    'created' => 28,
-                    'succeeded' => 2,
-                    'failed' => 8,
-                );
-                break;
-            case 'Credit_06':
-                $order_status = array(
-                    'created' => 29,
-                    'succeeded' => 2,
-                    'failed' => 8,
-                );
-                break;
-            case 'Credit_12':
-                $order_status = array(
-                    'created' => 30,
-                    'succeeded' => 2,
-                    'failed' => 8,
-                );
-                break;
-            case 'Credit_18':
-                $order_status = array(
-                    'created' => 31,
-                    'succeeded' => 2,
-                    'failed' => 8,
-                );
-                break;
-            case 'Credit_24':
-                $order_status = array(
-                    'created' => 32,
-                    'succeeded' => 2,
-                    'failed' => 8,
-                );
-                break;
-            case 'WebATM':
-                $order_status = array(
-                    'created' => 33,
-                    'succeeded' => 2,
-                    'failed' => 8,
-                );
-                break;
-            case 'ATM':
-                $order_status = array(
-                    'created' => 20, // suzy: 2019-12-06 34 -> 20
-                    'succeeded' => 2,
-                    'failed' => 8,
-                );
-                break;
-            case 'BARCODE':
-                $order_status = array(
-                    'created' => 35,
-                    'succeeded' => 2,
-                    'failed' => 8,
-                );
-                break;
-            case 'CVS':
-                $order_status = array(
-                    'created' => 36,
-                    'succeeded' => 2,
-                    'failed' => 8,
-                );
-                break;
-            default:
-                $order_status = array(
-                    'created' => 1, // 待付款
-                    'succeeded' => 2, // 已付款
-                    'failed' => 8, // 付款失敗
-                );
+        $payments_desc = array(
+            'Credit' => $this->l('Credit card'),
+            'Credit_03' => $this->l('Credit card (03 installments)'),
+            'Credit_06' => $this->l('Credit card (06 installments)'),
+            'Credit_12' => $this->l('Credit card (12 installments)'),
+            'Credit_18' => $this->l('Credit card (18 installments)'),
+            'Credit_24' => $this->l('Credit card (24 installments)'),
+            'WebATM' => $this->l('WebATM'),
+            'ATM' => $this->l('ATM'),
+            'CVS' => $this->l('CVS'),
+            'BARCODE' => $this->l('BARCODE'),
+        );
 
+        return $payments_desc;
+    }
+
+    public function getPaymentDesc($payment_name)
+    {
+        $payments_desc = $this->getPaymentsDesc();
+
+        if (!isset($payments_desc[$payment_name])) {
+            return '';
+        } else {
+            return $payments_desc[$payment_name];
         }
+    }
 
-//        $order_status = array(
-//            'created' => 1,
-//            'succeeded' => 2,
-//            'failed' => 8,
-//        );
-
+    public function getOrderStatusID($status_name)
+    {
+        $order_status = array(
+            'created' => 1,
+            'succeeded' => 2,
+            'failed' => 8,
+        );
 
         return $order_status[$status_name];
     }
@@ -446,7 +340,6 @@ class Ecpay extends PaymentModule
         }
     }
 
-    # Private custom function
     private function postValidation()
     {
         $required_fields = array(

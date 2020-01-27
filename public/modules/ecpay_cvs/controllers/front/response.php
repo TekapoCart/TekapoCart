@@ -49,23 +49,45 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
 
                 $shipping_status = $feedback['RtnCode'];
 
+                $shipped_status_id = $this->module->getOrderStatusID('shipped');
+                $delivered_status_id = $this->module->getOrderStatusID('delivered');
+                $pickedup_status_id = $this->module->getOrderStatusID('pickedup');
+                $notpickedup_status_id = $this->module->getOrderStatusID('notpickedup');
+                $order_current_status = (int)$order->getCurrentState();
+
                 switch ($shipping_status) {
                     // 商品已送至物流中心
                     case 2030:
                     case 3024:
+                        if ($order_current_status !== $shipped_status_id) {
+                            $this->module->updateOrderStatus($order_id, $shipped_status_id, true);
+                        }
+
                         break;
                     // 商品已送達門市
                     case 2063:
                     case 2073:
                     case 3018:
+                        if ($order_current_status !== $delivered_status_id) {
+                            $this->module->updateOrderStatus($order_id, $delivered_status_id, true);
+                        }
+
                         break;
                     // 消費者成功取件
                     case 2067:
                     case 3022:
+                        if ($order_current_status !== $pickedup_status_id) {
+                            $this->module->updateOrderStatus($order_id, $pickedup_status_id, true);
+                        }
+
                         break;
                     // 消費者七天未取件
                     case 2074:
                     case 3020:
+                        if ($order_current_status !== $notpickedup_status_id) {
+                            $this->module->updateOrderStatus($order_id, $notpickedup_status_id, true);
+                        }
+
                         break;
                     // 門市關轉
                     case 2037:
@@ -80,6 +102,21 @@ class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
                 $tcOrderShipping->cvs_validation_number = $feedback['CVSValidationNo'];
                 $tcOrderShipping->home_shipping_number = $feedback['BookingNote'];
                 $tcOrderShipping->save();
+
+                if (in_array($tcOrderShipping->send_status, [
+                    EcpayLogisticsSubType::UNIMART,
+                    EcpayLogisticsSubType::UNIMART_C2C,
+                ])) {
+                    if ($order->getWsShippingNumber() != $tcOrderShipping->cvs_shipping_number) {
+                        $order->setWsShippingNumber($tcOrderShipping->cvs_shipping_number);
+                    }
+                } elseif (in_array($tcOrderShipping->send_status, [
+                    EcpayLogisticsSubType::TCAT,
+                ])) {
+                    if ($order->getWsShippingNumber() != $tcOrderShipping->home_shipping_number) {
+                        $order->setWsShippingNumber($tcOrderShipping->home_shipping_number);
+                    }
+                }
 
             }
 

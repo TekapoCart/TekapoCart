@@ -106,7 +106,12 @@ class Ps_Wirepayment extends PaymentModule
     public function install()
     {
         Configuration::updateValue(self::FLAG_DISPLAY_PAYMENT_INVITE, true);
-        if (!parent::install() || !$this->registerHook('paymentReturn') || !$this->registerHook('paymentOptions')) {
+        if (!parent::install()
+            || !$this->registerHook('paymentReturn')
+            || !$this->registerHook('paymentOptions')
+            || !$this->registerHook('displayAdminOrderTabOrder')
+            || !$this->registerHook('displayAdminOrderContentOrder')
+        ) {
             return false;
         }
         return true;
@@ -230,6 +235,8 @@ class Ps_Wirepayment extends PaymentModule
             in_array(
                 $state,
                 array(
+                    // suzy: 2020-01-27 支援舊 state 10
+                    10,
                     Configuration::get('PS_OS_BANKWIRE'),
                     Configuration::get('PS_OS_OUTOFSTOCK'),
                     Configuration::get('PS_OS_OUTOFSTOCK_UNPAID'),
@@ -330,10 +337,25 @@ class Ps_Wirepayment extends PaymentModule
         return $this->fetch('module:ps_wirepayment/views/templates/hook/order_detail.tpl');
     }
 
-//    public function hookDisplayAdminOrderTabOrder($params) {
-//        echo '1111';exit;
-//        return;
-//    }
+    // suzy: 2020-01-27 後台訂單詳細頁籤
+    public function hookDisplayAdminOrderTabOrder($params)
+    {
+        if ($params['order']->module === 'ps_wirepayment') {
+            $this->smarty->assign(array(
+                'tab_title' => $this->trans('Pay by bank wire', array(), 'Modules.Wirepayment.Shop'),
+            ));
+            return $this->display(__FILE__, '/views/templates/hook/tab_order.tpl');
+        }
+
+    }
+
+    // suzy: 2020-01-27 後台訂單詳細頁籤內容
+    public function hookDisplayAdminOrderContentOrder($params)
+    {
+        if ($params['order']->module === 'ps_wirepayment') {
+            return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
+        }
+    }
 
     public function checkCurrency($cart)
     {

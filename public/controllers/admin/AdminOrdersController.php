@@ -1939,12 +1939,12 @@ class AdminOrdersControllerCore extends AdminController
 
         // suzy: 2018-09-14 調整訂單狀態顯示
         $states = OrderState::getOrderStates($this->context->language->id);
-        $unpaid_state_ids = [1, 10, 12, 19, 20, 23, 27, 28, 29, 30];
-        $processing_state_ids =  [14, 17];
+        $unpaid_state_ids = [1, 12, 23];
+        $processing_state_ids =  [14];
         $paid_state_ids = [2, 9];
-        $shipment_state_ids = [3, 4, 5];
+        $shipment_state_ids = [3, 4, 5, 37];
         $archived_state_ids = [7, 22];
-        $error_state_ids = [6, 8, 21];
+        $error_state_ids = [6, 8, 38, 21];
         $sorted_states = [
             'unpaid' => [
                 '-' => '[待付款]',

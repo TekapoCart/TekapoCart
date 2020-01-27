@@ -54,8 +54,8 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
 
                     switch ($shipping_status) {
                         case EzShip_ReturnOrderStatus::S01:
-                            if ($order->getWsShippingNumber() != $ezship_feedback['sn_id']) {
-                                $order->setWsShippingNumber($ezship_feedback['sn_id']);
+                            if ($order->getWsShippingNumber() != $tcOrderShipping->sn_id) {
+                                $order->setWsShippingNumber($tcOrderShipping->sn_id);
                             }
                             break;
                         case EzShip_ReturnOrderStatus::E00:

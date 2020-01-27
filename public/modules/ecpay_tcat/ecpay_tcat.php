@@ -194,6 +194,7 @@ class Ecpay_Tcat extends CarrierModule
 
             $this->smarty->assign(array(
                 'scheduled_data' => $scheduled_data,
+                'return_status' => $tcOrderShipping['return_status'],
                 'return_message' => $tcOrderShipping['return_message'],
             ));
 
@@ -257,10 +258,15 @@ class Ecpay_Tcat extends CarrierModule
             $this->context->controller->errors[] = $this->l('Invalid mobile phone format');
         }
 
+        $country = new Country($address->id_country);
+        if ($country->iso_code !== 'TW') {
+            $this->context->controller->errors[] = $this->l('Invalid delivery address');
+        }
+
         $receiverZipcode = Zipcode::parse($address->city . $address->address1 . $address->address2);
         $receiverCity = $receiverZipcode->county();
         if (strlen($receiverCity) === 0) {
-            $this->context->controller->errors[] = $this->l('Invalid address format');
+            $this->context->controller->errors[] = $this->l('Invalid delivery address');
         }
 
         if ($this->context->controller->errors) {
@@ -420,7 +426,7 @@ class Ecpay_Tcat extends CarrierModule
 
             $AL->SendExtend['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
 
-            if (empty($tcOrderShipping->id)) {
+            if (!empty($tcOrderShipping->id)) {
                 $AL->SendExtend['ScheduledDeliveryTime'] = $tcOrderShipping->delivery_time;
             } else {
                 $scheduled_data = $this->getScheduledData($order->id_cart, $order->id_carrier);
