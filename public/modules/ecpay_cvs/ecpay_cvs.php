@@ -177,7 +177,7 @@ class Ecpay_Cvs extends CarrierModule
             } elseif (Configuration::get('ecpay_logistics_type') == 'b2c') {
                 $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::UNIMART;
             } else {
-                throw new Exception($this->l('Invalid ECPay Logistics Type.'));
+                return false;
             }
             $AL->Send['IsCollection'] = EcpayIsCollection::NO;
             $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'selectStore', []);
