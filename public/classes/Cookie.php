@@ -73,7 +73,8 @@ class CookieCore
         $this->_path = rawurlencode($this->_path);
         $this->_path = str_replace('%2F', '/', $this->_path);
         $this->_path = str_replace('%7E', '~', $this->_path);
-        $this->_domain = $this->getDomain($shared_urls);
+        // suzy: 2020-01-19 加 ; samesite=none; secure
+        $this->_domain = $this->getDomain($shared_urls) . '; samesite=none; secure';
 
         // suzy: 2018-09-25 改 TekapoCart
         // $this->_name = 'PrestaShop-' . md5(($this->_standalone ? '' : _PS_VERSION_) . $name . $this->_domain);
