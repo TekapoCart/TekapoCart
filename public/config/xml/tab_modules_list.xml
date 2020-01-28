@@ -260,17 +260,15 @@
         <module name="referralprogram" position="31"/>
     </tab>
     <tab class_name="AdminPayment" display_type="default_list">
-        <module name="ps_cashondelivery" position="1"/>
-        <module name="ps_wirepayment" position="2"/>
-        <module name="ecpay" position="3"/>
-        <module name="paypal" position="4"/>
-        <module name="smilepay_credit" position="5"/>
-        <module name="smilepay_atm" position="6"/>
-        <module name="smilepay_c2c" position="7"/>
-        <module name="smilepay_c2cup" position="8"/>
-        <module name="smilepay_ezcat" position="9"/>
-        <module name="smilepay_ezcatup" position="10"/>
-        <module name="smilepay_palmboxc2cup" position="11"/>
+        <module name="ps_wirepayment" position="1"/>
+        <module name="tc_cvs" position="2"/>
+        <module name="tc_pod" position="3"/>
+        <module name="ezship" position="4"/>
+        <module name="ezship_home" position="5"/>
+        <module name="ecpay" position="6"/>
+        <module name="ecpay_cvs" position="7"/>
+        <module name="ecpay_tcat" position="8"/>
+        <module name="paypal" position="9"/>
     </tab>
     <tab class_name="AdminCarriers" display_type="slider_list">
         <module name="bpostshm" position="1"/>
