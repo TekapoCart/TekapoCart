@@ -19,7 +19,7 @@
  *
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright Copyright (c) 202-ecommerce
- * @license   Commercial license
+ * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @version   develop
  */
  
@@ -30,6 +30,7 @@ class AdminPayPalLogsController extends AdminPayPalProcessLoggerController
     public function initContent()
     {
         $this->context->smarty->assign('showWarningForUserBraintree', $this->module->showWarningForUserBraintree());
+        $this->context->smarty->assign('moduleDir', _MODULE_DIR_);
         $this->content = $this->context->smarty->fetch($this->getTemplatePath() . '_partials/headerLogo.tpl');
         $this->content .= parent::initContent();
     }

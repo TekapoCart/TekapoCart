@@ -9,5 +9,4 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'PaypalPPBTlib\\' => array($vendorDir . '/ppbtlib/src'),
     'PaypalAddons\\' => array($baseDir . '/'),
-    'PayPalTest\\' => array($baseDir . '/202/tests'),
 );

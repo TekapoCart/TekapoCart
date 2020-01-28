@@ -18,10 +18,11 @@
  * versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
- *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2019 PrestaShop SA
- *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
- *  International Registered Trademark & Property of PrestaShop SA
+ *  @author 2007-2019 PayPal
+ *  @author 202 ecommerce <tech@202-ecommerce.com>
+ *  @copyright PayPal
+ *  @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ *  
  */
 
 include_once _PS_MODULE_DIR_.'paypal/classes/AbstractMethodPaypal.php';
@@ -51,6 +52,10 @@ class PaypalEcScOrderModuleFrontController extends PaypalAbstarctModuleFrontCont
             $method->setParameters($this->values);
             $info = $method->getInfo();
             $this->prepareOrder($info);
+
+            if (!empty($this->errors)) {
+                return;
+            }
         } catch (PayPal\Exception\PPConnectionException $e) {
             $this->errors['error_msg'] = $paypal->l('Error connecting to ', pathinfo(__FILE__)['filename']) . $e->getUrl();
         } catch (PayPal\Exception\PPMissingCredentialException $e) {
@@ -147,10 +152,13 @@ class PaypalEcScOrderModuleFrontController extends PaypalAbstarctModuleFrontCont
             }
         }
         if (!$address_exist) {
-            $orderAddress = new Address();
             $nameArray = explode(" ", $ship_addr->Name);
-            $orderAddress->firstname = $nameArray[0];
-            $orderAddress->lastname = $nameArray[1];
+            $firstName = implode(' ', array_slice($nameArray, 0, count($nameArray) - 1));
+            $lastName = $nameArray[count($nameArray) - 1];
+
+            $orderAddress = new Address();
+            $orderAddress->firstname = $firstName;
+            $orderAddress->lastname = $lastName;
             $orderAddress->address1 = $ship_addr->Street1;
             if (isset($ship_addr->Street2)) {
                 $orderAddress->address2 = $ship_addr->Street2;
@@ -189,8 +197,8 @@ class PaypalEcScOrderModuleFrontController extends PaypalAbstarctModuleFrontCont
                     'address2' => $orderAddress->address2,
                     'id_state' => $orderAddress->id_state
                 );
-                session_start();
-                $_SESSION['notifications'] = Tools::jsonEncode(array('error' => $validationMessage));
+
+                $this->errors[] = $validationMessage;
                 $url = Context::getContext()->link->getPageLink('order', null, null, $vars);
                 $this->redirectUrl = $url;
                 return;
@@ -210,8 +218,8 @@ class PaypalEcScOrderModuleFrontController extends PaypalAbstarctModuleFrontCont
                 'id_address' => $id_address,
                 'editAddress' => 'delivery'
             );
-            session_start();
-            $_SESSION['notifications'] = Tools::jsonEncode(array('error' => $this->l('Your address is incomplete, please update it.')));
+
+            $this->errors[] = $this->l('Your address is incomplete, please update it.');
             $url = Context::getContext()->link->getPageLink('order', null, null, $vars);
             $this->redirectUrl = $url;
             return;

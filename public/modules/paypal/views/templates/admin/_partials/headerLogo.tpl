@@ -17,22 +17,28 @@
 * versions in the future. If you wish to customize PrestaShop for your
 * needs please refer to http://www.prestashop.com for more information.
 *
-*  @author    PrestaShop SA <contact@prestashop.com>
-*  @copyright 2007-2019 PrestaShop SA
-*  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
-*  International Registered Trademark & Property of PrestaShop SA
+*  @author 2007-2019 PayPal
+ *  @author 202 ecommerce <tech@202-ecommerce.com>
+*  @copyright PayPal
+*  @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+*
 *}
 
 <div class="panel active-panel pp__flex pp__align-items-center">
 	<div class="pp__pr-4">
-		<img style="width: 135px" src="/modules/paypal/views/img/paypal.png">
+		<img style="width: 135px" src="{$moduleDir|addslashes}paypal/views/img/paypal.png">
 	</div>
 	<div class="pp__pl-5">
 		<p>
 			{l s='Activate the PayPal module to start selling to +250M PayPal customers around the globe' mod='paypal'}.
 		</p>
 		{if $page_header_toolbar_title !== 'Help' && $page_header_toolbar_title !== 'Logs'}
-			<p>{l s='Activate in three easy steps' mod='paypal'}: </p>
+        	{if isset($methodType) && $methodType == 'EC'}
+				<p>{l s='Activate in three easy steps' mod='paypal'}: </p>
+			{else}
+				<p>{l s='Activate in two easy steps' mod='paypal'}: </p>
+        	{/if}
+
 			<p>
 				<ul>
 					<li>

@@ -17,10 +17,11 @@
 * versions in the future. If you wish to customize PrestaShop for your
 * needs please refer to http://www.prestashop.com for more information.
 *
-* @author PrestaShop SA <contact@prestashop.com>
-  * @copyright 2007-2019 PrestaShop SA
-  * @license http://opensource.org/licenses/afl-3.0.php Academic Free License (AFL 3.0)
-  * International Registered Trademark & Property of PrestaShop SA
+* @author 2007-2019 PayPal
+ *  @author 202 ecommerce <tech@202-ecommerce.com>
+  * @copyright PayPal
+  * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+  *
   *}
 
 <div class="block-preview-button-context pp__flex">
@@ -42,7 +43,7 @@
 				</span>
 			</label>
 		</div>
-		<img src="/modules/paypal/views/img/cart_page_button.png" class="img-responsive" alt="cart_page">
+		<img src="{$moduleDir|addslashes}paypal/views/img/cart_page_button.png" class="img-responsive" alt="cart_page">
 	</div>
 
 	<div class="pp__py-2 pp__px-1">
@@ -69,7 +70,7 @@
 				</span>
 			</label>
 		</div>
-		<img src="/modules/paypal/views/img/product_page_button.png" alt="product_page_button">
+		<img src="{$moduleDir|addslashes}paypal/views/img/product_page_button.png" alt="product_page_button">
 	</div>
 </div>
 

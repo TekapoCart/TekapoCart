@@ -18,10 +18,11 @@
  * versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
- *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2019 PrestaShop SA
- *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
- *  International Registered Trademark & Property of PrestaShop SA
+ *  @author 2007-2019 PayPal
+ *  @author 202 ecommerce <tech@202-ecommerce.com>
+ *  @copyright PayPal
+ *  @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ *  
  */
 
 include_once _PS_MODULE_DIR_.'paypal/classes/AbstractMethodPaypal.php';
@@ -47,7 +48,12 @@ class PaypalScInitModuleFrontController extends PaypalAbstarctModuleFrontControl
         $this->values['getToken'] = Tools::getvalue('getToken');
         $this->values['credit_card'] = 0;
         $this->values['short_cut'] = 1;
-        $this->setMethod(AbstractMethodPaypal::load());
+        if ($this->module->paypal_method == 'MB') {
+            $methodType = 'EC';
+        } else {
+            $methodType = $this->module->paypal_method;
+        }
+        $this->setMethod(AbstractMethodPaypal::load($methodType));
     }
 
     public function postProcess()
@@ -58,6 +64,10 @@ class PaypalScInitModuleFrontController extends PaypalAbstarctModuleFrontControl
 
         if ($this->values['source_page'] == 'product') {
             $this->prepareProduct();
+        }
+
+        if (Validate::isLoadedObject($this->context->cart) == false) {
+            return false;
         }
 
         try {

@@ -20,8 +20,8 @@
  *
  *  @author    PrestaShop SA <contact@prestashop.com>
  *  @copyright 2007-2019 PrestaShop SA
- *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
- *  International Registered Trademark & Property of PrestaShop SA
+ *  @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ *
  */
 
 require_once 'AbstractMethodPaypal.php';
@@ -86,6 +86,11 @@ class MethodEC extends AbstractMethodPaypal
 
     public $errors = array();
 
+    public $advancedFormParametres = array(
+        'paypal_os_accepted_two',
+        'paypal_os_waiting_validation'
+    );
+
     /**
      * @param $values array replace for tools::getValues()
      */
@@ -129,7 +134,11 @@ class MethodEC extends AbstractMethodPaypal
     {
         $mode = Configuration::get('PAYPAL_SANDBOX') ? 'SANDBOX' : 'LIVE';
         $paypal = Module::getInstanceByName($this->name);
-        if (isset($params['api_username']) && isset($params['api_password']) && isset($params['api_signature'])) {
+
+        if (isset($params['api_username']) &&
+            isset($params['api_password']) &&
+            isset($params['api_signature']) &&
+            (isset($params['id_shop']) == false || $params['id_shop'] == Context::getContext()->shop->id)) {
             Configuration::updateValue('PAYPAL_EXPRESS_CHECKOUT', 1);
             Configuration::updateValue('PAYPAL_USERNAME_'.$mode, $params['api_username']);
             Configuration::updateValue('PAYPAL_PSWD_'.$mode, $params['api_password']);
@@ -137,7 +146,6 @@ class MethodEC extends AbstractMethodPaypal
             Configuration::updateValue('PAYPAL_'.$mode.'_ACCESS', 1);
             Configuration::updateValue('PAYPAL_MERCHANT_ID_'.$mode, $params['merchant_id']);
             Configuration::updateValue('PAYPAL_EXPRESS_CHECKOUT_IN_CONTEXT', 1);
-            Configuration::updateValue('PAYPAL_API_CARD', $params['with_card']);
             $this->checkCredentials();
             return;
         }
@@ -196,6 +204,7 @@ class MethodEC extends AbstractMethodPaypal
         $setECReqDetails->AddressOverride = 1;
         $setECReqDetails->ReqConfirmShipping = 0;
         $setECReqDetails->LandingPage = ($this->credit_card ? 'Billing' : 'Login');
+        
 
         if ($this->short_cut) {
             $setECReqDetails->ReturnURL = Context::getContext()->link->getModuleLink($this->name, 'ecScOrder', array(), true);
@@ -303,8 +312,9 @@ class MethodEC extends AbstractMethodPaypal
                 // It's needed to take a percentage of the order amount, taking into account the others discounts
                 if ((int)$discount['reduction_percent'] > 0) {
                     $discount['value_real'] = $order_total_with_reduction * ($discount['value_real'] / $order_total);
-                    $order_total_with_reduction -= $discount['value_real'];
-                } else {
+                }
+
+                if ((int)$discount['free_shipping'] == false) {
                     $order_total_with_reduction -= $discount['value_real'];
                 }
 
@@ -461,6 +471,27 @@ class MethodEC extends AbstractMethodPaypal
     }
 
     /**
+     * @param $cart Cart
+     * @return string additional payment information
+     */
+    public function getCustomFieldInformation(Cart $cart)
+    {
+        $module = Module::getInstanceByName($this->name);
+        $return = $module->l('Cart ID: ',  get_class($this)) . $cart->id . '.';
+
+        if (Shop::isFeatureActive()) {
+            $shop = new Shop($cart->id_shop, $cart->id_lang);
+
+            if (Validate::isLoadedObject($shop)) {
+                $return .= $module->l('Shop name: ',  get_class($this)) . $shop->name;
+            }
+        }
+
+        return $return;
+
+    }
+
+    /**
      * @see AbstractMethodPaypal::validation()
      */
     public function validation()
@@ -475,6 +506,7 @@ class MethodEC extends AbstractMethodPaypal
 
         $this->_paymentDetails = new PaymentDetailsType();
         $this->_paymentDetails->ButtonSource = 'PrestaShop_Cart_'.(getenv('PLATEFORM') == 'PSREADY' ? 'Ready_':'').'EC';
+        $this->_paymentDetails->Custom = $this->getCustomFieldInformation($cart);
 
         if (!Context::getContext()->cart->isVirtualCart()) {
             $address = $this->_getShippingAddress();
@@ -497,11 +529,16 @@ class MethodEC extends AbstractMethodPaypal
         $DoECReq->DoExpressCheckoutPaymentRequest = $DoECRequest;
 
         $paypalService = new PayPalAPIInterfaceServiceService($this->_getCredentialsInfo());
+
         $exec_payment = $paypalService->DoExpressCheckoutPayment($DoECReq);
 
         if (isset($exec_payment->Errors)) {
+            if ($exec_payment->Errors[0]->ErrorCode == 10486) {
+                $this->token = $this->payment_token;
+            }
             throw new PaypalException($exec_payment->Errors[0]->ErrorCode, $exec_payment->Errors[0]->ShortMessage, $exec_payment->Errors[0]->LongMessage);
         }
+
         $this->setDetailsTransaction($exec_payment->DoExpressCheckoutPaymentResponseDetails);
 
         $currency = $context->currency;
@@ -509,13 +546,31 @@ class MethodEC extends AbstractMethodPaypal
 
         $total = $payment_info->GrossAmount->value;
         $paypal = Module::getInstanceByName($this->name);
-        if (Configuration::get('PAYPAL_API_INTENT') == "sale") {
-            $order_state = Configuration::get('PS_OS_PAYMENT');
-        } else {
-            $order_state = Configuration::get('PAYPAL_OS_WAITING');
-        }
+        $order_state = $this->getOrderStatus();
 
         $paypal->validateOrder($cart->id, $order_state, $total, $this->getPaymentMethod(), null, $this->getDetailsTransaction(), (int)$currency->id, false, $customer->secure_key);
+    }
+
+    /**
+     * @return int id of the order status
+     **/
+    public function getOrderStatus()
+    {
+        if ((int)Configuration::get('PAYPAL_CUSTOMIZE_ORDER_STATUS')) {
+            if (Configuration::get('PAYPAL_API_INTENT') == "sale") {
+                $orderStatus = (int)Configuration::get('PAYPAL_OS_WAITING_VALIDATION');
+            } else {
+                $orderStatus = (int)Configuration::get('PAYPAL_OS_WAITING');
+            }
+        } else {
+            if (Configuration::get('PAYPAL_API_INTENT') == "sale") {
+                $orderStatus = (int)Configuration::get('PS_OS_PAYMENT');
+            } else {
+                $orderStatus = (int)Configuration::get('PAYPAL_OS_WAITING');
+            }
+        }
+
+        return $orderStatus;
     }
 
     public function setDetailsTransaction($transaction)
@@ -772,14 +827,14 @@ class MethodEC extends AbstractMethodPaypal
     /**
      * @see AbstractMethodPaypal::getLinkToTransaction()
      */
-    public function getLinkToTransaction($id_transaction, $sandbox)
+    public function getLinkToTransaction($log)
     {
-        if ($sandbox) {
+        if ($log->sandbox) {
             $url = 'https://www.sandbox.paypal.com/activity/payment/';
         } else {
             $url = 'https://www.paypal.com/activity/payment/';
         }
-        return $url . $id_transaction;
+        return $url . $log->id_transaction;
     }
 
     /**
@@ -827,6 +882,7 @@ class MethodEC extends AbstractMethodPaypal
             'accountConfigured' => $this->isConfigured(),
             'urlOnboarding' => $context->link->getAdminLink('AdminPayPalSetup', true, null, $urlParameters),
             'country_iso' => $countryDefault->iso_code,
+            'idShop' => Context::getContext()->shop->id,
         );
 
         if ((int)Configuration::get('PAYPAL_SANDBOX')) {
@@ -844,5 +900,42 @@ class MethodEC extends AbstractMethodPaypal
         }
 
         return $tpl_vars;
+    }
+
+    public function getAdvancedFormInputs()
+    {
+        $inputs = array();
+        $module = Module::getInstanceByName($this->name);
+        $orderStatuses = $module->getOrderStatuses();
+
+        if (Configuration::get('PAYPAL_API_INTENT') == 'authorization') {
+            $inputs[] = array(
+                'type' => 'select',
+                'label' => $module->l('Payment authorized and waiting for validation by admin', get_class($this)),
+                'name' => 'paypal_os_waiting_validation',
+                'hint' => $module->l('You are currently using the Authorize mode. It means that you separate the payment authorization from the capture of the authorized payment. By default the orders will be created in the "Waiting for PayPal payment" but you can customize it if needed.', get_class($this)),
+                'desc' => $module->l('Default status : Waiting for PayPal payment', get_class($this)),
+                'options' => array(
+                    'query' => $orderStatuses,
+                    'id' => 'id',
+                    'name' => 'name'
+                )
+            );
+        } else {
+            $inputs[] = array(
+                'type' => 'select',
+                'label' => $module->l('Payment accepted and transaction completed', get_class($this)),
+                'name' => 'paypal_os_accepted_two',
+                'hint' => $module->l('You are currently using the Sale mode (the authorization and capture occur at the same time as the sale). So the payement is accepted instantly and the new order is created in the "Payment accepted" status. You can customize the status for orders with completed transactions. Ex : you can create an additional status "Payment accepted via PayPal" and set it as the default status.', get_class($this)),
+                'desc' => $module->l('Default status : Payment accepted', get_class($this)),
+                'options' => array(
+                    'query' => $orderStatuses,
+                    'id' => 'id',
+                    'name' => 'name'
+                )
+            );
+        }
+
+        return $inputs;
     }
 }

@@ -17,10 +17,11 @@
 * versions in the future. If you wish to customize PrestaShop for your
 * needs please refer to http://www.prestashop.com for more information.
 *
-*  @author    PrestaShop SA <contact@prestashop.com>
-*  @copyright 2007-2019 PrestaShop SA
-*  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
-*  International Registered Trademark & Property of PrestaShop SA
+*  @author 2007-2019 PayPal
+ *  @author 202 ecommerce <tech@202-ecommerce.com>
+*  @copyright PayPal
+*  @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+*
 *}
 
 <div data-container-express-checkout data-paypal-source-page="{$source_page}" style="float:right; margin: 10px 40px 0 0">
@@ -30,7 +31,12 @@
                   type="hidden"
                   name="id_product"
                   data-paypal-id-product
-                  value="{if isset($smarty.get.id_product)}{$smarty.get.id_product|intval}{/if}" />
+                  {if isset($smarty.get.id_product)}
+                    value="{$smarty.get.id_product|intval}"
+                  {elseif isset($product)}
+                    value="{$product->id}"
+                  {/if}
+          />
           <input type="hidden" name="quantity" data-paypal-qty value=""/>
           <input type="hidden" name="combination" data-paypal-combination value="" />
           <input type="hidden" data-paypal-id-product-attribute value="{$es_cs_product_attribute|escape:'htmlall':'UTF-8'}" />

@@ -19,7 +19,7 @@
  *
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright Copyright (c) 202-ecommerce
- * @license   Commercial license
+ * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @version   develop
  */
 
@@ -71,10 +71,7 @@ class AdminProcessLoggerController extends \ModuleAdminController
         $this->bulk_actions = array(
             'delete' => array(
                 'text' => $this->module->l('Delete selected', 'AdminProcessLoggerController'),
-                'confirm' => $this->module->l(
-                    'Would you like to delete the selected items?',
-                    'AdminProcessLoggerController'
-                ),
+                'confirm' => $this->module->l('Would you like to delete the selected items?', 'AdminProcessLoggerController'),
             )
         );
 
@@ -321,9 +318,7 @@ class AdminProcessLoggerController extends \ModuleAdminController
 
             if (!is_numeric($extlogs_erasing_daysmax)) {
                 $this->errors[] = $this->module->l(
-                    'You must specify a valid \"Auto erasing delay (in days)\" number.',
-                    'AdminProcessLoggerController'
-                );
+                    'You must specify a valid \"Auto erasing delay (in days)\" number.', 'AdminProcessLoggerController');
             } else {
                 \Configuration::updateValue(
                     'PAYPAL_EXTLOGS_ERASING_DAYSMAX',
@@ -332,10 +327,7 @@ class AdminProcessLoggerController extends \ModuleAdminController
                     null,
                     $shop['id_shop']
                 );
-                $this->confirmations[] = $this->module->l(
-                    'Successful update.',
-                    'AdminProcessLoggerController'
-                );
+                $this->confirmations[] = $this->module->l('Successful update.', 'AdminProcessLoggerController');
             }
         }
 

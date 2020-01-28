@@ -18,10 +18,11 @@
  * versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
- *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2019 PrestaShop SA
- *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
- *  International Registered Trademark & Property of PrestaShop SA
+ *  @author 2007-2019 PayPal
+ *  @author 202 ecommerce <tech@202-ecommerce.com>
+ *  @copyright PayPal
+ *  @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ *  
  */
 
 require_once 'AbstractMethodPaypal.php';
@@ -73,6 +74,10 @@ class MethodPPP extends AbstractMethodPaypal
     public $paymentId;
 
     protected $payment_method = 'PayPal';
+
+    public $advancedFormParametres = array(
+        'paypal_os_accepted_two'
+    );
 
     /**
      * @param $values array replace for tools::getValues()
@@ -484,8 +489,19 @@ class MethodPPP extends AbstractMethodPaypal
         $currency = $context->currency;
         $total = (float)$exec_payment->transactions[0]->amount->total;
         $paypal = Module::getInstanceByName($this->name);
-        $order_state = Configuration::get('PS_OS_PAYMENT');
+        $order_state = $this->getOrderStatus();
         $paypal->validateOrder($cart->id, $order_state, $total, $this->getPaymentMethod(), null, $this->getDetailsTransaction(), (int)$currency->id, false, $customer->secure_key);
+    }
+
+    public function getOrderStatus()
+    {
+        if ((int)Configuration::get('PAYPAL_CUSTOMIZE_ORDER_STATUS')) {
+            $orderStatus = (int)Configuration::get('PAYPAL_OS_ACCEPTED_TWO');
+        } else {
+            $orderStatus = (int)Configuration::get('PS_OS_PAYMENT');
+        }
+
+        return $orderStatus;
     }
 
     public function setDetailsTransaction($transaction)
@@ -652,14 +668,14 @@ class MethodPPP extends AbstractMethodPaypal
     /**
      * @see AbstractMethodPaypal::getLinkToTransaction()
      */
-    public function getLinkToTransaction($id_transaction, $sandbox)
+    public function getLinkToTransaction($log)
     {
-        if ($sandbox) {
+        if ($log->sandbox) {
             $url = 'https://www.sandbox.paypal.com/activity/payment/';
         } else {
             $url = 'https://www.paypal.com/activity/payment/';
         }
-        return $url . $id_transaction;
+        return $url . $log->id_transaction;
     }
 
     /**
@@ -718,13 +734,23 @@ class MethodPPP extends AbstractMethodPaypal
 
     public function getTplVars()
     {
-        $tpl_vars = array(
-            'paypal_sandbox_clientid' => Configuration::get('PAYPAL_SANDBOX_CLIENTID'),
-            'paypal_live_clientid' => Configuration::get('PAYPAL_LIVE_CLIENTID'),
-            'paypal_sandbox_secret' => Configuration::get('PAYPAL_SANDBOX_SECRET'),
-            'paypal_live_secret' => Configuration::get('PAYPAL_LIVE_SECRET'),
-            'accountConfigured' => $this->isConfigured(),
-        );
+        $sandboxMode = (int)Configuration::get('PAYPAL_SANDBOX');
+
+        if ($sandboxMode) {
+            $tpl_vars = array(
+                'paypal_sandbox_clientid' => Configuration::get('PAYPAL_SANDBOX_CLIENTID'),
+                'paypal_sandbox_secret' => Configuration::get('PAYPAL_SANDBOX_SECRET'),
+            );
+        } else {
+            $tpl_vars = array(
+                'paypal_live_secret' => Configuration::get('PAYPAL_LIVE_SECRET'),
+                'paypal_live_clientid' => Configuration::get('PAYPAL_LIVE_CLIENTID')
+            );
+        }
+
+        $tpl_vars['accountConfigured'] = $this->isConfigured();
+        $tpl_vars['sandboxMode'] = $sandboxMode;
+
 
         return $tpl_vars;
     }
@@ -737,5 +763,27 @@ class MethodPPP extends AbstractMethodPaypal
         } else {
             Configuration::updateValue('PAYPAL_PLUS_EXPERIENCE', '');
         }
+    }
+
+    public function getAdvancedFormInputs()
+    {
+        $inputs = array();
+        $module = Module::getInstanceByName($this->name);
+        $orderStatuses = $module->getOrderStatuses();
+
+        $inputs[] = array(
+            'type' => 'select',
+            'label' => $module->l('Payment accepted and transaction completed', get_class($this)),
+            'name' => 'paypal_os_accepted_two',
+            'hint' => $module->l('You are currently using the Sale mode (the authorization and capture occur at the same time as the sale). So the payement is accepted instantly and the new order is created in the "Payment accepted" status. You can customize the status for orders with completed transactions. Ex : you can create an additional status "Payment accepted via PayPal" and set it as the default status.', get_class($this)),
+            'desc' => $module->l('Default status : Payment accepted', get_class($this)),
+            'options' => array(
+                'query' => $orderStatuses,
+                'id' => 'id',
+                'name' => 'name'
+            )
+        );
+
+        return $inputs;
     }
 }

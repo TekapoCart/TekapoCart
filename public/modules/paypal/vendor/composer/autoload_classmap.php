@@ -6,14 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'PayPalTest\\EcInitTest' => $baseDir . '/202/tests/EcInitTest.php',
-    'PayPalTest\\MethodECTest' => $baseDir . '/202/tests/MethodECTest.php',
-    'PayPalTest\\MethodPPPTest' => $baseDir . '/202/tests/MethodPPPTest.php',
-    'PayPalTest\\PaypalCaptureTest' => $baseDir . '/202/tests/PaypalCaptureTest.php',
-    'PayPalTest\\PaypalLogTest' => $baseDir . '/202/tests/PaypalLogTest.php',
-    'PayPalTest\\PaypalOrderTest' => $baseDir . '/202/tests/PaypalOrderTest.php',
-    'PayPalTest\\PaypalTest' => $baseDir . '/202/tests/PaypalTest.php',
-    'PayPalTest\\ScInitTest' => $baseDir . '/202/tests/ScInitTest.php',
     'PayPal\\Api\\Address' => $vendorDir . '/paypal/rest-api-sdk-php/lib/PayPal/Api/Address.php',
     'PayPal\\Api\\Agreement' => $vendorDir . '/paypal/rest-api-sdk-php/lib/PayPal/Api/Agreement.php',
     'PayPal\\Api\\AgreementDetails' => $vendorDir . '/paypal/rest-api-sdk-php/lib/PayPal/Api/AgreementDetails.php',
@@ -600,7 +592,10 @@ return array(
     'PayPal\\Validation\\UrlValidator' => $vendorDir . '/paypal/rest-api-sdk-php/lib/PayPal/Validation/UrlValidator.php',
     'PaypalAddons\\classes\\AdminPayPalController' => $baseDir . '/classes/AdminPayPalController.php',
     'PaypalAddons\\classes\\PaypalException' => $baseDir . '/classes/PaypalException.php',
+    'PaypalAddons\\services\\ServicePaypalIpn' => $baseDir . '/services/ServicePaypalIpn.php',
     'PaypalAddons\\services\\ServicePaypalLog' => $baseDir . '/services/ServicePaypalLog.php',
+    'PaypalAddons\\services\\ServicePaypalOrder' => $baseDir . '/services/ServicePaypalOrder.php',
+    'PaypalAddons\\services\\ServicePaypalVaulting' => $baseDir . '/services/ServicePaypalVaulting.php',
     'PaypalPPBTlib\\AbstractMethod' => $vendorDir . '/ppbtlib/src/AbstractMethod.php',
     'PaypalPPBTlib\\CommonAbstarctModuleFrontController' => $vendorDir . '/ppbtlib/src/CommonAbstarctModuleFrontController.php',
     'PaypalPPBTlib\\Db\\DbSchema' => $vendorDir . '/ppbtlib/src/Db/DbSchema.php',

@@ -18,8 +18,8 @@
  * ...........................................................................
  *
  * @author    202-ecommerce <tech@202-ecommerce.com>
- * @copyright Copyright (c) 202-ecommerce
- * @license   Commercial license
+ * @copyright PayPal
+ * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @version   develop
  */
  
@@ -30,6 +30,17 @@ use PaypalAddons\classes\AdminPayPalController;
 
 class AdminPayPalHelpController extends AdminPayPalController
 {
+    public function init()
+    {
+        parent::init();
+
+	    if (Tools::isSubmit('registerHooks')) {
+            if ($this->registerHooks()) {
+                $this->confirmations[] = $this->l('Hooks successfully registered');
+            }
+        }
+    }
+
     public function initContent()
     {
         parent::initContent();
@@ -40,12 +51,28 @@ class AdminPayPalHelpController extends AdminPayPalController
         $this->context->smarty->assign($tpl_vars);
         $this->content = $this->context->smarty->fetch($this->getTemplatePath() . 'help.tpl');
         $this->context->smarty->assign('content', $this->content);
-        $this->addJS('modules/' . $this->module->name . '/views/js/helpAdmin.js');
+        $this->addJS(_PS_MODULE_DIR_ . $this->module->name . '/views/js/helpAdmin.js');
     }
 
     public function displayAjaxCheckCredentials()
     {
         $response = new JsonResponse($this->_checkRequirements());
         return $response->send();
+    }
+
+    public function registerHooks()
+    {
+        $result = true;
+        $hooksUnregistered = $this->module->getHooksUnregistered();
+
+        if (empty($hooksUnregistered)) {
+            return $result;
+        }
+
+        foreach ($hooksUnregistered as $hookName) {
+            $result &= $this->module->registerHook($hookName);
+        }
+
+        return $result;
     }
 }

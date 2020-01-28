@@ -18,10 +18,11 @@
  * versions in the future. If you wish to customize PrestaShop for your
  * needs please refer to http://www.prestashop.com for more information.
  *
- *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2019 PrestaShop SA
- *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
- *  International Registered Trademark & Property of PrestaShop SA
+ *  @author 2007-2019 PayPal
+ *  @author 202 ecommerce <tech@202-ecommerce.com>
+ *  @copyright PayPal
+ *  @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ *  
  */
 
 namespace PaypalPPBTlib;
@@ -68,12 +69,18 @@ abstract class CommonAbstarctModuleFrontController extends ModuleFrontController
             if (isset($this->errors['error_code'])) {
                 $message .= 'Error code: ' . $this->errors['error_code'] . ';';
             }
-            if (isset($this->errors['error_msg']) && $this->errors['error_msg']) {
-                $message .= 'Short message: ' . $this->errors['error_msg'] . ';';
+
+            if (isset($this->errors['logger_msg'])) {
+                $message .= 'Short message: ' . $this->errors['logger_msg'] . ';';
+            } else {
+                if (isset($this->errors['error_msg']) && $this->errors['error_msg']) {
+                    $message .= 'Short message: ' . $this->errors['error_msg'] . ';';
+                }
+                if (isset($this->errors['msg_long']) && $this->errors['msg_long']) {
+                    $message .= 'Long message: ' . $this->errors['msg_long'] . ';';
+                }
             }
-            if (isset($this->errors['msg_long']) && $this->errors['msg_long']) {
-                $message .= 'Long message: ' . $this->errors['msg_long'] . ';';
-            }
+
             ProcessLoggerHandler::openLogger();
             ProcessLoggerHandler::logError(
                 $message,
@@ -89,7 +96,7 @@ abstract class CommonAbstarctModuleFrontController extends ModuleFrontController
         }
 
         if (!empty($this->redirectUrl)) {
-            \Tools::redirect($this->redirectUrl);
+            $this->redirectWithNotifications($this->redirectUrl);
         }
         if (!empty($this->jsonValues)) {
             $response = new JsonResponse($this->jsonValues);
