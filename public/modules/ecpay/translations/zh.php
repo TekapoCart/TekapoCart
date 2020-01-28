@@ -2,7 +2,7 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{ecpay}prestashop>ecpay_a4f832e004e088028e8882b74c8140ef'] = '绿界金流';
+$_MODULE['<{ecpay}prestashop>ecpay_8713c95f52b8e52d7433be205064147c'] = '绿界金流';
 $_MODULE['<{ecpay}prestashop>ecpay_28cb27b64b3d954652d8c889d2d877bb'] = '是否确定移除绿界整合金流模组';
 $_MODULE['<{ecpay}prestashop>ecpay_e7f9e382dc50889098cbe56f2554c77b'] = '信用卡（一次付清）';
 $_MODULE['<{ecpay}prestashop>ecpay_0291875d5f8a31a53490e96a5cdc3b16'] = '信用卡（03期）';

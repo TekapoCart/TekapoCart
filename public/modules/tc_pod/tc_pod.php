@@ -21,7 +21,7 @@ class Tc_Pod extends PaymentModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('TekapoCart Payment on Delivery');
+        $this->displayName = $this->l('Payment on Delivery');
         $this->description = 'https://www.tekapo.io/';
         $this->confirmUninstall = $this->l('Do you want to uninstall TekapoCart POD module?');
 
