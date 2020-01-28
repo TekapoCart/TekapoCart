@@ -315,7 +315,10 @@ class MailCore extends ObjectModel
         }
 
         /* Construct multiple recipients list if needed */
-        $message = \Swift_Message::newInstance();
+        // suzy: 2020-01-19 升級 swiftmailer 6
+//        $message = \Swift_Message::newInstance();
+        $message = new Swift_Message();
+
         if (is_array($to) && isset($to)) {
             foreach ($to as $key => $addr) {
                 $addr = trim($addr);
@@ -368,22 +371,34 @@ class MailCore extends ObjectModel
                     return false;
                 }
 
-                $connection = \Swift_SmtpTransport::newInstance(
+                // suzy: 2020-01-19 升級 swiftmailer 6
+//                $connection = \Swift_SmtpTransport::newInstance(
+//                    $configuration['PS_MAIL_SERVER'],
+//                    $configuration['PS_MAIL_SMTP_PORT'],
+//                    $configuration['PS_MAIL_SMTP_ENCRYPTION']
+//                )
+                $connection = (new Swift_SmtpTransport(
                     $configuration['PS_MAIL_SERVER'],
                     $configuration['PS_MAIL_SMTP_PORT'],
                     $configuration['PS_MAIL_SMTP_ENCRYPTION']
-                )
+                ))
                     ->setUsername($configuration['PS_MAIL_USER'])
                     ->setPassword($configuration['PS_MAIL_PASSWD']);
             } else {
-                $connection = \Swift_MailTransport::newInstance();
+                // suzy: 2020-01-19 升級 swiftmailer 6
+//                $connection = \Swift_MailTransport::newInstance();
+                $connection = new Swift_SendmailTransport();
+
             }
 
             if (!$connection) {
                 return false;
             }
 
-            $swift = \Swift_Mailer::newInstance($connection);
+            // suzy: 2020-01-19 升級 swiftmailer 6
+//            $swift = \Swift_Mailer::newInstance($connection);
+            $swift = new Swift_Mailer($connection);
+
             /* Get templates content */
             $iso = Language::getIsoById((int) $idLang);
             $isoDefault = Language::getIsoById((int) Configuration::get('PS_LANG_DEFAULT'));
@@ -716,7 +731,7 @@ class MailCore extends ObjectModel
      */
     public static function sendMailTest(
         $smtpChecked,
-        $smtp_server,
+        $smtpServer,
         $content,
         $subject,
         $type,
@@ -734,15 +749,33 @@ class MailCore extends ObjectModel
                 if (Tools::strtolower($smtpEncryption) === 'off') {
                     $smtpEncryption = false;
                 }
-                $smtp = \Swift_SmtpTransport::newInstance($smtp_server, $smtpPort, $smtpEncryption)
+
+                // suzy: 2020-01-19 升級 swiftmailer 6
+//                $smtp = \Swift_SmtpTransport::newInstance($smtpServer, $smtpPort, $smtpEncryption)
+//                    ->setUsername($smtpLogin)
+//                    ->setPassword($smtpPassword);
+//                $swift = \Swift_Mailer::newInstance($smtp);
+
+
+                $connection = (new Swift_SmtpTransport(
+                    $smtpServer,
+                    $smtpPort,
+                    $smtpEncryption
+                ))
                     ->setUsername($smtpLogin)
                     ->setPassword($smtpPassword);
-                $swift = \Swift_Mailer::newInstance($smtp);
+
             } else {
-                $swift = \Swift_Mailer::newInstance(\Swift_MailTransport::newInstance());
+                // suzy: 2020-01-19 升級 swiftmailer 6
+//                $swift = \Swift_Mailer::newInstance(\Swift_MailTransport::newInstance());
+                $connection = new Swift_SendmailTransport();
             }
 
-            $message = \Swift_Message::newInstance();
+            // suzy: 2020-01-19 升級 swiftmailer 6
+//            $message = \Swift_Message::newInstance();
+
+            $swift = new Swift_Mailer($connection);
+            $message = new Swift_Message();
 
             $message
                 ->setFrom($from)
