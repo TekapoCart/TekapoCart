@@ -134,7 +134,7 @@ define('_PS_SUPP_IMG_DIR_', _PS_IMG_DIR_.'su/');
 define('_PS_TMP_IMG_DIR_', _PS_IMG_DIR_.'tmp/');
 
 // suzy: 2019-01-05 貼紙功能
-define('_PS_STICKER_IMG_DIR_', _PS_IMG_DIR_.'/cms/sticker/');
+define('_PS_STICKER_IMG_DIR_', _PS_IMG_DIR_.'cms/sticker/');
 
 /* settings php */
 define('_PS_TRANS_PATTERN_', '(.*[^\\\\])');
