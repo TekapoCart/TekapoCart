@@ -2,7 +2,7 @@
 <module>
     <name>ps_currencyselector</name>
     <displayName><![CDATA[貨幣區塊]]></displayName>
-    <version><![CDATA[2.0.0]]></version>
+    <version><![CDATA[2.0.1]]></version>
     <description><![CDATA[加入一個區塊讓客戶選擇他們偏好的購物貨幣。]]></description>
     <author><![CDATA[PrestaShop]]></author>
     <tab><![CDATA[]]></tab>
