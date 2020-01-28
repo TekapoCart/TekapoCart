@@ -97,7 +97,7 @@ class Ps_Facetedsearch extends Module implements WidgetInterface
     {
         $this->name = 'ps_facetedsearch';
         $this->tab = 'front_office_features';
-        $this->version = '3.4.0';
+        $this->version = '3.4.1';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -810,15 +810,9 @@ class Ps_Facetedsearch extends Module implements WidgetInterface
             'id_lang' => $this->getContext()->cookie->id_lang,
             'token' => substr(Tools::encrypt('ps_facetedsearch/index'), 0, 10),
             'base_folder' => urlencode(_PS_ADMIN_DIR_),
-
-            // suzy: 2019-01-24 token 產生方法已改變
-            // 'price_indexer_url' => $moduleUrl . 'ps_facetedsearch-price-indexer.php' . '?token=' . substr(Tools::encrypt('ps_facetedsearch/index'), 0, 10),
-            // 'full_price_indexer_url' => $moduleUrl . 'ps_facetedsearch-price-indexer.php' . '?token=' . substr(Tools::encrypt('ps_facetedsearch/index'), 0, 10) . '&full=1',
-            // 'attribute_indexer_url' => $moduleUrl . 'ps_facetedsearch-attribute-indexer.php' . '?token=' . substr(Tools::encrypt('ps_facetedsearch/index'), 0, 10),
-            'price_indexer_url' => $moduleUrl . 'ps_facetedsearch-price-indexer.php'.'?token='.substr(_COOKIE_KEY_, 34, 8),
-            'full_price_indexer_url' => $moduleUrl . 'ps_facetedsearch-price-indexer.php'.'?token='.substr(_COOKIE_KEY_, 34, 8).'&full=1',
-            'attribute_indexer_url' => $moduleUrl . 'ps_facetedsearch-attribute-indexer.php'.'?token='.substr(_COOKIE_KEY_, 34, 8),
-
+            'price_indexer_url' => $moduleUrl . 'ps_facetedsearch-price-indexer.php' . '?token=' . substr(Tools::encrypt('ps_facetedsearch/index'), 0, 10),
+            'full_price_indexer_url' => $moduleUrl . 'ps_facetedsearch-price-indexer.php' . '?token=' . substr(Tools::encrypt('ps_facetedsearch/index'), 0, 10) . '&full=1',
+            'attribute_indexer_url' => $moduleUrl . 'ps_facetedsearch-attribute-indexer.php' . '?token=' . substr(Tools::encrypt('ps_facetedsearch/index'), 0, 10),
             'clear_cache_url' => $moduleUrl . 'ps_facetedsearch-clear-cache.php' . '?token=' . substr(Tools::encrypt('ps_facetedsearch/index'), 0, 10),
             'filters_templates' => $this->getDatabase()->executeS('SELECT * FROM ' . _DB_PREFIX_ . 'layered_filter ORDER BY date_add DESC'),
             'show_quantities' => Configuration::get('PS_LAYERED_SHOW_QTIES'),
