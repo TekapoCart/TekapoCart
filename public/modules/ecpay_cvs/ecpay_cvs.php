@@ -791,8 +791,8 @@ class Ecpay_Cvs extends CarrierModule
     public function getOrderStatusID($status_name)
     {
         $order_status = array(
-            'shipped' => 4, // 已出貨
-            'delivered' => 5, // 已送達門市
+            'shipped' => Configuration::get('PS_OS_SHIPPING'), // 已出貨
+            'delivered' => Configuration::get('PS_OS_DELIVERED'), // 已送達門市
             'pickedup' => 37, // 已取件
             'notpickedup' => 38, // 未取件
         );

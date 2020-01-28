@@ -319,9 +319,9 @@ class Ecpay extends PaymentModule
     public function getOrderStatusID($status_name)
     {
         $order_status = array(
-            'created' => 1,
-            'succeeded' => 2,
-            'failed' => 8,
+            'created' => Configuration::get('PS_OS_CHEQUE'), // 1 待付款
+            'succeeded' => Configuration::get('PS_OS_PAYMENT'), // 2 已付款
+            'failed' => Configuration::get('PS_OS_ERROR'), // 8 付款失敗
         );
 
         return $order_status[$status_name];
