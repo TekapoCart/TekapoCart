@@ -157,7 +157,8 @@ class Simplicity_Sociallogin extends Module
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        $back = isset($_SESSION['social_login_back']) ? $_SESSION['social_login_back'] : $this->context->link->getPageLink('my-account');
+        // $back = isset($_SESSION['social_login_back']) ? $_SESSION['social_login_back'] : $this->context->link->getPageLink('my-account');
+        $back = $this->context->link->getPageLink('my-account');
 
         $this->context->controller->success[] = $this->trans('Login Successful', array(), 'Shop.Theme.Customeraccount');
         $this->context->controller->redirectWithNotifications($back);
