@@ -226,8 +226,8 @@ class Simplicity_Sociallogin extends Module
 
     public function socialUpdate($social_id, $social_type, $customer_id)
     {
-        $sql = "UPDATE `' . _DB_PREFIX_ . 'sociallogin` SET `id_customer`='" . $customer_id .
-            "' WHERE `id_social`='" . $social_id . "' AND type='" . $social_type . "'";
+        $sql = "UPDATE " . _DB_PREFIX_ . "sociallogin SET id_customer='" . $customer_id .
+            "' WHERE id_social='" . $social_id . "' AND type='" . $social_type . "'";
         Db::getInstance()->Execute($sql);
     }
 
@@ -235,40 +235,15 @@ class Simplicity_Sociallogin extends Module
     {
 
         $customer = new Customer($id_customer);
-        $customer->logged = 1;
 
-        $this->context->cookie->id_customer = (int)($customer->id);
-        $this->context->cookie->customer_lastname = $customer->lastname;
-        $this->context->cookie->customer_firstname = $customer->firstname;
-        $this->context->cookie->logged = 1;
-        $this->context->cookie->is_guest = $customer->isGuest();
-        $this->context->cookie->passwd = $customer->passwd;
-        $this->context->cookie->email = $customer->email;
+        // Login Customer
+        $this->context->updateCustomer($customer);
 
-        $this->context->customer = $customer;
-
-        if (Configuration::get('PS_CART_FOLLOWING') &&
-            (empty($this->context->cookie->id_cart) || Cart::getNbProducts($this->context->cookie->id_cart) == 0) &&
-            $id_cart = (int)Cart::lastNoneOrderedCart($this->context->customer->id)
-        ) {
-            $this->context->cart = new Cart($id_cart);
-        } else {
-            $this->context->cart->id_carrier = 0;
-            $this->context->cart->setDeliveryOption(null);
-            $this->context->cart->id_address_delivery = Address::getFirstCustomerAddressId((int)($customer->id));
-            $this->context->cart->id_address_invoice = Address::getFirstCustomerAddressId((int)($customer->id));
-        }
-
-        $this->context->cart->id_customer = (int)$customer->id;
-        $this->context->cart->secure_key = $customer->secure_key;
-        $this->context->cart->save();
-        $this->context->cookie->id_cart = (int)$this->context->cart->id;
-        $this->context->cookie->write();
-        $this->context->cart->autosetProductAddress();
-        Hook::exec('actionAuthentication');
+        Hook::exec('actionAuthentication', array('customer' => $this->context->customer));
 
         CartRule::autoRemoveFromCart($this->context);
         CartRule::autoAddToCart($this->context);
+        // END Login
 
     }
 
