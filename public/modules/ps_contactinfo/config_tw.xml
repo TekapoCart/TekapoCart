@@ -6,7 +6,7 @@
     <description><![CDATA[顯示商店聯絡資訊於特定區塊。]]></description>
     <author><![CDATA[PrestaShop]]></author>
     <tab><![CDATA[]]></tab>
-    <is_configurable>0</is_configurable>
+    <is_configurable>1</is_configurable>
     <need_instance>1</need_instance>
 	<limited_countries></limited_countries>
 </module>
