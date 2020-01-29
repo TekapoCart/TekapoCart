@@ -13,16 +13,30 @@
                 <br>
                 <br>
                 {if isset($map_url)}
-                    <button type="button" onclick="window.open('{$map_url nofilter}', '_self');" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary reselect-store">
                         更新門市
                     </button>
+                    <script type="text/javascript">
+                        $('.reselect-store').on('click', function () {
+                            if (confirm('重新選取門市並通知 ECPay，確定繼續？')) {
+                                window.open('{$map_url nofilter}', '_self');
+                            }
+                        });
+                    </script>
                 {/if}
                 {if isset($print_html)}
                     {$print_html nofilter}
                 {/if}
-                <button type="button" onclick="window.open('{$resend_url nofilter}', '_self');" class="btn btn-primary">
+                <button type="button" class="btn btn-primary resend-order">
                     重送 ECPay 訂單
                 </button>
+                <script type="text/javascript">
+                    $('.resend-order').on('click', function () {
+                        if (confirm('重送訂單將取得新「ECPay 物流交易編號」，確定繼續？')) {
+                            window.open('{$resend_url nofilter}', '_self');
+                        }
+                    });
+                </script>
             </div>
             <div class="col-md-6">
                 {if isset($sn_id)}

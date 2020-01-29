@@ -2,9 +2,16 @@
     {if isset($return_message)}
     <div class="row">
         <div class="col-md-6">
-            <button type="button" onclick="window.open('{$resend_url nofilter}', '_self');" class="btn btn-primary">
+            <button type="button" class="btn btn-primary resend-order">
                 重送 ezShip 訂單
             </button>
+            <script type="text/javascript">
+                $('.resend-order').on('click', function () {
+                    if (confirm('重送訂單將取得新「ezShip 編號」，確定繼續？')) {
+                        window.open('{$resend_url nofilter}', '_self');
+                    }
+                });
+            </script>
         </div>
         <div class="col-md-6">
             {if isset($sn_id) && $sn_id != '00000000'}

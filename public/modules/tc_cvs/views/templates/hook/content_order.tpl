@@ -11,9 +11,16 @@
                 門市代號：{$store_data['code']}
                 <br>
                 <br>
-                <button type="button" onclick="window.open('{$map_url nofilter}', '_self');" class="btn btn-primary">
+                <button type="button" class="btn btn-primary reselect-store">
                     更新門市
                 </button>
+                <script type="text/javascript">
+                    $('.reselect-store').on('click', function () {
+                        if (confirm('重新選取門市，確定繼續？')) {
+                            window.open('{$map_url nofilter}', '_self');
+                        }
+                    });
+                </script>
             </div>
             <div class="col-md-6">
                 {if strlen($change_store_message) > 0}

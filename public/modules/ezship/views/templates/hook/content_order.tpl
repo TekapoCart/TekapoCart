@@ -11,12 +11,26 @@
                 門市代號：{$store_data['code']}
                 <br>
                 <br>
-                <button type="button" onclick="window.open('{$map_url nofilter}', '_self');" class="btn btn-primary">
+                <button type="button" class="btn btn-primary reselect-store">
                     更新門市
                 </button>
-                <button type="button" onclick="window.open('{$resend_url nofilter}', '_self');" class="btn btn-primary">
+                <script type="text/javascript">
+                    $('.reselect-store').on('click', function () {
+                        if (confirm('重新選取門市，確定繼續？')) {
+                            window.open('{$map_url nofilter}', '_self');
+                        }
+                    });
+                </script>
+                <button type="button" class="btn btn-primary resend-order">
                     重送 ezShip 訂單
                 </button>
+                <script type="text/javascript">
+                    $('.resend-order').on('click', function () {
+                        if (confirm('重送訂單將取得新「ezShip 編號」，確定繼續？')) {
+                            window.open('{$resend_url nofilter}', '_self');
+                        }
+                    });
+                </script>
             </div>
             <div class="col-md-6">
                 {if isset($sn_id) && $sn_id != '00000000'}
