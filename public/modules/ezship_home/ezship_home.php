@@ -45,7 +45,7 @@ class EzShip_Home extends CarrierModule
         $carrier->name = $this->l('Home delivery');
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
-        $carrier->shipping_external = 0;
+        $carrier->shipping_external = 1;
         $carrier->shipping_method = 2;
         $carrier->is_module = 1;
         $carrier->external_module_name = $this->name;
@@ -204,7 +204,7 @@ class EzShip_Home extends CarrierModule
 
     public function getOrderShippingCost($params, $shipping_cost)
     {
-        return 0;
+        return $shipping_cost;
     }
 
     public function getOrderShippingCostExternal($params)
@@ -306,7 +306,7 @@ class EzShip_Home extends CarrierModule
 
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('EzShip_Home createShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
+            EzShip_Home::logMessage(sprintf('EzShip_Home createShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
         }
     }
 

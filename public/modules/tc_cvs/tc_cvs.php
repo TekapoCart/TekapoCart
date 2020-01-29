@@ -124,7 +124,7 @@ class Tc_Cvs extends CarrierModule
         $carrier->name = $this->l('7-11 pickup in-store');
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
-        $carrier->shipping_external = 0;
+        $carrier->shipping_external = 1;
         $carrier->shipping_method = 2;
         $carrier->is_module = 1;
         $carrier->external_module_name = $this->name;
@@ -158,7 +158,7 @@ class Tc_Cvs extends CarrierModule
             return false;
         }
 
-        $store_data = $this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier);
+        $store_data = $this->getStoreData($this->context->cart->id, $params['carrier']['id']);
 
         $map_url = $this->context->isMobile() ? 'https://emap.presco.com.tw/c2cemapm-u.ashx' : 'https://emap.presco.com.tw/c2cemap.ashx';
         $query = [
@@ -393,9 +393,162 @@ class Tc_Cvs extends CarrierModule
         return true;
     }
 
+    public function getContent()
+    {
+        $html_content = '';
+
+        # Update the settings
+        if (Tools::isSubmit('tc_cvs_submit')) {
+            # Validate the POST parameters
+            $this->postValidation();
+
+            if (!empty($this->postError)) {
+                # Display the POST error
+                $html_content .= $this->displayError($this->postError);
+            } else {
+                $html_content .= $this->postProcess();
+            }
+        }
+
+        # Display the setting form
+        $html_content .= $this->displayForm();
+
+        return $html_content;
+    }
+
+    private function postValidation()
+    {
+        $required_fields = array(
+            'tc_cvs_penghu_store_ids' => '澎湖門市 ID',
+        );
+
+        foreach ($required_fields as $field_name => $field_desc) {
+            $tmp_field_value = Tools::getValue($field_name);
+            if (empty($tmp_field_value)) {
+                $this->postError = $field_desc . $this->l(' is required');
+                return;
+            }
+        }
+    }
+
+    private function displayForm()
+    {
+        # Set the configurations for generating a setting form
+        $fields_form[0]['form'] = array(
+            'legend' => array(
+                'title' => '7-11 交貨便設定',
+            ),
+            'input' => array(
+                array(
+                    'type' => 'select',
+                    'label' => '商家位置',
+                    'name' => 'tc_cvs_sender_location',
+                    'options' => array(
+                        'query' => array(
+                            array('id' => '0', 'name' => '台灣本島'),
+                            array('id' => '1', 'name' => '離島（澎湖）'),
+                        ),
+                        'id' => 'id',
+                        'name' => 'name'
+                    ),
+                    'required' => true,
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => '離島追加運費',
+                    'name' => 'tc_cvs_island_fee',
+                    'required' => true,
+                ),
+                array(
+                    'type' => 'textarea',
+                    'label' => '澎湖門市 ID',
+                    'name' => 'tc_cvs_penghu_store_ids',
+                    'required' => true,
+                ),
+            ),
+            'submit' => array(
+                'name' => 'tc_cvs_submit',
+                'title' => $this->l('Save'),
+            ),
+            'buttons' => array(
+                array(
+                    'href' => $this->context->link->getAdminLink('AdminPayment', false).'&token='.Tools::getAdminTokenLite('AdminPayment'),
+                    'title' => '返回金物流模組',
+                    'icon' => 'process-icon-back'
+                )
+            )
+        );
+
+        $helper = new HelperForm();
+
+        # Module, token and currentIndex
+        $helper->module = $this;
+        $helper->name_controller = $this->name;
+        $helper->token = Tools::getAdminTokenLite('AdminModules');
+        $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
+
+        # Get the default language
+        $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
+
+        # Language
+        $helper->default_form_language = $default_lang;
+        $helper->allow_employee_form_lang = $default_lang;
+
+        # Load the current settings
+        foreach ($this->tcCvsParams as $param_name) {
+            $helper->fields_value[$param_name] = Configuration::get($param_name);
+
+            if ($param_name === 'tc_cvs_island_fee') {
+                if (strlen($helper->fields_value[$param_name]) === 0) {
+                    $helper->fields_value[$param_name] = 40;
+                }
+            } elseif ($param_name === 'tc_cvs_penghu_store_ids') {
+                if (strlen($helper->fields_value[$param_name]) === 0) {
+                    $helper->fields_value[$param_name] = '153869,195081,900795,951106,188201,941833,909574,113883,151391,922201,941202,930545,113506,880590,892571,901891,900762,987806,142869,184140,981750,166740';
+                }
+            }
+
+        }
+
+        return $helper->generateForm($fields_form);
+    }
+
+    private function postProcess()
+    {
+
+        if (strlen(Tools::getValue('tc_cvs_penghu_store_ids')) === 0) {
+            $_POST['tc_cvs_penghu_store_ids'] = '153869,195081,900795,951106,188201,941833,909574,113883,151391,922201,941202,930545,113506,880590,892571,901891,900762,987806,142869,184140,981750,166740';
+        }
+
+        foreach ($this->tcCvsParams as $param_name) {
+
+            if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
+                return $this->displayError($param_name . ' ' . $this->l('updated failed'));
+            }
+        }
+
+        return $this->displayConfirmation($this->trans('Settings updated.', array(), 'Admin.Notifications.Success'));
+    }
+
     public function getOrderShippingCost($params, $shipping_cost)
     {
-        return 0;
+
+        $store_data = $this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier);
+        if ($store_data) {
+
+            if (Configuration::get('tc_cvs_sender_location') == 1) {
+                if (strpos(Configuration::get('tc_cvs_penghu_store_ids'), $store_data['code']) === false) {
+                    return $shipping_cost + (int)Configuration::get('tc_cvs_island_fee');
+                }
+            } elseif (Configuration::get('tc_cvs_sender_location') == 0) {
+                if (strpos(Configuration::get('tc_cvs_penghu_store_ids'), $store_data['code']) !== false) {
+                    return $shipping_cost + (int)Configuration::get('tc_cvs_island_fee');
+                }
+            }
+
+        }
+
+        return $shipping_cost;
     }
 
     public function getOrderShippingCostExternal($params)
@@ -450,7 +603,7 @@ class Tc_Cvs extends CarrierModule
                 $tcOrderShipping->rv_name = $address->lastname . $address->firstname;
                 $tcOrderShipping->rv_mobile = $address->phone_mobile;
 
-                if ($tc_order_shipping_id) {
+                if (!empty($tcOrderShipping->id)) {
 
                 } else {
                     $store_data = $this->getStoreData($order->id_cart, $order->id_carrier);

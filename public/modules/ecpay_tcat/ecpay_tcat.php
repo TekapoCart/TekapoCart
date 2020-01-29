@@ -12,6 +12,8 @@ include_once _PS_MODULE_DIR_ . 'ecpay_cvs/classes/TcCartShipping.php';
 class Ecpay_Tcat extends CarrierModule
 {
 
+    private $ecpayParams = [];
+
     private $deliveryTimeOptions = [];
 
     public function __construct()
@@ -32,6 +34,12 @@ class Ecpay_Tcat extends CarrierModule
         if (!$invoke_result) {
             throw new Exception($this->l('ECPay SDK is missing.'));
         }
+
+        $this->ecpayParams = [
+            'ecpay_sender_address',
+            'ecpay_sender_postcode',
+            'ecpay_parcel_pickup_time',
+        ];
 
         $this->deliveryTimeOptions = [
             EcpayScheduledDeliveryTime::UNLIMITED => $this->l('No Limit'),
@@ -61,7 +69,7 @@ class Ecpay_Tcat extends CarrierModule
         $carrier->name = $this->l('Home delivery');
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
-        $carrier->shipping_external = 0;
+        $carrier->shipping_external = 1;
         $carrier->shipping_method = 2;
         $carrier->is_module = 1;
         $carrier->external_module_name = $this->name;
@@ -94,7 +102,7 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
-        $scheduled_data = $this->getScheduledData($this->context->cart->id, $this->context->cart->id_carrier);
+        $scheduled_data = $this->getScheduledData($this->context->cart->id, $params['carrier']['id']);
 
         $this->smarty->assign([
             'scheduled_data' => $scheduled_data,
@@ -276,9 +284,133 @@ class Ecpay_Tcat extends CarrierModule
         return true;
     }
 
+    public function getContent()
+    {
+        $html_content = '';
+
+        # Update the settings
+        if (Tools::isSubmit('ecpay_submit')) {
+            # Validate the POST parameters
+            $this->postValidation();
+
+            if (!empty($this->postError)) {
+                # Display the POST error
+                $html_content .= $this->displayError($this->postError);
+            } else {
+                $html_content .= $this->postProcess();
+            }
+        }
+
+        # Display the setting form
+        $html_content .= $this->displayForm();
+
+        return $html_content;
+    }
+
+    private function postValidation()
+    {
+        $required_fields = array(
+            'ecpay_sender_address' => '寄件人地址',
+            'ecpay_sender_postcode' => '寄件人郵遞區號',
+        );
+
+        foreach ($required_fields as $field_name => $field_desc) {
+            $tmp_field_value = Tools::getValue($field_name);
+            if (empty($tmp_field_value)) {
+                $this->postError = $field_desc . $this->l(' is required');
+                return;
+            }
+        }
+    }
+
+    private function displayForm()
+    {
+        # Set the configurations for generating a setting form
+        $fields_form[0]['form'] = array(
+            'legend' => array(
+                'title' => $this->l('ECPay configuration'),
+            ),
+            'input' => array(
+                array(
+                    'type' => 'text',
+                    'label' => '寄件人地址',
+                    'name' => 'ecpay_sender_address',
+                    'required' => true,
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => '寄件人郵遞區號',
+                    'name' => 'ecpay_sender_postcode',
+                    'required' => true,
+                ),
+                array(
+                    'type' => 'select',
+                    'label' => '預定取件時段',
+                    'name' => 'ecpay_parcel_pickup_time',
+                    'options' => array(
+                        'query' => array(
+                            array('id' => '4', 'name' => '不限時'),
+                            array('id' => '1', 'name' => '13 前'),
+                            array('id' => '3', 'name' => '14~18時'),
+                        ),
+                        'id' => 'id',
+                        'name' => 'name'
+                    ),
+                ),
+
+            ),
+            'submit' => array(
+                'name' => 'ecpay_submit',
+                'title' => $this->l('Save'),
+            ),
+            'buttons' => array(
+                array(
+                    'href' => $this->context->link->getAdminLink('AdminPayment', false).'&token='.Tools::getAdminTokenLite('AdminPayment'),
+                    'title' => '返回金物流模組',
+                    'icon' => 'process-icon-back'
+                )
+            )
+        );
+
+        $helper = new HelperForm();
+
+        # Module, token and currentIndex
+        $helper->module = $this;
+        $helper->name_controller = $this->name;
+        $helper->token = Tools::getAdminTokenLite('AdminModules');
+        $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
+
+        # Get the default language
+        $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
+
+        # Language
+        $helper->default_form_language = $default_lang;
+        $helper->allow_employee_form_lang = $default_lang;
+
+        # Load the current settings
+        foreach ($this->ecpayParams as $param_name) {
+            $helper->fields_value[$param_name] = Configuration::get($param_name);
+        }
+
+        return $helper->generateForm($fields_form);
+    }
+
+    private function postProcess()
+    {
+
+        foreach ($this->ecpayParams as $param_name) {
+
+            if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
+                return $this->displayError($param_name . ' ' . $this->l('updated failed'));
+            }
+        }
+
+        return $this->displayConfirmation($this->trans('Settings updated.', array(), 'Admin.Notifications.Success'));
+    }
+
     public function getOrderShippingCost($params, $shipping_cost)
     {
-        return 0;
+        return $shipping_cost;
     }
 
     public function getOrderShippingCostExternal($params)

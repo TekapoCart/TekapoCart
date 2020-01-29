@@ -3,6 +3,7 @@
 global $_MODULE;
 $_MODULE = array();
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_0702d52268ee17b84d632e557699d4fa'] = 'ECPay 黑猫宅配';
+$_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_560c7dd45f44a78faa1aa6ca1c2ebae2'] = 'ECPay 设定';
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_ad0322901b80cf443ba23c6544946ef9'] = '2-3 天';
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_6cefaa978ccec960693d10cefeb2c2bf'] = '黑猫宅配';
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_2084d4d72acfc24b948650eec4baf1c4'] = '取件人姓名字数超过限制';

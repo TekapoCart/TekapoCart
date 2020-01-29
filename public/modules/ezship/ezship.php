@@ -124,7 +124,7 @@ class EzShip extends CarrierModule
         $carrier->name = $this->l('OK Mart, HiLife, FamilyMart pickup in-store');
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
-        $carrier->shipping_external = 0;
+        $carrier->shipping_external = 1;
         $carrier->shipping_method = 2;
         $carrier->is_module = 1;
         $carrier->external_module_name = $this->name;
@@ -158,7 +158,7 @@ class EzShip extends CarrierModule
             return false;
         }
 
-        $store_data = $this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier);
+        $store_data = $this->getStoreData($this->context->cart->id, $params['carrier']['id']);
 
         $map_url = 'https://map.ezship.com.tw/ezship_map_web.jsp';
         $query = [
@@ -459,7 +459,7 @@ class EzShip extends CarrierModule
                 ),
                 array(
                     'type' => 'select',
-                    'label' => $this->l('ezShip Confirm Order'),
+                    'label' => '確認訂單',
                     'name' => 'ezship_confirm_order',
                     'options' => array(
                         'query' => array(
@@ -472,12 +472,12 @@ class EzShip extends CarrierModule
                 ),
                 array(
                     'type' => 'select',
-                    'label' => $this->l('ezShip Enable Payment on delivery'),
+                    'label' => '貨到付款',
                     'name' => 'ezship_enable_pod',
                     'options' => array(
                         'query' => array(
-                            array('id' => '1', 'name' => '啟用貨到付款'),
-                            array('id' => '0', 'name' => '停用貨到付款'),
+                            array('id' => '1', 'name' => '啟用'),
+                            array('id' => '0', 'name' => '停用'),
                         ),
                         'id' => 'id',
                         'name' => 'name'
@@ -547,7 +547,7 @@ class EzShip extends CarrierModule
 
     public function getOrderShippingCost($params, $shipping_cost)
     {
-        return 0;
+        return $shipping_cost;
     }
 
     public function getOrderShippingCostExternal($params)

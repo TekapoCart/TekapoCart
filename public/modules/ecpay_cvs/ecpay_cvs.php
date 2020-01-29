@@ -38,9 +38,6 @@ class Ecpay_Cvs extends CarrierModule
             'ecpay_logistics_type',
             'ecpay_sender_name',
             'ecpay_sender_cellphone',
-            'ecpay_sender_address',
-            'ecpay_sender_postcode',
-            'ecpay_parcel_pickup_time',
         ];
 
     }
@@ -135,7 +132,7 @@ class Ecpay_Cvs extends CarrierModule
         $carrier->name = $this->l('7-11 pickup in-store');
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
-        $carrier->shipping_external = 0;
+        $carrier->shipping_external = 1;
         $carrier->shipping_method = 2;
         $carrier->is_module = 1;
         $carrier->external_module_name = $this->name;
@@ -184,7 +181,7 @@ class Ecpay_Cvs extends CarrierModule
             $AL->Send['ExtraData'] = $this->context->cart->id;
             $map_url = $AL->CvsMap();
 
-            $store_data = $this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier);
+            $store_data = $this->getStoreData($this->context->cart->id, $params['carrier']['id']);
 
             $this->smarty->assign([
                 'map_url' => $map_url,
@@ -580,33 +577,6 @@ class Ecpay_Cvs extends CarrierModule
                     'name' => 'ecpay_sender_cellphone',
                     'desc' => '只允許數字、10 碼、09 開頭',
                 ),
-                array(
-                    'type' => 'text',
-                    'label' => $this->l('ECPay Sender Address'),
-                    'name' => 'ecpay_sender_address',
-                    'desc' => '若啟用宅配，此欄位為必填'
-                ),
-                array(
-                    'type' => 'text',
-                    'label' => $this->l('ECPay Sender Postcode'),
-                    'name' => 'ecpay_sender_postcode',
-                    'desc' => '若啟用宅配，此欄位為必填'
-                ),
-                array(
-                    'type' => 'select',
-                    'label' => $this->l('ECPay Parcel Pickup time'),
-                    'name' => 'ecpay_parcel_pickup_time',
-                    'options' => array(
-                        'query' => array(
-                            array('id' => '4', 'name' => '不限時'),
-                            array('id' => '1', 'name' => '13 前'),
-                            array('id' => '3', 'name' => '14~18時'),
-                        ),
-                        'id' => 'id',
-                        'name' => 'name'
-                    ),
-                ),
-
             ),
             'submit' => array(
                 'name' => 'ecpay_submit',
@@ -659,7 +629,7 @@ class Ecpay_Cvs extends CarrierModule
 
     public function getOrderShippingCost($params, $shipping_cost)
     {
-        return 0;
+        return $shipping_cost;
     }
 
     public function getOrderShippingCostExternal($params)
