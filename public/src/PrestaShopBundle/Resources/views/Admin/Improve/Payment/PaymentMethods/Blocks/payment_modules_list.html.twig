@@ -45,20 +45,17 @@
           {{ module.attributes.description|raw }}
         </p>
       </div>
-      {# suzy: 2019-02-11 移動 if module.attributes.is_configurable 位置 #}
-      {#% if module.attributes.is_configurable %#}
+      {% if module.attributes.is_configurable %}
       <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-3">
         <div class="text-center">
-          {% if module.attributes.is_configurable %}
           <a href="{{ path('admin_module_configure_action', {'module_name': module.attributes.name}) }}"
              class="btn btn-primary-reverse btn-outline-primary light-button"
           >
             {{ 'Configure'|trans({}, 'Admin.Global') }}
           </a>
-          {% endif %}
         </div>
       </div>
-      {#% endif %#}
+      {% endif %}
     </div>
   {% endfor %}
   </div>

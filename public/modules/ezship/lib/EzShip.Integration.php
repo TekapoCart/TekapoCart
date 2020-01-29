@@ -197,7 +197,7 @@ class EzShip_AllInOne
 
     function CheckOutFeedback()
     {
-        return EzShip_CheckOutFeedback::CheckOut(array_merge($_POST, ['EncryptType' => $this->EncryptType]), $this->suID, $this->secret);
+        return EzShip_CheckOutFeedback::CheckOut(array_merge($_REQUEST, ['EncryptType' => $this->EncryptType]), $this->suID, $this->secret);
     }
 }
 
@@ -217,8 +217,10 @@ abstract class EzShip_Aio
 
         curl_setopt($ch, CURLOPT_URL, $ServiceURL);
         curl_setopt($ch, CURLOPT_HEADER, false);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // 302 redirect
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
         $rs = curl_exec($ch);
@@ -226,6 +228,9 @@ abstract class EzShip_Aio
         if (false === $rs) {
             throw new Exception(curl_error($ch), curl_errno($ch));
         }
+
+        // ezShip 特別處理
+        echo $rs;
 
         curl_close($ch);
 

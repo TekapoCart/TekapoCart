@@ -151,6 +151,10 @@ class EzShip_Home extends CarrierModule
                 'return_status' => $tcOrderShipping['return_status'],
                 'return_message' => $tcOrderShipping['return_message'],
             ));
+
+            $this->smarty->assign([
+                'sn_id' => $tcOrderShipping['sn_id'],
+            ]);
         }
 
         // 建立物流訂單 / 重新取號

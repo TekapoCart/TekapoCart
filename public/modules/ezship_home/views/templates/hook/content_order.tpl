@@ -7,8 +7,8 @@
             </button>
         </div>
         <div class="col-md-6">
-            {if !empty($sn_id) && $sn_id != '00000000'}
-                <p>店到店編號：{$sn_id}</p>
+            {if isset($sn_id) && $sn_id != '00000000'}
+                <p>ezShip 編號：{$sn_id}</p>
             {/if}
             {if strlen($return_status) > 0}
                 <p>物流回傳狀態：{$return_status}</p>
