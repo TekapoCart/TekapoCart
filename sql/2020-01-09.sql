@@ -49,3 +49,14 @@ UPDATE `ps_order_state` SET `sort` = '94' WHERE `ps_order_state`.`id_order_state
 
 DELETE FROM ps_configuration WHERE name='BLOCKCONTACT_TELNUMBER';
 DELETE FROM ps_configuration WHERE name='BLOCKCONTACT_EMAIL';
+
+UPDATE `ps_order_state_lang` SET `name` = '處理中（貨到付款）' WHERE `ps_order_state_lang`.`id_order_state` = 14 AND `ps_order_state_lang`.`id_lang` = 1;
+UPDATE `ps_order_state_lang` SET `name` = 'Payment upon pickup in progress' WHERE `ps_order_state_lang`.`id_order_state` = 14 AND `ps_order_state_lang`.`id_lang` = 2;
+UPDATE `ps_order_state_lang` SET `name` = '处理中（货到付款）' WHERE `ps_order_state_lang`.`id_order_state` = 14 AND `ps_order_state_lang`.`id_lang` = 3;
+UPDATE `ps_order_state_lang` SET `name` = '注文受付（受取り時支払い）' WHERE `ps_order_state_lang`.`id_order_state` = 14 AND `ps_order_state_lang`.`id_lang` = 4;
+
+-- 特別處理
+ALTER TABLE `ps_carrier_lang` CHANGE `email_extra_info` `shipped_email_info` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '已出貨通知信補充資訊';
+
+UPDATE `ps_carrier` SET `deleted` = '1' WHERE `ps_carrier`.`id_carrier` = 105;
+UPDATE `ps_carrier` SET `deleted` = '1' WHERE `ps_carrier`.`id_carrier` = 106;
