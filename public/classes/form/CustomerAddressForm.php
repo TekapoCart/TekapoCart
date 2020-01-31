@@ -150,6 +150,12 @@ class CustomerAddressFormCore extends AbstractForm
             $address->alias = $this->translator->trans('My Address', [], 'Shop.Theme.Checkout');
         }
 
+        // suzy: 2020-02-01 修正當選擇超商時 city 及 address1 必填的問題
+        if (isset($this->formFields['id_country']) && $this->formFields['id_country']->getValue() == 245) {
+            $address->city = '-';
+            $address->address1 = '-';
+        }
+
         Hook::exec('actionSubmitCustomerAddressForm', array('address' => &$address));
 
         $this->setAddress($address);
