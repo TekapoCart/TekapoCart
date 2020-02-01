@@ -113,8 +113,6 @@ class Hashing
                     return password_verify($passwd, $hash);
                 },
             ),
-            // suzy: 2018-08-10 不想支援 md5
-            /*
             'md5' => array(
                 'option' => array(),
                 'hash' => function ($passwd, $staticSalt, $option) {
@@ -124,7 +122,6 @@ class Hashing
                     return md5($staticSalt . $passwd) === $hash;
                 },
             ),
-            */
         );
     }
 }

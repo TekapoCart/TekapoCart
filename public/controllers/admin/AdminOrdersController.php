@@ -107,8 +107,7 @@ class AdminOrdersControllerCore extends AdminController
                 'title' => $this->trans('Reference', array(), 'Admin.Global'),
             ),
             'new' => array(
-                // suzy: 2018-10-10 改文字 'title' => $this->trans('New client', array(), 'Admin.Orderscustomers.Feature'),
-                'title' => '訪客',
+                'title' => $this->trans('New client', array(), 'Admin.Orderscustomers.Feature'),
                 'align' => 'text-center',
                 'type' => 'bool',
                 'tmpTableFilter' => true,

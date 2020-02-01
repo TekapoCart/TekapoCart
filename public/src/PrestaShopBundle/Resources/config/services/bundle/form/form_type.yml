@@ -837,6 +837,7 @@ services:
             - '@prestashop.adapter.form.choice_provider.country_state_by_id'
             - '@=service("prestashop.adapter.legacy.context").getContext().country.id'
             - '@translator'
+            - '@=service("prestashop.core.form.choice_provider.country_by_id").getChoicesAttributes()'
         tags:
             - { name: form.type }
 
@@ -866,3 +867,11 @@ services:
             - '@=service("prestashop.core.form.choice_provider.mail_themes").getChoices()'
         tags:
             - { name: form.type }
+
+    form.type.configure.advanced_parameters.profile:
+      class: 'PrestaShopBundle\Form\Admin\Configure\AdvancedParameters\Profile\ProfileType'
+      public: true
+      arguments:
+        - '@translator'
+      tags:
+        - { name: form.type }

@@ -35,9 +35,9 @@ use PrestaShop\PrestaShop\Core\Domain\Category\Command\DeleteCategoryCoverImageC
 use PrestaShop\PrestaShop\Core\Domain\Category\Command\DeleteCategoryMenuThumbnailImageCommand;
 use PrestaShop\PrestaShop\Core\Domain\Category\Command\SetCategoryIsEnabledCommand;
 use PrestaShop\PrestaShop\Core\Domain\Category\Command\UpdateCategoryPositionCommand;
-use PrestaShop\PrestaShop\Core\Domain\Category\Query\GetCategoryIsEnabled;
-use PrestaShop\PrestaShop\Core\Domain\Category\QueryResult\EditableCategory;
+use PrestaShop\PrestaShop\Core\Domain\Category\Exception\CannotAddCategoryException;
 use PrestaShop\PrestaShop\Core\Domain\Category\Exception\CannotDeleteRootCategoryForShopException;
+use PrestaShop\PrestaShop\Core\Domain\Category\Exception\CannotEditCategoryException;
 use PrestaShop\PrestaShop\Core\Domain\Category\Exception\CannotUpdateCategoryStatusException;
 use PrestaShop\PrestaShop\Core\Domain\Category\Exception\CannotDeleteImageException;
 use PrestaShop\PrestaShop\Core\Domain\Category\Exception\CategoryConstraintException;
@@ -45,9 +45,12 @@ use PrestaShop\PrestaShop\Core\Domain\Category\Exception\CategoryException;
 use PrestaShop\PrestaShop\Core\Domain\Category\Exception\CategoryNotFoundException;
 use PrestaShop\PrestaShop\Core\Domain\Category\Exception\MenuThumbnailsLimitException;
 use PrestaShop\PrestaShop\Core\Domain\Category\Query\GetCategoryForEditing;
+use PrestaShop\PrestaShop\Core\Domain\Category\Query\GetCategoryIsEnabled;
+use PrestaShop\PrestaShop\Core\Domain\Category\QueryResult\EditableCategory;
 use PrestaShop\PrestaShop\Core\Domain\Category\ValueObject\MenuThumbnailId;
 use PrestaShop\PrestaShop\Core\Domain\ShowcaseCard\Query\GetShowcaseCardIsClosed;
 use PrestaShop\PrestaShop\Core\Domain\ShowcaseCard\ValueObject\ShowcaseCard;
+use PrestaShop\PrestaShop\Core\Grid\Definition\Factory\CategoryGridDefinitionFactory;
 use PrestaShop\PrestaShop\Core\Search\Filters\CategoryFilters;
 use PrestaShopBundle\Component\CsvResponse;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
@@ -69,7 +72,10 @@ class CategoryController extends FrameworkBundleAdminController
     /**
      * Show categories listing.
      *
-     * @AdminSecurity("is_granted(['read', 'update', 'create', 'delete'], request.get('_legacy_controller'))")
+     * @AdminSecurity(
+     *     "is_granted(['read', 'update', 'create', 'delete'], request.get('_legacy_controller'))",
+     *     message="You do not have permission to list this."
+     * )
      *
      * @param Request $request
      * @param CategoryFilters $filters
@@ -110,11 +116,33 @@ class CategoryController extends FrameworkBundleAdminController
     }
 
     /**
+     * Process Grid search.
+     *
+     * @AdminSecurity("is_granted(['read'], request.get('_legacy_controller'))")
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function searchGridAction(Request $request)
+    {
+        $responseBuilder = $this->get('prestashop.bundle.grid.response_builder');
+
+        return $responseBuilder->buildSearchResponse(
+            $this->get('prestashop.core.grid.definition.factory.category'),
+            $request,
+            CategoryGridDefinitionFactory::GRID_ID,
+            'admin_categories_index'
+        );
+    }
+
+    /**
      * Show "Add new" form and handle form submit.
      *
      * @AdminSecurity(
      *     "is_granted(['create'], request.get('_legacy_controller'))",
-     *     message="You do not have permission to create this."
+     *     message="You do not have permission to create this.",
+     *     redirectRoute="admin_categories_index"
      * )
      *
      * @param Request $request
@@ -164,7 +192,8 @@ class CategoryController extends FrameworkBundleAdminController
      *
      * @AdminSecurity(
      *     "is_granted(['create'], request.get('_legacy_controller'))",
-     *     message="You do not have permission to create this."
+     *     message="You do not have permission to create this.",
+     *     redirectRoute="admin_categories_index"
      * )
      *
      * @param Request $request
@@ -212,7 +241,8 @@ class CategoryController extends FrameworkBundleAdminController
      *
      * @AdminSecurity(
      *     "is_granted(['update'], request.get('_legacy_controller'))",
-     *     message="You do not have permission to edit this."
+     *     message="You do not have permission to edit this.",
+     *     redirectRoute="admin_categories_index"
      * )
      *
      * @param int $categoryId
@@ -282,7 +312,8 @@ class CategoryController extends FrameworkBundleAdminController
      *
      * @AdminSecurity(
      *     "is_granted(['update'], request.get('_legacy_controller'))",
-     *     message="You do not have permission to edit this."
+     *     message="You do not have permission to edit this.",
+     *     redirectRoute="admin_categories_index"
      * )
      *
      * @param int $categoryId
@@ -347,7 +378,9 @@ class CategoryController extends FrameworkBundleAdminController
      *
      * @AdminSecurity(
      *     "is_granted(['update'], request.get('_legacy_controller'))",
-     *     message="You do not have permission to edit this."
+     *     message="You do not have permission to edit this.",
+     *     redirectRoute="admin_categories_edit",
+     *     redirectQueryParamsToKeep={"categoryId"}
      * )
      *
      * @param Request $request
@@ -386,7 +419,9 @@ class CategoryController extends FrameworkBundleAdminController
      *
      * @AdminSecurity(
      *     "is_granted(['update'], request.get('_legacy_controller'))",
-     *     message="You do not have permission to edit this."
+     *     message="You do not have permission to edit this.",
+     *     redirectRoute="admin_categories_edit",
+     *     redirectQueryParamsToKeep={"categoryId"}
      * )
      *
      * @param Request $request
@@ -639,6 +674,7 @@ class CategoryController extends FrameworkBundleAdminController
      */
     public function exportAction(CategoryFilters $filters)
     {
+        $filters = new CategoryFilters(['limit' => null] + $filters->all());
         $categoriesGridFactory = $this->get('prestashop.core.grid.factory.category');
         $categoriesGrid = $categoriesGridFactory->getGrid($filters);
 
@@ -754,6 +790,14 @@ class CategoryController extends FrameworkBundleAdminController
             ],
             CannotDeleteRootCategoryForShopException::class => $this->trans(
                 'You cannot remove this category because one of your shops uses it as a root category.',
+                'Admin.Catalog.Notification'
+            ),
+            CannotAddCategoryException::class => $this->trans(
+                'An error occurred while creating the category.',
+                'Admin.Catalog.Notification'
+            ),
+            CannotEditCategoryException::class => $this->trans(
+                'An error occurred while editing the category.',
                 'Admin.Catalog.Notification'
             ),
             CannotUpdateCategoryStatusException::class => $this->trans(

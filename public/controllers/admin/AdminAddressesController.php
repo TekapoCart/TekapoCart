@@ -35,8 +35,7 @@ class AdminAddressesControllerCore extends AdminController
     public function __construct()
     {
         $this->bootstrap = true;
-        // suzy: 2018-07-28 不需顯示 必填欄位
-        // $this->required_database = true;
+        $this->required_database = true;
         $this->required_fields = array('company', 'address2', 'postcode', 'other', 'phone', 'phone_mobile', 'vat_number', 'dni');
         $this->table = 'address';
         $this->className = 'CustomerAddress';
@@ -84,9 +83,9 @@ class AdminAddressesControllerCore extends AdminController
                 'filter_key' => 'a!firstname',
                 'maxlength' => 30,
             ),
-            // suzy: 2018-09-22 新增欄位 電話
+            // suzy: 2018-09-22 新增欄位 手機
             'phone_mobile' => array(
-                'title' => '電話'
+                'title' => '手機'
             ),
             'address1' => array(
                 'title' => $this->trans('Address', array(), 'Admin.Global'),
@@ -167,9 +166,7 @@ class AdminAddressesControllerCore extends AdminController
                 */
                 array(
                     'type' => 'text',
-                    // suzy: 2018-09-26 名稱
-                    // 'label' => $this->trans('Address alias', array(), 'Admin.Orderscustomers.Feature'),
-                    'label' => '名稱',
+                    'label' => $this->trans('Address alias', array(), 'Admin.Orderscustomers.Feature'),
                     'name' => 'alias',
                     'required' => true,
                     'col' => '4',
@@ -177,9 +174,7 @@ class AdminAddressesControllerCore extends AdminController
                 ),
                 array(
                     'type' => 'textarea',
-                    // suzy: 2018-09-26 備註
-                    // 'label' => $this->trans('Other', array(), 'Admin.Global'),
-                    'label' => '備註',
+                    'label' => $this->trans('Other', array(), 'Admin.Global'),
                     'name' => 'other',
                     'required' => false,
                     'cols' => 15,
@@ -530,6 +525,11 @@ class AdminAddressesControllerCore extends AdminController
                 echo json_encode(array('infos' => pSQL($customer['firstname']) . '_' . pSQL($customer['lastname']) . '_' . pSQL($customer['company'])));
             }
         }
+
+        if (Tools::isSubmit('dni_required')) {
+            echo json_encode(['dni_required' => Address::dniRequired((int) Tools::getValue('id_country'))]);
+        }
+
         die;
     }
 

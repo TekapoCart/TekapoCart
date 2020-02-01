@@ -1203,7 +1203,7 @@ File: controllers/admin/AdminAddressesController.php:132</note>
       </trans-unit>
       <trans-unit id="baa31a65f29121c32b637bb845d41acf" approved="yes">
         <source>Address alias</source>
-        <target xml:lang="zh-TW">地址別名</target>
+        <target xml:lang="zh-TW">地址代號</target>
         <note>Context:
 File: controllers/admin/AdminAddressesController.php:136</note>
       </trans-unit>
@@ -1519,7 +1519,7 @@ File: controllers/admin/AdminOrdersController.php:1647</note>
       </trans-unit>
       <trans-unit id="94003250a2187a9f51b227b490e5ab6b" approved="yes">
         <source>New client</source>
-        <target xml:lang="zh-TW">新客戶</target>
+        <target xml:lang="zh-TW">訪客</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:87</note>
       </trans-unit>

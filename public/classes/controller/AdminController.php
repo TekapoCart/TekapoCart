@@ -247,6 +247,9 @@ class AdminControllerCore extends Controller
     /** @var HelperList */
     protected $helper;
 
+    /** @var bool */
+    private $allowAnonymous = false;
+
     /** @var int DELETE access level */
     const LEVEL_DELETE = 4;
 
@@ -429,13 +432,20 @@ class AdminControllerCore extends Controller
             }
 
             $this->bo_theme = $default_theme_name;
-
             if (!@filemtime(_PS_BO_ALL_THEMES_DIR_ . $this->bo_theme . DIRECTORY_SEPARATOR . 'template')) {
                 $this->bo_theme = 'default';
             }
 
-            $this->bo_css = ((Validate::isLoadedObject($this->context->employee)
-                && $this->context->employee->bo_css) ? $this->context->employee->bo_css : 'theme.css');
+            $this->context->employee->bo_theme = (
+                Validate::isLoadedObject($this->context->employee)
+                && $this->context->employee->bo_theme
+            ) ? $this->context->employee->bo_theme : $this->bo_theme;
+
+            $this->bo_css = (
+                Validate::isLoadedObject($this->context->employee)
+                && $this->context->employee->bo_css
+            ) ? $this->context->employee->bo_css : 'theme.css';
+            $this->context->employee->bo_css = $this->bo_css;
 
             $adminThemeCSSFile = _PS_BO_ALL_THEMES_DIR_ . $this->bo_theme . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $this->bo_css;
 
@@ -453,11 +463,9 @@ class AdminControllerCore extends Controller
         $this->token = Tools::getAdminToken($this->controller_name . (int) $this->id . (int) $this->context->employee->id);
 
         $this->_conf = array(
-            // suzy: 1 => $this->trans('Successful deletion.', array(), 'Admin.Notifications.Success'),
-            1 => '成功刪除',
+            1 => $this->trans('Successful deletion.', array(), 'Admin.Notifications.Success'),
             2 => $this->trans('The selection has been successfully deleted.', array(), 'Admin.Notifications.Success'),
-            // suzy: 3 => $this->trans('Successful creation.', array(), 'Admin.Notifications.Success'),
-            3 => '成功建立',
+            3 => $this->trans('Successful creation.', array(), 'Admin.Notifications.Success'),
             4 => $this->trans('Successful update.', array(), 'Admin.Notifications.Success'),
             5 => $this->trans('The status has been successfully updated.', array(), 'Admin.Notifications.Success'),
             6 => $this->trans('The settings have been successfully updated.', array(), 'Admin.Notifications.Success'),
@@ -772,7 +780,7 @@ class AdminControllerCore extends Controller
      */
     public function checkToken()
     {
-        if (TokenInUrls::isDisabled()) {
+        if (TokenInUrls::isDisabled() || $this->isAnonymousAllowed()) {
             return true;
         }
 
@@ -1326,11 +1334,11 @@ class AdminControllerCore extends Controller
                     $this->redirect_after = self::$currentIndex . '&token=' . $this->token;
                 }
 
-                // suzy: 2018-09-26 修正切換語系、貨幣、優惠活動時，正式機 $_SERVER['HTTP_REFERER'] 抓不到東西
+                // suzy: 2018-09-26 修正切換 zone、country、優惠活動時，正式機 $_SERVER['HTTP_REFERER'] 抓不到東西
                 if (
-                    strstr(self::$currentIndex, 'AdminLanguages') ||
-                    strstr(self::$currentIndex, 'AdminCurrencies') ||
-                    strstr(self::$currentIndex, 'AdminCartRules')
+                    strstr(self::$currentIndex, 'AdminCartRules') ||
+                    strstr(self::$currentIndex, 'AdminZones') ||
+                    strstr(self::$currentIndex, 'AdminCountries')
                 ) {
                     $this->redirect_after = self::$currentIndex . '&token=' . $this->token;
                 }
@@ -2426,24 +2434,19 @@ class AdminControllerCore extends Controller
                 $this->bulk_actions = array();
             }
 
-            // suzy: 2018-09-26 若無 bulk 完全不顯示
-            if (count($this->bulk_actions) > 0) {
-                $this->bulk_actions = array_merge(array(
-                    'enableSelection' => array(
-                        'text' => $this->l('Enable selection'),
-                        'icon' => 'icon-power-off text-success'
-                    ),
-                    'disableSelection' => array(
-                        'text' => $this->l('Disable selection'),
-                        'icon' => 'icon-power-off text-danger'
-                    ),
-                    'divider' => array(
-                        'text' => 'divider'
-                    )
-                ), $this->bulk_actions);
-
-            }
-
+            $this->bulk_actions = array_merge(array(
+                'enableSelection' => array(
+                    'text' => $this->l('Enable selection'),
+                    'icon' => 'icon-power-off text-success',
+                ),
+                'disableSelection' => array(
+                    'text' => $this->l('Disable selection'),
+                    'icon' => 'icon-power-off text-danger',
+                ),
+                'divider' => array(
+                    'text' => 'divider',
+                ),
+            ), $this->bulk_actions);
         }
 
         $helper = new HelperList();
@@ -2823,7 +2826,17 @@ class AdminControllerCore extends Controller
                 $this->context->cookie->last_activity = time();
             }
         }
-        if ($this->controller_name != 'AdminLogin' && (!isset($this->context->employee) || !$this->context->employee->isLoggedBack())) {
+
+        if (
+            !$this->isAnonymousAllowed()
+            && (
+                $this->controller_name != 'AdminLogin'
+                && (
+                    !isset($this->context->employee)
+                    || !$this->context->employee->isLoggedBack()
+                )
+            )
+        ) {
             if (isset($this->context->employee)) {
                 $this->context->employee->logout();
             }
@@ -2833,6 +2846,7 @@ class AdminControllerCore extends Controller
             }
             Tools::redirectAdmin($this->context->link->getAdminLink('AdminLogin') . ((!isset($_GET['logout']) && $this->controller_name != 'AdminNotFound' && Tools::getValue('controller')) ? '&redirect=' . $this->controller_name : '') . ($email ? '&email=' . $email : ''));
         }
+
         // Set current index
         $current_index = 'index.php' . (($controller = Tools::getValue('controller')) ? '?controller=' . $controller : '');
         if ($back = Tools::getValue('back')) {
@@ -2902,7 +2916,8 @@ class AdminControllerCore extends Controller
      */
     public function initShopContext()
     {
-        if (!$this->context->employee->isLoggedBack()) {
+        // Do not initialize context when the shop is not installed
+        if (defined('PS_INSTALLATION_IN_PROGRESS')) {
             return;
         }
 
@@ -2917,13 +2932,13 @@ class AdminControllerCore extends Controller
             $this->redirect_after = $url['path'] . ($http_build_query ? '?' . $http_build_query : '');
         } elseif (!Shop::isFeatureActive()) {
             $this->context->cookie->shopContext = 's-' . (int) Configuration::get('PS_SHOP_DEFAULT');
-        } elseif (Shop::getTotalShops(false, null) < 2) {
+        } elseif (Shop::getTotalShops(false, null) < 2 && $this->context->employee->isLoggedBack()) {
             $this->context->cookie->shopContext = 's-' . (int) $this->context->employee->getDefaultShopID();
         }
 
-        $shop_id = '';
+        $shop_id = null;
         Shop::setContext(Shop::CONTEXT_ALL);
-        if ($this->context->cookie->shopContext) {
+        if ($this->context->cookie->shopContext && $this->context->employee->isLoggedBack()) {
             $split = explode('-', $this->context->cookie->shopContext);
             if (count($split) == 2) {
                 if ($split[0] == 'g') {
@@ -4859,5 +4874,27 @@ class AdminControllerCore extends Controller
             ['symbol' => $numberSpecification->getSymbolsByNumberingSystem(Locale::NUMBERING_SYSTEM_LATIN)->toArray()],
             $numberSpecification->toArray()
         );
+    }
+
+    /**
+     * Set if anonymous is allowed to run this controller
+     *
+     * @param bool $value
+     *
+     * @return bool
+     */
+    protected function setAllowAnonymous($value)
+    {
+        $this->allowAnonymous = (bool) $value;
+    }
+
+    /**
+     * Return if an anonymous is allowed to run this controller
+     *
+     * @return bool
+     */
+    protected function isAnonymousAllowed()
+    {
+        return $this->allowAnonymous;
     }
 }

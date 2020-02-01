@@ -236,7 +236,7 @@ File: controllers/admin/AdminCmsController.php:130</note>
       </trans-unit>
       <trans-unit id="21f93401134586a6c481422bf01fccfd" approved="yes">
         <source>Only letters and the hyphen (-) character are allowed.</source>
-        <target xml:lang="zh-TW">只接受字母和"-"符號。</target>
+        <target xml:lang="zh-TW">只允許字母和 "-" 符號。</target>
         <note>Context:
 File: controllers/admin/AdminCmsController.php:169</note>
       </trans-unit>
@@ -264,7 +264,7 @@ File: controllers/admin/AdminCmsController.php:260</note>
     <body>
       <trans-unit id="51a8b3a61ad63d4e5df2ce86870e39b8" approved="yes">
         <source>Transplant a module</source>
-        <target xml:lang="zh-TW">管理模組位置</target>
+        <target xml:lang="zh-TW">新增模組位置</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/modules_positions/form.tpl:35</note>
       </trans-unit>

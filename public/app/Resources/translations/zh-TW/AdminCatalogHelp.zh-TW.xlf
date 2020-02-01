@@ -482,19 +482,19 @@ File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:
       </trans-unit>
       <trans-unit id="f364944e8422977932bd21eb2d96963a" approved="yes">
         <source>Do you want to display this page?</source>
-        <target xml:lang="zh-TW">您想顯示此頁嗎？</target>
+        <target xml:lang="zh-TW">網址不完整（缺少 token），您想繼續此頁嗎？</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:60</note>
       </trans-unit>
       <trans-unit id="a0d31e7f783700b99e15ce8621dc6381" approved="yes">
         <source>Yes, I understand the risks</source>
-        <target xml:lang="zh-TW">是的，我明白風險</target>
+        <target xml:lang="zh-TW">是的，我完全明白情況並想繼續瀏覽此頁</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:63</note>
       </trans-unit>
       <trans-unit id="a5b0a810681c7fca4581d7f7524009f4" approved="yes">
         <source>Take me out of there!</source>
-        <target xml:lang="zh-TW">回主控台</target>
+        <target xml:lang="zh-TW">先不要，帶我回主控台</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:66</note>
       </trans-unit>

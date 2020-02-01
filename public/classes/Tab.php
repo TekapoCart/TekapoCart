@@ -279,7 +279,7 @@ class TabCore extends ObjectModel
                     '
 				SELECT t.*, tl.name
 				FROM `' . _DB_PREFIX_ . 'tab_bak` t
-				LEFT JOIN `' . _DB_PREFIX_ . 'tab_lang_bak` tl ON (t.`id_tab` = tl.`id_tab` AND tl.`id_lang` = ' . (int)$idLang . ')
+				LEFT JOIN `' . _DB_PREFIX_ . 'tab_lang_bak` tl ON (t.`id_tab` = tl.`id_tab` AND tl.`id_lang` = ' . (int) $idLang . ')
 				WHERE 1 ' . (defined('_PS_HOST_MODE_') ? ' AND `hide_host_mode` = 0' : '') . '
 				ORDER BY t.`position` ASC'
                 );
@@ -288,7 +288,7 @@ class TabCore extends ObjectModel
                     '
 				SELECT t.*, tl.name
 				FROM `' . _DB_PREFIX_ . 'tab` t
-				LEFT JOIN `' . _DB_PREFIX_ . 'tab_lang` tl ON (t.`id_tab` = tl.`id_tab` AND tl.`id_lang` = ' . (int)$idLang . ')
+				LEFT JOIN `' . _DB_PREFIX_ . 'tab_lang` tl ON (t.`id_tab` = tl.`id_tab` AND tl.`id_lang` = ' . (int) $idLang . ')
 				WHERE 1 ' . (defined('_PS_HOST_MODE_') ? ' AND `hide_host_mode` = 0' : '') . '
 				ORDER BY t.`position` ASC'
                 );

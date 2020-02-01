@@ -161,9 +161,7 @@ class PositionsController extends FrameworkBundleAdminController
             'layoutHeaderToolbarBtn' => [
                 'save' => [
                     'href' => $saveUrl,
-                    // suzy: 2019-02-03 修改 desc
-                    // 'desc' => $this->trans('Transplant a module', 'Admin.Design.Feature'),
-                    'desc' => '新增模組位置',
+                    'desc' => $this->trans('Transplant a module', 'Admin.Design.Feature'),
                 ],
             ],
             'selectedModule' => $this->selectedModule,

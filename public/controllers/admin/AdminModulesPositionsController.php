@@ -343,9 +343,7 @@ class AdminModulesPositionsControllerCore extends AdminController
     {
         $this->page_header_toolbar_btn['save'] = array(
             'href' => self::$currentIndex . '&addToHook' . ($this->display_key ? '&show_modules=' . $this->display_key : '') . '&token=' . $this->token,
-            // suzy: 2018-08-13 修改名稱
-            // 'desc' => $this->trans('Transplant a module', array(), 'Admin.Design.Feature'),
-            'desc' => '新增模組位置',
+            'desc' => $this->trans('Transplant a module', array(), 'Admin.Design.Feature'),
             'icon' => 'process-icon-anchor',
         );
 

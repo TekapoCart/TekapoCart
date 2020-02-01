@@ -69,22 +69,11 @@ class AdminCmsControllerCore extends AdminController
                 'align' => 'center',
                 'class' => 'fixed-width-xs',
             ),
-            // suzy: 2018-10-12 修改文字
-            /*
             'link_rewrite' => array(
                 'title' => $this->trans('URL', array(), 'Admin.Global'),
             ),
             'meta_title' => array(
                 'title' => $this->trans('Title', array(), 'Admin.Global'),
-                'filter_key' => 'b!meta_title',
-                'maxlength' => 50,
-            ),
-            */
-            'link_rewrite' => array(
-                'title' => '連結',
-            ),
-            'meta_title' => array(
-                'title' => '標題',
                 'filter_key' => 'b!meta_title',
                 'maxlength' => 50,
             ),
@@ -182,9 +171,7 @@ class AdminCmsControllerCore extends AdminController
                 ),
                 array(
                     'type' => 'text',
-                    // suzy: 2019-02-01 修改標題
-                    // 'label' => $this->trans('Title', array(), 'Admin.Global'),
-                    'label' => '標題',
+                    'label' => $this->trans('Title', array(), 'Admin.Global'),
                     'name' => 'meta_title',
                     'id' => 'name', // for copyMeta2friendlyURL compatibility
                     'lang' => true,
@@ -202,9 +189,7 @@ class AdminCmsControllerCore extends AdminController
                     'name' => 'link_rewrite',
                     'required' => true,
                     'lang' => true,
-                    // suzy: 2019-02-01 改 hint
-                    // 'hint' => $this->trans('Only letters and the hyphen (-) character are allowed.', array(), 'Admin.Design.Feature'),
-                    'hint' => $this->trans('Only letters, numbers, underscore (_) and the minus (-) character are allowed.', array(), 'Admin.Catalog.Help'),
+                    'hint' => $this->trans('Only letters and the hyphen (-) character are allowed.', array(), 'Admin.Design.Feature'),
                 ),
                 array(
                     'type' => 'text',

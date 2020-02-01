@@ -52,6 +52,7 @@ use PrestaShop\PrestaShop\Core\Domain\ShowcaseCard\ValueObject\ShowcaseCard;
 use PrestaShop\PrestaShop\Core\Search\Filters\CustomerFilters;
 use PrestaShop\PrestaShop\Core\Domain\Customer\Exception\CustomerNotFoundException;
 use PrestaShop\PrestaShop\Core\Domain\Customer\Query\GetCustomerForViewing;
+use PrestaShop\PrestaShop\Core\Grid\Definition\Factory\CustomerGridDefinitionFactory;
 use PrestaShopBundle\Component\CsvResponse;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController as AbstractAdminController;
 use PrestaShopBundle\Form\Admin\Sell\Customer\DeleteCustomersType;
@@ -110,6 +111,27 @@ class CustomerController extends AbstractAdminController
             // 'isShowcaseCardClosed' => $showcaseCardIsClosed,
             'isShowcaseCardClosed' => true,
         ]);
+    }
+
+    /**
+     * Process Grid search.
+     *
+     * @AdminSecurity("is_granted(['read'], request.get('_legacy_controller'))")
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function searchGridAction(Request $request)
+    {
+        $responseBuilder = $this->get('prestashop.bundle.grid.response_builder');
+
+        return $responseBuilder->buildSearchResponse(
+            $this->get('prestashop.core.grid.definition.factory.customer'),
+            $request,
+            CustomerGridDefinitionFactory::GRID_ID,
+            'admin_customers_index'
+        );
     }
 
     /**
@@ -453,6 +475,8 @@ class CustomerController extends AbstractAdminController
             $editableCustomer = $this->getQueryBus()->handle(new GetCustomerForEditing((int) $customerId));
 
             $editCustomerCommand = new EditCustomerCommand((int) $customerId);
+
+            // toggle newsletter subscription
             $editCustomerCommand->setNewsletterSubscribed(!$editableCustomer->isNewsletterSubscribed());
 
             $this->getCommandBus()->handle($editCustomerCommand);
@@ -663,6 +687,7 @@ class CustomerController extends AbstractAdminController
      */
     public function exportAction(CustomerFilters $filters)
     {
+        $filters = new CustomerFilters(['limit' => null] + $filters->all());
         $gridFactory = $this->get('prestashop.core.grid.factory.customer');
         $grid = $gridFactory->getGrid($filters);
 
@@ -688,8 +713,8 @@ class CustomerController extends AbstractAdminController
                 'id_customer' => $record['id_customer'],
                 'social_title' => '--' === $record['social_title'] ? '' : $record['social_title'],
                 'firstname' => $record['firstname'],
-                'lastname' => $record['firstname'],
-                'email' => $record['firstname'],
+                'lastname' => $record['lastname'],
+                'email' => $record['email'],
                 'company' => '--' === $record['company'] ? '' : $record['company'],
                 'total_spent' => '--' === $record['total_spent'] ? '' : $record['total_spent'],
                 'enabled' => $record['active'],

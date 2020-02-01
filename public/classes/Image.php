@@ -619,7 +619,7 @@ class ImageCore extends ObjectModel
             //    return false;
             // }
             if (file_exists($file)) {
-                $success = unlink($file);
+                $success = @unlink($file);
                 if (!$success) {
                     return false;
                 }

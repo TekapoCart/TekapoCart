@@ -50,8 +50,7 @@ admin_module_manage:
 
 admin_module_manage_action:
     path:     /manage/action/{action}/{module_name}
-    # suzy: 2019-02-11 加上 GET 以支援金物流模組頁操作按鈕
-    methods:  [GET, POST]
+    methods:  [POST]
     defaults:
         _controller: PrestaShopBundle:Admin/Improve/Module:module
     requirements:

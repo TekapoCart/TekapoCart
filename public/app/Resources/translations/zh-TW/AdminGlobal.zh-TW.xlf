@@ -792,7 +792,7 @@ File: controllers/admin/AdminAddressesController.php:323</note>
       </trans-unit>
       <trans-unit id="6311ae17c1ee52b36e68aaf4ad066387" approved="yes">
         <source>Other</source>
-        <target xml:lang="zh-TW">其它</target>
+        <target xml:lang="zh-TW">其他/備註</target>
         <note>Context:
 File: controllers/admin/AdminAddressesController.php:144</note>
       </trans-unit>
@@ -1915,7 +1915,7 @@ File: admin-dev/themes/default/template/controllers/modules/configure.tpl:61</no
     <body>
       <trans-unit id="b78a3223503896721cca1303f776159b">
         <source>Title</source>
-        <target xml:lang="zh-TW">Title</target>
+        <target xml:lang="zh-TW">標題</target>
         <note>Line: 44</note>
       </trans-unit>
       <trans-unit id="98c7393cffa2aced4ce47240790dd450">

@@ -234,21 +234,6 @@ class CustomerThreadCore extends ObjectModel
     public static function getMessageCustomerThreads($id_customer_thread)
     {
         // suzy: 2018-09-22 調換姓名位置
-//        return Db::getInstance()->executeS('
-//			SELECT ct.*, cm.*, cl.name subject, CONCAT(e.firstname, \' \', e.lastname) employee_name,
-//				CONCAT(c.firstname, \' \', c.lastname) customer_name, c.firstname
-//			FROM ' . _DB_PREFIX_ . 'customer_thread ct
-//			LEFT JOIN ' . _DB_PREFIX_ . 'customer_message cm
-//				ON (ct.id_customer_thread = cm.id_customer_thread)
-//			LEFT JOIN ' . _DB_PREFIX_ . 'contact_lang cl
-//				ON (cl.id_contact = ct.id_contact AND cl.id_lang = ' . (int) Context::getContext()->language->id . ')
-//			LEFT JOIN ' . _DB_PREFIX_ . 'employee e
-//				ON e.id_employee = cm.id_employee
-//			LEFT JOIN ' . _DB_PREFIX_ . 'customer c
-//				ON (IFNULL(ct.id_customer, ct.email) = IFNULL(c.id_customer, c.email))
-//			WHERE ct.id_customer_thread = ' . (int) $id_customer_thread . '
-//			ORDER BY cm.date_add ASC
-//		');
         return Db::getInstance()->executeS('
 			SELECT ct.*, cm.*, cl.name subject, CONCAT(e.lastname, \' \', e.firstname) employee_name,
 				CONCAT(c.lastname, \' \', c.firstname) customer_name, c.firstname

@@ -143,7 +143,7 @@ File: themes/classic/templates/customer/password-new.tpl:63</note>
         <note>Context:
 File: themes/classic/templates/customer/_partials/order-messages.tpl:59</note>
       </trans-unit>
-      <trans-unit id="1625e29c02062efe5dbc42c3efeeebd5">
+      <trans-unit id="52ef26143ae61ec2d8bafab8cc7853fa">
         <source>-- please choose country --</source>
         <target xml:lang="zh-CN">-- please choose country</target>
         <note>Line: 59</note>
