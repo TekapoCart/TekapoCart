@@ -23,22 +23,27 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 {block name='product_miniature_item'}
-  <article data-sticker="{$product.sticker}" class="product-miniature js-product-miniature {if isset($cssClass)}{$cssClass}{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}">
+  <article data-sticker="{$product.sticker}" class="product-miniature js-product-miniature {if isset($cssClass)}{$cssClass}{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
 
     {if strlen($product.sticker) > 0}<div class="sticker" style="background-image: url('/img/cms/sticker/{$product.sticker}');{if strpos($product.sticker, 'nshift') !== false} top: 0; left: 0;{/if}"></div>{/if}
     <div class="thumbnail-container">
       {block name='product_thumbnail'}
-        <a href="{$product.canonical_url}" class="thumbnail product-thumbnail">
-          <img
-            alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
-            src="/img/1px.png"
-            {*data-full-size-image-url="{$product.cover.large.url}"*}
-            data-home-default="{$product.cover.bySize.home_default.url}"
-            data-home-default-mobile="{$product.cover.bySize.small_default.url}"
-            class="js_thumbnail_product"
-            {*loading="lazy"*}
-          >
-        </a>
+        {if $product.cover}
+            <a href="{$product.url}" class="thumbnail product-thumbnail">
+              <img
+                src="/img/1px.png"
+                alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                {*data-full-size-image-url="{$product.cover.large.url}"*}
+                data-home-default="{$product.cover.bySize.home_default.url}"
+                data-home-default-mobile="{$product.cover.bySize.small_default.url}"
+                class="js_thumbnail_product"
+              />
+            </a>
+        {else}
+            <a href="{$product.url}" class="thumbnail product-thumbnail">
+              <img src="{$urls.no_picture_image.bySize.home_default.url}" />
+            </a>
+        {/if}
       {/block}
 
       {* 遮罩專用 品名＆價格 *}
@@ -58,7 +63,7 @@
 
       <div class="product-description">
         {block name='product_name'}
-          <h3 class="h3 product-title"><a href="{$product.canonical_url}">{$product.name|truncate:70:'...'}</a></h3>
+          <h3 class="h3 product-title"><a href="{$product.url}">{$product.name|truncate:70:'...'}</a></h3>
         {/block}
 
         {block name='product_price_and_shipping'}
