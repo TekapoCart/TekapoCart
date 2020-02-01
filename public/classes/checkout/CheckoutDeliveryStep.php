@@ -123,10 +123,6 @@ class CheckoutDeliveryStepCore extends AbstractCheckoutStep
     public function handleRequest(array $requestParams = array())
     {
         if (isset($requestParams['delivery_option'])) {
-
-            // suzy: 2019-02-25 切換 options 時，遇到需要選門市情況，故應設為 false
-            // $this->step_is_complete = false; // 若問題已解決，可移除此行
-
             $this->setComplete(false);
             $this->getCheckoutSession()->setDeliveryOption(
                 $requestParams['delivery_option']
