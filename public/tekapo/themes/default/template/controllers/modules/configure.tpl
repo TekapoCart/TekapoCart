@@ -1,5 +1,5 @@
 {**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
@@ -64,68 +64,66 @@
 			</li>
 		</ul>
 	</div>
+    {* suzy: 2018-07-30 隱藏 *}
+    {*<div class="btn-toolbar">
+        <ul class="nav nav-pills pull-right">
+            <li>
+                <a id="desc-module-back" class="toolbar_btn" href="{url entity='sf' route='admin_module_manage'}">
+                    <i class="process-icon-back"></i>
+                    <div>{l s='Back' d='Admin.Global'}</div>
+                </a>
+            </li>
+            <!-- <li>
+                <a id="desc-module-disable" class="toolbar_btn" href="{$module_disable_link}" title="{l s='Disable' d='Admin.Actions'}">
+                    <i class="process-icon-off"></i>
+                    <div>{l s='Disable' d='Admin.Actions'}</div>
+                </a>
+            </li>
+            <li>
+                <a id="desc-module-uninstall" class="toolbar_btn" href="{$module_uninstall_link}" title="{l s='Uninstall'}">
+                    <i class="process-icon-uninstall"></i>
+                    <div>{l s='Uninstall'}</div>
+                </a>
+            </li>
+            <li>
+                <a id="desc-module-reset" class="toolbar_btn {if $is_reset_ready}reset_ready{/if}" href="{$module_reset_link}" title="{l s='Reset'}">
+                    <i class="process-icon-reset"></i>
+                    <div>{l s='Reset'}</div>
+                </a>
+            </li> -->
+            {if isset($trad_link)}
+            <li>
+                <a id="desc-module-translate" data-toggle="modal" data-target="#moduleTradLangSelect" class="toolbar_btn" href="#" title="{l s='Translate'}">
+                    <i class="process-icon-flag"></i>
+                    <div>{l s='Translate' d='Admin.Actions'}</div>
+                </a>
+            </li>
+            {/if}
+            {if isset($module_update_link)}
+            <li>
+                <a id="desc-module-update" class="toolbar_btn" href="{$module_update_link}" title="{l s='Update'}">
+                    <i class="process-icon-refresh"></i>
+                    <div>{l s='Check update' d='Admin.Modules.Feature'}</div>
+                </a>
+            </li>
+            {/if}
+            {if isset($module_rtl_link)}
+            <li>
+                <a id="desc-module-rtl" class="toolbar_btn" href="{$module_rtl_link}" title="{l s='Generate RTL Stylesheets'}">
+                    <i class="process-icon-rtl"></i>
+                    <div>{l s='RTL Module' d='Admin.Modules.Feature'}</div>
+                </a>
+            </li>
+            {/if}
+            <li>
+                <a id="desc-module-hook" class="toolbar_btn" href="{$module_hook_link}" title="{l s='Manage hooks'}">
+                    <i class="process-icon-anchor"></i>
+                    <div>{l s='Manage hooks' d='Admin.Modules.Feature'}</div>
+                </a>
+            </li>
+        </ul>
+    </div>*}
 </div>
-{* suzy: 2018-07-30 隱藏 *}
-{*<div class="page-bar toolbarBox">
-	<div class="btn-toolbar">
-		<ul class="nav nav-pills pull-right">
-			<li>
-				<a id="desc-module-back" class="toolbar_btn" href="{url entity='sf' route='admin_module_manage'}">
-					<i class="process-icon-back"></i>
-					<div>{l s='Back' d='Admin.Global'}</div>
-				</a>
-			</li>
-			<!-- <li>
-				<a id="desc-module-disable" class="toolbar_btn" href="{$module_disable_link}" title="{l s='Disable' d='Admin.Actions'}">
-					<i class="process-icon-off"></i>
-					<div>{l s='Disable' d='Admin.Actions'}</div>
-				</a>
-			</li>
-			<li>
-				<a id="desc-module-uninstall" class="toolbar_btn" href="{$module_uninstall_link}" title="{l s='Uninstall'}">
-					<i class="process-icon-uninstall"></i>
-					<div>{l s='Uninstall'}</div>
-				</a>
-			</li>
-			<li>
-				<a id="desc-module-reset" class="toolbar_btn {if $is_reset_ready}reset_ready{/if}" href="{$module_reset_link}" title="{l s='Reset'}">
-					<i class="process-icon-reset"></i>
-					<div>{l s='Reset'}</div>
-				</a>
-			</li> -->
-			{if isset($trad_link)}
-			<li>
-				<a id="desc-module-translate" data-toggle="modal" data-target="#moduleTradLangSelect" class="toolbar_btn" href="#" title="{l s='Translate'}">
-					<i class="process-icon-flag"></i>
-					<div>{l s='Translate' d='Admin.Actions'}</div>
-				</a>
-			</li>
-			{/if}
-			{if isset($module_update_link)}
-			<li>
-				<a id="desc-module-update" class="toolbar_btn" href="{$module_update_link}" title="{l s='Update'}">
-					<i class="process-icon-refresh"></i>
-					<div>{l s='Check update' d='Admin.Modules.Feature'}</div>
-				</a>
-			</li>
-			{/if}
-			{if isset($module_rtl_link)}
-			<li>
-				<a id="desc-module-rtl" class="toolbar_btn" href="{$module_rtl_link}" title="{l s='Generate RTL Stylesheets'}">
-					<i class="process-icon-rtl"></i>
-					<div>{l s='RTL Module' d='Admin.Modules.Feature'}</div>
-				</a>
-			</li>
-			{/if}
-			<li>
-				<a id="desc-module-hook" class="toolbar_btn" href="{$module_hook_link}" title="{l s='Manage hooks'}">
-					<i class="process-icon-anchor"></i>
-					<div>{l s='Manage hooks' d='Admin.Modules.Feature'}</div>
-				</a>
-			</li>
-		</ul>
-	</div>
-</div>*}
 
 
 {/block}

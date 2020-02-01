@@ -1,5 +1,5 @@
 {**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
@@ -26,10 +26,10 @@
 	<div id="login-header">
 		<h1 class="text-center" style="font-family:Verdana;font-weight: bold; font-size: 26px; color: #67C8C2;">
 			TekapoCart <span style="font-size: 0.6rem; color: #999; font-weight: normal;">{$tekapocart_version}</span>
-			{* suzy: 2018-08-20 改 logo 名稱 <img id="logo" src="{$img_dir}prestashop@2x.png" width="123px" height="24px" alt="PrestaShop" />*}
+            {* suzy: 2018-08-20 改 logo 名稱 <img id="logo" src="{$img_dir}prestashop@2x.png" width="123px" height="24px" alt="PrestaShop" />*}
 		</h1>
 		<h2 class="text-center" style="font-family:Verdana; font-size: 0.95rem;">Create Your Own Shop from Zero to Hero</h2>
-		{* suzy: 2018-08-12 換 shop version 還有加 style <div class="text-center">{$ps_version}</div>*}
+        {* suzy: 2018-08-12 換 shop version 還有加 style <div class="text-center">{$ps_version}</div>*}
 		<div id="error" class="hide alert alert-danger">
 		{if isset($errors)}
 			<h4>
@@ -55,7 +55,7 @@
 	<div class="flip-container">
 		<div class="flipper">
 			<div class="front front_login panel" {if isset($reset_token) && isset($id_employee)}style="display:none;"{/if}>
-                <h4 id="shop_name">{$shop_name}</h4>
+				<h4 id="shop_name">{$shop_name}</h4>
 				{if !isset($wrong_folder_name) && !isset($wrong_install_name)}
 				<form action="#" id="login_form" method="post">
 					<input type="hidden" name="redirect" id="redirect" value="{$redirect}"/>
@@ -168,13 +168,14 @@
 	</div>
 	{hook h="displayAdminLogin"}
 	<div id="login-footer">
-		{* suzy: 2018-08-20 修改 login footer *}
+        {* suzy: 2018-08-20 修改 login footer *}
 		<p class="text-center text-muted">
-			&copy; 2018 <a href="https://www.tekapo.io/" target="_blank">TekapoCart</a><br/>
+			&copy; {$smarty.now|date_format:"%Y"} <a href="https://www.tekapo.io/" target="_blank">TekapoCart</a><br/>
 			Based on <a href="https://www.prestashop.com/" target="_blank">PrestaShop</a> &
 			Hosted on <a href="https://cloud.google.com/" target="_blank">Google Cloud Platform</a>
 		</p>
-		{* suzy: 2018-08-12 隱藏 social links<p class="text-center">
+		{* suzy: 2018-08-12 隱藏 social links
+		<p class="text-center">
 			<a class="link-social link-twitter _blank" href="https://twitter.com/PrestaShop" title="Twitter">
 				<i class="icon-twitter"></i>
 			</a>

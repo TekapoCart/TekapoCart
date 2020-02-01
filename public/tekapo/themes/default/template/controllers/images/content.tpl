@@ -1,5 +1,5 @@
 {**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
@@ -121,7 +121,7 @@
 					</span>
 					<p class="help-block">
 						若檔案太多可能會超過系統執行時間，這會需要分多次進行，這時請選「否」
-						{* suzy: 2018-09-26 調整說明 l s='Select "No" only if your server timed out and you need to resume the regeneration.' html=1 d='Admin.Design.Help'*}
+                        {* suzy: 2018-09-26 調整說明 l s='Select "No" only if your server timed out and you need to resume the regeneration.' html=1 d='Admin.Design.Help'*}
 					</p>
 				</div>
 			</div>

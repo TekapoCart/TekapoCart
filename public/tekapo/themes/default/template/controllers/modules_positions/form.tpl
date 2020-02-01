@@ -63,7 +63,7 @@
 					<optgroup id="hooks_unregistered" label="{l s='Available hooks' d='Admin.Design.Feature'}">
 					{foreach $hooks as $hook}
 						{if !$hook['registered']}
-							{* suzy: 2018-08-21 再加模組名稱 *}
+							{* suzy: 2018-08-21 再加模組名稱、排序 *}
                             {*<option value="{$hook['id_hook']}" {if $id_hook == $hook['id_hook']} selected="selected"{/if}>{$hook['name']}{if $hook['name'] != $hook['title']} ({$hook['title']}){/if}{if isset($hook['description'])} ({$hook['description']|escape:'htmlall':'UTF-8'}){/if}</option>*}
 							<option value="{$hook['id_hook']}" {if $id_hook == $hook['id_hook']} selected="selected"{/if}>{$hook['sort']} {$hook['title']} {if $hook['name'] != $hook['title']} [{$hook['name']}]{/if}</option>
 						{/if}
@@ -73,7 +73,7 @@
 					<optgroup id="hooks_registered" label="{l s='Already registered hooks' d='Admin.Design.Feature'}" disabled>
 					{foreach $hooks as $hook}
 						{if $hook['registered']}
-                            {* suzy: 2018-08-21 再加模組名稱 *}
+                            {* suzy: 2018-08-21 再加模組名稱、排序 *}
 							{*<option value="{$hook['id_hook']}" {if $id_hook == $hook['id_hook']} selected="selected"{/if}>{$hook['name']}{if $hook['name'] != $hook['title']} ({$hook['title']}){/if}{if isset($hook['description'])} ({$hook['description']|escape:'htmlall':'UTF-8'}){/if}</option>*}
 							<option value="{$hook['id_hook']}" {if $id_hook == $hook['id_hook']} selected="selected"{/if}>{$hook['sort']} {$hook['title']} {if $hook['name'] != $hook['title']} [{$hook['name']}]{/if}</option>
 						{/if}

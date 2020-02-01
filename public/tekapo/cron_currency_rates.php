@@ -30,13 +30,20 @@ if (!defined('_PS_ADMIN_DIR_')) {
 include _PS_ADMIN_DIR_.'/../config/config.inc.php';
 
 // suzy: 2019-12-31 改寫 cron 檢查條件
+//if (isset($_GET['secure_key'])) {
+//    $secureKey = md5(_COOKIE_KEY_.Configuration::get('PS_SHOP_NAME'));
+//    if (!empty($secureKey) && $secureKey === $_GET['secure_key']) {
+//        $shop_ids = Shop::getCompleteListOfShopsID();
+//        foreach ($shop_ids as $shop_id) {
+//            Shop::setContext(Shop::CONTEXT_SHOP, (int)$shop_id);
+//            Currency::refreshCurrencies();
+//        }
+//    }
+//}
 if ($_SERVER['REMOTE_ADDR'] === file_get_contents("http://ipecho.net/plain")) {
-    // $secureKey = md5(_COOKIE_KEY_.Configuration::get('PS_SHOP_NAME'));
-    // if (!empty($secureKey) && $secureKey === $_GET['secure_key']) {
-        $shop_ids = Shop::getCompleteListOfShopsID();
-        foreach ($shop_ids as $shop_id) {
-            Shop::setContext(Shop::CONTEXT_SHOP, (int)$shop_id);
-            Currency::refreshCurrencies();
-        }
-    // }
+    $shop_ids = Shop::getCompleteListOfShopsID();
+    foreach ($shop_ids as $shop_id) {
+        Shop::setContext(Shop::CONTEXT_SHOP, (int)$shop_id);
+        Currency::refreshCurrencies();
+    }
 }
