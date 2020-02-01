@@ -89,7 +89,7 @@
 			{$hookDashboardZoneOne}
 		</div>
 		*}
-		<div class="col-md-8 col-lg-7" id="hookDashboardZoneTwo">
+		<div class="{* suzy: 2020-02-01 col-md-8 改成 col-md-12 col-lg-7*}col-md-12" id="hookDashboardZoneTwo">
 			{$hookDashboardZoneTwo}
 			{* suzy: 2018-06-11 隱藏 Add more dashboard modules
 			<div id="dashaddons" class="row-margin-bottom">

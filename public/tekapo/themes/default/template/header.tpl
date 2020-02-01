@@ -124,6 +124,7 @@
 
       {* Quick access *}
       {* suzy: 2019-01-01 quick_access 加上 is_array 判斷 *}
+      {if count($quick_access) >= 0}
       <div id="header_quick" class="component">
         <div class="dropdown">
           <button
@@ -410,7 +411,7 @@
           </div>
         {/if}
 
-        {if $install_dir_exists}
+{if $install_dir_exists}
       <div class="alert alert-warning">
         {l s='For security reasons, you must also delete the /install folder.' d='Admin.Login.Notification'}
       </div>

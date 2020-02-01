@@ -1,6 +1,11 @@
 TekapoCart <hi@tekapo.io>
 -------------------------------------------
 *******************************************
+* 1.1.4 (February 01, 2020)
+*******************************************
+Improve
+- PrestaShop 1.7.6.3
+*******************************************
 * 1.1.3 (January 28, 2020)
 *******************************************
 Improve
@@ -17,6 +22,11 @@ Vendor
 - SwiftMailer 6
 - overtrue/pinyin
 - recca0120/twzipcode
+Steps
+- install ezship, ezship_home, tc_pod, ecpay_cvs, ecpay_tcat, tc_cvs
+- upgrade Paypal
+- run 2020-01-09.sql
+- uninstall smilepay, ps_cashondelivery
 *******************************************
 * 1.1.2 (December 27, 2019)
 *******************************************
