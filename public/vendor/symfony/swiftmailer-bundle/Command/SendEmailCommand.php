@@ -51,9 +51,6 @@ EOF
         ;
     }
 
-    /**
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->io = new SymfonyStyle($input, $output);
@@ -67,8 +64,6 @@ EOF
                 $this->processMailer($name, $input, $output);
             }
         }
-
-        return 0;
     }
 
     private function processMailer($name, InputInterface $input, OutputInterface $output)

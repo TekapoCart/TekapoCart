@@ -97,9 +97,7 @@
             >
           </div>
           <div class="input-in-tab">
-            {# suzy: 2019-10-09 隱藏補充說明 #}
-            {#{{ ps.form_group_row(shopLogosForm.shop_logos.mail_logo, {}, {'help': headerLogoPath == mailLogoPath ? 'Warning: if no email logo is available, the main logo will be used instead.'|trans({}, 'Admin.Design.Notification') : '' }) }}#}
-            {{ ps.form_group_row(shopLogosForm.shop_logos.mail_logo, {}) }}
+            {{ ps.form_group_row(shopLogosForm.shop_logos.mail_logo, {}, {'help': headerLogoPath == mailLogoPath ? 'Warning: if no email logo is available, the main logo will be used instead.'|trans({}, 'Admin.Design.Notification') : '' }) }}
           </div>
         </div>
         <div class="tab-pane" id="invoice-configuration" role="tabpanel" aria-labelledby="logo-tab">
@@ -116,9 +114,7 @@
             >
           </div>
           <div class="input-in-tab">
-            {# suzy: 2019-10-09 隱藏補充說明 #}
-            {#{{ ps.form_group_row(shopLogosForm.shop_logos.invoice_logo, {}, {'help': headerLogoPath == invoiceLogoPath ? 'Warning: if no invoice logo is available, the main logo will be used instead.'|trans({}, 'Admin.Design.Help') : '' }) }}#}
-            {{ ps.form_group_row(shopLogosForm.shop_logos.invoice_logo, {}) }}
+            {{ ps.form_group_row(shopLogosForm.shop_logos.invoice_logo, {}, {'help': headerLogoPath == invoiceLogoPath ? 'Warning: if no invoice logo is available, the main logo will be used instead.'|trans({}, 'Admin.Design.Help') : '' }) }}
           </div>
         </div>
       </div>
@@ -146,12 +142,9 @@
       <div class="form-group row">
         <div class="col-sm">
           {{ ps.form_widget_with_error(shopLogosForm.shop_logos.favicon) }}
-          {# suzy: 2019-10-09 隱藏補充說明 #}
-          {#
           <small class="form-text">
-            {{ 'Use our [1]favicon generator on PrestaShop Marketplace[/1] to boost your brand image!'|trans({'[1]': '<a href="https://addons.prestashop.com/create-favicon.php?pab=1" target="_blank">', '[/1]': '</a>'}, 'Admin.Design.Help')|raw }}
+            {{ 'Use our [1]favicon generator on PrestaShop Marketplace[/1] to boost your brand image!'|trans({'[1]': '<a href="http://google.com/search?q=favicon+generator" target="_blank">', '[/1]': '</a>'}, 'Admin.Design.Help')|raw }}
           </small>
-          #}
         </div>
       </div>
 

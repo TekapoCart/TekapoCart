@@ -363,6 +363,11 @@ class Google_Service_Fitness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'activityType' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                  'repeated' => true,
+                ),
                 'endTime' => array(
                   'location' => 'query',
                   'type' => 'string',

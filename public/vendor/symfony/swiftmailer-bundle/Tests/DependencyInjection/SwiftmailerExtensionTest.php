@@ -52,7 +52,7 @@ class SwiftmailerExtensionTest extends \PHPUnit\Framework\TestCase
     public function testDefaultConfig($type)
     {
         $requestContext = $this->getMockBuilder('Symfony\Component\Routing\RequestContext')->setMethods(['getHost'])->getMock();
-        $requestContext->expects($this->once())->method('getHost')->willReturn('example.org');
+        $requestContext->expects($this->once())->method('getHost')->will($this->returnValue('example.org'));
         $services = ['router.request_context' => $requestContext];
 
         $container = $this->loadContainerFromFile('empty', $type, $services);
@@ -83,7 +83,7 @@ class SwiftmailerExtensionTest extends \PHPUnit\Framework\TestCase
     {
         // Local domain is specified explicitly, so the request context host is ignored.
         $requestContext = $this->getMockBuilder('Symfony\Component\Routing\RequestContext')->setMethods(['getHost'])->getMock();
-        $requestContext->expects($this->any())->method('getHost')->willReturn('example.org');
+        $requestContext->expects($this->any())->method('getHost')->will($this->returnValue('example.org'));
         $services = ['router.request_context' => $requestContext];
 
         $container = $this->loadContainerFromFile('sendmail', $type, $services);
@@ -92,11 +92,6 @@ class SwiftmailerExtensionTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('swiftmailer.mailer.default.transport.sendmail', (string) $container->getAlias('swiftmailer.mailer.default.transport'));
 
         $this->assertEquals('local.example.org', $container->get('swiftmailer.mailer.default.transport')->getLocalDomain());
-
-        /** @var \Swift_SendmailTransport $transport */
-        $transport = $container->get('swiftmailer.transport');
-
-        $this->assertEquals('/usr/sbin/sendmail -t -i', $transport->getCommand());
     }
 
     /**
@@ -286,11 +281,10 @@ class SwiftmailerExtensionTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider getConfigTypes
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
     public function testInvalidServiceSpool($type)
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
-
         $this->loadContainerFromFile('spool_service_invalid', $type);
     }
 

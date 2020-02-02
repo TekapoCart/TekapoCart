@@ -23,7 +23,7 @@
  *
  * <p>
  * For more information about this service, see the API
- * <a href="https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/quickstart-cloud-asset-inventory" target="_blank">Documentation</a>
+ * <a href="https://cloud.google.com/asset-inventory/docs/quickstart" target="_blank">Documentation</a>
  * </p>
  *
  * @author Google, Inc.

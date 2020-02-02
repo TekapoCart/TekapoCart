@@ -67,7 +67,7 @@ EOF
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -96,8 +96,6 @@ EOF
         $sentMessages = $mailer->send($message);
 
         $this->io->success(sprintf('%s emails were successfully sent.', $sentMessages));
-
-        return 0;
     }
 
     /**

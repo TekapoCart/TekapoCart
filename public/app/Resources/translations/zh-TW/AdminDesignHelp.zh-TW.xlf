@@ -238,12 +238,12 @@ File: admin-dev/themes/default/template/controllers/images/content.tpl:69</note>
       <body>
         <trans-unit id="aeec498c2bb6b53e8eb24752af092828">
           <source>Will appear on email headers. If undefined, the header logo will be used.</source>
-          <target xml:lang="zh-TW">如無設定通知信 LOGO，將使用主 LOGO。</target>
+          <target xml:lang="zh-TW">顯示在訂單通知信、客服問答、聯絡我們通知信上方。</target>
           <note>Line: 88</note>
         </trans-unit>
         <trans-unit id="544cd7788ebd8916e7191e7a8fd0db57">
           <source>Warning: if no invoice logo is available, the main logo will be used instead.</source>
-          <target xml:lang="zh-TW">警告：如沒有定義通知信 LOGO，會改用網站 LOGO 替代。</target>
+          <target xml:lang="zh-TW">若無上傳，則會使用主 LOGO 代替。</target>
           <note>Line: 117</note>
         </trans-unit>
         <trans-unit id="b0297d22aade28eda5efbeb5c2e21e97">
@@ -253,7 +253,7 @@ File: admin-dev/themes/default/template/controllers/images/content.tpl:69</note>
         </trans-unit>
         <trans-unit id="3fb044d8f9136df5b2f0087f8a8fb0c9">
           <source>Use our [1]favicon generator on PrestaShop Marketplace[/1] to boost your brand image!</source>
-          <target xml:lang="zh-TW">Use our [1]favicon generator on PrestaShop Marketplace[/1] to boost your brand image!</target>
+          <target xml:lang="zh-TW">可使用 [1]線上工具[/1] 產生 Favicon！</target>
           <note>Line: 146</note>
         </trans-unit>
         <trans-unit id="04f1f93771bf12b0b80ae6a86ceb5cae">
@@ -263,7 +263,7 @@ File: admin-dev/themes/default/template/controllers/images/content.tpl:69</note>
         </trans-unit>
         <trans-unit id="e91d6b1f1f3836b0126eb26760a0eb49">
           <source>It is the small icon that appears in browser tabs, next to the title.</source>
-          <target xml:lang="zh-TW">位在瀏覽器頁籤上的小圖示。</target>
+          <target xml:lang="zh-TW">顯示在瀏覽器頁籤上的小圖示。</target>
           <note>Line: 130</note>
         </trans-unit>
       </body>

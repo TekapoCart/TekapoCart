@@ -33,10 +33,10 @@ class Google_Service_SQLAdmin_Resource_Users extends Google_Service_Resource
    * project ID.
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string host Host of the user in the instance.
    * @opt_param string name Name of the user in the instance.
    * @opt_param string resourceName The name of the user to delete. Format:
    * projects/{project}/locations/{location}/instances/{instance}/users
-   * @opt_param string host Host of the user in the instance.
    * @return Google_Service_SQLAdmin_Operation
    */
   public function delete($project, $instance, $optParams = array())
@@ -91,10 +91,10 @@ class Google_Service_SQLAdmin_Resource_Users extends Google_Service_Resource
    * @param Google_Service_SQLAdmin_User $postBody
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string host Optional. Host of the user in the instance.
    * @opt_param string name Name of the user in the instance.
    * @opt_param string resourceName The name of the user for Cloud SQL to update.
    * Format: projects/{project}/locations/{location}/instances/{instance}/users
-   * @opt_param string host Optional. Host of the user in the instance.
    * @return Google_Service_SQLAdmin_Operation
    */
   public function update($project, $instance, Google_Service_SQLAdmin_User $postBody, $optParams = array())

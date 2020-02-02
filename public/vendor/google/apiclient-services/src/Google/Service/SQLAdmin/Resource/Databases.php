@@ -107,7 +107,9 @@ class Google_Service_SQLAdmin_Resource_Databases extends Google_Service_Resource
   }
   /**
    * Partially updates a resource containing information about a database inside a
-   * Cloud SQL instance. This method supports patch semantics. (databases.patch)
+   * Cloud SQL instance. This method supports patch semantics. Caution: This is
+   * not a partial update, so you must include values for all the settings that
+   * you want to retain. For partial updates, use update. (databases.patch)
    *
    * @param string $project Project ID of the project that contains the instance.
    * @param string $instance Database instance ID. This does not include the

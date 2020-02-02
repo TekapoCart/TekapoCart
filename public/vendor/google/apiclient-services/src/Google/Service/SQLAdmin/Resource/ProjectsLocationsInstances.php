@@ -35,9 +35,9 @@ class Google_Service_SQLAdmin_Resource_ProjectsLocationsInstances extends Google
    * @param Google_Service_SQLAdmin_SqlInstancesRescheduleMaintenanceRequestBody $postBody
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string project ID of the project that contains the instance.
    * @opt_param string instance Cloud SQL instance ID. This does not include the
    * project ID.
-   * @opt_param string project ID of the project that contains the instance.
    * @return Google_Service_SQLAdmin_Operation
    */
   public function rescheduleMaintenance($parent, Google_Service_SQLAdmin_SqlInstancesRescheduleMaintenanceRequestBody $postBody, $optParams = array())

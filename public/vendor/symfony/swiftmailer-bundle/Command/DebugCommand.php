@@ -50,9 +50,6 @@ EOF
         ;
     }
 
-    /**
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->io = new SymfonyStyle($input, $output);
@@ -63,8 +60,6 @@ EOF
         } else {
             $this->outputMailers();
         }
-
-        return 0;
     }
 
     protected function outputMailers($routes = null)
