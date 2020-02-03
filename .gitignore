@@ -30,16 +30,21 @@ public/modules/*/composer.phar
 public/modules/*/Readme.md
 
 public/vendor/*/*/composer.json
-public/vendor/beberlei/DoctrineExtensions/tests/*
-public/vendor/greenlion/php-sql-parser/tests/*
-public/vendor/pear/archive_tar/tests/*
-public/vendor/react/promise/tests/*
-public/vendor/rize/uri-template/test/*
+public/vendor/*/*/LICENSE
+public/vendor/*/*/Makefile
+public/vendor/*/*/.gitignore
+public/vendor/*/*/.gitmodules
+public/vendor/*/*/*.md
+public/vendor/*/*/*.yml
+public/vendor/*/*/*.dist
+public/vendor/*/*/*.rst
+public/vendor/*/*/tests/*
+public/vendor/*/*/docs/*
+public/vendor/*/*/doc/*
+public/vendor/*/*/*/doc/*
 public/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Tests/*
 public/vendor/symfony/symfony/src/Symfony/Bridge/PhpUnit/Tests/*
 public/vendor/sensio/framework-extra-bundle/Tests/*
-public/vendor/twig/twig/test/*
-public/vendor/twig/twig/doc/*
 
 ######## shop*.json
 public/config/themes/simplicity*/shop1.json

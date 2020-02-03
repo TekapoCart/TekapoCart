@@ -195,7 +195,10 @@ class Google_Service_Container_Resource_ProjectsLocationsClusters extends Google
     return $this->call('setLegacyAbac', array($params), "Google_Service_Container_Operation");
   }
   /**
-   * Sets the locations for a specific cluster. (clusters.setLocations)
+   * Sets the locations for a specific cluster. Deprecated. Use
+   * [projects.locations.clusters.update](/kubernetes-
+   * engine/docs/reference/rest/v1/projects.locations.clusters.update) instead.
+   * (clusters.setLocations)
    *
    * @param string $name The name (project, location, cluster) of the cluster to
    * set locations. Specified in the format 'projects/locations/clusters'.

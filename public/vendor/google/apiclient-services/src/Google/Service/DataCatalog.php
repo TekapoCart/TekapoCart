@@ -508,14 +508,14 @@ class Google_Service_DataCatalog extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'serializedTaxonomies' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
                 'taxonomies' => array(
                   'location' => 'query',
                   'type' => 'string',
                   'repeated' => true,
+                ),
+                'serializedTaxonomies' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
                 ),
               ),
             ),'get' => array(

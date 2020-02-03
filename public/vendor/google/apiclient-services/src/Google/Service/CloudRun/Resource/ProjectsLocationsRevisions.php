@@ -68,8 +68,6 @@ class Google_Service_CloudRun_Resource_ProjectsLocationsRevisions extends Google
    * project ID or number.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string labelSelector Allows to filter resources based on a label.
-   * Supported operations are =, !=, exists, in, and notIn.
    * @opt_param string resourceVersion The baseline resource version from which
    * the list or watch operation should start. Not currently used by Cloud Run.
    * @opt_param bool includeUninitialized Not currently used by Cloud Run.
@@ -80,6 +78,8 @@ class Google_Service_CloudRun_Resource_ProjectsLocationsRevisions extends Google
    * @opt_param int limit The maximum number of records that should be returned.
    * @opt_param bool watch Flag that indicates that the client expects to watch
    * this resource as well. Not currently used by Cloud Run.
+   * @opt_param string labelSelector Allows to filter resources based on a label.
+   * Supported operations are =, !=, exists, in, and notIn.
    * @return Google_Service_CloudRun_ListRevisionsResponse
    */
   public function listProjectsLocationsRevisions($parent, $optParams = array())
