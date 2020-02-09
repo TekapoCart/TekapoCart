@@ -621,7 +621,7 @@ File: controllers/front/CartController.php:606</note>
       </trans-unit>
       <trans-unit id="9a7c79186c1ff1cd48b31ed6caf6ff48" approved="yes">
         <source>The item %product% in your cart is no longer available in this quantity. You cannot proceed with your order until the quantity is adjusted.</source>
-        <target xml:lang="zh-TW">你的購物車中的項目（%product%）沒有足夠的庫存。請調整數量再繼續下單。</target>
+        <target xml:lang="zh-TW">商品（%product%）庫存不足，請先調整購物車數量再繼續結帳流程。</target>
         <note>Context:
 File: controllers/front/CartController.php:599</note>
       </trans-unit>

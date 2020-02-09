@@ -374,6 +374,13 @@ class FrontControllerCore extends Controller
             Tools::redirect($link->getPageLink('index'));
         }
 
+        // suzy: 2020-02-10 為 varnish 做準備
+        if ($this->context->customer->logged) {
+            header('X-Logged-In: True');
+        } else {
+            header('X-Logged-In: False');
+        }
+
         /* Cart already exists */
         if ((int) $this->context->cookie->id_cart) {
             if (!isset($cart)) {

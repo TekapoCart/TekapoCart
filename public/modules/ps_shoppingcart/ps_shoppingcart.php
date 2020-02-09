@@ -88,10 +88,27 @@ class Ps_Shoppingcart extends Module implements WidgetInterface
         );
     }
 
+    // suzy: 2020-02-09 ajax 取得購物車數量
+    public function isXmlHttpRequest()
+    {
+        return
+            !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+    }
+
     public function renderWidget($hookName, array $params)
     {
         if (Configuration::isCatalogMode()) {
             return;
+        }
+
+        // suzy: 2020-02-09 ajax 取得購物車數量
+        if (!$this->isXmlHttpRequest()) {
+            $this->smarty->assign(array(
+                'refresh_url' => $this->context->link->getModuleLink('ps_shoppingcart', 'ajax', array(), null, null, null, true),
+                'cart_url' => $this->getCartSummaryURL(),
+            ));
+            return $this->fetch('module:ps_shoppingcart/ps_shoppingcart_empty.tpl');
         }
 
         $this->smarty->assign($this->getWidgetVariables($hookName, $params));
