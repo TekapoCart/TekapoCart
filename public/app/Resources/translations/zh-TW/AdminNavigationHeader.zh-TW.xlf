@@ -68,7 +68,7 @@ File: controllers/admin/AdminQuickAccessesController.php:66</note>
       </trans-unit>
       <trans-unit id="fe501f6dab88efcbde9b3f062a5ae781" approved="yes">
         <source>Quick Access menu</source>
-        <target xml:lang="zh-TW">快速連結選單</target>
+        <target xml:lang="zh-TW">書籤選單</target>
         <note>Context:
 File: controllers/admin/AdminQuickAccessesController.php:79</note>
       </trans-unit>
@@ -86,7 +86,7 @@ File: controllers/admin/AdminQuickAccessesController.php:102</note>
       </trans-unit>
       <trans-unit id="35c2475e5e8a5a14f8c1d9c1238e4cef" approved="yes">
         <source>Add new quick access</source>
-        <target xml:lang="zh-TW">新增快速連結</target>
+        <target xml:lang="zh-TW">新增書籤</target>
         <note>Context:
 File: controllers/admin/AdminQuickAccessesController.php:135</note>
       </trans-unit>
@@ -120,13 +120,13 @@ File: admin-dev/themes/default/template/search_form.tpl:45</note>
       </trans-unit>
       <trans-unit id="f53c56a189f5670f997915484f96f388" approved="yes">
         <source>Customers by name</source>
-        <target xml:lang="zh-TW">按名稱列出客戶</target>
+        <target xml:lang="zh-TW">客戶姓名</target>
         <note>Context:
 File: admin-dev/themes/default/template/search_form.tpl:46</note>
       </trans-unit>
       <trans-unit id="627f312c03624bf40f0656d5e7da6983" approved="yes">
         <source>Customers by IP address</source>
-        <target xml:lang="zh-TW">按IP列出客戶</target>
+        <target xml:lang="zh-TW">客戶 IP</target>
         <note>Context:
 File: admin-dev/themes/default/template/search_form.tpl:51</note>
       </trans-unit>
@@ -190,25 +190,25 @@ File: admin-dev/themes/default/template/header.tpl:70</note>
       </trans-unit>
       <trans-unit id="4f32a32dea642737580dd71cdfd8d3c0" approved="yes">
         <source>Quick Access</source>
-        <target xml:lang="zh-TW">快速連結</target>
+        <target xml:lang="zh-TW">書籤</target>
         <note>Context:
 File: admin-dev/themes/default/template/header.tpl:127</note>
       </trans-unit>
       <trans-unit id="f5c26758149849ee0f84a2eceaf0acfd" approved="yes">
         <source>Remove from QuickAccess</source>
-        <target xml:lang="zh-TW">從 QuickAccess 刪除</target>
+        <target xml:lang="zh-TW">從書籤刪除</target>
         <note>Context:
 File: admin-dev/themes/default/template/header.tpl:142</note>
       </trans-unit>
       <trans-unit id="383247a8cb198be4042d128986100cea" approved="yes">
         <source>Add current page to QuickAccess</source>
-        <target xml:lang="zh-TW">將網頁添加到 QuickAccess</target>
+        <target xml:lang="zh-TW">將此頁加入書籤</target>
         <note>Context:
 File: admin-dev/themes/default/template/header.tpl:149</note>
       </trans-unit>
       <trans-unit id="165122309e15dc09c30b78951e53cb5a" approved="yes">
         <source>Manage quick accesses</source>
-        <target xml:lang="zh-TW">管理快速連結</target>
+        <target xml:lang="zh-TW">管理書籤</target>
         <note>Context:
 File: admin-dev/themes/default/template/header.tpl:156</note>
       </trans-unit>

@@ -88,7 +88,7 @@ class Ps_Shoppingcart extends Module implements WidgetInterface
         );
     }
 
-    // suzy: 2020-02-09 ajax 取得購物車數量
+    // suzy: 2020-02-09 為 varnish 做準備
     public function isXmlHttpRequest()
     {
         return
@@ -102,7 +102,7 @@ class Ps_Shoppingcart extends Module implements WidgetInterface
             return;
         }
 
-        // suzy: 2020-02-09 ajax 取得購物車數量
+        // suzy: 2020-02-09 為 varnish 做準備
         if (!$this->isXmlHttpRequest()) {
             $this->smarty->assign(array(
                 'refresh_url' => $this->context->link->getModuleLink('ps_shoppingcart', 'ajax', array(), null, null, null, true),

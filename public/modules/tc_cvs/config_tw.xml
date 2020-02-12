@@ -3,11 +3,11 @@
     <name>tc_cvs</name>
     <displayName><![CDATA[TekapoCart 7-11 交貨便]]></displayName>
     <version><![CDATA[1.0]]></version>
-    <description><![CDATA[TekapoCart 711 超商取貨，商家自行取得寄件代碼、列印服務單。]]></description>
+    <description><![CDATA[無需申請物流平台，商家自行申請交貨便代碼，不支援取貨付款。]]></description>
     <author><![CDATA[TekapoCart]]></author>
     <tab><![CDATA[shipping_logistics]]></tab>
-    <confirmUninstall><![CDATA[Are you sure you want to delete your details ?]]></confirmUninstall>
+	<confirmUninstall><![CDATA[Do you want to uninstall tc_cvs module?]]></confirmUninstall>
     <is_configurable>1</is_configurable>
     <need_instance>1</need_instance>
-    <limited_countries></limited_countries>
+	<limited_countries></limited_countries>
 </module>

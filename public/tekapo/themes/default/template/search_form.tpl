@@ -55,6 +55,7 @@
 							<i class="icon-credit-card"></i> {l s='Orders' d='Admin.Global'}
 						</a>
 					</li>
+					<!-- suzy: 2020-02-12 隱藏搜尋分類
 					<li class="search-invoices search-option">
 						<a href="#" data-value="4" data-placeholder="{l s='Invoice Number' d='Admin.Navigation.Header'}" data-icon="icon-book">
 							<i class="icon-book"></i> {l s='Invoices' d='Admin.Navigation.Menu'}
@@ -70,6 +71,7 @@
 							<i class="icon-puzzle-piece"></i> {l s='Modules' d='Admin.Global'}
 						</a>
 					</li>
+					-->
 				</ul>
 			</div>
 			{if isset($show_clear_btn) && $show_clear_btn}

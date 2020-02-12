@@ -29,7 +29,7 @@ $(document).ready(function () {
     });
   };
 
-  // suzy: 2020-02-09 ajax 取得購物車數量
+  // suzy: 2020-02-09 為 varnish 做準備
   var refreshURL = $('.blockcart').data('refresh-url');
   var requestData = {};
   $.post(refreshURL, requestData).then(function (resp) {

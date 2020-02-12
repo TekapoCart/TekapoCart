@@ -426,6 +426,13 @@ class ToolsCore
             return Tools::strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https';
         }
 
+        // suzy: 2020-02-11 為 varnish 做準備
+        if (Configuration::get('TC_VARNISH_ENABLED')) {
+            if (Configuration::get('PS_SSL_ENABLED_EVERYWHERE')) {
+                return true;
+            }
+        }
+
         return false;
     }
 

@@ -322,19 +322,19 @@ File: controllers/admin/AdminReferrersController.php:272</note>
     <body>
       <trans-unit id="500294c9fd031bb4f00a82b5d27dc22c" approved="yes">
         <source>If you own an SSL certificate for your shop's domain name, you can activate SSL encryption (https://) for customer account identification and order processing.</source>
-        <target xml:lang="zh-TW">如果您的主機商提供 SSL 證書 ，您可以啟用 SSL 加密 (https://) 來保護客戶的帳戶資料與訂單處理資訊。</target>
+        <target xml:lang="zh-TW">如果您的主機支援 SSL 憑證，您可以啟用 SSL 連線來保護客戶的個人資料與訂單資訊。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/preferences.html.twig:49</note>
       </trans-unit>
       <trans-unit id="d86a9baf93dba6b27dbbb04cef8d3aae" approved="yes">
         <source>When enabled, all the pages of your shop will be SSL-secured.</source>
-        <target xml:lang="zh-TW">強迫所有商店使用SSL。</target>
+        <target xml:lang="zh-TW">強制全部商店使用 SSL 連線。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/preferences.html.twig:60</note>
       </trans-unit>
       <trans-unit id="a1202480ddcd8665114515ca380c0e5b" approved="yes">
         <source>Enable or disable token in the Front Office to improve PrestaShop's security.</source>
-        <target xml:lang="zh-TW">啟用或停用前台憑證來加強商店的安全</target>
+        <target xml:lang="zh-TW">啟用或停用前台 token（通行證）來加強商店的安全</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/preferences.html.twig:66</note>
       </trans-unit>

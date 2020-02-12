@@ -1,6 +1,6 @@
 {if $display_type == 'text' }
     <div class="logo-wrapper hidden-sm-down" id="_desktop_logo">
-        <a href="{if $language.iso_code == 'tw'}{$urls.base_url}{else}{$urls.base_url}{$language.iso_code}{/if}">
+        <a href="{$home_url}">
             {if (!empty($display_font)) }<span style="font-family: {$display_font}">{$display_text}</span>{else}{$display_text}{/if}
         </a>
     </div>
@@ -8,7 +8,7 @@
     <div class="logo-wrapper hidden-sm-down{if $configuration.logo_max_width } {$configuration.logo_max_width}"{/if}" id="_desktop_logo" itemscope itemtype="https://schema.org/Organization">
         <meta itemprop="logo" content="{$shop.logo}">
         <meta itemprop="url" content="{$urls.base_url}">
-        <a href="{if $language.iso_code == 'tw'}{$urls.base_url}{else}{$urls.base_url}{$language.iso_code}{/if}">
+        <a href="{$home_url}">
             <img class="logo img-responsive" src="{$shop.logo}" alt="{$shop.name}">
         </a>
     </div>

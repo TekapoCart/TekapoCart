@@ -161,7 +161,13 @@ if ($cookie_lifetime > 0) {
 if (defined('_PS_ADMIN_DIR_')) {
     $cookie = new Cookie('psAdmin', '', $cookie_lifetime);
 } else {
-    $force_ssl = Configuration::get('PS_SSL_ENABLED') && Configuration::get('PS_SSL_ENABLED_EVERYWHERE');
+    // suzy: 2020-02-11 為 varnish 做準備
+    if (Configuration::get('TC_VARNISH_ENABLED')) {
+        $force_ssl = false;
+    } else {
+        $force_ssl = Configuration::get('PS_SSL_ENABLED') && Configuration::get('PS_SSL_ENABLED_EVERYWHERE');
+    }
+
     if ($context->shop->getGroup()->share_order) {
         $cookie = new Cookie('ps-sg'.$context->shop->getGroup()->id, '', $cookie_lifetime, $context->shop->getUrlsSharedCart(), false, $force_ssl);
     } else {
@@ -268,5 +274,5 @@ define('_GCP_KEY_', Configuration::get('TC_GCP_KEY', '/var/bak/cdn_key.json'));
 define('_GCP_BUCKET_', Configuration::get('TC_GCP_BUCKET', 'tekapocart-cdn'));
 
 // suzy: 2018-08-12 TekapoCart Version
-define('_TC_VERSION_', '1.1.4');
-define('_TC_VERSION_DATE_', '20200201');
+define('_TC_VERSION_', '1.1.5');
+define('_TC_VERSION_DATE_', '20200211');

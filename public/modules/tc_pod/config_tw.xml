@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>tc_pod</name>
-    <displayName><![CDATA[TekapoCart 貨到付款]]></displayName>
+    <displayName><![CDATA[貨到付款]]></displayName>
     <version><![CDATA[1.0]]></version>
-    <description><![CDATA[超商取貨付款、宅配貨到付款]]></description>
+    <description><![CDATA[https://www.tekapo.io/]]></description>
     <author><![CDATA[TekapoCart]]></author>
     <tab><![CDATA[payments_gateways]]></tab>
-    <confirmUninstall><![CDATA[Are you sure you want to delete your details ?]]></confirmUninstall>
-    <is_configurable>1</is_configurable>
+	<confirmUninstall><![CDATA[Do you want to uninstall TekapoCart POD module?]]></confirmUninstall>
+    <is_configurable>0</is_configurable>
     <need_instance>1</need_instance>
-    <limited_countries></limited_countries>
+	<limited_countries></limited_countries>
 </module>

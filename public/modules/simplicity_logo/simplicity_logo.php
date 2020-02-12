@@ -74,15 +74,16 @@ class Simplicity_Logo extends Module implements WidgetInterface
 
     public function getWidgetVariables($hookName, array $params)
     {
+
+        $iso_code = $this->context->language->iso_code;
+        $base_url = (Tools::usingSecureMode() ? Tools::getShopDomainSsl(true) : Tools::getShopDomain(true)) . __PS_BASE_URI__;
+        $home_url = ($iso_code == 'tw') ? $base_url : $base_url . $iso_code;
+
         return [
+            'home_url' => $home_url,
             'display_type' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_TYPE'),
             'display_text' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_TEXT'),
             'display_font' => Configuration::get('SIMPLICITY_LOGO_DISPLAY_FONT'),
-
-            'logo_max_width_css' => Configuration::get('SIMPLICITY_LOGO_MAX_WIDTH_CSS'),
-            'body_bg_css' => Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS'),
-
-            'mobile_type' => Configuration::get('SIMPLICITY_LOGO_MOBILE_TYPE'),
         ];
     }
 

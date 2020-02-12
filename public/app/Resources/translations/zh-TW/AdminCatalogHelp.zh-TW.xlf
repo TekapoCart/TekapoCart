@@ -476,7 +476,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:
       </trans-unit>
       <trans-unit id="d24ec28b066e46d9d9ec3c1f39aa89ee" approved="yes">
         <source>[1]Invalid token[/1]: direct access to this link may lead to a potential security breach.</source>
-        <target xml:lang="zh-TW">[1]無效的 token (權杖)[/1]：此頁面已經過期。</target>
+        <target xml:lang="zh-TW">[1]無效的 token (通行證)[/1]：連線時間已到期。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:56</note>
       </trans-unit>
@@ -494,7 +494,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:
       </trans-unit>
       <trans-unit id="a5b0a810681c7fca4581d7f7524009f4" approved="yes">
         <source>Take me out of there!</source>
-        <target xml:lang="zh-TW">先不要，帶我回主控台</target>
+        <target xml:lang="zh-TW">回到管理後台主控台</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:66</note>
       </trans-unit>

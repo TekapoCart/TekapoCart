@@ -1355,7 +1355,9 @@ class LinkCore
         }
 
         if ($relativeProtocol) {
-            $base = '//' . ($ssl && $this->ssl_enable ? $shop->domain_ssl : $shop->domain);
+            // suzy: 2020-02-11 為 varnish 做準備
+            // $base = '//' . ($ssl && $this->ssl_enable ? $shop->domain_ssl : $shop->domain);
+            $base = '';
         } else {
             $base = (($ssl && $this->ssl_enable) ? 'https://' . $shop->domain_ssl : 'http://' . $shop->domain);
         }

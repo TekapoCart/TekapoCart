@@ -52,7 +52,7 @@ AddType font/woff2 .woff2
 </FilesMatch>
 
 #If rewrite mod isn't enabled
-ErrorDocument 404 /index.php?controller=404
-ErrorDocument 403 /index.php?controller=404
+ErrorDocument 404 /page-not-found
+ErrorDocument 403 /page-not-found
 
 # ~~end~~ Do not remove this comment, Prestashop will keep automatically the code outside this comment when .htaccess will be generated again
