@@ -12,7 +12,8 @@ Steps
 - UPDATE `ps_configuration` SET `value` = '1' WHERE `ps_configuration`.`name` = 'PS_SSL_ENABLED';
 - UPDATE `ps_configuration` SET `value` = '1' WHERE `ps_configuration`.`name` = 'PS_SSL_ENABLED_EVERYWHERE';
 - INSERT INTO `ps_configuration` (`id_configuration`, `id_shop_group`, `id_shop`, `name`, `value`, `date_add`, `date_upd`) VALUES (NULL, NULL, NULL, 'TC_VARNISH_ENABLED', '1', NOW(), NOW());
-
+DB
+- slim.sql
 *******************************************
 * 1.1.4 (February 01, 2020)
 *******************************************
