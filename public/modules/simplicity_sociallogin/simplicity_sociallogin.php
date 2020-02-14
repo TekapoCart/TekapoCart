@@ -28,6 +28,7 @@ class Simplicity_Sociallogin extends Module
     {
         return $this->registerHook('header') &&
             $this->registerHook('displayCheckoutStepOneNotLogged') &&
+            $this->registerHook('displayCustomerLoginFormAfter') &&
             $this->registerHook('displayCustomerLoginLink');
     }
 
@@ -110,13 +111,25 @@ class Simplicity_Sociallogin extends Module
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        if (strpos($_SERVER['REQUEST_URI'], 'core.js.map') === false) {
-            $_SESSION['social_login_back'] = Tools::getCurrentUrlProtocolPrefix() . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        }
+
+        $_SESSION['social_login_back'] = $this->context->link->getPageLink('my-account');
 
         $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
         $this->smarty->assign('g_login_url', $this->getGLoginUrl());
         return $this->display(__FILE__, 'hook-login.tpl');
+    }
+
+    public function hookDisplayCustomerLoginFormAfter()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $_SESSION['social_login_back'] = $this->context->link->getPageLink('my-account');
+
+        $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
+        $this->smarty->assign('g_login_url', $this->getGLoginUrl());
+        return $this->display(__FILE__, 'hook-login-page.tpl');
     }
 
     public function hookDisplayCheckoutStepOneNotLogged()
@@ -157,8 +170,7 @@ class Simplicity_Sociallogin extends Module
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        // $back = isset($_SESSION['social_login_back']) ? $_SESSION['social_login_back'] : $this->context->link->getPageLink('my-account');
-        $back = $this->context->link->getPageLink('my-account');
+        $back = isset($_SESSION['social_login_back']) ? $_SESSION['social_login_back'] : $this->context->link->getPageLink('my-account');
 
         $this->context->controller->success[] = $this->trans('Login Successful', array(), 'Shop.Theme.Customeraccount');
         $this->context->controller->redirectWithNotifications($back);

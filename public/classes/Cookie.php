@@ -75,15 +75,16 @@ class CookieCore
         $this->_path = str_replace('%7E', '~', $this->_path);
         // suzy: 2020-01-19 因應 chrome 加上 SameSite、為 varnish 做準備
         // $this->_domain = $this->getDomain($shared_urls);
-        if (Configuration::get('TC_VARNISH_ENABLED')) {
-            $this->_domain = $this->getDomain($shared_urls) . '; SameSite=Strict;';
-        } else {
-            $this->_domain = $this->getDomain($shared_urls) . '; SameSite=None; Secure;';
-        }
+        $this->_domain = $this->getDomain($shared_urls) . '; SameSite=None; Secure';
+//        if (Configuration::get('TC_VARNISH_ENABLED')) {
+//            $this->_domain = $this->getDomain($shared_urls) . '; SameSite=Strict';
+//        } else {
+//            $this->_domain = $this->getDomain($shared_urls) . '; SameSite=None; Secure';
+//        }
 
-        // suzy: 2018-09-25 改 TekapoCart
+        // suzy: 2018-09-25 改 Cookie Name
         // $this->_name = 'PrestaShop-' . md5(($this->_standalone ? '' : _PS_VERSION_) . $name . $this->_domain);
-        $this->_name = 'TekapoCart-' . md5(($this->_standalone ? '' : _PS_VERSION_) . $name . $this->_domain);
+        $this->_name = 'TC-' . md5(($this->_standalone ? '' : _PS_VERSION_) . $name . $this->_domain);
 
         $this->_allow_writing = true;
         $this->_salt = $this->_standalone ? str_pad('', 8, md5('ps' . __FILE__)) : _COOKIE_IV_;

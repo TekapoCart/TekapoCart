@@ -17,3 +17,10 @@ UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINPARENTMAILTHEME_C
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINPARENTMAILTHEME_DELETE' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_TAB_ADMINMAILTHEMEPARENT_DELETE';
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINPARENTMAILTHEME_READ' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_TAB_ADMINMAILTHEMEPARENT_READ';
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINPARENTMAILTHEME_UPDATE' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_TAB_ADMINMAILTHEMEPARENT_UPDATE';
+
+-- simplicity_sociallogin
+INSERT INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES
+('82', '1', '116', '1'),
+('82', '2', '116', '1'),
+('82', '3', '116', '1'),
+('82', '4', '116', '1');
