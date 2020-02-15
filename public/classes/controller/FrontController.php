@@ -351,10 +351,6 @@ class FrontControllerCore extends Controller
         $currency = Tools::setCurrency($this->context->cookie);
 
         if (isset($_GET['logout']) || ($this->context->customer->logged && Customer::isBanned($this->context->customer->id))) {
-            // suzy: 2018-09-25 不讓 Browser Keep Cache
-            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-            header("Cache-Control: post-check=0, pre-check=0", false);
-            header("Pragma: no-cache");
 
             $this->context->customer->logout();
 
@@ -362,10 +358,6 @@ class FrontControllerCore extends Controller
             // Tools::redirect(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null);
             Tools::redirect($link->getPageLink('index'));
         } elseif (isset($_GET['mylogout'])) {
-            // suzy: 2018-09-25 不讓 Browser Keep Cache
-            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-            header("Cache-Control: post-check=0, pre-check=0", false);
-            header("Pragma: no-cache");
 
             $this->context->customer->mylogout();
 
