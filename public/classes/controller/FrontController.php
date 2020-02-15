@@ -270,14 +270,6 @@ class FrontControllerCore extends Controller
 
         parent::init();
 
-        // suzy: 2020-02-15 為 varnish 做準備（304 沒啥差別先註解起來）
-//        if (!isset($this->context->cookie->last_modified) ||
-//            strtotime(date('d-m-Y H:i:s', $this->context->cookie->last_modified)) !== (int)$this->context->cookie->last_modified
-//        ) {
-//            $this->context->cookie->last_modified = time();
-//        }
-//        header("Last-Modified: " . gmdate("D, d M Y H:i:s", $this->context->cookie->last_modified) . " GMT");
-
         // enable Symfony error handler if debug mode enabled
         $this->initDebugguer();
 
@@ -366,9 +358,6 @@ class FrontControllerCore extends Controller
 
             $this->context->customer->logout();
 
-            // suzy: 2020-02-15 為 varnish 做準備（304 沒啥差別先註解起來）
-//            $this->context->cookie->last_modified = time();
-
             // suzy: 2018-09-25 修正轉頁兩次的問題（登出後轉回會員中心又再轉到首頁）
             // Tools::redirect(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null);
             Tools::redirect($link->getPageLink('index'));
@@ -379,9 +368,6 @@ class FrontControllerCore extends Controller
             header("Pragma: no-cache");
 
             $this->context->customer->mylogout();
-
-            // suzy: 2020-02-15 為 varnish 做準備（304 沒啥差別先註解起來）
-//            $this->context->cookie->last_modified = time();
 
             // suzy: 2018-09-25 修正轉頁兩次的問題（登出後轉回會員中心又再轉到首頁）
             // Tools::redirect(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null);
