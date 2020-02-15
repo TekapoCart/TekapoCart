@@ -30,14 +30,14 @@ $(document).ready(function () {
   };
 
   // suzy: 2020-02-09 為 varnish 做準備
-  var refreshURL = $('.blockcart').data('refresh-url');
-  var requestData = {};
-  $.post(refreshURL, requestData).then(function (resp) {
-    $('.blockcart').replaceWith($(resp.preview).find('.blockcart'));
-    if (resp.modal) {
-      showModal(resp.modal);
-    }
-  })
+  // var refreshURL = $('.blockcart').data('refresh-url');
+  // var requestData = {};
+  // $.post(refreshURL, requestData).then(function (resp) {
+  //   $('.blockcart').replaceWith($(resp.preview).find('.blockcart'));
+  //   if (resp.modal) {
+  //     showModal(resp.modal);
+  //   }
+  // })
 
   prestashop.on(
     'updateCart',
