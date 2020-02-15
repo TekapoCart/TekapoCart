@@ -258,6 +258,9 @@ class Simplicity_Sociallogin extends Module
         CartRule::autoAddToCart($this->context);
         // END Login
 
+        // suzy: 2020-02-15 為 varnish 做準備
+        $this->context->cookie->last_modified = time();
+
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////
