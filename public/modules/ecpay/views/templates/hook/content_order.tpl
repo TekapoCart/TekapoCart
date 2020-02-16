@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-6">
                 {if strlen($tcOrderPayment['return_status']) > 0}
-                    <p>綠界回傳狀態：{$return_status|nl2br nofilter}</p>
+                    <p>綠界回傳狀態：{$tcOrderPayment['return_status']|nl2br nofilter}</p>
                 {/if}
                 {if strlen($tcOrderPayment['return_message']) > 0}
                     <p>綠界回傳訊息：<br>{$tcOrderPayment['return_message']|nl2br nofilter}</p>
