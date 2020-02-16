@@ -104,10 +104,8 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
 
                     if ($this->module->isTestMode($aio->MerchantID)) {
                         $aio->ServiceURL = 'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut';
-                        $aio->Send['MerchantTradeNo'] = date('YmdHis');
                     } else {
                         $aio->ServiceURL = 'https://payment.ecpay.com.tw/Cashier/AioCheckOut';
-                        $aio->Send['MerchantTradeNo'] = '';
                     }
 
                     $tcOrderPayment = new TcOrderPayment();
@@ -185,9 +183,6 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                     $this->module->validateOrder($cart_id, $order_status_id, $order_total, $this->module->displayName, $chosen_payment_desc, array(),
                         (int)$currency->id, false, $customer->secure_key);
 
-                    $aio->Send['MerchantTradeNo'] .= $this->module->currentOrder;
-                    $aio->Send['MerchantTradeDate'] = date('Y/m/d H:i:s');
-
                     $aio->Send['ClientBackURL'] = Tools::getShopDomainSsl(true, true) . __PS_BASE_URI__
                         . 'index.php?controller=order-confirmation&id_cart=' . $cart_id
                         . '&id_module=' . $this->module->id
@@ -200,6 +195,9 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                     $tcOrderPayment->order_reference = $order->reference;
                     $tcOrderPayment->module = $this->module->name;
                     $tcOrderPayment->save();
+
+                    $aio->Send['MerchantTradeNo'] = $order->reference;
+                    $aio->Send['MerchantTradeDate'] = date('Y/m/d H:i:s', strtotime($order->date_add));
 
                     # Get the redirect html
                     $aio->CheckOut();

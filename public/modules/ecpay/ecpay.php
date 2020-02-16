@@ -285,16 +285,6 @@ class Ecpay extends PaymentModule
         return intval(round($order_total));
     }
 
-    public function getCartOrderID($merchant_trade_no, $ecpay_merchant_id)
-    {
-        $cart_order_id = $merchant_trade_no;
-        if ($this->isTestMode($ecpay_merchant_id)) {
-            $cart_order_id = substr($merchant_trade_no, 14);
-        }
-
-        return $cart_order_id;
-    }
-
     public function getPaymentsDesc()
     {
         $payments_desc = array(

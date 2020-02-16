@@ -28,7 +28,7 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
 
                     Ecpay::logMessage('Feedback: ' . json_encode($feedback), true);
 
-                    $order_reference = $this->module->getCartOrderID($feedback['MerchantTradeNo'], Configuration::get('ecpay_merchant_id'));
+                    $order_reference = $feedback['MerchantTradeNo'];
 
                     $tcOrderPayment = TcOrderPayment::getLogByOrderRef($order_reference);
                     if (!$tcOrderPayment) {

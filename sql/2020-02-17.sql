@@ -21,3 +21,17 @@ KEY `order_reference` (`order_reference`),
 KEY `id_order` (`id_order`)
 )
 ENGINE=INNODB CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+----
+
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES
+(105, 1, 31, 1),
+(105, 2, 31, 1),
+(105, 3, 31, 1),
+(105, 4, 31, 1);
+
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES
+(105, 1, 33, 1),
+(105, 2, 33, 1),
+(105, 3, 33, 1),
+(105, 4, 33, 1);
