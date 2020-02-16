@@ -40,4 +40,4 @@ $_MODULE['<{ecpay}prestashop>payment_return_51332b8fec73c1f1aeb5259d61fabb3a'] =
 $_MODULE['<{ecpay}prestashop>payment_return_294ebdec6ae91e8d0e0a2168af57a518'] = '超商条码';
 $_MODULE['<{ecpay}prestashop>payment_return_844b576f828ae4d7005489f92c70a361'] = '金流回传状态';
 $_MODULE['<{ecpay}prestashop>payment_return_9b5638a72c8871a45d0499853e7e6906'] = '付款成功';
-$_MODULE['<{ecpay}prestashop>payment_return_e3f59aca200687def611191ad53cf742'] = '付款成功';
+$_MODULE['<{ecpay}prestashop>payment_return_e3f59aca200687def611191ad53cf742'] = '取号成功';

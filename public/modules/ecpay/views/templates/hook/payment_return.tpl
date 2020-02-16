@@ -71,7 +71,7 @@
 
         {elseif $tcOrderPayment['payment_type'] == 'BARCODE'}
             <dt>{l s='Payment method' mod='ecpay'}：</dt>
-            <dd>{l s='CVS' mod='ecpay'}</dd>
+            <dd>{l s='BARCODE' mod='ecpay'}</dd>
 
             <dt>{l s='ECPay Return status' mod='ecpay'}：</dt>
             <dd>
