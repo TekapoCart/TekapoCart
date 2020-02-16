@@ -925,7 +925,8 @@ class AdminCarrierWizardControllerCore extends AdminController
         }
 
         $step_fields = array(
-            1 => array('name', 'delay', 'grade', 'url'),
+            // suzy: 2020-02-16 加上 shipped_email_info 欄位
+            1 => array('name', 'delay', 'grade', 'url', 'shipped_email_info'),
             2 => array('is_free', 'id_tax_rules_group', 'shipping_handling', 'shipping_method', 'range_behavior'),
             3 => array('range_behavior', 'max_height', 'max_width', 'max_depth', 'max_weight'),
             4 => array(),
