@@ -198,7 +198,7 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                     $order = new Order($this->module->currentOrder);
                     $tcOrderPayment->id_order = $order->id;
                     $tcOrderPayment->order_reference = $order->reference;
-                    $tcOrderPayment->module = $this->name;
+                    $tcOrderPayment->module = $this->module->name;
                     $tcOrderPayment->save();
 
                     # Get the redirect html

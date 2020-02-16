@@ -533,9 +533,13 @@ class Tc_Cvs extends CarrierModule
     public function getOrderShippingCost($params, $shipping_cost)
     {
 
-        $store_data = $this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier);
-        if ($store_data) {
+        $carrier = new Carrier($this->context->cart->id_carrier);
+        if ($carrier->external_module_name !== $this->name) {
+            return $shipping_cost;
+        }
 
+        $store_data = $this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier);
+        if ($store_data && strlen($store_data['code']) > 0) {
             if (Configuration::get('tc_cvs_sender_location') == 1) {
                 if (strpos(Configuration::get('tc_cvs_penghu_store_ids'), $store_data['code']) === false) {
                     return $shipping_cost + (int)Configuration::get('tc_cvs_island_fee');
@@ -545,7 +549,6 @@ class Tc_Cvs extends CarrierModule
                     return $shipping_cost + (int)Configuration::get('tc_cvs_island_fee');
                 }
             }
-
         }
 
         return $shipping_cost;

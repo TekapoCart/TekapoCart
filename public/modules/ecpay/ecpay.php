@@ -83,7 +83,7 @@ class Ecpay extends PaymentModule
                 `barcode_3` VARCHAR(20) NULL DEFAULT NULL,  
                 `date_add` DATETIME NOT NULL,
                 `date_upd` DATETIME NOT NULL,                
-                PRIMARY KEY (`id_tc_cart_shipping`),
+                PRIMARY KEY (`id_tc_order_payment`),
                 KEY `id_cart_carrier` (`id_cart`,`id_carrier`)
             )
             ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET utf8 COLLATE utf8_general_ci;';
@@ -179,16 +179,21 @@ class Ecpay extends PaymentModule
 
     public function hookPaymentReturn($params)
     {
-        if (!$this->active) {
+        if ($params['order']->module !== 'ecpay') {
             return;
         }
 
-        $rq = Db::getInstance()->getRow('SELECT payment_message FROM `'
-            . _DB_PREFIX_ . 'orders` WHERE id_order=' . $params['order']->id);
-        $payment_message = $rq['payment_message'];
+//        $rq = Db::getInstance()->getRow('SELECT payment_message FROM `'
+//            . _DB_PREFIX_ . 'orders` WHERE id_order=' . $params['order']->id);
+//        $payment_message = $rq['payment_message'];
+//
+//        $this->smarty->assign(array(
+//            'payment_message' => $payment_message,
+//        ));
 
+        $tcOrderPayment = TcOrderPayment::getLogByOrderId($params['order']->id, 'array');
         $this->smarty->assign(array(
-            'payment_message' => $payment_message,
+            'tcOrderPayment' => $tcOrderPayment,
         ));
 
         return $this->display(__FILE__, 'payment_return.tpl');
@@ -229,9 +234,12 @@ class Ecpay extends PaymentModule
         }
 
         $tcOrderPayment = TcOrderPayment::getLogByOrderId($params['order']->id, 'array');
-        $this->smarty->assign(array(
-            'tcOrderPayment' => $tcOrderPayment,
-        ));
+        if ($tcOrderPayment) {
+            $this->smarty->assign(array(
+                'tcOrderPayment' => $tcOrderPayment,
+            ));
+        }
+
 
         return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
     }

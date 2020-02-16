@@ -41,11 +41,11 @@
                 {/if}
             </div>
             <div class="col-md-6">
-                {if strlen($return_code) > 0}
+                {if strlen($tcOrderPayment['return_status']) > 0}
                     <p>綠界回傳狀態：{$return_code|nl2br nofilter}</p>
                 {/if}
-                {if strlen($return_message) > 0}
-                    <p>綠界回傳訊息：<br>{$return_message|nl2br nofilter}</p>
+                {if strlen($tcOrderPayment['return_message']) > 0}
+                    <p>綠界回傳訊息：<br>{$tcOrderPayment['return_message']|nl2br nofilter}</p>
                 {/if}
             </div>
         </div>

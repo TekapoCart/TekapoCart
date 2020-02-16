@@ -11,7 +11,7 @@
 
             <dt>{l s='ECPay Return status' mod='ecpay'}：</dt>
             <dd>
-                {if $tcOrderPayment['return_code'] == 1 }
+                {if $tcOrderPayment['return_status'] == 1 }
                     {l s='Payment success' mod='ecpay'}
                 {/if}
             </dd>
@@ -22,7 +22,7 @@
 
             <dt>{l s='ECPay Return status' mod='ecpay'}：</dt>
             <dd>
-                {if $tcOrderPayment['return_code'] == 1 }
+                {if $tcOrderPayment['return_status'] == 1 }
                     {l s='Payment success' mod='ecpay'}
                 {/if}
             </dd>
@@ -33,14 +33,14 @@
 
             <dt>{l s='ECPay Return status' mod='ecpay'}：</dt>
             <dd>
-                {if $tcOrderPayment['return_code'] == 1 }
+                {if $tcOrderPayment['return_status'] == 1 }
                     {l s='Payment success' mod='ecpay'}
-                {elseif $tcOrderPayment['return_code'] == 2}
+                {elseif $tcOrderPayment['return_status'] == 2}
                     {l s='Take a number success' mod='ecpay'}
                 {/if}
             </dd>
 
-            {if $tcOrderPayment['return_code'] == 2}
+            {if $tcOrderPayment['return_status'] == 2}
                 <dt>{l s='ATM Bank Code' mod='ecpay'}：</dt>
                 <dd>{$tcOrderPayment['atm_bank_code']}</dd>
                 <dt>{l s='ATM Virtual Account' mod='ecpay'}：</dt>
@@ -55,14 +55,14 @@
 
             <dt>{l s='ECPay Return status' mod='ecpay'}：</dt>
             <dd>
-                {if $tcOrderPayment['return_code'] == 1 }
+                {if $tcOrderPayment['return_status'] == 1 }
                     {l s='Payment success' mod='ecpay'}
-                {elseif $tcOrderPayment['return_code'] == 10100073}
+                {elseif $tcOrderPayment['return_status'] == 10100073}
                     {l s='Take a number success' mod='ecpay'}
                 {/if}
             </dd>
 
-            {if $tcOrderPayment['return_code'] == 10100073}
+            {if $tcOrderPayment['return_status'] == 10100073}
                 <dt>{l s='CVS Payment No' mod='ecpay'}：</dt>
                 <dd>{$tcOrderPayment['cvs_payment_no']}</dd>
                 <dt>{l s='Expiry Date' mod='ecpay'}：</dt>
@@ -75,14 +75,14 @@
 
             <dt>{l s='ECPay Return status' mod='ecpay'}：</dt>
             <dd>
-                {if $tcOrderPayment['return_code'] == 1 }
+                {if $tcOrderPayment['return_status'] == 1 }
                     {l s='Payment success' mod='ecpay'}
-                {elseif $tcOrderPayment['return_code'] == 10100073}
+                {elseif $tcOrderPayment['return_status'] == 10100073}
                     {l s='Take a number success' mod='ecpay'}
                 {/if}
             </dd>
 
-            {if $tcOrderPayment['return_code'] == 10100073}
+            {if $tcOrderPayment['return_status'] == 10100073}
                 <dt>{l s='BARCODE 1' mod='ecpay'}：</dt>
                 <dd>{$tcOrderPayment['barcode_1']}</dd>
                 <dt>{l s='BARCODE 2' mod='ecpay'}：</dt>
