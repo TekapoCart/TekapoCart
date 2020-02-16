@@ -112,7 +112,7 @@ if (!class_exists('TcOrderPayment')) {
             $rowOrder = Db::getInstance()->getRow($query);
 
             if (is_array($rowOrder)) {
-                return new TcOrderShipping($rowOrder['id_tc_order_payment']);
+                return new TcOrderPayment($rowOrder['id_tc_order_payment']);
             } else {
                 return false;
             }
