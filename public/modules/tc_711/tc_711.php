@@ -623,7 +623,7 @@ class Tc_711 extends CarrierModule
 
         } catch (Exception $e) {
 
-            Tc_Cvs::logMessage(sprintf('Tc_Cvs createShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
+            Tc_711::logMessage(sprintf('Tc_711 createShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
         }
     }
 

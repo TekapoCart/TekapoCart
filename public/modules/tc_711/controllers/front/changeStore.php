@@ -21,7 +21,7 @@ class Tc_711ChangeStoreModuleFrontController extends ModuleFrontController
                 throw new Exception('Get feedback failed.');
             } else {
 
-                Tc_Cvs::logMessage('Feedback: ' . json_encode($feedback), true);
+                Tc_711::logMessage('Feedback: ' . json_encode($feedback), true);
 
                 $id_tc_order_shipping = (int)$feedback['TempVar'];
 
@@ -53,7 +53,7 @@ class Tc_711ChangeStoreModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Tc_Cvs::logMessage(sprintf('Tc_Cvs_ChangeStore exception: %s', $e->getMessage()), true);
+            Tc_711::logMessage(sprintf('Tc_711_ChangeStore exception: %s', $e->getMessage()), true);
         }
 
         exit;

@@ -22,7 +22,7 @@ class Ecpay_711ChangeStoreModuleFrontController extends ModuleFrontController
                 throw new Exception('Get feedback failed.');
             } else {
 
-                Ecpay_Cvs::logMessage('Feedback: ' . json_encode($feedback), true);
+                Ecpay_711::logMessage('Feedback: ' . json_encode($feedback), true);
 
                 $id_tc_order_shipping = (int)$feedback['ExtraData'];
 
@@ -53,7 +53,7 @@ class Ecpay_711ChangeStoreModuleFrontController extends ModuleFrontController
                 $AL->Send['ReceiverStoreID'] = $feedback['CVSStoreID'];
 
                 $Result = $AL->UpdateUnimartStore();
-                Ecpay_Cvs::logMessage('Feedback: ' . json_encode($Result), true);
+                Ecpay_711::logMessage('Feedback: ' . json_encode($Result), true);
 
                 if ($Result == ' 1|OK') {
                     $tcOrderShipping->store_code = $feedback['CVSStoreID'];
@@ -78,7 +78,7 @@ class Ecpay_711ChangeStoreModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsChangeStore exception: %s. %s', $sn_id, $e->getMessage()), true);
+            Ecpay_711::logMessage(sprintf('Ecpay_711ChangeStore exception: %s. %s', $sn_id, $e->getMessage()), true);
         }
 
         exit;

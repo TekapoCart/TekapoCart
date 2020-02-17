@@ -24,7 +24,7 @@ class Ecpay_711NotifyChangeStoreModuleFrontController extends ModuleFrontControl
                 throw new Exception('Get ECPay feedback failed.');
             } else {
 
-                Ecpay_Cvs::logMessage('Feedback: ' . json_encode($feedback), true);
+                Ecpay_711::logMessage('Feedback: ' . json_encode($feedback), true);
 
                 $sn_id = $feedback['AllPayLogisticsID'];
 
@@ -71,7 +71,7 @@ class Ecpay_711NotifyChangeStoreModuleFrontController extends ModuleFrontControl
             }
         } catch (Exception $e) {
 
-            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsNotifyChangeStore response exception: %s %s', $sn_id, $e->getMessage()), true);
+            Ecpay_711::logMessage(sprintf('Ecpay_711NotifyChangeStore response exception: %s %s', $sn_id, $e->getMessage()), true);
             $result_message = '0|' . $e->getMessage();
         }
 

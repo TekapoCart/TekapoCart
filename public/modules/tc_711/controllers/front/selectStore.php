@@ -12,7 +12,7 @@ class Tc_711SelectStoreModuleFrontController extends ModuleFrontController
                 throw new Exception('Get feedback failed.');
             } else {
 
-                Tc_Cvs::logMessage('Feedback: ' . json_encode($feedback), true);
+                Tc_711::logMessage('Feedback: ' . json_encode($feedback), true);
 
                 if ($this->context->cart->id !== (int)$feedback['TempVar']) {
                     throw new Exception('Verify feedback failed.');
@@ -30,7 +30,7 @@ class Tc_711SelectStoreModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Tc_Cvs::logMessage(sprintf('Tc_CvsSelectStore exception: %s', $e->getMessage()), true);
+            Tc_711::logMessage(sprintf('Tc_711SelectStore exception: %s', $e->getMessage()), true);
         }
 
         exit;

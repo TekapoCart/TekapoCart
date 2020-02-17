@@ -764,7 +764,7 @@ class Ecpay_711 extends CarrierModule
 
         } catch (Exception $e) {
 
-            Ecpay_Cvs::logMessage(sprintf('Ecpay_Cvs createShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
+            Ecpay_711::logMessage(sprintf('Ecpay_711 createShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
         }
     }
 

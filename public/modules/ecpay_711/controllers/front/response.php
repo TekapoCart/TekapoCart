@@ -27,7 +27,7 @@ class Ecpay_711ResponseModuleFrontController extends ModuleFrontController
                 throw new Exception('Get feedback failed.');
             } else {
 
-                Ecpay_Cvs::logMessage('Feedback: ' . json_encode($feedback), true);
+                Ecpay_711::logMessage('Feedback: ' . json_encode($feedback), true);
 
                 $order_reference = substr($feedback['MerchantTradeNo'], 0, 16);
 
@@ -122,7 +122,7 @@ class Ecpay_711ResponseModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsResponse exception: %s  %s', $order_id, $e->getMessage()), true);
+            Ecpay_711::logMessage(sprintf('Ecpay_711Response exception: %s  %s', $order_id, $e->getMessage()), true);
             $result_message = '0|' . $e->getMessage();
         }
 

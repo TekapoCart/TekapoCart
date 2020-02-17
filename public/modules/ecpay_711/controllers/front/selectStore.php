@@ -12,7 +12,7 @@ class Ecpay_711SelectStoreModuleFrontController extends ModuleFrontController
                 throw new Exception('Get feedback failed.');
             } else {
 
-                Ecpay_Cvs::logMessage('Feedback: ' . json_encode($feedback), true);
+                Ecpay_711::logMessage('Feedback: ' . json_encode($feedback), true);
 
                 if ($this->context->cart->id !== (int)$feedback['ExtraData']) {
                     throw new Exception('Verify feedback failed.');
@@ -29,7 +29,7 @@ class Ecpay_711SelectStoreModuleFrontController extends ModuleFrontController
             }
 
         } catch (Exception $e) {
-            Ecpay_Cvs::logMessage(sprintf('Ecpay_CvsSelectStore exception: %s', $e->getMessage()), true);
+            Ecpay_711::logMessage(sprintf('Ecpay_711SelectStore exception: %s', $e->getMessage()), true);
         }
 
         exit;
