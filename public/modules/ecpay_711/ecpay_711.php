@@ -7,7 +7,7 @@ if (!defined('_PS_VERSION_')) {
 include_once _PS_MODULE_DIR_ . 'ecpay_711/classes/TcOrderShipping.php';
 include_once _PS_MODULE_DIR_ . 'ecpay_711/classes/TcCartShipping.php';
 
-class Ecpay_Cvs extends \CarrierModule
+class Ecpay_711 extends CarrierModule
 {
 
     private $ecpayParams = [];

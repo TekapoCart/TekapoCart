@@ -8,7 +8,7 @@ use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 
 include_once _PS_MODULE_DIR_ . 'ecpay/classes/TcOrderPayment.php';
 
-class Ecpay extends \PaymentModule
+class Ecpay extends PaymentModule
 {
     private $postError = '';
 
