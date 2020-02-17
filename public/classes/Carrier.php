@@ -153,7 +153,7 @@ class CarrierCore extends ObjectModel
             'delay' => array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'required' => true, 'size' => 512),
 
             // suzy: 2018-12-08: 在已出貨通知信顯示追蹤號碼
-            'shipped_email_info' => array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isCleanHtml', 'size' => 512),
+            'shipped_email_info' => array('type' => self::TYPE_HTML, 'lang' => true, 'validate' => 'isCleanHtml', 'size' => 512),
 
             // suzy: 2018-08-01 訂單明細顯示用圖：判斷是否顯示地址
             'need_address' => array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
