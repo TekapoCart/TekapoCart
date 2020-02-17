@@ -54,6 +54,7 @@ class Ecpay_Tcat extends CarrierModule
             OR !$this->registerHook('displayCarrierExtraContent')
             OR !$this->registerHook('actionCarrierProcess')
             OR !$this->registerHook('displayOrderConfirmation')
+            OR !$this->registerHook('displayOrderDetail')
             OR !$this->registerHook('displayAdminOrderTabOrder')
             OR !$this->registerHook('displayAdminOrderContentOrder')
             OR !$this->installCarrier()
@@ -119,12 +120,44 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
-        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
-        if (!$tcOrderShipping) {
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
+        if ($tcOrderShipping) {
+            $scheduled_data['delivery_time'] = $tcOrderShipping['delivery_time'];
+        } else {
+            $scheduled_data = $this->getScheduledData($params['order']->id_cart, $params['order']->id_carrier);
             $this->createShippingOrder($params['order']->id);
         }
 
-        return;
+        if (!in_array($scheduled_data['delivery_time'], $this->deliveryTimeOptions)) {
+            return;
+        }
+
+        $this->smarty->assign(array(
+            'scheduled_data' => $scheduled_data,
+            'dropdown_options' => $this->deliveryTimeOptions,
+        ));
+
+        return $this->display(__FILE__, 'display_order_confirmation.tpl');
+    }
+
+    public function hookDisplayOrderDetail($params)
+    {
+        $carrier = new Carrier($params['order']->id_carrier);
+        if ($carrier->external_module_name !== $this->name) {
+            return false;
+        }
+
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
+        if ($tcOrderShipping) {
+            $scheduled_data['delivery_time'] = $tcOrderShipping['delivery_time'];
+
+            $this->smarty->assign(array(
+                'scheduled_data' => $scheduled_data,
+                'return_message' => $tcOrderShipping['return_message'],
+            ));
+        }
+
+        return $this->display(__FILE__, 'display_order_detail.tpl');
     }
 
     // 前台選擇承運商

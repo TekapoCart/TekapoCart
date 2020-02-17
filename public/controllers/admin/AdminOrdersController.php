@@ -598,7 +598,8 @@ class AdminOrdersControllerCore extends AdminController
 
                         // suzy: 2018-12-08 在已出貨通知信顯示配送編號
                         if ($history->id_order_state == Configuration::get('PS_OS_SHIPPING')) {
-                            $templateVars['{tracking_number}'] = strlen($order->shipping_number) > 0 ? $order->shipping_number : '--';
+                            $tracking_number = $order->getWsShippingNumber();
+                            $templateVars['{tracking_number}'] = strlen($tracking_number) > 0 ? $tracking_number : '--';
                             $templateVars['{extra_info}'] =  $carrier->shipped_email_info;
                         }
 

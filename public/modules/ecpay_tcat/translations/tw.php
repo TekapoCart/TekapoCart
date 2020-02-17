@@ -12,3 +12,9 @@ $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_4707166baa30e68a936b62bc2e96f5ef'] 
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_89945a5e7eb668f06d02df1f309de466'] = '13時前';
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_c88bb48d2d3d888c92de7f4bd61d0fa6'] = '14~18時';
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_c9b0872391b322a2eabe828d0b7353c5'] = '不限時';
+
+$_MODULE['<{ecpay_tcat}prestashop>display_order_confirmation_4d1c2dd237da2d9c3dba6abfeb5b7639'] = '取貨資訊';
+$_MODULE['<{ecpay_tcat}prestashop>display_order_confirmation_205b01b3197cf06688f6ed574faf5664'] = '預定送達時段';
+
+$_MODULE['<{ecpay_tcat}prestashop>display_order_detail_4d1c2dd237da2d9c3dba6abfeb5b7639'] = '取貨資訊';
+$_MODULE['<{ecpay_tcat}prestashop>display_order_detail_205b01b3197cf06688f6ed574faf5664'] = '預定送達時段';

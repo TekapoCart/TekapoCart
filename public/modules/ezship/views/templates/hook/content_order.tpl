@@ -26,7 +26,7 @@
                 </button>
                 <script type="text/javascript">
                     $('.resend-order').on('click', function () {
-                        if (confirm('重送訂單將取得新「ezShip 編號」，確定繼續？')) {
+                        if (confirm('請注意：重送訂單將取得新「ezShip 編號」，確定繼續？')) {
                             window.open('{$resend_url nofilter}', '_self');
                         }
                     });

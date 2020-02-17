@@ -30,6 +30,7 @@ class EzShip_Home extends CarrierModule
         if (!parent::install()
             OR !$this->registerHook('actionCarrierProcess')
             OR !$this->registerHook('displayOrderConfirmation')
+            OR !$this->registerHook('displayOrderDetail')
             OR !$this->registerHook('displayAdminOrderTabOrder')
             OR !$this->registerHook('displayAdminOrderContentOrder')
             OR !$this->installCarrier()
@@ -83,6 +84,24 @@ class EzShip_Home extends CarrierModule
         }
 
         return;
+    }
+
+    public function hookDisplayOrderDetail($params)
+    {
+        $carrier = new Carrier($params['order']->id_carrier);
+        if ($carrier->external_module_name !== $this->name) {
+            return false;
+        }
+
+        $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
+        if ($tcOrderShipping) {
+
+            $this->smarty->assign(array(
+                'return_message' => $tcOrderShipping['return_message'],
+            ));
+        }
+
+        return $this->display(__FILE__, 'display_order_detail.tpl');
     }
 
     // 前台選擇承運商

@@ -8,3 +8,7 @@ $_MODULE['<{ezship_home}prestashop>ezship_home_6cefaa978ccec960693d10cefeb2c2bf'
 $_MODULE['<{ezship_home}prestashop>ezship_home_2084d4d72acfc24b948650eec4baf1c4'] = '取件人姓名字數超過限制';
 $_MODULE['<{ezship_home}prestashop>ezship_home_d8879c62708a902f3274d4277bcacd90'] = '取件人行動電話格式不正確';
 $_MODULE['<{ezship_home}prestashop>ezship_home_4707166baa30e68a936b62bc2e96f5ef'] = '請完整填寫配送地址含縣市及鄉鎮市區';
+
+$_MODULE['<{ecpay_home}prestashop>display_order_confirmation_4d1c2dd237da2d9c3dba6abfeb5b7639'] = '取貨資訊';
+
+$_MODULE['<{ecpay_home}prestashop>display_order_detail_4d1c2dd237da2d9c3dba6abfeb5b7639'] = '取貨資訊';

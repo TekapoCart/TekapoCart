@@ -226,7 +226,6 @@ class EzShip extends CarrierModule
             $store_data['code'] = $tcOrderShipping['store_code'];
             $store_data['name'] = $tcOrderShipping['store_name'];
             $store_data['addr'] = $tcOrderShipping['store_addr'];
-            $store_data['return_message'] = $tcOrderShipping['return_message'];
 
             $this->smarty->assign(array(
                 'store_data' => $store_data,

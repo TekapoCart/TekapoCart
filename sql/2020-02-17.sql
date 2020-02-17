@@ -49,3 +49,17 @@ UPDATE `ps_tc_order_shipping` SET `module` = 'tc_711' WHERE `ps_tc_order_shippin
 UPDATE `ps_configuration` SET `name` = 'tc_711_island_fee' WHERE `ps_configuration`.`name` = 'tc_cvs_island_fee';
 UPDATE `ps_configuration` SET `name` = 'tc_711_penghu_store_ids' WHERE `ps_configuration`.`name` = 'tc_cvs_penghu_store_ids';
 UPDATE `ps_configuration` SET `name` = 'tc_711_sender_location' WHERE `ps_configuration`.`name` = 'tc_cvs_sender_location';
+
+----
+
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES
+('107', '1', '73', '1'),
+('107', '2', '73', '1'),
+('107', '3', '73', '1'),
+('107', '4', '73', '1');
+
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES
+('110', '1', '73', '1'),
+('110', '2', '73', '1'),
+('110', '3', '73', '1'),
+('110', '4', '73', '1');
