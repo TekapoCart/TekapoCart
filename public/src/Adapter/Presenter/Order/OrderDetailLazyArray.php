@@ -69,6 +69,17 @@ class OrderDetailLazyArray extends AbstractLazyArray
     }
 
     /**
+     * suzy: 2020-02-18 在 order-history 顯示配送方式
+     * @arrayAccess
+     *
+     * @return int
+     */
+    public function getCarrierId()
+    {
+        return $this->order->id_carrier;
+    }
+
+    /**
      * @arrayAccess
      *
      * @return string

@@ -58,8 +58,20 @@ class HistoryControllerCore extends FrontController
             $this->warning[] = $this->trans('You have not placed any orders.', array(), 'Shop.Notifications.Warning');
         }
 
+        // suzy: 2020-02-18 在 order-history 顯示配送方式
+        $carriers = array_merge(
+            Carrier::getCarriers($this->context->language->id, false, false, false, null, Carrier::ALL_CARRIERS),
+            Carrier::getCarriers($this->context->language->id, false, true, false, null, Carrier::ALL_CARRIERS)
+        );
+        $carrier_name_list = [];
+        foreach ($carriers as $carrier) {
+            $carrier_name_list[$carrier['id_carrier']] = $carrier['name'];
+        }
+
         $this->context->smarty->assign(array(
             'orders' => $orders,
+            // suzy: 2020-02-18 在 order-history 顯示配送方式
+            'carriers' => $carrier_name_list,
         ));
 
         parent::initContent();
@@ -70,6 +82,7 @@ class HistoryControllerCore extends FrontController
     {
         $orders = array();
         $customer_orders = Order::getCustomerOrders($this->context->customer->id);
+
         foreach ($customer_orders as $customer_order) {
             $order = new Order((int) $customer_order['id_order']);
             $orders[$customer_order['id_order']] = $this->order_presenter->present($order);

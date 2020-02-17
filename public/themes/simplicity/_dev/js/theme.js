@@ -94,4 +94,16 @@ $(document).ready(() => {
   }
   // msc end
 
+  // suzy: twzipcode
+  if ($('body#checkout').length === 1 || $('body#address').length === 1) {
+      $('#twzipcode').twzipcode({
+          'zipcodeName'  : 'postcode'
+      });
+      $(document).ajaxComplete(function() {
+          $('#twzipcode').twzipcode({
+              'zipcodeName'  : 'postcode'
+          });
+      });
+  }
+
 });

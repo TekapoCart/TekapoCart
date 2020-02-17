@@ -39,7 +39,8 @@
           <th>{l s='Date' d='Shop.Theme.Checkout'}</th>
           <th>{l s='Total price' d='Shop.Theme.Checkout'}</th>
           <th class="hidden-md-down">{l s='Payment' d='Shop.Theme.Checkout'}</th>
-          <th class="hidden-md-down">{l s='Status' d='Shop.Theme.Checkout'}</th>
+          <th class="hidden-md-down">{l s='Shipping Method' d='Shop.Theme.Checkout'}</th>
+          <th>{l s='Status' d='Shop.Theme.Checkout'}</th>
           {* suzy: 2018-07-30 隱藏 發票<th>{l s='Invoice' d='Shop.Theme.Checkout'}</th>*}
           <th>&nbsp;</th>
         </tr>
@@ -51,6 +52,7 @@
             <td>{$order.details.order_date}</td>
             <td class="text-xs-right">{$order.totals.total.value}</td>
             <td class="hidden-md-down">{$order.details.payment}</td>
+            <td class="hidden-md-down">{$carriers[$order.details.carrier_id]}</td>
             <td>
               <span
                 class="label label-pill {$order.history.current.contrast}"

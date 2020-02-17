@@ -359,7 +359,7 @@ class OrderLazyArray extends AbstractLazyArray
         $orderCarrier['name'] = ($carrier->name == '0') ? Configuration::get('PS_SHOP_NAME') : $carrier->name;
         $orderCarrier['delay'] = $carrier->delay;
 
-        // suzy: 2018-08-01 訂單明細顯示用圖：判斷是否顯示地址
+        // suzy: 2018-08-01 訂單明細顯示用途：判斷是否顯示地址
         $orderCarrier['need_address'] = $carrier->need_address;
 
         return $orderCarrier;
