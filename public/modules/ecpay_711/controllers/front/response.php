@@ -1,6 +1,6 @@
 <?php
 
-class Ecpay_CvsResponseModuleFrontController extends ModuleFrontController
+class Ecpay_711ResponseModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 

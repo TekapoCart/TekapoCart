@@ -63,3 +63,15 @@ INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `positio
 ('110', '2', '73', '1'),
 ('110', '3', '73', '1'),
 ('110', '4', '73', '1');
+
+----
+
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_ECPAY_711_CREATE' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_MODULE_ECPAY_CVS_CREATE';
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_ECPAY_711_DELETE' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_MODULE_ECPAY_CVS_DELETE';
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_ECPAY_711_READ' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_MODULE_ECPAY_CVS_READ';
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_ECPAY_711_UPDATE' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_MODULE_ECPAY_CVS_UPDATE';
+
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_TC_711_CREATE' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_MODULE_TC_CVS_CREATE';
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_TC_711_DELETE' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_MODULE_TC_CVS_DELETE';
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_TC_711_READ' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_MODULE_TC_CVS_READ';
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_TC_711_UPDATE' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_MODULE_TC_CVS_UPDATE';

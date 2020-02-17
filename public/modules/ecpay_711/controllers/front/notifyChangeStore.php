@@ -1,6 +1,6 @@
 <?php
 
-class Ecpay_CvsNotifyChangeStoreModuleFrontController extends ModuleFrontController
+class Ecpay_711NotifyChangeStoreModuleFrontController extends ModuleFrontController
 {
     public $ssl = true;
 
