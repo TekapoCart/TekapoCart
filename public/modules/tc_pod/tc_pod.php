@@ -50,12 +50,12 @@ class Tc_Pod extends PaymentModule
             return;
         }
 
-        // 允許的物流模組 ezship, ezship_home, ecpay_cvs
+        // 允許的物流模組 ezship, ezship_home, ecpay_711
         $carrier = new Carrier($this->context->cart->id_carrier);
         if (!in_array($carrier->external_module_name, [
             'ezship',
             'ezship_home',
-            'ecpay_cvs',
+            'ecpay_711',
         ])
         ) {
             return false;

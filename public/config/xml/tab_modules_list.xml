@@ -261,12 +261,12 @@
     </tab>
     <tab class_name="AdminPayment" display_type="default_list">
         <module name="ps_wirepayment" position="1"/>
-        <module name="tc_cvs" position="2"/>
+        <module name="tc_711" position="2"/>
         <module name="tc_pod" position="3"/>
         <module name="ezship" position="4"/>
         <module name="ezship_home" position="5"/>
         <module name="ecpay" position="6"/>
-        <module name="ecpay_cvs" position="7"/>
+        <module name="ecpay_711" position="7"/>
         <module name="ecpay_tcat" position="8"/>
         <module name="paypal" position="9"/>
     </tab>

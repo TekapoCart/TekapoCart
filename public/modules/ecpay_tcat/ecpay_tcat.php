@@ -6,8 +6,8 @@ if (!defined('_PS_VERSION_')) {
 
 use Recca0120\Twzipcode\Zipcode;
 
-include_once _PS_MODULE_DIR_ . 'ecpay_cvs/classes/TcOrderShipping.php';
-include_once _PS_MODULE_DIR_ . 'ecpay_cvs/classes/TcCartShipping.php';
+include_once _PS_MODULE_DIR_ . 'ecpay_711/classes/TcOrderShipping.php';
+include_once _PS_MODULE_DIR_ . 'ecpay_711/classes/TcCartShipping.php';
 
 class Ecpay_Tcat extends CarrierModule
 {
@@ -421,7 +421,7 @@ class Ecpay_Tcat extends CarrierModule
     public function invokeEcpaySDK()
     {
         if (!class_exists('EcpayLogistics', false)) {
-            if (!include(_PS_MODULE_DIR_ . '/ecpay_cvs/lib/Ecpay.Logistic.Integration.php')) {
+            if (!include(_PS_MODULE_DIR_ . '/ecpay_711/lib/Ecpay.Logistic.Integration.php')) {
                 return false;
             }
         }
@@ -483,7 +483,7 @@ class Ecpay_Tcat extends CarrierModule
             $AL->Send['ReceiverEmail'] = $customer->email;
 
             $AL->Send['TradeDesc'] = '';
-            $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_cvs', 'response', []);
+            $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_711', 'response', []);
             $AL->Send['Remark'] = '';
 
             $AL->SendExtend = [];

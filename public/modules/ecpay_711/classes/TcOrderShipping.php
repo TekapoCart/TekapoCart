@@ -10,7 +10,7 @@ if (!class_exists('TcOrderShipping')) {
         /** @var string order reference */
         public $order_reference;
 
-        /** @var string logistics module ezship, ezship_home, ecpay_711, ecpay_tcat, tc_711 ... */
+        /** @var string logistics module ezship, ezship_home, ecpay_711, ecpay_cat, tc_711 ... */
         public $module;
 
         /** @var string send status */

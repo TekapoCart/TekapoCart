@@ -35,3 +35,17 @@ INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `positio
 (105, 2, 33, 1),
 (105, 3, 33, 1),
 (105, 4, 33, 1);
+
+----
+
+UPDATE `ps_module` SET `name` = 'ecpay_711' WHERE `ps_module`.`name` = 'ecpay_cvs';
+UPDATE `ps_carrier` SET `external_module_name` = 'ecpay_711' WHERE `ps_carrier`.`external_module_name` = 'ecpay_cvs';
+UPDATE `ps_tc_order_shipping` SET `module` = 'ecpay_711' WHERE `ps_tc_order_shipping`.`module` = 'ecpay_cvs';
+
+UPDATE `ps_module` SET `name` = 'tc_711' WHERE `ps_module`.`name` = 'tc_cvs';
+UPDATE `ps_carrier` SET `external_module_name` = 'tc_711' WHERE `ps_carrier`.`external_module_name` = 'tc_cvs';
+UPDATE `ps_tc_order_shipping` SET `module` = 'tc_711' WHERE `ps_tc_order_shipping`.`module` = 'tc_cvs';
+
+UPDATE `ps_configuration` SET `name` = 'tc_711_island_fee' WHERE `ps_configuration`.`name` = 'tc_cvs_island_fee';
+UPDATE `ps_configuration` SET `name` = 'tc_711_penghu_store_ids' WHERE `ps_configuration`.`name` = 'tc_cvs_penghu_store_ids';
+UPDATE `ps_configuration` SET `name` = 'tc_711_sender_location' WHERE `ps_configuration`.`name` = 'tc_cvs_sender_location';
