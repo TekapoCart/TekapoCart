@@ -153,6 +153,7 @@ class Ecpay_Tcat extends CarrierModule
 
             $this->smarty->assign(array(
                 'scheduled_data' => $scheduled_data,
+                'dropdown_options' => $this->deliveryTimeOptions,
                 'return_message' => $tcOrderShipping['return_message'],
             ));
         }
