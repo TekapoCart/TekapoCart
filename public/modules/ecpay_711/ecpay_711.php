@@ -68,7 +68,6 @@ class Ecpay_711 extends CarrierModule
                 `id_tc_cart_shipping` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
                 `id_cart` INT(10) UNSIGNED NULL DEFAULT NULL,
                 `id_carrier` INT(10) UNSIGNED NULL DEFAULT NULL,
-                `module` VARCHAR(64) NULL DEFAULT NULL,
                 `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
                 `store_code` VARCHAR(10) NULL DEFAULT NULL,
                 `store_name` VARCHAR(255) NULL DEFAULT NULL,
@@ -178,7 +177,7 @@ class Ecpay_711 extends CarrierModule
             }
             $AL->Send['IsCollection'] = EcpayIsCollection::NO;
             $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_711', 'selectStore', []);
-            $AL->Send['ExtraData'] = $this->context->cart->id;
+            $AL->Send['ExtraData'] = $this->context->cart->id . '_' . $params['carrier']['id'];
             $map_url = $AL->CvsMap();
 
             $store_data = $this->getStoreData($this->context->cart->id, $params['carrier']['id']);
@@ -773,6 +772,45 @@ class Ecpay_711 extends CarrierModule
         return intval(round($order_total));
     }
 
+    public function getStoreData($cart_id, $carrier_id)
+    {
+        $tcCartShipping = TcCartShipping::getStoreData($cart_id, $carrier_id);
+
+        if ($tcCartShipping) {
+            return [
+                'type' => $tcCartShipping['store_type'],
+                'code' => $tcCartShipping['store_code'],
+                'name' => $tcCartShipping['store_name'],
+                'addr' => $tcCartShipping['store_addr'],
+            ];
+        } else {
+            return false;
+        }
+    }
+
+    public function saveStoreData($store_data, $carrier_id = NULL)
+    {
+        $cart_id = $this->context->cart->id;
+        if (!$carrier_id) {
+            $carrier_id = $this->context->cart->id_carrier;
+        }
+        if ((int)$carrier_id <= 0) {
+            return;
+        }
+        TcCartShipping::saveStoreData($cart_id, $carrier_id, $store_data);
+    }
+
+    public static function logMessage($message, $is_append = false)
+    {
+        $path = _PS_LOG_DIR_ . 'ecpay_logistics.log';
+
+        if (!$is_append) {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+        } else {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+        }
+    }
+
     public function getOrderStatusID($status_name)
     {
         $order_status = array(
@@ -795,40 +833,6 @@ class Ecpay_711 extends CarrierModule
         # Send a mail
         if ($send_mail) {
             $order_history->addWithemail();
-        }
-    }
-
-    public function getStoreData($cart_id, $carrier_id)
-    {
-        $tcCartShipping = TcCartShipping::getStoreData($cart_id, $carrier_id);
-
-        if ($tcCartShipping) {
-            return [
-                'type' => $tcCartShipping['store_type'],
-                'code' => $tcCartShipping['store_code'],
-                'name' => $tcCartShipping['store_name'],
-                'addr' => $tcCartShipping['store_addr'],
-            ];
-        } else {
-            return false;
-        }
-    }
-
-    public function saveStoreData($store_data)
-    {
-        $cart_id = $this->context->cart->id;
-        $carrier_id = $this->context->cart->id_carrier;
-        TcCartShipping::saveStoreData($cart_id, $carrier_id, $store_data);
-    }
-
-    public static function logMessage($message, $is_append = false)
-    {
-        $path = _PS_LOG_DIR_ . 'ecpay_logistics.log';
-
-        if (!$is_append) {
-            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
-        } else {
-            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
         }
     }
 

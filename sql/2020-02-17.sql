@@ -75,3 +75,7 @@ UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_TC_711_CREATE' WHER
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_TC_711_DELETE' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_MODULE_TC_CVS_DELETE';
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_TC_711_READ' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_MODULE_TC_CVS_READ';
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_TC_711_UPDATE' WHERE `ps_authorization_role`.`slug` = 'ROLE_MOD_MODULE_TC_CVS_UPDATE';
+
+----
+
+ALTER TABLE `ps_tc_cart_shipping` DROP `module`;

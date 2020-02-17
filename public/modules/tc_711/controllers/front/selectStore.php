@@ -13,8 +13,15 @@ class Tc_711SelectStoreModuleFrontController extends ModuleFrontController
             } else {
 
                 Tc_711::logMessage('Feedback: ' . json_encode($feedback), true);
+                
+                list($cart_id, $carrier_id) = explode('_', $feedback['TempVar']);
 
-                if ($this->context->cart->id !== (int)$feedback['TempVar']) {
+                if ($this->context->cart->id !== (int)$cart_id) {
+                    throw new Exception('Verify feedback failed.');
+                }
+
+                $carrier = new Carrier((int)$carrier_id);
+                if ($carrier->external_module_name !== $this->module->name) {
                     throw new Exception('Verify feedback failed.');
                 }
 
@@ -24,7 +31,7 @@ class Tc_711SelectStoreModuleFrontController extends ModuleFrontController
                     'name' => $feedback['storename'],
                     'addr' => $feedback['storeaddress'],
                 ];
-                $this->module->saveStoreData($store_data);
+                $this->module->saveStoreData($store_data, $carrier->id);
                 Tools::redirect($this->context->link->getPageLink('order', true));
             }
 

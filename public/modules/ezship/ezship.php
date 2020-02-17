@@ -60,7 +60,6 @@ class EzShip extends CarrierModule
                 `id_tc_cart_shipping` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
                 `id_cart` INT(10) UNSIGNED NULL DEFAULT NULL,
                 `id_carrier` INT(10) UNSIGNED NULL DEFAULT NULL,
-                `module` VARCHAR(64) NULL DEFAULT NULL,
                 `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
                 `store_code` VARCHAR(10) NULL DEFAULT NULL,
                 `store_name` VARCHAR(255) NULL DEFAULT NULL,
@@ -167,7 +166,7 @@ class EzShip extends CarrierModule
             'stCate' => $store_data ? $store_data['type'] : '',
             'stCode' => $store_data ? $store_data['code'] : '',
             'rtURL' => $this->context->link->getModuleLink('ezship', 'selectStore', []),
-            'webPara' => '',
+            'webPara' => $params['carrier']['id'],
         ];
         $map_url .= '?' . http_build_query($query);
 
@@ -673,17 +672,6 @@ class EzShip extends CarrierModule
         return intval(round($order_total));
     }
 
-    public static function logMessage($message, $is_append = false)
-    {
-        $path = _PS_LOG_DIR_ . 'ezship_logistics.log';
-
-        if (!$is_append) {
-            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
-        } else {
-            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
-        }
-    }
-
     public function getStoreData($cart_id, $carrier_id)
     {
         $tcCartShipping = TcCartShipping::getStoreData($cart_id, $carrier_id);
@@ -700,11 +688,26 @@ class EzShip extends CarrierModule
         }
     }
 
-    public function saveStoreData($store_data)
+    public function saveStoreData($store_data, $carrier_id = NULL)
     {
         $cart_id = $this->context->cart->id;
-        $carrier_id = $this->context->cart->id_carrier;
+        if (!$carrier_id) {
+            $carrier_id = $this->context->cart->id_carrier;
+        }
+        if ((int)$carrier_id <= 0) {
+            return;
+        }
         TcCartShipping::saveStoreData($cart_id, $carrier_id, $store_data);
     }
 
+    public static function logMessage($message, $is_append = false)
+    {
+        $path = _PS_LOG_DIR_ . 'ezship_logistics.log';
+
+        if (!$is_append) {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+        } else {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+        }
+    }
 }

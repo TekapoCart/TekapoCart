@@ -1,8 +1,4 @@
 <?php
-// 不讓 Browser Keep Cache
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
 
 class EzShipSelectStoreModuleFrontController extends ModuleFrontController
 {
@@ -22,13 +18,18 @@ class EzShipSelectStoreModuleFrontController extends ModuleFrontController
                     throw new Exception('Verify feedback failed.');
                 }
 
+                $carrier = new Carrier((int)$ezship_feedback['webPara']);
+                if ($carrier->external_module_name !== $this->module->name) {
+                    throw new Exception('Verify feedback failed.');
+                }
+
                 $store_data = [
                     'type' => $ezship_feedback['stCate'],
                     'code' => $ezship_feedback['stCode'],
                     'name' => $ezship_feedback['stName'],
                     'addr' => $ezship_feedback['stAddr'],
                 ];
-                $this->module->saveStoreData($store_data);
+                $this->module->saveStoreData($store_data, $carrier->id);
                 Tools::redirect($this->context->link->getPageLink('order', true));
             }
 

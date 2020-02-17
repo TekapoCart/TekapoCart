@@ -671,10 +671,8 @@ class Ecpay_Tcat extends CarrierModule
     {
         $cart_id = $this->context->cart->id;
         $carrier_id = $this->context->cart->id_carrier;
-        TcCartShipping::saveScheduledData($cart_id, $carrier_id, $scheduled_data);
+        TcCartShipping::saveScheduledData($cart_id, $carrier_id, $scheduled_data, $this->name);
     }
-
-
 
     public static function logMessage($message, $is_append = false)
     {

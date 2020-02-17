@@ -14,7 +14,14 @@ class Ecpay_711SelectStoreModuleFrontController extends ModuleFrontController
 
                 Ecpay_711::logMessage('Feedback: ' . json_encode($feedback), true);
 
-                if ($this->context->cart->id !== (int)$feedback['ExtraData']) {
+                list($cart_id, $carrier_id) = explode('_', $feedback['ExtraData']);
+
+                if ($this->context->cart->id !== (int)$cart_id) {
+                    throw new Exception('Verify feedback failed.');
+                }
+
+                $carrier = new Carrier((int)$carrier_id);
+                if ($carrier->external_module_name !== $this->module->name) {
                     throw new Exception('Verify feedback failed.');
                 }
 
@@ -24,7 +31,7 @@ class Ecpay_711SelectStoreModuleFrontController extends ModuleFrontController
                     'name' => $feedback['CVSStoreName'],
                     'addr' => $feedback['CVSAddress'],
                 ];
-                $this->module->saveStoreData($store_data);
+                $this->module->saveStoreData($store_data, $carrier->id);
                 Tools::redirect($this->context->link->getPageLink('order', true));
             }
 
