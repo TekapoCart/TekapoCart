@@ -34,6 +34,8 @@ $_MODULE['<{ecpay_711}prestashop>display_order_confirmation_ec4aff9ab8173b482b12
 $_MODULE['<{ecpay_711}prestashop>display_order_confirmation_84d7eb8328d9be05d4c14469200b8c88'] = 'SMS notification will be sent when the goods arrive.';
 
 $_MODULE['<{ecpay_711}prestashop>display_order_detail_4d1c2dd237da2d9c3dba6abfeb5b7639'] = 'Pickup Info';
+$_MODULE['<{ecpay_711}prestashop>display_order_detail_70e5f2f79f0df6677abfa15cadb67a84'] = 'Receiver Name';
+$_MODULE['<{ecpay_711}prestashop>display_order_detail_a01a6be1f61438ab400738791a61a8de'] = 'Receiver Phone';
 $_MODULE['<{ecpay_711}prestashop>display_order_detail_cd37457c859cdb020b00b94a27cf13f9'] = 'Store Code';
 $_MODULE['<{ecpay_711}prestashop>display_order_detail_e3fb0b5e9ce53fe70b119648fc217f44'] = 'Store Name';
 $_MODULE['<{ecpay_711}prestashop>display_order_detail_653d48136a36d3fddd3a805948a4d8ef'] = 'Store Address';

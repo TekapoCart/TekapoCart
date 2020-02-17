@@ -120,6 +120,13 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
+        $address = new Address(intval($params['order']->id_address_delivery));
+        if (!is_null($address->phone_mobile) && !empty($address->phone_mobile)) {
+            $phone = $address->phone_mobile;
+        } else {
+            $phone = $address->phone;
+        }
+
         $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
             $scheduled_data['delivery_time'] = $tcOrderShipping['delivery_time'];
@@ -128,11 +135,12 @@ class Ecpay_Tcat extends CarrierModule
             $this->createShippingOrder($params['order']->id);
         }
 
-        if (!in_array($scheduled_data['delivery_time'], $this->deliveryTimeOptions)) {
-            return;
-        }
-
         $this->smarty->assign(array(
+            'receiver_name' => $address->lastname . Tools::maskString($address->firstname, 'name'),
+            'receiver_phone' => Tools::maskString($phone, 'phone'),
+            'receiver_city' => $address->city,
+            'receiver_postcode' => $address->postcode,
+            'receiver_address' => Tools::maskString($address->address, 'address'),
             'scheduled_data' => $scheduled_data,
             'dropdown_options' => $this->deliveryTimeOptions,
         ));
@@ -147,11 +155,23 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
+        $address = new Address(intval($params['order']->id_address_delivery));
+        if (!is_null($address->phone_mobile) && !empty($address->phone_mobile)) {
+            $phone = $address->phone_mobile;
+        } else {
+            $phone = $address->phone;
+        }
+
         $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
             $scheduled_data['delivery_time'] = $tcOrderShipping['delivery_time'];
 
             $this->smarty->assign(array(
+                'receiver_name' => $address->lastname . Tools::maskString($address->firstname, 'name'),
+                'receiver_phone' => Tools::maskString($phone, 'phone'),
+                'receiver_city' => $address->city,
+                'receiver_postcode' => $address->postcode,
+                'receiver_address' => Tools::maskString($address->address, 'address'),
                 'scheduled_data' => $scheduled_data,
                 'dropdown_options' => $this->deliveryTimeOptions,
                 'return_message' => $tcOrderShipping['return_message'],

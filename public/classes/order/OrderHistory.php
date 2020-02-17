@@ -493,7 +493,9 @@ class OrderHistoryCore extends ObjectModel
             }
             $data = array(
                 '{lastname}' => $result['lastname'],
-                '{firstname}' => $result['firstname'],
+                // suzy: 遮罩處理
+                // '{firstname}' => $result['firstname'],
+                '{firstname}' => Tools::maskString($result['firstname'], 'name'),
                 '{id_order}' => (int) $this->id_order,
                 '{order_name}' => $order->getUniqReference(),
                 '{followup}' => str_replace('@', $order->getWsShippingNumber(), $carrierUrl),
