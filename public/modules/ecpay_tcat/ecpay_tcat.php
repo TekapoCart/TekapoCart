@@ -140,7 +140,7 @@ class Ecpay_Tcat extends CarrierModule
             'receiver_phone' => Tools::maskString($phone, 'phone'),
             'receiver_city' => $address->city,
             'receiver_postcode' => $address->postcode,
-            'receiver_address' => Tools::maskString($address->address, 'address'),
+            'receiver_address' => Tools::maskString($address->address1, 'address'),
             'scheduled_data' => $scheduled_data,
             'dropdown_options' => $this->deliveryTimeOptions,
         ));
@@ -171,7 +171,7 @@ class Ecpay_Tcat extends CarrierModule
                 'receiver_phone' => Tools::maskString($phone, 'phone'),
                 'receiver_city' => $address->city,
                 'receiver_postcode' => $address->postcode,
-                'receiver_address' => Tools::maskString($address->address, 'address'),
+                'receiver_address' => Tools::maskString($address->address1, 'address'),
                 'scheduled_data' => $scheduled_data,
                 'dropdown_options' => $this->deliveryTimeOptions,
                 'return_message' => $tcOrderShipping['return_message'],
