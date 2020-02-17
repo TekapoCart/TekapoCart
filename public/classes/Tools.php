@@ -4416,7 +4416,7 @@ exit;
 
         } else if ($type == 'phone') {
 
-            return mb_substr($input, 0, -6) . str_repeat('*', 4);
+            return mb_substr($input, 0, 4) . str_repeat('*', 5) . mb_substr($input, -1, 1);
 
         } else if ($type == 'address') {
 
