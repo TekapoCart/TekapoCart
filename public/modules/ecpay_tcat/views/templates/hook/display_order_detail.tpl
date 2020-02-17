@@ -19,7 +19,7 @@
         </dl>
 
         {if strlen($return_message) > 0}
-            <p>物流追蹤：<br>{$return_message|nl2br nofilter}</p>
+            <p>{l s='Shipping Log' mod='ecpay_tcat'}：<br>{$return_message|nl2br nofilter}</p>
         {/if}
     </div>
 {/if}

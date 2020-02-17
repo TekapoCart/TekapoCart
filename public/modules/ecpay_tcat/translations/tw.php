@@ -28,3 +28,4 @@ $_MODULE['<{ecpay_tcat}prestashop>display_order_detail_628ea294212a46ece79f0236f
 $_MODULE['<{ecpay_tcat}prestashop>display_order_detail_f4fc962d5586a24d453a3b0f26e6faea'] = '取貨人郵遞區號';
 $_MODULE['<{ecpay_tcat}prestashop>display_order_detail_c5b8c2379912db4b6ace799089d2c65c'] = '取貨人地址';
 $_MODULE['<{ecpay_tcat}prestashop>display_order_detail_205b01b3197cf06688f6ed574faf5664'] = '預定送達時段';
+$_MODULE['<{ecpay_tcat}prestashop>display_order_detail_1165eb193193f8ee509397d92f1e47ee'] = '物流追蹤';

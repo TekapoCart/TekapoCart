@@ -205,8 +205,8 @@ class EzShip extends CarrierModule
         }
 
         $this->smarty->assign(array(
-            'receiver_name' => $address->lastname . $address->firstname,
-            'receiver_phone' => $phone,
+            'receiver_name' => $address->lastname . Tools::maskString($address->firstname, 'name'),
+            'receiver_phone' => Tools::maskString($phone, 'phone'),
             'store_data' => $store_data,
         ));
 
@@ -220,6 +220,13 @@ class EzShip extends CarrierModule
             return false;
         }
 
+        $address = new Address(intval($params['order']->id_address_delivery));
+        if (!is_null($address->phone_mobile) && !empty($address->phone_mobile)) {
+            $phone = $address->phone_mobile;
+        } else {
+            $phone = $address->phone;
+        }
+
         $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
             $store_data['type'] = $tcOrderShipping['store_type'];
@@ -228,6 +235,8 @@ class EzShip extends CarrierModule
             $store_data['addr'] = $tcOrderShipping['store_addr'];
 
             $this->smarty->assign(array(
+                'receiver_name' => $address->lastname . Tools::maskString($address->firstname, 'name'),
+                'receiver_phone' => Tools::maskString($phone, 'phone'),
                 'store_data' => $store_data,
                 'return_message' => $tcOrderShipping['return_message'],
             ));

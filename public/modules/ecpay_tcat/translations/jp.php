@@ -28,3 +28,4 @@ $_MODULE['<{ecpay_tcat}prestashop>display_order_detail_628ea294212a46ece79f0236f
 $_MODULE['<{ecpay_tcat}prestashop>display_order_detail_f4fc962d5586a24d453a3b0f26e6faea'] = 'Receiver Postcode';
 $_MODULE['<{ecpay_tcat}prestashop>display_order_detail_c5b8c2379912db4b6ace799089d2c65c'] = 'Receiver Address';
 $_MODULE['<{ecpay_tcat}prestashop>display_order_detail_205b01b3197cf06688f6ed574faf5664'] = 'Delivery Time';
+$_MODULE['<{ecpay_tcat}prestashop>display_order_detail_1165eb193193f8ee509397d92f1e47ee'] = 'Shipping Log';

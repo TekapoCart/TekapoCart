@@ -22,8 +22,6 @@ $_MODULE['<{ecpay_711}prestashop>display_carrier_extra_content_e3fb0b5e9ce53fe70
 $_MODULE['<{ecpay_711}prestashop>display_carrier_extra_content_653d48136a36d3fddd3a805948a4d8ef'] = '取货地址';
 $_MODULE['<{ecpay_711}prestashop>display_carrier_extra_content_9f8ad215afcf3e2c76e0c867f8d692eb'] = '重选取货门市';
 
-$_MODULE['<{ecpay_711}prestashop>content_order_9f8ad215afcf3e2c76e0c867f8d692eb'] = '重选取货门市';
-
 $_MODULE['<{ecpay_711}prestashop>display_order_confirmation_4d1c2dd237da2d9c3dba6abfeb5b7639'] = '取货资讯';
 $_MODULE['<{ecpay_711}prestashop>display_order_confirmation_70e5f2f79f0df6677abfa15cadb67a84'] = '取货人';
 $_MODULE['<{ecpay_711}prestashop>display_order_confirmation_a01a6be1f61438ab400738791a61a8de'] = '取货人电话';
@@ -40,3 +38,4 @@ $_MODULE['<{ecpay_711}prestashop>display_order_detail_cd37457c859cdb020b00b94a27
 $_MODULE['<{ecpay_711}prestashop>display_order_detail_e3fb0b5e9ce53fe70b119648fc217f44'] = '门市名称';
 $_MODULE['<{ecpay_711}prestashop>display_order_detail_653d48136a36d3fddd3a805948a4d8ef'] = '门市地址';
 $_MODULE['<{ecpay_711}prestashop>display_order_detail_84d7eb8328d9be05d4c14469200b8c88'] = '商品抵达指定门市后，将会有简讯通知取货';
+$_MODULE['<{ecpay_711}prestashop>display_order_detail_1165eb193193f8ee509397d92f1e47ee'] = '物流追踪';

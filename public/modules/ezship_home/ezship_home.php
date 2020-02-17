@@ -78,12 +78,29 @@ class EzShip_Home extends CarrierModule
             return false;
         }
 
+        $address = new Address(intval($params['order']->id_address_delivery));
+        if (!is_null($address->phone_mobile) && !empty($address->phone_mobile)) {
+            $phone = $address->phone_mobile;
+        } else {
+            $phone = $address->phone;
+        }
+
         $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id);
-        if (!$tcOrderShipping) {
+        if ($tcOrderShipping) {
+
+        } else {
             $this->createShippingOrder($params['order']->id);
         }
 
-        return;
+        $this->smarty->assign(array(
+            'receiver_name' => $address->lastname . Tools::maskString($address->firstname, 'name'),
+            'receiver_phone' => Tools::maskString($phone, 'phone'),
+            'receiver_city' => $address->city,
+            'receiver_postcode' => $address->postcode,
+            'receiver_address' => Tools::maskString($address->address1, 'address'),
+        ));
+
+        return $this->display(__FILE__, 'display_order_confirmation.tpl');
     }
 
     public function hookDisplayOrderDetail($params)
@@ -93,10 +110,22 @@ class EzShip_Home extends CarrierModule
             return false;
         }
 
+        $address = new Address(intval($params['order']->id_address_delivery));
+        if (!is_null($address->phone_mobile) && !empty($address->phone_mobile)) {
+            $phone = $address->phone_mobile;
+        } else {
+            $phone = $address->phone;
+        }
+
         $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
 
             $this->smarty->assign(array(
+                'receiver_name' => $address->lastname . Tools::maskString($address->firstname, 'name'),
+                'receiver_phone' => Tools::maskString($phone, 'phone'),
+                'receiver_city' => $address->city,
+                'receiver_postcode' => $address->postcode,
+                'receiver_address' => Tools::maskString($address->address1, 'address'),
                 'return_message' => $tcOrderShipping['return_message'],
             ));
         }
