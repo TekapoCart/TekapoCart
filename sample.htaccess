@@ -34,7 +34,6 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ %{ENV:REWRITEBASE}index.php [NC,L]
-</IfModule>
 
 AddType application/vnd.ms-fontobject .eot
 AddType font/ttf .ttf
