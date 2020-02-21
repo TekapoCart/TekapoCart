@@ -37,7 +37,7 @@ class Tc_711SelectStoreModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Tc_711::logMessage(sprintf('Tc_711SelectStore exception: %s', $e->getMessage()), true);
+            Tc_711::warnMessage(sprintf('Tc_711SelectStore exception: %s', $e->getMessage()), true);
         }
 
         exit;

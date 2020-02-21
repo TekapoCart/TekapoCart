@@ -33,7 +33,7 @@ class Ecpay_711ResendShippingOrderModuleFrontController extends ModuleFrontContr
 
         } catch (Exception $e) {
 
-            Ecpay_711::logMessage(sprintf('Ecpay_711ResendShippingOrder exception: %s %s', $order_id, $e->getMessage()), true);
+            Ecpay_711::warnMessage(sprintf('Ecpay_711ResendShippingOrder exception: %s %s', $order_id, $e->getMessage()), true);
         }
 
         exit;

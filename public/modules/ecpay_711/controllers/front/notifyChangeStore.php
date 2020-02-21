@@ -71,7 +71,7 @@ class Ecpay_711NotifyChangeStoreModuleFrontController extends ModuleFrontControl
             }
         } catch (Exception $e) {
 
-            Ecpay_711::logMessage(sprintf('Ecpay_711NotifyChangeStore response exception: %s %s', $sn_id, $e->getMessage()), true);
+            Ecpay_711::warnMessage(sprintf('Ecpay_711NotifyChangeStore response exception: %s %s', $sn_id, $e->getMessage()), true);
             $result_message = '0|' . $e->getMessage();
         }
 

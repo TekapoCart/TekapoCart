@@ -37,7 +37,7 @@ class EzShipResendShippingOrderModuleFrontController extends ModuleFrontControll
 
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('EzShip_ResendShippingOrder exception: %s %s', $order_id, $e->getMessage()), true);
+            EzShip::warnMessage(sprintf('EzShip_ResendShippingOrder exception: %s %s', $order_id, $e->getMessage()), true);
         }
 
         exit;

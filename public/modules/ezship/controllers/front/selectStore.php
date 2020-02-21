@@ -34,7 +34,8 @@ class EzShipSelectStoreModuleFrontController extends ModuleFrontController
             }
 
         } catch (Exception $e) {
-            Ezship::logMessage(sprintf('EzShipSelectStore exception: %s', $e->getMessage()), true);
+
+            Ezship::warnMessage(sprintf('EzShipSelectStore exception: %s', $e->getMessage()), true);
         }
 
         exit;

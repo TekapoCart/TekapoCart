@@ -204,7 +204,8 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                 }
             }
         } catch (Exception $e) {
-            $this->ecpay_warning = sprintf($this->module->l('Payment failure, %s', 'payment'), $e->getMessage());
+
+            Ecpay::warnMessage(sprintf('EcpayValidation exception: %s', $e->getMessage()), true);
         }
 
 

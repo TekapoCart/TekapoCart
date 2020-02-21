@@ -53,7 +53,7 @@ class Tc_711ChangeStoreModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Tc_711::logMessage(sprintf('Tc_711_ChangeStore exception: %s', $e->getMessage()), true);
+            Tc_711::warnMessage(sprintf('Tc_711_ChangeStore exception: %s', $e->getMessage()), true);
         }
 
         exit;

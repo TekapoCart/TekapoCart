@@ -36,7 +36,8 @@ class Ecpay_711SelectStoreModuleFrontController extends ModuleFrontController
             }
 
         } catch (Exception $e) {
-            Ecpay_711::logMessage(sprintf('Ecpay_711SelectStore exception: %s', $e->getMessage()), true);
+
+            Ecpay_711::warnMessage(sprintf('Ecpay_711SelectStore exception: %s', $e->getMessage()), true);
         }
 
         exit;
