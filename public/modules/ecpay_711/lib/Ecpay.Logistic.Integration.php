@@ -188,7 +188,7 @@ if (!class_exists('EcpayLogistics', false)) {
         /**
          * 版本
          */
-        const VERSION = '1.1.1912240';
+        const VERSION = '1.1.2002120';
 
         public $ServiceURL = '';
         public $HashKey = '';
@@ -1755,7 +1755,7 @@ if (!class_exists('EcpayLogistics', false)) {
                 $this->IsInteger($Name, $Value);
 
                 // 內容檢查
-                $this->IsLegalValue($Name, $ClassName, $Value);
+                $this->IsLegal($Name, $Value);
             }
         }
 
