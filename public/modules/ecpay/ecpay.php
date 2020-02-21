@@ -470,4 +470,15 @@ class Ecpay extends PaymentModule
         }
     }
 
+    public static function warnMessage($message, $is_append = false)
+    {
+        $path = _PS_LOG_DIR_ . 'warn.log';
+
+        if (!$is_append) {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);
+        } else {
+            return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", FILE_APPEND | LOCK_EX);
+        }
+    }
+
 }

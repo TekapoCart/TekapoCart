@@ -79,7 +79,7 @@ class EzShipResponseModuleFrontController extends ModuleFrontController
             }
         } catch (Exception $e) {
 
-            EzShip::logMessage(sprintf('EzShipResponse exception: %s %s', $order_id, $e->getMessage()), true);
+            EzShip::waenMessage(sprintf('EzShipResponse exception: %s %s', $order_id, $e->getMessage()), true);
         }
 
         exit;

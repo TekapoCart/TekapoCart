@@ -136,7 +136,7 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
             }
         } catch (Exception $e) {
 
-            Ecpay::logMessage(sprintf('EcpayResponse exception: %s  %s', $order_id, $e->getMessage()), true);
+            Ecpay::warnMessage(sprintf('EcpayResponse exception: %s  %s', $order_id, $e->getMessage()), true);
             $result_message = '0|' . $e->getMessage();
         }
 

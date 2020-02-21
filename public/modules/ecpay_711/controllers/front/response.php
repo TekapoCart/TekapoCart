@@ -122,7 +122,7 @@ class Ecpay_711ResponseModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            Ecpay_711::logMessage(sprintf('Ecpay_711Response exception: %s  %s', $order_id, $e->getMessage()), true);
+            Ecpay_711::warnMessage(sprintf('Ecpay_711Response exception: %s  %s', $order_id, $e->getMessage()), true);
             $result_message = '0|' . $e->getMessage();
         }
 
