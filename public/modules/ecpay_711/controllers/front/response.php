@@ -29,7 +29,7 @@ class Ecpay_711ResponseModuleFrontController extends ModuleFrontController
 
                 Ecpay_711::logMessage('Feedback: ' . json_encode($feedback), true);
 
-                $order_reference = substr($feedback['MerchantTradeNo'], 0, 16);
+                $order_reference = substr($feedback['MerchantTradeNo'], 0, 15);
 
                 $tcOrderShipping = TcOrderShipping::getLogByOrderRef($order_reference);
                 if (!$tcOrderShipping) {
