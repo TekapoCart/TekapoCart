@@ -67,7 +67,9 @@ class CccReducerCore
             'id' => 'theme-ccc',
             'type' => 'external',
             'path' => $destinationPath,
-            'uri' => $this->getFQDN() . $this->getUriFromPath($destinationPath),
+            // suzy: 2020-02-21 讓 css 檔支援 CDN
+            // 'uri' => $this->getFQDN() . $this->getUriFromPath($destinationPath),
+            'uri' => 'https://' . Tools::getMediaServer($this->getUriFromPath($destinationPath)) . $this->getUriFromPath($destinationPath),
             'media' => 'all',
             'priority' => StylesheetManager::DEFAULT_PRIORITY,
         ];
@@ -105,7 +107,9 @@ class CccReducerCore
                 'id' => $position . '-js-ccc',
                 'type' => 'external',
                 'path' => $destinationPath,
-                'uri' => $this->getFQDN() . $this->getUriFromPath($destinationPath),
+                // suzy: 2020-02-21 讓 js 檔支援 CDN
+                // 'uri' => $this->getFQDN() . $this->getUriFromPath($destinationPath),
+                'uri' => 'https://' . Tools::getMediaServer($this->getUriFromPath($destinationPath)) . $this->getUriFromPath($destinationPath),
                 'priority' => JavascriptManager::DEFAULT_PRIORITY,
                 'attribute' => '',
             ];
