@@ -1649,6 +1649,9 @@ class FrontControllerCore extends Controller
     {
         $address = $this->context->shop->getAddress();
 
+        // suzy: 2020-02-21 圖片支援 CDN，replace _PS_IMG_ to $img_ps_url
+        $img_ps_url = Tools::getCurrentUrlProtocolPrefix() . Tools::getMediaServer(_PS_IMG_) . _PS_IMG_;
+
         $shop = array(
             'name' => Configuration::get('PS_SHOP_NAME'),
             'email' => Configuration::get('PS_SHOP_EMAIL'),
@@ -1657,22 +1660,22 @@ class FrontControllerCore extends Controller
             'long' => Configuration::get('PS_STORES_CENTER_LONG'),
             'lat' => Configuration::get('PS_STORES_CENTER_LAT'),
 
-            'logo' => (Configuration::get('PS_LOGO')) ? _PS_IMG_ . Configuration::get('PS_LOGO') : '',
+            'logo' => (Configuration::get('PS_LOGO')) ? $img_ps_url . Configuration::get('PS_LOGO') : '',
 
             // suzy: 2019-06-02 支援通知信 LOGO
-            'logo_mail' => (Configuration::get('PS_LOGO_MAIL')) ? _PS_IMG_ . Configuration::get('PS_LOGO_MAIL') : '',
+            'logo_mail' => (Configuration::get('PS_LOGO_MAIL')) ? $img_ps_url . Configuration::get('PS_LOGO_MAIL') : '',
 
-            'stores_icon' => (Configuration::get('PS_STORES_ICON')) ? _PS_IMG_ . Configuration::get('PS_STORES_ICON') : '',
-            'favicon' => (Configuration::get('PS_FAVICON')) ? _PS_IMG_ . Configuration::get('PS_FAVICON') : '',
+            'stores_icon' => (Configuration::get('PS_STORES_ICON')) ? $img_ps_url . Configuration::get('PS_STORES_ICON') : '',
+            'favicon' => (Configuration::get('PS_FAVICON')) ? $img_ps_url . Configuration::get('PS_FAVICON') : '',
             'favicon_update_time' => Configuration::get('PS_IMG_UPDATE_TIME'),
 
             // suzy: 2018-10-19 完整支援 favicons
-            'favicon_iphone' => (Configuration::get('PS_FAVICON_IPHONE')) ? _PS_IMG_ . Configuration::get('PS_FAVICON') : '',
-            'favicon_ipad' => (Configuration::get('PS_FAVICON_IPAD')) ? _PS_IMG_ . Configuration::get('PS_FAVICON_IPAD') : '',
-            'favicon_ipad_retina' => (Configuration::get('PS_FAVICON_IPAD_RETINA')) ? _PS_IMG_ . Configuration::get('PS_FAVICON_IPAD_RETINA') : '',
-            'favicon_iphone_retina' => (Configuration::get('PS_FAVICON_IPHONE_RETINA')) ? _PS_IMG_ . Configuration::get('PS_FAVICON_IPHONE_RETINA') : '',
-            'favicon_android' => (Configuration::get('PS_FAVICON_ANDROID')) ? _PS_IMG_ . Configuration::get('PS_FAVICON_ANDROID') : '',
-            'favicon_microsoft' => (Configuration::get('PS_FAVICON_MICROSOFT')) ? _PS_IMG_ . Configuration::get('PS_FAVICON_MICROSOFT') : '',
+            'favicon_iphone' => (Configuration::get('PS_FAVICON_IPHONE')) ? $img_ps_url . Configuration::get('PS_FAVICON') : '',
+            'favicon_ipad' => (Configuration::get('PS_FAVICON_IPAD')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPAD') : '',
+            'favicon_ipad_retina' => (Configuration::get('PS_FAVICON_IPAD_RETINA')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPAD_RETINA') : '',
+            'favicon_iphone_retina' => (Configuration::get('PS_FAVICON_IPHONE_RETINA')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPHONE_RETINA') : '',
+            'favicon_android' => (Configuration::get('PS_FAVICON_ANDROID')) ? $img_ps_url . Configuration::get('PS_FAVICON_ANDROID') : '',
+            'favicon_microsoft' => (Configuration::get('PS_FAVICON_MICROSOFT')) ? $img_ps_url . Configuration::get('PS_FAVICON_MICROSOFT') : '',
             'theme_color' => (Configuration::get('TC_THEME_COLOR_' . strtoupper($this->context->shop->theme_name))) ? Configuration::get('TC_THEME_COLOR_' . strtoupper($this->context->shop->theme_name)) : '#000',
 
             'address' => array(
