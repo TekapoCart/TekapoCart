@@ -9,6 +9,13 @@ class Ecpay_711ResponseModuleFrontController extends ModuleFrontController
         $result_message = '1|OK';
         $order_id = null;
         try {
+
+            # check remote ip within 175.99.72 range
+            if (!preg_match('/^175.99.72.\d{1,3}/', $_SERVER['REMOTE_ADDR'])
+                && !preg_match('/^175.99.72.\d{1,3}/', $_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                throw new Exception('IP is invalid.');
+            }
+
             # Retrieve the checkout result
             $AL = new EcpayLogistics();
             $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');

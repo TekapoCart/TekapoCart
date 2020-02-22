@@ -10,6 +10,13 @@ class EcpayResponseModuleFrontController extends ModuleFrontController
         $order_id = null;
         $order = null;
         try {
+
+            # check remote ip within 175.99.72 range
+            if (!preg_match('/^175.99.72.\d{1,3}/', $_SERVER['REMOTE_ADDR'])
+                && !preg_match('/^175.99.72.\d{1,3}/', $_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                throw new Exception('IP is invalid.');
+            }
+
             # Include the ECPay integration class
             $invoke_result = $this->module->invokeEcpayModule();
             if (!$invoke_result) {
