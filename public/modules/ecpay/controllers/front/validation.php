@@ -162,7 +162,7 @@ class EcpayValidationModuleFrontController extends ModuleFrontController
                         (int)$currency->id, false, $customer->secure_key);
 
                     $aio->Send['ClientBackURL'] = Tools::getShopDomainSsl(true, true) . __PS_BASE_URI__
-                        . 'order-confirmation&id_cart=' . $cart_id
+                        . 'order-confirmation?id_cart=' . $cart_id
                         . '&id_module=' . $this->module->id
                         . '&id_order=' . $this->module->currentOrder
                         . '&key=' . $customer->secure_key
