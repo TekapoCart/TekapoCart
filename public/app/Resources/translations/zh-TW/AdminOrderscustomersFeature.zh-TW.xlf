@@ -2261,8 +2261,22 @@ File: admin-dev/themes/default/template/controllers/slip/_print_pdf_icon.tpl:30<
     <body>
       <trans-unit id="d1554912e46f8d36a800ad8b604225f1">
         <source>Valid orders:</source>
-        <target>有效訂單：</target>
+        <target xml:lang="zh-TW">有效訂單：</target>
         <note>Line: 42</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="src/PrestaShopBundle/Resources/views/Admin/Sell/Customer/Blocks/View/addresses.html.twig" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="e174c1b711f254d538c689a90c5842a5">
+        <source>Phone number(s)</source>
+        <target xml:lang="zh-TW">Phone number(s)</target>
+        <note>Line: 51</note>
+      </trans-unit>
+      <trans-unit id="0c71153e10e4cca705c7de8625f23344">
+        <source>%firstname% %lastname% has not registered any addresses yet</source>
+        <target xml:lang="zh-TW">%lastname% %firstname% 尚未有任何配送資訊</target>
+        <note>Line: 113</note>
       </trans-unit>
     </body>
   </file>

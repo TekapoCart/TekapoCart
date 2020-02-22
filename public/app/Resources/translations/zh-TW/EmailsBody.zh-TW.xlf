@@ -1004,12 +1004,12 @@
     <body>
       <trans-unit id="b75184fa489c948c6debc4d635fefa5a" approved="yes">
         <source>You can access your customer account on our shop:</source>
-        <target xml:lang="zh-TW">您可以在我們的商店裡使用會員帳戶：</target>
+        <target xml:lang="zh-TW">前往登入瀏覽會員功能：</target>
         <note>Line: 317</note>
       </trans-unit>
       <trans-unit id="2df994fe4798f819768c87824ec15ced" approved="yes">
         <source>Email address:</source>
-        <target xml:lang="zh-TW">Email address:</target>
+        <target xml:lang="zh-TW">E-Mail：</target>
         <note>Line: 254</note>
       </trans-unit>
       <trans-unit id="016878df57341f82e0702d9259bfb7d8" approved="yes">
@@ -1019,12 +1019,12 @@
       </trans-unit>
       <trans-unit id="387c721c8acb98382f1d18feccf3dd55" approved="yes">
         <source>Your guest account has been turned into a customer account</source>
-        <target xml:lang="zh-TW">Your guest account has been turned into a customer account</target>
+        <target xml:lang="zh-TW">您的訪客帳號已經升級成為會員帳號</target>
         <note>Line: 180</note>
       </trans-unit>
       <trans-unit id="3008c9316cf28c5f439bbcc2e43b2e3e" approved="yes">
         <source>Congratulations, your guest account for [1]{shop_name}[/1] has been turned into a customer account!</source>
-        <target xml:lang="zh-TW">Congratulations, your guest account for [1]{shop_name}[/1] has been turned into a customer account!</target>
+        <target xml:lang="zh-TW">恭喜您，您已成為 [1]{shop_name}[/1] 的會員！</target>
         <note>Line: 247</note>
       </trans-unit>
     </body>

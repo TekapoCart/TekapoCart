@@ -242,13 +242,13 @@ File: controllers/admin/AdminShippingController.php:56</note>
       </trans-unit>
       <trans-unit id="1d8ca7f442e6d4ad3da5cb61b84284fc" approved="yes">
         <source>Handling charges</source>
-        <target xml:lang="zh-TW">處理費</target>
+        <target xml:lang="zh-TW">手續費</target>
         <note>Context:
 File: controllers/admin/AdminShippingController.php:60</note>
       </trans-unit>
       <trans-unit id="c9722f74f95451816de0f8ca3259ae44" approved="yes">
         <source>Free shipping starts at</source>
-        <target xml:lang="zh-TW">免運費總金額下限</target>
+        <target xml:lang="zh-TW">免運費門檻</target>
         <note>Context:
 File: controllers/admin/AdminShippingController.php:72</note>
       </trans-unit>

@@ -26,8 +26,9 @@
 <div class="card">
   <h3 class="card-header">
     <i class="material-icons">person</i>
-    {{ customerInformation.personalInformation.firstName }}
+    {# suzy: 2020-02-22 調整姓名 #}
     {{ customerInformation.personalInformation.lastName }}
+    {{ customerInformation.personalInformation.firstName }}
     {{ '[%06d]'|format(customerInformation.customerId.value) }}
     -
     <a href="mailto:{{ customerInformation.personalInformation.email }}">
