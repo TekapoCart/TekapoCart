@@ -9,7 +9,7 @@
         <meta itemprop="logo" content="{$shop.logo}">
         <meta itemprop="url" content="{$urls.base_url}">
         <a href="{$home_url}">
-            <img class="logo img-responsive" src="{$shop.logo}" alt="{$shop.name}">
+            <img class="logo img-responsive lazyload" src="/img/1px.png" data-src="{$shop.logo}" alt="{$shop.name}">
         </a>
     </div>
 {/if}
