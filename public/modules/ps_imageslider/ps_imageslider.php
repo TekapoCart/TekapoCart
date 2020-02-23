@@ -570,13 +570,14 @@ class Ps_ImageSlider extends Module implements WidgetInterface
                 if (isset($slide['sizes'][0]) && $slide['sizes'][0]) {
                     $slide['size'] = $slide['sizes'][0];
                 }
+                $pieces = explode('.', $slide['image']);
+                $type = $pieces[1];
+                $slide['has_webp'] = file_exists(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $pieces[0] . '.webp') ? true : false;
                 if (!file_exists(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $slide['thumb'])) {
                     $temp_name = _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $slide['image'];
                     list($temp_width, $temp_height, $temp_type, $temp_attr) = @getimagesize($temp_name);
                     $small_width = $this->small_width;
                     $small_height = round($small_width * $temp_height / $temp_width);
-                    $pieces = explode('.', $slide['image']);
-                    $type = $pieces[1];
                     ImageManager::resize($temp_name, _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $pieces[0] . '_' . $this->small_postfix . '.' . $type, $small_width, $small_height, $type);
                 }
                 $slide['thumb_sizes'] = @getimagesize(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $slide['thumb']);

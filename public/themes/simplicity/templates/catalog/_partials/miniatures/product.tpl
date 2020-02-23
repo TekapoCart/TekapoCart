@@ -49,7 +49,6 @@
                   class="lazyload"
                 />
               </picture>
-
             </a>
         {else}
             <a href="{$product.url}" class="thumbnail product-thumbnail">
