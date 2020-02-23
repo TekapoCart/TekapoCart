@@ -38,6 +38,7 @@
               <img src="/img/1px.png"
                 alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
                 data-sizes="auto"
+                data-src="{$product.cover.bySize.home_default.url}"
                 data-srcset="
                   {$product.cover.bySize.small_default.url} {$product.cover.bySize.small_default.width}w,
                   {$product.cover.bySize.home_default.url} {$product.cover.bySize.home_default.width}w,
