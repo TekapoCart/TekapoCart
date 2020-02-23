@@ -39,8 +39,10 @@
                 class="lazyload"
               />*}
               <picture>
-                <source type="image/webp" srcset="{$product.cover.bySize.home_default.url|replace:'jpg':'webp'}" />
-                <source type="image/jpeg" srcset="{$product.cover.bySize.home_default.url}" />
+                {if $product.cover.bySize.home_default.has_webp}
+                  <source type="image/webp" data-srcset="{$product.cover.bySize.home_default.url|replace:'jpg':'webp'}" />
+                {/if}
+                <source type="image/jpeg" data-srcset="{$product.cover.bySize.home_default.url}" />
                 <img src="/img/1px.png"
                   data-src="{$product.cover.bySize.home_default.url}"
                   alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"

@@ -170,6 +170,11 @@ class ImageRetriever
                 );
             }
 
+            // suzy: 2020-02-24 支援 webp
+            $has_webp = file_exists(implode(DIRECTORY_SEPARATOR, [
+                $imageFolderPath, $id_image . '-' . $image_type['name'] . '.' . 'webp'
+            ])) ? true : false;
+
             $url = $this->link->$getImageURL(
                 isset($object->link_rewrite) ? $object->link_rewrite : $object->name,
                 $id_image,
@@ -180,6 +185,8 @@ class ImageRetriever
                 'url' => $url,
                 'width' => (int) $image_type['width'],
                 'height' => (int) $image_type['height'],
+                // suzy: 2020-02-24 支援 webp
+                'has_webp' => $has_webp,
             ];
         }
 
