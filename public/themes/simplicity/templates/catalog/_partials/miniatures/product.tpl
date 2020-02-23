@@ -29,12 +29,6 @@
       {block name='product_thumbnail'}
         {if $product.cover}
             <a href="{$product.url}" class="thumbnail product-thumbnail">
-              {*<img
-                alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
-                data-home-default="{$product.cover.bySize.home_default.url}"
-                data-home-default-mobile="{$product.cover.bySize.small_default.url}"
-                class="js_thumbnail_product"
-              />*}
               <img src="/img/1px.png"
                 alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
                 data-sizes="auto"
@@ -45,7 +39,6 @@
 	              {$product.cover.bySize.large_default.url} {$product.cover.bySize.large_default.width}w"
                 class="lazyload"
               />
-
             </a>
         {else}
             <a href="{$product.url}" class="thumbnail product-thumbnail">
