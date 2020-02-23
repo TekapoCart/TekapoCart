@@ -24,7 +24,16 @@
  *}
 <a class="banner" href="{$banner_link}" title="{$banner_desc}">
   {if isset($banner_img)}
-    <img src="{$banner_img}" alt="{$banner_desc}" title="{$banner_desc}" class="img-fluid">
+    <img src="/img/1px.png"
+      alt="{$banner_desc}"
+      title="{$banner_desc}"
+      data-sizes="auto"
+      data-src="{$banner_img}"
+      data-srcset="
+        {$banner_img} {$banner_img_width}w,
+        {$banner_thumb} {$banner_thumb_width}w"
+      class="img-fluid lazyload"
+    />
   {else}
     <span>{$banner_desc}</span>
   {/if}

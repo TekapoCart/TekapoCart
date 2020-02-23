@@ -34,6 +34,10 @@ class Ps_Banner extends Module implements WidgetInterface
 {
     private $templateFile;
 
+    // suzy: 2020-02-23 更改模組圖片儲存路徑
+    protected $small_width = 600;
+    protected $small_postfix = 'small';
+
 	public function __construct()
 	{
 		$this->name = 'ps_banner';
@@ -112,7 +116,9 @@ class Ps_Banner extends Module implements WidgetInterface
                         return $error;
                     } else {
                         $ext = substr($_FILES['BANNER_IMG_'.$lang['id_lang']]['name'], strrpos($_FILES['BANNER_IMG_'.$lang['id_lang']]['name'], '.') + 1);
-                        $file_name = md5($_FILES['BANNER_IMG_'.$lang['id_lang']]['name']).'.'.$ext;
+                        // suzy: 2020-02-23 更改模組圖片儲存路徑
+                        // $file_name = md5($_FILES['BANNER_IMG_'.$lang['id_lang']]['name']).'.'.$ext;
+                        $file_name = md5($_FILES['BANNER_IMG_'.$lang['id_lang']]['name']);
 
                         // suzy: 2018-12-26 修正圖片不會上傳到 cdn (要透過 ImageManager::resize)
                         /*
@@ -129,16 +135,30 @@ class Ps_Banner extends Module implements WidgetInterface
                         }
                         */
                         $temp_name = tempnam(_PS_TMP_IMG_DIR_, 'PS');
+
                         if (!move_uploaded_file($_FILES['BANNER_IMG_'.$lang['id_lang']]['tmp_name'], $temp_name)) {
                             return $this->displayError($this->trans('An error occurred while attempting to upload the file.', array(), 'Admin.Notifications.Error'));
-                        } else if (!ImageManager::resize($temp_name, dirname(__FILE__).DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$file_name, null, null, $ext)) {
+                        // suzy: 2020-02-23 更改模組圖片儲存路徑
+                        // } else if (!ImageManager::resize($temp_name, dirname(__FILE__).DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$file_name, null, null, $ext)) {
+                        } elseif (!$sizes = @getimagesize($temp_name)) {
+                            $errors[] = $this->displayError($this->getTranslator()->trans('An error occurred during the get image size process.', array(), 'Admin.Notifications.Error'));
+                        } else if (!ImageManager::resize($temp_name, _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $file_name . '.' . $ext, null, null, $ext)) {
                             return $this->displayError($this->trans('An error occurred during the image upload process.', array(), 'Admin.Notifications.Error'));
+                        } elseif (!ImageManager::resize($temp_name, _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $file_name  . '_' . $this->small_postfix . '.' . $ext, $this->small_width, round($this->small_width * $sizes[1] / $sizes[0]), $ext)) {
+                            $errors[] = $this->displayError($this->getTranslator()->trans('An error occurred during the image upload process.', array(), 'Admin.Notifications.Error'));
                         } else {
+                            // suzy: 2020-02-23 更改模組圖片儲存路徑
+//                            if (Configuration::hasContext('BANNER_IMG', $lang['id_lang'], Shop::getContext())
+//                                && Configuration::get('BANNER_IMG', $lang['id_lang']) != $file_name) {
+//                                @unlink(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . Configuration::get('BANNER_IMG', $lang['id_lang']));
+//                            }
+//                            $values['BANNER_IMG'][$lang['id_lang']] = $file_name;
+
                             if (Configuration::hasContext('BANNER_IMG', $lang['id_lang'], Shop::getContext())
-                                && Configuration::get('BANNER_IMG', $lang['id_lang']) != $file_name) {
-                                @unlink(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . Configuration::get('BANNER_IMG', $lang['id_lang']));
+                                && Configuration::get('BANNER_IMG', $lang['id_lang']) != $file_name . '.' . $ext) {
+                                @unlink(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . Configuration::get('BANNER_IMG', $lang['id_lang']));
                             }
-                            $values['BANNER_IMG'][$lang['id_lang']] = $file_name;
+                            $values['BANNER_IMG'][$lang['id_lang']] = $file_name . '.' . $ext;
                         }
 
                     }
@@ -265,13 +285,36 @@ class Ps_Banner extends Module implements WidgetInterface
     {
         $imgname = Configuration::get('BANNER_IMG', $this->context->language->id);
 
-        if ($imgname && file_exists(_PS_MODULE_DIR_.$this->name.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$imgname)) {
-            $this->smarty->assign('banner_img', $this->context->link->protocol_content . Tools::getMediaServer($imgname) . $this->_path . 'img/' . $imgname);
+        // suzy: 2020-02-23 更改模組圖片儲存路徑
+        // if ($imgname && file_exists(_PS_MODULE_DIR_.$this->name.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$imgname)) {
+        //     $this->smarty->assign('banner_img', $this->context->link->protocol_content . Tools::getMediaServer($imgname) . $this->_path . 'img/' . $imgname);
+        // }
+        if ($imgname && file_exists(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $imgname)) {
+            $this->smarty->assign('banner_img', $this->context->link->protocol_content . Tools::getMediaServer($imgname) . _PS_MOD_IMG_ . $this->name . '/' . $imgname);
+            list($b_width, $b_height, $b_type, $b_attr) = @getimagesize(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $imgname);
+            $this->smarty->assign('banner_img_width', $b_width);
         }
 
         $banner_link = Configuration::get('BANNER_LINK', $this->context->language->id);
         if (!$banner_link) {
             $banner_link = $this->context->link->getPageLink('index');
+        }
+
+        // suzy: 2020-02-23 更改模組圖片儲存路徑
+        $pieces = explode('.', $imgname);
+        $thumb = $pieces[0] . '_' . $this->small_postfix . '.' . $pieces[1]; // 1.png -> 1_small.png
+        if (!file_exists(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $thumb)) {
+            $temp_name = _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $imgname;
+            list($temp_width, $temp_height, $temp_type, $temp_attr) = @getimagesize($temp_name);
+            $small_width = $this->small_width;
+            $small_height = round($small_width * $temp_height / $temp_width);
+            $type = $pieces[1];
+            ImageManager::resize($temp_name, _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $pieces[0] . '_' . $this->small_postfix . '.' . $type, $small_width, $small_height, $type);
+        }
+        if ($thumb && file_exists(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $thumb)) {
+            $this->smarty->assign('banner_thumb', $this->context->link->protocol_content . Tools::getMediaServer($imgname) . _PS_MOD_IMG_ . $this->name . '/' . $thumb);
+            list($b_width, $b_height, $b_type, $b_attr) = @getimagesize(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $thumb);
+            $this->smarty->assign('banner_thumb_width', $b_width);
         }
 
         return array(

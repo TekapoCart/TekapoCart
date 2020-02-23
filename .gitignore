@@ -240,12 +240,20 @@ public/img/cms/sticker/funny.svg
 public/img/cms/sticker/environmentally-friendly.svg
 public/img/cms/sticker/cruelty-free.svg
 
+######## 模組 public/img/mod/
+public/img/mod/ps_banner/sample.png
+public/img/mod/ps_banner/sample_small.png
+public/img/mod/ps_banner/fileType
+public/img/mod/ps_imageslider/1.png
+public/img/mod/ps_imageslider/1_small.png
+public/img/mod/ps_imageslider/2.png
+public/img/mod/ps_imageslider/2_small.png
+public/img/mod/ps_imageslider/3.png
+public/img/mod/ps_imageslider/3_small.png
+public/img/mod/ps_imageslider/fileType
+
 #### 其他
 public/img/logo_mail.jpg
-public/modules/ps_banner/img/sample.png
-public/modules/ps_imageslider/images/1.png
-public/modules/ps_imageslider/images/2.png
-public/modules/ps_imageslider/images/3.png
 
 
 ######## 以下參考 https://github.com/PrestaShop/PrestaShop/blob/1.7.4.2/.gitignore

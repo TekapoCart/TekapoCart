@@ -180,7 +180,7 @@ class ImageManagerCore
             return !($error = self::ERROR_FILE_NOT_EXIST);
         }
 
-        // suzy: 2018-09-22 是否為縮圖
+        // suzy: 2018-09-22 是否為縮圖（用來判斷 crop）
         $is_thumb = false;
         if (!empty($destinationWidth) && !empty($destinationHeight) &&
             ((int) $destinationWidth == 500 || (int) $destinationWidth == 300)

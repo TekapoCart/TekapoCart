@@ -58,6 +58,9 @@ define('_THEME_COL_DIR_', _PS_IMG_.'co/');
 define('_THEME_GENDERS_DIR_', _PS_IMG_.'genders/');
 define('_PS_PROD_IMG_', _PS_IMG_.'p/');
 
+// suzy: 2020-02-23 更改模組圖片儲存路徑
+define('_PS_MOD_IMG_', __PS_BASE_URI__.'img/mod/');
+
 /* Other URLs */
 define('_PS_JS_DIR_', __PS_BASE_URI__.'js/');
 define('_PS_CSS_DIR_', __PS_BASE_URI__.'css/');

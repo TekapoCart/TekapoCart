@@ -45,6 +45,10 @@ class Ps_ImageSlider extends Module implements WidgetInterface
     protected $default_wrap = 1;
     protected $templateFile;
 
+    // suzy: 2020-02-23 更改模組圖片儲存路徑
+    protected $small_width = 600;
+    protected $small_postfix = 'small';
+
     public function __construct()
     {
         $this->name = 'ps_imageslider';
@@ -476,17 +480,26 @@ class Ps_ImageSlider extends Module implements WidgetInterface
                 ) {
                     $temp_name = tempnam(_PS_TMP_IMG_DIR_, 'PS');
                     $salt = sha1(microtime());
+
                     if ($error = ImageManager::validateUpload($_FILES['image_'.$language['id_lang']])) {
                         $errors[] = $error;
                     } elseif (!$temp_name || !move_uploaded_file($_FILES['image_'.$language['id_lang']]['tmp_name'], $temp_name)) {
                         return false;
-                    } elseif (!ImageManager::resize($temp_name, dirname(__FILE__).'/images/'.$salt.'_'.$_FILES['image_'.$language['id_lang']]['name'], null, null, $type)) {
+                    // suzy: 2020-02-23 更改模組圖片儲存路徑
+                    // } elseif (!ImageManager::resize($temp_name, dirname(__FILE__).'/images/'.$salt.'_'.$_FILES['image_'.$language['id_lang']]['name'], null, null, $type)) {
+                    } elseif (!$sizes = @getimagesize($temp_name)) {
+                        $errors[] = $this->displayError($this->getTranslator()->trans('An error occurred during the get image size process.', array(), 'Admin.Notifications.Error'));
+                    } elseif (!ImageManager::resize($temp_name, _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $salt . '-' . $language['id_lang'] . '.' . $type, null, null, $type)) {
                         $errors[] = $this->displayError($this->getTranslator()->trans('An error occurred during the image upload process.', array(), 'Admin.Notifications.Error'));
+                    } elseif (!ImageManager::resize($temp_name, _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $salt . '-' . $language['id_lang'] . '_' . $this->small_postfix . '.' . $type, $this->small_width, round($this->small_width * $sizes[1] / $sizes[0]), $type)) {
+                        $errors[] = $this->displayError($this->getTranslator()->trans('An error occurred during the thumb resize process.', array(), 'Admin.Notifications.Error'));
                     }
                     if (isset($temp_name)) {
                         @unlink($temp_name);
                     }
-                    $slide->image[$language['id_lang']] = $salt.'_'.$_FILES['image_'.$language['id_lang']]['name'];
+                    // suzy: 2020-02-23 更改模組圖片儲存路徑
+                    // $slide->image[$language['id_lang']] = $salt.'_'.$_FILES['image_'.$language['id_lang']]['name'];
+                    $slide->image[$language['id_lang']] = $salt . '-' . $language['id_lang'] . '.' . $type;
                 } elseif (Tools::getValue('image_old_'.$language['id_lang']) != '') {
                     $slide->image[$language['id_lang']] = Tools::getValue('image_old_' . $language['id_lang']);
                 }
@@ -546,9 +559,29 @@ class Ps_ImageSlider extends Module implements WidgetInterface
         $slides = $this->getSlides(true);
         if (is_array($slides)) {
             foreach ($slides as &$slide) {
-                $slide['sizes'] = @getimagesize((dirname(__FILE__) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $slide['image']));
-                if (isset($slide['sizes'][3]) && $slide['sizes'][3]) {
-                    $slide['size'] = $slide['sizes'][3];
+                // suzy: 2020-02-23 更改模組圖片儲存路徑
+                // $slide['sizes'] = @getimagesize((dirname(__FILE__) . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $slide['image']));
+                $slide['sizes'] = @getimagesize(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $slide['image']);
+
+                // suzy: 2020-02-23 更改模組圖片儲存路徑
+//                if (isset($slide['sizes'][3]) && $slide['sizes'][3]) {
+//                    $slide['size'] = $slide['sizes'][3];
+//                }
+                if (isset($slide['sizes'][0]) && $slide['sizes'][0]) {
+                    $slide['size'] = $slide['sizes'][0];
+                }
+                if (!file_exists(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $slide['thumb'])) {
+                    $temp_name = _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $slide['image'];
+                    list($temp_width, $temp_height, $temp_type, $temp_attr) = @getimagesize($temp_name);
+                    $small_width = $this->small_width;
+                    $small_height = round($small_width * $temp_height / $temp_width);
+                    $pieces = explode('.', $slide['image']);
+                    $type = $pieces[1];
+                    ImageManager::resize($temp_name, _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $pieces[0] . '_' . $this->small_postfix . '.' . $type, $small_width, $small_height, $type);
+                }
+                $slide['thumb_sizes'] = @getimagesize(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $slide['thumb']);
+                if (isset($slide['thumb_sizes'][0]) && $slide['thumb_sizes'][0]) {
+                    $slide['thumb_size'] = $slide['thumb_sizes'][0];
                 }
             }
         }
@@ -651,8 +684,15 @@ class Ps_ImageSlider extends Module implements WidgetInterface
         );
 
         foreach ($slides as &$slide) {
-            $slide['image_url'] = $this->context->link->getMediaLink(_MODULE_DIR_.'ps_imageslider/images/'.$slide['image']);
+            // suzy: 2020-02-23 更改模組圖片儲存路徑
+            // $slide['image_url'] = $this->context->link->getMediaLink(_MODULE_DIR_.'ps_imageslider/images/'.$slide['image']);
+            $slide['image_url'] = $this->context->link->getMediaLink(_PS_MOD_IMG_ . $this->name . '/' . $slide['image']);
             $slide['url'] = $this->updateUrl($slide['url']);
+
+            // suzy: 2020-02-23 更改模組圖片儲存路徑
+            $pieces = explode('.', $slide['image']);
+            $slide['thumb'] = $pieces[0] . '_' . $this->small_postfix . '.' . $pieces[1]; // 1-3.png -> 1-3_small.png
+            $slide['thumb_url'] = $this->context->link->getMediaLink(_PS_MOD_IMG_ . $this->name . '/' . $slide['thumb']);
         }
 
         return $slides;
@@ -724,7 +764,9 @@ class Ps_ImageSlider extends Module implements WidgetInterface
             array(
                 'link' => $this->context->link,
                 'slides' => $slides,
-                'image_baseurl' => $this->_path.'images/'
+                // suzy: 2020-02-23 更改模組圖片儲存路徑
+                // 'image_baseurl' => $this->_path.'images/'
+                'image_baseurl' => _PS_MOD_IMG_ . $this->name . '/',
             )
         );
 
@@ -841,7 +883,9 @@ class Ps_ImageSlider extends Module implements WidgetInterface
             'fields_value' => $this->getAddFieldsValues(),
             'languages' => $this->context->controller->getLanguages(),
             'id_language' => $this->context->language->id,
-            'image_baseurl' => $this->_path.'images/'
+            // suzy: 2020-02-23 更改模組圖片儲存路徑
+            // 'image_baseurl' => $this->_path.'images/'
+            'image_baseurl' => _PS_MOD_IMG_ . $this->name . '/',
         );
 
         $helper->override_folder = '/';

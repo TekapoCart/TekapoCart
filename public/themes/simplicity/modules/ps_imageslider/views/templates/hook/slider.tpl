@@ -29,7 +29,15 @@
         <li class="carousel-item {if $smarty.foreach.homeslider.first}active{/if}" role="option" aria-hidden="{if $smarty.foreach.homeslider.first}false{else}true{/if}">
           <a href="{$slide.url}">
             <figure>
-              <img src="{$slide.image_url}" alt="{$slide.legend|escape}">
+              <img src="/img/1px.png"
+                alt="{$slide.legend|escape}"
+                data-sizes="auto"
+                data-src="{$slide.image_url}"
+                data-srcset="
+                  {$slide.image_url} {$slide.size}w,
+                  {$slide.thumb_url} {$slide.thumb_size}w"
+                class="lazyload"
+              />
               {if $slide.description}
                 <figcaption class="caption">
                   <div class="caption-description">{$slide.description nofilter}</div>
