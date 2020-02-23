@@ -65,6 +65,7 @@ function toggleMobileStyles()
 }
 
 // suzy: 2018-06-17 列表頁商品圖 桌機手機圖尺寸切換
+/* deprecated
 function toggleThumbnails()
 {
     if (prestashop.responsive.mobile) {
@@ -83,6 +84,7 @@ function toggleThumbnails()
         });
     }
 }
+*/
 
 $(window).on('resize', function() {
 	var _cw = prestashop.responsive.current_width;
@@ -93,7 +95,8 @@ $(window).on('resize', function() {
   prestashop.responsive.mobile = prestashop.responsive.current_width < prestashop.responsive.min_width;
 	if (_toggle) {
 		toggleMobileStyles();
-        toggleThumbnails();
+        // deprecated
+		// toggleThumbnails();
 	}
 });
 
@@ -101,8 +104,10 @@ $(document).ready(function() {
 	if (prestashop.responsive.mobile) {
 		toggleMobileStyles();
 	}
-    toggleThumbnails();
+    // deprecated
+    // toggleThumbnails();
 });
 $( document ).ajaxComplete(function() {
-    toggleThumbnails();
+    // deprecated
+    // toggleThumbnails();
 });

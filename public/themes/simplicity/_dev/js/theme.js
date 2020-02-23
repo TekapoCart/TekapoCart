@@ -47,6 +47,8 @@ import './lib/bootstrap-filestyle.min';
 import './lib/jquery.scrollbox.min';
 // suzy: 2020-01-25 twzipcode
 import './lib/jquery.twzipcode';
+// suzy: 2020-02-23 lazysizes
+import './lib/lazysizes.min';
 
 import './components/block-cart';
 
