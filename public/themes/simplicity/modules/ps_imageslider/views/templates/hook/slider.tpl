@@ -37,6 +37,7 @@
                    data-src-mobile="{$slide.thumb_url}"
                    data-sizes="auto"
                    data-src="{$slide.image_url}"
+                   src="{$slide.thumb_url|replace:$type:'.webp'}"
                    data-srcset="
                      {$slide.image_url|replace:$type:'.webp'} {$slide.size}w,
                      {$slide.thumb_url|replace:$type:'.webp'} {$slide.thumb_size}w"
@@ -49,6 +50,7 @@
                    data-src-mobile="{$slide.thumb_url}"
                    data-sizes="auto"
                    data-src="{$slide.image_url}"
+                   src="{$slide.thumb_url}"
                    data-srcset="
                      {$slide.image_url} {$slide.size}w,
                      {$slide.thumb_url} {$slide.thumb_size}w"
