@@ -29,16 +29,29 @@
         <li class="carousel-item {if $smarty.foreach.homeslider.first}active{/if}" role="option" aria-hidden="{if $smarty.foreach.homeslider.first}false{else}true{/if}">
           <a href="{$slide.url}">
             <figure>
-              {*<img src="/img/1px.png"
-                alt="{$slide.legend|escape}"
-                data-sizes="auto"
-                data-src="{$slide.image_url}"
-                data-srcset="
-                  {$slide.image_url} {$slide.size}w,
-                  {$slide.thumb_url} {$slide.thumb_size}w"
-                class="lazyload"
-              />*}
-              <picture>
+              {if $slide.has_webp}
+                {assign 'type' array('.jpg', '.jpeg', '.png', '.gif')}
+                <img
+                   alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                   data-sizes="auto"
+                   data-src="{$slide.image_url}"
+                   data-srcset="
+                     {$slide.image_url|replace:$type:'.webp'} {$slide.size}w,
+                     {$slide.thumb_url|replace:$type:'.webp'} {$slide.thumb_size}w"
+                   class="lazyload"
+                />
+              {else}
+                <img
+                   alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                   data-sizes="auto"
+                   data-src="{$product.cover.bySize.home_default.url}"
+                   data-srcset="
+                     {$slide.image_url} {$slide.size}w,
+                     {$slide.thumb_url} {$slide.thumb_size}w"
+                   class="lazyload"
+                />
+              {/if}
+              {*<picture>
                 {if $slide.has_webp}
                   {assign 'type' array('jpg', 'jpeg', 'png', 'gif')}
                   <source type="image/webp" data-srcset="{$slide.image_url|replace:$type:'webp'}" />
@@ -49,7 +62,7 @@
                    alt="{$slide.legend|escape}"
                    class="lazyload"
                 />
-              </picture>
+              </picture>*}
               {if $slide.description}
                 <figcaption class="caption">
                   <div class="caption-description">{$slide.description nofilter}</div>

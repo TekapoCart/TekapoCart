@@ -48,13 +48,38 @@ import './lib/jquery.scrollbox.min';
 // suzy: 2020-01-25 twzipcode
 import './lib/jquery.twzipcode';
 // suzy: 2020-02-23 lazysizes
-import './lib/lazysizes.min';
+import lazySizes from './lib/lazysizes.min';
+lazySizes.cfg.init = false;
 
 import './components/block-cart';
 
 // "inherit" EventEmitter
 for (var i in EventEmitter.prototype) {
   prestashop[i] = EventEmitter.prototype[i];
+}
+
+function webpIsSupported(callback)
+{
+    // If the browser doesn't have the method createImageBitmap, you can't display webp format
+    if(!window.createImageBitmap) {
+        callback(false);
+        return;
+    }
+
+    // Base64 representation of a white point image
+    var webpdata = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=';
+
+    // Retrieve the Image in Blob Format
+    fetch(webpdata).then(function(response) {
+        return response.blob();
+    }).then(function(blob) {
+        // If the createImageBitmap method succeeds, return true, otherwise false
+        createImageBitmap(blob).then(function() {
+            callback(true);
+        }, function() {
+            callback(false);
+        });
+    });
 }
 
 $(document).ready(() => {
@@ -70,6 +95,16 @@ $(document).ready(() => {
   topMenu.init();
   productMinitature.init();
   productSelect.init();
+
+  // suzy: 2020-02-23 lazysizes
+  webpIsSupported(function(isSupported) {
+    if (isSupported) {
+        lazySizes.init();
+    } else{
+        $('.lazyload').removeAttr('data-srcset');
+        lazySizes.init();
+    }
+  });
 
   // suzy: msc start
   let pack;
@@ -107,5 +142,6 @@ $(document).ready(() => {
           });
       });
   }
+
 
 });

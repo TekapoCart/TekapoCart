@@ -297,7 +297,10 @@ button:focus {
   }
 }
 
-
+img.lazyload:not([src]) {
+  // visibility: hidden;
+  opacity: 0.001;
+}
 
 
 // dark mode
