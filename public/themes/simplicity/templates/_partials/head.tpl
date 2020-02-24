@@ -47,6 +47,10 @@
 
 {block name='head_icons'}
 
+  <link rel="dns-prefetch" href="//www.google-analytics.com" />
+  <link rel="dns-prefetch" href="//connect.facebook.net" />
+  <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+
   <link rel="icon" type="image/png" href="{$shop.favicon}?{$shop.favicon_update_time}">
   <link rel="apple-touch-icon" href="{$shop.favicon_iphone}?{$shop.favicon_update_time}">
   <link rel="apple-touch-icon" sizes="152x152" href="{$shop.favicon_ipad}?{$shop.favicon_update_time}">
