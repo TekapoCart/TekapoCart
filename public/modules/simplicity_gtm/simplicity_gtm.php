@@ -60,12 +60,12 @@ class Simplicity_Gtm extends Module
     {
         $hooks = array(
             'header',
-            'orderConfirmation',
             'displayBeforeBodyClosingTag',
+            'orderConfirmation',
+            'updateOrderStatus',
             'backOfficeHeader',
             'displayAdminOrderTabOrder',
             'displayAdminOrderContentOrder',
-            'updateOrderStatus'
         );
 
         $installed = (parent::install() &&
@@ -337,7 +337,7 @@ class Simplicity_Gtm extends Module
         $this->context->controller->registerJavascript(
             'modules-' . $this->name,
             'modules/' . $this->name . '/simplicity_gtm.js',
-            array('position' => 'head', 'priority' => 150)
+            array('position' => 'bottom', 'priority' => 150)
         );
 
         return $this->fetch('module:' . $this->name . '/hook-header.tpl');
