@@ -44,7 +44,6 @@
                   data-src-mobile="{$product.cover.bySize.small_default.url}"
                   data-sizes="auto"
                   data-src="{$product.cover.bySize.home_default.url}"
-                  src="{$product.cover.bySize.small_default.url|replace:$type:'.webp'}"
                   data-srcset="
                     {$product.cover.bySize.small_default.url|replace:$type:'.webp'} {$product.cover.bySize.small_default.width}w,
                     {$product.cover.bySize.home_default.url|replace:$type:'.webp'} {$product.cover.bySize.home_default.width}w"
