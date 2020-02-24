@@ -123,9 +123,9 @@ $(document).ready(() => {
     navigator.scriptList = [];
   }
   pack = [
-    '/js/msc/class-msc-sidebar.js',
-    '/js/msc/wcl.js',
-    '/js/msc/class-msc-select.js'
+    '/js/msc/class-msc-sidebar.min.js',
+    '/js/msc/wcl.min.js',
+    '/js/msc/class-msc-select.min.js'
   ];
   for (var i=-1,l=pack.length;++i<l;) {
     var path = pack[i], script;
