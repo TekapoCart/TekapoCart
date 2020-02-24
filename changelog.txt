@@ -12,6 +12,8 @@ Steps
 - mv ./public/modules/ps_banner/img/* ./public/img/mod/ps_banner/
 - cp -a ./img/p/* ./public/img/p
 - cp -a ./img/mod/* ./public/img/mod
+- cp ./img/logo.jpg ./public/img/
+- cp ./img/logo_small.jpg ./public/img/
 DB
 - 2020-02-23.sql
 *******************************************
