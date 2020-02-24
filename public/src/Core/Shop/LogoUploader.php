@@ -114,12 +114,21 @@ class LogoUploader
             $fileExtension = ($fieldName == 'PS_STORES_ICON') ? '.gif' : '.jpg';
             $logoName = $this->getLogoName($logoPrefix, $fileExtension);
 
+            // suzy: 2020-02-24 加入 small 縮圖
+            $pieces = explode('.', $logoName);
+            $small_width = 450;
+
             if ($fieldName == 'PS_STORES_ICON') {
                 if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . $logoName, null, null, 'gif', true)) {
                     throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop icon %s.', $logoName));
                 }
             } else {
                 if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . $logoName)) {
+                    throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', $logoName));
+                // suzy: 2020-02-24 加入 small 縮圖
+                } else if (!$sizes = @getimagesize($tmpName)) {
+                    throw new PrestaShopException(sprintf('An error occurred while attempting to get image size process %s.', $logoName));
+                } else if ($sizes[0] > 650 && !@ImageManager::resize($tmpName, _PS_IMG_DIR_ . $pieces[0] . '_small.' .  $pieces[1], $small_width, round($small_width * $sizes[1] / $sizes[0]), $pieces[1])) {
                     throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', $logoName));
                 }
             }
@@ -132,11 +141,22 @@ class LogoUploader
                     $this->updateInMultiShopContext($idShop, $idShopGroup, $fieldName);
                 } else {
                     @unlink(_PS_IMG_DIR_ . Configuration::get($fieldName));
+                    // suzy: 2020-02-24 加入 small 縮圖
+                    $old_pieces = explode('.', Configuration::get($fieldName));
+                    @unlink(_PS_IMG_DIR_ . $old_pieces[0] . '_small.' . $old_pieces[1]);
                 }
             }
 
             Configuration::updateValue($fieldName, $logoName, false, $idShopGroup, $idShop);
+            // suzy: 2020-02-24 加入 small 縮圖
+            Configuration::updateValue($fieldName . '_WIDTH', $sizes[0], false, $idShopGroup, $idShop);
+            Configuration::updateValue($fieldName . '_SMALL', $pieces[0] . '_small.' .  $pieces[1], false, $idShopGroup, $idShop);
+            Configuration::updateValue($fieldName . '_SMALL_WIDTH', $small_width, false, $idShopGroup, $idShop);
             unlink($tmpName);
+
+            // suzy: 2020-02-24 加入 small 縮圖
+            Tools::clearSmartyCache();
+            //Tools::clearCache();
 
             return true;
         }

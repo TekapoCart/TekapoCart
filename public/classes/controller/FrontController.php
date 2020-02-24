@@ -1662,6 +1662,11 @@ class FrontControllerCore extends Controller
 
             'logo' => (Configuration::get('PS_LOGO')) ? $img_ps_url . Configuration::get('PS_LOGO') : '',
 
+            // suzy: 2020-02-24 加入 small 縮圖
+            'logo_width' => (Configuration::get('PS_LOGO_WIDTH')) ? Configuration::get('PS_LOGO_WIDTH') : '',
+            'logo_small' => (Configuration::get('PS_LOGO_SMALL')) ? $img_ps_url . Configuration::get('PS_LOGO_SMALL') : '',
+            'logo_small_width' => (Configuration::get('PS_LOGO_SMALL_WIDTH')) ? Configuration::get('PS_LOGO_SMALL_WIDTH') : '',
+
             // suzy: 2019-06-02 支援通知信 LOGO
             'logo_mail' => (Configuration::get('PS_LOGO_MAIL')) ? $img_ps_url . Configuration::get('PS_LOGO_MAIL') : '',
 

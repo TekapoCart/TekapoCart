@@ -1,19 +1,28 @@
 TekapoCart <hi@tekapo.io>
 -------------------------------------------
 *******************************************
+* 1.1.6 (February 23, 2020)
+*******************************************
+Improve
+- Lighthouse Performance
+Steps
+- mkdir -p ./img/mod/ps_imageslider
+- mv ./public/modules/ps_imageslider/images/* ./public/img/mod/ps_imageslider/
+- mkdir -p ./public/img/mod/ps_banner
+- mv ./public/modules/ps_banner/img/* ./public/img/mod/ps_banner/
+- cp -a ./img/p/* ./public/img/p
+- cp -a ./img/mod/* ./public/img/mod
+DB
+- 2020-02-23.sql
+*******************************************
 * 1.1.5 (February 11, 2020)
 *******************************************
 Improve
 - Varnish
-Steps
-- UPDATE `ps_shop_url` SET `domain` = 'test.tekapo.cart:8080' WHERE `ps_shop_url`.`id_shop_url` = 1;
-- UPDATE `ps_configuration` SET `value` = 'test.tekapo.cart:8080' WHERE `ps_configuration`.`name` = 'PS_SHOP_DOMAIN';
-- UPDATE `ps_configuration` SET `value` = '0' WHERE `ps_configuration`.`name` = 'PS_CANONICAL_REDIRECT';
-- UPDATE `ps_configuration` SET `value` = '1' WHERE `ps_configuration`.`name` = 'PS_SSL_ENABLED';
-- UPDATE `ps_configuration` SET `value` = '1' WHERE `ps_configuration`.`name` = 'PS_SSL_ENABLED_EVERYWHERE';
-- INSERT INTO `ps_configuration` (`id_configuration`, `id_shop_group`, `id_shop`, `name`, `value`, `date_add`, `date_upd`) VALUES (NULL, NULL, NULL, 'TC_VARNISH_ENABLED', '1', NOW(), NOW());
 DB
 - slim.sql
+- 2020-02-16.sql 需比對 carrier
+- 2020-02-17.sql
 *******************************************
 * 1.1.4 (February 01, 2020)
 *******************************************
@@ -39,7 +48,7 @@ Vendor
 - overtrue/pinyin
 - recca0120/twzipcode
 Steps
-- install ezship, ezship_home, tc_pod, ecpay_cvs, ecpay_tcat, tc_cvs
+- install ezship, ezship_home, tc_pod, ecpay_711, ecpay_tcat, tc_cvs
 - upgrade Paypal
 - run 2020-01-09.sql
 - uninstall smilepay, ps_cashondelivery

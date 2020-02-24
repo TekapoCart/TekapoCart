@@ -9,7 +9,19 @@
         <meta itemprop="logo" content="{$shop.logo}">
         <meta itemprop="url" content="{$urls.base_url}">
         <a href="{$home_url}">
-            <img class="logo img-responsive" src="{$shop.logo}" alt="{$shop.name}">
+            <img alt="{$shop.name}"
+            {if $shop.logo_width && $shop.logo_small && $shop.logo_small_width}
+              data-sizes="auto"
+              data-src="{$shop.logo}"
+              src="{$shop.logo_small}"
+              data-srcset="
+                {$shop.logo} {$shop.logo_width}w,
+                {$shop.logo_small} {$shop.logo_small_width}w"
+            {else}
+              src="{$shop.logo}"
+            {/if}
+              class="logo img-responsive lazyload"
+            />
         </a>
     </div>
 {/if}
