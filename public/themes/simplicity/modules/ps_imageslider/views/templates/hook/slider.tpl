@@ -33,6 +33,8 @@
                 {assign 'type' array('.jpg', '.jpeg', '.png', '.gif')}
                 <img
                    alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                   data-src-desktop="{$slide.image_url}"
+                   data-src-mobile="{$slide.thumb_url}"
                    data-sizes="auto"
                    data-src="{$slide.image_url}"
                    data-srcset="
@@ -43,26 +45,16 @@
               {else}
                 <img
                    alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                   data-src-desktop="{$slide.image_url}"
+                   data-src-mobile="{$slide.thumb_url}"
                    data-sizes="auto"
-                   data-src="{$product.cover.bySize.home_default.url}"
+                   data-src="{$slide.image_url}"
                    data-srcset="
                      {$slide.image_url} {$slide.size}w,
                      {$slide.thumb_url} {$slide.thumb_size}w"
                    class="lazyload"
                 />
               {/if}
-              {*<picture>
-                {if $slide.has_webp}
-                  {assign 'type' array('jpg', 'jpeg', 'png', 'gif')}
-                  <source type="image/webp" data-srcset="{$slide.image_url|replace:$type:'webp'}" />
-                {/if}
-                <source type="image/jpeg" data-srcset="{$slide.image_url}" />
-                <img src="/img/1px.png"
-                   data-src="{$slide.image_url}"
-                   alt="{$slide.legend|escape}"
-                   class="lazyload"
-                />
-              </picture>*}
               {if $slide.description}
                 <figcaption class="caption">
                   <div class="caption-description">{$slide.description nofilter}</div>

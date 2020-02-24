@@ -102,6 +102,17 @@ $(document).ready(() => {
         lazySizes.init();
     } else{
         $('.lazyload').removeAttr('data-srcset');
+
+        document.addEventListener('lazybeforeunveil', function(e){
+            if (e.target.hasAttribute('data-src-desktop') && e.target.hasAttribute('data-src-mobile')) {
+                if (prestashop.responsive.mobile) {
+                    e.target.setAttribute('data-src', e.target.getAttribute('data-src-mobile'));
+                } else {
+                    e.target.setAttribute('data-src', e.target.getAttribute('data-src-desktop'));
+                }
+            }
+        });
+
         lazySizes.init();
     }
   });

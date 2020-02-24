@@ -40,6 +40,8 @@
                 {assign 'type' array('.jpg', '.jpeg', '.png', '.gif')}
                 <img
                   alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                  data-src-desktop="{$product.cover.bySize.home_default.url}"
+                  data-src-mobile="{$product.cover.bySize.small_default.url}"
                   data-sizes="auto"
                   data-src="{$product.cover.bySize.home_default.url}"
                   data-srcset="
@@ -50,6 +52,8 @@
               {else}
                 <img
                   alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                  data-src-desktop="{$product.cover.bySize.home_default.url}"
+                  data-src-mobile="{$product.cover.bySize.small_default.url}"
                   data-sizes="auto"
                   data-src="{$product.cover.bySize.home_default.url}"
                   data-srcset="
@@ -58,17 +62,6 @@
                   class="lazyload"
                 />
               {/if}
-              {*<picture>
-                {if $product.cover.bySize.home_default.has_webp}
-                  <source type="image/webp" data-srcset="{$product.cover.bySize.home_default.url|replace:'jpg':'webp'}" />
-                {/if}
-                <source type="image/jpeg" data-srcset="{$product.cover.bySize.home_default.url}" />
-                <img src="/img/1px.png"
-                  data-src="{$product.cover.bySize.home_default.url}"
-                  alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
-                  class="lazyload"
-                />
-              </picture>*}
             </a>
         {else}
             <a href="{$product.url}" class="thumbnail product-thumbnail">
