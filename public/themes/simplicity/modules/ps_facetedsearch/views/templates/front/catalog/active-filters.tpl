@@ -22,13 +22,22 @@
   * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
   * International Registered Trademark & Property of PrestaShop SA
   *}
+<section id="js-active-search-filters" class="{if $activeFilters|count}active_filters{else}hide{/if}">
+  {*block name='active_filters_title'}
+    <h1 class="h6 {if $activeFilters|count}active-filter-title{else}hidden-xs-up{/if}">{l s='Active filters' d='Shop.Theme.Global'}</h1>
+  {/block*}
 
-{function get_limit_select element=''}
-  {assign var="name" value="{$element}_filter_show_limit"}
-  <select name="{$name}">
-    <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
-    {for $index=2 to 20}
-      <option value="{$index}">{$index}</option>
-    {/for}
-  </select>
-{/function}
+  {if $activeFilters|count}
+    <ul>
+      {foreach from=$activeFilters item="filter"}
+        {block name='active_filters_item'}
+          <li class="filter-block">
+            {l s='%1$s: ' d='Shop.Theme.Catalog' sprintf=[$filter.facetLabel]}
+            {$filter.label}
+            <a class="js-search-link" href="{$filter.nextEncodedFacetsURL}"><i class="material-icons close">&#xE5CD;</i></a>
+          </li>
+        {/block}
+      {/foreach}
+    </ul>
+  {/if}
+</section>

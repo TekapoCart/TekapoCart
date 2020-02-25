@@ -244,7 +244,7 @@ File: themes/classic/templates/catalog/_partials/facets.tpl:132</note>
     <body>
       <trans-unit id="2143f8cb66482342b35208bdc3fd949c" approved="yes">
         <source>Active filters</source>
-        <target xml:lang="zh-TW">使用中的篩選項</target>
+        <target xml:lang="zh-TW">已選取的篩選條件</target>
         <note>Context:
 File: themes/classic/templates/catalog/_partials/active_filters.tpl:27</note>
       </trans-unit>

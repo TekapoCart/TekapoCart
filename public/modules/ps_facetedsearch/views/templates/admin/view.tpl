@@ -23,7 +23,6 @@
   * International Registered Trademark & Property of PrestaShop SA
   *}
 {include file='./_partials/messages.tpl'}
-{include file='./_functions/show_limit.tpl'}
 
 <div class="panel">
   <h3><i class="icon-cogs"></i> {l s='New filters template' d='Modules.Facetedsearch.Admin'}</h3>
@@ -86,12 +85,16 @@
                     {/if}
                   </div>
                   <div class="col-lg-3">
-                    {if empty($filter['slider'])}
-                      <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
-                      <div class="col-lg-6">
-                        {call get_limit_select element=$filterId}
-                      </div>
-                    {/if}
+                    <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
+                    <div class="col-lg-6">
+                      <select name="{$filterId}_filter_show_limit">
+                        <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                      </select>
+                    </div>
                   </div>
                 </li>
               {/foreach}
@@ -138,7 +141,13 @@
                     <div class="col-lg-3 pull-right">
                       <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
                       <div class="col-lg-6">
-                        {call get_limit_select element="layered_selection_ag_{(int)$attribute_group['id_attribute_group']}"}
+                        <select name="layered_selection_ag_{(int)$attribute_group['id_attribute_group']}_filter_show_limit">
+                          <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                        </select>
                       </div>
                     </div>
                     <div class="col-lg-3 pull-right">
@@ -194,7 +203,13 @@
                     <div class="col-lg-3 pull-right">
                       <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
                       <div class="col-lg-6">
-                        {call get_limit_select element="layered_selection_feat_{(int)$feature['id_feature']}"}
+                        <select name="layered_selection_feat_{(int)$feature['id_feature']}_filter_show_limit">
+                          <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                        </select>
                       </div>
                     </div>
                     <div class="col-lg-3 pull-right">

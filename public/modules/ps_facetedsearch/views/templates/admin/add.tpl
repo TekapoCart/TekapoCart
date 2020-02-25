@@ -23,7 +23,6 @@
   * International Registered Trademark & Property of PrestaShop SA
   *}
 {include file='./_partials/messages.tpl'}
-{include file='./_functions/show_limit.tpl'}
 
 <div class="panel">
   <h3><i class="icon-cogs"></i> {l s='New filters template' d='Modules.Facetedsearch.Admin'}</h3>
@@ -70,7 +69,13 @@
                 <div class="col-lg-3 pull-right">
                   <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
                   <div class="col-lg-6">
-                    {call get_limit_select element="layered_selection_subcategories"}
+                    <select name="layered_selection_subcategories_filter_show_limit">
+                      <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-lg-3 pull-right">
@@ -102,7 +107,13 @@
                 <div class="col-lg-3 pull-right">
                   <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
                   <div class="col-lg-6">
-                    {call get_limit_select element="layered_selection_stock"}
+                    <select name="layered_selection_stock_filter_show_limit">
+                      <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-lg-3 pull-right">
@@ -133,7 +144,13 @@
                 <div class="col-lg-3 pull-right">
                   <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
                   <div class="col-lg-6">
-                    {call get_limit_select element="layered_selection_condition"}
+                    <select name="layered_selection_condition_filter_show_limit">
+                      <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-lg-3 pull-right">
@@ -164,7 +181,13 @@
                 <div class="col-lg-3 pull-right">
                   <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
                   <div class="col-lg-6">
-                    {call get_limit_select element="layered_selection_manufacturer"}
+                    <select name="layered_selection_manufacturer_filter_show_limit">
+                      <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
                   </div>
                 </div>
                 <div class="col-lg-3 pull-right">
@@ -193,6 +216,16 @@
                   <span class="module_name">{l s='Product weight filter (slider)' d='Modules.Facetedsearch.Admin'}</span>
                 </div>
                 <div class="col-lg-3 pull-right">
+                  <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
+                  <div class="col-lg-6">
+                    <select name="layered_selection_weight_slider_filter_show_limit">
+                      <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="col-lg-3 pull-right">
                   <label class="control-label col-lg-6">{l s='Filter style:' d='Modules.Facetedsearch.Admin'}</label>
@@ -217,6 +250,16 @@
                   <span class="module_name">{l s='Product price filter (slider)' d='Modules.Facetedsearch.Admin'}</span>
                 </div>
                 <div class="col-lg-3 pull-right">
+                  <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
+                  <div class="col-lg-6">
+                    <select name="layered_selection_price_slider_filter_show_limit">
+                      <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="col-lg-3 pull-right">
                   <label class="control-label col-lg-6">{l s='Filter style:' d='Modules.Facetedsearch.Admin'}</label>
@@ -268,7 +311,13 @@
                     <div class="col-lg-3 pull-right">
                       <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
                       <div class="col-lg-6">
-                        {call get_limit_select element="layered_selection_ag_{(int)$attribute_group['id_attribute_group']}"}
+                        <select name="layered_selection_ag_{(int)$attribute_group['id_attribute_group']}_filter_show_limit">
+                          <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                        </select>
                       </div>
                     </div>
                     <div class="col-lg-3 pull-right">
@@ -324,7 +373,13 @@
                     <div class="col-lg-3 pull-right">
                       <label class="control-label col-lg-6">{l s='Filter result limit:' d='Modules.Facetedsearch.Admin'}</label>
                       <div class="col-lg-6">
-                        {call get_limit_select element="layered_selection_feat_{(int)$feature['id_feature']}"}
+                        <select name="layered_selection_feat_{(int)$feature['id_feature']}_filter_show_limit">
+                          <option value="0">{l s='No limit' d='Modules.Facetedsearch.Admin'}</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                        </select>
                       </div>
                     </div>
                     <div class="col-lg-3 pull-right">

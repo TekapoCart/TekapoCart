@@ -23,9 +23,9 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 <section id="js-active-search-filters" class="{if $activeFilters|count}active_filters{else}hide{/if}">
-  {*block name='active_filters_title'}
+  {block name='active_filters_title'}
     <h1 class="h6 {if $activeFilters|count}active-filter-title{else}hidden-xs-up{/if}">{l s='Active filters' d='Shop.Theme.Global'}</h1>
-  {/block*}
+  {/block}
 
   {if $activeFilters|count}
     <ul>

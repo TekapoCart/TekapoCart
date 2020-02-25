@@ -44,7 +44,6 @@ class HookDispatcher
         Hook\FeatureValue::class,
         Hook\Product::class,
         Hook\ProductSearch::class,
-        Hook\SpecificPrice::class,
     ];
 
     /**
