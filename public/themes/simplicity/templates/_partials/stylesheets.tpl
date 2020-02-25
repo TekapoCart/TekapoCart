@@ -23,7 +23,8 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 
-<link href="https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+TC|Material+Icons&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 
 {foreach $stylesheets.external as $stylesheet}
   <link rel="stylesheet" href="{$stylesheet.uri}?{$smarty.const._TC_VERSION_DATE_}" type="text/css" media="{$stylesheet.media}">
