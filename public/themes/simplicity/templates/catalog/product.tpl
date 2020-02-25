@@ -43,6 +43,10 @@
   <meta property="product:weight:value" content="{$product.weight}">
   <meta property="product:weight:units" content="{$product.weight_unit}">
   {/if}
+  <meta property="twitter:title" content="{$page.meta.title}">
+  <meta property="twitter:image" content="{$product.cover.bySize.large_default.url}">
+  <meta name="twitter:image:width" content="{$product.cover.bySize.large_default.width}">
+  <meta name="twitter:image:height" content="{$product.cover.bySize.large_default.height}">
 {/block}
 
 {block name='content'}

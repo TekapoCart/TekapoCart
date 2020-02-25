@@ -243,7 +243,7 @@ File: admin-dev/themes/default/template/controllers/images/content.tpl:69</note>
         </trans-unit>
         <trans-unit id="544cd7788ebd8916e7191e7a8fd0db57">
           <source>Warning: if no invoice logo is available, the main logo will be used instead.</source>
-          <target xml:lang="zh-TW">若無上傳，則會使用主 LOGO 代替。</target>
+          <target xml:lang="zh-TW">若無上傳，則會使用網站 LOGO 代替。</target>
           <note>Line: 117</note>
         </trans-unit>
         <trans-unit id="b0297d22aade28eda5efbeb5c2e21e97">
@@ -258,7 +258,7 @@ File: admin-dev/themes/default/template/controllers/images/content.tpl:69</note>
         </trans-unit>
         <trans-unit id="04f1f93771bf12b0b80ae6a86ceb5cae">
           <source>Will appear on your main page. Recommended size for the default theme: height %height% and width %width%.</source>
-          <target xml:lang="zh-TW">網站主要 LOGO。建議檔案大小不超過 500K。</target>
+          <target xml:lang="zh-TW">網站 LOGO。建議檔案大小不超過 500K。</target>
           <note>Line: 35</note>
         </trans-unit>
         <trans-unit id="e91d6b1f1f3836b0126eb26760a0eb49">

@@ -1675,7 +1675,7 @@ class FrontControllerCore extends Controller
             'favicon_update_time' => Configuration::get('PS_IMG_UPDATE_TIME'),
 
             // suzy: 2018-10-19 完整支援 favicons
-            'favicon_iphone' => (Configuration::get('PS_FAVICON_IPHONE')) ? $img_ps_url . Configuration::get('PS_FAVICON') : '',
+            'favicon_iphone' => (Configuration::get('PS_FAVICON_IPHONE')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPHONE') : '',
             'favicon_ipad' => (Configuration::get('PS_FAVICON_IPAD')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPAD') : '',
             'favicon_ipad_retina' => (Configuration::get('PS_FAVICON_IPAD_RETINA')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPAD_RETINA') : '',
             'favicon_iphone_retina' => (Configuration::get('PS_FAVICON_IPHONE_RETINA')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPHONE_RETINA') : '',

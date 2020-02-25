@@ -98,7 +98,7 @@ File: controllers/admin/AdminThemesController.php:405</note>
       </trans-unit>
       <trans-unit id="49824ed511fd64f33f2f8a1818ee8fe1" approved="yes">
         <source>Header logo</source>
-        <target xml:lang="zh-TW">主 LOGO：</target>
+        <target xml:lang="zh-TW">網站 LOGO：</target>
         <note>Context:
 File: controllers/admin/AdminThemesController.php:409</note>
       </trans-unit>
