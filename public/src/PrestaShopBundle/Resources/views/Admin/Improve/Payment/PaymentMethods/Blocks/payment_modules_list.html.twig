@@ -53,6 +53,18 @@
           >
             {{ 'Configure'|trans({}, 'Admin.Global') }}
           </a>
+
+            {# suzy: 2019-02-11 新增 停用 啟用 操作按鈕 #}
+            {% if module.database.active %}
+              <a href="{{ path('admin_module_manage_action', {'action': 'disable', 'module_name': module.attributes.name}) }}"
+                 class="btn btn-primary-reverse btn-outline-primary light-button"
+              >停用</a>
+            {% else %}
+              <a href="{{ path('admin_module_manage_action', {'action': 'enable', 'module_name': module.attributes.name}) }}"
+                 class="btn btn-primary-reverse btn-outline-primary light-button"
+              >啟用</a>
+            {% endif %}
+
         </div>
       </div>
       {% endif %}

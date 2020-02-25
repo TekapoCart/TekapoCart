@@ -50,7 +50,7 @@ admin_module_manage:
 
 admin_module_manage_action:
     path:     /manage/action/{action}/{module_name}
-    methods:  [POST]
+    methods:  [GET, POST]
     defaults:
         _controller: PrestaShopBundle:Admin/Improve/Module:module
     requirements:

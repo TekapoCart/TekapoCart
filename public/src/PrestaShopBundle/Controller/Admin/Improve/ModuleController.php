@@ -481,6 +481,13 @@ class ModuleController extends ModuleAbstractController
             );
         }
 
+        // suzy: 2019-02-11 強制讓金物流頁可設定 啟用/停用
+        if ($request->getMethod() == 'GET') {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
+
         return new JsonResponse($response);
     }
 
