@@ -104,7 +104,9 @@ class ShopLogosType extends AbstractType
             ->add('favicon', FileType::class, [
                 'required' => false,
                 'attr' => [
-                    'accept' => $shopLogoSettings->getIconImageExtensionWithDot(),
+                    // suzy: 2020-02-25 favicon 允許上傳 jpg, png
+                    // 'accept' => $shopLogoSettings->getIconImageExtensionWithDot(),
+                    'accept' => $availableLogoFileTypes,
                 ],
             ])
         ;

@@ -256,6 +256,7 @@ public/img/mod/ps_imageslider/fileType
 public/img/logo.jpg
 public/img/logo_small.jpg
 public/img/logo_mail.jpg
+public/img/favicon_*.jpg
 
 
 ######## 以下參考 https://github.com/PrestaShop/PrestaShop/blob/1.7.4.2/.gitignore

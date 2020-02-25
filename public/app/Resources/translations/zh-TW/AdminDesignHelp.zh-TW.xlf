@@ -253,7 +253,7 @@ File: admin-dev/themes/default/template/controllers/images/content.tpl:69</note>
         </trans-unit>
         <trans-unit id="3fb044d8f9136df5b2f0087f8a8fb0c9">
           <source>Use our [1]favicon generator on PrestaShop Marketplace[/1] to boost your brand image!</source>
-          <target xml:lang="zh-TW">可使用 [1]線上工具[/1] 產生 Favicon！</target>
+          <target xml:lang="zh-TW"></target>
           <note>Line: 146</note>
         </trans-unit>
         <trans-unit id="04f1f93771bf12b0b80ae6a86ceb5cae">
@@ -263,7 +263,7 @@ File: admin-dev/themes/default/template/controllers/images/content.tpl:69</note>
         </trans-unit>
         <trans-unit id="e91d6b1f1f3836b0126eb26760a0eb49">
           <source>It is the small icon that appears in browser tabs, next to the title.</source>
-          <target xml:lang="zh-TW">顯示在瀏覽器頁籤上的小圖示。</target>
+          <target xml:lang="zh-TW">顯示在瀏覽器頁籤上的小圖示。最小圖像尺寸為 310x310px。</target>
           <note>Line: 130</note>
         </trans-unit>
       </body>

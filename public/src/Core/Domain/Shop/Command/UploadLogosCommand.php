@@ -139,12 +139,14 @@ class UploadLogosCommand
      */
     public function setUploadedFavicon(UploadedFile $uploadedFavicon)
     {
-        if (ShopLogoSettings::AVAILABLE_ICON_IMAGE_EXTENSION !== $uploadedFavicon->getClientOriginalExtension()) {
-            throw new NotSupportedFaviconExtensionException(sprintf(
-                'Not supported "%s" favicon extension. Supported extension is "ico".',
-                $uploadedFavicon->getClientOriginalExtension()
-            ));
-        }
+        // suzy: 2020-02-25 favicon 允許上傳 jpg, png
+//        if (ShopLogoSettings::AVAILABLE_ICON_IMAGE_EXTENSION !== $uploadedFavicon->getClientOriginalExtension()) {
+//            throw new NotSupportedFaviconExtensionException(sprintf(
+//                'Not supported "%s" favicon extension. Supported extension is "ico".',
+//                $uploadedFavicon->getClientOriginalExtension()
+//            ));
+//        }
+        $this->assertIsValidLogoImageExtension($uploadedFavicon);
 
         $this->assertNativeFileValidationDoesNotFail($uploadedFavicon);
 

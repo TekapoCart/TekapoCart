@@ -67,7 +67,7 @@ class LogoUploader
     }
 
     // suzy: 2018-10-19 完整支援 favicons - 加上參數
-    public function updateFavicon($configName = 'PS_FAVICON', $fileName = 'favicon')
+    public function updateFavicon()
     {
         $shopId = (int) $this->shop->id;
 
@@ -81,9 +81,63 @@ class LogoUploader
 //
 //        Configuration::updateGlobalValue('PS_FAVICON', 'favicon.ico');
 
-        if ($this->uploadIco($configName, _PS_IMG_DIR_.$fileName.'-'.$shopId.'.png')) {
-            Configuration::updateValue($configName, $fileName.'-'.$shopId.'.png');
+        $files = $_FILES;
+        $fieldName = 'PS_FAVICON';
+        $logoPrefix = 'favicon';
+
+        if (isset($files[$fieldName]['tmp_name'], $files[$fieldName]['tmp_name'], $files[$fieldName]['size'])) {
+            if ($error = ImageManager::validateUpload($files[$fieldName], Tools::getMaxUploadSize())) {
+                throw new PrestaShopException($error);
+            }
+            $tmpName = tempnam(_PS_TMP_IMG_DIR_, 'PS');
+
+            if (!$tmpName || !move_uploaded_file($files[$fieldName]['tmp_name'], $tmpName)) {
+                throw new PrestaShopException(sprintf('%Upload of temporary file to %s has failed.', $tmpName));
+            }
+
+            $ext = '.jpg';
+
+            // suzy: 2020-02-24 加入 small 縮圖
+            $pieces = explode('.', $logoPrefix . $ext);
+            $browser_width = 32;
+            $iphone_width = 120;
+            $ipad_width = 152;
+            $ipad_retina_width = 167;
+            $iphone_retina_width = 180;
+            $android_width = 192;
+            $microsoft_width = 310;
+
+            if (!$sizes = @getimagesize($tmpName)) {
+                throw new PrestaShopException(sprintf('An error occurred while attempting to get image size process %s.', 'favicon'));
+            } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_32_' . $shopId . $ext, $browser_width, round($browser_width * $sizes[1] / $sizes[0]), $pieces[1])) {
+                throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon browser'));
+            } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_120_' . $shopId . $ext, $iphone_width, round($iphone_width * $sizes[1] / $sizes[0]), $pieces[1])) {
+                throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon iphone'));
+            } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_152_' . $shopId . $ext, $ipad_width, round($ipad_width * $sizes[1] / $sizes[0]), $pieces[1])) {
+                throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon ipad'));
+            } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_167_' . $shopId . $ext, $ipad_retina_width, round($ipad_retina_width * $sizes[1] / $sizes[0]), $pieces[1])) {
+                throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon ipad retina'));
+            } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_180_' . $shopId . $ext, $iphone_retina_width, round($iphone_retina_width * $sizes[1] / $sizes[0]), $pieces[1])) {
+                throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon iphone retina'));
+            } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_192_' . $shopId . $ext, $android_width, round($android_width * $sizes[1] / $sizes[0]), $pieces[1])) {
+                throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon android'));
+            } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_310_' . $shopId . $ext, $microsoft_width, round($microsoft_width * $sizes[1] / $sizes[0]), $pieces[1])) {
+                throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon microsoft'));
+            }
+
+            Configuration::updateValue('PS_FAVICON', 'favicon_32_' . $shopId . $ext);
+            Configuration::updateValue('PS_FAVICON_IPHONE', 'favicon_120_' . $shopId . $ext);
+            Configuration::updateValue('PS_FAVICON_IPAD', 'favicon_152_' . $shopId . $ext);
+            Configuration::updateValue('PS_FAVICON_IPAD_RETINA', 'favicon_167_' . $shopId . $ext);
+            Configuration::updateValue('PS_FAVICON_IPHONE_RETINA', 'favicon_180_' . $shopId . $ext);
+            Configuration::updateValue('PS_FAVICON_ANDROID', 'favicon_192_' . $shopId . $ext);
+            Configuration::updateValue('PS_FAVICON_MICROSOFT', 'favicon_310_' . $shopId . $ext);
+
+            return true;
         }
+
+        return false;
+
     }
 
     /**
@@ -156,7 +210,6 @@ class LogoUploader
 
             // suzy: 2020-02-24 加入 small 縮圖
             Tools::clearSmartyCache();
-            //Tools::clearCache();
 
             return true;
         }
@@ -177,6 +230,9 @@ class LogoUploader
             $logoShop = Configuration::get($fieldName);
             if ($logoAll != $logoShop && $logoGroup != $logoShop && $logoShop != false) {
                 @unlink(_PS_IMG_DIR_ . Configuration::get($fieldName));
+                // suzy: 2020-02-24 加入 small 縮圖
+                $old_pieces = explode('.', Configuration::get($fieldName));
+                @unlink(_PS_IMG_DIR_ . $old_pieces[0] . '_small.' . $old_pieces[1]);
             }
         } elseif (Shop::getContext() == Shop::CONTEXT_GROUP) {
             $idShopGroup = Shop::getContextShopGroupID();
@@ -185,6 +241,9 @@ class LogoUploader
             Shop::setContext(Shop::CONTEXT_GROUP);
             if ($logoAll != Configuration::get($fieldName)) {
                 @unlink(_PS_IMG_DIR_ . Configuration::get($fieldName));
+                // suzy: 2020-02-24 加入 small 縮圖
+                $old_pieces = explode('.', Configuration::get($fieldName));
+                @unlink(_PS_IMG_DIR_ . $old_pieces[0] . '_small.' . $old_pieces[1]);
             }
         }
     }
