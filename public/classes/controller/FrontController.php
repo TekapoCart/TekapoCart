@@ -1667,6 +1667,9 @@ class FrontControllerCore extends Controller
             'logo_small' => (Configuration::get('PS_LOGO_SMALL')) ? $img_ps_url . Configuration::get('PS_LOGO_SMALL') : '',
             'logo_small_width' => (Configuration::get('PS_LOGO_SMALL_WIDTH')) ? Configuration::get('PS_LOGO_SMALL_WIDTH') : '',
 
+            // suzy: 2020-02-25 fb:app_id
+            'fb_app_id' => (Configuration::get('SIMPLICITY_FB_APP_ID')) ? Configuration::get('SIMPLICITY_FB_APP_ID') : '',
+
             // suzy: 2019-06-02 支援通知信 LOGO
             'logo_mail' => (Configuration::get('PS_LOGO_MAIL')) ? $img_ps_url . Configuration::get('PS_LOGO_MAIL') : '',
 

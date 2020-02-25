@@ -25,12 +25,13 @@
 {extends file=$layout}
 
 {block name='head' append}
+    <meta property="fb:app_id" content="{$shop.fb_app_id}">
     <meta property="og:type" content="product">
     <meta property="og:url" content="{$urls.current_url}">
     <meta property="og:title" content="{$page.meta.title}">
     <meta property="og:site_name" content="{$shop.name}">
     <meta property="og:description" content="{$page.meta.description}">
-    <meta property="og:image" content="{$shop.favicon_iphone_retina}?{$shop.favicon_update_time}">
+    <meta property="og:image" content="{$shop.favicon_microsoft}?{$shop.favicon_update_time}">
 {/block}
 
 {block name='content'}
