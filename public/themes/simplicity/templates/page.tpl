@@ -32,6 +32,8 @@
     <meta property="og:site_name" content="{$shop.name}">
     <meta property="og:description" content="{$page.meta.description}">
     <meta property="og:image" content="{$shop.favicon_microsoft}?{$shop.favicon_update_time}">
+    <meta property="og:image:width" content="310">
+    <meta property="og:image:height" content="310">
 {/block}
 
 {block name='content'}
