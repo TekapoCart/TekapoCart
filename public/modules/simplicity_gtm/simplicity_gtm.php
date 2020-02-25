@@ -66,7 +66,6 @@ class Simplicity_Gtm extends Module
             'backOfficeHeader',
             'displayAdminOrderTabOrder',
             'displayAdminOrderContentOrder',
-
         );
 
         $installed = (parent::install() &&
@@ -338,7 +337,7 @@ class Simplicity_Gtm extends Module
         $this->context->controller->registerJavascript(
             'modules-' . $this->name,
             'modules/' . $this->name . '/simplicity_gtm.js',
-            array('position' => 'head', 'priority' => 150)
+            array('position' => 'bottom', 'priority' => 150)
         );
 
         return $this->fetch('module:' . $this->name . '/hook-header.tpl');
