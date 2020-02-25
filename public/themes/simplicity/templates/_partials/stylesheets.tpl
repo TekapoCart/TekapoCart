@@ -23,7 +23,7 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 
-<link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 
 {foreach $stylesheets.external as $stylesheet}
