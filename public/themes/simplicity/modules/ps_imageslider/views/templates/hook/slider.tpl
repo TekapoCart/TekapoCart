@@ -37,7 +37,7 @@
                    data-src-mobile="{$slide.thumb_url}"
                    data-sizes="auto"
                    data-src="{$slide.image_url}"
-                   {if $smarty.foreach.homeslider.first}src="{$slide.thumb_url|replace:$type:'.webp'}"{/if}
+                   src="{$slide.thumb_url|replace:$type:'.webp'}"
                    data-srcset="
                      {$slide.image_url|replace:$type:'.webp'} {$slide.size}w,
                      {$slide.thumb_url|replace:$type:'.webp'} {$slide.thumb_size}w"

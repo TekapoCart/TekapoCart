@@ -47,11 +47,11 @@
 
 {block name='head_icons'}
 
-  <link rel="dns-prefetch" href="https://www.facebook.com" />
-  <link rel="dns-prefetch" href="https://connect.facebook.net" />
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-  <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-  <link rel="dns-prefetch" href="https://stats.g.doubleclick.net" />
+  <link rel="preconnect" href="https://www.facebook.com" />
+  <link rel="preconnect" href="https://connect.facebook.net" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://www.google-analytics.com" />
+  <link rel="preconnect" href="https://stats.g.doubleclick.net" />
 
   <link rel="icon" sizes="32x32" type="image/png" href="{$shop.favicon}?{$shop.favicon_update_time}">
   <link rel="apple-touch-icon" sizes="120x120" href="{$shop.favicon_iphone}?{$shop.favicon_update_time}">
