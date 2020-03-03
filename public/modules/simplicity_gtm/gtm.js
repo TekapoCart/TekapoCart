@@ -336,34 +336,71 @@ function GtmJs() {
                     idProductAttribute = 0;
                 }
                 idProduct = idProduct + '-' + idProductAttribute;
-                product = publicValues.visibleProducts[idProduct];
-                var dataLayerObj = {
-                    'event': 'productClick',
-                    'eventCategory': 'engagement',
-                    'eventAction': 'select_content',
-                    'eventLabel': 'product_list',
-                    'eventValue': ''
-                };
-                dataLayerObj.eventLabel = (link ? 'product_list' : 'quick_view');
-                if (publicValues.guaSettings.trackingId) {
-                    dataLayerObj.ecommerce = {
-                        'currencyCode': publicValues.shopSettings.currency,
-                        'click': {
-                            'actionField': {'list': list},
-                            'products': [getProductLayer(product, 'gua')]
+
+                /////////////////////////////////////////
+
+                var req = new XMLHttpRequest(),
+                    url = privateValues.moduleUrl + 'response',
+                    data = {
+                        'action': 'product',
+                        'products_position': privateValues.productsPosition,
+                        'list': list,
+                        'visible_products': publicValues.visibleProducts,
+                        'id_products': [idProduct],
+                        'token': publicValues.shopSettings.token
+                    },
+                    formData,
+                    response;
+
+                formData = new FormData();
+                formData.append('data', JSON.stringify(data));
+
+                req.open('POST', url, true);
+                req.onreadystatechange = function () {
+
+                    try {
+                        if (req.status === 200 && req.readyState === 4) {
+                            products = JSON.parse(req.responseText);
+                            if (typeof products === 'object') {
+                                /////////////////////////////////////////
+                                var dataLayerObj = {
+                                    'event': 'productClick',
+                                    'eventCategory': 'engagement',
+                                    'eventAction': 'select_content',
+                                    'eventLabel': (link ? 'product_list' : 'quick_view'),
+                                    'eventValue': ''
+                                };
+                                if (publicValues.guaSettings.trackingId) {
+                                    dataLayerObj.ecommerce = {
+                                        'currencyCode': publicValues.shopSettings.currency,
+                                        'click': {
+                                            'actionField': {'list': list},
+                                            'products': [getProductLayer(products[0], 'gua')]
+                                        }
+                                    };
+                                }
+                                if (link) {
+                                    privateValues.redirectLink = link;
+                                    dataLayerObj.eventCallback = callbackWithTimeout(
+                                        function () {
+                                            redirectLink();
+                                        },
+                                        2000
+                                    );
+                                }
+                                pushDataLayer(dataLayerObj);
+                                /////////////////////////////////////////
+                            }
                         }
-                    };
-                }
-                if (link) {
-                    privateValues.redirectLink = link;
-                    dataLayerObj.eventCallback = callbackWithTimeout(
-                        function () {
-                            redirectLink();
-                        },
-                        2000
-                    );
-                }
-                pushDataLayer(dataLayerObj);
+                    } catch (error) {
+                        console.warn(error);
+                    }
+
+                };
+                req.send(formData);
+
+                /////////////////////////////////////////
+
             } else {
                 document.location = link;
             }

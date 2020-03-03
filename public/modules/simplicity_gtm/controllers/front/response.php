@@ -85,29 +85,30 @@ class Simplicity_GtmResponseModuleFrontController extends ModuleFrontController
                             }
 
                             if (!empty($track_products)) {
-                                $gtm_products = [];
-                                foreach ($track_products as $key => $track_product) {
+                                $send_products = [];
+                                foreach ($track_products as $key => $product) {
                                     $position = null;
                                     if ($products_position) {
+                                        $id_product = isset($product['id_product']) ? $product['id_product'] : $product['id'];
                                         $id_product_attribute = 0;
                                         if (isset($product['id_product_attribute']) && $product['id_product_attribute'] > 0) {
                                             $id_product_attribute = $product['id_product_attribute'];
                                         } elseif (isset($product['cache_default_attribute']) && $product['cache_default_attribute'] > 0) {
                                             $id_product_attribute = $product['cache_default_attribute'];
                                         }
-                                        $default_key = $track_product['id_product'] . '-' . $id_product_attribute;
+                                        $default_key = $id_product . '-' . $id_product_attribute;
                                         if (isset($products_position[$key])) {
                                             $position = $products_position[$key];
                                         } elseif (isset($products_position[$default_key])) {
                                             $position = $products_position[$default_key];
                                         }
                                     }
-                                    $track_product['position'] = $position;
-                                    $track_product['list'] = $list;
-                                    $gtm_products[] = $track_product;
+                                    $product['position'] = $position;
+                                    $product['list'] = $list;
+                                    $send_products[] = $product;
                                 }
                                 header('Content-Type: application/json');
-                                die(json_encode($gtm_products));
+                                die(json_encode($send_products));
                             }
 
                             break;
