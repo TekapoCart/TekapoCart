@@ -32,7 +32,7 @@
               {if $slide.has_webp}
                 {assign 'type' array('.jpg', '.jpeg', '.png', '.gif')}
                 <img
-                   alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                   alt="{$slide.legend|escape}"
                    data-src-desktop="{$slide.image_url}"
                    data-src-mobile="{$slide.thumb_url}"
                    data-sizes="auto"
@@ -45,7 +45,7 @@
                 />
               {else}
                 <img
-                   alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                   alt="{$slide.legend|escape}"
                    data-src-desktop="{$slide.image_url}"
                    data-src-mobile="{$slide.thumb_url}"
                    data-sizes="auto"

@@ -53,7 +53,7 @@ class EzShipChangeStoreModuleFrontController extends ModuleFrontController
 
         } catch (Exception $e) {
 
-            EzShip::waenMessage(sprintf('EzShipChangeStore exception: %s', $e->getMessage()), true);
+            EzShip::warnMessage(sprintf('EzShipChangeStore exception: %s', $e->getMessage()), true);
         }
 
         exit;

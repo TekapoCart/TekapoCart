@@ -52,7 +52,7 @@ class Tc_711 extends CarrierModule
         return true;
     }
 
-    public function installDb()
+    private function installDb()
     {
         $sql = [];
 
@@ -117,7 +117,7 @@ class Tc_711 extends CarrierModule
 
     }
 
-    public function installCarrier()
+    private function installCarrier()
     {
         $carrier = new Carrier();
         $carrier->name = $this->l('7-11 pickup in-store');

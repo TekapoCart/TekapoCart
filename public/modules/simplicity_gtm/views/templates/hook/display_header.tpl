@@ -1,24 +1,27 @@
 <script data-keepinline>
-    var gtmId = '{$gtm_id}';
-    var gaSettings = {$gaSettings|json_encode nofilter};
-    var adsSettings = {$adsSettings|json_encode nofilter};
-    var facebookSettings = {$facebookSettings|json_encode nofilter};
-    var shopSettings = {$shopSettings|json_encode nofilter};
-    var dataLayer = window.dataLayer || [];
-    var initDataLayer = new Object();
-    if (gaSettings.trackingId) {
+    var gtmId = '{$gtm_id}',
+        guaSettings = {$guaSettings|json_encode nofilter},
+        adsSettings = {$adsSettings|json_encode nofilter},
+        facebookSettings = {$facebookSettings|json_encode nofilter},
+        shopSettings = {$shopSettings|json_encode nofilter},
+        dataLayer = window.dataLayer || [],
+        initDataLayer = new Object();
+
+    if (guaSettings.trackingId) {
         initDataLayer.gua = {
-            'trackingId': gaSettings.trackingId,
+            'trackingId': guaSettings.trackingId,
             'cookieDomain': 'auto',
-            'anonymizeIp': gaSettings.anonymizeIp,
-            'siteSpeedSampleRate': gaSettings.siteSpeedSampleRate,
-            'dimensionProdId': gaSettings.ecommProdId,
-            'dimensionPageType': gaSettings.ecommPageType,
-            'dimensionTotalValue': gaSettings.ecommTotalValue,
-            'dimensionCategory' : gaSettings.ecommCategory
+            // 'allowLinker': true,
+            'siteSpeedSampleRate': 1,
+            // 'anonymizeIp': false,
+            // 'linkAttribution': true,
+            'dimensionProdId': 1,
+            'dimensionPageType': 2,
+            'dimensionTotalValue': 3,
+            'dimensionCategory' : 4
         };
-        if (gaSettings.unifyUserId) {
-            initDataLayer.gua.userId = gaSettings.id_customer;
+        if (guaSettings.customerId > 0) {
+            initDataLayer.gua.userId = guaSettings.customerId;
         }
     }
     if (adsSettings.conversionId) {
@@ -35,9 +38,11 @@
     initDataLayer.common = {
         'currency' : shopSettings.currency,
         'langCode' : shopSettings.lang,
+        'countryCode' : shopSettings.lang,
         'referrer' : document.referrer,
         'userAgent' : navigator.userAgent,
-        'navigatorLang' : navigator.language
+        'navigatorLang' : navigator.language,
+        // 'doNotTrack': false
     };
     dataLayer.push(initDataLayer);
 
@@ -52,4 +57,5 @@
         f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', gtmId);
     {/literal}
+
 </script>

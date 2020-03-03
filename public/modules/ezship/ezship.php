@@ -52,7 +52,7 @@ class EzShip extends CarrierModule
         return true;
     }
 
-    public function installDb()
+    private function installDb()
     {
         $sql = [];
 
@@ -117,7 +117,7 @@ class EzShip extends CarrierModule
 
     }
 
-    public function installCarrier()
+    private function installCarrier()
     {
         $carrier = new Carrier();
         $carrier->name = $this->l('OK Mart, HiLife, FamilyMart pickup in-store');

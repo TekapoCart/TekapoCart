@@ -1,15 +1,17 @@
 <?php
 
-abstract class EzShip_ShippingMethod
+abstract class Gtm_ActionType
 {
 
-    const HOME = 'Home';
+    const PURCHASE = 'Purchase';
 
-    const CVS = 'CVS';
+    const REFUND = 'Refund';
+
+    const ABORT = 'Abort';
 }
 
-if (!class_exists('EzShip_EncryptType', false)) {
-    abstract class EzShip_EncryptType
+if (!class_exists('Gtm_EncryptType', false)) {
+    abstract class Gtm_EncryptType
     {
         // MD5(預設)
         const ENC_MD5 = 0;
@@ -151,9 +153,9 @@ abstract class EzShip_ReturnOrderStatus
 
 }
 
-class EzShip_AllInOne
+class Gtm_AllInOne
 {
-    public $suID = 'suID';
+    public $gtmID = 'gtmID';
     public $secret = 'secret';
 
     public $ServiceURL = 'ServiceURL';
@@ -162,49 +164,51 @@ class EzShip_AllInOne
     public $SendExtend = 'SendExtend';
 
     public $Query = 'Query';
-    public $EncryptType = EzShip_EncryptType::ENC_MD5;
+    public $EncryptType = Gtm_EncryptType::ENC_MD5;
 
     function __construct()
     {
 
         $this->Send = [
-            "orderID" => '',
-            "orderStatus" => '',
-            "orderType" => '',
-            "orderAmount" => '',
-            "rvName" => '',
-            "rvEmail" => '',
-            "rvMobile" => '',
-            "rtURL" => '',
+            "cid" => '',
+            "cu" => '',
+            "ds" => '',
+            "t" => '',
+            "ti" => '',
+            "tid" => '',
+            "pa" => '',
+            "uid" => '',
+            "v" => '',
+            "z" => '',
 
-            "ChooseShipping" => '',
+            "ChooseAction" => '',
             "Items" => [],
         ];
 
         $this->SendExtend = [];
 
         $this->Query = [
-            'sn_id' => ''
+            'gtmID' => ''
         ];
 
     }
 
-    function CheckOutXml()
+    function CheckOut()
     {
-        $arParameters = array_merge(array('suID' => $this->suID, 'EncryptType' => $this->EncryptType), $this->Send);
-        return EzShip_Send::CheckOutXml($arParameters, $this->SendExtend, $this->suID, $this->secret, $this->ServiceURL);
+        $arParameters = array_merge(array('gtmID' => $this->gtmID, 'EncryptType' => $this->EncryptType), $this->Send);
+        return Gtm_Send::CheckOut($arParameters, $this->SendExtend, $this->gtmID, $this->secret, $this->ServiceURL);
     }
 
     function CheckOutFeedback()
     {
-        return EzShip_CheckOutFeedback::CheckOut(array_merge($_REQUEST, ['EncryptType' => $this->EncryptType]), $this->suID, $this->secret);
+        return Gtm_CheckOutFeedback::CheckOut(array_merge(json_decode($_REQUEST['data'], true), ['EncryptType' => $this->EncryptType]), $this->gtmID, $this->secret);
     }
 }
 
 /**
  * 抽象類
  */
-abstract class EzShip_Aio
+abstract class Gtm_Aio
 {
 
     protected static function ServerPost($parameters, $ServiceURL)
@@ -218,10 +222,11 @@ abstract class EzShip_Aio
         curl_setopt($ch, CURLOPT_URL, $ServiceURL);
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // 302 redirect
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         $rs = curl_exec($ch);
 
         if (false === $rs) {
@@ -232,53 +237,36 @@ abstract class EzShip_Aio
 
         return $rs;
     }
-
-    protected static function XmlEncode($arParameters, $cdataParameters)
-    {
-
-        $szXml = '';
-        foreach ($arParameters as $key => $value) {
-            if (is_array($value) === true) {
-                $szXml .= sprintf('<%s>%s</%s>', $key, self::XmlEncode($value, $cdataParameters), $key);
-            } else {
-                if (empty($value) === false && (in_array($key, $cdataParameters, true) === true || (bool)preg_match('/[<>&]/', $value) === true)) {
-                    $value = '<![CDATA[' . $value . ']]>';
-                }
-                $szXml .= sprintf('<%s>%s</%s>', $key, $value, $key);
-            }
-        }
-        return $szXml;
-    }
 }
 
-class EzShip_Send extends EzShip_Aio
+class Gtm_Send extends Gtm_Aio
 {
-    public static $ShippingObj;
+    public static $ActionObj;
 
     protected static function process($arParameters = array(), $arExtend = array())
     {
-        $shippingMethod = 'EzShip_Verification_' . $arParameters['ChooseShipping'];
-        self::$ShippingObj = new $shippingMethod;
+        $actionType = 'Gtm_Verification_' . $arParameters['ChooseAction'];
+        self::$ActionObj = new $actionType;
 
-        unset($arParameters['ChooseShipping']);
+        unset($arParameters['ChooseAction']);
 
         // 檢查參數
-        $arParameters = self::$ShippingObj->check_string($arParameters);
+        $arParameters = self::$ActionObj->check_string($arParameters);
 
         // 檢查商品
-        $arParameters = self::$ShippingObj->check_goods($arParameters);
+        $arParameters = self::$ActionObj->check_goods($arParameters);
 
         // 檢查額外參數
-        $arExtend = self::$ShippingObj->check_extend_string($arExtend);
+        $arExtend = self::$ActionObj->check_extend_string($arExtend);
 
         // 過濾額外參數
-        $arExtend = self::$ShippingObj->filter_string($arExtend);
+        $arExtend = self::$ActionObj->filter_string($arExtend);
 
         // 合併共同參數及延伸參數
         return array_merge($arParameters, $arExtend);
     }
 
-    static function CheckOutXml($arParameters = [], $arExtend = [], $suID = '', $secret = '', $ServiceURL = '')
+    static function CheckOut($arParameters = [], $arExtend = [], $suID = '', $secret = '', $ServiceURL = '')
     {
 
         $arParameters = self::process($arParameters, $arExtend);
@@ -288,28 +276,15 @@ class EzShip_Send extends EzShip_Aio
 
         $arParameters = array_merge($arParameters, array('webPara' => $szCheckMacValue));
 
-        $detailXml = '';
-
-        foreach ($arParameters['Items'] as $item) {
-            $detailXml .= '<Detail>' . parent::XmlEncode($item, ['prodNo', 'prodName', 'prodSpec']) . '</Detail>';
-        }
-
-        unset($arParameters['Items']);
         unset($arParameters['EncryptType']);
 
-        // 生成 xml
-        $postParameters = [
-            'web_map_xml' => '<ORDER>' . parent::XmlEncode($arParameters, ['rvName', 'rvAddr']) . $detailXml . '</ORDER>',
-        ];
-
-
-        return static::ServerPost($postParameters, $ServiceURL);
+        return static::ServerPost($arParameters, $ServiceURL);
     }
 }
 
-class EzShip_CheckOutFeedback extends EzShip_Aio
+class Gtm_CheckOutFeedback extends Gtm_Aio
 {
-    static function CheckOut($arParameters = [], $suID = '', $secret = '')
+    static function CheckOut($arParameters = [], $gtmID = '', $secret = '')
     {
         // 變數宣告
         $arErrors = [];
@@ -341,59 +316,18 @@ class EzShip_CheckOutFeedback extends EzShip_Aio
     }
 }
 
-Abstract class EzShip_Verification
+Abstract class Gtm_Verification
 {
 
-    public $arShippingExtend = [];
+    public $arActionExtend = [];
 
     // 檢查共同參數
     public function check_string($arParameters = [])
     {
 
         $arErrors = [];
-        if (strlen($arParameters['suID']) == 0) {
-            array_push($arErrors, 'suID is required.');
-        }
-        if (strlen($arParameters['suID']) > 100) {
-            array_push($arErrors, 'suID max length is 100.');
-        }
-
-        if (strlen($arParameters['orderID']) == 0) {
-            array_push($arErrors, 'orderID is required.');
-        }
-
-        if (strlen($arParameters['orderStatus']) == 0) {
-            array_push($arErrors, 'orderStatus is required.');
-        }
-
-        if (strlen($arParameters['orderType']) == 0) {
-            array_push($arErrors, 'orderType is required.');
-        }
-
-        if (strlen($arParameters['orderAmount']) == 0) {
-            array_push($arErrors, 'orderAmount is required.');
-        }
-
-        if (strlen($arParameters['rvName']) == 0) {
-            array_push($arErrors, 'rvName is required.');
-        }
-        if (strlen($arParameters['rvName']) > 60) {
-            array_push($arErrors, 'rvName max length is 60.');
-        }
-
-        if (strlen($arParameters['rvEmail']) == 0) {
-            array_push($arErrors, 'rvEmail is required.');
-        }
-        if (strlen($arParameters['rvEmail']) > 100) {
-            array_push($arErrors, 'rvEmail max length is 100.');
-        }
-
-        if (strlen($arParameters['rvMobile']) == 0) {
-            array_push($arErrors, 'rvMobile is required.');
-        }
-
-        if (strlen($arParameters['rtURL']) == 0) {
-            array_push($arErrors, 'rtURL is required.');
+        if (strlen($arParameters['gtmID']) == 0) {
+            array_push($arErrors, 'gtmID is required.');
         }
 
         // 檢查CheckMacValue加密方式
@@ -412,7 +346,7 @@ Abstract class EzShip_Verification
     public function check_extend_string($arExtend = [])
     {
         $arErrors = [];
-        foreach ($this->arShippingExtend as $key => $value) {
+        foreach ($this->arActionExtend as $key => $value) {
             if (!isset($arExtend[$key]) || strlen($arExtend[$key]) == 0) {
                 array_push($arErrors, $key . ' is required.');
             }
@@ -455,9 +389,9 @@ Abstract class EzShip_Verification
     // 過濾多餘參數
     public function filter_string($arExtend = array())
     {
-        $arShippingExtend = array_keys($this->arShippingExtend);
+        $arActionExtend = array_keys($this->arActionExtend);
         foreach ($arExtend as $key => $value) {
-            if (!in_array($key, $arShippingExtend)) {
+            if (!in_array($key, $arActionExtend)) {
                 unset($arExtend[$key]);
             }
         }
@@ -466,9 +400,9 @@ Abstract class EzShip_Verification
     }
 }
 
-class EzShip_Verification_CVS extends EzShip_Verification
+class Gtm_Verification_Purchase extends Gtm_Verification
 {
-    public $arShippingExtend = array(
+    public $arActionExtend = array(
         'stCode' => '',
     );
 
@@ -480,9 +414,24 @@ class EzShip_Verification_CVS extends EzShip_Verification
     }
 }
 
-class EzShip_Verification_Home extends EzShip_Verification
+class Gtm_Verification_Refund extends Gtm_Verification
 {
-    public $arShippingExtend = array(
+    public $arActionExtend = array(
+        'rvAddr' => '',
+        'rvZip' => '',
+    );
+
+    // 過濾多餘參數
+    function filter_string($arExtend = array())
+    {
+        $arExtend = parent::filter_string($arExtend);
+        return $arExtend;
+    }
+}
+
+class Gtm_Verification_Abort extends Gtm_Verification
+{
+    public $arActionExtend = array(
         'rvAddr' => '',
         'rvZip' => '',
     );
@@ -537,12 +486,12 @@ if (!class_exists('EzShip_CheckMacValue', false)) {
 
                 // 編碼
                 switch ($encType) {
-                    case EzShip_EncryptType::ENC_SHA256:
+                    case Gtm_EncryptType::ENC_SHA256:
                         // SHA256 編碼
                         $sMacValue = hash('sha256', $sMacValue);
                         break;
 
-                    case EzShip_EncryptType::ENC_MD5:
+                    case Gtm_EncryptType::ENC_MD5:
                     default:
                         // MD5 編碼
                         $sMacValue = md5($sMacValue);

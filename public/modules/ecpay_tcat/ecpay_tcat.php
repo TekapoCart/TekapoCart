@@ -64,7 +64,7 @@ class Ecpay_Tcat extends CarrierModule
         return true;
     }
 
-    public function installCarrier()
+    private function installCarrier()
     {
         $carrier = new Carrier();
         $carrier->name = $this->l('Home delivery');
