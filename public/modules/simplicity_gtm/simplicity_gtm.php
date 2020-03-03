@@ -845,7 +845,7 @@ class Simplicity_Gtm extends Module
                 $currency = CurrencyCore::getCurrency($order->id_currency);
                 $aio->Send['cu'] = $currency['iso_code'];
 
-                $aio->Send['ds'] = 'backoffice'; // Data Source
+                $aio->Send['ds'] = 'system'; // Data Source
                 $aio->Send['t'] = 'event'; // Transaction Type
                 $aio->Send['ti'] = $order->id;
                 $aio->Send['tid'] = Configuration::get('SIMPLICITY_GTM_GUA_ID');
@@ -948,7 +948,7 @@ class Simplicity_Gtm extends Module
                 $aio->secret = Configuration::get('SIMPLICITY_GTM_SECRET');
                 $aio->ServiceURL = 'https://www.google-analytics.com/collect';
                 $aio->Send['cid'] = GtmClient::getClientIdByCustomerId($customer_id);
-                $aio->Send['ds'] = 'admin';
+                $aio->Send['ds'] = 'system';
                 $aio->Send['ea'] = 'aborted';
                 $aio->Send['ec'] = 'exception';
                 $aio->Send['el'] = 'order_id_' . $order_id;

@@ -143,6 +143,14 @@ abstract class AdminStatsTabControllerCore extends AdminPreferencesControllerCor
         $tpl = $this->createTemplate('menu.tpl');
 
         $modules = $this->getModules();
+
+        // suzy: 2020-03-03 隱藏部份統計模組
+        foreach ($modules as $key => $module) {
+            if (!in_array($module['name'], ['statsbestcustomers', 'statsbestproducts', 'statsforecast'])) {
+                unset($modules[$key]);
+            }
+        }
+
         $module_instance = array();
         foreach ($modules as $m => $module) {
             if ($module_instance[$module['name']] = Module::getInstanceByName($module['name'])) {
