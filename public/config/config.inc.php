@@ -268,5 +268,5 @@ define('_GCP_KEY_', Configuration::get('TC_GCP_KEY', '/var/bak/cdn_key.json'));
 define('_GCP_BUCKET_', Configuration::get('TC_GCP_BUCKET', 'tekapocart-cdn'));
 
 // suzy: 2018-08-12 TekapoCart Version
-define('_TC_VERSION_', '1.1.7');
-define('_TC_VERSION_DATE_', '20200225-2');
+define('_TC_VERSION_', '1.1.8');
+define('_TC_VERSION_DATE_', '20200303');
