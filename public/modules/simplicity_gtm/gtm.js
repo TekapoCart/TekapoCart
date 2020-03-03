@@ -318,7 +318,7 @@ function GtmJs() {
             if (activeFilter && activeFilter.classList.contains('active_filters')) {
                 list = 'filtered_results';
             } else {
-                list = publicValues.list_name;
+                list = publicValues.listName;
             }
             if (!isNaN(idProduct)) {
                 classList = target.classList;
