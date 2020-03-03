@@ -866,13 +866,13 @@ class Simplicity_Gtm extends Module
 
 
 //            // Get reference url
-//            $gtm_order['document_reference'] = Rc_PgTagManagerTools::getSourceConnection(
+//            $gtm_order['document_reference'] = getSourceConnection(
 //                $order_id,
 //                $order_date
 //            );
 //
 //            // get ga utm campaign
-//            $gtm_order['ga_utm'] = Rc_PgTagManagerTools::getGaUtmValues(
+//            $gtm_order['ga_utm'] = getGaUtmValues(
 //                $gtm_order['module'],
 //                $gtm_order['document_reference']
 //            );
