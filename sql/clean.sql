@@ -39,10 +39,13 @@ TRUNCATE TABLE `ps_stock_mvt`;
 TRUNCATE TABLE `ps_fbmessenger_subscription`;
 TRUNCATE TABLE `ps_fbmessenger_message`;
 TRUNCATE TABLE `ps_gtm_client`;
-TRUNCATE TABLE `ps_gtm_orders`;
+TRUNCATE TABLE `ps_gtm_order`;
 TRUNCATE TABLE `ps_paypal_capture`;
 TRUNCATE TABLE `ps_paypal_order`;
 TRUNCATE TABLE `ps_paypal_processlogger`;
+TRUNCATE TABLE `ps_tc_cart_shipping`;
+TRUNCATE TABLE `ps_tc_order_payment`;
+TRUNCATE TABLE `ps_tc_order_shipping`;
 
 
 --
@@ -59,6 +62,7 @@ UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='SIMPLICITY_GTM_GUA_ID';
 UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='SIMPLICITY_GTM_ADWORDS_ID';
 UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='SIMPLICITY_GTM_ADWORDS_LABEL';
 UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='SIMPLICITY_GTM_FACEBOOK_ID';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='SIMPLICITY_GTM_SECRET';
 
 UPDATE `ps_configuration` SET `value` ='smtp.gmail.com' WHERE `name` = 'PS_MAIL_SERVER';
 UPDATE `ps_configuration` SET `value`='e.tekapo@gmail.com' WHERE `name`='PS_MAIL_USER';
@@ -110,5 +114,19 @@ UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='PAYPAL_METHOD';
 UPDATE `ps_configuration` SET `value`=0 WHERE `name`='PAYPAL_CONNECTION_EC_CONFIGURED';
 UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='PAYPAL_SIGNATURE_LIVE';
 
+-- ezship
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ezship_su_id';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ezship_secret';
+
+-- ecpay
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ecpay_logistics_merchant_id';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ecpay_logistics_hash_key';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ecpay_logistics_hash_iv';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ecpay_sender_name';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ecpay_sender_cellphone';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ecpay_sender_address';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ecpay_sender_postcode';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ecpay_parcel_pickup_time';
 
 
+UPDATE `ps_employee` SET `id_last_order` = '0' WHERE `ps_employee`.`id_employee` = 1;
