@@ -38,8 +38,10 @@ include(dirname(__FILE__) . '/../../init.php');
 //        die('Bad token');
 //    }
 //}
-if ($_SERVER['REMOTE_ADDR'] !== file_get_contents("http://ipecho.net/plain")) {
-    die('Bad token');
+if ($_SERVER['REMOTE_ADDR'] !== '127.0.0.1') {
+    if (Tools::substr(Tools::encrypt('gsitemap/cron'), 0, 10) != Tools::getValue('token') || !Module::isInstalled('gsitemap')) {
+        die('Bad token');
+    }
 }
 
 $gsitemap = Module::getInstanceByName('gsitemap');
