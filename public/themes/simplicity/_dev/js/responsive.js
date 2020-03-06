@@ -68,6 +68,7 @@ function toggleMobileStyles()
 	});
 }
 
+// suzy: 支援 webp
 function webpIsSupported(callback)
 {
     // If the browser doesn't have the method createImageBitmap, you can't display webp format
@@ -103,10 +104,14 @@ function toggleThumbnails()
 
                 var device = prestashop.responsive.mobile ? 'mobile' : 'desktop';
 
-                if ($(this).attr('data-src-' + device + '-webp').length > 0) {
-                    $(this).attr('src', $(this).attr('data-src-' + device + '-webp'));
-                } else if ($(this).attr('data-src-' + device).length > 0) {
-                    $(this).attr('src', $(this).attr('data-src-' + device));
+                if ($(this).attr('data-src-' + device + '-webp')) {
+                    if ($(this).attr('src') !== $(this).attr('data-src-' + device + '-webp')) {
+                        $(this).attr('src', $(this).attr('data-src-' + device + '-webp'));
+                    }
+                } else if ($(this).attr('data-src-' + device)) {
+                    if ($(this).attr('src') !== $(this).attr('data-src-' + device)) {
+                        $(this).attr('src', $(this).attr('data-src-' + device));
+                    }
                 }
             });
 
@@ -116,8 +121,10 @@ function toggleThumbnails()
 
                 var device = prestashop.responsive.mobile ? 'mobile' : 'desktop';
 
-                if ($(this).attr('data-src-' + device).length > 0) {
-                    $(this).attr('src', $(this).attr('data-src-' + device));
+                if ($(this).attr('data-src-' + device)) {
+                    if ($(this).attr('src') !== $(this).attr('data-src-' + device)) {
+                        $(this).attr('src', $(this).attr('data-src-' + device));
+                    }
                 }
             });
         }
