@@ -40,13 +40,11 @@
                 {assign 'type' array('.jpg', '.jpeg', '.png', '.gif')}
                 <img
                   alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                  data-src-desktop-webp="{$product.cover.bySize.home_default.url|replace:$type:'.webp'}"
+                  data-src-mobile-webp="{$product.cover.bySize.small_default.url|replace:$type:'.webp'}"
                   data-src-desktop="{$product.cover.bySize.home_default.url}"
                   data-src-mobile="{$product.cover.bySize.small_default.url}"
-                  data-sizes="auto"
                   data-src="{$product.cover.bySize.home_default.url}"
-                  data-srcset="
-                    {$product.cover.bySize.small_default.url|replace:$type:'.webp'} {$product.cover.bySize.small_default.width}w,
-                    {$product.cover.bySize.home_default.url|replace:$type:'.webp'} {$product.cover.bySize.home_default.width}w"
                   class="lazyload"
               />
               {else}
@@ -54,11 +52,7 @@
                   alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
                   data-src-desktop="{$product.cover.bySize.home_default.url}"
                   data-src-mobile="{$product.cover.bySize.small_default.url}"
-                  data-sizes="auto"
                   data-src="{$product.cover.bySize.home_default.url}"
-                  data-srcset="
-                    {$product.cover.bySize.small_default.url} {$product.cover.bySize.small_default.width}w,
-                    {$product.cover.bySize.home_default.url} {$product.cover.bySize.home_default.width}w"
                   class="lazyload"
                 />
               {/if}

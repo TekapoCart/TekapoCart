@@ -27,7 +27,7 @@
 <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
 
 {foreach $stylesheets.external as $stylesheet}
-  <link rel="stylesheet" href="{$stylesheet.uri}?{$smarty.const._TC_VERSION_DATE_}" type="text/css" media="{$stylesheet.media}">
+  <link rel="stylesheet" href="{$stylesheet.uri}?{$smarty.const._TC_VERSION_DATE_}{$shop.ccccss_version}" type="text/css" media="{$stylesheet.media}">
 {/foreach}
 
 {foreach $stylesheets.inline as $stylesheet}

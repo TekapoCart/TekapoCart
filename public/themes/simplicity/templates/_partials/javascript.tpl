@@ -23,7 +23,7 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 {foreach $javascript.external as $js}
-  <script type="text/javascript" src="{$js.uri}?{$smarty.const._TC_VERSION_DATE_}" {$js.attribute}></script>
+  <script type="text/javascript" src="{$js.uri}?{$smarty.const._TC_VERSION_DATE_}{$shop.cccjs_version}" {$js.attribute}></script>
 {/foreach}
 
 {foreach $javascript.inline as $js}

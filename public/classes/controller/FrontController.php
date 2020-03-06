@@ -1568,11 +1568,15 @@ class FrontControllerCore extends Controller
         $logo_max_width = trim(Configuration::get('SIMPLICITY_LOGO_MAX_WIDTH_CSS'));
         $logo_max_width = strlen($logo_max_width) > 0 ? $logo_max_width : '';
 
+        // suzy: 2020-03-06 商品頁顯示標籤
+        $show_tag_in_product = Configuration::get('TC_SEARCH_SHOW_TAGS_IN_PRODUCT');
+
         return array(
 
             'body_bg_css' => $body_bg_css,
             'mobile_type' => $mobile_type,
             'logo_max_width' => $logo_max_width,
+            'show_tag_in_product' => $show_tag_in_product,
 
             'display_taxes_label' => $this->getDisplayTaxesLabel(),
             'display_prices_tax_incl' => (bool) (new TaxConfiguration())->includeTaxes(),
@@ -1685,6 +1689,10 @@ class FrontControllerCore extends Controller
             'favicon_android' => (Configuration::get('PS_FAVICON_ANDROID')) ? $img_ps_url . Configuration::get('PS_FAVICON_ANDROID') : '',
             'favicon_microsoft' => (Configuration::get('PS_FAVICON_MICROSOFT')) ? $img_ps_url . Configuration::get('PS_FAVICON_MICROSOFT') : '',
             'theme_color' => (Configuration::get('TC_THEME_COLOR_' . strtoupper($this->context->shop->theme_name))) ? Configuration::get('TC_THEME_COLOR_' . strtoupper($this->context->shop->theme_name)) : '#000',
+
+            // suzy: 2020-03-06 用 ccc version 讀取最新
+            'ccccss_version' => Configuration::get('PS_CCCCSS_VERSION'),
+            'cccjs_version' => Configuration::get('PS_CCCJS_VERSION'),
 
             'address' => array(
                 'formatted' => AddressFormat::generateAddress($address, array(), '<br>'),

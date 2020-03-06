@@ -128,6 +128,16 @@ class AdminSearchConfControllerCore extends AdminController
                 'title' => $this->trans('Search', array(), 'Admin.Shopparameters.Feature'),
                 'icon' => 'icon-search',
                 'fields' => array(
+
+                    // suzy: 2020-03-06 商品頁顯示標籤
+                    'TC_SEARCH_SHOW_TAGS_IN_PRODUCT' => array(
+                        'title' => '商品頁顯示標籤',
+                        'validation' => 'isBool',
+                        'cast' => 'intval',
+                        'type' => 'bool',
+                        'desc' => '在商品頁的社群分享按鈕上方顯示標籤。',
+                    ),
+
                     'PS_SEARCH_START' => array(
                         'title' => $this->trans('Search within word', array(), 'Admin.Shopparameters.Feature'),
                         'validation' => 'isBool',

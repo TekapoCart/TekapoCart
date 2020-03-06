@@ -689,6 +689,34 @@
   margin-top: $medium-space;
 }
 
+.product-tags {
+  margin: 2rem 0 0 0;
+  ul {
+    display: inline-block;
+    li {
+      display: inline-block;
+      margin: 0 4px 4px 0;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      a {
+        display: block;
+        padding: 0 12px;
+        height: 32px;
+        line-height: 32px;
+        border-radius: 32px;
+        background-color: $brand-primary;
+        font-size: $font-size-lg;
+        transition: opacity ease .2s;
+        color: $brand-background;
+        &:hover {
+          background-color: darken($brand-primary, 10%);
+        }
+      }
+    }
+  }
+
+}
+
 .social-sharing {
   width: 100%;
   display: flex;

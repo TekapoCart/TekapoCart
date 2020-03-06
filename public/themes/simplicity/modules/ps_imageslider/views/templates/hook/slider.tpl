@@ -33,28 +33,18 @@
                 {assign 'type' array('.jpg', '.jpeg', '.png', '.gif')}
                 <img
                    alt="{$slide.legend|escape}"
+                   data-src-desktop-webp="{$slide.image_url|replace:$type:'.webp'}"
+                   data-src-mobile-webp="{$slide.thumb_url|replace:$type:'.webp'}"
                    data-src-desktop="{$slide.image_url}"
                    data-src-mobile="{$slide.thumb_url}"
-                   data-sizes="auto"
                    data-src="{$slide.image_url}"
                    src="{$slide.thumb_url|replace:$type:'.webp'}"
-                   data-srcset="
-                     {$slide.image_url|replace:$type:'.webp'} {$slide.size}w,
-                     {$slide.thumb_url|replace:$type:'.webp'} {$slide.thumb_size}w"
                    class="lazyload"
                 />
               {else}
                 <img
                    alt="{$slide.legend|escape}"
-                   data-src-desktop="{$slide.image_url}"
-                   data-src-mobile="{$slide.thumb_url}"
-                   data-sizes="auto"
-                   data-src="{$slide.image_url}"
-                   {if $smarty.foreach.homeslider.first}src="{$slide.thumb_url}"{/if}
-                   data-srcset="
-                     {$slide.image_url} {$slide.size}w,
-                     {$slide.thumb_url} {$slide.thumb_size}w"
-                   class="lazyload"
+                   src="{$slide.image_url}"
                 />
               {/if}
               {if $slide.description}

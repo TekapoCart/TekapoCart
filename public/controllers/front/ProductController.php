@@ -1083,6 +1083,9 @@ class ProductControllerCore extends ProductPresentingFrontControllerCore
         $product['extraContent'] = $extraContentFinder->addParams(array('product' => $this->product))->present();
         $product['ecotax'] = Tools::convertPrice((float) $product['ecotax'], $this->context->currency, true, $this->context);
 
+        // suzy: 2020-03-06 商品頁顯示標籤
+        $product['tags'] = $this->product->tags;
+
         $product_full = Product::getProductProperties($this->context->language->id, $product, $this->context);
 
         $product_full = $this->addProductCustomizationData($product_full);

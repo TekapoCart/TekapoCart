@@ -98,10 +98,28 @@ $(document).ready(() => {
 
   // suzy: 2020-02-23 lazysizes
   webpIsSupported(function(isSupported) {
+
     if (isSupported) {
+
+        document.addEventListener('lazybeforeunveil', function(e){
+            if (e.target.hasAttribute('data-src-desktop-webp') && e.target.hasAttribute('data-src-mobile-webp')) {
+                if (prestashop.responsive.mobile) {
+                    e.target.setAttribute('data-src', e.target.getAttribute('data-src-mobile-webp'));
+                } else {
+                    e.target.setAttribute('data-src', e.target.getAttribute('data-src-desktop-webp'));
+                }
+            } else if (e.target.hasAttribute('data-src-desktop') && e.target.hasAttribute('data-src-mobile')) {
+                if (prestashop.responsive.mobile) {
+                    e.target.setAttribute('data-src', e.target.getAttribute('data-src-mobile'));
+                } else {
+                    e.target.setAttribute('data-src', e.target.getAttribute('data-src-desktop'));
+                }
+            }
+        });
+
         lazySizes.init();
+
     } else{
-        $('.lazyload').removeAttr('data-srcset');
 
         document.addEventListener('lazybeforeunveil', function(e){
             if (e.target.hasAttribute('data-src-desktop') && e.target.hasAttribute('data-src-mobile')) {
