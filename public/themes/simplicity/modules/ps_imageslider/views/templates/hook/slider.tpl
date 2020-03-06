@@ -37,14 +37,16 @@
                    data-src-mobile-webp="{$slide.thumb_url|replace:$type:'.webp'}"
                    data-src-desktop="{$slide.image_url}"
                    data-src-mobile="{$slide.thumb_url}"
-                   data-src="{$slide.image_url}"
                    src="{$slide.thumb_url|replace:$type:'.webp'}"
-                   class="lazyload"
+                   class="js_toggle_thumbnail"
                 />
               {else}
                 <img
                    alt="{$slide.legend|escape}"
-                   src="{$slide.image_url}"
+                   data-src-desktop="{$slide.image_url}"
+                   data-src-mobile="{$slide.thumb_url}"
+                   src="{$slide.thumb_url}"
+                   class="js_toggle_thumbnail"
                 />
               {/if}
               {if $slide.description}
