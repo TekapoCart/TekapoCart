@@ -26,9 +26,7 @@ function comparePaths(requestUrl, pathsArray) {
     if (requestUrl) {
         for (let index = 0; index < pathsArray.length; index++) {
             const pathRegEx = pathsArray[index];
-            console.log(requestUrl);
             if (pathComparer(requestUrl, pathRegEx)) {
-                console.log('pass');
                 return true;
             }
         }
@@ -61,13 +59,11 @@ self.addEventListener("activate", function (event) {
 self.addEventListener("fetch", function (event) {
     if (event.request.method !== "GET") return;
 
-    // var url = event.request.url;
-    // url = url.replace('http://','').replace('https://','').split(/[/?#]/)[0];
-    // if (url !== "demo.tekapo.io" && url !== "cdn.tekapo.io") {
-    //     return;
-    // }
-
     if (event.request.url.indexOf('/tekapo/') !== -1 ) {
+        return;
+    }
+
+    if (event.request.url.indexOf('/order') !== -1 ) {
         return;
     }
 
