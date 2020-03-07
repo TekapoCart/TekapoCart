@@ -67,7 +67,6 @@ self.addEventListener("fetch", function (event) {
     }
 
 
-
     networkFirstFetch(event);
 
     // if (comparePaths(event.request.url, networkFirstPaths)) {

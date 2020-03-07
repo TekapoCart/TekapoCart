@@ -51,6 +51,11 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
+// suzy: 2020-03-08 https://github.com/PrestaShop/PrestaShop/issues/15592
+if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+    $_SERVER['HTTPS'] = 'on';
+}
+
 // For retrocompatibility with "tab" parameter
 if (!isset($_GET['controller']) && isset($_GET['tab'])) {
     $_GET['controller'] = strtolower($_GET['tab']);
