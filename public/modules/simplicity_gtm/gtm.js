@@ -198,10 +198,14 @@ function GtmJs() {
                         'client_id': clientId,
                         'token': publicValues.shopSettings.token
                     };
-                    formData = new FormData();
-                    formData.append('data', JSON.stringify(data));
-                    req.open('POST', url, true);
-                    req.send(formData);
+                    try {
+                        formData = new FormData();
+                        formData.append('data', JSON.stringify(data));
+                        req.open('POST', url, true);
+                        req.send(formData);
+                    } catch (error) {
+                        console.warn(error);
+                    }
                 }
             });
         }
@@ -352,16 +356,18 @@ function GtmJs() {
                     formData,
                     response;
 
-                formData = new FormData();
-                formData.append('data', JSON.stringify(data));
+                try {
+                    formData = new FormData();
+                    formData.append('data', JSON.stringify(data));
 
-                req.open('POST', url, true);
-                req.onreadystatechange = function () {
+                    req.open('POST', url, true);
+                    req.onreadystatechange = function () {
 
-                    try {
                         if (req.status === 200 && req.readyState === 4) {
                             products = JSON.parse(req.responseText);
+
                             if (typeof products === 'object') {
+
                                 /////////////////////////////////////////
                                 var dataLayerObj = {
                                     'event': 'productClick',
@@ -370,6 +376,7 @@ function GtmJs() {
                                     'eventLabel': (link ? 'product_list' : 'quick_view'),
                                     'eventValue': ''
                                 };
+
                                 if (publicValues.guaSettings.trackingId) {
                                     dataLayerObj.ecommerce = {
                                         'currencyCode': publicValues.shopSettings.currency,
@@ -392,13 +399,12 @@ function GtmJs() {
                                 /////////////////////////////////////////
                             }
                         }
-                    } catch (error) {
-                        console.warn(error);
-                    }
+                    };
+                    req.send(formData);
 
-                };
-                req.send(formData);
-
+                } catch (error) {
+                    console.warn(error);
+                }
                 /////////////////////////////////////////
 
             } else {
@@ -830,11 +836,15 @@ function GtmJs() {
                     data.adBlocker = adBlocker;
                 }
 
-                var formData = new FormData();
-                formData.append('data', JSON.stringify(data));
-                formData.append('token', publicValues.shopSettings.token);
-                req.open('POST', url, true);
-                req.send(formData);
+                try {
+                    var formData = new FormData();
+                    formData.append('data', JSON.stringify(data));
+                    formData.append('token', publicValues.shopSettings.token);
+                    req.open('POST', url, true);
+                    req.send(formData);
+                } catch (error) {
+                    console.warn(error);
+                }
             },
             1000
         );
