@@ -15,7 +15,6 @@ const networkFirstPaths = [
 const avoidCachingPaths = [
     /* Add an array of regex of paths that shouldn't be cached */
     // Example: /\/api\/.*/
-    /\/order.*/
 ];
 
 function pathComparer(requestUrl, pathRegEx) {
@@ -67,11 +66,15 @@ self.addEventListener("fetch", function (event) {
         return;
     }
 
-    if (comparePaths(event.request.url, networkFirstPaths)) {
-        networkFirstFetch(event);
-    } else {
-        cacheFirstFetch(event);
-    }
+
+
+    networkFirstFetch(event);
+
+    // if (comparePaths(event.request.url, networkFirstPaths)) {
+    //     networkFirstFetch(event);
+    // } else {
+    //     cacheFirstFetch(event);
+    // }
 });
 
 function cacheFirstFetch(event) {
