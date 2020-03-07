@@ -27,7 +27,9 @@ function comparePaths(requestUrl, pathsArray) {
     if (requestUrl) {
         for (let index = 0; index < pathsArray.length; index++) {
             const pathRegEx = pathsArray[index];
+            console.log(requestUrl);
             if (pathComparer(requestUrl, pathRegEx)) {
+                console.log('pass');
                 return true;
             }
         }
