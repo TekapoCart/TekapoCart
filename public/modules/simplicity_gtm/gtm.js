@@ -404,6 +404,10 @@ function GtmJs() {
 
                 } catch (error) {
                     console.warn(error);
+                    if (link) {
+                        privateValues.redirectLink = link;
+                        redirectLink();
+                    }
                 }
                 /////////////////////////////////////////
 
