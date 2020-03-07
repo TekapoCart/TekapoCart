@@ -3,13 +3,13 @@
   "short_name": "TekapoCart",
   "icons": [
     {
-      "src": "/img/favicon_192_1.jpg",
-      "type": "image/jpg",
+      "src": "/img/icon-192.jpg",
+      "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/img/favicon_512_1.jpg",
-      "type": "image/jpg",
+      "src": "/img/icon-512.jpg",
+      "type": "image/png",
       "sizes": "512x512"
     }
   ],
