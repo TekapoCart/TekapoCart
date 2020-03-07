@@ -201,7 +201,7 @@ class Gtm_AllInOne
 
     function CheckOutFeedback()
     {
-        return Gtm_CheckOutFeedback::CheckOut(array_merge(json_decode($_REQUEST['data'], true), ['EncryptType' => $this->EncryptType]), $this->gtmID, $this->secret);
+        return Gtm_CheckOutFeedback::CheckOut(array_merge($_POST, ['EncryptType' => $this->EncryptType]), $this->gtmID, $this->secret);
     }
 }
 

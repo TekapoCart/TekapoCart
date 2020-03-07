@@ -107,8 +107,9 @@ class Simplicity_GtmResponseModuleFrontController extends ModuleFrontController
                                     $product['list'] = $list;
                                     $send_products[] = $product;
                                 }
-                                header('Content-Type: application/json');
-                                die(json_encode($send_products));
+
+                                echo json_encode($send_products);
+                                exit;
                             }
 
                             break;

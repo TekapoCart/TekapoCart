@@ -114,9 +114,9 @@ function GtmJs() {
 
                 /////////////////////////////////////////
 
-                var req = new XMLHttpRequest(),
-                    url = privateValues.moduleUrl + 'response',
-                    data = {
+                $.post(
+                    privateValues.moduleUrl + 'response',
+                    {
                         'action': 'product',
                         'products_position': privateValues.productsPosition,
                         'list': list,
@@ -124,49 +124,36 @@ function GtmJs() {
                         'id_products': privateValues.sendProducts,
                         'token': publicValues.shopSettings.token
                     },
-                    formData,
-                    response;
+                    function(data) {
+                        products = data;
+                        if (typeof products === 'object') {
+                            /////////////////////////////////////////
+                            var dataLayerObj = {
+                                    'event': 'scrollTracking',
+                                    'eventCategory': 'engagement',
+                                    'eventAction': 'view_item_list',
+                                    'eventLabel': '',
+                                    'eventValue': ''
+                                },
+                                remarketingLayer = {};
 
-                formData = new FormData();
-                formData.append('data', JSON.stringify(data));
-
-                req.open('POST', url, true);
-                req.onreadystatechange = function () {
-
-                    try {
-                        if (req.status === 200 && req.readyState === 4) {
-                            products = JSON.parse(req.responseText);
-                            if (typeof products === 'object') {
-                                /////////////////////////////////////////
-                                var dataLayerObj = {
-                                        'event': 'scrollTracking',
-                                        'eventCategory': 'engagement',
-                                        'eventAction': 'view_item_list',
-                                        'eventLabel': '',
-                                        'eventValue': ''
-                                    },
-                                    remarketingLayer = {};
-
-                                if (publicValues.guaSettings.trackingId) {
-                                    dataLayerObj.ecommerce = {
-                                        'currencyCode': publicValues.shopSettings.currency,
-                                        'impressions': getProductsLayer(products, 'gua')
-                                    };
-                                    if (publicValues.guaSettings.dynamicRemarketing) {
-                                        remarketingLayer = getRemarketingLayer(products);
-                                        Object.assign(dataLayerObj, remarketingLayer);
-                                    }
+                            if (publicValues.guaSettings.trackingId) {
+                                dataLayerObj.ecommerce = {
+                                    'currencyCode': publicValues.shopSettings.currency,
+                                    'impressions': getProductsLayer(products, 'gua')
+                                };
+                                if (publicValues.guaSettings.dynamicRemarketing) {
+                                    remarketingLayer = getRemarketingLayer(products);
+                                    Object.assign(dataLayerObj, remarketingLayer);
                                 }
-                                pushDataLayer(dataLayerObj);
-                                /////////////////////////////////////////
                             }
+                            pushDataLayer(dataLayerObj);
+                            /////////////////////////////////////////
                         }
-                    } catch (error) {
-                        console.warn(error);
-                    }
 
-                };
-                req.send(formData);
+                    }, 'json').fail(function(error) {
+                        console.warn(error);
+                    });
 
                 /////////////////////////////////////////
 
@@ -343,9 +330,9 @@ function GtmJs() {
 
                 /////////////////////////////////////////
 
-                var req = new XMLHttpRequest(),
-                    url = privateValues.moduleUrl + 'response',
-                    data = {
+                $.post(
+                    privateValues.moduleUrl + 'response',
+                    {
                         'action': 'product',
                         'products_position': privateValues.productsPosition,
                         'list': list,
@@ -353,62 +340,47 @@ function GtmJs() {
                         'id_products': [idProduct],
                         'token': publicValues.shopSettings.token
                     },
-                    formData,
-                    response;
-
-                try {
-                    formData = new FormData();
-                    formData.append('data', JSON.stringify(data));
-
-                    req.open('POST', url, true);
-                    req.onreadystatechange = function () {
-
-                        if (req.status === 200 && req.readyState === 4) {
-                            products = JSON.parse(req.responseText);
-
-                            if (typeof products === 'object') {
-
-                                /////////////////////////////////////////
-                                var dataLayerObj = {
-                                    'event': 'productClick',
-                                    'eventCategory': 'engagement',
-                                    'eventAction': 'select_content',
-                                    'eventLabel': (link ? 'product_list' : 'quick_view'),
-                                    'eventValue': ''
+                    function(data) {
+                        products = data;
+                        if (typeof products === 'object') {
+                            /////////////////////////////////////////
+                            var dataLayerObj = {
+                                'event': 'productClick',
+                                'eventCategory': 'engagement',
+                                'eventAction': 'select_content',
+                                'eventLabel': (link ? 'product_list' : 'quick_view'),
+                                'eventValue': ''
+                            };
+                            if (publicValues.guaSettings.trackingId) {
+                                dataLayerObj.ecommerce = {
+                                    'currencyCode': publicValues.shopSettings.currency,
+                                    'click': {
+                                        'actionField': {'list': list},
+                                        'products': [getProductLayer(products[0], 'gua')]
+                                    }
                                 };
-
-                                if (publicValues.guaSettings.trackingId) {
-                                    dataLayerObj.ecommerce = {
-                                        'currencyCode': publicValues.shopSettings.currency,
-                                        'click': {
-                                            'actionField': {'list': list},
-                                            'products': [getProductLayer(products[0], 'gua')]
-                                        }
-                                    };
-                                }
-                                if (link) {
-                                    privateValues.redirectLink = link;
-                                    dataLayerObj.eventCallback = callbackWithTimeout(
-                                        function () {
-                                            redirectLink();
-                                        },
-                                        2000
-                                    );
-                                }
-                                pushDataLayer(dataLayerObj);
-                                /////////////////////////////////////////
                             }
+                            if (link) {
+                                privateValues.redirectLink = link;
+                                dataLayerObj.eventCallback = callbackWithTimeout(
+                                    function () {
+                                        redirectLink();
+                                    },
+                                    2000
+                                );
+                            }
+                            pushDataLayer(dataLayerObj);
+                            /////////////////////////////////////////
                         }
-                    };
-                    req.send(formData);
 
-                } catch (error) {
-                    console.warn(error);
-                    if (link) {
-                        privateValues.redirectLink = link;
-                        redirectLink();
-                    }
-                }
+                    }, 'json').fail(function(error) {
+                        console.warn(error);
+                        if (link) {
+                            privateValues.redirectLink = link;
+                            redirectLink();
+                        }
+                    });
+
                 /////////////////////////////////////////
 
             } else {
@@ -824,31 +796,27 @@ function GtmJs() {
 
         dataLayerObj.eventCallback = callbackWithTimeout(
             function () {
-                var req = new XMLHttpRequest();
-                var url = privateValues.moduleUrl + 'response';
                 var data = {
                     'action': 'orderComplete',
                     'is_order': true,
                     'id_order': orderComplete.id,
                     'id_shop': orderComplete.shopId,
                     'id_customer': publicValues.guaSettings.id_customer
-                };
+                    },
+                    adBlocker = !(window.google_tag_manager && window.ga && window.ga.loaded);
 
-                var adBlocker = !(window.google_tag_manager && window.ga && window.ga.loaded);
                 if (adBlocker) {
                     data.action = 'abort';
                     data.adBlocker = adBlocker;
                 }
-
-                try {
-                    var formData = new FormData();
-                    formData.append('data', JSON.stringify(data));
-                    formData.append('token', publicValues.shopSettings.token);
-                    req.open('POST', url, true);
-                    req.send(formData);
-                } catch (error) {
-                    console.warn(error);
-                }
+                $.post(
+                    privateValues.moduleUrl + 'response',
+                    data,
+                    function(data) {
+                        //
+                    }, 'json').fail(function(error) {
+                        console.warn(error);
+                    });
             },
             1000
         );
