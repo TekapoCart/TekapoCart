@@ -152,7 +152,7 @@ function GtmJs() {
                         }
 
                     }, 'json').fail(function(error) {
-                        console.warn(error);
+                        console.warn(error.responseText);
                     });
 
                 /////////////////////////////////////////
@@ -374,7 +374,7 @@ function GtmJs() {
                         }
 
                     }, 'json').fail(function(error) {
-                        console.warn(error);
+                        console.warn(error.responseText);
                         if (link) {
                             privateValues.redirectLink = link;
                             redirectLink();
@@ -815,7 +815,7 @@ function GtmJs() {
                     function(data) {
                         //
                     }, 'json').fail(function(error) {
-                        console.warn(error);
+                        console.warn(error.responseText);
                     });
             },
             1000

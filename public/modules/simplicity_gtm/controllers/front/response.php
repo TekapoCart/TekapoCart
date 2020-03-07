@@ -34,8 +34,7 @@ class Simplicity_GtmResponseModuleFrontController extends ModuleFrontController
                             $ids_detected = $feedback['id_products'];
                             $products_position = $feedback['products_position'];
                             $list = $feedback['list'];
-                            $visible_products = $feedback['visible_products'];
-
+                            $visible_products = isset($feedback['visible_products']) ? $feedback['visible_products'] : [];
 
                             $track_products = [];
                             if (!empty($ids_detected) && !empty($visible_products)) {
@@ -109,7 +108,6 @@ class Simplicity_GtmResponseModuleFrontController extends ModuleFrontController
                                 }
 
                                 echo json_encode($send_products);
-                                exit;
                             }
 
                             break;
