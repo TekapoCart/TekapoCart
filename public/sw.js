@@ -15,6 +15,7 @@ const networkFirstPaths = [
 const avoidCachingPaths = [
     /* Add an array of regex of paths that shouldn't be cached */
     // Example: /\/api\/.*/
+    /\/tekapo\/.*/
 ];
 
 function pathComparer(requestUrl, pathRegEx) {
@@ -57,6 +58,12 @@ self.addEventListener("activate", function (event) {
 // If any fetch fails, it will look for the request in the cache and serve it from there first
 self.addEventListener("fetch", function (event) {
     if (event.request.method !== "GET") return;
+
+    // var url = event.request.url;
+    // url = url.replace('http://','').replace('https://','').split(/[/?#]/)[0];
+    // if (url !== "demo.tekapo.io" && url !== "cdn.tekapo.io") {
+    //     return;
+    // }
 
     if (comparePaths(event.request.url, networkFirstPaths)) {
         networkFirstFetch(event);
