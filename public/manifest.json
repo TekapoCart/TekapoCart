@@ -1,6 +1,18 @@
 {
   "name": "TekapoCart",
   "short_name": "TekapoCart",
+  "icons": [
+    {
+      "src": "/img/favicon_192_1.jpg",
+      "type": "image/jpg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/img/favicon_512_1.jpg",
+      "type": "image/jpg",
+      "sizes": "512x512"
+    }
+  ],
   "lang": "zh-TW",
   "start_url": "/",
   "display": "standalone",
