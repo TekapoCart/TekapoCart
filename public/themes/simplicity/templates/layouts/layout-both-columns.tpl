@@ -121,7 +121,7 @@
             } else {
                 // Register the service worker
                 navigator.serviceWorker
-                    .register("sw.js", {
+                    .register("sw.js?{$smarty.const._TC_VERSION_DATE_}{$shop.cccjs_version}", {
                         scope: "./"
                     })
                     .then(function (reg) {
