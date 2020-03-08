@@ -2468,7 +2468,7 @@ class ToolsCore
         }
 
         $shop_theme = Context::getContext()->shop->theme_name;
-        $theme_color = (Configuration::get('TC_THEME_COLOR_' . strtoupper($shop_theme))) ? Configuration::get('TC_THEME_COLOR_' . strtoupper($shop_theme)) : '#000';
+        $theme_color = (Configuration::get('TC_THEME_COLOR_' . strtoupper($shop_theme))) ? Configuration::get('TC_THEME_COLOR_' . strtoupper($shop_theme)) : '#fff';
         $lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
         $locale = $lang->locale;
         $img_update_time = Configuration::get('PS_IMG_UPDATE_TIME');
