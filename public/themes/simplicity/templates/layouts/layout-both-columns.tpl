@@ -116,20 +116,22 @@
 
     <script>
         if ("serviceWorker" in navigator) {
-            if (navigator.serviceWorker.controller) {
-                console.log("[PWA Builder] active service worker found, no need to register");
-            } else {
-                // Register the service worker
-                navigator.serviceWorker
-                    .register("sw.js?{$smarty.const._TC_VERSION_DATE_}{$shop.cccjs_version}", {
-                        scope: "./"
-                    })
-                    .then(function (reg) {
-                        console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
-                    });
+          if (navigator.serviceWorker.controller) {
+            console.log("[PWA Builder] active service worker found, no need to register");
+          } else {
+            // Register the service worker
+            navigator.serviceWorker
+              .register("sw.js?{$smarty.const._TC_VERSION_DATE_}{$shop.cccjs_version}", {
+                scope: "./"
+              })
+              .then(function (reg) {
+                console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
+              });
             }
         }
     </script>
+
+    {$shop|@var_dump}
 
   </body>
 

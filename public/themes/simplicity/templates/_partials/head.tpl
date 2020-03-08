@@ -53,20 +53,21 @@
   <link rel="preconnect" href="https://www.google-analytics.com" />
   <link rel="preconnect" href="https://stats.g.doubleclick.net" />
 
-  <link rel="icon" sizes="32x32" type="image/png" href="{$shop.favicon}?{$shop.favicon_update_time}">
   <link rel="apple-touch-icon" sizes="120x120" href="{$shop.favicon_iphone}?{$shop.favicon_update_time}">
   <link rel="apple-touch-icon" sizes="152x152" href="{$shop.favicon_ipad}?{$shop.favicon_update_time}">
   <link rel="apple-touch-icon" sizes="167x167" href="{$shop.favicon_ipad_retina}?{$shop.favicon_update_time}">
   <link rel="apple-touch-icon" sizes="180x180" href="{$shop.favicon_iphone_retina}?{$shop.favicon_update_time}">
+  <link rel="icon" sizes="32x32" type="image/png" href="{$shop.favicon}?{$shop.favicon_update_time}">
   <link rel="icon" sizes="192x192" href="{$shop.favicon_android}?{$shop.favicon_update_time}">
+  <link rel="manifest" href="manifest_{$shop.id}.json">
+  <link rel="mask-icon" href="/img/logo-gcart.svg" color="{$shop.theme_color}">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="msapplication-square310x310logo" content="{$shop.favicon_microsoft}?{$shop.favicon_update_time}">
-
-  <meta name="theme-color" content="{$shop.theme_color}">
+  <meta name="msapplication-TileColor" content="{$shop.theme_color}">
   <meta name="msapplication-navbutton-color" content="{$shop.theme_color}">
-  {*  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> *}
+  <meta name="theme-color" content="{$shop.theme_color}">
 
-  <link rel="manifest" href="/manifest.json">
 {/block}
 
 {block name='stylesheets'}

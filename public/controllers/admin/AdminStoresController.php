@@ -402,6 +402,10 @@ class AdminStoresControllerCore extends AdminController
         } else {
             $this->display = 'add';
         }
+
+        // suzy: 2020-03-08 產生新 manifest.json
+        Tools::generateManifest();
+
     }
 
     protected function postImage($id)

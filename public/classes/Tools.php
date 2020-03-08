@@ -2456,6 +2456,60 @@ class ToolsCore
         return $domains;
     }
 
+    // suzy: 2020-03-08 產生 manifest
+    public static function generateManifest()
+    {
+        $shop_id = Context::getContext()->shop->id;
+
+        $manifest_file = _PS_ROOT_DIR_ . '/manifest_' . $shop_id . '.json';
+
+        if (!$write_fd = @fopen($manifest_file, 'wb')) {
+            return false;
+        }
+
+        $shop_theme = Context::getContext()->shop->theme_name;
+        $theme_color = (Configuration::get('TC_THEME_COLOR_' . strtoupper($shop_theme))) ? Configuration::get('TC_THEME_COLOR_' . strtoupper($shop_theme)) : '#000';
+        $lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
+        $locale = $lang->locale;
+        $img_update_time = Configuration::get('PS_IMG_UPDATE_TIME');
+        $icon144 = 'favicon_144_' . $shop_id . '.png?v=' . $img_update_time;
+        $icon192 = 'favicon_192_' . $shop_id . '.png?v=' . $img_update_time;
+        $icon512 = 'favicon_512_' . $shop_id . '.png?v=' . $img_update_time;
+
+        $manifest_content = [
+            'name' => Configuration::get('PS_SHOP_NAME'),
+            'short_name' => Configuration::get('PS_SHOP_NAME'),
+            'icons' => [
+                0 => [
+                    'src' => Context::getContext()->link->protocol_content . Tools::getMediaServer($icon144) . _PS_IMG_ . $icon144,
+                    'type' => 'image/png',
+                    'sizes' => '144x144',
+                ],
+                1 => [
+                    'src' => Context::getContext()->link->protocol_content . Tools::getMediaServer($icon192) . _PS_IMG_ . $icon192,
+                    'type' => 'image/png',
+                    'sizes' => '192x192',
+                ],
+                2 => [
+                    'src' => Context::getContext()->link->protocol_content . Tools::getMediaServer($icon512) . _PS_IMG_ . $icon512,
+                    'type' => 'image/png',
+                    'sizes' => '512x512',
+                ],
+            ],
+            'lang' => $locale,
+            'start_url' => '/?source=pwa',
+            'display' => 'standalone',
+            'background_color' => $theme_color,
+            'theme_color' => $theme_color,
+        ];
+
+
+        fwrite($write_fd, json_encode($manifest_content));
+        fclose($write_fd);
+
+        return true;
+    }
+
     public static function generateHtaccess($path = null, $rewrite_settings = null, $cache_control = null, $specific = '', $disable_multiviews = null, $medias = false, $disable_modsec = null)
     {
         if (defined('_PS_IN_TEST_')

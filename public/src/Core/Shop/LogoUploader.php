@@ -95,17 +95,19 @@ class LogoUploader
                 throw new PrestaShopException(sprintf('%Upload of temporary file to %s has failed.', $tmpName));
             }
 
-            $ext = '.jpg';
+            $ext = '.png';
 
             // suzy: 2020-02-24 加入 small 縮圖
             $pieces = explode('.', $logoPrefix . $ext);
             $browser_width = 32;
             $iphone_width = 120;
+            $pwa_width = 144;
             $ipad_width = 152;
             $ipad_retina_width = 167;
             $iphone_retina_width = 180;
             $android_width = 192;
             $microsoft_width = 310;
+            $pwal_width = 512;
 
             if (!$sizes = @getimagesize($tmpName)) {
                 throw new PrestaShopException(sprintf('An error occurred while attempting to get image size process %s.', 'favicon'));
@@ -113,6 +115,8 @@ class LogoUploader
                 throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon browser'));
             } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_120_' . $shopId . $ext, $iphone_width, round($iphone_width * $sizes[1] / $sizes[0]), $pieces[1])) {
                 throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon iphone'));
+            } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_144_' . $shopId . $ext, $pwa_width, round($pwa_width * $sizes[1] / $sizes[0]), $pieces[1])) {
+                throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon pwa 144'));
             } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_152_' . $shopId . $ext, $ipad_width, round($ipad_width * $sizes[1] / $sizes[0]), $pieces[1])) {
                 throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon ipad'));
             } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_167_' . $shopId . $ext, $ipad_retina_width, round($ipad_retina_width * $sizes[1] / $sizes[0]), $pieces[1])) {
@@ -123,15 +127,22 @@ class LogoUploader
                 throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon android'));
             } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_310_' . $shopId . $ext, $microsoft_width, round($microsoft_width * $sizes[1] / $sizes[0]), $pieces[1])) {
                 throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon microsoft'));
+            } else if (!@ImageManager::resize($tmpName, _PS_IMG_DIR_ . 'favicon_512_' . $shopId . $ext, $pwal_width, round($pwal_width * $sizes[1] / $sizes[0]), $pieces[1])) {
+                throw new PrestaShopException(sprintf('An error occurred while attempting to copy shop logo %s.', 'favicon pwa 512'));
             }
 
             Configuration::updateValue('PS_FAVICON', 'favicon_32_' . $shopId . $ext);
             Configuration::updateValue('PS_FAVICON_IPHONE', 'favicon_120_' . $shopId . $ext);
+            Configuration::updateValue('PS_FAVICON_PWA', 'favicon_144_' . $shopId . $ext);
             Configuration::updateValue('PS_FAVICON_IPAD', 'favicon_152_' . $shopId . $ext);
             Configuration::updateValue('PS_FAVICON_IPAD_RETINA', 'favicon_167_' . $shopId . $ext);
             Configuration::updateValue('PS_FAVICON_IPHONE_RETINA', 'favicon_180_' . $shopId . $ext);
             Configuration::updateValue('PS_FAVICON_ANDROID', 'favicon_192_' . $shopId . $ext);
             Configuration::updateValue('PS_FAVICON_MICROSOFT', 'favicon_310_' . $shopId . $ext);
+            Configuration::updateValue('PS_FAVICON_PWAL', 'favicon_512_' . $shopId . $ext);
+
+            // suzy: 2020-03-08 產生新 manifest.json
+            Tools::generateManifest();
 
             return true;
         }

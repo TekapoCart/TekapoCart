@@ -1657,6 +1657,9 @@ class FrontControllerCore extends Controller
         $img_ps_url = Tools::getCurrentUrlProtocolPrefix() . Tools::getMediaServer(_PS_IMG_) . _PS_IMG_;
 
         $shop = array(
+            // suzy: 2020-03-08 shop id
+            'id' => $this->context->shop->id,
+
             'name' => Configuration::get('PS_SHOP_NAME'),
             'email' => Configuration::get('PS_SHOP_EMAIL'),
             'registration_number' => Configuration::get('PS_SHOP_DETAILS'),
@@ -1688,6 +1691,8 @@ class FrontControllerCore extends Controller
             'favicon_iphone_retina' => (Configuration::get('PS_FAVICON_IPHONE_RETINA')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPHONE_RETINA') : '',
             'favicon_android' => (Configuration::get('PS_FAVICON_ANDROID')) ? $img_ps_url . Configuration::get('PS_FAVICON_ANDROID') : '',
             'favicon_microsoft' => (Configuration::get('PS_FAVICON_MICROSOFT')) ? $img_ps_url . Configuration::get('PS_FAVICON_MICROSOFT') : '',
+            'favicon_pwa' => (Configuration::get('PS_FAVICON_PWA')) ? $img_ps_url . Configuration::get('PS_FAVICON_PWA') : '',
+            'favicon_pwal' => (Configuration::get('PS_FAVICON_PWAL')) ? $img_ps_url . Configuration::get('PS_FAVICON_PWAL') : '',
             'theme_color' => (Configuration::get('TC_THEME_COLOR_' . strtoupper($this->context->shop->theme_name))) ? Configuration::get('TC_THEME_COLOR_' . strtoupper($this->context->shop->theme_name)) : '#000',
 
             // suzy: 2020-03-06 用 ccc version 讀取最新
