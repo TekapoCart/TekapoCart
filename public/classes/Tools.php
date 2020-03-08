@@ -2472,9 +2472,9 @@ class ToolsCore
         $lang = new Language((int)Configuration::get('PS_LANG_DEFAULT'));
         $locale = $lang->locale;
         $img_update_time = Configuration::get('PS_IMG_UPDATE_TIME');
-        $icon144 = 'favicon_144_' . $shop_id . '.png?v=' . $img_update_time;
-        $icon192 = 'favicon_192_' . $shop_id . '.png?v=' . $img_update_time;
-        $icon512 = 'favicon_512_' . $shop_id . '.png?v=' . $img_update_time;
+        $icon144 = 'favicon_144_' . $shop_id . '.png?' . $img_update_time;
+        $icon192 = 'favicon_192_' . $shop_id . '.png?' . $img_update_time;
+        $icon512 = 'favicon_512_' . $shop_id . '.png?' . $img_update_time;
 
         $manifest_content = [
             'name' => Configuration::get('PS_SHOP_NAME'),
@@ -2499,6 +2499,7 @@ class ToolsCore
             'lang' => $locale,
             'start_url' => '/?source=pwa',
             'display' => 'standalone',
+            'orientation' => 'portrait',
             'background_color' => $theme_color,
             'theme_color' => $theme_color,
         ];

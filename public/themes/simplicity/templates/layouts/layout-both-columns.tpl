@@ -114,6 +114,7 @@
       {hook h='displayBeforeBodyClosingTag'}
     {/block}
 
+    {* <script src="sw.js"></script> *}
     <script>
         if ("serviceWorker" in navigator) {
           if (navigator.serviceWorker.controller) {
