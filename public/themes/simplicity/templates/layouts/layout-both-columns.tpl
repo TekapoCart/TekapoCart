@@ -131,8 +131,6 @@
         }
     </script>
 
-    {$shop|@var_dump}
-
   </body>
 
 </html>
