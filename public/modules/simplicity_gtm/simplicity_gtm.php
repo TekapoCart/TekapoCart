@@ -267,13 +267,12 @@ class Simplicity_Gtm extends Module
             $this->context->smarty->assign(array(
                 'sendOrderComplete' => [
                     'id' => $order->id,
-                    'shopId' => $order->id_shop,
+                    'affiliation' => isset($affiliation) ? $affiliation : '',
                     'revenue' => round((float)$order->total_paid, 2),
+                    'tax' => round((float)$order_tax, 2),
                     'shipping' => round((float)$order->total_shipping, 2),
                     'coupons' => isset($coupons) ? $coupons : null,
                     'products' => $products,
-                    'tax' => round((float)$order_tax, 2),
-                    'affiliation' => isset($affiliation) ? $affiliation : '',
                 ]
             ));
 
@@ -286,8 +285,14 @@ class Simplicity_Gtm extends Module
 
     public function hookActionOrderStatusUpdate($params)
     {
+
         $gtmId = Configuration::get('SIMPLICITY_GTM_ID');
         if (empty($gtmId)) {
+            return false;
+        }
+
+        $active_hooks = Hook::$executed_hooks;
+        if (!in_array('displayBackOfficeHeader', $active_hooks)) {
             return false;
         }
 
@@ -306,16 +311,16 @@ class Simplicity_Gtm extends Module
                 // 已退款
                 $refund_states = explode(',', Configuration::get('SIMPLICITY_GTM_REFUND_ORDER_STATES'));
                 if (in_array($order_status, $refund_states)) {
-                    $this->sendGaOrder($order, 'refund');
+                    $this->sendGaOrder($order, 'refund', 'status');
                 }
                 // 已取消、付款失敗 如何處置？
             } else {
 
                 $excluded_order_states = explode(',', Configuration::get('SIMPLICITY_GTM_EXCLUDED_ORDER_STATES'));
                 if (!in_array($order_status, $excluded_order_states)) {
-                    $result = $this->sendGaOrder($order, 'purchase');
+                    $result = $this->sendGaOrder($order, 'purchase', 'status');
                     if ($result) {
-                        GtmOrder::saveOrder($order_id, $order->id_shop, 'updateStatus');
+                        GtmOrder::saveOrder($order_id, $order->id_shop, 'status');
                     }
                 }
             }
@@ -747,7 +752,6 @@ class Simplicity_Gtm extends Module
             $quantity_wanted = $product['product_quantity_refunded'];
         }
 
-        // Normalize product model
         return array(
             'id' => isset($product['id_product']) ? $product['id_product'] : $product['id'],
             'name' => isset($product['name']) ? $product['name'] : $product['product_name'],
@@ -847,7 +851,7 @@ class Simplicity_Gtm extends Module
         return $products;
     }
 
-    public function sendGaOrder($order, $action_type)
+    public function sendGaOrder($order, $action_type, $via)
     {
 
         $order_id = $order->id;
@@ -870,7 +874,7 @@ class Simplicity_Gtm extends Module
                 $currency = CurrencyCore::getCurrency($order->id_currency);
                 $aio->Send['cu'] = $currency['iso_code'];
 
-                $aio->Send['ds'] = 'system'; // Data Source
+                $aio->Send['ds'] = $via; // Data Source
                 $aio->Send['t'] = 'event'; // Transaction Type
                 $aio->Send['ti'] = $order->id;
                 $aio->Send['tid'] = Configuration::get('SIMPLICITY_GTM_GUA_ID');
@@ -997,7 +1001,6 @@ class Simplicity_Gtm extends Module
 
             Simplicity_Gtm::logMessage(sprintf('Simplicity_Gtm abortGaOrder %s exception: %s', $order_id, $e->getMessage()), true);
         }
-
     }
 
     public static function logMessage($message, $is_append = false)

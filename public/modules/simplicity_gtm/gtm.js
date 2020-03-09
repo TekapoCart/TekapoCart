@@ -165,13 +165,10 @@ function GtmJs() {
 
     }
 
-    // User-ID（ajax）
+    // User-ID (ajax)
     publicValues.setClientId = function () {
         var trackers,
-            req,
-            url = privateValues.moduleUrl + 'response',
-            clientId,
-            formData;
+            clientId;
         if (window.ga) {
             ga(function () {
                 trackers = ga.getAll();
@@ -179,20 +176,24 @@ function GtmJs() {
                     clientId = trackers[0].get('clientId');
                 }
                 if (clientId && clientId !== publicValues.guaSettings.clientId) {
-                    req = new XMLHttpRequest();
-                    data = {
-                        'action': 'clientId',
-                        'client_id': clientId,
-                        'token': publicValues.shopSettings.token
-                    };
-                    try {
-                        formData = new FormData();
-                        formData.append('data', JSON.stringify(data));
-                        req.open('POST', url, true);
-                        req.send(formData);
-                    } catch (error) {
-                        console.warn(error);
-                    }
+
+                    /////////////////////////////
+                    $.post(
+                        privateValues.moduleUrl + 'response',
+                        {
+                            'action': 'clientId',
+                            'client_id': clientId,
+                            'token': publicValues.shopSettings.token
+                        },
+                        function(data) {
+                          //
+
+                        }, 'json').fail(function(error) {
+                          console.warn(error.responseText);
+
+                    });
+                    /////////////////////////////
+
                 }
             });
         }
@@ -217,7 +218,7 @@ function GtmJs() {
         }
     }
 
-    // 商品檢視 - productDetail
+    // 商品檢視 - productDetail (1/2 ajax)
     publicValues.eventViewProduct = function (event) {
         var productDetailsNode,
             productDetails,
@@ -349,7 +350,7 @@ function GtmJs() {
 
     }
 
-    // 商品列表點擊 - productClick
+    // 商品列表點擊 - productClick (ajax)
     publicValues.eventClickList = function (event) {
         var target = delegateEvents(['.js-product-miniature .quick-view', '.js-product-miniature .product-thumbnail', '.js-product-miniature .product-title a', '.js-product-miniature .variant-links a', '.js-product-miniature .product-no-desc-overlay a'], event.target),
             classList,
@@ -810,84 +811,30 @@ function GtmJs() {
             'eventLabel': '',
             'eventValue': ''
         };
-        var orderContents = {
-            'productsId': [],
-            'productsEan': [],
-            'productsReference': [],
-            'amount': 0
-        };
-        var orderLayer = {};
-        var remarketingLayer = {};
-
-        orderComplete.products.forEach(function (product) {
-            orderContents.productsId.push(product.id);
-            orderContents.productsReference.push(product.reference);
-            orderContents.amount += product.quantity;
-        });
-        if (publicValues.guaSettings.trackingId) {
-            orderLayer.ecommerce = {
-                'currencyCode': publicValues.shopSettings.currency,
-                'purchase': {
-                    'actionField': {
-                        'id': orderComplete.id,
-                        'affiliation': orderComplete.affiliation,
-                        'revenue': orderComplete.revenue,
-                        'tax': orderComplete.tax,
-                        'shipping': orderComplete.shipping
-                    },
-                    'products': getProductsLayer(orderComplete.products, 'gua')
-                }
-            };
-            if (Array.isArray(orderComplete.coupons) && orderComplete.coupons.length) {
-                orderLayer.ecommerce.purchase.actionField.coupon = orderComplete.coupons.join(' / ');
-            }
-            if (publicValues.guaSettings.dynamicRemarketing) {
-                remarketingLayer = getRemarketingLayer(orderComplete.products, publicValues.ecommPageType);
-                Object.assign(orderLayer, remarketingLayer);
-            }
-        }
-        if (publicValues.facebookSettings.trackingId) {
-            orderLayer.facebook = {
-                'contents': getProductsLayer(orderComplete.products, 'facebook'),
-                'contentType': 'product'
-            };
-        }
-        orderLayer.common = {
-            'orderId': orderComplete.id,
-            'products': getProductsLayer(orderComplete.products, 'common'),
-            'productIds': orderContents.productsId,
-            'productEans': orderContents.productsEan,
-            'productReferences': orderContents.productsReference,
-            'numItems': orderContents.amount,
-            'orderRevenue': orderComplete.revenue,
-            'coupons': orderComplete.coupons
-        };
+        var orderLayer = getOrderLayer(orderComplete);
 
         Object.assign(dataLayerObj, orderLayer);
 
         dataLayerObj.eventCallback = callbackWithTimeout(
             function () {
-                var data = {
-                    'action': 'orderComplete',
-                    'is_order': true,
-                    'id_order': orderComplete.id,
-                    'id_shop': orderComplete.shopId,
-                    'id_customer': publicValues.guaSettings.id_customer
-                    },
+                var action = 'orderComplete',
                     adBlocker = !(window.google_tag_manager && window.ga && window.ga.loaded);
 
                 if (adBlocker) {
-                    data.action = 'abort';
-                    data.adBlocker = adBlocker;
+                    action = 'abort';
                 }
                 $.post(
                     privateValues.moduleUrl + 'response',
-                    data,
+                    {
+                        'action': action,
+                        'id_order': orderComplete.id,
+                        'token': publicValues.shopSettings.token
+                    },
                     function(data) {
                         //
                     }, 'json').fail(function(error) {
-                        console.warn(error.responseText);
-                    });
+                    console.warn(error.responseText);
+                });
             },
             1000
         );
@@ -974,6 +921,71 @@ function GtmJs() {
         });
 
         return remarketingLayer;
+    }
+
+    function getOrderLayer(orderComplete) {
+        var orderContents = {
+            'productsId' : [],
+            'productsEan' : [],
+            'productsReference' : [],
+            'amount' : 0
+        };
+        var orderLayer = {};
+        var remarketingLayer = {};
+
+        orderComplete.products.forEach(function(product){
+            orderContents.productsId.push(product.id);
+            orderContents.productsEan.push(product.ean13);
+            orderContents.productsReference.push(product.reference);
+            orderContents.amount += product.quantity;
+        });
+
+        if (publicValues.guaSettings.trackingId) {
+
+            orderLayer.ecommerce = {
+                'currencyCode' : publicValues.shopSettings.currency,
+                'purchase' : {
+                    'actionField' : {
+                        'id' : orderComplete.id,
+                        'affiliation' : orderComplete.affiliation,
+                        'revenue' : orderComplete.revenue,
+                        'tax' : orderComplete.tax,
+                        'shipping' : orderComplete.shipping
+                    },
+                    'products' : getProductsLayer(orderComplete.products, 'gua')
+                }
+            };
+
+            if (Array.isArray(orderComplete.coupons) && orderComplete.coupons.length) {
+                orderLayer.ecommerce.purchase.actionField.coupon = orderComplete.coupons.join(' / ');
+            }
+
+            if (publicValues.guaSettings.dynamicRemarketing) {
+                remarketingLayer = getRemarketingLayer(orderComplete.products, publicValues.ecommPageType);
+                // merge layers
+                Object.assign(orderLayer, remarketingLayer);
+            }
+        }
+
+        if (publicValues.facebookSettings.trackingId) {
+            orderLayer.facebook = {
+                'contents' : getProductsLayer(orderComplete.products, 'facebook'),
+                'contentType' : 'product'
+            };
+        }
+
+        orderLayer.common = {
+            'orderId' : orderComplete.id,
+            'products' : getProductsLayer(orderComplete.products, 'common'),
+            'productIds' : orderContents.productsId,
+            'productEans' : orderContents.productsEan,
+            'productReferences' : orderContents.productsReference,
+            'numItems' : orderContents.amount,
+            'orderRevenue' : orderComplete.revenue,
+            'coupons' : orderComplete.coupons
+        };
+
+        return orderLayer;
     }
 
     function getCheckOutStep() {

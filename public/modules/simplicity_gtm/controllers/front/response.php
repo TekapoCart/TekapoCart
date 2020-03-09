@@ -108,12 +108,33 @@ class Simplicity_GtmResponseModuleFrontController extends ModuleFrontController
                                 }
 
                                 echo json_encode($send_products);
+
+                            } else {
+
+                                echo '0|ERROR';
+
                             }
 
                             break;
 
                         case 'orderComplete':
-                            GtmOrder::saveOrder($feedback['id_order'], $feedback['id_shop'], 'shop');
+
+                            $order_id = $feedback['id_order'];
+                            $customer_id = $this->context->customer->id;
+
+                            $order = new Order((int)$order_id);
+                            if (!empty($order->id) && $order->id_customer == $customer_id) {
+
+                                GtmOrder::saveOrder($feedback['id_order'], $this->context->shop->id, 'shop');
+
+                                echo '1|OK';
+
+                            } else {
+
+                                echo '0|ERROR';
+
+                            }
+
                             break;
 
                         case 'clientId':
@@ -130,10 +151,17 @@ class Simplicity_GtmResponseModuleFrontController extends ModuleFrontController
                                 }
                             }
 
+                            echo '1|OK';
+
                             break;
 
                         case 'abort':
-                            $this->module->abortGaOrder($feedback['id_order'], $feedback['id_customer']);
+
+                            $customer_id = $this->context->customer->id;
+                            $this->module->abortGaOrder($feedback['id_order'], $customer_id);
+
+                            echo '1|OK';
+
                             break;
                     }
 
