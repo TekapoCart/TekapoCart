@@ -51,7 +51,7 @@ self.addEventListener("install", function (event) {
 
     event.waitUntil(
         caches.open(CACHE).then(function (cache) {
-            console.log('Opened cache');
+            // console.log('Opened cache');
             return cache.addAll(precacheFiles).then(function () {
                 return cache.add(offlineFallbackPage);
             });
@@ -61,7 +61,7 @@ self.addEventListener("install", function (event) {
 
 // Allow sw to control of current page
 self.addEventListener("activate", function (event) {
-    console.log("[PWA Builder] Claiming clients for current page");
+    // console.log("[PWA Builder] Claiming clients for current page");
     event.waitUntil(self.clients.claim());
 });
 
@@ -138,7 +138,7 @@ function networkFirstFetch(event) {
                 return response;
             })
             .catch(function (error) {
-                console.log("[PWA Builder] Network request Failed. Serving content from cache: " + error);
+                // console.log("[PWA Builder] Network request Failed. Serving content from cache: " + error);
                 return fromCache(event.request);
             })
     );
