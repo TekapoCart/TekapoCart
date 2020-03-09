@@ -241,8 +241,16 @@ function GtmJs() {
             idProductAttribute = productDetails.id_product_attribute;
         }
         idProduct = idProduct + '-' + idProductAttribute;
+
+        if (idProduct === privateValues.lastIdProductView) {
+            return;
+        }
+
         product = publicValues.visibleProducts[idProduct];
-        if (idProduct !== privateValues.lastIdProductView) {
+
+        if (product) {
+
+            /////////////////////////////////////////
             var dataLayerObj = {
                     'event': 'productDetail',
                     'eventCategory': 'engagement',
@@ -275,7 +283,70 @@ function GtmJs() {
             };
             pushDataLayer(dataLayerObj);
             privateValues.lastIdProductView = idProduct;
+            /////////////////////////////////////////
+
+        } else {
+
+            /////////////////////////////////////////
+            $.post(
+                privateValues.moduleUrl + 'response',
+                {
+                    'action': 'product',
+                    'products_position': privateValues.productsPosition,
+                    'list': list,
+                    'visible_products': publicValues.visibleProducts,
+                    'id_products': [idProduct],
+                    'token': publicValues.shopSettings.token
+                },
+                function(data) {
+                    products = data;
+                    if (typeof products === 'object') {
+
+                        /////////////////////////////////////////
+                        var dataLayerObj = {
+                                'event': 'productDetail',
+                                'eventCategory': 'engagement',
+                                'eventAction': 'view_item',
+                                'eventLabel': '',
+                                'eventValue': ''
+                            },
+                            remarketingLayer = {};
+                        if (publicValues.guaSettings.trackingId) {
+                            dataLayerObj.ecommerce = {
+                                'currencyCode': publicValues.shopSettings.currency,
+                                'detail': {
+                                    'actionField': {'list': list},
+                                    'products': [getProductLayer(products[0], 'gua')]
+                                }
+                            };
+                            if (publicValues.guaSettings.dynamicRemarketing) {
+                                remarketingLayer = getRemarketingLayer(publicValues.visibleProducts);
+                                Object.assign(dataLayerObj, remarketingLayer);
+                            }
+                        }
+                        if (publicValues.facebookSettings.trackingId) {
+                            dataLayerObj.facebook = {
+                                'contents': [getProductLayer(products[0], 'facebook')],
+                                'contentType': 'product'
+                            };
+                        }
+                        dataLayerObj.common = {
+                            'product': getProductLayer(products[0], 'common')
+                        };
+                        pushDataLayer(dataLayerObj);
+                        privateValues.lastIdProductView = idProduct;
+                        /////////////////////////////////////////
+
+                    }
+
+                }, 'json').fail(function(error) {
+                console.warn(error.responseText);
+            });
+
+            /////////////////////////////////////////
         }
+
+
     }
 
     // 商品列表點擊 - productClick

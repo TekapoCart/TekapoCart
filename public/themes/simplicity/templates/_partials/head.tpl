@@ -53,7 +53,7 @@
   <link rel="preconnect" href="https://www.google-analytics.com" />
   <link rel="preconnect" href="https://stats.g.doubleclick.net" />
 
-  {*<link rel="shortcut icon" href="favicon.ico">*}
+  {*<link rel="shortcut icon" href="/img/favicon.ico">*}
   <link rel="icon" sizes="32x32" type="image/png" href="{$shop.favicon}?{$shop.favicon_update_time}">
   <link rel="icon" sizes="192x192" href="{$shop.favicon_android}?{$shop.favicon_update_time}">
   <link rel="apple-touch-icon" sizes="120x120" href="{$shop.favicon_iphone}?{$shop.favicon_update_time}">
@@ -72,6 +72,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="#000">
   <meta name="apple-mobile-web-app-title" content="{$shop.name}">
+  {*
   <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-640x1136.png?{$shop.cccjs_version}" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
   <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-750x1294.png?{$shop.cccjs_version}" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
   <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-1242x2148.png?{$shop.cccjs_version}" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
@@ -79,6 +80,7 @@
   <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-1536x2048.png?{$shop.cccjs_version}" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
   <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-1668x2224.png?{$shop.cccjs_version}" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
   <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-2048x2732.png?{$shop.cccjs_version}" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+  *}
 
 {/block}
 
