@@ -40,6 +40,7 @@ class Simplicity_Gtm extends Module
             'SIMPLICITY_GTM_FACEBOOK_CATALOG_VARIANT',
             'SIMPLICITY_GTM_EXCLUDED_ORDER_STATES',
             'SIMPLICITY_GTM_REFUND_ORDER_STATES',
+            'SIMPLICITY_PWA_MODE',
         ];
 
     }
@@ -115,6 +116,14 @@ class Simplicity_Gtm extends Module
             'modules/' . $this->name . '/gtm.js',
             array('position' => 'bottom', 'priority' => 150)
         );
+
+        if (Configuration::get('SIMPLICITY_PWA_MODE')) {
+            $this->context->controller->registerJavascript(
+                'simplicity_pwa',
+                'modules/' . $this->name . '/sw-register.js',
+                array('position' => 'bottom', 'priority' => 150)
+            );
+        }
 
         $guaSettings = [
             'clientId' => $client_id,
@@ -489,6 +498,20 @@ class Simplicity_Gtm extends Module
                     'name' => 'SIMPLICITY_GTM_SECRET',
                     'desc' => $this->l('auto generated'),
                     'readonly' => true,
+                ),
+                array(
+                    'type' => 'switch',
+                    'label' => 'PWA 模式',
+                    'name' => 'SIMPLICITY_PWA_MODE',
+                    'desc' => '支援離線瀏覽、安裝應用程式',
+                    'values' => array(
+                        array(
+                            'value' => true,
+                        ),
+                        array(
+                            'value' => false
+                        )
+                    )
                 ),
             ),
             'submit' => array(

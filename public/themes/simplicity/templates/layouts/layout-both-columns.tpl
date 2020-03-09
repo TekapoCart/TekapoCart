@@ -113,23 +113,7 @@
     {block name='hook_before_body_closing_tag'}
       {hook h='displayBeforeBodyClosingTag'}
     {/block}
-
-    <script>
-        if ("serviceWorker" in navigator) {
-          if (navigator.serviceWorker.controller) {
-            // console.log("Service worker found, no need to register");
-          } else {
-            // Register the service worker
-            navigator.serviceWorker.register("/sw.min.js?{$smarty.const._TC_VERSION_DATE_}{$shop.cccjs_version}", {
-                scope: "/"
-              })
-              .then(function (reg) {
-                // console.log("Service worker has been registered for scope: " + reg.scope);
-              });
-          }
-        }
-    </script>
-
+  
   </body>
 
 </html>
