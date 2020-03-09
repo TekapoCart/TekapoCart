@@ -18,7 +18,7 @@
             'dimensionProdId': 1,
             'dimensionPageType': 2,
             'dimensionTotalValue': 3,
-            'dimensionCategory' : 4
+            'dimensionCategory': 4
         };
         if (guaSettings.customerId > 0) {
             initDataLayer.gua.userId = guaSettings.customerId;
@@ -26,8 +26,8 @@
     }
     if (adsSettings.conversionId) {
         initDataLayer.adWords = {
-            'conversionId' : adsSettings.conversionId,
-            'conversionLabel' : adsSettings.conversionLabel
+            'conversionId': adsSettings.conversionId,
+            'conversionLabel': adsSettings.conversionLabel
         };
     }
     if (facebookSettings.trackingId) {
@@ -36,12 +36,12 @@
         };
     }
     initDataLayer.common = {
-        'currency' : shopSettings.currency,
-        'langCode' : shopSettings.lang,
-        'countryCode' : shopSettings.lang,
-        'referrer' : document.referrer,
-        'userAgent' : navigator.userAgent,
-        'navigatorLang' : navigator.language,
+        'currency': shopSettings.currency,
+        'langCode': shopSettings.lang,
+        'countryCode': shopSettings.lang,
+        'referrer': document.referrer,
+        'userAgent': navigator.userAgent,
+        'navigatorLang': navigator.language,
         // 'doNotTrack': false
     };
     dataLayer.push(initDataLayer);

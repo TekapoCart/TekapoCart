@@ -25,7 +25,7 @@
     sendOrderComplete = {$sendOrderComplete|json_encode nofilter};
     {/if}
 
-    document.addEventListener('DOMContentLoaded', function(event) {
+    document.addEventListener('DOMContentLoaded', function (event) {
 
         prestashop.on('clickQuickView', function (event) {
             GtmJs.eventViewProduct(event)
@@ -66,7 +66,7 @@
 
     }, false);
 
-    window.addEventListener('pageshow', function(event) {
+    window.addEventListener('pageshow', function (event) {
 
         if (event.persisted) {
             window.location.reload()

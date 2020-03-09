@@ -1,16 +1,27 @@
-// This is the service worker with the Advanced caching
+const CACHE = "tc-cache-v1";
 
-const CACHE = "pwabuilder-adv-cache";
+// If any of the files fail to download, then the install step will fail
 const precacheFiles = [
-    /* Add an array of files to precache for your app */
+    '/'
 ];
 
 const offlineFallbackPage = "offline.html";
 
-const networkFirstPaths = [
-    /* Add an array of regex of paths that should go network first */
+const cacheFirstPaths = [
+    /* Add an array of regex of paths that should go cache first */
     // Example: /\/api\/.*/
+    /\/img\/.*/,
+    /\/theme\/.*\/assets\/css\/.*/,
+    /\/theme\/.*\/assets\/cache\/.*/
 ];
+
+const avoidCachingDomains = [
+    'www.facebook.com',
+    'connect.facebook.net',
+    'www.google-analytics.com',
+    'www.googletagmanager.com',
+    'stats.g.doubleclick.net'
+]
 
 const avoidCachingPaths = [
     /* Add an array of regex of paths that shouldn't be cached */
@@ -28,19 +39,19 @@ function comparePaths(requestUrl, pathsArray) {
             if (pathComparer(requestUrl, pathRegEx)) {
                 return true;
             }
+
         }
     }
     return false;
 }
 
 self.addEventListener("install", function (event) {
-    console.log("[PWA Builder] Install Event processing");
-    console.log("[PWA Builder] Skip waiting on install");
+
     self.skipWaiting();
 
     event.waitUntil(
         caches.open(CACHE).then(function (cache) {
-            console.log("[PWA Builder] Caching pages during install");
+            console.log('Opened cache');
             return cache.addAll(precacheFiles).then(function () {
                 return cache.add(offlineFallbackPage);
             });
@@ -56,32 +67,32 @@ self.addEventListener("activate", function (event) {
 
 // If any fetch fails, it will look for the request in the cache and serve it from there first
 self.addEventListener("fetch", function (event) {
+
     if (event.request.method !== "GET") return;
 
-    if (event.request.url.indexOf('/tekapo/') !== -1 ) {
+    if (event.request.url.indexOf('/tekapo') !== -1 || event.request.url.indexOf('/order') !== -1) {
+        // console.log('Skip: ' + event.request.url);
         return;
     }
 
-    if (event.request.url.indexOf('/order') !== -1 ) {
+    if (comparePaths(event.request.url, avoidCachingDomains)) {
+        // console.log('avoidCachingDomains: ' + event.request.url);
         return;
     }
 
-
-    networkFirstFetch(event);
-
-    // if (comparePaths(event.request.url, networkFirstPaths)) {
-    //     networkFirstFetch(event);
-    // } else {
-    //     cacheFirstFetch(event);
-    // }
+    if (comparePaths(event.request.url, cacheFirstPaths)) {
+        cacheFirstFetch(event);
+    } else {
+        networkFirstFetch(event);
+    }
 });
 
 function cacheFirstFetch(event) {
     event.respondWith(
         fromCache(event.request).then(
             function (response) {
-                // The response was found in the cache so we responde with it and update the entry
 
+                // The response was found in the cache so we responde with it and update the entry
                 // This is where we call the server to get the newest version of the
                 // file to use the next time we show view
                 event.waitUntil(
@@ -93,12 +104,13 @@ function cacheFirstFetch(event) {
                 return response;
             },
             function () {
+
                 // The response was not found in the cache so we look for it on the server
                 return fetch(event.request)
                     .then(function (response) {
+                        // console.log('[cacheFirstFetch] Cache Not Found and Fetch: ' + event.request.url);
                         // If request was success, add or update it in the cache
                         event.waitUntil(updateCache(event.request, response.clone()));
-
                         return response;
                     })
                     .catch(function (error) {
@@ -106,8 +118,7 @@ function cacheFirstFetch(event) {
                         if (event.request.destination !== "document" || event.request.mode !== "navigate") {
                             return;
                         }
-
-                        console.log("[PWA Builder] Network request failed and no cache." + error);
+                        // console.log("[cacheFirstFetch] Network request failed and no cache." + error);
                         // Use the precached offline page as fallback
                         return caches.open(CACHE).then(function (cache) {
                             cache.match(offlineFallbackPage);
@@ -133,16 +144,14 @@ function networkFirstFetch(event) {
     );
 }
 
+// Check to see if you have it in the cache
+// If not in the cache, then return error page
 function fromCache(request) {
-    // Check to see if you have it in the cache
-    // Return response
-    // If not in the cache, then return error page
     return caches.open(CACHE).then(function (cache) {
         return cache.match(request).then(function (matching) {
             if (!matching || matching.status === 404) {
                 return Promise.reject("no-match");
             }
-
             return matching;
         });
     });
@@ -154,6 +163,5 @@ function updateCache(request, response) {
             return cache.put(request, response);
         });
     }
-
     return Promise.resolve();
 }

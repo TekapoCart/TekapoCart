@@ -14,7 +14,7 @@ public/themes/*/_dev/node_modules/*
 public/.htaccess
 public/config/settings.inc.php
 
-public/modules/ps_imageslider/images/fileType
+public/manifest*.json
 
 
 ### composer 相關
