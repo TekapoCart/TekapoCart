@@ -313,8 +313,10 @@ class Simplicity_Gtm extends Module
                 // 已取消、已退款、付款失敗
                 $excluded_order_states = explode(',', Configuration::get('SIMPLICITY_GTM_EXCLUDED_ORDER_STATES'));
                 if (!in_array($order_status, $excluded_order_states)) {
-                    $this->sendGaOrder($order, 'purchase');
-                    GtmOrder::saveOrder($order_id, $order->id_shop, 'system');
+                    $result = $this->sendGaOrder($order, 'purchase');
+                    if ($result) {
+                        GtmOrder::saveOrder($order_id, $order->id_shop, 'system');
+                    }
                 }
             }
 
@@ -945,12 +947,17 @@ class Simplicity_Gtm extends Module
 
                 $aio->CheckOut();
                 unset($aio);
+
+                return true;
+
             }
         } catch (Exception $e) {
 
             Simplicity_Gtm::logMessage(sprintf('Simplicity_Gtm sendGaOrder %s exception: %s', $order_id, $e->getMessage()), true);
         }
 
+
+        return false;
     }
 
     public function abortGaOrder($order_id, $customer_id)

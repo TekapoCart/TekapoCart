@@ -363,25 +363,25 @@ Abstract class Gtm_Verification
     public function check_goods($arParameters = [])
     {
         // 檢查產品名稱
-        $arErrors = [];
-        if (sizeof($arParameters['Items']) > 0) {
-            foreach ($arParameters['Items'] as $key => $product) {
-                foreach ($product as $field => $value) {
-                    if (in_array($field, ['prodName', 'prodSpec'])) {
-                        if (strlen($value) > 0) {
-                            $arParameters['Items'][$key][$field] = mb_substr($value, 0, 40);
-                        }
-                    }
-                }
-            }
-
-        } else {
-            array_push($arErrors, "Goods information not found.");
-        }
-
-        if (sizeof($arErrors) > 0) {
-            throw new Exception(join('<br>', $arErrors));
-        }
+//        $arErrors = [];
+//        if (sizeof($arParameters['Items']) > 0) {
+//            foreach ($arParameters['Items'] as $key => $product) {
+//                foreach ($product as $field => $value) {
+//                    if (in_array($field, ['prodName', 'prodSpec'])) {
+//                        if (strlen($value) > 0) {
+//                            $arParameters['Items'][$key][$field] = mb_substr($value, 0, 40);
+//                        }
+//                    }
+//                }
+//            }
+//
+//        } else {
+//            array_push($arErrors, "Goods information not found.");
+//        }
+//
+//        if (sizeof($arErrors) > 0) {
+//            throw new Exception(join('<br>', $arErrors));
+//        }
 
         return $arParameters;
     }
