@@ -120,7 +120,7 @@
             // console.log("[PWA Builder] active service worker found, no need to register");
           } else {
             // Register the service worker
-            navigator.serviceWorker.register("sw.min.js?{$smarty.const._TC_VERSION_DATE_}{$shop.cccjs_version}", {
+            navigator.serviceWorker.register("/sw.min.js?{$smarty.const._TC_VERSION_DATE_}{$shop.cccjs_version}", {
                 scope: "/"
               })
               .then(function (reg) {
