@@ -117,14 +117,14 @@
     <script>
         if ("serviceWorker" in navigator) {
           if (navigator.serviceWorker.controller) {
-            // console.log("[PWA Builder] active service worker found, no need to register");
+            // console.log("Service worker found, no need to register");
           } else {
             // Register the service worker
             navigator.serviceWorker.register("/sw.min.js?{$smarty.const._TC_VERSION_DATE_}{$shop.cccjs_version}", {
                 scope: "/"
               })
               .then(function (reg) {
-                // console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
+                // console.log("Service worker has been registered for scope: " + reg.scope);
               });
           }
         }
