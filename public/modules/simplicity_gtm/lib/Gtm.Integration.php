@@ -403,7 +403,6 @@ Abstract class Gtm_Verification
 class Gtm_Verification_Purchase extends Gtm_Verification
 {
     public $arActionExtend = array(
-        'stCode' => '',
     );
 
     // 過濾多餘參數
