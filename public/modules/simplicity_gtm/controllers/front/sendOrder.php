@@ -28,8 +28,10 @@ class Simplicity_GtmSendOrderModuleFrontController extends ModuleFrontController
                 // 已取消、已退款、付款失敗
                 $excluded_order_states = explode(',', Configuration::get('SIMPLICITY_GTM_EXCLUDED_ORDER_STATES'));
                 if (!in_array($order_status, $excluded_order_states)) {
-                    $this->module->sendGaOrder($order, 'purchase');
-                    GtmOrder::saveOrder($order_id, $order->id_shop, 'system');
+                    $result = $this->module->sendGaOrder($order, 'purchase');
+                    if ($result) {
+                        GtmOrder::saveOrder($order_id, $order->id_shop, 'admin');
+                    }
                 }
             }
 

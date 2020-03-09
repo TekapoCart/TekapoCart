@@ -310,12 +310,12 @@ class Simplicity_Gtm extends Module
                 }
                 // 已取消、付款失敗 如何處置？
             } else {
-                // 已取消、已退款、付款失敗
+
                 $excluded_order_states = explode(',', Configuration::get('SIMPLICITY_GTM_EXCLUDED_ORDER_STATES'));
                 if (!in_array($order_status, $excluded_order_states)) {
                     $result = $this->sendGaOrder($order, 'purchase');
                     if ($result) {
-                        GtmOrder::saveOrder($order_id, $order->id_shop, 'system');
+                        GtmOrder::saveOrder($order_id, $order->id_shop, 'updateStatus');
                     }
                 }
             }
