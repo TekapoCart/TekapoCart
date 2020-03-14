@@ -25,7 +25,24 @@
 <div class="images-container">
   {block name='product_cover'}
     <div class="product-cover">
-      <img class="js-qv-product-cover" src="{$product.cover.bySize.home_default.url}" alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}" title="{$product.cover.legend}" style="width:100%;" itemprop="image">
+      {if $product.cover.bySize.large_default.has_webp}
+        {assign 'type' array('.jpg', '.jpeg', '.png', '.gif')}
+        <img
+          class="js-qv-product-cover lazyload"
+          alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+          title="{$product.cover.legend}"
+          src="{$product.cover.bySize.large_default.url|replace:$type:'.webp'}"
+          data-src-desktop-webp="{$product.cover.bySize.large_default.url|replace:$type:'.webp'}"
+          data-src-mobile-webp="{$product.cover.bySize.large_default.url|replace:$type:'.webp'}"
+          data-src-desktop="{$product.cover.bySize.large_default.url}"
+          data-src-mobile="{$product.cover.bySize.large_default.url}"
+          data-src="{$product.cover.bySize.large_default.url}"
+          style="width:100%;"
+          itemprop="image"
+        />
+      {else}
+        <img class="js-qv-product-cover" src="{$product.cover.bySize.large_default.url}" alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}" title="{$product.cover.legend}" style="width:100%;" itemprop="image" />
+      {/if}
       <div class="layer hidden-sm-down" data-toggle="modal" data-target="#product-modal">
         <i class="material-icons zoom-in">&#xE8FF;</i>
       </div>

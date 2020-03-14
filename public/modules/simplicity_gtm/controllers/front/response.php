@@ -111,7 +111,7 @@ class Simplicity_GtmResponseModuleFrontController extends ModuleFrontController
 
                             } else {
 
-                                echo '0|ERROR';
+                                echo json_encode('0|ERROR');
 
                             }
 
@@ -127,11 +127,11 @@ class Simplicity_GtmResponseModuleFrontController extends ModuleFrontController
 
                                 GtmOrder::saveOrder($feedback['id_order'], $this->context->shop->id, 'shop');
 
-                                echo '1|OK';
+                                echo json_encode('1|OK');
 
                             } else {
 
-                                echo '0|ERROR';
+                                echo json_encode('0|ERROR');
 
                             }
 
@@ -151,7 +151,7 @@ class Simplicity_GtmResponseModuleFrontController extends ModuleFrontController
                                 }
                             }
 
-                            echo '1|OK';
+                            echo json_encode('1|OK');
 
                             break;
 
@@ -160,7 +160,7 @@ class Simplicity_GtmResponseModuleFrontController extends ModuleFrontController
                             $customer_id = $this->context->customer->id;
                             $this->module->abortGaOrder($feedback['id_order'], $customer_id);
 
-                            echo '1|OK';
+                            echo json_encode('1|OK');
 
                             break;
                     }
