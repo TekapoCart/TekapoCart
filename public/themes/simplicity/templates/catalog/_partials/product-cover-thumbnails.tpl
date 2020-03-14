@@ -31,7 +31,6 @@
           class="js-qv-product-cover lazyload"
           alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
           title="{$product.cover.legend}"
-          src="{$product.cover.bySize.large_default.url|replace:$type:'.webp'}"
           data-src-desktop-webp="{$product.cover.bySize.large_default.url|replace:$type:'.webp'}"
           data-src-mobile-webp="{$product.cover.bySize.large_default.url|replace:$type:'.webp'}"
           data-src-desktop="{$product.cover.bySize.large_default.url}"
