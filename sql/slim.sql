@@ -10,7 +10,7 @@ DELETE g FROM ps_guest as g LEFT JOIN ps_cart as c ON g.id_guest = c.id_guest WH
 
 OPTIMIZE TABLE ps_cart, ps_guest;
 
--- DELETE BY NILL: ps_connections
+-- DELETE BY NULL: ps_connections
 DELETE ps_connections FROM ps_connections LEFT JOIN ps_guest ON ps_connections.id_guest = ps_guest.id_guest WHERE ps_guest.id_guest IS NULL;
 
 -- DELETE BY NULL: ps_connections_source

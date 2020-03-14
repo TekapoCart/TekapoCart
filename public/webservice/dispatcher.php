@@ -55,7 +55,9 @@ if (isset($_SERVER['PHP_AUTH_USER'])) {
     $key = $_GET['ws_key'];
 } else {
     header($_SERVER['SERVER_PROTOCOL'].' 401 Unauthorized');
-    header('WWW-Authenticate: Basic realm="Welcome to PrestaShop Webservice, please enter the authentication key as the login. No password required."');
+    // suzy: 2020-03-11 PrestaShop -> TekapoCart
+    // header('WWW-Authenticate: Basic realm="Welcome to PrestaShop Webservice, please enter the authentication key as the login. No password required."');
+    header('WWW-Authenticate: Basic realm="Welcome to TekapoCart Webservice, please enter the authentication key."');
     die('401 Unauthorized');
 }
 

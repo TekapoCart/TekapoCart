@@ -1433,13 +1433,13 @@ File: controllers/admin/AdminWebserviceController.php:147</note>
       </trans-unit>
       <trans-unit id="a3946b47f44a8f7adf9c9b6e38911790" approved="yes">
         <source>Enable PrestaShop's webservice</source>
-        <target xml:lang="zh-TW">啟用PrestoShop 網路服務</target>
+        <target xml:lang="zh-TW">啟用 TekapoCart 網路服務</target>
         <note>Context:
 File: controllers/admin/AdminWebserviceController.php:80</note>
       </trans-unit>
       <trans-unit id="20eebdc752ee86d49f5d090759b237aa" approved="yes">
         <source>Webservice account key.</source>
-        <target xml:lang="zh-TW">網路服務帳戶密碼。</target>
+        <target xml:lang="zh-TW">TekapoCart Webservice 密鑰</target>
         <note>Context:
 File: controllers/admin/AdminWebserviceController.php:137</note>
       </trans-unit>

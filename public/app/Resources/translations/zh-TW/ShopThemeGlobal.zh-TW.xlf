@@ -112,7 +112,7 @@ File: controllers/front/DiscountController.php:106</note>
     <body>
       <trans-unit id="c82004d1ded071651efc9f2138342c50" approved="yes">
         <source>Our Offers</source>
-        <target xml:lang="zh-TW">我們的優惠</target>
+        <target xml:lang="zh-TW">我們的產品</target>
         <note>Context:
 File: controllers/front/SitemapController.php:39</note>
       </trans-unit>

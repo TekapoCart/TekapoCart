@@ -10,7 +10,7 @@ File: classes/ImageManager.php:468</note>
       </trans-unit>
       <trans-unit id="c4ae3afc5d4c01919142f8b39cc5c1c5" approved="yes">
         <source>Image format not recognized, allowed formats are: .gif, .jpg, .png</source>
-        <target xml:lang="zh-TW">圖片格式無法識別，可以使用的格式是：。gif，jpg和PNG格式。。</target>
+        <target xml:lang="zh-TW">圖片格式無法識別，可使用的格式為：。gif、jpg、png。</target>
         <note>Context:
 File: classes/ImageManager.php:448</note>
       </trans-unit>

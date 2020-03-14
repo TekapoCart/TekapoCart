@@ -833,7 +833,9 @@ class WebserviceRequestCore
                 }
             }
             if ($this->hasErrors()) {
-                header('WWW-Authenticate: Basic realm="Welcome to PrestaShop Webservice, please enter the authentication key as the login. No password required."');
+                // suzy: 2020-03-11 PrestaShop -> TekapoCart
+                // header('WWW-Authenticate: Basic realm="Welcome to PrestaShop Webservice, please enter the authentication key as the login. No password required."');
+                header('WWW-Authenticate: Basic realm="Welcome to TekapoCart Webservice, please enter the authentication key as the login. No password required."');
                 $this->objOutput->setStatus(401);
 
                 return false;
@@ -854,7 +856,9 @@ class WebserviceRequestCore
     protected function isActivated()
     {
         if (!Configuration::get('PS_WEBSERVICE')) {
-            $this->setError(503, 'The PrestaShop webservice is disabled. Please activate it in the PrestaShop Back Office', 22);
+            // suzy: 2020-03-11 PrestaShop -> TekapoCart
+            // $this->setError(503, 'The PrestaShop webservice is disabled. Please activate it in the PrestaShop Back Office', 22);
+            $this->setError(503, 'The TekapoCart webservice is disabled. Please activate it in the TekapoCart Back Office', 22);
 
             return false;
         }
@@ -1803,8 +1807,11 @@ class WebserviceRequestCore
 
         // write headers
         $this->objOutput->setHeaderParams('Access-Time', time())
-                        ->setHeaderParams('X-Powered-By', 'PrestaShop Webservice')
-                        ->setHeaderParams('PSWS-Version', _PS_VERSION_)
+                        // suzy: 2020-03-11 PrestaShop -> TekapoCart
+                        // ->setHeaderParams('X-Powered-By', 'PrestaShop Webservice')
+                        ->setHeaderParams('X-Powered-By', 'TekapoCart Webservice')
+                        // suzy: 2020-03-11 隱藏 version
+                        // ->setHeaderParams('PSWS-Version', _PS_VERSION_)
                         ->setHeaderParams('Execution-Time', round(microtime(true) - $this->_startTime, 3));
 
         $return['type'] = strtolower($this->outputFormat);
