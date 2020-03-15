@@ -526,7 +526,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/Lists/produ
     <body>
       <trans-unit id="bb03c14d14caa07e21f97cbe5eab022d" approved="yes">
         <source>Is the product a pack (a combination of at least two existing products), a virtual product (downloadable file, service, etc.), or simply a standard, physical product?</source>
-        <target xml:lang="zh-TW">請選擇此商品為 一般商品 或 組合商品（至少有兩個商品構成的組合）或 虛擬商品（可下載文件，服務等）。</target>
+        <target xml:lang="zh-TW">請選擇此商品為 一般商品 或 組合商品（至少有兩個商品構成的組合）或 虛擬商品（可下載文件）。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Blocks/header.html.twig:43</note>
       </trans-unit>

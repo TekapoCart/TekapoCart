@@ -1,167 +1,134 @@
-const CACHE = "tc-cache-v1";
+const PRECACHE = 'tc-precache-v1';
+const RUNTIME = 'tc-runtime-v1';
 
-// If any of the files fail to download, then the install step will fail
-const precacheFiles = [
-    '/'
+// A list of local resources we always want to be cached.
+const PRECACHE_URLS = [
+//  'index.html',
+//  './', // Alias for index.html
+//  'styles.css',
+//  '../../styles/main.css',
+//  'demo.js'
 ];
 
-const offlineFallbackPage = "offline.html";
-
-const cacheFirstPaths = [
-    /* Add an array of regex of paths that should go cache first */
-    // Example: /\/api\/.*/
-    /\/img\/.*/,
-    /\/theme\/.*\/assets\/css\/.*/,
-    /\/theme\/.*\/assets\/cache\/.*/
-];
-
-const avoidCachingDomains = [
-    'www.facebook.com',
-    'connect.facebook.net',
-    'www.google-analytics.com',
-    'www.googletagmanager.com',
-    'stats.g.doubleclick.net'
-]
-
-const avoidCachingPaths = [
-    /* Add an array of regex of paths that shouldn't be cached */
-    // Example: /\/api\/.*/
+const CACHE_PATHS = [
+  /\/img\/.*/,
+  /\/themes\/.*\/assets\/css\/.*/,
+  /\/themes\/.*\/assets\/cache\/.*/
 ];
 
 function pathComparer(requestUrl, pathRegEx) {
-    return requestUrl.match(new RegExp(pathRegEx));
+  return requestUrl.match(new RegExp(pathRegEx));
 }
 
 function comparePaths(requestUrl, pathsArray) {
-    if (requestUrl) {
-        for (let index = 0; index < pathsArray.length; index++) {
-            const pathRegEx = pathsArray[index];
-            if (pathComparer(requestUrl, pathRegEx)) {
-                return true;
-            }
+  if (requestUrl) {
+    for (let index = 0; index < pathsArray.length; index++) {
+      const pathRegEx = pathsArray[index];
+      if (pathComparer(requestUrl, pathRegEx)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+// The install handler takes care of precaching the resources we always need.
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(PRECACHE).then(cache => cache.addAll(PRECACHE_URLS)).then(self.skipWaiting())
+  );
+});
+
+// The activate handler takes care of cleaning up old caches.
+self.addEventListener('activate', event => {
+
+  const currentCaches = [PRECACHE, RUNTIME];
+  event.waitUntil(async function() {
+    // Feature-detect
+    if (self.registration.navigationPreload) {
+      // Enable navigation preloads!
+      // await self.registration.navigationPreload.enable();
+    }
+
+    caches.keys().then(cacheNames => {
+      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+    }).then(cachesToDelete => {
+      return Promise.all(cachesToDelete.map(cacheToDelete => {
+        return caches.delete(cacheToDelete);
+      }));
+    }).then(() => self.clients.claim())
+
+  }());
+
+
+});
+
+// The fetch handler serves responses for same-origin resources from a cache.
+// If no response is found, it populates the runtime cache with the response
+// from the network before returning it to the page.
+self.addEventListener('fetch', event => {
+  // Skip cross-origin requests, like those for Google Analytics.
+  if (event.request.url.startsWith(self.location.origin) &&
+      event.request.method === "GET" &&
+      event.request.url.indexOf('/tekapo') === -1 &&
+      event.request.url.indexOf('/order') === -1
+  ) {
+
+    event.respondWith(async function() {
+
+        if (comparePaths(event.request.url, CACHE_PATHS)) {
+
+          // Respond from the cache if we can
+          const cachedResponse = await caches.match(event.request);
+          if (cachedResponse) {
+              // console.log('cachedResponse ', event.request.url);
+              return cachedResponse;
+          }
+
+          // Else, use the preloaded response, if it's there
+          const response = await event.preloadResponse;
+          if (response) {
+            // console.log('preloadResponse ', event.request.url);
+            return response;
+          }
+
+          return fetch(event.request).then(response => {
+            return caches.open(RUNTIME).then(cache => {
+              // Put a copy of the response in the runtime cache.
+              return cache.put(event.request, response.clone()).then(() => {
+                return response;
+              });
+            });
+          });
+
+        } else {
+
+          // Else, use the preloaded response, if it's there
+          const response = await event.preloadResponse;
+          if (response) {
+            // console.log('preloadResponse ', event.request);
+            return response;
+          }
+
+          return fetch(event.request).then(function (response) {
+            return caches.open(RUNTIME).then(cache => {
+              return cache.put(event.request, response.clone()).then(() => {
+                return response;
+              });
+            });
+          }).catch(function (error) {
+            return caches.open(RUNTIME).then(cache => {
+              return cache.match(event.request).then(matching => {
+                if (!matching || matching.status === 404) {
+                  return Promise.reject("no-match");
+                }
+                return matching;
+              });
+            });
+          })
 
         }
-    }
-    return false;
-}
+    }());
 
-self.addEventListener("install", function (event) {
-
-    self.skipWaiting();
-
-    event.waitUntil(
-        caches.open(CACHE).then(function (cache) {
-            // console.log('Opened cache');
-            return cache.addAll(precacheFiles).then(function () {
-                return cache.add(offlineFallbackPage);
-            });
-        })
-    );
+  }
 });
-
-// Allow sw to control of current page
-self.addEventListener("activate", function (event) {
-    // console.log("[PWA Builder] Claiming clients for current page");
-    event.waitUntil(self.clients.claim());
-});
-
-// If any fetch fails, it will look for the request in the cache and serve it from there first
-self.addEventListener("fetch", function (event) {
-
-    if (event.request.method !== "GET") return;
-
-    if (event.request.url.indexOf('/tekapo') !== -1 || event.request.url.indexOf('/order') !== -1) {
-        // console.log('Skip: ' + event.request.url);
-        return;
-    }
-
-    if (comparePaths(event.request.url, avoidCachingDomains)) {
-        // console.log('avoidCachingDomains: ' + event.request.url);
-        return;
-    }
-
-    if (comparePaths(event.request.url, cacheFirstPaths)) {
-        cacheFirstFetch(event);
-    } else {
-        networkFirstFetch(event);
-    }
-});
-
-function cacheFirstFetch(event) {
-    event.respondWith(
-        fromCache(event.request).then(
-            function (response) {
-
-                // The response was found in the cache so we responde with it and update the entry
-                // This is where we call the server to get the newest version of the
-                // file to use the next time we show view
-                event.waitUntil(
-                    fetch(event.request).then(function (response) {
-                        return updateCache(event.request, response);
-                    })
-                );
-
-                return response;
-            },
-            function () {
-
-                // The response was not found in the cache so we look for it on the server
-                return fetch(event.request)
-                    .then(function (response) {
-                        // console.log('[cacheFirstFetch] Cache Not Found and Fetch: ' + event.request.url);
-                        // If request was success, add or update it in the cache
-                        event.waitUntil(updateCache(event.request, response.clone()));
-                        return response;
-                    })
-                    .catch(function (error) {
-                        // The following validates that the request was for a navigation to a new document
-                        if (event.request.destination !== "document" || event.request.mode !== "navigate") {
-                            return;
-                        }
-                        // console.log("[cacheFirstFetch] Network request failed and no cache." + error);
-                        // Use the precached offline page as fallback
-                        return caches.open(CACHE).then(function (cache) {
-                            cache.match(offlineFallbackPage);
-                        });
-                    });
-            }
-        )
-    );
-}
-
-function networkFirstFetch(event) {
-    event.respondWith(
-        fetch(event.request)
-            .then(function (response) {
-                // If request was success, add or update it in the cache
-                event.waitUntil(updateCache(event.request, response.clone()));
-                return response;
-            })
-            .catch(function (error) {
-                // console.log("[PWA Builder] Network request Failed. Serving content from cache: " + error);
-                return fromCache(event.request);
-            })
-    );
-}
-
-// Check to see if you have it in the cache
-// If not in the cache, then return error page
-function fromCache(request) {
-    return caches.open(CACHE).then(function (cache) {
-        return cache.match(request).then(function (matching) {
-            if (!matching || matching.status === 404) {
-                return Promise.reject("no-match");
-            }
-            return matching;
-        });
-    });
-}
-
-function updateCache(request, response) {
-    if (!comparePaths(request.url, avoidCachingPaths)) {
-        return caches.open(CACHE).then(function (cache) {
-            return cache.put(request, response);
-        });
-    }
-    return Promise.resolve();
-}

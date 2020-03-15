@@ -3,7 +3,7 @@ if ("serviceWorker" in navigator) {
         // console.log("Service worker found, no need to register");
     } else {
         // Register the service worker
-        navigator.serviceWorker.register("/sw.min.js", {
+        navigator.serviceWorker.register("/sw.js?v1", {
             scope: "/"
         })
             .then(function (reg) {
