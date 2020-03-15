@@ -541,8 +541,8 @@ class Ecpay_Tcat extends CarrierModule
             $AL->Send['Remark'] = '';
 
             $AL->SendExtend = [];
-            $AL->SendExtend['SenderZipCode'] = Configuration::get('ecpay_sender_postcode');
-            $AL->SendExtend['SenderAddress'] = Configuration::get('ecpay_sender_address');
+            $AL->SendExtend['SenderZipCode'] = empty(Configuration::get('ecpay_sender_postcode')) ? '無名氏' : Configuration::get('ecpay_sender_postcode');
+            $AL->SendExtend['SenderAddress'] = empty(Configuration::get('ecpay_sender_address')) ? '地址尚未設定' : Configuration::get('ecpay_sender_address');
 
             $AL->SendExtend['ReceiverZipCode'] = $address->postcode;
             $AL->SendExtend['ReceiverAddress'] = $address->city . $address->address1 . $address->address2;

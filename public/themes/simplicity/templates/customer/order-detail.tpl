@@ -173,7 +173,7 @@
 
   {$HOOK_DISPLAYORDERDETAIL nofilter}
 
-  {if $order.carrier.need_address }
+  {if $order.carrier.need_address && $order.carrier.is_module == 0}
   {block name='addresses'}
     <div class="addresses" style="margin-left: -15px; margin-right: -15px;">
       {if $order.addresses.delivery}

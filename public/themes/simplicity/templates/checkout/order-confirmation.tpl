@@ -86,7 +86,7 @@
           {/if}
         {/block}
 
-        {if $order.carrier.need_address }
+        {if $order.carrier.need_address && $order.carrier.is_module == 0}
           {block name='addresses'}
             <div class="addresses card row">
               {if $order.addresses.delivery}
