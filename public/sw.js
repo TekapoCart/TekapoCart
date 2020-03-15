@@ -1,5 +1,5 @@
-const PRECACHE = 'tc-precache-v1';
-const RUNTIME = 'tc-runtime-v1';
+const PRECACHE = 'tc-precache-v2';
+const RUNTIME = 'tc-runtime-v2';
 
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
@@ -67,11 +67,17 @@ self.addEventListener('activate', event => {
 // If no response is found, it populates the runtime cache with the response
 // from the network before returning it to the page.
 self.addEventListener('fetch', event => {
-  // Skip cross-origin requests, like those for Google Analytics.
-  if (event.request.url.startsWith(self.location.origin) &&
+
+  if (
+      // event.request.url.startsWith(self.location.origin) &&
       event.request.method === "GET" &&
       event.request.url.indexOf('/tekapo') === -1 &&
-      event.request.url.indexOf('/order') === -1
+      event.request.url.indexOf('/order') === -1 &&
+      event.request.url.indexOf('www.facebook.com') === -1 &&
+      event.request.url.indexOf('connect.facebook.net') === -1 &&
+      event.request.url.indexOf('www.google-analytics.com') === -1 &&
+      event.request.url.indexOf('www.googletagmanager.com') === -1 &&
+      event.request.url.indexOf('stats.g.doubleclick.net') === -1
   ) {
 
     event.respondWith(async function() {
