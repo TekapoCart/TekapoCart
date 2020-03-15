@@ -105,6 +105,8 @@ self.addEventListener('fetch', event => {
                 return response;
               });
             });
+          }).catch(function (error) {
+            return Promise.reject("no-connection");
           });
 
         } else {
