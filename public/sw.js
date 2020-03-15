@@ -1,5 +1,5 @@
-const PRECACHE = 'tc-precache-v2';
-const RUNTIME = 'tc-runtime-v2';
+const PRECACHE = 'tc-precache-v3';
+const RUNTIME = 'tc-runtime-v3';
 
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
