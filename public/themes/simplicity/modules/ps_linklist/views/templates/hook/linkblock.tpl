@@ -45,7 +45,7 @@
                 class="{$link.class}"
                 href="{$link.url}"
                 title="{$link.description}"
-                {if !empty($link.target)} target="{$link.target}" {/if}
+                {if !empty($link.target)} target="{$link.target}" rel="noreferrer"{/if}
             >
               {$link.title}
             </a>
