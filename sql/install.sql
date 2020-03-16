@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.18-16, for osx10.12 (x86_64)
 --
--- Host: localhost    Database: tekapocart_test
+-- Host: localhost    Database: tekapocart
 -- ------------------------------------------------------
 -- Server version	5.7.18-16
 
@@ -25,12 +25,12 @@
 /*!50717 DEALLOCATE PREPARE s */;
 
 --
--- Current Database: `tekapocart_test`
+-- Current Database: `tekapocart`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `tekapocart_test` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `tekapocart` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
-USE `tekapocart_test`;
+USE `tekapocart`;
 
 --
 -- Table structure for table `ps_access`
