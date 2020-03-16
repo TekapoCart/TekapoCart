@@ -44,7 +44,22 @@ class AdminCartsControllerCore extends AdminController
         $this->allow_export = true;
         $this->_orderWay = 'DESC';
 
-        $this->_select = 'CONCAT(LEFT(c.`firstname`, 1), \'. \', c.`lastname`) `customer`, a.id_cart total, ca.name carrier, o.id_order,
+        // suzy: 2020-03-16 姓名調換
+//        $this->_select = 'CONCAT(LEFT(c.`firstname`, 1), \'. \', c.`lastname`) `customer`, a.id_cart total, ca.name carrier, o.id_order,
+//		IF (IFNULL(o.id_order, \'' . $this->trans('Non ordered', array(), 'Admin.Orderscustomers.Feature') . '\') = \'' . $this->trans('Non ordered', array(), 'Admin.Orderscustomers.Feature') . '\', IF(TIME_TO_SEC(TIMEDIFF(\'' . pSQL(date('Y-m-d H:i:00', time())) . '\', a.`date_add`)) > 86400, \'' . $this->trans('Abandoned cart', array(), 'Admin.Orderscustomers.Feature') . '\', \'' . $this->trans('Non ordered', array(), 'Admin.Orderscustomers.Feature') . '\'), o.id_order) AS status, IF(o.id_order, 1, 0) badge_success, IF(o.id_order, 0, 1) badge_danger, IF(co.id_guest, 1, 0) id_guest';
+//        $this->_join = 'LEFT JOIN ' . _DB_PREFIX_ . 'customer c ON (c.id_customer = a.id_customer)
+//		LEFT JOIN ' . _DB_PREFIX_ . 'currency cu ON (cu.id_currency = a.id_currency)
+//		LEFT JOIN ' . _DB_PREFIX_ . 'carrier ca ON (ca.id_carrier = a.id_carrier)
+//		LEFT JOIN ' . _DB_PREFIX_ . 'orders o ON (o.id_cart = a.id_cart)
+//		LEFT JOIN (
+//            SELECT `id_guest`
+//            FROM `' . _DB_PREFIX_ . 'connections`
+//            WHERE
+//                TIME_TO_SEC(TIMEDIFF(\'' . pSQL(date('Y-m-d H:i:00', time())) . '\', `date_add`)) < 1800
+//            LIMIT 1
+//       ) AS co ON co.`id_guest` = a.`id_guest`';
+
+        $this->_select = 'CONCAT(c.`lastname`, \' \', c.`firstname`) `customer`, a.id_cart total, ca.name carrier, o.id_order,
 		IF (IFNULL(o.id_order, \'' . $this->trans('Non ordered', array(), 'Admin.Orderscustomers.Feature') . '\') = \'' . $this->trans('Non ordered', array(), 'Admin.Orderscustomers.Feature') . '\', IF(TIME_TO_SEC(TIMEDIFF(\'' . pSQL(date('Y-m-d H:i:00', time())) . '\', a.`date_add`)) > 86400, \'' . $this->trans('Abandoned cart', array(), 'Admin.Orderscustomers.Feature') . '\', \'' . $this->trans('Non ordered', array(), 'Admin.Orderscustomers.Feature') . '\'), o.id_order) AS status, IF(o.id_order, 1, 0) badge_success, IF(o.id_order, 0, 1) badge_danger, IF(co.id_guest, 1, 0) id_guest';
         $this->_join = 'LEFT JOIN ' . _DB_PREFIX_ . 'customer c ON (c.id_customer = a.id_customer)
 		LEFT JOIN ' . _DB_PREFIX_ . 'currency cu ON (cu.id_currency = a.id_currency)

@@ -34,7 +34,7 @@ File: classes/form/CustomerAddressFormatter.php:202</note>
       </trans-unit>
       <trans-unit id="59716c97497eb9694541f7c3d37b1a4d" approved="yes">
         <source>Country</source>
-        <target xml:lang="zh-TW">國家/區域</target>
+        <target xml:lang="zh-TW">國家/配送方式</target>
         <note>Context:
 File: classes/form/CustomerAddressFormatter.php:204</note>
       </trans-unit>
@@ -163,7 +163,7 @@ File: themes/classic/templates/customer/_partials/order-messages.tpl:59</note>
       </trans-unit>
       <trans-unit id="52ef26143ae61ec2d8bafab8cc7853fa">
         <source>-- please choose country --</source>
-        <target xml:lang="zh-TW">-- 請選擇國家/區域</target>
+        <target xml:lang="zh-TW">-- 請選擇國家/配送方式</target>
         <note>Line: 59</note>
       </trans-unit>
       <trans-unit id="deb10517653c255364175796ace3553f" approved="yes">

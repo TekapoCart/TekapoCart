@@ -126,25 +126,26 @@ final class CustomerGridDefinitionFactory extends AbstractGridDefinitionFactory
                     'field' => 'id_customer',
                 ])
             )
+            // suzy: 2020-03-16 客戶列表欄位顯示調整
+//            ->add(
+//                (new DataColumn('social_title'))
+//                ->setName($this->trans('Social title', [], 'Admin.Global'))
+//                ->setOptions([
+//                    'field' => 'social_title',
+//                ])
+//            )
             ->add(
-                (new DataColumn('social_title'))
-                ->setName($this->trans('Social title', [], 'Admin.Global'))
-                ->setOptions([
-                    'field' => 'social_title',
-                ])
+                (new DataColumn('lastname'))
+                    ->setName($this->trans('Last name', [], 'Admin.Global'))
+                    ->setOptions([
+                        'field' => 'lastname',
+                    ])
             )
             ->add(
                 (new DataColumn('firstname'))
                 ->setName($this->trans('First name', [], 'Admin.Global'))
                 ->setOptions([
                     'field' => 'firstname',
-                ])
-            )
-            ->add(
-                (new DataColumn('lastname'))
-                ->setName($this->trans('Last name', [], 'Admin.Global'))
-                ->setOptions([
-                    'field' => 'lastname',
                 ])
             )
             ->add(
@@ -172,26 +173,26 @@ final class CustomerGridDefinitionFactory extends AbstractGridDefinitionFactory
                     'route_param_name' => 'customerId',
                 ])
             )
-            ->add(
-                (new ToggleColumn('newsletter'))
-                ->setName($this->trans('Newsletter', [], 'Admin.Global'))
-                ->setOptions([
-                    'field' => 'newsletter',
-                    'primary_field' => 'id_customer',
-                    'route' => 'admin_customers_toggle_newsletter_subscription',
-                    'route_param_name' => 'customerId',
-                ])
-            )
-            ->add(
-                (new ToggleColumn('optin'))
-                ->setName($this->trans('Partner offers', [], 'Admin.Orderscustomers.Feature'))
-                ->setOptions([
-                    'field' => 'optin',
-                    'primary_field' => 'id_customer',
-                    'route' => 'admin_customers_toggle_partner_offer_subscription',
-                    'route_param_name' => 'customerId',
-                ])
-            )
+//            ->add(
+//                (new ToggleColumn('newsletter'))
+//                ->setName($this->trans('Newsletter', [], 'Admin.Global'))
+//                ->setOptions([
+//                    'field' => 'newsletter',
+//                    'primary_field' => 'id_customer',
+//                    'route' => 'admin_customers_toggle_newsletter_subscription',
+//                    'route_param_name' => 'customerId',
+//                ])
+//            )
+//            ->add(
+//                (new ToggleColumn('optin'))
+//                ->setName($this->trans('Partner offers', [], 'Admin.Orderscustomers.Feature'))
+//                ->setOptions([
+//                    'field' => 'optin',
+//                    'primary_field' => 'id_customer',
+//                    'route' => 'admin_customers_toggle_partner_offer_subscription',
+//                    'route_param_name' => 'customerId',
+//                ])
+//            )
             ->add(
                 (new DataColumn('date_add'))
                 ->setName($this->trans('Registration', [], 'Admin.Orderscustomers.Feature'))
@@ -284,27 +285,18 @@ final class CustomerGridDefinitionFactory extends AbstractGridDefinitionFactory
                 ])
                 ->setAssociatedColumn('id_customer')
             )
-            ->add(
-                (new Filter('social_title', ChoiceType::class))
-                ->setTypeOptions([
-                    'choices' => $this->genderChoices,
-                    'expanded' => false,
-                    'multiple' => false,
-                    'required' => false,
-                    'choice_translation_domain' => false,
-                ])
-                ->setAssociatedColumn('social_title')
-            )
-            ->add(
-                (new Filter('firstname', TextType::class))
-                ->setTypeOptions([
-                    'attr' => [
-                        'placeholder' => $this->trans('Search first name', [], 'Admin.Actions'),
-                    ],
-                    'required' => false,
-                ])
-                ->setAssociatedColumn('firstname')
-            )
+            // suzy: 2020-03-16 客戶列表欄位顯示調整
+//            ->add(
+//                (new Filter('social_title', ChoiceType::class))
+//                ->setTypeOptions([
+//                    'choices' => $this->genderChoices,
+//                    'expanded' => false,
+//                    'multiple' => false,
+//                    'required' => false,
+//                    'choice_translation_domain' => false,
+//                ])
+//                ->setAssociatedColumn('social_title')
+//            )
             ->add(
                 (new Filter('lastname', TextType::class))
                 ->setTypeOptions([
@@ -314,6 +306,16 @@ final class CustomerGridDefinitionFactory extends AbstractGridDefinitionFactory
                     'required' => false,
                 ])
                 ->setAssociatedColumn('lastname')
+            )
+            ->add(
+                (new Filter('firstname', TextType::class))
+                    ->setTypeOptions([
+                        'attr' => [
+                            'placeholder' => $this->trans('Search first name', [], 'Admin.Actions'),
+                        ],
+                        'required' => false,
+                    ])
+                    ->setAssociatedColumn('firstname')
             )
             ->add(
                 (new Filter('email', TextType::class))
@@ -329,14 +331,14 @@ final class CustomerGridDefinitionFactory extends AbstractGridDefinitionFactory
                 (new Filter('active', YesAndNoChoiceType::class))
                 ->setAssociatedColumn('active')
             )
-            ->add(
-                (new Filter('newsletter', YesAndNoChoiceType::class))
-                ->setAssociatedColumn('newsletter')
-            )
-            ->add(
-                (new Filter('optin', YesAndNoChoiceType::class))
-                ->setAssociatedColumn('optin')
-            )
+//            ->add(
+//                (new Filter('newsletter', YesAndNoChoiceType::class))
+//                ->setAssociatedColumn('newsletter')
+//            )
+//            ->add(
+//                (new Filter('optin', YesAndNoChoiceType::class))
+//                ->setAssociatedColumn('optin')
+//            )
             ->add(
                 (new Filter('date_add', DateRangeType::class))
                 ->setTypeOptions([

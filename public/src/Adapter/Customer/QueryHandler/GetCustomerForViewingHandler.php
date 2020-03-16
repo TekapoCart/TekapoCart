@@ -548,18 +548,36 @@ final class GetCustomerForViewingHandler implements GetCustomerForViewingHandler
 
         foreach ($addresses as $address) {
             $company = $address['company'] ?: '--';
+            // suzy: 2020-03-16 地址順序調整
+//            $fullAddress = sprintf(
+//                '%s %s %s %s',
+//                $address['address1'],
+//                $address['address2'] ?: '',
+//                $address['postcode'],
+//                $address['city']
+//            );
             $fullAddress = sprintf(
                 '%s %s %s %s',
-                $address['address1'],
-                $address['address2'] ?: '',
                 $address['postcode'],
-                $address['city']
+                $address['city'],
+                $address['address1'],
+                $address['address2'] ?: ''
             );
 
+            // suzy: 2020-03-16 姓名順序調整
+//            $customerAddresses[] = new AddressInformation(
+//                (int) $address['id_address'],
+//                $company,
+//                sprintf('%s %s', $address['firstname'], $address['lastname']),
+//                $fullAddress,
+//                $address['country'],
+//                (string) $address['phone'],
+//                (string) $address['phone_mobile']
+//            );
             $customerAddresses[] = new AddressInformation(
                 (int) $address['id_address'],
                 $company,
-                sprintf('%s %s', $address['firstname'], $address['lastname']),
+                sprintf('%s %s', $address['lastname'], $address['firstname']),
                 $fullAddress,
                 $address['country'],
                 (string) $address['phone'],

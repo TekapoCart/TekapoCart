@@ -24,7 +24,9 @@
  *#}
 
 {% set enableSidebar = true %}
-{% set fullName = '%s. %s'|format(customerInformation.personalInformation.firstName[:1], customerInformation.personalInformation.lastName) %}
+{# suzy: 2020-03-16 調整姓名 #}
+{# {% set fullName = '%s. %s'|format(customerInformation.personalInformation.firstName[:1], customerInformation.personalInformation.lastName) %} #}
+{% set fullName = '%s %s'|format(customerInformation.personalInformation.lastName, customerInformation.personalInformation.firstName) %}
 {% set layoutTitle = 'Editing customer %name%'|trans({'%name%': fullName}, 'Admin.Orderscustomers.Feature') %}
 
 {% extends 'PrestaShopBundle:Admin:layout.html.twig' %}

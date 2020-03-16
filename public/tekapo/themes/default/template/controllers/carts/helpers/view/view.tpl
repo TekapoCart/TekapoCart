@@ -43,7 +43,8 @@
 					{else}
 					<i class="icon-question"></i>
 					{/if}
-					<a href="{$link->getAdminLink('AdminCustomers', true, [], ['id_customer' => $customer->id|intval, 'viewcustomer' => 1])|escape:'html':'UTF-8'}">{$customer->firstname} {$customer->lastname}</a></h2>
+					{* suzy: 2020-03-16 姓名調換 *}
+					<a href="{$link->getAdminLink('AdminCustomers', true, [], ['id_customer' => $customer->id|intval, 'viewcustomer' => 1])|escape:'html':'UTF-8'}">{$customer->lastname} {$customer->firstname}</a></h2>
 				<div class="form-horizontal">
 					<div class="form-group">
 						<label class="col-lg-3 control-label">{l s='Account registration date:' d='Admin.Orderscustomers.Feature'}</label>
