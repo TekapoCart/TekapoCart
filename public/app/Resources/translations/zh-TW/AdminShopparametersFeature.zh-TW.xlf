@@ -1621,7 +1621,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="52be3e936f99d9746870ca7d356b3f21" approved="yes">
         <source>Force update of friendly URL</source>
-        <target xml:lang="zh-TW">強迫FRIENDLY URL更新</target>
+        <target xml:lang="zh-TW">強制 FRIENDLY URL 更新</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_general.html.twig:58</note>
       </trans-unit>
@@ -1655,15 +1655,20 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="a2ab7db4ee7104a693358c0c9d07c6ce" approved="yes">
         <source>Display unavailable product attributes on the product page</source>
-        <target xml:lang="zh-TW">在商品頁上顯示售完的商品屬性</target>
+        <target xml:lang="zh-TW">在商品頁上顯示售完</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_page.html.twig:49</note>
       </trans-unit>
       <trans-unit id="01dabe7ae47f9848c5e38f353a8f866f" approved="yes">
         <source>Display the "add to cart" button when a product has attributes</source>
-        <target xml:lang="zh-TW">商品有屬性時顯示「加入到購物車」按鈕</target>
+        <target xml:lang="zh-TW">商品有屬性時顯示「加入到購物車」</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_page.html.twig:55</note>
+      </trans-unit>
+      <trans-unit id="0a91cf360875af4259f26bc7e2971132">
+        <source>Separator of attribute anchor on the product links</source>
+        <target xml:lang="zh-TW">商品連結屬性分隔符號</target>
+        <note>Line: 71</note>
       </trans-unit>
       <trans-unit id="f7699b3d1af7fe3cdb3a6ff301940fdf" approved="yes">
         <source>Display discounted price</source>
@@ -1711,19 +1716,34 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="be6be43cab36ddf8024d237c4a2414f7" approved="yes">
         <source>Allow ordering of out-of-stock products</source>
-        <target xml:lang="zh-TW">允許訂購無庫存產品：</target>
+        <target xml:lang="zh-TW">允許訂購無庫存產品</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_stock.html.twig:35</note>
       </trans-unit>
       <trans-unit id="69983ae81c0090a571d3f60aedbd0d46" approved="yes">
         <source>Enable stock management</source>
-        <target xml:lang="zh-TW">啟用倉庫管理：</target>
+        <target xml:lang="zh-TW">啟用倉庫管理</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_stock.html.twig:41</note>
       </trans-unit>
+      <trans-unit id="966c11f36eeb298187639eea581a7522">
+        <source>Label of in-stock products</source>
+        <target xml:lang="zh-TW">有庫存商品顯示文字</target>
+        <note>Line: 55</note>
+      </trans-unit>
+      <trans-unit id="3385e522bc49e8f8fcb008788bc1762d">
+        <source>Label of out-of-stock products with allowed backorders</source>
+        <target xml:lang="zh-TW">補貨中商品顯示文字</target>
+        <note>Line: 64</note>
+      </trans-unit>
+      <trans-unit id="d79daa535ef1e90b7b1230b501b7b6c6">
+        <source>Label of out-of-stock products with denied backorders</source>
+        <target xml:lang="zh-TW">已售完商品顯示文字</target>
+        <note>Line: 73</note>
+      </trans-unit>
       <trans-unit id="480cb944a0974a27ec0f964de23a18f4" approved="yes">
         <source>Delivery time of in-stock products</source>
-        <target xml:lang="zh-TW">有庫存商品的配送時間</target>
+        <target xml:lang="zh-TW">有庫存商品所需配送時間</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_stock.html.twig:68</note>
       </trans-unit>
@@ -1732,6 +1752,11 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
         <target xml:lang="zh-TW">若無請留白</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_stock.html.twig:77</note>
+      </trans-unit>
+      <trans-unit id="d8b9fadcb2c1164975877a18731b1f4a">
+        <source>Delivery time of out-of-stock products with allowed backorders</source>
+        <target xml:lang="zh-TW">補貨中商品所需配送時間</target>
+        <note>Line: 89</note>
       </trans-unit>
       <trans-unit id="65055b5469b4ad0c6f799ad782d1ebe5" approved="yes">
         <source>Default pack stock management</source>
@@ -1866,6 +1891,69 @@ File: admin-dev/themes/default/template/controllers/referrers/helpers/view/view.
         <target xml:lang="zh-TW">商品篩選：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/referrers/helpers/view/view.tpl:112</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="src/PrestaShopBundle/Form/Admin/Configure/ShopParameters/ProductPreferences/PaginationType.php" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="df644ae155e79abf54175bd15d75f363">
+        <source>Product name</source>
+        <target xml:lang="zh-TW">商品名稱</target>
+        <note>Line: 50</note>
+      </trans-unit>
+      <trans-unit id="290b7c47045d269e2ccfa69e6477acfe">
+        <source>Product price</source>
+        <target xml:lang="zh-TW">商品價格</target>
+        <note>Line: 51</note>
+      </trans-unit>
+      <trans-unit id="0cffebd3c32f4467e14759b2b7d3d515">
+        <source>Product add date</source>
+        <target xml:lang="zh-TW">商品上架日期</target>
+        <note>Line: 52</note>
+      </trans-unit>
+      <trans-unit id="d920ec381c352d9d92a53ed3d261e8c6">
+        <source>Product modified date</source>
+        <target xml:lang="zh-TW">商品更新日期</target>
+        <note>Line: 53</note>
+      </trans-unit>
+      <trans-unit id="3cfcde53f39184634bc7b2344479fbc4">
+        <source>Position inside category</source>
+        <target xml:lang="zh-TW">商品排序位置</target>
+        <note>Line: 54</note>
+      </trans-unit>
+      <trans-unit id="1be6f9eb563f3bf85c78b4219bf09de9">
+        <source>Brand</source>
+        <target xml:lang="zh-TW">商品品牌</target>
+        <note>Line: 55</note>
+      </trans-unit>
+      <trans-unit id="7b541de13ca0229406e134a373dd6382">
+        <source>Product quantity</source>
+        <target xml:lang="zh-TW">商品庫存</target>
+        <note>Line: 56</note>
+      </trans-unit>
+      <trans-unit id="75ed578ac3cb02b0ba40002a25bc0403">
+        <source>Product reference</source>
+        <target xml:lang="zh-TW">商品編號</target>
+        <note>Line: 57</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="src/PrestaShopBundle/Form/Admin/Configure/ShopParameters/ProductPreferences/StockType.php" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="175db77b6b3ecd9633e85b5efc28bbc1">
+        <source>Decrement pack only.</source>
+        <target xml:lang="zh-TW">只扣除組合庫存</target>
+        <note>Line: 73</note>
+      </trans-unit>
+      <trans-unit id="1ba020dea4ce06fa139a471db21f41a7">
+        <source>Decrement products in pack only.</source>
+        <target xml:lang="zh-TW">只扣除商品庫存</target>
+        <note>Line: 74</note>
+      </trans-unit>
+      <trans-unit id="61b912928e920c280798dc648d4068fe">
+        <source>Decrement both.</source>
+        <target xml:lang="zh-TW">同時扣除組合及商品庫存</target>
+        <note>Line: 75</note>
       </trans-unit>
     </body>
   </file>

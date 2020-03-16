@@ -266,7 +266,7 @@ File: controllers/admin/AdminTrackingController.php:440</note>
     <body>
       <trans-unit id="13f13e9a00350642fed860ff27b9976e" approved="yes">
         <source>Cost price</source>
-        <target xml:lang="zh-TW">成本</target>
+        <target xml:lang="zh-TW">成本價</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pricing.html.twig:111</note>
       </trans-unit>
@@ -332,7 +332,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pric
       </trans-unit>
       <trans-unit id="8e99fa97ef8d51d9215028842c7ad57c" approved="yes">
         <source>Priority management</source>
-        <target xml:lang="zh-TW">優先順序管理</target>
+        <target xml:lang="zh-TW">折扣計算順序</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pricing.html.twig:169</note>
       </trans-unit>
@@ -769,7 +769,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/esse
       </trans-unit>
       <trans-unit id="694e8d1f2ee056f98ee488bdc4982d73" approved="yes">
         <source>Quantity</source>
-        <target xml:lang="zh-TW">數量</target>
+        <target xml:lang="zh-TW">庫存</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/essentials.html.twig:196</note>
       </trans-unit>
@@ -2607,6 +2607,11 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
         <target xml:lang="zh-TW">重新導向</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_seo.html.twig:90</note>
+      </trans-unit>
+      <trans-unit id="c6b3d0f163e32b16cbdde201859d33e3" approved="yes">
+        <source>Here is a preview of your search engine result, play with it!</source>
+        <target xml:lang="zh-TW">搜尋結果預覽</target>
+        <note>Line: 31</note>
       </trans-unit>
     </body>
   </file>

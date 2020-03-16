@@ -378,7 +378,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductOptions.php:122</note>
     <body>
       <trans-unit id="af809f35e40bd6f644509ad566ecf38c" approved="yes">
         <source>To have a different title from the product name, enter it here.</source>
-        <target xml:lang="zh-TW">商品名稱若有不同請在此處填寫。</target>
+        <target xml:lang="zh-TW">若與商品名稱不同請在此處填寫。</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductSeo.php:79</note>
       </trans-unit>
@@ -390,7 +390,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductSeo.php:89</note>
       </trans-unit>
       <trans-unit id="5f99bb8ecd940f311cb66fadfc467a2b" approved="yes">
         <source>To have a different description than your product summary in search results pages, write it here.</source>
-        <target xml:lang="zh-TW">商品描述若有不同請在此處填寫。</target>
+        <target xml:lang="zh-TW">若與商品描述不同請在此處填寫。</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductSeo.php:103</note>
       </trans-unit>
@@ -764,6 +764,11 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pric
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pricing.html.twig:130</note>
       </trans-unit>
+      <trans-unit id="fbade15b99b07c58fab7be777c0f4c0c">
+        <source>Sometimes one customer can fit into multiple price rules. Priorities allow you to define which rules apply first.</source>
+        <target xml:lang="zh-TW">一位客戶可能符合多個折扣規則。可設定各別商品折扣順序或可套用至全站商品。</target>
+        <note>Line: 182</note>
+      </trans-unit>
     </body>
   </file>
   <file original="src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/essentials.html.twig" source-language="en" target-language="zh-TW" datatype="plaintext">
@@ -794,7 +799,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/esse
       </trans-unit>
       <trans-unit id="5e8b5ad38b1c0a76d41c2ebaa74c11f5" approved="yes">
         <source>Advanced settings in [1][2]Quantities[/1]</source>
-        <target xml:lang="zh-TW">在 [1][2]數量[/1]裡的進階設置</target>
+        <target xml:lang="zh-TW">前往 [1][2]庫存[/1] 進階設定</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/essentials.html.twig:208</note>
       </trans-unit>
@@ -806,7 +811,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/esse
       </trans-unit>
       <trans-unit id="143cb6dd5281d68859217704ad9c9f60" approved="yes">
         <source>Advanced settings in [1][2]Pricing[/1]</source>
-        <target xml:lang="zh-TW">前往 [1][2]價格[/1] 詳細設定</target>
+        <target xml:lang="zh-TW">前往 [1][2]價格[/1] 進階設定</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/essentials.html.twig:237</note>
       </trans-unit>

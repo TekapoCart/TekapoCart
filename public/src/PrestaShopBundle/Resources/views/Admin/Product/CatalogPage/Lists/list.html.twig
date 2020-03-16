@@ -57,9 +57,11 @@
         <td class="text-center">
             <a href="{{ product.url|default('') }}#tab-step2">{{ product.price|default('N/A'|trans({}, 'Admin.Global')) }}</a>
         </td>
+        {# suzy: 2020-03-16 隱藏 價格（含稅）
         <td class="text-center">
             <a href="{{ product.url|default('') }}#tab-step2">{{ product.price_final|default('N/A'|trans({}, 'Admin.Global')) }}</a>
         </td>
+        #}
 
         {% if 'PS_STOCK_MANAGEMENT'|configuration %}
             <td class="product-sav-quantity text-center" data-product-quantity-value="{{ product.sav_quantity|default('') }}">
@@ -137,7 +139,7 @@
     </tr>
     {% endblock %}
 {% else %}
-<tr><td colspan="11">
+<tr>{# suzy: 2020-03-16 <td colspan="11"> #}<td colspan="10">
         {{ "There is no result for this search. Update your filters to view other products."|trans({}, 'Admin.Catalog.Notification') }}
     </td></tr>
 {% endfor %}

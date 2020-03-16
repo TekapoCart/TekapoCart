@@ -53,12 +53,15 @@
           <th scope="col">{# suzy: 2018-09-07 Category 改成 Main category #}
             {{ ps.sortable_column_header("Main category"|trans({}, 'Admin.Catalog.Feature'), 'name_category', orderBy, sortOrder) }}
           </th>
-          <th scope="col" class="text-center" style="width: 9%">
-            {{ ps.sortable_column_header("Price (tax excl.)"|trans({}, 'Admin.Catalog.Feature'), 'price', orderBy, sortOrder) }}
+          <th scope="col" class="text-center" style="width: 9%">{# suzy: 2020-03-16 價格 (未稅) 改成 價格 #}
+            {#{ ps.sortable_column_header("Price (tax excl.)"|trans({}, 'Admin.Catalog.Feature'), 'price', orderBy, sortOrder) }}#}
+            價格
           </th>
+          {# suzy: 2020-03-16 隱藏 價格（含稅）
           <th scope="col" class="text-center" style="width: 9%">
             {{ "Price (tax incl.)"|trans({}, 'Admin.Catalog.Feature') }}
           </th>
+          #}
 
           {% if 'PS_STOCK_MANAGEMENT'|configuration %}
           <th scope="col" class="text-center" style="width: 9%">
@@ -138,7 +141,9 @@
               'disabled': filters_disabled,
             } %}
           </th>
+          {# suzy: 2020-03-16 隱藏 價格（含稅）
           <th class="text-center"></th>
+          #}
           {% if 'PS_STOCK_MANAGEMENT'|configuration %}
           <th class="text-center">
             {% include '@PrestaShop/Admin/Helpers/range_inputs.html.twig' with {

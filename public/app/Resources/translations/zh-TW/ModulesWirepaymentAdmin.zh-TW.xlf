@@ -110,7 +110,7 @@ File: modules/ps_wirepayment/views/templates/hook/infos.tpl:28</note>
       </trans-unit>
       <trans-unit id="cfc0561623b37471f267aa911092b3ac" approved="yes">
         <source>If the client chooses to pay by bank wire, the order status will change to 'Waiting for Payment'.</source>
-        <target xml:lang="zh-TW">如果客戶選擇以轉帳匯款付款，訂單狀態會變成「等待轉帳匯款」。</target>
+        <target xml:lang="zh-TW">如果客戶選擇以轉帳匯款付款，訂單狀態會變成「待付款」。</target>
         <note>Context:
 File: modules/ps_wirepayment/views/templates/hook/infos.tpl:29</note>
       </trans-unit>
