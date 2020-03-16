@@ -124,7 +124,7 @@
 
       {* Quick access *}
       {* suzy: 2019-01-01 quick_access 加上 is_array 判斷 *}
-      {if count($quick_access) >= 0}
+      {if is_array($quick_access) && count($quick_access) >= 0}
       <div id="header_quick" class="component">
         <div class="dropdown">
           <button
