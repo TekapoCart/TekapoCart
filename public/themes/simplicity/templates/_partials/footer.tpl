@@ -43,7 +43,7 @@
 {block name='copyright_link'}
   <div class="text-xs-center copyright">
     Copyright &copy; {$smarty.now|date_format:"%Y"} <a href="{$urls.base_url}" target="_blank">{$shop.name}</a><br>
-    Powered by <a href="https://www.tekapo.io/" target="_blank">TekapoCart</a>
+    Powered by <a href="https://www.tekapo.io/" target="_blank" rel="noreferrer">TekapoCart</a>
   </div>
 {/block}
 

@@ -1,0 +1,18 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+Thanks for your trust.
+
+We are pleased to offer you a discount of {amount}% off your next order. And this offer is valid for {days} days, so do not wait any longer!
+
+Here is your VOUCHER CODE: {voucher_num}
+
+Enter this code in your shopping cart to get the discount.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

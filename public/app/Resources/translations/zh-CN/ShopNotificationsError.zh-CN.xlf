@@ -19,7 +19,17 @@ File: modules/trackingfront/trackingfront.php:99</note>
   </file>
   <file original="classes/form/CustomerForm.php" source-language="en" target-language="zh-CN" datatype="plaintext">
     <body>
-      
+      <trans-unit id="b99c284c2a24cf024e5811c89706bf79" approved="yes">
+        <source>The email "%mail%" is already used, please choose another one or sign in</source>
+        <target xml:lang="zh-CN">E-Mail “%mail%”已被使用，请用另一个 E-Mail 或登入</target>
+        <note>Context:
+File: classes/form/CustomerForm.php:114</note>
+      </trans-unit>
+      <trans-unit id="eefb581d7c421334e62a68223c7a242a">
+        <source>The email is already used, please choose another one or sign in</source>
+        <target xml:lang="zh-CN">E-Mail 已被使用，请用另一个 E-Mail 或登入</target>
+        <note>Line: 112</note>
+      </trans-unit>
     </body>
   </file>
   <file original="classes/stock/SupplyOrderDetail.php" source-language="en" target-language="zh-CN" datatype="plaintext">

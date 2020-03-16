@@ -1,0 +1,18 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+如要確保收到信件，可將此信箱加入通訊錄。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+Customer Service - Discussion Forwarded
+
+{employee} wanted to forward this discussion to you.
+
+對話記錄： {messages}
+
+{employee} added {comment}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

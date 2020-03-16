@@ -26,7 +26,7 @@ File: classes/order/OrderHistory.php:344</note>
     <body>
       <trans-unit id="9cdca3c7972c48111e79648c942ac672" approved="yes">
         <source>The message was successfully sent to the customer.</source>
-        <target xml:lang="zh-TW">該訊息已成功發送給客戶。</target>
+        <target xml:lang="zh-TW">訊息已成功發送。</target>
         <note>Context:
 File: classes/controller/AdminController.php:466</note>
       </trans-unit>
@@ -112,7 +112,7 @@ File: controllers/admin/AdminCustomersController.php:1001</note>
     <body>
       <trans-unit id="f193c3dd6da8a06a610c632db03d55c8" approved="yes">
         <source>The order ID -- or the invoice order ID -- is missing.</source>
-        <target xml:lang="zh-TW">缺少訂單編號或發票訂單編號</target>
+        <target xml:lang="zh-TW">缺少訂單 ID 或 invoice order ID</target>
         <note>Context:
 File: controllers/admin/AdminPdfController.php:90</note>
       </trans-unit>
@@ -130,7 +130,7 @@ File: controllers/admin/AdminPdfController.php:125</note>
       </trans-unit>
       <trans-unit id="f2e9d5988718c8a3dde49c6bcb55125b" approved="yes">
         <source>The supply order ID is missing.</source>
-        <target xml:lang="zh-TW">缺少採購單編號</target>
+        <target xml:lang="zh-TW">缺少採購單 ID</target>
         <note>Context:
 File: controllers/admin/AdminPdfController.php:150</note>
       </trans-unit>
@@ -194,13 +194,13 @@ File: controllers/admin/AdminOrdersController.php:389</note>
       </trans-unit>
       <trans-unit id="45d4b3afac71a54470a6cbf828e8cb0d" approved="yes">
         <source>The order carrier ID is invalid.</source>
-        <target xml:lang="zh-TW">訂單貨運商編號有誤</target>
+        <target xml:lang="zh-TW">訂單配送方式 ID 有誤</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:468</note>
       </trans-unit>
       <trans-unit id="e52d022f0fb2160ec1cf7b4122ab9589" approved="yes">
         <source>The tracking number is incorrect.</source>
-        <target xml:lang="zh-TW">追蹤號碼錯誤</target>
+        <target xml:lang="zh-TW">配送編號有誤</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:470</note>
       </trans-unit>
@@ -350,7 +350,7 @@ File: controllers/admin/AdminOrdersController.php:1168</note>
       </trans-unit>
       <trans-unit id="7d0d71a3e577be4c20799b52286191d6" approved="yes">
         <source>The transaction ID is invalid.</source>
-        <target xml:lang="zh-TW">交易編號有誤</target>
+        <target xml:lang="zh-TW">交易 ID 有誤</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1170</note>
       </trans-unit>
@@ -634,19 +634,19 @@ File: controllers/admin/AdminEmployeesController.php:412</note>
     <body>
       <trans-unit id="5844cf5e9f752e6eb7cc1166a3022183" approved="yes">
         <source>No order was found with this ID:</source>
-        <target xml:lang="zh-TW">這個編號找不到訂單：</target>
+        <target xml:lang="zh-TW">這個 ID 找不到訂單：</target>
         <note>Context:
 File: controllers/admin/AdminSearchController.php:124</note>
       </trans-unit>
       <trans-unit id="3b27bc623d860beacbe5d5cde18fdec0" approved="yes">
         <source>No invoice was found with this ID:</source>
-        <target xml:lang="zh-TW">這個編號找不到發票：</target>
+        <target xml:lang="zh-TW">這個 ID 找不到發票：</target>
         <note>Context:
 File: controllers/admin/AdminSearchController.php:134</note>
       </trans-unit>
       <trans-unit id="ec79affe41245b47969a2451211b263a" approved="yes">
         <source>No cart was found with this ID:</source>
-        <target xml:lang="zh-TW">這個編號找不到購物車：</target>
+        <target xml:lang="zh-TW">這個 ID 找不到購物車：</target>
         <note>Context:
 File: controllers/admin/AdminSearchController.php:142</note>
       </trans-unit>
@@ -824,7 +824,7 @@ File: controllers/admin/AdminReturnController.php:233</note>
       </trans-unit>
       <trans-unit id="16f2adf6c4fd1317acba5871267a60f2" approved="yes">
         <source>No order return ID has been specified.</source>
-        <target xml:lang="zh-TW">沒有指定訂單退回編號</target>
+        <target xml:lang="zh-TW">沒有指定訂單退貨 ID </target>
         <note>Context:
 File: controllers/admin/AdminReturnController.php:281</note>
       </trans-unit>
@@ -966,7 +966,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="153c7809e6b00b6cbfa01b8aa9db43e3" approved="yes">
         <source>paid instead of</source>
-        <target xml:lang="zh-TW">已支付，而非應付的</target>
+        <target xml:lang="zh-TW">已付款，而非應付款項</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:407</note>
       </trans-unit>

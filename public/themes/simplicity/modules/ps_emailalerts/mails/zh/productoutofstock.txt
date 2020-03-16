@@ -1,0 +1,18 @@
+此信件为系统自动传送，请勿直接回复，感谢您的配合。
+如要确保收到信件，可将此信箱加入通讯录。
+
+{shop_url}
+
+您好，
+
+{product} 几乎没有库存了。
+
+There are now less than {last_qty} items in stock.
+
+所剩库存： {qty}
+
+Replenish your inventory, go to the Catalog > Stocks section of your back office to manage your stock.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

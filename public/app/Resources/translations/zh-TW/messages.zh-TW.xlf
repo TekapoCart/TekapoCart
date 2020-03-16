@@ -212,13 +212,13 @@ File: controllers/admin/AdminTabsController.php:96</note>
       </trans-unit>
       <trans-unit id="ede4759c9afae620fd586628789fa304" approved="yes">
         <source>Enable selection</source>
-        <target xml:lang="zh-TW">啟用選擇項目</target>
+        <target xml:lang="zh-TW">啟用所選</target>
         <note>Context:
 File: controllers/admin/AdminTabsController.php:299</note>
       </trans-unit>
       <trans-unit id="ab7fd6e250b64a46027a996088fdff74" approved="yes">
         <source>Disable selection</source>
-        <target xml:lang="zh-TW">停用選擇項目</target>
+        <target xml:lang="zh-TW">停用所選</target>
         <note>Context:
 File: controllers/admin/AdminTabsController.php:303</note>
       </trans-unit>
@@ -230,7 +230,7 @@ File: controllers/admin/AdminTabsController.php:52</note>
       </trans-unit>
       <trans-unit id="e25f0ecd41211b01c83e5fec41df4fe7" approved="yes">
         <source>Delete selected items?</source>
-        <target xml:lang="zh-TW">確認刪除已選定項目?</target>
+        <target xml:lang="zh-TW">確認刪除選取？</target>
         <note>Context:
 File: controllers/admin/AdminTabsController.php:53</note>
       </trans-unit>
@@ -409,13 +409,13 @@ File: modules/ps_themecusto/controllers/admin/AdminPsThemeCustoConfiguration.php
 File: modules/ps_themecusto/controllers/admin/AdminPsThemeCustoConfiguration.php:41</note>
       </trans-unit>
       <trans-unit id="038bd38b5172a9ba90468070bdc4d4f3" approved="yes">
-        <source>Disable Mobile</source>
-        <target xml:lang="zh-TW">只停用手機版</target>
+        <source>Disable mobile</source>
+        <target xml:lang="zh-TW">停用手機版</target>
         <note>Context:
 File: modules/ps_themecusto/controllers/admin/AdminPsThemeCustoConfiguration.php:43</note>
       </trans-unit>
       <trans-unit id="8b1a3613ac33a07ab788b2656755110c" approved="yes">
-        <source>Enable Mobile</source>
+        <source>Enable mobile</source>
         <target xml:lang="zh-TW">啟用手機版</target>
         <note>Context:
 File: modules/ps_themecusto/controllers/admin/AdminPsThemeCustoConfiguration.php:44</note>
@@ -534,7 +534,7 @@ File: modules/ps_themecusto/controllers/admin/AdminPsThemeCustoConfiguration.php
     <body>
       <trans-unit id="526d688f37a86d3c3f27d0c5016eb71d" approved="yes">
         <source>Reset</source>
-        <target xml:lang="zh-TW">重新設定</target>
+        <target xml:lang="zh-TW">重設</target>
         <note>Context:
 File: admin-dev/themes/default/template/helpers/list/list_header.tpl:386</note>
       </trans-unit>
@@ -832,7 +832,7 @@ File: modules/ps_googleanalytics/ps_googleanalytics.php:161</note>
       </trans-unit>
       <trans-unit id="851bd83a102d143ee17d97f9e15e15af" approved="yes">
         <source>Google Analytics Tracking ID</source>
-        <target xml:lang="zh-TW">Google Analytics（谷歌分析）追踪編號</target>
+        <target xml:lang="zh-TW">Google Analytics Tracking ID</target>
         <note>Context:
 File: modules/ps_googleanalytics/ps_googleanalytics.php:166</note>
       </trans-unit>
@@ -1435,7 +1435,7 @@ File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:49</
       </trans-unit>
       <trans-unit id="f5945546981ef6e50e1fade1b386da04" approved="yes">
         <source>Search (e.g.: product reference, customer name…)</source>
-        <target xml:lang="zh-TW">搜索（例如：商品編號，客戶名稱...）</target>
+        <target xml:lang="zh-TW">搜索（例如：商品編號，客戶姓名...）</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:36</note>
       </trans-unit>
@@ -1453,7 +1453,7 @@ File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:42</
       </trans-unit>
       <trans-unit id="c32516babc5b6c47eb8ce1bfc223253c" approved="yes">
         <source>Catalog</source>
-        <target xml:lang="zh-TW">商品目錄</target>
+        <target xml:lang="zh-TW">商品</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:44</note>
       </trans-unit>
@@ -1465,31 +1465,31 @@ File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:44</
       </trans-unit>
       <trans-unit id="855d2bf59043b81e76bc931e685a4f58" approved="yes">
         <source>by name</source>
-        <target xml:lang="zh-TW">依據名稱</target>
+        <target xml:lang="zh-TW">姓名</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:45</note>
       </trans-unit>
       <trans-unit id="a3681587c5320489b6a3dd21282e254d" approved="yes">
         <source>Email, name...</source>
-        <target xml:lang="zh-TW">電郵，名稱...</target>
+        <target xml:lang="zh-TW">E-Mail，名稱...</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:45</note>
       </trans-unit>
       <trans-unit id="399574be0ed95657dfac0e8d38374c62" approved="yes">
         <source>by ip address</source>
-        <target xml:lang="zh-TW">依據 IP 位址</target>
+        <target xml:lang="zh-TW">IP</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:46</note>
       </trans-unit>
       <trans-unit id="16b2494238f8f996b09417d1dc56c795" approved="yes">
         <source>by IP address</source>
-        <target xml:lang="zh-TW">依據 IP 位址</target>
+        <target xml:lang="zh-TW">IP</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:46</note>
       </trans-unit>
       <trans-unit id="d79cf3f429596f77db95c65074663a54" approved="yes">
         <source>Order ID</source>
-        <target xml:lang="zh-TW">訂單編號</target>
+        <target xml:lang="zh-TW">訂單 ID</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:47</note>
       </trans-unit>
@@ -1529,7 +1529,7 @@ File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:52</
     <body>
       <trans-unit id="490aa6e856ccf208a054389e47ce0d06" approved="yes">
         <source>Id</source>
-        <target xml:lang="zh-TW">編號</target>
+        <target xml:lang="zh-TW">ID</target>
         <note>Context:
 File: modules/psgdpr/views/templates/front/pdf/personalData.carts-tab.tpl:30</note>
       </trans-unit>
@@ -2025,25 +2025,25 @@ File: modules/prestafraud/prestafraud.php:196</note>
       </trans-unit>
       <trans-unit id="1d6af794b2599c1407a83029a09d1ecf" approved="yes">
         <source>Carriers</source>
-        <target xml:lang="zh-TW">承運商</target>
+        <target xml:lang="zh-TW">配送方式</target>
         <note>Context:
 File: modules/prestafraud/prestafraud.php:209</note>
       </trans-unit>
       <trans-unit id="914419aa32f04011357d3b604a86d7eb" approved="yes">
         <source>Carrier</source>
-        <target xml:lang="zh-TW">承運商</target>
+        <target xml:lang="zh-TW">配送方式</target>
         <note>Context:
 File: modules/prestafraud/prestafraud.php:212</note>
       </trans-unit>
       <trans-unit id="fecb07f7ab46e23e9b520a9a9af7b97b" approved="yes">
         <source>Carrier Type</source>
-        <target xml:lang="zh-TW">承運商類型</target>
+        <target xml:lang="zh-TW">配送方式類型</target>
         <note>Context:
 File: modules/prestafraud/prestafraud.php:212</note>
       </trans-unit>
       <trans-unit id="b04ad61ad875f6e7149fdd51c2e60ce2" approved="yes">
         <source>Choose a carrier type...</source>
-        <target xml:lang="zh-TW">選擇承運商類型...</target>
+        <target xml:lang="zh-TW">選擇配送方式類型...</target>
         <note>Context:
 File: modules/prestafraud/prestafraud.php:217</note>
       </trans-unit>
@@ -2769,7 +2769,7 @@ File: admin-dev/themes/default/template/search_form.tpl:50</note>
     <body>
       <trans-unit id="4f32a32dea642737580dd71cdfd8d3c0" approved="yes">
         <source>Quick Access</source>
-        <target xml:lang="zh-TW">快速連結</target>
+        <target xml:lang="zh-TW">書籤</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/quick_access.tpl:4</note>
       </trans-unit>
@@ -2793,7 +2793,7 @@ File: admin-dev/themes/new-theme/template/components/layout/quick_access.tpl:44<
       </trans-unit>
       <trans-unit id="165122309e15dc09c30b78951e53cb5a" approved="yes">
         <source>Manage quick accesses</source>
-        <target xml:lang="zh-TW">管理快速連結</target>
+        <target xml:lang="zh-TW">管理書籤</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/quick_access.tpl:49</note>
       </trans-unit>
@@ -2965,7 +2965,7 @@ File: admin-dev/themes/new-theme/template/header.tpl:60</note>
       </trans-unit>
       <trans-unit id="7a2e40e90ddbc145f11afacb5eb83ae2" approved="yes">
         <source>Customer name:</source>
-        <target xml:lang="zh-TW">客戶名稱</target>
+        <target xml:lang="zh-TW">客戶姓名</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/header.tpl:61</note>
       </trans-unit>
@@ -3189,7 +3189,7 @@ File: admin-dev/themes/default/template/controllers/modules_positions/list_modul
     <body>
       <trans-unit id="bcca39c6f36c3085c46429511614b227" approved="yes">
         <source>If enabled, the voucher will not apply to products already on sale.</source>
-        <target xml:lang="zh-TW">若啟用，正在特價的商品將無法套用於此活動。</target>
+        <target xml:lang="zh-TW">正在特價的商品將無法套用於此活動。</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/actions.tpl:145</note>
       </trans-unit>
@@ -3307,7 +3307,7 @@ File: admin-dev/themes/default/template/controllers/attribute_generator/content.
     <body>
       <trans-unit id="d13d8380c3f4de07fef91a42fe6c60d7" approved="yes">
         <source>Customer ID:</source>
-        <target xml:lang="zh-TW">客戶編號：</target>
+        <target xml:lang="zh-TW">客戶 ID：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/message.tpl:127</note>
       </trans-unit>

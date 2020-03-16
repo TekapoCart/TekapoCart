@@ -1,0 +1,18 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+如要確保收到信件，可將此信箱加入通訊錄。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+Your guest account has been turned into a customer account
+
+Congratulations, your guest account for {shop_name} has been turned into a customer account!
+
+Email address: {email}
+
+您可以在我們的商店裡使用會員帳戶： [{shop_name}]({shop_url})
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

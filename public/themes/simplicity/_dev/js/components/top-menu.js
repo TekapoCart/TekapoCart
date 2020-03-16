@@ -1,5 +1,5 @@
 /**
- * 2007-2017 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2017 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -50,10 +50,10 @@ export default class TopMenu extends DropDown {
 
       // suzy: 加入 msc menu
       if (document.querySelector('#mobile_top_menu_wrapper')) {
-          $('#mobile_top_menu_wrapper').toggle();
-          self.toggleMobileMenu();
+        $('#mobile_top_menu_wrapper').toggle();
+        self.toggleMobileMenu();
       } else if (document.querySelector('#mobile_top_menu_msc_wrapper')) {
-          document.querySelector('#mobile_top_menu_msc_wrapper').toggle();
+        document.querySelector('#mobile_top_menu_msc_wrapper').toggle();
       }
 
     });
@@ -70,6 +70,7 @@ export default class TopMenu extends DropDown {
     });
     prestashop.on('responsive update', function(event) {
       $('.js-sub-menu').removeAttr('style');
+      // suzy: 改成 close
       // self.toggleMobileMenu();
       self.closeMobileMenu();
 
@@ -79,36 +80,40 @@ export default class TopMenu extends DropDown {
 
   // suzy: 追加
   closeMobileMenu() {
-      if (document.querySelector('#mobile_top_menu_wrapper')) {
-          $('#mobile_top_menu_wrapper').hide();
-          $('#header').removeClass('is-open');
-          $('#notifications, #wrapper, #footer').show();
-          $('.header-bottom').show();
-          $('#menu-icon .material-icons').removeClass('on');
-          $('#_mobile_logo').removeClass('on');
-          $('#menu-icon .material-icons').text('menu');
-      } else if (document.querySelector('#mobile_top_menu_msc_wrapper')) {
-          document.querySelector('#mobile_top_menu_msc_wrapper').curtainCall();
-      }
+    if (document.querySelector('#mobile_top_menu_wrapper')) {
+      $('#mobile_top_menu_wrapper').hide();
+      $('#header').removeClass('is-open');
+      $('#notifications, #wrapper, #footer').show();
+      $('.header-bottom').show();
+      $('#menu-icon .material-icons').removeClass('on');
+      $('#_mobile_logo').removeClass('on');
+      $('#menu-icon .material-icons').text('menu');
+    } else if (document.querySelector('#mobile_top_menu_msc_wrapper')) {
+      document.querySelector('#mobile_top_menu_msc_wrapper').curtainCall();
+    }
   }
 
   toggleMobileMenu() {
-      // $('#header').toggleClass('is-open');
-      if ($('#mobile_top_menu_wrapper').is(":visible")) {
-          $('#header').addClass('is-open'); // suzy: 追加
-          $('#notifications, #wrapper, #footer').hide();
-          $('.header-bottom').hide(); // suzy: 追加
-          $('#menu-icon .material-icons').addClass('on'); // suzy: 追加
-          $('#_mobile_logo').addClass('on'); // suzy: 追加
-          $('#menu-icon .material-icons').text('close'); // suzy: 追加
-      } else {
-          $('#header').removeClass('is-open'); // suzy: 追加
-          $('#notifications, #wrapper, #footer').show();
-          $('.header-bottom').show(); // suzy: 追加
-          $('#menu-icon .material-icons').removeClass('on'); // suzy: 追加
-          $('#_mobile_logo').removeClass('on'); // suzy: 追加
-          $('#menu-icon .material-icons').text('menu'); // suzy: 追加
-      }
+    // $('#header').toggleClass('is-open');
+    if ($('#mobile_top_menu_wrapper').is(":visible")) {
+      $('#notifications, #wrapper, #footer').hide();
+
+      // suzy: 追加
+      $('#header').addClass('is-open');
+      $('.header-bottom').hide();
+      $('#menu-icon .material-icons').addClass('on');
+      $('#_mobile_logo').addClass('on');
+      $('#menu-icon .material-icons').text('close');
+    } else {
+      $('#notifications, #wrapper, #footer').show();
+
+      // suzy: 追加
+      $('#header').removeClass('is-open');
+      $('.header-bottom').show();
+      $('#menu-icon .material-icons').removeClass('on');
+      $('#_mobile_logo').removeClass('on');
+      $('#menu-icon .material-icons').text('menu');
+    }
   }
 
 }

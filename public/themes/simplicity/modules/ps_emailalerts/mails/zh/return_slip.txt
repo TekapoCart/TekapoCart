@@ -1,0 +1,34 @@
+此信件为系统自动传送，请勿直接回复，感谢您的配合。
+如要确保收到信件，可将此信箱加入通讯录。
+
+{shop_url}
+
+您好，
+
+You have received a new return request for {shop_name}.
+
+Return Details
+
+订单： {order_name} 下单： {date}
+
+客户 {firstname} {lastname}, ({email})
+
+参考	产品	数量   {items}
+
+送货地址
+
+{delivery_block_html}
+
+账单地址
+
+{invoice_block_html}
+
+客户留言：
+
+{message}
+
+查看订单状态请至「[订单查询]({guest_tracking_url})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

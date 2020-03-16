@@ -1,0 +1,34 @@
+Please do not reply directly to this email, we will not receive it.
+Adding our email address as a contact to ensure all messages are delivered to your Inbox.
+
+{shop_url}
+
+Hi,
+
+You have received a new return request for {shop_name}.
+
+Return Details
+
+Order: {order_name} Placed on {date}
+
+Customer: {firstname} {lastname}, ({email})
+
+SKU	Product	Qty   {items}
+
+Delivery address
+
+{delivery_block_html}
+
+Billing address
+
+{invoice_block_html}
+
+Customer message:
+
+{message}
+
+You can track your order status via the 「[Order Tracking]({guest_tracking_url})」.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

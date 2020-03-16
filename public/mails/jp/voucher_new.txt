@@ -1,0 +1,16 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+Voucher code has been generated
+
+Here is your new voucher code: {voucher_num}
+
+In order to use it, just copy/paste this code during check out.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

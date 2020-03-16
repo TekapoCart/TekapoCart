@@ -1,5 +1,5 @@
 {**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
@@ -106,7 +106,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-7">
+    <!-- suzy: 2019-12-05 col-lg-7 改 col-lg-12 -->
+    <div class="col-lg-12">
       <div class="panel">
         <div class="panel-heading">
           <i class="icon-credit-card"></i>
@@ -139,7 +140,7 @@
               {l s='View invoice' d='Admin.Orderscustomers.Feature'}
             </a>
           {else}
-            {*  suzy: 2018-09-12 隱藏 X 無發票
+            {* suzy: 2018-09-12 隱藏 X 無發票
             <span class="span label label-inactive">
               <i class="icon-remove"></i>
               {l s='No invoice' d='Admin.Orderscustomers.Feature'}
@@ -148,10 +149,12 @@
           {/if}
           &nbsp;
           {if $order->delivery_number}
+            {* suzy: 2019-12-05 隱藏 檢視出貨單 按鈕
             <a class="btn btn-default _blank"  href="{$link->getAdminLink('AdminPdf', true, [], ['submitAction' => 'generateDeliverySlipPDF', 'id_order' => $order->id|intval])|escape:'html':'UTF-8'}">
               <i class="icon-truck"></i>
               {l s='View delivery slip' d='Admin.Orderscustomers.Feature'}
             </a>
+            *}
           {else}
             {* suzy: 2018-09-12 隱藏 X 無出貨單
             <span class="span label label-inactive">
@@ -174,23 +177,26 @@
             </a>
             &nbsp;
           {/if}
+          {* suzy: 2019-12-05 隱藏 部份退款 按鈕
           {if $order->hasInvoice()}
             <a id="desc-order-partial_refund" class="btn btn-default" href="#refundForm">
               <i class="icon-exchange"></i>
               {l s='Partial refund' d='Admin.Orderscustomers.Feature'}
             </a>
           {/if}
+          *}
           {hook h='displayBackOfficeOrderActions' id_order=$order->id|intval}
         </div>
         <!-- Tab nav -->
         <ul class="nav nav-tabs" id="tabOrder">
-          {$HOOK_TAB_ORDER}
           <li class="active">
             <a href="#status">
               <i class="icon-time"></i>
               {l s='Status' d='Admin.Global'} <span class="badge">{$history|@count}</span>
             </a>
           </li>
+          {* suzy: 2019-12-05 移動 hook 位置 *}
+          {$HOOK_TAB_ORDER}
           <li>
             <a href="#documents">
               <i class="icon-file-text"></i>
@@ -200,7 +206,6 @@
         </ul>
         <!-- Tab content -->
         <div class="tab-content panel">
-          {$HOOK_CONTENT_ORDER}
           <!-- Tab status -->
           <div class="tab-pane active" id="status">
             <h4 class="visible-print">{l s='Status' d='Admin.Global'} <span class="badge">({$history|@count})</span></h4>
@@ -269,6 +274,8 @@
               </div>
             </form>
           </div>
+          {* suzy: 2019-12-05 移動 hook 位置 *}
+          {$HOOK_CONTENT_ORDER}
           <!-- Tab documents -->
           <div class="tab-pane" id="documents">
             <h4 class="visible-print">{l s='Documents' d='Admin.Orderscustomers.Feature'} <span class="badge">({$order_documents|@count})</span></h4>
@@ -441,7 +448,7 @@
                   <th><span class="title_box ">{l s='Payment method' d='Admin.Orderscustomers.Feature'}</span></th>
                   <th><span class="title_box ">{l s='Transaction ID' d='Admin.Orderscustomers.Feature'}</span></th>
                   <th><span class="title_box ">{l s='Amount' d='Admin.Global'}</span></th>
-                  {* suzy: 2018-09-12 隱藏 發票 <th><span class="title_box ">{l s='Invoice' d='Admin.Global'}</span></th>*}
+                  <th><span class="title_box ">{l s='Invoice' d='Admin.Global'}</span></th>
                   <th></th>
                 </tr>
               </thead>
@@ -452,17 +459,19 @@
                   <td>{$payment->payment_method|escape:'html':'UTF-8'}</td>
                   <td>{$payment->transaction_id|escape:'html':'UTF-8'}</td>
                   <td>{displayPrice price=$payment->amount currency=$payment->id_currency}</td>
-                  {* suzy: 2018-09-12 隱藏 發票 <td>
+                  <td>
                   {if $invoice = $payment->getOrderInvoice($order->id)}
                     {$invoice->getInvoiceNumberFormatted($current_id_lang, $order->id_shop)}
                   {else}
                   {/if}
-                  </td>*}
+                  </td>
                   <td class="actions">
+                    {* suzy: 2019-12-05 隱藏無用按鈕
                     <button class="btn btn-default open_payment_information">
                       <i class="icon-search"></i>
                       {l s='Details' d='Admin.Global'}
                     </button>
+                    *}
                   </td>
                 </tr>
                 <tr class="payment_information" style="display: none;">
@@ -539,7 +548,7 @@
                       {/foreach}
                     </select>
                   </td>
-                  {* suzy: 2018-09-12 隱藏 發票 <td>
+                  <td>
                     {if count($invoices_collection) > 0}
                       <select name="payment_invoice" id="payment_invoice">
                       {foreach from=$invoices_collection item=invoice}
@@ -547,7 +556,7 @@
                       {/foreach}
                       </select>
                     {/if}
-                  </td>*}
+                  </td>
                   <td class="actions">
                     <button class="btn btn-primary" type="submit" name="submitAddPayment">
                       {l s='Add' d='Admin.Actions'}
@@ -581,7 +590,8 @@
       </div>
       {hook h="displayAdminOrderLeft" id_order=$order->id}
     </div>
-    <div class="col-lg-5">
+    <!-- suzy: 2019-12-05 col-lg-5 改 col-lg-12 -->
+    <div class="col-lg-12">
       <!-- Customer informations -->
       <div class="panel">
         {if $customer->id}
@@ -589,7 +599,7 @@
             <i class="icon-user"></i>
             {l s='Customer' d='Admin.Global'}
             <span class="badge">
-              <a href="?tab=AdminCustomers&amp;id_customer={$customer->id}&amp;viewcustomer&amp;token={getAdminToken tab='AdminCustomers'}">
+              <a href="{$link->getAdminLink('AdminCustomers', true, [], ['id_customer' => $customer->id,'viewcustomer' => 1])}">
                 {if Configuration::get('PS_B2B_ENABLE')}{$customer->company} - {/if}
                 {$gender->name|escape:'html':'UTF-8'}
                 {* suzy: 2018-09-15 調整姓名 *}{$customer->lastname} {$customer->firstname}
@@ -605,7 +615,8 @@
                 {l s='This order has been placed by a guest.' d='Admin.Orderscustomers.Feature'}
                 {* suzy: 2018-09-26 隱藏「將客戶升級成為會員」功能
                 {if (!Customer::customerExists($customer->email))}
-                  <form method="post" action="index.php?tab=AdminCustomers&amp;id_customer={$customer->id}&amp;id_order={$order->id|intval}&amp;token={getAdminToken tab='AdminCustomers'}">
+                  <form method="post"
+                        action="{$link->getAdminLink('AdminCustomers', true, [], ['guesttocustomer' => 1, 'id_customer' => $customer->id, 'id_order' => $order->id])}">
                     <input type="hidden" name="id_lang" value="{$order->id_lang}" />
                     <input class="btn btn-default" type="submit" name="submitGuestToCustomer" value="{l s='Transform a guest into a customer'}" />
                     <p class="help-block">{l s='This feature will generate a random password and send an email to the customer.' d='Admin.Orderscustomers.Help'}</p>
@@ -637,14 +648,17 @@
 
             <div class="col-xs-6">
               <div class="form-group hidden-print">
-                <a href="?tab=AdminCustomers&amp;id_customer={$customer->id}&amp;viewcustomer&amp;token={getAdminToken tab='AdminCustomers'}" class="btn btn-default btn-block">{l s='View full details...' d='Admin.Orderscustomers.Feature'}</a>
+                <a href="{$link->getAdminLink('AdminCustomers', true, [], ['id_customer' => $customer->id,'viewcustomer' => 1])}" class="btn btn-default btn-block">{l s='View full details...' d='Admin.Orderscustomers.Feature'}</a>
               </div>
               <div class="panel panel-sm">
                 <div class="panel-heading">
                   <i class="icon-eye-slash"></i>
                   {l s='Private note' d='Admin.Orderscustomers.Feature'}
                 </div>
-                <form id="customer_note" class="form-horizontal" action="ajax.php" method="post" onsubmit="saveCustomerNote({$customer->id});return false;" >
+                <form id="customer_note"
+                      class="form-horizontal"
+                      action="{$link->getAdminLink('AdminCustomers', true, [], ['updateCustomerNote' => 1, 'id_customer' => $customer->id])}"
+                      method="post" onsubmit="saveCustomerNote();return false;" >
                   <div class="form-group">
                     <div class="col-lg-12">
                       <textarea name="note" id="noteContent" class="textarea-autosize" onkeyup="$(this).val().length > 0 ? $('#submitCustomerNote').removeAttr('disabled') : $('#submitCustomerNote').attr('disabled', 'disabled')">{$customer->note}</textarea>
@@ -699,19 +713,12 @@
                               selected="selected"
                             {/if}>
                             {$address['alias']} -
-                            {* suzy: 2018-09-18 調 顯示 *}
-                            {if $address['address1'] != 'N/A'}
-                              {$address['address1']}
-                            {/if}
-                            {if $address['postcode'] != '00'}
-                              {$address['postcode']}
-                            {/if}
-                            {if $address['city'] != 'N/A'}
-                              {$address['city']}
-                            {/if}
+                            {$address['address1']}
+                            {$address['postcode']}
+                            {$address['city']}
                             {if !empty($address['state'])}
                               {$address['state']}
-                            {/if}
+                            {/if},
                             {$address['country']}
                           </option>
                           {/foreach}
@@ -726,7 +733,7 @@
                 <div class="well">
                   <div class="row">
                     <div class="{* suzy: 2018-09-13 隱藏 Google Maps col-sm-6*}">
-                      <a class="btn btn-default pull-right" href="?tab=AdminAddresses&amp;id_address={$addresses.delivery->id}&amp;addaddress&amp;realedit=1&amp;id_order={$order->id}&amp;address_type=1&amp;token={getAdminToken tab='AdminAddresses'}&amp;back={$smarty.server.REQUEST_URI|urlencode}">
+                    <a class="btn btn-default pull-right" href="?tab=AdminAddresses&amp;id_address={$addresses.delivery->id}&amp;addaddress&amp;realedit=1&amp;id_order={$order->id}&amp;address_type=1&amp;token={getAdminToken tab='AdminAddresses'}&amp;back={$smarty.server.REQUEST_URI|urlencode}">
                         <i class="icon-pencil"></i>
                         {l s='Edit' d='Admin.Actions'}
                       </a>
@@ -756,18 +763,12 @@
                           selected="selected"
                           {/if}>
                           {$address['alias']} -
-                          {if $address['address1'] != 'N/A'}
-                            {$address['address1']}
-                          {/if}
-                          {if $address['postcode'] != '00'}
-                            {$address['postcode']}
-                          {/if}
-                          {if $address['city'] != 'N/A'}
-                            {$address['city']}
-                          {/if}
+                          {$address['address1']}
+                          {$address['postcode']}
+                          {$address['city']}
                           {if !empty($address['state'])}
                             {$address['state']}
-                          {/if}
+                          {/if},
                           {$address['country']}
                         </option>
                         {/foreach}
@@ -782,7 +783,7 @@
               <div class="well">
                 <div class="row">
                   <div class="{* suzy: 2018-09-13 隱藏 Google Maps col-sm-6 *}">
-                    <a class="btn btn-default pull-right" href="?tab=AdminAddresses&amp;id_address={$addresses.invoice->id}&amp;addaddress&amp;realedit=1&amp;id_order={$order->id}&amp;address_type=2&amp;back={$smarty.server.REQUEST_URI|urlencode}&amp;token={getAdminToken tab='AdminAddresses'}">
+                  <a class="btn btn-default pull-right" href="?tab=AdminAddresses&amp;id_address={$addresses.invoice->id}&amp;addaddress&amp;realedit=1&amp;id_order={$order->id}&amp;address_type=2&amp;back={$smarty.server.REQUEST_URI|urlencode}&amp;token={getAdminToken tab='AdminAddresses'}">
                       <i class="icon-pencil"></i>
                       {l s='Edit' d='Admin.Actions'}
                     </a>
@@ -820,17 +821,16 @@
                   </div>
                 </div>*}
                 <div class="message-body" {* suzy: 2018-09-17 改 style *} style="margin: 0;">
+
                   <h4 class="message-item-heading">
+
                     {* suzy: 2018-09-17 調整顯示 *}
-                    {if $message['system'] == 1}
-                      <span class="badge badge-info">系統</span>
-                    {elseif ($message['elastname']|escape:'html':'UTF-8')}
-                      {* suzy: 2018-09-14 姓式 移到前面*}
-                      <span class="badge badge-info">{$message['elastname']|escape:'html':'UTF-8'} {$message['efirstname']|escape:'html':'UTF-8'}</span>
+                    {if ($message['elastname']|escape:'html':'UTF-8')}
+                    {* suzy: 2018-09-14 姓式 移到前面*}
+                    <span class="badge badge-info">{$message['elastname']|escape:'html':'UTF-8'} {$message['efirstname']|escape:'html':'UTF-8'}</span>
                     {elseif ($message['clastname']|escape:'html':'UTF-8') }
-                      {* suzy: 2018-09-14 姓式 移到前面*}
-                      {*{$message['cfirstname']|escape:'html':'UTF-8'} {$message['clastname']|escape:'html':'UTF-8'}*}
-                      <span class="badge badge-info">客戶</span>
+                    {*{$message['cfirstname']|escape:'html':'UTF-8'} {$message['clastname']|escape:'html':'UTF-8'}*}
+                    <span class="badge badge-info">客戶</span>
                     {/if}
 
                     <span class="message-date">&nbsp;<i class="icon-calendar"></i>
@@ -974,7 +974,7 @@
                   {if $stock_management}<th class="text-center"><span class="title_box ">{l s='Available quantity' d='Admin.Orderscustomers.Feature'}</span></th>{/if}
                   <th>
                     <span class="title_box ">{l s='Total' d='Admin.Global'}</span>
-                    {* suzy: 2018-09-12 隱藏「未稅」<small class="text-muted">{$smarty.capture.TaxMethod}</small>*}
+                    <small class="text-muted">{$smarty.capture.TaxMethod}</small>
                   </th>
                   <th style="display: none;" class="add_product_fields"></th>
                   <th style="display: none;" class="edit_product_fields"></th>
@@ -1029,14 +1029,15 @@
             <div class="col-xs-6">
               {* suzy: 2018-08-01 隱藏：「客戶所在群組的價格顯示為： 未稅」＆＆「退貨功能已停用」
               <div class="alert alert-warning">
-
-                  ls='For this customer group, prices are displayed as: [1]%tax_method%[/1]'
+                {l
+                  s='For this customer group, prices are displayed as: [1]%tax_method%[/1]'
                   sprintf=[
                     '%tax_method%' => $smarty.capture.TaxMethod,
                     '[1]' => '<strong>',
                     '[/1]' => '</strong>'
                   ]
                   d='Admin.Orderscustomers.Notification'
+                }
                 {if !Configuration::get('PS_ORDER_RETURN')}
                   <br/><strong>{l s='Merchandise returns are disabled' d='Admin.Orderscustomers.Notification'}</strong>
                 {/if}
@@ -1143,9 +1144,17 @@
                           </div>
                           <input type="text" name="partialRefundShippingCost" value="0" />
                         </div>
+                        {* suzy: 2018-09-12 隱藏「未稅」
                         <p class="help-block"><i class="icon-warning-sign"></i> {l
                             s='(Max %s %s)'
                             sprintf=[Tools::displayPrice(Tools::ps_round($shipping_refundable, 2), $currency->id) , $smarty.capture.TaxMethod]
+                            d='Admin.Orderscustomers.Feature'
+                            }
+                        </p>
+                        *}
+                        <p class="help-block"><i class="icon-warning-sign"></i> {l
+                            s='(Max %s)'
+                            sprintf=[Tools::displayPrice(Tools::ps_round($shipping_refundable, 2), $currency->id)]
                             d='Admin.Orderscustomers.Feature'
                             }
                         </p>

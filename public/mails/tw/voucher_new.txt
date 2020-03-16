@@ -1,0 +1,16 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+如要確保收到信件，可將此信箱加入通訊錄。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+Voucher code has been generated
+
+Here is your new voucher code: {voucher_num}
+
+In order to use it, just copy/paste this code during check out.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,6 +1,121 @@
 TekapoCart <hi@tekapo.io>
 -------------------------------------------
 *******************************************
+* 1.1.9 (March 06, 2020)
+*******************************************
+Improve
+- 商品標籤
+- 開店成功通知信加註三點須知
+- 清除按鈕時更新的 time flag 加進 css, js 的版號判斷
+- 隱藏部份統計模組
+Fix
+- quickview 的商品圖 large_default 改成 home_default
+
+*******************************************
+* 1.1.8 (March 03, 2020)
+*******************************************
+- simplicity_gtm
+DB
+- 2020-03-02.sql
+
+*******************************************
+* 1.1.7 (February 25, 2020)
+*******************************************
+Improve
+- 字型上雲端
+Fix
+- ps_facetedsearch hooks
+DB
+- 2020-02-25.sql
+
+*******************************************
+* 1.1.6 (February 23, 2020)
+*******************************************
+Improve
+- Lighthouse Performance
+Steps
+- mkdir -p ./img/mod/ps_imageslider
+- mv ./public/modules/ps_imageslider/images/* ./public/img/mod/ps_imageslider/
+- mkdir -p ./public/img/mod/ps_banner
+- mv ./public/modules/ps_banner/img/* ./public/img/mod/ps_banner/
+- cp -a ./img/p/* ./public/img/p
+- cp -a ./img/mod/* ./public/img/mod
+- cp ./img/logo.jpg ./public/img/
+- cp ./img/logo_small.jpg ./public/img/
+DB
+- 2020-02-23.sql
+
+*******************************************
+* 1.1.5 (February 11, 2020)
+*******************************************
+Improve
+- Varnish
+DB
+- slim.sql
+- 2020-02-16.sql 需比對 carrier
+- 2020-02-17.sql
+
+*******************************************
+* 1.1.4 (February 01, 2020)
+*******************************************
+Improve
+- PrestaShop 1.7.6.3
+DB
+- 2020-02-08.sql
+
+*******************************************
+* 1.1.3 (January 28, 2020)
+*******************************************
+Improve
+- ezShip 超商
+- ezShip 宅配
+- ECPay 7-11
+- ECPay 黑貓宅配
+- TC 7-11 交貨便
+- 重構 ECPay 金流
+- 移除 SmilePay
+DB
+- 2020-01-09.sql
+Vendor
+- SwiftMailer 6
+- overtrue/pinyin
+- recca0120/twzipcode
+Steps
+- install ezship, ezship_home, tc_pod, ecpay_711, ecpay_tcat, tc_cvs
+- upgrade Paypal
+- run 2020-01-09.sql
+- uninstall smilepay, ps_cashondelivery
+
+*******************************************
+* 1.1.2 (December 27, 2019)
+*******************************************
+Improve
+- 升級 1.7.6.1
+- HTML 編輯器允許結構化資料 itemprop、itemscope、itemtype
+- 讓拍立得版型可上 404 圖
+- miniatures/product.tpl 修正結構化資料
+- FB 登入避免發生彈跳問題，改使用 PHP SDK 串接
+- AWS SES 比較特殊，設定 from（借用 PS_MAIL_DOMAIN）
+- MAIL replyTo 改成一律使用商店 E-Mail
+- Google 社群登入
+Fix
+- 修正 viewed-products 虫
+- tekapo/searchcron.php 不讓 Browser Keep Cache
+- 自訂頁面 不讓 Browser Keep Cache
+- 改寫 classes/Search.php（取自網路）
+- order_reference size 9 改成 15
+- 結帳頁 個人資訊 調換 lastname, firstname 順序
+- 修正 404 頁返回鍵無效問題
+- 模組位置的 $controller 先濾掉 '-' 再檢查 exceptions
+- identity 頁的 email 欄位，改成 readonly
+DB
+- 2019-10-20.sql
+- 2019-10-20-change-schema.sql
+- 2019-10-20-paypal.sql
+- 2019-10-20-ps_currency.sql
+- 2019-10-20-ps_hook.sql
+
+*******************************************
 * 1.1.1 (Auguest 30, 2019)
 *******************************************
 Improve
@@ -8,8 +123,8 @@ Improve
 - 商品貼紙支援「nshift」秘技
 - 後台模組 新增按鈕「返回佈景模組」
 - 後台商品上架 隱藏「新增品牌」
-- 官方社群連結 新增 Tripadvosor
-File
+- 官方社群連結 新增 Tripadvisor
+DB
 - 2019-08-30.sql（後台選單顯示「檔案」）
 
 *******************************************
@@ -22,7 +137,7 @@ Improve
 - 新增 後台 桌機版 LOGO 設定最大寬度
 Fix
 - 自訂頁面 友善連結加強過濾
-File
+DB
 - 2019-08-15.sql（多帳號權限）
 - 2019-08-15-check.sql（多帳號權限）
 - 2019-08-18.sql（新增 4 SQL 查詢）
@@ -56,7 +171,7 @@ Improve
 - 移除 後台上方搜尋連線 api-addons
 - 移除 tawk
 - 擴展 LOGO 版型搭配
-File
+DB
 - 2019-08-08.sql（開放 後台 Customer Group）
 - 2019-08-11.sql（allow change default currency）
 

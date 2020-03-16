@@ -266,7 +266,7 @@ File: controllers/admin/AdminTrackingController.php:440</note>
     <body>
       <trans-unit id="13f13e9a00350642fed860ff27b9976e" approved="yes">
         <source>Cost price</source>
-        <target xml:lang="zh-TW">成本</target>
+        <target xml:lang="zh-TW">成本價</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pricing.html.twig:111</note>
       </trans-unit>
@@ -332,7 +332,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pric
       </trans-unit>
       <trans-unit id="8e99fa97ef8d51d9215028842c7ad57c" approved="yes">
         <source>Priority management</source>
-        <target xml:lang="zh-TW">優先順序管理</target>
+        <target xml:lang="zh-TW">折扣計算順序</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pricing.html.twig:169</note>
       </trans-unit>
@@ -582,12 +582,6 @@ File: controllers/admin/AdminCategoriesController.php:460</note>
         <note>Context:
 File: controllers/admin/AdminCategoriesController.php:461</note>
       </trans-unit>
-      <trans-unit id="2028f52eb6d12dc1814f92f18c7365a0" approved="yes">
-        <source>Category Cover Image</source>
-        <target xml:lang="zh-TW">分類主圖</target>
-        <note>Context:
-File: controllers/admin/AdminCategoriesController.php:562</note>
-      </trans-unit>
       <trans-unit id="4ae362f049719078c429941bed5dd440" approved="yes">
         <source>Category thumbnail</source>
         <target xml:lang="zh-TW">分類小圖</target>
@@ -605,6 +599,17 @@ File: controllers/admin/AdminCategoriesController.php:583</note>
         <target xml:lang="zh-TW">客戶群組</target>
         <note>Context:
 File: controllers/admin/AdminCategoriesController.php:631</note>
+      </trans-unit>
+      <trans-unit id="8987d8bb6500cb0889946c2655e930b6">
+        <source>Category cover image</source>
+        <target xml:lang="zh-TW">分類主圖</target>
+        <note>Line: 74</note>
+      </trans-unit>
+      <trans-unit id="2028f52eb6d12dc1814f92f18c7365a0" approved="yes">
+        <source>Category Cover Image</source>
+        <target xml:lang="zh-TW">分類主圖</target>
+        <note>Context:
+File: controllers/admin/AdminCategoriesController.php:562</note>
       </trans-unit>
       <trans-unit id="154b6e494bf56cc4c787bfee6deac113" approved="yes">
         <source>Root Category</source>
@@ -654,25 +659,25 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductShipping.php:134</note>
       </trans-unit>
       <trans-unit id="582d519b697f8d1a558e91220beea671" approved="yes">
         <source>Available carriers</source>
-        <target xml:lang="zh-TW">可使用承運商</target>
+        <target xml:lang="zh-TW">可使用配送方式</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductShipping.php:150</note>
       </trans-unit>
       <trans-unit id="d41e652e3ec13615827534c10beac3ee" approved="yes">
         <source>Default delivery time</source>
-        <target xml:lang="zh-TW">預設送貨時間</target>
+        <target xml:lang="zh-TW">預設配送時間</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductShipping.php:159</note>
       </trans-unit>
       <trans-unit id="16599dbd0bf238cbae4090fe1db04145" approved="yes">
         <source>Specific delivery time to this product</source>
-        <target xml:lang="zh-TW">該商品的送貨時間（於下方設定）</target>
+        <target xml:lang="zh-TW">該商品的配送時間（於下方設定）</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductShipping.php:160</note>
       </trans-unit>
       <trans-unit id="205b01b3197cf06688f6ed574faf5664" approved="yes">
         <source>Delivery Time</source>
-        <target xml:lang="zh-TW">送貨時間</target>
+        <target xml:lang="zh-TW">配送時間</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductShipping.php:167</note>
       </trans-unit>
@@ -764,7 +769,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/esse
       </trans-unit>
       <trans-unit id="694e8d1f2ee056f98ee488bdc4982d73" approved="yes">
         <source>Quantity</source>
-        <target xml:lang="zh-TW">數量</target>
+        <target xml:lang="zh-TW">庫存</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/essentials.html.twig:196</note>
       </trans-unit>
@@ -1994,7 +1999,7 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:39</note>
       </trans-unit>
       <trans-unit id="08f2624d7719fac81f1af3e3e64d5e63" approved="yes">
         <source>Apply new quantity</source>
-        <target xml:lang="zh-TW">套用新的數量</target>
+        <target xml:lang="zh-TW">套用</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:40</note>
       </trans-unit>
@@ -2061,13 +2066,13 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:61</note>
       </trans-unit>
       <trans-unit id="898bed66d82aeaab1d62875fd3657c40" approved="yes">
         <source>Movements</source>
-        <target xml:lang="zh-TW">移動</target>
+        <target xml:lang="zh-TW">變動記錄</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:63</note>
       </trans-unit>
       <trans-unit id="083e99de177243cffe65b7f8724c89ca" approved="yes">
         <source>Search products (search by name, reference, supplier)</source>
-        <target xml:lang="zh-TW">搜尋商品 (以名稱, 編號, 供應商)</target>
+        <target xml:lang="zh-TW">搜尋商品 (名稱、編號、供應商)</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:67</note>
       </trans-unit>
@@ -2091,7 +2096,7 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:70</note>
       </trans-unit>
       <trans-unit id="60ca6b20f2ef2afc178d7e5d7224b5c8" approved="yes">
         <source>Bulk edit quantity</source>
-        <target xml:lang="zh-TW">批次更新數量</target>
+        <target xml:lang="zh-TW">批次更新庫存</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:72</note>
       </trans-unit>
@@ -2603,6 +2608,11 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_seo.html.twig:90</note>
       </trans-unit>
+      <trans-unit id="c6b3d0f163e32b16cbdde201859d33e3" approved="yes">
+        <source>Here is a preview of your search engine result, play with it!</source>
+        <target xml:lang="zh-TW">搜尋結果預覽</target>
+        <note>Line: 31</note>
+      </trans-unit>
     </body>
   </file>
   <file original="src/PrestaShopBundle/Resources/views/Admin/Common/pagination.html.twig" source-language="en" target-language="zh-TW" datatype="plaintext">
@@ -2793,7 +2803,7 @@ File: admin-dev/themes/default/template/controllers/cart_rules/conditions.tpl:16
       </trans-unit>
       <trans-unit id="46b00dccbc9e441b3fcf567d39975f86" approved="yes">
         <source>Carrier selection</source>
-        <target xml:lang="zh-TW">選擇承運商</target>
+        <target xml:lang="zh-TW">選擇配送方式</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/conditions.tpl:183</note>
       </trans-unit>

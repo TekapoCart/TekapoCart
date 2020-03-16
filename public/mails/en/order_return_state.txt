@@ -1,0 +1,14 @@
+Please do not reply directly to this email, we will not receive it.
+Adding our email address as a contact to ensure all messages are delivered to your Inbox.
+
+{shop_url}
+
+Hi {firstname} {lastname},
+
+Order return #{id_order_return} - Update
+
+We have updated the progress on your return #{id_order_return}, the new status is: "{state_order_return}".
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,0 +1,18 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+如要確保收到信件，可將此信箱加入通訊錄。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+已出貨通知
+
+您的訂單 {order_name} 已經出貨，請留意到貨狀況。
+配送編號 {tracking_number}
+{extra_info}
+
+查看訂單狀態請至「[訂單查詢]({guest_tracking_url})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

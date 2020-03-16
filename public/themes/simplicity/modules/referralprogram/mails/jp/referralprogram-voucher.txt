@@ -1,0 +1,17 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+Sponsorship Program
+
+We have created a voucher in your name for referring a friend.
+Here is the code of your voucher: {voucher_num}, with an amount of {voucher_num}
+
+Simply copy/paste this code during the payment process for your next order.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

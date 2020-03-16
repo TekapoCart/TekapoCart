@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -214,7 +214,7 @@ class CustomerThreadCore extends ObjectModel
 
     public static function getTotalCustomerThreads($where = null)
     {
-        if (is_null($where)) {
+        if (null === $where) {
             return (int) Db::getInstance()->getValue(
                 '
 				SELECT COUNT(*)
@@ -234,21 +234,6 @@ class CustomerThreadCore extends ObjectModel
     public static function getMessageCustomerThreads($id_customer_thread)
     {
         // suzy: 2018-09-22 調換姓名位置
-//        return Db::getInstance()->executeS('
-//			SELECT ct.*, cm.*, cl.name subject, CONCAT(e.firstname, \' \', e.lastname) employee_name,
-//				CONCAT(c.firstname, \' \', c.lastname) customer_name, c.firstname
-//			FROM ' . _DB_PREFIX_ . 'customer_thread ct
-//			LEFT JOIN ' . _DB_PREFIX_ . 'customer_message cm
-//				ON (ct.id_customer_thread = cm.id_customer_thread)
-//			LEFT JOIN ' . _DB_PREFIX_ . 'contact_lang cl
-//				ON (cl.id_contact = ct.id_contact AND cl.id_lang = ' . (int) Context::getContext()->language->id . ')
-//			LEFT JOIN ' . _DB_PREFIX_ . 'employee e
-//				ON e.id_employee = cm.id_employee
-//			LEFT JOIN ' . _DB_PREFIX_ . 'customer c
-//				ON (IFNULL(ct.id_customer, ct.email) = IFNULL(c.id_customer, c.email))
-//			WHERE ct.id_customer_thread = ' . (int) $id_customer_thread . '
-//			ORDER BY cm.date_add ASC
-//		');
         return Db::getInstance()->executeS('
 			SELECT ct.*, cm.*, cl.name subject, CONCAT(e.lastname, \' \', e.firstname) employee_name,
 				CONCAT(c.lastname, \' \', c.firstname) customer_name, c.firstname

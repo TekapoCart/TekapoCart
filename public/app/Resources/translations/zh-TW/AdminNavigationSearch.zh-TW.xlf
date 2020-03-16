@@ -4,19 +4,19 @@
     <body>
       <trans-unit id="1eafe1bac879d838ee6d25eccfc9cb35" approved="yes">
         <source>There are no results matching your query "%s".</source>
-        <target xml:lang="zh-TW">SQL查詢 "%s" 沒有結果。</target>
+        <target xml:lang="zh-TW">搜尋 "%s" 沒有結果。</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:35</note>
       </trans-unit>
       <trans-unit id="71eb31b250c9248c64a08e1efad5f6d9" approved="yes">
         <source>%d results match your query "%s".</source>
-        <target xml:lang="zh-TW">查詢 "%s" 有 %d 個結果。</target>
+        <target xml:lang="zh-TW">有 %d 個 "%s" 搜尋結果。</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:39</note>
       </trans-unit>
       <trans-unit id="7728ad63f14ad095862fd765b7a74fe6" approved="yes">
         <source>1 result matches your query "%s".</source>
-        <target xml:lang="zh-TW">查詢 "%s" 有 1個結果。</target>
+        <target xml:lang="zh-TW">有 1 個 "%s" 搜尋結果。</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/search/helpers/view/view.tpl:37</note>
       </trans-unit>

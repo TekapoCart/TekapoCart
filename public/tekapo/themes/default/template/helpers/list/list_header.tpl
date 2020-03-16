@@ -1,5 +1,5 @@
 {**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
@@ -29,8 +29,13 @@
 			$(".ajax_table_link").click(function () {
 				var link = $(this);
 				$.post($(this).attr('href'), function (data) {
-					if (data.success == 1) {
-						showSuccessMessage(data.text);
+				  // If response comes from symfony controller
+          // then data has "status" and "message" properties
+          // otherwise if response comes from legacy controller
+          // then data has "success" and "text" properties.
+
+					if (data.success == 1 || data.status === true) {
+						showSuccessMessage(data.text || data.message);
 						if (link.hasClass('action-disabled')){
 							link.removeClass('action-disabled').addClass('action-enabled');
 						} else {
@@ -44,7 +49,7 @@
 							}
 						});
 					} else {
-						showErrorMessage(data.text);
+						showErrorMessage(data.text || data.message);
 					}
 				}, 'json');
 				return false;
@@ -121,14 +126,25 @@
 	<input type="hidden" id="submitFilter{$list_id}" name="submitFilter{$list_id}" value="0"/>
 	<input type="hidden" name="page" value="{$page|intval}"/>
 	<input type="hidden" name="selected_pagination" value="{$selected_pagination|intval}"/>
+
 	{block name="override_form_extra"}{/block}
+
 	<div class="panel col-lg-12">
 		<div class="panel-heading">
-			{if isset($icon)}<i class="{$icon}"></i> {/if}{if is_array($title)}{$title|end|escape:'html':'UTF-8'}{else}{$title|escape:'html':'UTF-8'}{/if}
+			{if isset($icon)}
+				<i class="{$icon}"></i>
+			{/if}
+
+			{if is_array($title)}
+				{$title|end|escape:'html':'UTF-8'}
+			{else}
+				{$title|escape:'html':'UTF-8'}
+			{/if}
+
 			{if isset($toolbar_btn) && count($toolbar_btn) >0}
 				<span class="badge">{$list_total}</span>
 				<span class="panel-heading-action">
-				{*suzy: 2018-07-28 隱藏 新增、匯入按鈕 foreach from=$toolbar_btn item=btn key=k}
+				{foreach from=$toolbar_btn item=btn key=k}
 					{if $k != 'modules-list' && $k != 'back'}
 						<a id="desc-{$table}-{if isset($btn.imgclass)}{$btn.imgclass}{else}{$k}{/if}" class="list-toolbar-btn{if isset($btn.target) && $btn.target} _blank{/if}"{if isset($btn.href)} href="{$btn.href|escape:'html':'UTF-8'}"{/if}{if isset($btn.js) && $btn.js} onclick="{$btn.js}"{/if}>
 							<span title="" data-toggle="tooltip" class="label-tooltip" data-original-title="{l s=$btn.desc}" data-html="true" data-placement="top">
@@ -136,15 +152,13 @@
 							</span>
 						</a>
 					{/if}
-				{/foreach*}
-				{* suzy: 2018-07-28 隱藏 reload 按鈕
+				{/foreach}
 					<a class="list-toolbar-btn" href="javascript:location.reload();">
 						<span title="" data-toggle="tooltip" class="label-tooltip" data-original-title="{l s='Refresh list'}" data-html="true" data-placement="top">
 							<i class="process-icon-refresh"></i>
 						</span>
 					</a>
-				*}
-				{* suzy: 2018-07-28 隱藏 SQL 功能 if isset($sql) && $sql}
+				{if isset($sql) && $sql}
 					{assign var=sql_manager value=Profile::getProfileAccess(Context::getContext()->employee->id_profile, Tab::getIdFromClassName('AdminRequestSql'))}
 
 					{if $sql_manager.view == 1}
@@ -159,7 +173,7 @@
 							</span>
 						</a>
 					{/if}
-				{/if*}
+				{/if}
 				</span>
 			{/if}
 		</div>

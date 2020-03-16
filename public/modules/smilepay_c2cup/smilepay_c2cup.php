@@ -289,7 +289,7 @@ class Smilepay_c2cup extends CarrierModule
         );
 
         $btn_style = 'font-size: 18px; margin-bottom: 10px; border-radius: 5px; padding: 5px 10px;';
-        $btn_url = '<button style="' . $btn_style . '" onclick=window.open("' . $_url . '") >取號 / 列印寄件單</button>';
+        $btn_url = '<button style="' . $btn_style . '" onclick=window.open("' . $_url . '") >SmilePay 取號 / 列印寄件單</button>';
 
         $date = date("Y-m-d H:i:s");
         $sql = 'INSERT INTO `' . _DB_PREFIX_ . 'smilepay_c2cup_table` (`id_order`, `smse_id`, `btn_url`, `date_upd`, `store_id`, `store_name`, `store_address`, `customer_name`, `customer_phone`, `amount`) VALUES(';
@@ -417,7 +417,9 @@ class Smilepay_c2cup extends CarrierModule
 
         // suzy: 2018-07-20 拿掉 p style margin-left 20px
         // 加上 class='offset-xs-2 col-xs-10 offset-sm-1 col-sm-11'
-        $template = "<div id='smilepay_c2cup_emap_but' style='margin-left:35px;'><p><button type='button' onclick='window.open(\"$url\",\"_self\");' class='btn btn-primary'>" . $maptext . "</button>"
+        $template = "<div id='smilepay_c2cup_emap_but' style='margin-left:35px;'><p>"
+            . $this->l('The name on the ID must match that of the packages label.')
+            ."</p><p><button type='button' onclick='window.open(\"$url\",\"_self\");' class='btn btn-primary'>" . $maptext . "</button>"
             . $mapstoretext . "</p></div>";
 
 

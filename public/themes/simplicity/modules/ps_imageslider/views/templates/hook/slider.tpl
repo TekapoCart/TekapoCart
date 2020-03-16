@@ -29,7 +29,26 @@
         <li class="carousel-item {if $smarty.foreach.homeslider.first}active{/if}" role="option" aria-hidden="{if $smarty.foreach.homeslider.first}false{else}true{/if}">
           <a href="{$slide.url}">
             <figure>
-              <img src="{$slide.image_url}" alt="{$slide.legend|escape}">
+              {if $slide.has_webp}
+                {assign 'type' array('.jpg', '.jpeg', '.png', '.gif')}
+                <img
+                   alt="{$slide.legend|escape}"
+                   data-src-desktop-webp="{$slide.image_url|replace:$type:'.webp'}"
+                   data-src-mobile-webp="{$slide.thumb_url|replace:$type:'.webp'}"
+                   data-src-desktop="{$slide.image_url}"
+                   data-src-mobile="{$slide.thumb_url}"
+                   src="{$slide.thumb_url|replace:$type:'.webp'}"
+                   class="js_toggle_thumbnail"
+                />
+              {else}
+                <img
+                   alt="{$slide.legend|escape}"
+                   data-src-desktop="{$slide.image_url}"
+                   data-src-mobile="{$slide.thumb_url}"
+                   src="{$slide.thumb_url}"
+                   class="js_toggle_thumbnail"
+                />
+              {/if}
               {if $slide.description}
                 <figcaption class="caption">
                   <div class="caption-description">{$slide.description nofilter}</div>

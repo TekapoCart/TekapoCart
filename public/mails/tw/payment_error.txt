@@ -1,0 +1,16 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+如要確保收到信件，可將此信箱加入通訊錄。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+Order ID {order_name} - 付款發生錯誤
+
+若您持續無法成功下單 請與我們聯絡。
+
+在確認款項前我們無法進行出貨作業，造成不便敬請見諒。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,0 +1,34 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+お知らせ
+
+You have received a new return request for {shop_name}.
+
+Return Details
+
+注文 {order_name} 注文日 {date}
+
+お客様： {firstname} {lastname}, ({email})
+
+番号	商品	数量   {items}
+
+配送先住所
+
+{delivery_block_html}
+
+請求先住所
+
+{invoice_block_html}
+
+顧客メッセージ：
+
+{message}
+
+ご注文内容の詳細は「[注文履歴]({guest_tracking_url})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

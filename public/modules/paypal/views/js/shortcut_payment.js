@@ -1,27 +1,3 @@
-/**
- * 2007-2018 PrestaShop
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
- * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
- *
- * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
- * @license   http://addons.prestashop.com/en/content/12-terms-and-conditions-of-use
- * International Registered Trademark & Property of PrestaShop SA
- */
-
-$(document).ready(function(){
-    if ($('section#checkout-payment-step').hasClass('js-current-step')) {
-        $('.payment-options div').hide();
-        if ($('input[data-module-name=express_checkout_schortcut]').length > 0) {
-            $('input[data-module-name=express_checkout_schortcut]').click();
-            $('.payment-options').append($('#paypal-es-checked').show());
-        } else if($('input[data-module-name=paypal_plus_schortcut]').length > 0) {
-            $('input[data-module-name=paypal_plus_schortcut]').click();
-            $('.payment-options').append($('#paypal-ppp-checked').show());
-        }
-    }
-});
+/*! For license information please see shortcut_payment.js.LICENSE */
+!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)n.d(r,o,function(t){return e[t]}.bind(null,o));return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=5)}({5:function(e,t){$(document).ready(function(){if($("section#checkout-payment-step").hasClass("js-current-step")){var e=$('input[data-module-name="'.concat(paypalCheckedMethod,'"]'));$(".payment-options div").hide(),e.length>0&&(e.click(),$(".payment-options").append(scPaypalCheckedMsg))}})}});
+//# sourceMappingURL=shortcut_payment.js.map

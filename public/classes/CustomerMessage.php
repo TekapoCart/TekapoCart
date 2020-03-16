@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -81,6 +81,8 @@ class CustomerMessageCore extends ObjectModel
             'date_add' => array('type' => self::TYPE_DATE, 'validate' => 'isDate'),
             'date_upd' => array('type' => self::TYPE_DATE, 'validate' => 'isDate'),
             'read' => array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+
+            // suzy: 2018-09-17 新增欄位：system
             'system' => array('type' => self::TYPE_INT),
         ),
     );
@@ -103,7 +105,7 @@ class CustomerMessageCore extends ObjectModel
      * @param int $idOrder Order ID
      * @param bool $private Private
      *
-     * @return array|false|mysqli_result|null|PDOStatement|resource
+     * @return array|false|mysqli_result|PDOStatement|resource|null
      */
     public static function getMessagesByOrderId($idOrder, $private = true)
     {
@@ -137,15 +139,17 @@ class CustomerMessageCore extends ObjectModel
      */
     public static function getTotalCustomerMessages($where = null)
     {
-        if (is_null($where)) {
-            return (int) Db::getInstance()->getValue('
+        if (null === $where) {
+            return (int) Db::getInstance()->getValue(
+                '
 				SELECT COUNT(*)
 				FROM ' . _DB_PREFIX_ . 'customer_message
 				LEFT JOIN `' . _DB_PREFIX_ . 'customer_thread` ct ON (cm.`id_customer_thread` = ct.`id_customer_thread`)
 				WHERE 1' . Shop::addSqlRestriction()
             );
         } else {
-            return (int) Db::getInstance()->getValue('
+            return (int) Db::getInstance()->getValue(
+                '
 				SELECT COUNT(*)
 				FROM ' . _DB_PREFIX_ . 'customer_message cm
 				LEFT JOIN `' . _DB_PREFIX_ . 'customer_thread` ct ON (cm.`id_customer_thread` = ct.`id_customer_thread`)
@@ -179,7 +183,8 @@ class CustomerMessageCore extends ObjectModel
      */
     public static function getLastMessageForCustomerThread($id_customer_thread)
     {
-        return (string) Db::getInstance()->getValue('
+        return (string) Db::getInstance()->getValue(
+            '
             SELECT message
             FROM ' . _DB_PREFIX_ . 'customer_message
             WHERE id_customer_thread = ' . (int) $id_customer_thread . '

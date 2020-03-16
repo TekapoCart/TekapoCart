@@ -1,0 +1,16 @@
+此信件为系统自动传送，请勿直接回复，感谢您的配合。
+如要确保收到信件，可将此信箱加入通讯录。
+
+{shop_url}
+
+恭喜！
+
+Your referred friend {sponsored_firstname} {sponsored_lastname} has placed his/her first order on [{shop_name}]({shop_url})!
+
+We are pleased to offer you a voucher worth {discount_display} (VOUCHER # {discount_name}) that you can use on your next order.
+
+此致敬礼。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

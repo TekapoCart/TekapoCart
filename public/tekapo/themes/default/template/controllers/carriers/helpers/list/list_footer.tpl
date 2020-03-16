@@ -1,5 +1,5 @@
 {**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
@@ -26,7 +26,7 @@
 {extends file="helpers/list/list_footer.tpl"}
 	{block name="after"}
         {* suzy: 2018-06-22 隱藏推薦物流模組
-		{if is_null($modules_list)}
+        {if is_null($modules_list)}
 			<div class="panel">
 				<h3>{l s="Use one of our recommended carrier modules" d='Admin.Shipping.Feature'}</h3>
 				<p>{l s="It seems there are no recommended carriers for your country." d='Admin.Shipping.Feature'}</p>

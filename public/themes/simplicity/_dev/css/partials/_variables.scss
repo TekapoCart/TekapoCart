@@ -1,7 +1,10 @@
+$gray-dark: #363A42;
 $gray-darker: #232323;
 $gray: #7A7A7A;
 $gray-light: #F1F1F1;
+$gray-light-second: #DBDBDB;
 $gray-lighter: #f6f6f6;
+$gray-lighter-second: #F7F7F7;
 
 // $brand-primary: #2fb5d2; /* default */
 $brand-primary: #67C8C2;
@@ -27,7 +30,7 @@ $darker-border-color: $gray-darker;
 $hr-border-color: rgba(0, 0, 0, 0.1);
 $menu-border-color: #fff;
 $footer-border-color: #f6f6f6;
-$table-border-color: #333;
+$table-border-color: $gray;
 
 $tag-new: #96DCE0;
 $tag-sale: #F3CB54;
@@ -53,7 +56,6 @@ $svg-primary-fill: #000;
 $overlay-opacity: 0.5;
 
 $close-color: #000;
-$close-text-shadow: #fff;
 
 
 
@@ -98,7 +100,6 @@ $close-text-shadow: #fff;
 //$overlay-opacity: 0.85;
 //
 //$close-color: $brand-primary;
-//$close-text-shadow: $brand-background;
 
 // dark mode end
 
@@ -112,6 +113,7 @@ $large-space: 1.875rem;
 $extra-large-space: 2.5rem;
 
 $warning: #FF9A52;
+$warning-second: #F49D6E;
 $warning-hover: #FDE7BB;
 
 $alert-warning-bg: rgba(255,154,82,0.3);

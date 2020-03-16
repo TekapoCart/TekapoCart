@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,26 +19,33 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  *  @author    PrestaShop SA <contact@prestashop.com>
- *  @copyright 2007-2018 PrestaShop SA
- *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
- *  International Registered Trademark & Property of PrestaShop SA
+ *  @copyright 2007-2019 PrestaShop SA
+ *  @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ *
  */
 
+/**
+ * Class PaypalOrder.
+ */
 class PaypalVaulting extends ObjectModel
 {
-    public $token;
+    /** @var integer id of the Prestashop Customer object*/
+    public $id_customer;
 
-    public $id_paypal_customer;
+    /** @var string hash of the remembered card ids*/
+    public $rememberedCards;
 
-    public $name; // client can set card name in prestashop account
+    /** @var bool mode of payment (sandbox or live) */
+    public $sandbox;
 
-    public $info;
-
-    public $payment_tool; // card ou paypal, etc...
-
+    /** @var string Object creation date */
     public $date_add;
 
+    /** @var string Object last modification date */
     public $date_upd;
+
+    /** @var string */
+    public $profile_key;
 
     /**
      * @see ObjectModel::$definition
@@ -48,53 +55,14 @@ class PaypalVaulting extends ObjectModel
         'primary' => 'id_paypal_vaulting',
         'multilang' => false,
         'fields' => array(
-            'token' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
-            'id_paypal_customer' => array('type' => self::TYPE_INT),
-            'name' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
-            'info' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
-            'payment_tool' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
+            'id_customer' => array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId'),
+            'rememberedCards' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
+            'profile_key' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
+            'sandbox' => array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
             'date_add' => array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
             'date_upd' => array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
         )
     );
 
-    public static function vaultingExist($token, $customer)
-    {
-        $db = Db::getInstance();
-        $query = new DbQuery();
-        $query->select('id_paypal_vaulting');
-        $query->from('paypal_vaulting');
-        $query->where('token = "'.pSQL($token).'" AND id_paypal_customer = '.(int)$customer);
-        $result = $db->getValue($query);
-        return $result ? true : false;
-    }
-
-    public static function getCustomerMethods($customer, $method)
-    {
-        $db = Db::getInstance();
-        $query = new DbQuery();
-        $query->select('*');
-        $query->from('paypal_vaulting', 'pv');
-        $query->leftJoin('paypal_customer','pc','pv.id_paypal_customer = pc.id_paypal_customer');
-        $query->where('pc.id_customer = '.(int)$customer.' AND pv.payment_tool = "'.pSQL($method).'"');
-        $result = $db->executeS($query);
-        return $result;
-    }
-
-    public static function getCustomerGroupedMethods($customer)
-    {
-        $db = Db::getInstance();
-        $methods = array();
-        $query = new DbQuery();
-        $query->select('*');
-        $query->from('paypal_vaulting', 'pv');
-        $query->leftJoin('paypal_customer','pc','pv.id_paypal_customer = pc.id_paypal_customer');
-        $query->where('pc.id_customer = '.(int)$customer);
-        $results = $db->query($query);
-        while ($result = $db->nextRow($results)) {
-            $methods[$result['payment_tool']][] = $result;
-        }
-        return $methods;
-    }
 
 }

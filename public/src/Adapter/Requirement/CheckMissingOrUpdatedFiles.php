@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -27,6 +27,7 @@
 namespace PrestaShop\PrestaShop\Adapter\Requirement;
 
 use AppKernel;
+use PrestaShop\PrestaShop\Core\Foundation\Version;
 
 /**
  * Part of requirements for a PrestaShop website
@@ -47,7 +48,7 @@ class CheckMissingOrUpdatedFiles
             'updated' => array(),
         );
 
-        if (is_null($dir)) {
+        if (null === $dir) {
             $xml = @simplexml_load_file(_PS_API_URL_ . '/xml/md5-' . AppKernel::MAJOR_VERSION . '/' . AppKernel::VERSION . '.xml');
             if (!$xml) {
                 return $fileList;
@@ -73,7 +74,7 @@ class CheckMissingOrUpdatedFiles
         }
 
         foreach ($dir->dir as $subdir) {
-            $this->getListOfUpdatedFiles($subdir, $path . $subdir['name'] . '/');
+            $fileList = array_merge_recursive($fileList, $this->getListOfUpdatedFiles($subdir, $path . $subdir['name'] . '/'));
         }
 
         return $fileList;

@@ -43,7 +43,7 @@
   <section id="content" class="page-content page-order-confirmation card">
     <div class="card-block">
 
-        {* 訂單明細 訂單編號 付款方式 送貨方式 *}
+        {* 訂單明細 訂單編號 付款方式 配送方式 *}
         {block name='order_details'}
           <div id="order-details">
             <div class="row card">
@@ -55,6 +55,7 @@
                   {if !$order.details.is_virtual}
                   <li>{l s='Shipping method: %method%' d='Shop.Theme.Checkout' sprintf=['%method%' => $order.carrier.name]} - {$order.carrier.delay}</em></li>
                   {/if}
+                  <li>{l s='Order status: %state%' d='Shop.Theme.Checkout' sprintf=['%state%' => $order.history.current.ostate_name]}</li>
                 </ul>
               </div>
             </div>
@@ -74,7 +75,7 @@
         {/block}
 
         {block name='hook_order_confirmation'}
-          {if ! empty($HOOK_PAYMENT_RETURN)}
+          {if ! empty($HOOK_ORDER_CONFIRMATION)}
             <div id="content-hook_order_confirmation" class="card definition-list">
               <div class="row">
                 <div class="col-md-12">
@@ -85,7 +86,7 @@
           {/if}
         {/block}
 
-        {if $order.carrier.need_address }
+        {if $order.carrier.need_address && $order.carrier.is_module == 0}
           {block name='addresses'}
             <div class="addresses card row">
               {if $order.addresses.delivery}
@@ -98,13 +99,14 @@
                 </div>
               {/if}
 
+              {*
               <div class="col-lg-6 col-md-6 col-sm-6">
                 <article id="invoice-address" class="box">
-                  {* suzy: 2018-08-01 不要 alias <h4>{l s='Invoice address %alias%' d='Shop.Theme.Checkout' sprintf=['%alias%' => $order.addresses.invoice.alias]}</h4>*}
                   <h4>{l s='Invoice address %alias%' d='Shop.Theme.Checkout' sprintf=['%alias%' => '']}</h4>
                   <address>{$order.addresses.invoice.formatted nofilter}</address>
                 </article>
               </div>
+              *}
               <div class="clearfix"></div>
             </div>
           {/block}

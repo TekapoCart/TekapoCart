@@ -1,0 +1,16 @@
+Please do not reply directly to this email, we will not receive it.
+Adding our email address as a contact to ensure all messages are delivered to your Inbox.
+
+{shop_url}
+
+Congratulations!
+
+Your referred friend {sponsored_firstname} {sponsored_lastname} has placed his/her first order on [{shop_name}]({shop_url})!
+
+We are pleased to offer you a voucher worth {discount_display} (VOUCHER # {discount_name}) that you can use on your next order.
+
+Best regards,
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

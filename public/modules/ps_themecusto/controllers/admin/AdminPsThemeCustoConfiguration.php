@@ -23,109 +23,97 @@
 * @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
 * International Registered Trademark & Property of PrestaShop SA
 **/
-
-require_once(dirname(__FILE__).'../../../classes/ThemeCustoRequests.php');
+require_once _PS_MODULE_DIR_ . 'ps_themecusto/vendor/autoload.php';
 
 class AdminPsThemeCustoConfigurationController extends ModuleAdminController
 {
+    public $isPsVersion174Plus;
+    public $controller_quick_name;
+    public $aModuleActions;
+    public $moduleActionsNames;
+    public $categoryList;
+
     public function __construct()
     {
         parent::__construct();
 
+        $this->isPsVersion174Plus = (bool) version_compare(_PS_VERSION_, '1.7.4', '>=');
         $this->controller_quick_name = 'configuration';
-        $this->aModuleActions = array('uninstall', 'install', 'configure', 'enable', 'disable', 'disable_mobile', 'enable_mobile', 'reset' );
+        $this->aModuleActions = array('uninstall', 'install', 'configure', 'enable', 'disable', 'disable_mobile', 'enable_mobile', 'reset');
         $this->moduleActionsNames = array(
             $this->l('Uninstall'),
             $this->l('Install'),
             $this->l('Configure'),
             $this->l('Enable'),
             $this->l('Disable'),
-            // suzy: 2018-09-12 暫時修正 Translation not found 出現在 log 的 warning
-            // $this->l('Disable Mobile'),
-            '只停用手機版',
+            $this->l('Disable Mobile'),
             $this->l('Enable Mobile'),
-            $this->l('Reset')
+            $this->l('Reset'),
         );
+
         $this->categoryList = array(
-            'menu'              => $this->l('Menu'),
-            'slider'            => $this->l('Slider'),
-            'home_products'     => $this->l('Home Products'),
-            'block_text'        => $this->l('Text block'),
-            'banner'            => $this->l('Banner'),
+            'menu' => $this->l('Menu'),
+            'slider' => $this->l('Slider'),
+            'home_products' => $this->l('Home Products'),
+            'block_text' => $this->l('Text block'),
+            'banner' => $this->l('Banner'),
             'social_newsletter' => $this->l('Social &  Newsletter'),
-            'footer'            => $this->l('Footer'),
+            'footer' => $this->l('Footer'),
 
-            // suzy: 2018-08-21 加入其他佈景模組
-            'side'               => '左側欄',
-            'product_additional' => '商品頁 額外資訊',
-            'product_footer'     => '商品頁 頁尾',
-            'cart'               => '結帳頁',
-            'self'               => '獨立頁',
+            // suzy: 2019-12-10 中文翻譯
+            // 'content' => $this->l('content'),
+            // 'categories' => $this->l('Categories'),
+            // 'navigation_column' => $this->l('Navigation column'),
+            // 'product_management' => $this->l('Product management'),
+            // 'product_detail' => $this->l('Product detail'),
+            // 'product_block' => $this->l('Product block'),
+            'content' => '商品區塊',
+            'categories' => '分類',
+            'navigation_column' => '左側欄',
+            'product_management' => '商品',
+            'product_detail' => '商品額外資訊',
+            'product_block' => '推薦商品',
+
         );
     }
 
     /**
-     * suzy: 2018-08-21 加入其他佈景模組
-     * @return array
-     */
-    public function getListToConfigureOther()
-    {
-        $aList = array(
-            'side' => array(
-                'modules' => array(
-                    'ps_facetedsearch' => 0,
-                ),
-            ),
-            'product_additional' => array(
-                'modules' => array(
-                    'ps_sharebuttons' => 0,
-                ),
-            ),
-            'product_footer' => array(
-                'modules' => array(
-                    'ps_crossselling' => 0,
-                    'ps_categoryproducts' => 0,
-                ),
-            ),
-            'cart' => array(
-                'modules' => array(
-                    'simplicity_fbmessaging' => 0,
-                ),
-            ),
-            'self' => array(
-                'modules' => array(
-                    'ps_viewedproduct' => 0,
-                ),
-            ),
-
-        );
-
-        return $aList;
-    }
-
-    /**
-     * Get modules list to show
+     * Get homepage list of modules to show
      *
      * @param none
-     * @return array $aList
-    */
-    public function getListToConfigure()
+     *
+     * @return array
+     */
+    public function getHomepageListConfiguration()
     {
-        $aList = array(
+        if ($this->isPsVersion174Plus) {
+            $footerModules = array(
+                'blockreassurance' => 22312,
+                'ps_linklist' => 24360,
+                // suzy: 2018-08-21 新增 simplicity_footerbar
+                'simplicity_footerbar' => 0,
+            );
+        } else {
+            $footerModules = array(
+                'ps_linklist' => 24360,
+            );
+        }
+
+        return array(
             'menu' => array(
                 'pages' => array(
                     /* suzy: 2018-08-26 隱藏 分類、自訂頁面、品牌
                     'AdminCategories' => array(
-                        $this->l('Create and manage Product Categories'),
-                        $this->l('Create here a full range of categories and subcategories to classify your products and manage your catalog easily.')
+                        $this->l('Categories'),
+                        $this->l('Create here a full range of categories and subcategories to classify your products and manage your catalog easily.'),
                     ),
                     'AdminCmsContent' => array(
-                        $this->l('Create content pages'),
-                        $this->l('Add and manage your content pages (CMS pages: Terms and conditions of use, Our stores, About us, etc.) as you want.')
+                        $this->l('Content pages'),
+                        $this->l('Add and manage your content pages to make your store interesting and trustworthy.'),
                     ),
                     'AdminManufacturers' => array(
-                        $this->l('Create Brands and Suppliers pages'),
-                        $this->l('This page allows you to create and manage your Brands and/or Suppliers pages.')
+                        $this->l('Brands and Suppliers'),
+                        $this->l('Manage both your brands and suppliers at the same place !'),
                     ),
                     */
                 ),
@@ -140,7 +128,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             ),
             'slider' => array(
                 'modules' => array(
-                    (($this->module->ready)? 'pshomeslider' : 'ps_imageslider') => (($this->module->ready)? 27562 : 22320)
+                    $this->module->ready ? 'pshomeslider' : 'ps_imageslider' => $this->module->ready ? 27562 : 22320,
                 ),
             ),
             'home_products' => array(
@@ -149,7 +137,6 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                     'ps_bestsellers' => 24566,
                     'ps_newproducts' => 24671,
                     'ps_specials' => 24672,
-
                 ),
             ),
             'block_text' => array(
@@ -162,12 +149,259 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             'banner' => array(
                 'modules' => array(
                     'ps_banner' => 22313,
+                    // suzy: 2019-12-11 新增 simplicity_igfeed
                     'simplicity_igfeed' => 0,
                 ),
             ),
             'social_newsletter' => array(
                 'modules' => array(
-                    'ps_emailsubscription'  => 22318,
+                    'ps_emailsubscription' => 22318,
+                    'ps_socialfollow' => 22323,
+                ),
+            ),
+            'footer' => array(
+                'modules' => $footerModules,
+                /* suzy: 2018-09-06 隱藏 聯絡資訊
+                'pages' => array(
+                    'AdminStores' => array(
+                        $this->l('Shop details'),
+                        $this->l('Display additional information about your store or how to contact you to make it easy for your customers to reach you.'),
+                    ),
+                ),
+                */
+            ),
+        );
+    }
+
+    /**
+     * Get category list of modules to show
+     *
+     * @param none
+     *
+     * @return array
+     */
+    public function getCategoryListConfiguration()
+    {
+        if ($this->isPsVersion174Plus) {
+            $category = array(
+                'sfRoutePages' => array(
+                    'admin_product_preferences' => array(
+                        // suzy: 2019-12-10 中文翻譯
+                        // $this->l('Pagination'),
+                        // $this->l('Set the numbers of products you want to display per page and how.'),
+                        '進階設定',
+                        '商品全域設定',
+                    ),
+                ),
+            );
+            $footerModules = array(
+                'blockreassurance' => 22312,
+                'ps_linklist' => 24360,
+                // suzy: 2018-08-21 新增 simplicity_footerbar
+                'simplicity_footerbar' => 0,
+            );
+
+            $menu = array(
+                'pages' => array(
+                    /* suzy: 2018-08-26 隱藏 自訂頁面、品牌
+                    'AdminCmsContent' => array(
+                        $this->l('Content pages'),
+                        $this->l('Add and manage your content pages to make your store interesting and trustworthy.'),
+                    ),
+                    'AdminManufacturers' => array(
+                        $this->l('Brands and Suppliers'),
+                        $this->l('Manage both your brands and suppliers at the same place !'),
+                    ),
+                    */
+                ),
+                'modules' => array(
+                    // suzy: 2018-08-21 新增 ps_customersignin、simplicity_sociallogin、simplicity_headerbar
+                    'simplicity_headerbar' => 0,
+                    'simplicity_logo' => 0,
+                    'ps_mainmenu' => 22321,
+                    'ps_customersignin' => 0,
+                    'simplicity_sociallogin' => 0,
+                ),
+            );
+        } else {
+            $category = array(
+                'pages' => array(
+                    'AdminPPreferences' => array(
+                        $this->l('Pagination'),
+                        $this->l('Set the numbers of products you want to display per page and how.'),
+                    ),
+                ),
+            );
+            $footerModules = array(
+                'ps_linklist' => 24360,
+            );
+
+            $menu = array(
+                'pages' => array(
+                    'AdminCmsContent' => array(
+                        $this->l('Content pages'),
+                        $this->l('Add and manage your content pages to make your store interesting and trustworthy.'),
+                    ),
+                    'AdminManufacturers' => array(
+                        $this->l('Brands and Suppliers'),
+                        $this->l('Manage both your brands and suppliers at the same place !'),
+                    ),
+                ),
+                'modules' => array(
+                    'ps_mainmenu' => 22321,
+                ),
+            );
+        }
+
+        return array(
+            'menu' => $menu,
+            'categories' => array(
+                'pages' => array(
+                    'AdminCategories' => array(
+                        $this->l('Categories'),
+                        // suzy: 2019-12-10 文字翻譯
+                        // $this->l('Create a full range of Categories and Subcategories to classify your products, add categoryies desciptions and manage your catalog easily.'),
+                        '新增、修改、刪除、排序 商品分類、次分類'
+                    ),
+                ),
+            ),
+            'navigation_column' => array(
+                'modules' => array(
+                    'ps_categorytree' => 22314,
+                    'ps_facetedsearch' => 23867,
+                ),
+            ),
+            'content' => $category,
+            'social_newsletter' => array(
+                'modules' => array(
+                    'ps_emailsubscription' => 22318,
+                    'ps_socialfollow' => 22323,
+                ),
+            ),
+            'footer' => array(
+                'modules' => $footerModules,
+                /* suzy: 2018-09-06 隱藏 聯絡資訊
+                'pages' => array(
+                    'AdminStores' => array(
+                        $this->l('Shop details'),
+                        $this->l('Display additional information about your store or how to contact you to make it easy for your customers to reach you.'),
+                    ),
+                ),
+                */
+            ),
+        );
+    }
+
+    /**
+     * Get product list of modules to show
+     *
+     * @param none
+     *
+     * @return array
+     */
+    public function getProductListConfiguration()
+    {
+        if ($this->isPsVersion174Plus) {
+            $productManagement = array(
+                'sfRoutePages' => array(
+                    'admin_product_catalog' => array(
+                        $this->l('Catalog'),
+                        // suzy: 2019-12-10 中文翻譯
+                        // $this->l('Access your list of products to manage your catalog efficiently.'),
+                        '新增、修改、刪除、排序 商品內容、商品圖片'
+                    ),
+                    /* suzy: 2019-12-10 隱藏 Stock
+                    'admin_stock_overview' => array(
+                        $this->l('Stock'),
+                        $this->l('Manage your stock and edit product quantities right here.'),
+                    ),
+                    */
+                ),
+                /* suzy: 2019-12-10 隱藏 Product attributes
+                'pages' => array(
+                    'AdminAttributesGroups' => array(
+                        $this->l('Product attributes'),
+                        $this->l('Create or manage your attributes : colors, sizes, materials, ...'),
+                    ),
+                ),
+                */
+            );
+            $productDetailsModules = array(
+                'blockreassurance' => 22312,
+                'ps_sharebuttons' => 22322,
+            );
+            if (version_compare(_PS_VERSION_, '1.7.6', '>=')) {
+                $productDetailsModules['productcomments'] = 9144;
+            }
+        } else {
+            $productManagement = array(
+                'sfRoutePages' => array(
+                    'admin_product_catalog' => array(
+                        $this->l('Catalog'),
+                        $this->l('Access your list of products to manage your catalog efficiently.'),
+                    ),
+                ),
+                'pages' => array(
+                    'AdminAttributesGroups' => array(
+                        $this->l('Product attributes'),
+                        $this->l('Create or manage your attributes : colors, sizes, materials, ...'),
+                    ),
+                    'AdminPPreferences' => array(
+                        $this->l('Quantities and stock availability'),
+                        $this->l('Choose the way you display quantities and stock availability on your product page.'),
+                    ),
+                    'AdminStockManagement' => array(
+                        $this->l('Stock'),
+                        $this->l('Manage your stock and edit product quantities right here.'),
+                    ),
+                ),
+            );
+            $productDetailsModules = array(
+                'ps_sharebuttons' => 22322,
+            );
+        }
+
+        return array(
+            'menu' => array(
+                'pages' => array(
+                    /* suzy: 2018-08-26 隱藏 分類、自訂頁面、品牌
+                    'AdminCategories' => array(
+                        $this->l('Categories'),
+                        $this->l('Create here a full range of categories and subcategories to classify your products and manage your catalog easily.'),
+                    ),
+                    'AdminCmsContent' => array(
+                        $this->l('Content pages'),
+                        $this->l('Add and manage your content pages to make your store interesting and trustworthy.'),
+                    ),
+                    'AdminManufacturers' => array(
+                        $this->l('Brands and Suppliers'),
+                        $this->l('Manage both your brands and suppliers at the same place !'),
+                    ),
+                     */
+                ),
+                'modules' => array(
+                    // suzy: 2018-08-21 新增 ps_customersignin、simplicity_sociallogin、simplicity_headerbar
+                    'simplicity_headerbar' => 0,
+                    'simplicity_logo' => 0,
+                    'ps_mainmenu' => 22321,
+                    'ps_customersignin' => 0,
+                    'simplicity_sociallogin' => 0,
+                ),
+            ),
+            'product_management' => $productManagement,
+            'product_detail' => array(
+                'modules' => $productDetailsModules,
+            ),
+            'product_block' => array(
+                'modules' => array(
+                    'ps_categoryproducts' => 24588,
+                    'ps_viewedproduct' => 24674,
+                    'ps_crossselling' => 24696,
+                ),
+            ),
+            'social_newsletter' => array(
+                'modules' => array(
+                    'ps_emailsubscription' => 22318,
                     'ps_socialfollow' => 22323,
                 ),
             ),
@@ -176,29 +410,22 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 'pages' => array(
                     'AdminStores' => array(
                         $this->l('Shop details'),
-                        $this->l('Display additional information about your store or how to contact you to make it easy for your customers to reach you.')
+                        $this->l('Display additional information about your store or how to contact you to make it easy for your customers to reach you.'),
                     ),
                 ),
                 */
                 'modules' => array(
-                    // suzy: 2018-09-06 隱藏 聯絡資訊
-                    // suzy: 2018-08-21 新增 ps_contactinfo
-                    //'ps_contactinfo' => 0,
                     'ps_linklist' => 24360,
+                    // suzy: 2018-08-21 新增 simplicity_footerbar
                     'simplicity_footerbar' => 0,
                 ),
             ),
         );
-
-        return $aList;
     }
 
     /**
      * Initialize the content by adding Boostrap and loading the TPL
-     *
-     * @param none
-     * @return none
-    */
+     */
     public function initContent()
     {
         parent::initContent();
@@ -210,64 +437,60 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
         }
         $installedModulePage = $this->context->link->getAdminLink('AdminModulesManage');
 
-        $aListToConfigure = $this->getListToConfigure();
-
-        // suzy: 2018-08-21 加入其他佈景模組
-        $aListToConfigureOther = $this->getListToConfigureOther();
+        $homepageListToConfigure = $this->getHomepageListConfiguration();
+        $categoryListToConfigure = $this->getCategoryListConfiguration();
+        $productListToConfigure = $this->getProductListConfiguration();
 
         $this->context->smarty->assign(array(
-            'enable'                => $this->module->active,
-            'moduleName'            => $this->module->displayName,
-            'bootstrap'             => 1,
-            'configure_type'        => $this->controller_quick_name,
-            'iconConfiguration'     => $this->module->img_path.'/controllers/configuration/icon_configurator.png',
-            'listCategories'        => $this->categoryList,
-            'elementsList'          => $this->setFinalList($aListToConfigure),
-            'selectionModulePage'   => $selectionModulePage,
-            'installedModulePage'   => $installedModulePage,
-            'moduleImgUri'          => $this->module->img_path.'/controllers/configuration/',
-            'moduleActions'         => $this->aModuleActions,
-            'moduleActionsNames'    => $this->moduleActionsNames,
-            'themeConfiguratorUrl'  => $this->context->link->getAdminLink('AdminModules', true, false, array('configure' => 'ps_themeconfigurator')),
-            'is_ps_ready'           => $this->module->ready,
-            'ps_uri'                => $this->module->ps_uri,
-
-            // suzy: 2018-08-21 加入其他佈景模組
-            'elementsListOther'   => $this->setFinalList($aListToConfigureOther),
+            'enable' => $this->module->active,
+            'moduleName' => $this->module->displayName,
+            'bootstrap' => 1,
+            'configure_type' => $this->controller_quick_name,
+            'iconConfiguration' => $this->module->img_path . '/controllers/configuration/icon_configurator.png',
+            'listCategories' => $this->categoryList,
+            'homePageList' => $this->setFinalList($homepageListToConfigure),
+            'categoryPageList' => $this->setFinalList($categoryListToConfigure),
+            'productPageList' => $this->setFinalList($productListToConfigure),
+            'selectionModulePage' => $selectionModulePage,
+            'installedModulePage' => $installedModulePage,
+            'moduleImgUri' => $this->module->img_path . '/controllers/configuration/',
+            'moduleActions' => $this->aModuleActions,
+            'moduleActionsNames' => $this->moduleActionsNames,
+            'themeConfiguratorUrl' => $this->context->link->getAdminLink('AdminModules', true, false, array('configure' => 'ps_themeconfigurator')),
+            'isPsReady' => $this->module->ready,
+            'ps_uri' => $this->module->ps_uri,
         ));
 
         $aJsDef = array(
-            'admin_module_controller_psthemecusto'  => $this->module->controller_name[1],
-            'admin_module_ajax_url_psthemecusto'    => $this->module->front_controller[1],
-            'module_action_sucess'                  => $this->l('Action on the module successfully completed'),
-            'module_action_failed'                  => $this->l('Action on module failed'),
+            'admin_module_controller_psthemecusto' => $this->module->controller_name[1],
+            'admin_module_ajax_url_psthemecusto' => $this->module->front_controller[1],
+            'module_action_sucess' => $this->l('Action on the module successfully completed'),
+            'module_action_failed' => $this->l('Action on module failed'),
         );
-        $aJs = array($this->module->js_path.'/controllers/'.$this->controller_quick_name.'/back.js');
-        $aCss = array($this->module->css_path.'/controllers/'.$this->controller_quick_name.'/back.css');
+        $jsPath = array($this->module->js_path . '/controllers/' . $this->controller_quick_name . '/back.js');
+        $cssPath = array($this->module->css_path . '/controllers/' . $this->controller_quick_name . '/back.css');
 
-        $this->module->setMedia($aJsDef, $aJs, $aCss);
-        $this->setTemplate( $this->module->template_dir.'page.tpl');
+        $this->module->setMedia($aJsDef, $jsPath, $cssPath);
+        $this->setTemplate($this->module->template_dir . 'page.tpl');
     }
-
 
     /**
      * AJAX : Do a module action like Install, disable, enable ...
      *
      * @param null
+     *
      * @return mixed int | tpl
-    */
+     */
     public function ajaxProcessUpdateModule()
     {
         if (!$this->module->hasEditRight()) {
             die($this->l('You do not have permission to edit this.'));
         }
 
-        $iModuleId      = (int)Tools::getValue('id_module');
-        $sModuleName    = pSQL(Tools::getValue('module_name'));
-        $sModuleAction  = pSQL(Tools::getValue('action_module'));
-        $oModule        = Module::getInstanceByName($sModuleName);
-        $bReturn        = false;
-        $sUrlActive     = ($oModule->isEnabled($oModule->name)? 'configure' : 'enable');
+        $sModuleName = pSQL(Tools::getValue('module_name'));
+        $sModuleAction = pSQL(Tools::getValue('action_module'));
+        $oModule = Module::getInstanceByName($sModuleName);
+        $sUrlActive = $oModule->isEnabled($oModule->name) ? 'configure' : 'enable';
 
         switch ($sModuleAction) {
             /* suzy: 2018-11-17 不可 uninstall (移除)
@@ -275,7 +498,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 if ($this->module->ready === true) {
                     break;
                 }
-                $bReturn = $oModule->uninstall();
+                $oModule->uninstall();
                 $sUrlActive = 'install';
             break;
             */
@@ -283,30 +506,30 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 if ($this->module->ready === true) {
                     break;
                 }
-                $bReturn = $oModule->install();
-                $sUrlActive = (method_exists($oModule, 'getContent'))? 'configure' : 'disable';
+                $oModule->install();
+                $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
             break;
             case 'enable':
-                $bReturn = $oModule->enable();
-                $sUrlActive = (method_exists($oModule, 'getContent'))? 'configure' : 'disable';
+                $oModule->enable();
+                $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
             break;
             case 'disable':
-                $bReturn = $oModule->disable();
+                $oModule->disable();
                 $sUrlActive = 'enable';
             break;
             case 'disable_mobile':
-                $bReturn = $oModule->disableDevice(Context::DEVICE_MOBILE);
-                $sUrlActive = (method_exists($oModule, 'getContent'))? 'configure' : 'disable';
+                $oModule->disableDevice(Context::DEVICE_MOBILE);
+                $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
             break;
             case 'enable_mobile':
-                $bReturn = $oModule->enableDevice(Context::DEVICE_MOBILE);
-                $sUrlActive = (method_exists($oModule, 'getContent'))? 'configure' : 'disable';
+                $oModule->enableDevice(Context::DEVICE_MOBILE);
+                $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
             break;
             /* suzy: 2018-11-17 不可 reset (重新設定)
             case 'reset':
-                $bReturn = $oModule->uninstall();
-                $bReturn = $oModule->install();
-                $sUrlActive = (method_exists($oModule, 'getContent'))? 'configure' : 'disable';
+                $oModule->uninstall();
+                $oModule->install();
+                $sUrlActive = method_exists($oModule, 'getContent') ? 'configure' : 'disable';
             break;
             */
             default:
@@ -320,28 +543,26 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
         $aModule['url_active'] = $sUrlActive;
         $aModule['active'] = ThemeCustoRequests::getModuleDeviceStatus($oModule->id);
         $aModule['actions_url']['configure'] = $this->context->link->getAdminLink('AdminModules', true, false, array('configure' => $oModule->name));
-        $aModule['can_configure'] = (method_exists($oModule, 'getContent'))? true : false;
-        $aModule['enable_mobile'] = (int)Db::getInstance()->getValue('SELECT enable_device FROM '._DB_PREFIX_.'module_shop WHERE id_module = '.(int)$oModule->id);
-
-        unset($oModule);
+        $aModule['can_configure'] = method_exists($oModule, 'getContent') ? true : false;
+        $aModule['enable_mobile'] = (int) Db::getInstance()->getValue('SELECT enable_device FROM ' . _DB_PREFIX_ . 'module_shop WHERE id_module = ' . (int) $oModule->id);
 
         $this->context->smarty->assign(array(
-            'module'                => $aModule,
-            'moduleActions'         => $this->aModuleActions,
-            'moduleActionsNames'    => $this->moduleActionsNames,
-            'is_ps_ready'           => $this->module->ready,
-            )
-        );
+            'module' => $aModule,
+            'moduleActions' => $this->aModuleActions,
+            'moduleActionsNames' => $this->moduleActionsNames,
+            'isPsReady' => $this->module->ready,
+        ));
 
-        die($this->context->smarty->fetch(dirname(__FILE__).'/../../views/templates/admin/controllers/'.$this->controller_quick_name.'/elem/module_actions.tpl'));
+        $this->ajaxDie($this->context->smarty->fetch(__DIR__ . '/../../views/templates/admin/controllers/' . $this->controller_quick_name . '/elem/module_actions.tpl'));
     }
 
     /**
      * get list to show
      *
      * @param array $aList
-     * @return none
-    */
+     *
+     * @return array
+     */
     public function setFinalList($aList)
     {
         $modulesOnDisk = Module::getModulesDirOnDisk();
@@ -351,8 +572,18 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             foreach ($aElementListByType as $sType => $aElementsList) {
                 if ($sType == 'pages') {
                     foreach ($aElementsList as $sController => $aPage) {
+                        $aModuleFinalList[$sSegmentName][$sType][$sController]['name'] = $sController;
                         $aModuleFinalList[$sSegmentName][$sType][$sController]['displayName'] = $this->l($aPage[0]);
                         $aModuleFinalList[$sSegmentName][$sType][$sController]['url'] = $this->context->link->getAdminLink($sController);
+                        $aModuleFinalList[$sSegmentName][$sType][$sController]['description'] = $this->l($aPage[1]);
+                        $aModuleFinalList[$sSegmentName][$sType][$sController]['action'] = $this->l('Configure');
+                    }
+                } elseif ($sType == 'sfRoutePages') {
+                    $container = PrestaShop\PrestaShop\Adapter\SymfonyContainer::getInstance();
+                    foreach ($aElementsList as $sController => $aPage) {
+                        $aModuleFinalList[$sSegmentName][$sType][$sController]['name'] = $sController;
+                        $aModuleFinalList[$sSegmentName][$sType][$sController]['displayName'] = $this->l($aPage[0]);
+                        $aModuleFinalList[$sSegmentName][$sType][$sController]['url'] = $container->get('router')->generate($sController);
                         $aModuleFinalList[$sSegmentName][$sType][$sController]['description'] = $this->l($aPage[1]);
                         $aModuleFinalList[$sSegmentName][$sType][$sController]['action'] = $this->l('Configure');
                     }
@@ -363,9 +594,9 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                                 continue;
                             }
                             /* For a module coming from outside. It will be downloaded and installed */
-                            $length = file_put_contents(_PS_MODULE_DIR_.basename($sModuleName).'.zip', Tools::addonsRequest('module', array('id_module' => $iModuleId)));
-                            if (!empty($length) && Tools::ZipExtract(_PS_MODULE_DIR_.basename($sModuleName).'.zip', _PS_MODULE_DIR_)) {
-                                @unlink(_PS_MODULE_DIR_.basename($sModuleName).'.zip');
+                            $length = file_put_contents(_PS_MODULE_DIR_ . basename($sModuleName) . '.zip', Tools::addonsRequest('module', array('id_module' => $iModuleId)));
+                            if (!empty($length) && Tools::ZipExtract(_PS_MODULE_DIR_ . basename($sModuleName) . '.zip', _PS_MODULE_DIR_)) {
+                                unlink(_PS_MODULE_DIR_ . basename($sModuleName) . '.zip');
                             } else {
                                 continue;
                             }
@@ -378,7 +609,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             if (!isset($aModuleFinalList[$sSegmentName])) {
                 $aModuleFinalList[$sSegmentName] = null;
             }
-            if (is_array($aModuleFinalList[$sSegmentName]['modules'])) {
+            if (isset($aModuleFinalList[$sSegmentName]['modules']) && is_array($aModuleFinalList[$sSegmentName]['modules'])) {
                 uasort($aModuleFinalList[$sSegmentName]['modules'], array($this, 'sortArrayInstalledModulesFirst'));
             }
         }
@@ -391,8 +622,9 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
      *
      * @param object $oModuleInstance
      * @param bool $bIsInstalled
+     *
      * @return array $aModule
-    */
+     */
     public function setModuleFinalList($oModuleInstance, $bIsInstalled)
     {
         $aModule = array();
@@ -400,14 +632,12 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
         $aModule['id_module'] = $oModuleInstance->id;
         $aModule['active'] = $oModuleInstance->active;
 
-
-
         if ($bIsInstalled === true) {
-            $aModule['can_configure'] = (method_exists($oModuleInstance, 'getContent'))? true : false;
+            $aModule['can_configure'] = (method_exists($oModuleInstance, 'getContent')) ? true : false;
             if (method_exists($oModuleInstance, 'getContent')) {
-                $aModule['url_active'] = $this->l(($oModuleInstance->active? 'configure' : 'enable'));
+                $aModule['url_active'] = $this->l(($oModuleInstance->active ? 'configure' : 'enable'));
             } else {
-                $aModule['url_active'] = $this->l(($oModuleInstance->active? 'disable' : 'enable'));
+                $aModule['url_active'] = $this->l(($oModuleInstance->active ? 'disable' : 'enable'));
             }
             $aModule['installed'] = 1;
         } else {
@@ -416,12 +646,12 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             $aModule['installed'] = 0;
         }
 
-        $aModule['enable_mobile'] = (int)Db::getInstance()->getValue('SELECT enable_device FROM '._DB_PREFIX_.'module_shop WHERE id_module = '.(int)$oModuleInstance->id);
+        $aModule['enable_mobile'] = (int) Db::getInstance()->getValue('SELECT enable_device FROM ' . _DB_PREFIX_ . 'module_shop WHERE id_module = ' . (int) $oModuleInstance->id);
         $aModule['name'] = $oModuleInstance->name;
         $aModule['displayName'] = $oModuleInstance->displayName;
         $aModule['description'] = $oModuleInstance->description;
-        $aModule['controller_name'] = (isset($oModuleInstance->controller_name)? $oModuleInstance->controller_name : '');
-        $aModule['logo'] = '/modules/'.$oModuleInstance->name.'/logo.png';
+        $aModule['controller_name'] = (isset($oModuleInstance->controller_name) ? $oModuleInstance->controller_name : '');
+        $aModule['logo'] = '/modules/' . $oModuleInstance->name . '/logo.png';
         $aModule['actions_url']['configure'] = $this->context->link->getAdminLink('AdminModules', true, false, array('configure' => $oModuleInstance->name));
 
         return $aModule;
@@ -432,8 +662,9 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
      *
      * @param array $a
      * @param array $b
+     *
      * @return bool
-    */
+     */
     public function sortArrayInstalledModulesFirst($a, $b)
     {
         return strcmp($b['installed'], $a['installed']);

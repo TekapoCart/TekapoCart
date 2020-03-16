@@ -1,8 +1,4 @@
 <?php
-/**
- * @ SDK版本
- */
-const VERSION = '1.1.190328';
 
 /**
  * 付款方式。
@@ -419,11 +415,18 @@ if(!class_exists('ECPay_EncryptType', false))
  * 1.1.20221    *支援站內付全方位金流
  * 1.1.180313   *修正信用卡記憶卡號參數.
  * 1.1.190328   *設定class_exists的autoload參數為false.
+ * 1.1.190917   *ServerPost改static調用
+ * 1.1.1910310  *修正電子發票延伸檢查碼錯誤
  *
- * @version 1.1.190328
+ * @version 1.1.1910310
  * @author charlie & wesley
  */
 class ECPay_AllInOne {
+
+    /**
+     * @ SDK版本
+     */
+    const VERSION = '1.1.1910310';
 
     public $ServiceURL = 'ServiceURL';
     public $ServiceMethod = 'ServiceMethod';
@@ -746,7 +749,7 @@ class ECPay_QueryTradeInfo extends ECPay_Aio
         if (sizeof($arErrors) == 0) {
             $arParameters["CheckMacValue"] = ECPay_CheckMacValue::generate($arParameters,$HashKey,$HashIV,$EncryptType);
             // 送出查詢並取回結果。
-            $szResult = parent::ServerPost($arParameters,$ServiceURL);
+            $szResult = static::ServerPost($arParameters,$ServiceURL);
             $szResult = str_replace(' ', '%20', $szResult);
             $szResult = str_replace('+', '%2B', $szResult);
 
@@ -795,7 +798,7 @@ class ECPay_QueryPeriodCreditCardTradeInfo extends ECPay_Aio
         if (sizeof($arErrors) == 0) {
             $arParameters["CheckMacValue"] = ECPay_CheckMacValue::generate($arParameters,$HashKey,$HashIV,$EncryptType);
             // 送出查詢並取回結果。
-            $szResult = parent::ServerPost($arParameters,$ServiceURL);
+            $szResult = static::ServerPost($arParameters,$ServiceURL);
             $szResult = str_replace(' ', '%20', $szResult);
             $szResult = str_replace('+', '%2B', $szResult);
 
@@ -830,7 +833,7 @@ class ECPay_DoAction extends ECPay_Aio
         $szCheckMacValue = ECPay_CheckMacValue::generate($arParameters,$HashKey,$HashIV,$EncryptType);
         $arParameters["CheckMacValue"] = $szCheckMacValue;
         // 送出查詢並取回結果。
-        $szResult = self::ServerPost($arParameters,$ServiceURL);
+        $szResult = static::ServerPost($arParameters,$ServiceURL);
         // 轉結果為陣列。
         parse_str($szResult, $arResult);
         // 重新整理回傳參數。
@@ -869,7 +872,7 @@ class ECPay_AioCapture extends ECPay_Aio
         $arParameters["CheckMacValue"] = $szCheckMacValue;
 
         // 送出查詢並取回結果。
-        $szResult = self::ServerPost($arParameters,$ServiceURL);
+        $szResult = static::ServerPost($arParameters,$ServiceURL);
 
         // 轉結果為陣列。
         parse_str($szResult, $arResult);
@@ -918,7 +921,7 @@ class ECPay_QueryTrade extends ECPay_Aio
         if (sizeof($arErrors) == 0) {
             $arParameters["CheckMacValue"] = ECPay_CheckMacValue::generate($arParameters,$HashKey,$HashIV,$EncryptType);
             // 送出查詢並取回結果。
-            $szResult = parent::ServerPost($arParameters,$ServiceURL);
+            $szResult = static::ServerPost($arParameters,$ServiceURL);
 
             // 轉結果為陣列。
             $arResult = json_decode($szResult,true);
@@ -993,7 +996,7 @@ class ECPay_CreateTrade extends ECPay_Aio
         $arParameters["CheckMacValue"] = $szCheckMacValue;
 
         // 送出查詢並取回結果。
-        $szResult = self::ServerPost($arParameters,$ServiceURL);
+        $szResult = static::ServerPost($arParameters,$ServiceURL);
 
         // 轉結果為陣列。
         $arResult = json_decode($szResult,true);
@@ -1405,7 +1408,7 @@ Abstract class ECPay_Verification
             'InvoiceRemark'
         );
         foreach ($encode_fields as $tmp_field) {
-            $arExtend[$tmp_field] = urlencode($arExtend[$tmp_field]);
+            $arExtend[$tmp_field] = static::ecpay_urlencode($arExtend[$tmp_field]);
         }
 
         if (sizeof($arErrors) > 0) {
@@ -1413,6 +1416,26 @@ Abstract class ECPay_Verification
         }
 
         return $arExtend ;
+    }
+
+    /**
+     * URL Encode編碼，特殊字元取代
+     *
+     * @param  string $sParameters
+     * @return string $sParameters
+     */
+    public static function ecpay_urlencode($sParameters) {
+
+        // URL Encode編碼
+        $sParameters = urlencode($sParameters);
+
+        // 轉成小寫
+        $sParameters = strtolower($sParameters);
+
+        // 參數內特殊字元取代
+        $sParameters = ECPay_CheckMacValue::Replace_Symbol($sParameters);
+
+        return $sParameters;
     }
 
     // 是否支援 IgnorePayment 參數
@@ -1562,7 +1585,7 @@ if(!class_exists('ECPay_CheckMacValue', false))
 
     class ECPay_CheckMacValue{
 
-        static function generate($arParameters = array(),$HashKey = '' ,$HashIV = '',$encType = 0){
+        public static function generate($arParameters = array(),$HashKey = '' ,$HashIV = '',$encType = 0){
             $sMacValue = '' ;
 
             if(isset($arParameters))
@@ -1580,19 +1603,7 @@ if(!class_exists('ECPay_CheckMacValue', false))
                 $sMacValue .= '&HashIV=' . $HashIV ;
 
                 // URL Encode編碼
-                $sMacValue = urlencode($sMacValue);
-
-                // 轉成小寫
-                $sMacValue = strtolower($sMacValue);
-
-                // 取代為與 dotNet 相符的字元
-                $sMacValue = str_replace('%2d', '-', $sMacValue);
-                $sMacValue = str_replace('%5f', '_', $sMacValue);
-                $sMacValue = str_replace('%2e', '.', $sMacValue);
-                $sMacValue = str_replace('%21', '!', $sMacValue);
-                $sMacValue = str_replace('%2a', '*', $sMacValue);
-                $sMacValue = str_replace('%28', '(', $sMacValue);
-                $sMacValue = str_replace('%29', ')', $sMacValue);
+                $sMacValue = static::ecpay_urlencode($sMacValue);
 
                 // 編碼
                 switch ($encType) {
@@ -1612,6 +1623,7 @@ if(!class_exists('ECPay_CheckMacValue', false))
 
             return $sMacValue ;
         }
+
         /**
          * 自訂排序使用
          */
@@ -1621,11 +1633,31 @@ if(!class_exists('ECPay_CheckMacValue', false))
         }
 
         /**
+         * URL Encode編碼，特殊字元取代
+         *
+         * @param  string $sParameters
+         * @return string $sParameters
+         */
+        public static function ecpay_urlencode($sParameters) {
+
+            // URL Encode編碼
+            $sParameters = urlencode($sParameters);
+
+            // 轉成小寫
+            $sParameters = strtolower($sParameters);
+
+            // 參數內特殊字元取代
+            $sParameters = static::Replace_Symbol($sParameters);
+
+            return $sParameters;
+        }
+
+        /**
          * 參數內特殊字元取代
          * 傳入    $sParameters    參數
          * 傳出    $sParameters    回傳取代後變數
          */
-        static function Replace_Symbol($sParameters){
+        public static function Replace_Symbol($sParameters){
             if(!empty($sParameters)){
 
                 $sParameters = str_replace('%2D', '-', $sParameters);

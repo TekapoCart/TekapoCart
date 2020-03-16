@@ -1458,8 +1458,13 @@ class Ps_MainMenu extends Module implements WidgetInterface
         if (!is_array($c_tree_path) || count($c_tree_path) === 0) {
             if (method_exists($this->context->controller, 'getCategory')) {
                 $curr_category = $this->context->controller->getCategory();
-                $cate_page_identifier = 'category-' . $curr_category->id;
-                $c_tree_path = self::getTreePath($menu['children'], $cate_page_identifier);
+
+                // suzy: 2019-12-31 修正 $curr_category 可能為空造成錯誤
+                if ($curr_category) {
+                    $cate_page_identifier = 'category-' . $curr_category->id;
+                    $c_tree_path = self::getTreePath($menu['children'], $cate_page_identifier);
+                }
+
             }
         }
         return [

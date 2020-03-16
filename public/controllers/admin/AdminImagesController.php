@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -49,35 +49,32 @@ class AdminImagesControllerCore extends AdminController
 
         parent::__construct();
 
-        if (_PS_MODE_DEV_) {
-            $this->bulk_actions = array(
-                'delete' => array(
-                    'text' => $this->trans('Delete selected', array(), 'Admin.Actions'),
-                    'confirm' => $this->trans('Delete selected items?', array(), 'Admin.Notifications.Warning'),
-                    'icon' => 'icon-trash',
-                ),
-            );
-
-            $this->fields_list = array(
-                'id_image_type' => array('title' => $this->trans('ID', array(), 'Admin.Global'), 'align' => 'center', 'class' => 'fixed-width-xs'),
-                'name' => array('title' => $this->trans('Name', array(), 'Admin.Global')),
-                'width' => array('title' => $this->trans('Width', array(), 'Admin.Global'),  'suffix' => ' px'),
-                'height' => array('title' => $this->trans('Height', array(), 'Admin.Global'),  'suffix' => ' px'),
-                'products' => array('title' => $this->trans('Products', array(), 'Admin.Global'), 'align' => 'center', 'type' => 'bool', 'callback' => 'printEntityActiveIcon', 'orderby' => false),
-                'categories' => array('title' => $this->trans('Categories', array(), 'Admin.Global'), 'align' => 'center', 'type' => 'bool', 'callback' => 'printEntityActiveIcon', 'orderby' => false),
-                'manufacturers' => array('title' => $this->trans('Brands', array(), 'Admin.Global'), 'align' => 'center', 'type' => 'bool', 'callback' => 'printEntityActiveIcon', 'orderby' => false),
-                'suppliers' => array('title' => $this->trans('Suppliers', array(), 'Admin.Global'), 'align' => 'center', 'type' => 'bool', 'callback' => 'printEntityActiveIcon', 'orderby' => false),
-                'stores' => array('title' => $this->trans('Stores', array(), 'Admin.Global'), 'align' => 'center', 'type' => 'bool', 'callback' => 'printEntityActiveIcon', 'orderby' => false),
-            );
-        } else {
-            // suzy: 2018-09-23 調整圖片設定顯示
-            $this->fields_list = array(
-                'id_image_type' => array('title' => $this->trans('ID', array(), 'Admin.Global'), 'align' => 'center', 'class' => 'fixed-width-xs', 'search' => false),
-                'name' => array('title' => $this->trans('Name', array(), 'Admin.Global'), 'search' => false),
-                'width' => array('title' => $this->trans('Width', array(), 'Admin.Global'),  'suffix' => ' px', 'search' => false),
-                'height' => array('title' => $this->trans('Height', array(), 'Admin.Global'),  'suffix' => ' px', 'search' => false),
-            );
-        }
+        // suzy: 2018-09-23 調整圖片設定顯示
+//        $this->bulk_actions = array(
+//            'delete' => array(
+//                'text' => $this->trans('Delete selected', array(), 'Admin.Actions'),
+//                'confirm' => $this->trans('Delete selected items?', array(), 'Admin.Notifications.Warning'),
+//                'icon' => 'icon-trash',
+//            ),
+//        );
+//
+//        $this->fields_list = array(
+//            'id_image_type' => array('title' => $this->trans('ID', array(), 'Admin.Global'), 'align' => 'center', 'class' => 'fixed-width-xs'),
+//            'name' => array('title' => $this->trans('Name', array(), 'Admin.Global')),
+//            'width' => array('title' => $this->trans('Width', array(), 'Admin.Global'),  'suffix' => ' px'),
+//            'height' => array('title' => $this->trans('Height', array(), 'Admin.Global'),  'suffix' => ' px'),
+//            'products' => array('title' => $this->trans('Products', array(), 'Admin.Global'), 'align' => 'center', 'type' => 'bool', 'callback' => 'printEntityActiveIcon', 'orderby' => false),
+//            'categories' => array('title' => $this->trans('Categories', array(), 'Admin.Global'), 'align' => 'center', 'type' => 'bool', 'callback' => 'printEntityActiveIcon', 'orderby' => false),
+//            'manufacturers' => array('title' => $this->trans('Brands', array(), 'Admin.Global'), 'align' => 'center', 'type' => 'bool', 'callback' => 'printEntityActiveIcon', 'orderby' => false),
+//            'suppliers' => array('title' => $this->trans('Suppliers', array(), 'Admin.Global'), 'align' => 'center', 'type' => 'bool', 'callback' => 'printEntityActiveIcon', 'orderby' => false),
+//            'stores' => array('title' => $this->trans('Stores', array(), 'Admin.Global'), 'align' => 'center', 'type' => 'bool', 'callback' => 'printEntityActiveIcon', 'orderby' => false),
+//        );
+        $this->fields_list = array(
+            'id_image_type' => array('title' => $this->trans('ID', array(), 'Admin.Global'), 'align' => 'center', 'class' => 'fixed-width-xs', 'search' => false),
+            'name' => array('title' => $this->trans('Name', array(), 'Admin.Global'), 'search' => false),
+            'width' => array('title' => $this->trans('Width', array(), 'Admin.Global'),  'suffix' => ' px', 'search' => false),
+            'height' => array('title' => $this->trans('Height', array(), 'Admin.Global'),  'suffix' => ' px', 'search' => false),
+        );
 
         // No need to display the old image system migration tool except if product images are in _PS_PROD_IMG_DIR_
         $this->display_move = false;
@@ -93,175 +90,149 @@ class AdminImagesControllerCore extends AdminController
             }
         }
 
-        if (_PS_MODE_DEV_) {
-            $this->fields_options = array(
-                'images' => array(
-                    'title' => $this->trans('Images generation options', array(), 'Admin.Design.Feature'),
-                    'icon' => 'icon-picture',
-                    'top' => '',
-                    'bottom' => '',
-                    'description' => $this->trans('JPEG images have a small file size and standard quality. PNG images have a larger file size, a higher quality and support transparency. Note that in all cases the image files will have the .jpg extension.', array(), 'Admin.Design.Help') . '
-					<br /><br />' . $this->trans('WARNING: This feature may not be compatible with your theme, or with some of your modules. In particular, PNG mode is not compatible with the Watermark module. If you encounter any issues, turn it off by selecting "Use JPEG".', array(), 'Admin.Design.Help'),
-                    'fields' => array(
-                        'PS_IMAGE_QUALITY' => array(
-                            'title' => $this->trans('Image format', array(), 'Admin.Design.Feature'),
-                            'show' => true,
-                            'required' => true,
-                            'type' => 'radio',
-                            'choices' => array('jpg' => $this->trans('Use JPEG.', array(), 'Admin.Design.Feature'), 'png' => $this->trans('Use PNG only if the base image is in PNG format.', array(), 'Admin.Design.Feature'), 'png_all' => $this->trans('Use PNG for all images.', array(), 'Admin.Design.Feature')),
+        // suzy: 2018-09-23 調整圖片設定顯示
+//        $this->fields_options = array(
+//            'images' => array(
+//                'title' => $this->trans('Images generation options', array(), 'Admin.Design.Feature'),
+//                'icon' => 'icon-picture',
+//                'top' => '',
+//                'bottom' => '',
+//                'description' => $this->trans('JPEG images have a small file size and standard quality. PNG images have a larger file size, a higher quality and support transparency. Note that in all cases the image files will have the .jpg extension.', array(), 'Admin.Design.Help') . '
+//					<br /><br />' . $this->trans('WARNING: This feature may not be compatible with your theme, or with some of your modules. In particular, PNG mode is not compatible with the Watermark module. If you encounter any issues, turn it off by selecting "Use JPEG".', array(), 'Admin.Design.Help'),
+//                'fields' => array(
+//                    'PS_IMAGE_QUALITY' => array(
+//                        'title' => $this->trans('Image format', array(), 'Admin.Design.Feature'),
+//                        'show' => true,
+//                        'required' => true,
+//                        'type' => 'radio',
+//                        'choices' => array('jpg' => $this->trans('Use JPEG.', array(), 'Admin.Design.Feature'), 'png' => $this->trans('Use PNG only if the base image is in PNG format.', array(), 'Admin.Design.Feature'), 'png_all' => $this->trans('Use PNG for all images.', array(), 'Admin.Design.Feature')),
+//                    ),
+//                    'PS_JPEG_QUALITY' => array(
+//                        'title' => $this->trans('JPEG compression', array(), 'Admin.Design.Feature'),
+//                        'hint' => $this->trans('Ranges from 0 (worst quality, smallest file) to 100 (best quality, biggest file).', array(), 'Admin.Design.Help') . ' ' . $this->trans('Recommended: 90.', array(), 'Admin.Design.Help'),
+//                        'validation' => 'isUnsignedId',
+//                        'required' => true,
+//                        'cast' => 'intval',
+//                        'type' => 'text',
+//                    ),
+//                    'PS_PNG_QUALITY' => array(
+//                        'title' => $this->trans('PNG compression', array(), 'Admin.Design.Feature'),
+//                        'hint' => $this->trans('PNG compression is lossless: unlike JPG, you do not lose image quality with a high compression ratio. However, photographs will compress very badly.', array(), 'Admin.Design.Help') . ' ' . $this->trans('Ranges from 0 (biggest file) to 9 (smallest file, slowest decompression).', array(), 'Admin.Design.Help') . ' ' . $this->trans('Recommended: 7.', array(), 'Admin.Design.Help'),
+//                        'validation' => 'isUnsignedId',
+//                        'required' => true,
+//                        'cast' => 'intval',
+//                        'type' => 'text',
+//                    ),
+//                    'PS_IMAGE_GENERATION_METHOD' => array(
+//                        'title' => $this->trans('Generate images based on one side of the source image', array(), 'Admin.Design.Feature'),
+//                        'validation' => 'isUnsignedId',
+//                        'required' => false,
+//                        'cast' => 'intval',
+//                        'type' => 'select',
+//                        'list' => array(
+//                            array(
+//                                'id' => '0',
+//                                'name' => $this->trans('Automatic (longest side)', array(), 'Admin.Design.Feature'),
+//                            ),
+//                            array(
+//                                'id' => '1',
+//                                'name' => $this->trans('Width', array(), 'Admin.Global'),
+//                            ),
+//                            array(
+//                                'id' => '2',
+//                                'name' => $this->trans('Height', array(), 'Admin.Global'),
+//                            ),
+//                        ),
+//                        'identifier' => 'id',
+//                        'visibility' => Shop::CONTEXT_ALL,
+//                    ),
+//                    'PS_PRODUCT_PICTURE_MAX_SIZE' => array(
+//                        'title' => $this->trans('Maximum file size of product customization pictures', array(), 'Admin.Design.Feature'),
+//                        'hint' => $this->trans('The maximum file size of pictures that customers can upload to customize a product (in bytes).', array(), 'Admin.Design.Help'),
+//                        'validation' => 'isUnsignedInt',
+//                        'required' => true,
+//                        'cast' => 'intval',
+//                        'type' => 'text',
+//                        'suffix' => $this->trans('bytes', array(), 'Admin.Design.Feature'),
+//                        'visibility' => Shop::CONTEXT_ALL,
+//                    ),
+//                    'PS_PRODUCT_PICTURE_WIDTH' => array(
+//                        'title' => $this->trans('Product picture width', array(), 'Admin.Design.Feature'),
+//                        'hint' => $this->trans('Width of product customization pictures that customers can upload (in pixels).', array(), 'Admin.Design.Help'),
+//                        'validation' => 'isUnsignedInt',
+//                        'required' => true,
+//                        'cast' => 'intval',
+//                        'type' => 'text',
+//                        'width' => 'px',
+//                        'suffix' => $this->trans('pixels', array(), 'Admin.Design.Feature'),
+//                        'visibility' => Shop::CONTEXT_ALL,
+//                    ),
+//                    'PS_PRODUCT_PICTURE_HEIGHT' => array(
+//                        'title' => $this->trans('Product picture height', array(), 'Admin.Design.Feature'),
+//                        'hint' => $this->trans('Height of product customization pictures that customers can upload (in pixels).', array(), 'Admin.Design.Help'),
+//                        'validation' => 'isUnsignedInt',
+//                        'required' => true,
+//                        'cast' => 'intval',
+//                        'type' => 'text',
+//                        'height' => 'px',
+//                        'suffix' => $this->trans('pixels', array(), 'Admin.Design.Feature'),
+//                        'visibility' => Shop::CONTEXT_ALL,
+//                    ),
+//                    'PS_HIGHT_DPI' => array(
+//                        'type' => 'bool',
+//                        'title' => $this->trans('Generate high resolution images', array(), 'Admin.Design.Feature'),
+//                        'required' => false,
+//                        'is_bool' => true,
+//                        'hint' => $this->trans('This will generate an additional file for each image (thus doubling your total amount of images). Resolution of these images will be twice higher.', array(), 'Admin.Design.Help'),
+//                        'desc' => $this->trans('Enable to optimize the display of your images on high pixel density screens.', array(), 'Admin.Design.Help'),
+//                        'visibility' => Shop::CONTEXT_ALL,
+//                    ),
+//                ),
+//                'submit' => array('title' => $this->trans('Save', array(), 'Admin.Actions')),
+//            ),
+//        );
+        $this->fields_options = array(
+            'images' => array(
+                'title' => $this->trans('Images generation options', array(), 'Admin.Design.Feature'),
+                'icon' => 'icon-picture',
+                'top' => '',
+                'bottom' => '',
+                'description' => '請注意：所有圖檔在後台上傳後會變成 .jpg 副檔名，但仍保留原有特性 例如：透明度。',
+                'fields' => array(
+                    'PS_IMAGE_GENERATION_METHOD' => array(
+                        'title' => $this->trans('Generate images based on one side of the source image', array(), 'Admin.Design.Feature'),
+                        'validation' => 'isUnsignedId',
+                        'required' => true,
+                        'cast' => 'intval',
+                        'type' => 'radio',
+                        'choices' => array(
+                            '0' => '1. 依照縮圖比例，與來源圖比例不合處會自動補白色背景（PNG 補透明背景）。（預設）',
+                            '1' => '2. 依照縮圖的「寬」，使用來源圖比例產生縮圖。',
+                            '2' => '3. 依照縮圖的「高」，使用來源圖比例產生縮圖。'
                         ),
-                        'PS_JPEG_QUALITY' => array(
-                            'title' => $this->trans('JPEG compression', array(), 'Admin.Design.Feature'),
-                            'hint' => $this->trans('Ranges from 0 (worst quality, smallest file) to 100 (best quality, biggest file).', array(), 'Admin.Design.Help') . ' ' . $this->trans('Recommended: 90.', array(), 'Admin.Design.Help'),
-                            'validation' => 'isUnsignedId',
-                            'required' => true,
-                            'cast' => 'intval',
-                            'type' => 'text',
-                        ),
-                        'PS_PNG_QUALITY' => array(
-                            'title' => $this->trans('PNG compression', array(), 'Admin.Design.Feature'),
-                            'hint' => $this->trans('PNG compression is lossless: unlike JPG, you do not lose image quality with a high compression ratio. However, photographs will compress very badly.', array(), 'Admin.Design.Help') . ' ' . $this->trans('Ranges from 0 (biggest file) to 9 (smallest file, slowest decompression).', array(), 'Admin.Design.Help') . ' ' . $this->trans('Recommended: 7.', array(), 'Admin.Design.Help'),
-                            'validation' => 'isUnsignedId',
-                            'required' => true,
-                            'cast' => 'intval',
-                            'type' => 'text',
-                        ),
-                        'PS_IMAGE_GENERATION_METHOD' => array(
-                            'title' => $this->trans('Generate images based on one side of the source image', array(), 'Admin.Design.Feature'),
-                            'validation' => 'isUnsignedId',
-                            'required' => false,
-                            'cast' => 'intval',
-                            'type' => 'select',
-                            'list' => array(
-                                array(
-                                    'id' => '0',
-                                    'name' => $this->trans('Automatic (longest side)', array(), 'Admin.Design.Feature'),
-                                ),
-                                array(
-                                    'id' => '1',
-                                    'name' => $this->trans('Width', array(), 'Admin.Global'),
-                                ),
-                                array(
-                                    'id' => '2',
-                                    'name' => $this->trans('Height', array(), 'Admin.Global'),
-                                ),
-                            ),
-                            'identifier' => 'id',
-                            'visibility' => Shop::CONTEXT_ALL,
-                        ),
-                        'PS_PRODUCT_PICTURE_MAX_SIZE' => array(
-                            'title' => $this->trans('Maximum file size of product customization pictures', array(), 'Admin.Design.Feature'),
-                            'hint' => $this->trans('The maximum file size of pictures that customers can upload to customize a product (in bytes).', array(), 'Admin.Design.Help'),
-                            'validation' => 'isUnsignedInt',
-                            'required' => true,
-                            'cast' => 'intval',
-                            'type' => 'text',
-                            'suffix' => $this->trans('bytes', array(), 'Admin.Design.Feature'),
-                            'visibility' => Shop::CONTEXT_ALL,
-                        ),
-                        'PS_PRODUCT_PICTURE_WIDTH' => array(
-                            'title' => $this->trans('Product picture width', array(), 'Admin.Design.Feature'),
-                            'hint' => $this->trans('Width of product customization pictures that customers can upload (in pixels).', array(), 'Admin.Design.Help'),
-                            'validation' => 'isUnsignedInt',
-                            'required' => true,
-                            'cast' => 'intval',
-                            'type' => 'text',
-                            'width' => 'px',
-                            'suffix' => $this->trans('pixels', array(), 'Admin.Design.Feature'),
-                            'visibility' => Shop::CONTEXT_ALL,
-                        ),
-                        'PS_PRODUCT_PICTURE_HEIGHT' => array(
-                            'title' => $this->trans('Product picture height', array(), 'Admin.Design.Feature'),
-                            'hint' => $this->trans('Height of product customization pictures that customers can upload (in pixels).', array(), 'Admin.Design.Help'),
-                            'validation' => 'isUnsignedInt',
-                            'required' => true,
-                            'cast' => 'intval',
-                            'type' => 'text',
-                            'height' => 'px',
-                            'suffix' => $this->trans('pixels', array(), 'Admin.Design.Feature'),
-                            'visibility' => Shop::CONTEXT_ALL,
-                        ),
-                        'PS_HIGHT_DPI' => array(
-                            'type' => 'bool',
-                            'title' => $this->trans('Generate high resolution images', array(), 'Admin.Design.Feature'),
-                            'required' => false,
-                            'is_bool' => true,
-                            'hint' => $this->trans('This will generate an additional file for each image (thus doubling your total amount of images). Resolution of these images will be twice higher.', array(), 'Admin.Design.Help'),
-                            'desc' => $this->trans('Enable to optimize the display of your images on high pixel density screens.', array(), 'Admin.Design.Help'),
-                            'visibility' => Shop::CONTEXT_ALL,
-                        ),
+                        'identifier' => 'id',
+                        'visibility' => Shop::CONTEXT_ALL,
                     ),
-                    'submit' => array('title' => $this->trans('Save', array(), 'Admin.Actions')),
-                ),
-            );
-        } else {
-            $this->fields_options = array(
-                'images' => array(
-                    'title' => $this->trans('Images generation options', array(), 'Admin.Design.Feature'),
-                    'icon' => 'icon-picture',
-                    'top' => '',
-                    'bottom' => '',
-                    'description' => '請注意：所有圖檔在後台上傳後會變成 .jpg 副檔名，但仍保留原有特性 例如：透明度。',
-                    'fields' => array(
-                        /* suzy: 2018-09-26 隱藏 圖片格式、JPEG壓縮、PNG 壓縮
-                        'PS_IMAGE_QUALITY' => array(
-                            'title' => $this->trans('Image format', array(), 'Admin.Design.Feature'),
-                            'show' => true,
-                            'required' => true,
-                            'type' => 'radio',
-                            'choices' => array('jpg' => $this->trans('Use JPEG.', array(), 'Admin.Design.Feature'), 'png' => $this->trans('Use PNG only if the base image is in PNG format.', array(), 'Admin.Design.Feature'), 'png_all' => $this->trans('Use PNG for all images.', array(), 'Admin.Design.Feature')),
-                        ),
-                        'PS_JPEG_QUALITY' => array(
-                            'title' => $this->trans('JPEG compression', array(), 'Admin.Design.Feature'),
-                            'hint' => $this->trans('Ranges from 0 (worst quality, smallest file) to 100 (best quality, biggest file).', array(), 'Admin.Design.Help') . ' ' . $this->trans('Recommended: 90.', array(), 'Admin.Design.Help'),
-                            'validation' => 'isUnsignedId',
-                            'required' => true,
-                            'cast' => 'intval',
-                            'type' => 'text',
-                        ),
-                        'PS_PNG_QUALITY' => array(
-                            'title' => $this->trans('PNG compression', array(), 'Admin.Design.Feature'),
-                            'hint' => $this->trans('PNG compression is lossless: unlike JPG, you do not lose image quality with a high compression ratio. However, photographs will compress very badly.', array(), 'Admin.Design.Help') . ' ' . $this->trans('Ranges from 0 (biggest file) to 9 (smallest file, slowest decompression).', array(), 'Admin.Design.Help') . ' ' . $this->trans('Recommended: 7.', array(), 'Admin.Design.Help'),
-                            'validation' => 'isUnsignedId',
-                            'required' => true,
-                            'cast' => 'intval',
-                            'type' => 'text',
-                        ),*/
-                        'PS_IMAGE_GENERATION_METHOD' => array(
-                            'title' => $this->trans('Generate images based on one side of the source image', array(), 'Admin.Design.Feature'),
-                            'validation' => 'isUnsignedId',
-                            'required' => true,
-                            'cast' => 'intval',
-                            'type' => 'radio',
-                            'choices' => array(
-                                '0' => '1. 依照縮圖比例，與來源圖比例不合處會自動補白色背景（PNG 補透明背景）。（預設）',
-                                '1' => '2. 依照縮圖的「寬」，使用來源圖比例產生縮圖。',
-                                '2' => '3. 依照縮圖的「高」，使用來源圖比例產生縮圖。'
-                            ),
-                            'identifier' => 'id',
-                            'visibility' => Shop::CONTEXT_ALL,
-                        ),
-                        'SIMPLICITY_IMAGE_USE_CROP' => array(
-                            'type' => 'bool',
-                            'title' => '縮圖裁切',
-                            'required' => false,
-                            'is_bool' => true,
-                            'desc' => '此功能在商品縮圖同時截取商品中間部份，解決畫面呈現多張圖片時，因為尺寸不一致而不美觀的問題。<br>只有 home_default / small_default 支援此功能。（預設：否）',
-                            'visibility' => Shop::CONTEXT_ALL,
-                        ),
-                        'SIMPLICITY_IMAGICK' => array(
-                            'type' => 'bool',
-                            'title' => '使用 Imagick 縮圖',
-                            'required' => false,
-                            'is_bool' => true,
-                            'desc' => '系統預設 GD 縮圖，此選項預設為關閉。若有縮圖嚴重色差無法可解問題，可開啟此功能試看看。',
-                            'visibility' => Shop::CONTEXT_ALL,
-                        ),
+                    'SIMPLICITY_IMAGE_USE_CROP' => array(
+                        'type' => 'bool',
+                        'title' => '縮圖裁切',
+                        'required' => false,
+                        'is_bool' => true,
+                        'desc' => '此功能在商品縮圖同時截取商品中間部份，解決畫面呈現多張圖片時，因為尺寸不一致而不美觀的問題。<br>只有 home_default / small_default 支援此功能。（預設：否）',
+                        'visibility' => Shop::CONTEXT_ALL,
                     ),
-                    'submit' => array('title' => $this->trans('Save', array(), 'Admin.Actions')),
+                    'SIMPLICITY_IMAGICK' => array(
+                        'type' => 'bool',
+                        'title' => '使用 Imagick 縮圖',
+                        'required' => false,
+                        'is_bool' => true,
+                        'desc' => '系統預設 GD 縮圖，此選項預設為關閉。若有縮圖嚴重色差無法可解問題，可開啟此功能試看看。',
+                        'visibility' => Shop::CONTEXT_ALL,
+                    ),
                 ),
-            );
-        }
+                'submit' => array('title' => $this->trans('Save', array(), 'Admin.Actions')),
+            ),
+        );
 
 
 
@@ -441,7 +412,8 @@ class AdminImagesControllerCore extends AdminController
             }
         } elseif (Tools::isSubmit('submitOptions' . $this->table)) {
             if ($this->access('edit')) {
-                /* suzy: 2018-09-26 不顯示 PS_PNG_QUALITY、PS_JPEG_QUALITY、PS_IMAGE_QUALITY 相關檢查也拿掉
+                // suzy: 2018-09-26 不顯示 PS_PNG_QUALITY、PS_JPEG_QUALITY、PS_IMAGE_QUALITY 相關檢查也拿掉
+                /*
                 if ((int) Tools::getValue('PS_JPEG_QUALITY') < 0
                     || (int) Tools::getValue('PS_JPEG_QUALITY') > 100) {
                     $this->errors[] = $this->trans('Incorrect value for the selected JPEG image compression.', array(), 'Admin.Design.Notification');
@@ -748,7 +720,7 @@ class AdminImagesControllerCore extends AdminController
             // Getting format generation
             $formats = ImageType::getImagesTypes($proc['type']);
             if ($type != 'all') {
-                $format = strval(Tools::getValue('format_' . $type));
+                $format = (string) (Tools::getValue('format_' . $type));
                 if ($format != 'all') {
                     foreach ($formats as $k => $form) {
                         if ($form['id_image_type'] != $format) {
@@ -784,7 +756,8 @@ class AdminImagesControllerCore extends AdminController
         return count($this->errors) > 0 ? false : true;
     }
 
-    /* suzy: 2018-09-27 隱藏新增按鈕
+    // suzy: 2018-09-27 隱藏新增按鈕
+    /*
     public function initPageHeaderToolbar()
     {
         if (empty($this->display)) {

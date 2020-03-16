@@ -61,7 +61,9 @@
 				<div class="form-group">
 					{if isset($fields_value[$input.name][$language.id_lang]) && $fields_value[$input.name][$language.id_lang] != ''}
 					<div id="{$input.name}-{$language.id_lang}-images-thumbnails" class="col-lg-12">
-						<img src="{$uri}img/{$fields_value[$input.name][$language.id_lang]}" class="img-thumbnail"/>
+						{* suzy: suzy: 2020-02-23 更改模組圖片儲存路徑 *}
+						{*<img src="{$uri}img/{$fields_value[$input.name][$language.id_lang]}" class="img-thumbnail"/>*}
+						<img src="/img/mod/ps_banner/{$fields_value[$input.name][$language.id_lang]}" class="img-thumbnail"/>
 					</div>
 					{/if}
 				</div>

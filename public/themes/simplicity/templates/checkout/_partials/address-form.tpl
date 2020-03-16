@@ -3,6 +3,7 @@
 {block name='form_field'}
   {if $field.name eq "alias"}
     {* we don't ask for alias here *}
+    <input type="hidden" name="{$field.name}" value="{$field.value}">
   {else}
     {$smarty.block.parent}
   {/if}

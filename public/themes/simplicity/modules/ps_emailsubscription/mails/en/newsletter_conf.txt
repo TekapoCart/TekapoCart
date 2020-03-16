@@ -1,0 +1,12 @@
+Please do not reply directly to this email, we will not receive it.
+Adding our email address as a contact to ensure all messages are delivered to your Inbox.
+
+{shop_url}
+
+Hi,
+
+Thank you for subscribing to our newsletter.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

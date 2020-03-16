@@ -1,0 +1,16 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+New alert message saved
+
+WARNING: you have received a new log alert in your back office.
+
+You can check for it in the Advanced Parameters > Logs section of your back office.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

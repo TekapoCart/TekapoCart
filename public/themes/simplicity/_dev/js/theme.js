@@ -45,6 +45,8 @@ import EventEmitter from 'events';
 
 import './lib/bootstrap-filestyle.min';
 import './lib/jquery.scrollbox.min';
+// suzy: 2020-01-25 twzipcode
+import './lib/jquery.twzipcode';
 
 import './components/block-cart';
 
@@ -67,15 +69,15 @@ $(document).ready(() => {
   productMinitature.init();
   productSelect.init();
 
-  // msc start
+  // suzy: msc start
   let pack;
   if (typeof navigator.scriptList == 'undefined') {
     navigator.scriptList = [];
   }
   pack = [
-    '/js/msc/class-msc-sidebar.js',
-    '/js/msc/wcl.js',
-    '/js/msc/class-msc-select.js'
+    '/js/msc/class-msc-sidebar.min.js',
+    '/js/msc/wcl.min.js',
+    '/js/msc/class-msc-select.min.js'
   ];
   for (var i=-1,l=pack.length;++i<l;) {
     var path = pack[i], script;
@@ -91,5 +93,18 @@ $(document).ready(() => {
     pack.parentNode.removeChild(pack);
   }
   // msc end
+
+  // suzy: twzipcode
+  if ($('body#checkout').length === 1 || $('body#address').length === 1) {
+      $('#twzipcode').twzipcode({
+          'zipcodeName'  : 'postcode'
+      });
+      $(document).ajaxComplete(function() {
+          $('#twzipcode').twzipcode({
+              'zipcodeName'  : 'postcode'
+          });
+      });
+  }
+
 
 });

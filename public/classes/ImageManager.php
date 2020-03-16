@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -126,13 +126,15 @@ class ImageManagerCore
 
         $memoryLimit = Tools::getMemoryLimit();
         // memory_limit == -1 => unlimited memory
-        if (function_exists('memory_get_usage') && (int) $memoryLimit != -1) {
+        if (isset($infos['bits']) && function_exists('memory_get_usage') && (int) $memoryLimit != -1) {
             $currentMemory = memory_get_usage();
-            $channel = isset($infos['channels']) ? ($infos['channels'] / 8) : 1;
+
+            $bits = $infos['bits'] / 8;
+            $channel = isset($infos['channels']) ? $infos['channels'] : 1;
 
             // Evaluate the memory required to resize the image: if it's too much, you can't resize it.
             // For perfs, avoid computing static maths formulas in the code. pow(2, 16) = 65536 ; 1024 * 1024 = 1048576
-            if (($infos[0] * $infos[1] * $infos['bits'] * $channel + 65536) * 1.8 + $currentMemory > $memoryLimit - 1048576) {
+            if (($infos[0] * $infos[1] * $bits * $channel + 65536) * 1.8 + $currentMemory > $memoryLimit - 1048576) {
                 return false;
             }
         }
@@ -178,7 +180,7 @@ class ImageManagerCore
             return !($error = self::ERROR_FILE_NOT_EXIST);
         }
 
-        // suzy: 2018-09-22 是否為縮圖
+        // suzy: 2018-09-22 是否為縮圖（用來判斷 crop）
         $is_thumb = false;
         if (!empty($destinationWidth) && !empty($destinationHeight) &&
             ((int) $destinationWidth == 500 || (int) $destinationWidth == 300)
@@ -204,18 +206,21 @@ class ImageManagerCore
                         $sourceWidth = $tmpWidth;
                         $sourceHeight = $tmpHeight;
                         $rotate = 180;
+
                         break;
 
                     case 6:
                         $sourceWidth = $tmpHeight;
                         $sourceHeight = $tmpWidth;
                         $rotate = -90;
+
                         break;
 
                     case 8:
                         $sourceWidth = $tmpHeight;
                         $sourceHeight = $tmpWidth;
                         $rotate = 90;
+
                         break;
 
                     default:
@@ -349,6 +354,7 @@ class ImageManagerCore
             $srcImage = ImageManager::create($type, $destinationFile);
             $centreX = round($currentWidth / 2); // 1350 / 2 = 675
             $centreY = round($currentHeight / 2); // 500 /2 = 250
+
             $cropWidth  = $oldDestinationWidth;  // 500
             $cropHeight = $oldDestinationHeight; // 500
             $cropWidthHalf  = round($cropWidth / 2); // 250
@@ -577,8 +583,6 @@ class ImageManagerCore
         }
         // suzy: 2018-10-19 ico 改成 png 並加強檢查
         // if (substr($file['name'], -4) != '.ico') {
-        //    return Context::getContext()->getTranslator()->trans('Image format not recognized, allowed formats are: .ico', array(), 'Admin.Notifications.Error');
-        // }
         if (!ImageManager::isRealImage($file['tmp_name'], $file['type']) || substr($file['name'], -4) != '.png' || preg_match('/\%00/', $file['name'])) {
             return Context::getContext()->getTranslator()->trans('Image format not recognized, allowed formats are: .ico', array(), 'Admin.Notifications.Error');
         }
@@ -620,8 +624,8 @@ class ImageManagerCore
         $dest = array();
         $dest['x'] = $dstX;
         $dest['y'] = $dstY;
-        $dest['width'] = !is_null($dstWidth) ? $dstWidth : $src['width'];
-        $dest['height'] = !is_null($dstHeight) ? $dstHeight : $src['height'];
+        $dest['width'] = null !== $dstWidth ? $dstWidth : $src['width'];
+        $dest['height'] = null !== $dstHeight ? $dstHeight : $src['height'];
         $dest['ressource'] = ImageManager::createWhiteImage($dest['width'], $dest['height']);
 
         $white = imagecolorallocate($dest['ressource'], 255, 255, 255);
@@ -647,15 +651,18 @@ class ImageManagerCore
         switch ($type) {
             case IMAGETYPE_GIF:
                 return imagecreatefromgif($filename);
+
                 break;
 
             case IMAGETYPE_PNG:
                 return imagecreatefrompng($filename);
+
                 break;
 
             case IMAGETYPE_JPEG:
             default:
                 return imagecreatefromjpeg($filename);
+
                 break;
         }
     }
@@ -702,11 +709,13 @@ class ImageManagerCore
         switch ($type) {
             case 'gif':
                 $success = imagegif($resource, $filename);
+
                 break;
 
             case 'png':
                 $quality = ($psPngQuality === false ? 7 : $psPngQuality);
                 $success = imagepng($resource, $filename, (int) $quality);
+
                 break;
 
             case 'jpg':
@@ -715,11 +724,13 @@ class ImageManagerCore
                 $quality = ($psJpegQuality === false ? 90 : $psJpegQuality);
                 imageinterlace($resource, 1); /// make it PROGRESSIVE
                 $success = imagejpeg($resource, $filename, (int) $quality);
+
                 break;
         }
         imagedestroy($resource);
         @chmod($filename, 0664);
 
+        // suzy: GCP
         if ($success) {
             ImageManager::uploadGCP($filename);
         }
@@ -767,6 +778,7 @@ class ImageManagerCore
         foreach ($types as $mime => $exts) {
             if (in_array($extension, $exts)) {
                 $mimeType = $mime;
+
                 break;
             }
         }

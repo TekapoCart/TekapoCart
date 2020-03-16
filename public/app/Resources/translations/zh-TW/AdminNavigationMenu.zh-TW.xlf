@@ -70,13 +70,13 @@ File: classes/lang/KeysReference/TabLang.php:37</note>
       </trans-unit>
       <trans-unit id="1d6af794b2599c1407a83029a09d1ecf" approved="yes">
         <source>Carriers</source>
-        <target xml:lang="zh-TW">承運商</target>
+        <target xml:lang="zh-TW">配送方式</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:38</note>
       </trans-unit>
       <trans-unit id="914419aa32f04011357d3b604a86d7eb" approved="yes">
         <source>Carrier</source>
-        <target xml:lang="zh-TW">承運商</target>
+        <target xml:lang="zh-TW">配送方式</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:39</note>
       </trans-unit>
@@ -184,7 +184,7 @@ File: classes/lang/KeysReference/TabLang.php:59</note>
       </trans-unit>
       <trans-unit id="8fddfc8225dcf89be0e15709c671af4e" approved="yes">
         <source>Delivery Slips</source>
-        <target xml:lang="zh-TW">送貨單</target>
+        <target xml:lang="zh-TW">配送單</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:60</note>
       </trans-unit>
@@ -196,7 +196,7 @@ File: classes/lang/KeysReference/TabLang.php:61</note>
       </trans-unit>
       <trans-unit id="eb626c94531ec554f93b2b78a77c8b1b" approved="yes">
         <source>Employees</source>
-        <target xml:lang="zh-TW">員工</target>
+        <target xml:lang="zh-TW">帳號</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:62</note>
       </trans-unit>
@@ -388,13 +388,13 @@ File: classes/lang/KeysReference/TabLang.php:101</note>
       </trans-unit>
       <trans-unit id="d0f25115288c15321ecf672f0d6a83ea" approved="yes">
         <source>Profiles</source>
-        <target xml:lang="zh-TW">職位</target>
+        <target xml:lang="zh-TW">部門</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:102</note>
       </trans-unit>
       <trans-unit id="4f32a32dea642737580dd71cdfd8d3c0" approved="yes">
         <source>Quick Access</source>
-        <target xml:lang="zh-TW">快速連結</target>
+        <target xml:lang="zh-TW">書籤</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:103</note>
       </trans-unit>
@@ -454,7 +454,7 @@ File: classes/lang/KeysReference/TabLang.php:112</note>
       </trans-unit>
       <trans-unit id="e836c2a96e7ef38a39afe4be2beddddd" approved="yes">
         <source>SQL Manager</source>
-        <target xml:lang="zh-TW">SQL管理器</target>
+        <target xml:lang="zh-TW">SQL 查詢</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:113</note>
       </trans-unit>
@@ -538,7 +538,7 @@ File: classes/lang/KeysReference/TabLang.php:127</note>
       </trans-unit>
       <trans-unit id="fcf3b725bb6ebb0e635b0f0902ade451" approved="yes">
         <source><![CDATA[Theme & Logo]]></source>
-        <target xml:lang="zh-TW"><![CDATA[佈景 ＆ Logo]]></target>
+        <target xml:lang="zh-TW">佈景主題</target>
         <note>Context:
 File: classes/lang/KeysReference/TabLang.php:128</note>
       </trans-unit>
@@ -613,7 +613,7 @@ File: src/PrestaShopBundle/Controller/Admin/Configure/AdvancedParameters/Adminis
     <body>
       <trans-unit id="c32516babc5b6c47eb8ce1bfc223253c" approved="yes">
         <source>Catalog</source>
-        <target xml:lang="zh-TW">商品目錄</target>
+        <target xml:lang="zh-TW">商品</target>
         <note>Context:
 File: admin-dev/themes/default/template/search_form.tpl:41</note>
       </trans-unit>

@@ -37,20 +37,23 @@
 
       {block name="address_form_fields"}
         <section class="form-fields">
+
+          {if isset($formFields.id_country) && $formFields.id_country.value == 203}
+            <div id="twzipcode">
+          {/if}
+
           {block name='form_fields'}
             {foreach from=$formFields item="field"}
               {block name='form_field'}
-                {if isset($show_bypass_address_label) && $field.name == 'address1'}
-                <div class="row">
-                  <div class="col-md-7">
-                      <p>{$show_bypass_address_label} <a class="js-bypass-address" href="#"><strong>{l s='Skip' d='Shop.Theme.Checkout'}</strong></a></p>
-                  </div>
-                </div>
-                {/if}
                 {form_field field=$field}
               {/block}
             {/foreach}
           {/block}
+
+          {if isset($formFields.id_country) && $formFields.id_country.value == 203}
+            </div>
+          {/if}
+
         </section>
       {/block}
 

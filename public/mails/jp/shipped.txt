@@ -1,0 +1,18 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+ご注文頂いた商品を発送致します
+
+注文番号 {order_name} ご注文商品を発送しました。
+お問い合わせ番号 {tracking_number}
+{extra_info}
+
+ご注文内容の詳細は「[注文履歴]({guest_tracking_url})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

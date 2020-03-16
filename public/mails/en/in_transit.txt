@@ -1,0 +1,18 @@
+Please do not reply directly to this email, we will not receive it.
+Adding our email address as a contact to ensure all messages are delivered to your Inbox.
+
+{shop_url}
+
+Hi {firstname} {lastname},
+
+{meta_products}
+
+Order ID {order_name} - In transit
+
+Your order with the reference {order_name} is on its way.
+
+You can track your package using the following link: {followup}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

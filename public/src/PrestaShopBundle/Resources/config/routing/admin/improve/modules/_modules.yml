@@ -47,10 +47,9 @@ admin_module_manage:
         _legacy_link:
             - AdminModulesManage
             - AdminModulesSf
-
+# suzy: 2019-02-11 強制讓金物流頁可設定 啟用/停用
 admin_module_manage_action:
     path:     /manage/action/{action}/{module_name}
-    # suzy: 2019-02-11 加上 GET 以支援金物流模組頁操作按鈕
     methods:  [GET, POST]
     defaults:
         _controller: PrestaShopBundle:Admin/Improve/Module:module

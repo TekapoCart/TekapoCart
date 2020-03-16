@@ -98,7 +98,7 @@ File: controllers/admin/AdminEmailsController.php:126</note>
       </trans-unit>
       <trans-unit id="c098053744ce979cbd030908105d54fe" approved="yes">
         <source>Mail domain name</source>
-        <target xml:lang="zh-TW">信件域名</target>
+        <target xml:lang="zh-TW">寄件者（選填）</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:138</note>
       </trans-unit>
@@ -122,7 +122,7 @@ File: controllers/admin/AdminEmailsController.php:157</note>
       </trans-unit>
       <trans-unit id="d7f2615c71a1567cc13cf3a7f7de0aea" approved="yes">
         <source>Encryption</source>
-        <target xml:lang="zh-TW">加密</target>
+        <target xml:lang="zh-TW">加密格式</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:164</note>
       </trans-unit>
@@ -216,7 +216,7 @@ File: controllers/admin/AdminEmailsController.php:287</note>
     <body>
       <trans-unit id="d37c2bf1bd3143847fca087b354f920e" approved="yes">
         <source>Customer ID</source>
-        <target xml:lang="zh-TW">客戶編號：</target>
+        <target xml:lang="zh-TW">客戶 ID</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:411</note>
       </trans-unit>
@@ -240,7 +240,7 @@ File: controllers/admin/AdminImportController.php:568</note>
       </trans-unit>
       <trans-unit id="97f08a40f22a625d0cbfe03db3349108" approved="yes">
         <source>Product ID</source>
-        <target xml:lang="zh-TW">商品編號</target>
+        <target xml:lang="zh-TW">商品 ID</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:124</note>
       </trans-unit>
@@ -318,7 +318,7 @@ File: controllers/admin/AdminImportController.php:287</note>
       </trans-unit>
       <trans-unit id="f8a0fa3674c3336359b77bbe8e942a2c" approved="yes">
         <source>ID / Name of shop</source>
-        <target xml:lang="zh-TW">商店的編號 / 名稱</target>
+        <target xml:lang="zh-TW">商店 ID/名稱</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:516</note>
       </trans-unit>
@@ -378,7 +378,7 @@ File: controllers/admin/AdminImportController.php:232</note>
       </trans-unit>
       <trans-unit id="8a1cabdfd802aa4ea2ec774feb832a1e" approved="yes">
         <source>Tax rule ID</source>
-        <target xml:lang="zh-TW">稅則編號</target>
+        <target xml:lang="zh-TW">稅 ID</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:233</note>
       </trans-unit>
@@ -564,7 +564,7 @@ File: controllers/admin/AdminImportController.php:409</note>
       </trans-unit>
       <trans-unit id="f323be7152201bfc856e649e84e9d64c" approved="yes">
         <source>Titles ID (Mr = 1, Ms = 2, else 0)</source>
-        <target xml:lang="zh-TW">稱謂編號 (先生 = 1，小姐 = 2，其他 0)</target>
+        <target xml:lang="zh-TW">稱謂 ID (先生 = 1，小姐 = 2，其他 0)</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:369</note>
       </trans-unit>
@@ -612,7 +612,7 @@ File: controllers/admin/AdminImportController.php:410</note>
       </trans-unit>
       <trans-unit id="3d1c10fcfac7da07fdb8b9f99d1c0901" approved="yes">
         <source>ID / Name of group shop</source>
-        <target xml:lang="zh-TW">商店群組的編號 / 名稱</target>
+        <target xml:lang="zh-TW">商店群組 ID / 名稱</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:458</note>
       </trans-unit>
@@ -648,25 +648,25 @@ File: controllers/admin/AdminImportController.php:513</note>
       </trans-unit>
       <trans-unit id="9b1f5ada3db7e58544806a11099b7103" approved="yes">
         <source>Supplier ID *</source>
-        <target xml:lang="zh-TW">供應商編號 *</target>
+        <target xml:lang="zh-TW">供應商 ID *</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:541</note>
       </trans-unit>
       <trans-unit id="84560d7d7c4d97c640d09a58491a3677" approved="yes">
         <source>Lang ID</source>
-        <target xml:lang="zh-TW">語言編號</target>
+        <target xml:lang="zh-TW">語言 ID</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:542</note>
       </trans-unit>
       <trans-unit id="8954e2e0d62b56db3c10df45a7602cd3" approved="yes">
         <source>Warehouse ID *</source>
-        <target xml:lang="zh-TW">倉庫編號 *</target>
+        <target xml:lang="zh-TW">倉庫 ID *</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:543</note>
       </trans-unit>
       <trans-unit id="dfa8db9b8d08689d8a23067e93ef4ef9" approved="yes">
         <source>Currency ID *</source>
-        <target xml:lang="zh-TW">貨幣編號 *</target>
+        <target xml:lang="zh-TW">貨幣 ID *</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:544</note>
       </trans-unit>
@@ -690,13 +690,13 @@ File: controllers/admin/AdminImportController.php:547</note>
       </trans-unit>
       <trans-unit id="c5d4da7adbd98e284ef9a8733a9ceaf2" approved="yes">
         <source>Product ID *</source>
-        <target xml:lang="zh-TW">商品編號 *</target>
+        <target xml:lang="zh-TW">商品 ID *</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:570</note>
       </trans-unit>
       <trans-unit id="41b00531a619d5e0f965854e352529f1" approved="yes">
         <source>Product Attribute ID</source>
-        <target xml:lang="zh-TW">商品屬性編號</target>
+        <target xml:lang="zh-TW">商品屬性 ID</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:571</note>
       </trans-unit>
@@ -778,7 +778,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/Lo
       </trans-unit>
       <trans-unit id="d95fc016a6eee828f434ed5f55504427" approved="yes">
         <source>Object ID</source>
-        <target xml:lang="zh-TW">物件編號</target>
+        <target xml:lang="zh-TW">物件 ID</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/LogsPage/Blocks/table.html.twig:48</note>
       </trans-unit>
@@ -926,19 +926,19 @@ File: controllers/admin/AdminShopController.php:842</note>
     <body>
       <trans-unit id="eb626c94531ec554f93b2b78a77c8b1b" approved="yes">
         <source>Employees</source>
-        <target xml:lang="zh-TW">員工</target>
+        <target xml:lang="zh-TW">帳號</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:219</note>
       </trans-unit>
       <trans-unit id="cce99c598cfdb9773ab041d54c3d973a" approved="yes">
         <source>Profile</source>
-        <target xml:lang="zh-TW">角色</target>
+        <target xml:lang="zh-TW">部門</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:88</note>
       </trans-unit>
       <trans-unit id="a19df5d477865657e2e2d4f9c30325db" approved="yes">
         <source>Employee options</source>
-        <target xml:lang="zh-TW">員工選項</target>
+        <target xml:lang="zh-TW">帳號選項</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:96</note>
       </trans-unit>
@@ -968,7 +968,7 @@ File: controllers/admin/AdminEmployeesController.php:107</note>
       </trans-unit>
       <trans-unit id="4696cdea33eee7e2c4fcb5dca30ccf56" approved="yes">
         <source>Allow employees to select a specific language for the Admin panel form.</source>
-        <target xml:lang="zh-TW">允許員工在管理介面選擇指定語言</target>
+        <target xml:lang="zh-TW">允許管理者在管理介面選擇指定語言</target>
         <note>Context:
 File: controllers/admin/AdminEmployeesController.php:108</note>
       </trans-unit>
@@ -1208,7 +1208,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/me
     <body>
       <trans-unit id="822376c59b7b86a05a2519f85f88da55" approved="yes">
         <source>SQL query Name</source>
-        <target xml:lang="zh-TW">SQL 查詢名稱</target>
+        <target xml:lang="zh-TW">名稱</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:52</note>
       </trans-unit>
@@ -1232,7 +1232,7 @@ File: controllers/admin/AdminRequestSqlController.php:98</note>
       </trans-unit>
       <trans-unit id="9b5c3d6674b3af1946fb50faae7079e2" approved="yes">
         <source>SQL query name</source>
-        <target xml:lang="zh-TW">SQL 查詢名稱</target>
+        <target xml:lang="zh-TW">名稱</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:143</note>
       </trans-unit>
@@ -1400,7 +1400,7 @@ File: controllers/admin/AdminShopGroupController.php:229</note>
     <body>
       <trans-unit id="69d18853cb35672b765f55ae37ae4967" approved="yes">
         <source>Add new profile</source>
-        <target xml:lang="zh-TW">新增角色</target>
+        <target xml:lang="zh-TW">新增部門</target>
         <note>Context:
 File: controllers/admin/AdminProfilesController.php:111</note>
       </trans-unit>
@@ -1433,13 +1433,13 @@ File: controllers/admin/AdminWebserviceController.php:147</note>
       </trans-unit>
       <trans-unit id="a3946b47f44a8f7adf9c9b6e38911790" approved="yes">
         <source>Enable PrestaShop's webservice</source>
-        <target xml:lang="zh-TW">啟用PrestoShop 網路服務</target>
+        <target xml:lang="zh-TW">啟用 TekapoCart 網路服務</target>
         <note>Context:
 File: controllers/admin/AdminWebserviceController.php:80</note>
       </trans-unit>
       <trans-unit id="20eebdc752ee86d49f5d090759b237aa" approved="yes">
         <source>Webservice account key.</source>
-        <target xml:lang="zh-TW">網路服務帳戶密碼。</target>
+        <target xml:lang="zh-TW">TekapoCart Webservice 密鑰</target>
         <note>Context:
 File: controllers/admin/AdminWebserviceController.php:137</note>
       </trans-unit>

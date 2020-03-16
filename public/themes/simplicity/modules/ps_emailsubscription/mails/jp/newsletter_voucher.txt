@@ -1,0 +1,14 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+お知らせ
+
+Subscribing to newsletter
+
+Thank you for subscribing to our newsletter. We are pleased to offer you the following voucher: {discount}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,5 +1,5 @@
 {**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
@@ -55,6 +55,7 @@
 							<i class="icon-credit-card"></i> {l s='Orders' d='Admin.Global'}
 						</a>
 					</li>
+					<!-- suzy: 2020-02-12 隱藏搜尋分類
 					<li class="search-invoices search-option">
 						<a href="#" data-value="4" data-placeholder="{l s='Invoice Number' d='Admin.Navigation.Header'}" data-icon="icon-book">
 							<i class="icon-book"></i> {l s='Invoices' d='Admin.Navigation.Menu'}
@@ -70,6 +71,7 @@
 							<i class="icon-puzzle-piece"></i> {l s='Modules' d='Admin.Global'}
 						</a>
 					</li>
+					-->
 				</ul>
 			</div>
 			{if isset($show_clear_btn) && $show_clear_btn}

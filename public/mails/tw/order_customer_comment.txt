@@ -1,0 +1,20 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+如要確保收到信件，可將此信箱加入通訊錄。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+Message from customer
+
+您收到了一封訂單訊息 {order_name}.
+
+客戶： {firstname} {lastname} ({email})
+
+客戶訊息：
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

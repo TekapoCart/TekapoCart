@@ -5,7 +5,8 @@ html {
 
 body {
   direction: ltr;
-  font-family: 'Noto Sans', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  font-family: 'Noto Sans', 'Microsoft JhengHei', sans-serif;
+  // font-family: 'Microsoft JhengHei', sans-serif;
   font-size: $base-font-size;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -261,17 +262,28 @@ input, textarea {
   }
 }
 
+input[type=number] {
+  -moz-appearance:textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
 .form-control-select {
   height: 2.625rem;
   -moz-appearance: none;
   -webkit-appearance: none;
   background: $gray-light url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAPklEQVR4Ae3TwREAEBQD0V/6do4SXPZg7EsBhsQ8IEmSMOsiuEfg3gL3oXC7wK0bd1G4o8X9F4yIkyQfSrIByQBjp7QuND8AAAAASUVORK5CYII=") no-repeat scroll right 0.5rem center / 1.25rem 1.25rem;
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   &:focus {
     outline: none;
     border: $input-btn-border-width solid $input-border-color;
   }
-
+  &.half {
+    width: 49%; display: inline;
+  }
 }
 
 .form-control-valign {
@@ -405,7 +417,7 @@ input, textarea {
       left: 0.125rem;
       top: 0.125rem;
       */
-      left: 0.24rem;
+      left: 0.2rem;
       top: 0.2rem;
     }
     &:focus + span {
@@ -485,11 +497,12 @@ input, textarea {
     }
     dd,
     dt {
-      flex: 0 0 45%;
+      flex: 0 0 50%;
       background: $gray-light;
       padding: 0.625rem;
       // margin: 0.125rem;
       margin: 0;
+      border: 1px solid $brand-background;
       &:nth-of-type(even) {
         background: $gray-lighter;
       }
@@ -566,4 +579,11 @@ button:disabled, .btn.disabled {
       color: $gray-darker;
     }
   }
+}
+
+// modal-dialog-centered class added from bootstrap 4.0.0, adapted for bootstrap 4.0.0-alpha.5
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - (30px * 2)); // 30px correspond to the default margin size from bootstrap 4.0.0-alpha.5 for modal-dialog class
 }

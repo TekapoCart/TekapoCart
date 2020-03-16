@@ -33,7 +33,7 @@
           }
         </p>
         <p>{l s='List of items to be returned:' d='Shop.Theme.Customeraccount'}</p>
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered table-order">
           <thead class="thead-default">
             <tr>
               <th>{l s='Product' d='Shop.Theme.Catalog'}</th>

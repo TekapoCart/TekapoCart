@@ -1,0 +1,17 @@
+此信件为系统自动传送，请勿直接回复，感谢您的配合。
+如要确保收到信件，可将此信箱加入通讯录。
+
+{shop_url}
+
+您好 {firstname} {lastname},
+
+Sponsorship Program
+
+我们已在您名下创建了一张折扣券给您的推荐好友。
+这是您的折扣券码： {voucher_num}，金额为 {voucher_num}
+
+只需在您的下一个订单的付款流程复制/粘贴此代码。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

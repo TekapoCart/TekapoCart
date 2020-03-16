@@ -1,0 +1,18 @@
+此信件为系统自动传送，请勿直接回复，感谢您的配合。
+如要确保收到信件，可将此信箱加入通讯录。
+
+{shop_url}
+
+您好 {firstname} {lastname},
+
+来自 {shop_name} 的新讯息
+
+您收到了一则由 {shop_name} 发出关于订单 {order_name} 的讯息。
+
+讯息：
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

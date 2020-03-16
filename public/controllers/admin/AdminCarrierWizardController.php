@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -138,8 +138,8 @@ class AdminCarrierWizardControllerCore extends AdminController
         }
 
         $this->context->smarty->assign(array(
-                'carrier_logo' => (Validate::isLoadedObject($carrier) && file_exists(_PS_SHIP_IMG_DIR_ . $carrier->id . '.jpg') ? _THEME_SHIP_DIR_ . $carrier->id . '.jpg' : false),
-            ));
+            'carrier_logo' => (Validate::isLoadedObject($carrier) && file_exists(_PS_SHIP_IMG_DIR_ . $carrier->id . '.jpg') ? _THEME_SHIP_DIR_ . $carrier->id . '.jpg' : false),
+        ));
 
         $this->context->smarty->assign(array(
             'logo_content' => $this->createTemplate('logo.tpl')->fetch(),
@@ -219,9 +219,9 @@ class AdminCarrierWizardControllerCore extends AdminController
                         'hint' => $this->trans('Delivery tracking URL: Type \'@\' where the tracking number should appear. It will be automatically replaced by the tracking number.', array(), 'Admin.Shipping.Help'),
                         'desc' => $this->trans('For example: \'http://example.com/track.php?num=@\' with \'@\' where the tracking number should appear.', array(), 'Admin.Shipping.Help'),
                     ),
-                    // suzy: 2018-12-08 在已出貨通知信顯示追蹤號碼
+                    // suzy: 2018-12-08 在已出貨通知信顯示配送編號
                     array(
-                        'type' => 'text',
+                        'type' => 'textarea',
                         'label' => '已出貨通知信補充資訊',
                         'name' => 'shipped_email_info',
                         'lang' => true,
@@ -264,7 +264,8 @@ class AdminCarrierWizardControllerCore extends AdminController
             'form' => array(
                 'id_form' => 'step_carrier_ranges',
                 'input' => array(
-                    /* suzy: 2018-11-14 隱藏 手續費 欄位
+                    // suzy: 2018-11-14 隱藏 手續費 欄位
+                    /*
                     'shipping_handling' => array(
                         'type' => 'switch',
                         'label' => $this->trans('Add handling costs', array(), 'Admin.Shipping.Feature'),
@@ -330,7 +331,8 @@ class AdminCarrierWizardControllerCore extends AdminController
                             ),
                         ),
                     ),
-                    /* suzy: 2018-11-14 隱藏 稅 欄位
+                    // suzy: 2018-11-14 隱藏 稅 欄位
+                    /*
                     'id_tax_rules_group' => array(
                         'type' => 'select',
                         'label' => $this->trans('Tax', array(), 'Admin.Global'),
@@ -566,10 +568,10 @@ class AdminCarrierWizardControllerCore extends AdminController
         $helper->id = (int) Tools::getValue('id_carrier');
         $helper->identifier = $this->identifier;
         $helper->tpl_vars = array_merge(array(
-                'fields_value' => $fields_value,
-                'languages' => $this->getLanguages(),
-                'id_language' => $this->context->language->id,
-            ), $tpl_vars);
+            'fields_value' => $fields_value,
+            'languages' => $this->getLanguages(),
+            'id_language' => $this->context->language->id,
+        ), $tpl_vars);
         $helper->override_folder = 'carrier_wizard/';
 
         return $helper->generateForm($fields_form);
@@ -583,6 +585,8 @@ class AdminCarrierWizardControllerCore extends AdminController
             'delay' => $this->getFieldValue($carrier, 'delay'),
             'grade' => $this->getFieldValue($carrier, 'grade'),
             'url' => $this->getFieldValue($carrier, 'url'),
+            // suzy: 2018-12-08 在已出貨通知信顯示配送編號
+            'shipped_email_info' => $this->getFieldValue($carrier, 'shipped_email_info'),
         );
     }
 
@@ -713,34 +717,11 @@ class AdminCarrierWizardControllerCore extends AdminController
                 if (!isset($range_sup[$key])) {
                     continue;
                 }
-                $add_range = true;
-                if ($range_type == Carrier::SHIPPING_METHOD_WEIGHT) {
-                    if (!RangeWeight::rangeExist(null, (float) $delimiter1, (float) $range_sup[$key], $carrier->id_reference)) {
-                        $range = new RangeWeight();
-                    } else {
-                        $range = new RangeWeight((int) $key);
-                        $range->id_carrier = (int) $carrier->id;
-                        $range->save();
-                        $add_range = false;
-                    }
-                }
-
-                if ($range_type == Carrier::SHIPPING_METHOD_PRICE) {
-                    if (!RangePrice::rangeExist(null, (float) $delimiter1, (float) $range_sup[$key], $carrier->id_reference)) {
-                        $range = new RangePrice();
-                    } else {
-                        $range = new RangePrice((int) $key);
-                        $range->id_carrier = (int) $carrier->id;
-                        $range->save();
-                        $add_range = false;
-                    }
-                }
-                if ($add_range) {
-                    $range->id_carrier = (int) $carrier->id;
-                    $range->delimiter1 = (float) $delimiter1;
-                    $range->delimiter2 = (float) $range_sup[$key];
-                    $range->save();
-                }
+                $range = $carrier->getRangeObject((int) $range_type);
+                $range->id_carrier = (int) $carrier->id;
+                $range->delimiter1 = (float) $delimiter1;
+                $range->delimiter2 = (float) $range_sup[$key];
+                $range->save();
 
                 if (!Validate::isLoadedObject($range)) {
                     return false;
@@ -833,9 +814,9 @@ class AdminCarrierWizardControllerCore extends AdminController
 
                     // Call of hooks
                     Hook::exec('actionCarrierUpdate', array(
-                            'id_carrier' => (int) $current_carrier->id,
-                            'carrier' => $new_carrier,
-                        ));
+                        'id_carrier' => (int) $current_carrier->id,
+                        'carrier' => $new_carrier,
+                    ));
                     $this->postImage($new_carrier->id);
                     $this->changeZones($new_carrier->id);
                     $new_carrier->setTaxRulesGroup((int) Tools::getValue('id_tax_rules_group'));
@@ -944,7 +925,8 @@ class AdminCarrierWizardControllerCore extends AdminController
         }
 
         $step_fields = array(
-            1 => array('name', 'delay', 'grade', 'url'),
+            // suzy: 2020-02-16 加上 shipped_email_info 欄位
+            1 => array('name', 'delay', 'grade', 'url', 'shipped_email_info'),
             2 => array('is_free', 'id_tax_rules_group', 'shipping_handling', 'shipping_method', 'range_behavior'),
             3 => array('range_behavior', 'max_height', 'max_width', 'max_depth', 'max_weight'),
             4 => array(),

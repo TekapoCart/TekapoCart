@@ -1,0 +1,20 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+Your message has been sent successfully, thank you for taking the time to write!
+
+Order ID #:  {order_name}
+
+商品:  {product_name}
+
+添付ファイル: {attached_file}
+
+We will reply as soon as possible.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

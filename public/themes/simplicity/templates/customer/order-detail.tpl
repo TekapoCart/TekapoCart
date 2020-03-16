@@ -33,7 +33,7 @@
     <div id="order-infos">
       <div class="box">
         <div class="row">
-            <div class="col-xs-{if $order.details.reorder_url}9{else}12{/if}">
+            <div class="col-xs-{if $order.details.reorder_url}8{else}12{/if}">
               <p>
               <strong>
                 {l
@@ -45,7 +45,7 @@
               </p>
             </div>
             {if $order.details.reorder_url}
-              <div class="col-xs-3 text-xs-right">
+              <div class="col-xs-4 text-xs-right">
                 <a href="{$order.details.reorder_url}" class="button-primary">{l s='Reorder' d='Shop.Theme.Actions'}</a>
               </div>
             {/if}
@@ -87,7 +87,7 @@
   {block name='order_history'}
     <section id="order-history" class="box">
       <h3>{l s='Follow your order\'s status step-by-step' d='Shop.Theme.Customeraccount'}</h3>
-      <table class="table {*table-striped*} table-bordered table-labeled hidden-xs-down">
+      <table class="table {*table-striped*} table-bordered table-labeled hidden-xs-down table-order">
         <thead class="thead-default">
           <tr>
             <th>{l s='Date' d='Shop.Theme.Global'}</th>
@@ -132,7 +132,7 @@
   {block name='order_carriers'}
     {if $order.shipping}
       <div class="box">
-        <table class="table {*table-striped*} table-bordered hidden-sm-down">
+        <table class="table {*table-striped*} table-bordered hidden-sm-down table-order">
           <thead class="thead-default">
             <tr>
               <th>{l s='Date' d='Shop.Theme.Global'}</th>
@@ -173,7 +173,7 @@
 
   {$HOOK_DISPLAYORDERDETAIL nofilter}
 
-  {if $order.carrier.need_address }
+  {if $order.carrier.need_address && $order.carrier.is_module == 0}
   {block name='addresses'}
     <div class="addresses" style="margin-left: -15px; margin-right: -15px;">
       {if $order.addresses.delivery}
@@ -186,17 +186,22 @@
         </div>
       {/if}
 
+      {*
       <div class="col-lg-6 col-md-6 col-sm-6">
         <article id="invoice-address" class="box">
-          {* suzy: 2018-08-01 不要 alias <h4>{l s='Invoice address %alias%' d='Shop.Theme.Checkout' sprintf=['%alias%' => $order.addresses.invoice.alias]}</h4>*}
           <h4>{l s='Invoice address %alias%' d='Shop.Theme.Checkout' sprintf=['%alias%' => '']}</h4>
           <address>{$order.addresses.invoice.formatted nofilter}</address>
         </article>
       </div>
+      *}
       <div class="clearfix"></div>
     </div>
   {/block}
   {/if}
+
+  {block name='order_messages'}
+    {include file='customer/_partials/order-messages.tpl'}
+  {/block}
 
   {block name='order_detail'}
     {if $order.details.is_returnable}
@@ -206,7 +211,4 @@
     {/if}
   {/block}
 
-  {block name='order_messages'}
-    {include file='customer/_partials/order-messages.tpl'}
-  {/block}
 {/block}

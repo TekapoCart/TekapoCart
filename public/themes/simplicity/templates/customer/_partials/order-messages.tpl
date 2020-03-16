@@ -28,15 +28,16 @@
       <h3>{l s='Messages' d='Shop.Theme.Customeraccount'}</h3>
       {foreach from=$order.messages item=message}
         <div class="message row">
-          <div class="col-sm-4">
-            {if $message.system == 1}
-                {* 系統 *}
-            {else}
+
+          {if $message.system != 1}
+            {* 系統 *}
+            <div class="col-xs-12 {*col-sm-4*}">
                 {$message.name}<br/>
-            {/if}
-            {$message.message_date}
-          </div>
-          <div class="col-sm-8">
+                {$message.message_date}
+            </div>
+          {/if}
+
+          <div class="col-xs-12 {*col-sm-8*}">
             {if $message.system == 1}
                 {$message.message|replace:',':'<br>' nofilter}
             {else}
@@ -50,6 +51,7 @@
 {/block}
 
 {block name='order_message_form'}
+  {if $customer.is_logged && !$customer.is_guest}
   <section class="order-message-form box">
     <form action="{$urls.pages.order_detail}" method="post">
 
@@ -90,4 +92,5 @@
 
     </form>
   </section>
+  {/if}
 {/block}

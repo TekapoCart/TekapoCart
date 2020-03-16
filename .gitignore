@@ -1,36 +1,50 @@
+
 .idea/
 
 public/app/cache/*
+public/app/config/parameters.php
 
 public/img/tmp/*
-!public/img/tmp/index.php
 public/img/s/*
+!public/img/tmp/index.php
 !public/img/s/index.php
 
 public/themes/*/_dev/node_modules/*
 
 public/.htaccess
+public/config/settings.inc.php
 
-public/modules/ps_imageslider/images/fileType
+public/manifest*.json
+
 
 ### composer 相關
 public/composer.json
 public/composer.lock
 public/composer.phar
-public/config/settings.inc.php
-public/app/config/parameters.php
+public/package.json
+public/package-lock.json
+
 public/modules/*/composer.json
+public/modules/*/composer.lock
+public/modules/*/composer.phar
 public/modules/*/Readme.md
-public/vendor/beberlei/DoctrineExtensions/tests/*
-public/vendor/greenlion/php-sql-parser/tests/*
-public/vendor/pear/archive_tar/tests/*
-public/vendor/react/promise/tests/*
-public/vendor/rize/uri-template/test/*
+
+public/vendor/*/*/composer.json
+public/vendor/*/*/LICENSE
+public/vendor/*/*/Makefile
+public/vendor/*/*/.gitignore
+public/vendor/*/*/.gitmodules
+public/vendor/*/*/*.md
+public/vendor/*/*/*.yml
+public/vendor/*/*/*.dist
+public/vendor/*/*/*.rst
+public/vendor/*/*/tests/*
+public/vendor/*/*/docs/*
+public/vendor/*/*/doc/*
+public/vendor/*/*/*/doc/*
 public/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Tests/*
 public/vendor/symfony/symfony/src/Symfony/Bridge/PhpUnit/Tests/*
 public/vendor/sensio/framework-extra-bundle/Tests/*
-public/vendor/twig/twig/test/*
-public/vendor/twig/twig/doc/*
 
 ######## shop*.json
 public/config/themes/simplicity*/shop1.json
@@ -226,20 +240,33 @@ public/img/cms/sticker/funny.svg
 public/img/cms/sticker/environmentally-friendly.svg
 public/img/cms/sticker/cruelty-free.svg
 
+######## 模組 public/img/mod/
+public/img/mod/ps_banner/sample.png
+public/img/mod/ps_banner/sample_small.png
+public/img/mod/ps_banner/fileType
+public/img/mod/ps_imageslider/1.png
+public/img/mod/ps_imageslider/1_small.png
+public/img/mod/ps_imageslider/2.png
+public/img/mod/ps_imageslider/2_small.png
+public/img/mod/ps_imageslider/3.png
+public/img/mod/ps_imageslider/3_small.png
+public/img/mod/ps_imageslider/fileType
 
 #### 其他
+public/img/logo.jpg
+public/img/logo_small.jpg
 public/img/logo_mail.jpg
-public/modules/ps_banner/img/sample.png
+public/img/favicon_*.png
 
 
 ######## 以下參考 https://github.com/PrestaShop/PrestaShop/blob/1.7.4.2/.gitignore
 
 public/var/*
-!var/cache
-var/cache/*
+!public/var/cache
+public/var/cache/*
 !public/var/cache/.gitkeep
-!var/logs
-var/logs/*
+!public/var/logs
+public/var/logs/*
 !public/var/logs/.gitkeep
 !public/var/sessions
 public/var/sessions/*

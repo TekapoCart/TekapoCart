@@ -370,13 +370,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Module/Includes/sorting.html.tw
     <body>
       <trans-unit id="8b1a3613ac33a07ab788b2656755110c" approved="yes">
         <source>Enable Mobile</source>
-        <target xml:lang="zh-TW">啟動手機</target>
+        <target xml:lang="zh-TW">啟用手機板</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Module/manage.html.twig:59</note>
       </trans-unit>
       <trans-unit id="038bd38b5172a9ba90468070bdc4d4f3" approved="yes">
         <source>Disable Mobile</source>
-        <target xml:lang="zh-TW">關閉手機</target>
+        <target xml:lang="zh-TW">停用手機板</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Module/manage.html.twig:60</note>
       </trans-unit>

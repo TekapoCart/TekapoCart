@@ -28,7 +28,7 @@ File: modules/blockreassurance/blockreassurance.php:246</note>
       </trans-unit>
       <trans-unit id="23498d91b6017e5d7f4ddde70daba286" approved="yes">
         <source>ID Shop</source>
-        <target xml:lang="zh-TW">商店編號</target>
+        <target xml:lang="zh-TW">商店 ID</target>
         <note>Context:
 File: modules/blockreassurance/blockreassurance.php:326</note>
       </trans-unit>

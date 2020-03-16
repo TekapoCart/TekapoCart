@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,20 +16,20 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
+use PrestaShop\PrestaShop\Adapter\Configuration as ConfigurationAdapter;
+use PrestaShop\PrestaShop\Adapter\ContainerBuilder;
+use PrestaShop\PrestaShop\Adapter\Image\ImageRetriever;
 use PrestaShop\PrestaShop\Adapter\Presenter\Cart\CartPresenter;
 use PrestaShop\PrestaShop\Adapter\Presenter\Object\ObjectPresenter;
-use PrestaShop\PrestaShop\Adapter\Configuration as ConfigurationAdapter;
-use PrestaShop\PrestaShop\Adapter\Image\ImageRetriever;
-use PrestaShop\PrestaShop\Adapter\ContainerBuilder;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Debug\Debug;
+use Symfony\Component\Filesystem\Filesystem;
 
 class FrontControllerCore extends Controller
 {
@@ -317,7 +317,8 @@ class FrontControllerCore extends Controller
                     'Current theme is unavailable. Please check your theme\'s directory name ("%s") and permissions.',
                     array(basename(rtrim(_PS_THEME_DIR_, '/\\'))),
                     'Admin.Design.Notification'
-                ));
+                )
+            );
         }
 
         if (Configuration::get('PS_GEOLOCATION_ENABLED')) {
@@ -350,10 +351,6 @@ class FrontControllerCore extends Controller
         $currency = Tools::setCurrency($this->context->cookie);
 
         if (isset($_GET['logout']) || ($this->context->customer->logged && Customer::isBanned($this->context->customer->id))) {
-            // suzy: 2018-09-25 不讓 Browser Keep Cache
-            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-            header("Cache-Control: post-check=0, pre-check=0", false);
-            header("Pragma: no-cache");
 
             $this->context->customer->logout();
 
@@ -361,16 +358,19 @@ class FrontControllerCore extends Controller
             // Tools::redirect(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null);
             Tools::redirect($link->getPageLink('index'));
         } elseif (isset($_GET['mylogout'])) {
-            // suzy: 2018-09-25 不讓 Browser Keep Cache
-            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-            header("Cache-Control: post-check=0, pre-check=0", false);
-            header("Pragma: no-cache");
 
             $this->context->customer->mylogout();
 
             // suzy: 2018-09-25 修正轉頁兩次的問題（登出後轉回會員中心又再轉到首頁）
             // Tools::redirect(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null);
             Tools::redirect($link->getPageLink('index'));
+        }
+
+        // suzy: 2020-02-10 為 varnish 做準備
+        if ($this->context->customer->logged) {
+            header('X-Logged-In: True');
+        } else {
+            header('X-Logged-In: False');
         }
 
         /* Cart already exists */
@@ -383,10 +383,10 @@ class FrontControllerCore extends Controller
                 PrestaShopLogger::addLog('Frontcontroller::init - Cart cannot be loaded or an order has already been placed using this cart', 1, null, 'Cart', (int) $this->context->cookie->id_cart, true);
                 unset($this->context->cookie->id_cart, $cart, $this->context->cookie->checkedTOS);
                 $this->context->cookie->check_cgv = false;
-            } elseif (intval(Configuration::get('PS_GEOLOCATION_ENABLED'))
+            } elseif ((int) (Configuration::get('PS_GEOLOCATION_ENABLED'))
                 && !in_array(strtoupper($this->context->cookie->iso_code_country), explode(';', Configuration::get('PS_ALLOWED_COUNTRIES')))
                 && $cart->nbProducts()
-                && intval(Configuration::get('PS_GEOLOCATION_NA_BEHAVIOR')) != -1
+                && (int) (Configuration::get('PS_GEOLOCATION_NA_BEHAVIOR')) != -1
                 && !FrontController::isInWhitelistForGeolocation()
                 && !in_array($_SERVER['SERVER_NAME'], array('localhost', '127.0.0.1', '::1'))
             ) {
@@ -854,6 +854,7 @@ class FrontControllerCore extends Controller
             if (@filemtime(_PS_GEOIP_DIR_ . _PS_GEOIP_CITY_FILE_)) {
                 if (!isset($this->context->cookie->iso_code_country) || (isset($this->context->cookie->iso_code_country) && !in_array(strtoupper($this->context->cookie->iso_code_country), explode(';', Configuration::get('PS_ALLOWED_COUNTRIES'))))) {
                     $reader = new GeoIp2\Database\Reader(_PS_GEOIP_DIR_ . _PS_GEOIP_CITY_FILE_);
+
                     try {
                         $record = $reader->city(Tools::getRemoteAddr());
                     } catch (\GeoIp2\Exception\AddressNotFoundException $e) {
@@ -954,10 +955,6 @@ class FrontControllerCore extends Controller
      */
     public function initHeader()
     {
-        /* @see P3P Policies (http://www.w3.org/TR/2002/REC-P3P-20020416/#compact_policies) */
-        header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
-        // suzy: 2019-08-30 隱藏 Powered-By
-        // header('Powered-By: PrestaShop');
     }
 
     /**
@@ -1402,7 +1399,7 @@ class FrontControllerCore extends Controller
             $params['id'] = null;
         }
 
-        if (is_null($locale)) {
+        if (null === $locale) {
             $locale = $this->context->language->locale;
         }
 
@@ -1514,7 +1511,8 @@ class FrontControllerCore extends Controller
         }
 
         $pages = array();
-        /* suzy: 2018-11-19 隱藏沒有使用的 urls.pages
+        // suzy: 2018-11-19 隱藏沒有使用的 urls.pages
+        /*
         $p = array(
             'address', 'addresses', 'authentication', 'cart', 'category', 'cms', 'contact',
             'discount', 'guest-tracking', 'history', 'identity', 'index', 'my-account',
@@ -1530,6 +1528,7 @@ class FrontControllerCore extends Controller
             'order-slip', 'pagenotfound', 'pdf-invoice', 'pdf-order-return', 'pdf-order-slip',
             'prices-drop', 'product', 'search',
         );
+
         foreach ($p as $page_name) {
             $index = str_replace('-', '_', $page_name);
             $pages[$index] = $this->context->link->getPageLink($page_name, $this->ssl);
@@ -1569,13 +1568,19 @@ class FrontControllerCore extends Controller
         $logo_max_width = trim(Configuration::get('SIMPLICITY_LOGO_MAX_WIDTH_CSS'));
         $logo_max_width = strlen($logo_max_width) > 0 ? $logo_max_width : '';
 
+        // suzy: 2020-03-06 商品頁顯示標籤
+        $show_tag_in_product = Configuration::get('TC_SEARCH_SHOW_TAGS_IN_PRODUCT');
+
         return array(
 
             'body_bg_css' => $body_bg_css,
             'mobile_type' => $mobile_type,
             'logo_max_width' => $logo_max_width,
+            'show_tag_in_product' => $show_tag_in_product,
 
             'display_taxes_label' => $this->getDisplayTaxesLabel(),
+            'display_prices_tax_incl' => (bool) (new TaxConfiguration())->includeTaxes(),
+            'taxes_enabled' => (bool) Configuration::get('PS_TAX'),
             'low_quantity_threshold' => (int) Configuration::get('PS_LAST_QTIES'),
             'is_b2b' => (bool) Configuration::get('PS_B2B_ENABLE'),
             'is_catalog' => (bool) Configuration::isCatalogMode(),
@@ -1619,11 +1624,13 @@ class FrontControllerCore extends Controller
             $cust = $this->objectPresenter->present($this->context->customer);
         }
 
-        unset($cust['secure_key']);
-        unset($cust['passwd']);
-        unset($cust['show_public_prices']);
-        unset($cust['deleted']);
-        unset($cust['id_lang']);
+        unset(
+            $cust['secure_key'],
+            $cust['passwd'],
+            $cust['show_public_prices'],
+            $cust['deleted'],
+            $cust['id_lang']
+        );
 
         $cust['is_logged'] = $this->context->customer->isLogged(true);
 
@@ -1646,7 +1653,13 @@ class FrontControllerCore extends Controller
     {
         $address = $this->context->shop->getAddress();
 
+        // suzy: 2020-02-21 圖片支援 CDN，replace _PS_IMG_ to $img_ps_url
+        $img_ps_url = Tools::getCurrentUrlProtocolPrefix() . Tools::getMediaServer(_PS_IMG_) . _PS_IMG_;
+
         $shop = array(
+            // suzy: 2020-03-08 shop id
+            'id' => $this->context->shop->id,
+
             'name' => Configuration::get('PS_SHOP_NAME'),
             'email' => Configuration::get('PS_SHOP_EMAIL'),
             'registration_number' => Configuration::get('PS_SHOP_DETAILS'),
@@ -1654,23 +1667,37 @@ class FrontControllerCore extends Controller
             'long' => Configuration::get('PS_STORES_CENTER_LONG'),
             'lat' => Configuration::get('PS_STORES_CENTER_LAT'),
 
-            'logo' => (Configuration::get('PS_LOGO')) ? _PS_IMG_ . Configuration::get('PS_LOGO') : '',
+            'logo' => (Configuration::get('PS_LOGO')) ? $img_ps_url . Configuration::get('PS_LOGO') : '',
+
+            // suzy: 2020-02-24 加入 small 縮圖
+            'logo_width' => (Configuration::get('PS_LOGO_WIDTH')) ? Configuration::get('PS_LOGO_WIDTH') : '',
+            'logo_small' => (Configuration::get('PS_LOGO_SMALL')) ? $img_ps_url . Configuration::get('PS_LOGO_SMALL') : '',
+            'logo_small_width' => (Configuration::get('PS_LOGO_SMALL_WIDTH')) ? Configuration::get('PS_LOGO_SMALL_WIDTH') : '',
+
+            // suzy: 2020-02-25 fb:app_id
+            'fb_app_id' => (Configuration::get('SIMPLICITY_FB_APP_ID')) ? Configuration::get('SIMPLICITY_FB_APP_ID') : '',
 
             // suzy: 2019-06-02 支援通知信 LOGO
-            'logo_mail' => (Configuration::get('PS_LOGO_MAIL')) ? _PS_IMG_ . Configuration::get('PS_LOGO_MAIL') : '',
+            'logo_mail' => (Configuration::get('PS_LOGO_MAIL')) ? $img_ps_url . Configuration::get('PS_LOGO_MAIL') : '',
 
-            'stores_icon' => (Configuration::get('PS_STORES_ICON')) ? _PS_IMG_ . Configuration::get('PS_STORES_ICON') : '',
-            'favicon' => (Configuration::get('PS_FAVICON')) ? _PS_IMG_ . Configuration::get('PS_FAVICON') : '',
+            'stores_icon' => (Configuration::get('PS_STORES_ICON')) ? $img_ps_url . Configuration::get('PS_STORES_ICON') : '',
+            'favicon' => (Configuration::get('PS_FAVICON')) ? $img_ps_url . Configuration::get('PS_FAVICON') : '',
             'favicon_update_time' => Configuration::get('PS_IMG_UPDATE_TIME'),
 
             // suzy: 2018-10-19 完整支援 favicons
-            'favicon_iphone' => (Configuration::get('PS_FAVICON_IPHONE')) ? _PS_IMG_ . Configuration::get('PS_FAVICON') : '',
-            'favicon_ipad' => (Configuration::get('PS_FAVICON_IPAD')) ? _PS_IMG_ . Configuration::get('PS_FAVICON_IPAD') : '',
-            'favicon_ipad_retina' => (Configuration::get('PS_FAVICON_IPAD_RETINA')) ? _PS_IMG_ . Configuration::get('PS_FAVICON_IPAD_RETINA') : '',
-            'favicon_iphone_retina' => (Configuration::get('PS_FAVICON_IPHONE_RETINA')) ? _PS_IMG_ . Configuration::get('PS_FAVICON_IPHONE_RETINA') : '',
-            'favicon_android' => (Configuration::get('PS_FAVICON_ANDROID')) ? _PS_IMG_ . Configuration::get('PS_FAVICON_ANDROID') : '',
-            'favicon_microsoft' => (Configuration::get('PS_FAVICON_MICROSOFT')) ? _PS_IMG_ . Configuration::get('PS_FAVICON_MICROSOFT') : '',
+            'favicon_iphone' => (Configuration::get('PS_FAVICON_IPHONE')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPHONE') : '',
+            'favicon_ipad' => (Configuration::get('PS_FAVICON_IPAD')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPAD') : '',
+            'favicon_ipad_retina' => (Configuration::get('PS_FAVICON_IPAD_RETINA')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPAD_RETINA') : '',
+            'favicon_iphone_retina' => (Configuration::get('PS_FAVICON_IPHONE_RETINA')) ? $img_ps_url . Configuration::get('PS_FAVICON_IPHONE_RETINA') : '',
+            'favicon_android' => (Configuration::get('PS_FAVICON_ANDROID')) ? $img_ps_url . Configuration::get('PS_FAVICON_ANDROID') : '',
+            'favicon_microsoft' => (Configuration::get('PS_FAVICON_MICROSOFT')) ? $img_ps_url . Configuration::get('PS_FAVICON_MICROSOFT') : '',
+            'favicon_pwa' => (Configuration::get('PS_FAVICON_PWA')) ? $img_ps_url . Configuration::get('PS_FAVICON_PWA') : '',
+            'favicon_pwal' => (Configuration::get('PS_FAVICON_PWAL')) ? $img_ps_url . Configuration::get('PS_FAVICON_PWAL') : '',
             'theme_color' => (Configuration::get('TC_THEME_COLOR_' . strtoupper($this->context->shop->theme_name))) ? Configuration::get('TC_THEME_COLOR_' . strtoupper($this->context->shop->theme_name)) : '#000',
+
+            // suzy: 2020-03-06 用 ccc version 讀取最新
+            'ccccss_version' => Configuration::get('PS_CCCCSS_VERSION'),
+            'cccjs_version' => Configuration::get('PS_CCCJS_VERSION'),
 
             'address' => array(
                 'formatted' => AddressFormat::generateAddress($address, array(), '<br>'),
@@ -1785,7 +1812,6 @@ class FrontControllerCore extends Controller
 
     public function getCanonicalURL()
     {
-        return;
     }
 
     /**
@@ -1853,7 +1879,7 @@ class FrontControllerCore extends Controller
         } elseif (Tools::getValue('fc') == 'module' && $module_name != '' && (Module::getInstanceByName($module_name) instanceof PaymentModule)) {
             $page_name = 'module-payment-submit';
         } elseif (preg_match('#^' . preg_quote($this->context->shop->physical_uri, '#') . 'modules/([a-zA-Z0-9_-]+?)/(.*)$#', $_SERVER['REQUEST_URI'], $m)) {
-            // @retrocompatibility Are we in a module ?
+            /** @retrocompatibility Are we in a module ? */
             $page_name = 'module-' . $m[1] . '-' . str_replace(array('.php', '/'), array('', '-'), $m[2]);
         } else {
             $page_name = Dispatcher::getInstance()->getController();
@@ -1930,8 +1956,7 @@ class FrontControllerCore extends Controller
         $formatter
             ->setAskForPartnerOptin(Configuration::get('PS_CUSTOMER_OPTIN'))
             ->setAskForBirthdate(Configuration::get('PS_CUSTOMER_BIRTHDATE'))
-            ->setPartnerOptinRequired($customer->isFieldRequired('optin'))
-        ;
+            ->setPartnerOptinRequired($customer->isFieldRequired('optin'));
 
         return $formatter;
     }

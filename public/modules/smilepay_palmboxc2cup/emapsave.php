@@ -31,7 +31,7 @@ if($orderWay==1)
     $order_url=Context::getContext()->link->getPageLink('order-opc');
 elseif($orderWay==0)
 {
-    $order_url=Context::getContext()->link->getPageLink('order',true,$context->language->id,"step=2");
+    $order_url=Context::getContext()->link->getPageLink('order');
 }
         
 

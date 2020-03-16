@@ -47,17 +47,40 @@
 
 {block name='head_icons'}
 
-  <link rel="icon" type="image/png" href="{$shop.favicon}?{$shop.favicon_update_time}">
-  <link rel="apple-touch-icon" href="{$shop.favicon_iphone}?{$shop.favicon_update_time}">
+  <link rel="preconnect" href="https://www.facebook.com" />
+  <link rel="preconnect" href="https://connect.facebook.net" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://www.google-analytics.com" />
+  <link rel="preconnect" href="https://stats.g.doubleclick.net" />
+
+  {*<link rel="shortcut icon" href="/img/favicon.ico">*}
+  <link rel="icon" sizes="32x32" type="image/png" href="{$shop.favicon}?{$shop.favicon_update_time}">
+  <link rel="icon" sizes="192x192" href="{$shop.favicon_android}?{$shop.favicon_update_time}">
+  <link rel="apple-touch-icon" sizes="120x120" href="{$shop.favicon_iphone}?{$shop.favicon_update_time}">
   <link rel="apple-touch-icon" sizes="152x152" href="{$shop.favicon_ipad}?{$shop.favicon_update_time}">
   <link rel="apple-touch-icon" sizes="167x167" href="{$shop.favicon_ipad_retina}?{$shop.favicon_update_time}">
   <link rel="apple-touch-icon" sizes="180x180" href="{$shop.favicon_iphone_retina}?{$shop.favicon_update_time}">
-  <link rel="icon" sizes="192x192" href="{$shop.favicon_android}?{$shop.favicon_update_time}">
-  <meta name="msapplication-square310x310logo" content="{$shop.favicon_microsoft}?{$shop.favicon_update_time}">
-  <meta name="theme-color" content="{$shop.theme_color}">
+
+  {*<meta name="msapplication-square310x310logo" content="{$shop.favicon_microsoft}?{$shop.favicon_update_time}">*}
+  <meta name="msapplication-TileColor" content="{$shop.theme_color}">
   <meta name="msapplication-navbutton-color" content="{$shop.theme_color}">
-  {*  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> *}
+
+  <link rel="manifest" href="/manifest_{$shop.id}.json">
+  <link rel="mask-icon" href="/img/cms/pwa/safari-pinned-tab.svg?{$shop.cccjs_version}" color="{$shop.theme_color}">
+  <meta name="theme-color" content="{$shop.theme_color}">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#000">
+  <meta name="apple-mobile-web-app-title" content="{$shop.name}">
+  {*
+  <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-640x1136.png?{$shop.cccjs_version}" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-750x1294.png?{$shop.cccjs_version}" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-1242x2148.png?{$shop.cccjs_version}" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-1125x2436.png?{$shop.cccjs_version}" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-1536x2048.png?{$shop.cccjs_version}" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-1668x2224.png?{$shop.cccjs_version}" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+  <link rel="apple-touch-startup-image" href="/img/cms/pwa/splash-2048x2732.png?{$shop.cccjs_version}" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+  *}
 
 {/block}
 

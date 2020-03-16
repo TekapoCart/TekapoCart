@@ -55,7 +55,6 @@
                   use_same_address          = $use_same_address
                   type                      = "delivery"
                   form_has_continue_button  = $form_has_continue_button
-                  show_bypass_address_label = $show_bypass_address_label
           }
         </div>
       {elseif $customer.addresses|count > 0}

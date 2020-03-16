@@ -378,7 +378,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductOptions.php:122</note>
     <body>
       <trans-unit id="af809f35e40bd6f644509ad566ecf38c" approved="yes">
         <source>To have a different title from the product name, enter it here.</source>
-        <target xml:lang="zh-TW">商品名稱若有不同請在此處填寫。</target>
+        <target xml:lang="zh-TW">若與商品名稱不同請在此處填寫。</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductSeo.php:79</note>
       </trans-unit>
@@ -390,7 +390,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductSeo.php:89</note>
       </trans-unit>
       <trans-unit id="5f99bb8ecd940f311cb66fadfc467a2b" approved="yes">
         <source>To have a different description than your product summary in search results pages, write it here.</source>
-        <target xml:lang="zh-TW">商品描述若有不同請在此處填寫。</target>
+        <target xml:lang="zh-TW">若與商品描述不同請在此處填寫。</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductSeo.php:103</note>
       </trans-unit>
@@ -452,6 +452,20 @@ File: src/PrestaShopBundle/Controller/Admin/ProductController.php:172</note>
       </trans-unit>
     </body>
   </file>
+  <file original="src/PrestaShopBundle/Form/Admin/Catalog/Category/AbstractCategoryType.php" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="88fe88f4033791ef6f38fbb7f7c58f04">
+        <source>To have a different title from the category name, enter it here.</source>
+        <target xml:lang="zh-TW">若與分類名稱不同請在此處填寫。</target>
+        <note>Line: 136</note>
+      </trans-unit>
+      <trans-unit id="0a7ca3ce7cde025a585cd02d7382b48f">
+        <source>To have a different description than your category summary in search results page, write it here.</source>
+        <target xml:lang="zh-TW">若與分類說明不同請在此處填寫。</target>
+        <note>Line: 169</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig" source-language="en" target-language="zh-TW" datatype="plaintext">
     <body>
       <trans-unit id="607e1d854783c8229998ac2b5b6923d3" approved="yes">
@@ -462,25 +476,25 @@ File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:
       </trans-unit>
       <trans-unit id="d24ec28b066e46d9d9ec3c1f39aa89ee" approved="yes">
         <source>[1]Invalid token[/1]: direct access to this link may lead to a potential security breach.</source>
-        <target xml:lang="zh-TW">[1]無效的 token (權杖)[/1]：此頁面已經過期。</target>
+        <target xml:lang="zh-TW">[1]無效的 token (通行證)[/1]：連線時間已到期。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:56</note>
       </trans-unit>
       <trans-unit id="f364944e8422977932bd21eb2d96963a" approved="yes">
         <source>Do you want to display this page?</source>
-        <target xml:lang="zh-TW">您想顯示此頁嗎？</target>
+        <target xml:lang="zh-TW">網址不完整（缺少 token），您想繼續此頁嗎？</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:60</note>
       </trans-unit>
       <trans-unit id="a0d31e7f783700b99e15ce8621dc6381" approved="yes">
         <source>Yes, I understand the risks</source>
-        <target xml:lang="zh-TW">是的，我明白風險</target>
+        <target xml:lang="zh-TW">是的，我完全明白情況並想繼續瀏覽此頁</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:63</note>
       </trans-unit>
       <trans-unit id="a5b0a810681c7fca4581d7f7524009f4" approved="yes">
         <source>Take me out of there!</source>
-        <target xml:lang="zh-TW">回主控台</target>
+        <target xml:lang="zh-TW">回到管理後台主控台</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:66</note>
       </trans-unit>
@@ -512,7 +526,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/Lists/produ
     <body>
       <trans-unit id="bb03c14d14caa07e21f97cbe5eab022d" approved="yes">
         <source>Is the product a pack (a combination of at least two existing products), a virtual product (downloadable file, service, etc.), or simply a standard, physical product?</source>
-        <target xml:lang="zh-TW">請選擇此商品為 一般商品 或 組合商品（至少有兩個商品構成的組合）或 虛擬商品（可下載文件，服務等）。</target>
+        <target xml:lang="zh-TW">請選擇此商品為 一般商品 或 組合商品（至少有兩個商品構成的組合）或 虛擬商品（可下載文件）。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Blocks/header.html.twig:43</note>
       </trans-unit>
@@ -750,6 +764,11 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pric
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pricing.html.twig:130</note>
       </trans-unit>
+      <trans-unit id="fbade15b99b07c58fab7be777c0f4c0c">
+        <source>Sometimes one customer can fit into multiple price rules. Priorities allow you to define which rules apply first.</source>
+        <target xml:lang="zh-TW">一位客戶可能符合多個折扣規則。可設定各別商品折扣順序或可套用至全站商品。</target>
+        <note>Line: 182</note>
+      </trans-unit>
     </body>
   </file>
   <file original="src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/essentials.html.twig" source-language="en" target-language="zh-TW" datatype="plaintext">
@@ -780,7 +799,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/esse
       </trans-unit>
       <trans-unit id="5e8b5ad38b1c0a76d41c2ebaa74c11f5" approved="yes">
         <source>Advanced settings in [1][2]Quantities[/1]</source>
-        <target xml:lang="zh-TW">在 [1][2]數量[/1]裡的進階設置</target>
+        <target xml:lang="zh-TW">前往 [1][2]庫存[/1] 進階設定</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/essentials.html.twig:208</note>
       </trans-unit>
@@ -792,7 +811,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/esse
       </trans-unit>
       <trans-unit id="143cb6dd5281d68859217704ad9c9f60" approved="yes">
         <source>Advanced settings in [1][2]Pricing[/1]</source>
-        <target xml:lang="zh-TW">前往 [1][2]價格[/1] 詳細設定</target>
+        <target xml:lang="zh-TW">前往 [1][2]價格[/1] 進階設定</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/essentials.html.twig:237</note>
       </trans-unit>
@@ -821,6 +840,18 @@ File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:
         <target xml:lang="zh-TW">只有後台管理者看得到，不會顯示給客戶</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:63</note>
+      </trans-unit>
+      <trans-unit id="4c04b0afd7a378940377c1948fa65e5f" approved="yes">
+        <source>This is the code users should enter to apply the voucher to a cart. Either create your own code or generate one by clicking on "Generate".</source>
+        <target xml:lang="zh-TW">This is the code users should enter to apply the voucher to a cart. Either create your own code or generate one by clicking on "Generate".</target>
+        <note>Context:
+File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:75</note>
+      </trans-unit>
+      <trans-unit id="b9fe1289d4d385c85d61f262aea8de40" approved="yes">
+        <source>Caution! If you leave this field blank, the rule will automatically be applied to benefiting customers.</source>
+        <target xml:lang="zh-TW">注意：若折扣碼欄空白，所有符合規則的購物車會自動產生優惠。</target>
+        <note>Context:
+File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:86</note>
       </trans-unit>
       <trans-unit id="9c0cc5911e6caceaa3f19e4bcf264ab0" approved="yes">
         <source>If the voucher is not yet in the cart, it will be displayed in the cart summary.</source>
@@ -906,6 +937,15 @@ File: admin-dev/themes/default/template/controllers/categories/helpers/form/form
         <target xml:lang="zh-TW">建議尺寸 (適用於預設主題): %1spx x %2spx</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/categories/helpers/form/form.tpl:60</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="src/PrestaShopBundle/Resources/views/Admin/Sell/Catalog/Categories/Blocks/form.html.twig" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="19318118b1173f172418b3282cb037d7">
+        <source><![CDATA[If you want a category to appear in the menu of your shop, go to [1]Modules > Module Manager[/1] and configure your menu module.]]></source>
+        <target></target>
+        <note>Line: 48</note>
       </trans-unit>
     </body>
   </file>

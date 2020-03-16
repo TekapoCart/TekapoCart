@@ -44,9 +44,21 @@ File: themes/classic/templates/customer/my-account.tpl:38</note>
       </trans-unit>
       <trans-unit id="cea4dedd9147586b361b90e900944690" approved="yes">
         <source>Order history and details</source>
-        <target xml:lang="zh-CN">历史及我的订单明细</target>
+        <target xml:lang="zh-CN">订单纪录</target>
         <note>Context:
 File: themes/classic/templates/customer/my-account.tpl:62</note>
+      </trans-unit>
+      <trans-unit id="d520143a7c98ecaaf79a086042992eda" approved="yes">
+        <source>Login Successful</source>
+        <target xml:lang="zh-CN">登入成功</target>
+        <note>Context:
+File: admin-dev/themes/default/template/controllers/modules/page.tpl:32</note>
+      </trans-unit>
+      <trans-unit id="e32ec920d817f25e2ddfe854f1155a38" approved="yes">
+        <source>Login Unsuccessful</source>
+        <target xml:lang="zh-CN">登入失败</target>
+        <note>Context:
+File: admin-dev/themes/default/template/controllers/modules/page.tpl:32</note>
       </trans-unit>
     </body>
   </file>
@@ -132,6 +144,12 @@ File: themes/classic/templates/customer/registration.tpl:28</note>
   </file>
   <file original="themes/classic/templates/customer/guest-login.tpl" source-language="en" target-language="zh-CN" datatype="plaintext">
     <body>
+      <trans-unit id="6b10b52dc4d44e780e6e38073668be56" approved="yes">
+        <source>Guest Order Tracking</source>
+        <target xml:lang="zh-CN">订单查询</target>
+        <note>Context:
+File: themes/classic/templates/customer/guest-login.tpl:28</note>
+      </trans-unit>
       <trans-unit id="d2948a89e47a4ad7eb8412c1c260ea88" approved="yes">
         <source>To track your order, please enter the following information:</source>
         <target xml:lang="zh-CN">为查询您的订单，请键入以下信息：</target>

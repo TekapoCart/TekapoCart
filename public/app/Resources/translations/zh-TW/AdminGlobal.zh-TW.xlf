@@ -30,7 +30,7 @@ File: admin-dev/themes/default/template/controllers/cart_rules/product_rule_item
     <body>
       <trans-unit id="3ec365dd533ddb7ef3d1c111186ce872" approved="yes">
         <source>Details</source>
-        <target xml:lang="zh-TW">訂單明細</target>
+        <target xml:lang="zh-TW">詳細</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/form.tpl:571</note>
       </trans-unit>
@@ -144,7 +144,7 @@ File: admin-dev/themes/default/template/controllers/orders/form.tpl:1546</note>
       </trans-unit>
       <trans-unit id="065ab3a28ca4f16f55f103adc7d0226f" approved="yes">
         <source>Delivery</source>
-        <target xml:lang="zh-TW">送貨</target>
+        <target xml:lang="zh-TW">配送</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/form.tpl:1369</note>
       </trans-unit>
@@ -554,7 +554,7 @@ File: admin-dev/themes/default/template/controllers/countries/helpers/list/list_
     <body>
       <trans-unit id="11ff9f68afb6b8b5b8eda218d7c83a65" approved="yes">
         <source>Sales</source>
-        <target xml:lang="zh-TW">銷售</target>
+        <target xml:lang="zh-TW">消費</target>
         <note>Context:
 File: modules/dashtrends/views/templates/hook/dashboard_zone_two.tpl:46</note>
       </trans-unit>
@@ -652,7 +652,7 @@ File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.
       </trans-unit>
       <trans-unit id="59716c97497eb9694541f7c3d37b1a4d" approved="yes">
         <source>Country</source>
-        <target xml:lang="zh-TW">國家</target>
+        <target xml:lang="zh-TW">國家/配送方式</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.tpl:609</note>
       </trans-unit>
@@ -688,7 +688,7 @@ File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.
       </trans-unit>
       <trans-unit id="914419aa32f04011357d3b604a86d7eb" approved="yes">
         <source>Carrier</source>
-        <target xml:lang="zh-TW">承運商</target>
+        <target xml:lang="zh-TW">配送方式</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.tpl:280</note>
       </trans-unit>
@@ -748,7 +748,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/Lists/produ
     <body>
       <trans-unit id="b718adec73e04ce3ec720dd11a06a308" approved="yes">
         <source>ID</source>
-        <target xml:lang="zh-TW">編號</target>
+        <target xml:lang="zh-TW">ID</target>
         <note>Context:
 File: admin-dev/themes/default/template/helpers/form/form_group.tpl:37</note>
       </trans-unit>
@@ -792,7 +792,7 @@ File: controllers/admin/AdminAddressesController.php:323</note>
       </trans-unit>
       <trans-unit id="6311ae17c1ee52b36e68aaf4ad066387" approved="yes">
         <source>Other</source>
-        <target xml:lang="zh-TW">其它</target>
+        <target xml:lang="zh-TW">其他/備註</target>
         <note>Context:
 File: controllers/admin/AdminAddressesController.php:144</note>
       </trans-unit>
@@ -844,7 +844,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="41de6d6cfb8953c021bbe4ba0701c8a1" approved="yes">
         <source>Messages</source>
-        <target xml:lang="zh-TW">備註 / 回傳資訊</target>
+        <target xml:lang="zh-TW">備註 / 補充資訊</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:786</note>
       </trans-unit>
@@ -940,6 +940,15 @@ File: controllers/admin/AdminEmployeesController.php:233</note>
       </trans-unit>
     </body>
   </file>
+  <file original="modules/ps_faviconnotificationbo/views/templates/admin/menu.tpl" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="34b6cd75171affba6957e308dcbd92be">
+        <source>Version</source>
+        <target>版本</target>
+        <note>Line: 33</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="modules/ps_imageslider/ps_imageslider.php" source-language="en" target-language="zh-TW" datatype="plaintext">
     <body>
       <trans-unit id="b112d8dc41120e6d28639b7eb825f491" approved="yes">
@@ -954,7 +963,7 @@ File: modules/ps_imageslider/ps_imageslider.php:746</note>
     <body>
       <trans-unit id="b78a3223503896721cca1303f776159b" approved="yes">
         <source>Title</source>
-        <target xml:lang="zh-TW">稱號</target>
+        <target xml:lang="zh-TW">名稱</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/TwigTemplateForm/bootstrap_4_layout.html.twig:328</note>
       </trans-unit>
@@ -1012,7 +1021,7 @@ File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:
     <body>
       <trans-unit id="46a2a41cc6e552044816a2d04634545d" approved="yes">
         <source>State</source>
-        <target xml:lang="zh-TW">縣/市</target>
+        <target xml:lang="zh-TW">州</target>
         <note>Context:
 File: controllers/admin/AdminStoresController.php:489</note>
       </trans-unit>
@@ -1268,7 +1277,7 @@ File: controllers/admin/AdminLanguagesController.php:135</note>
     <body>
       <trans-unit id="f8c8b903cb2e4f297e4b96d4b9c1e98a" approved="yes">
         <source>Employee</source>
-        <target xml:lang="zh-TW">員工</target>
+        <target xml:lang="zh-TW">帳號</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/LogsPage/Blocks/table.html.twig:36</note>
       </trans-unit>
@@ -1462,7 +1471,7 @@ File: controllers/admin/AdminOrdersController.php:1631</note>
       </trans-unit>
       <trans-unit id="ffbb5322a3702b0d8d9c7f506209c540" approved="yes">
         <source>Average Order Value</source>
-        <target xml:lang="zh-TW">平均訂單金額</target>
+        <target xml:lang="zh-TW">平均訂單交易金額</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1644</note>
       </trans-unit>
@@ -1665,6 +1674,15 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
   <file original="src/PrestaShopBundle/Form/Admin/Product/ProductSpecificPrice.php" source-language="en" target-language="zh-TW" datatype="plaintext">
     <body>
       
+    </body>
+  </file>
+  <file original="src/PrestaShopBundle/Resources/views/Admin/Common/Grid/Blocks/EmptyState/_default.html.twig" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="087fb8756d4add87f2d162304ccd486b">
+        <source>No records found</source>
+        <target xml:lang="zh-TW">尚無紀錄</target>
+        <note>Line: 28</note>
+      </trans-unit>
     </body>
   </file>
   <file original="admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl" source-language="en" target-language="zh-TW" datatype="plaintext">
@@ -1890,6 +1908,25 @@ File: admin-dev/themes/default/template/controllers/return/helpers/form/form.tpl
         <target xml:lang="zh-TW">返回</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/modules/configure.tpl:61</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="src/PrestaShopBundle/Resources/views/Admin/Improve/Design/Cms/Blocks/form.html.twig" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="b78a3223503896721cca1303f776159b">
+        <source>Title</source>
+        <target xml:lang="zh-TW">標題</target>
+        <note>Line: 44</note>
+      </trans-unit>
+      <trans-unit id="98c7393cffa2aced4ce47240790dd450">
+        <source>SEO preview</source>
+        <target xml:lang="zh-TW">SEO 預覽</target>
+        <note>Line: 52</note>
+      </trans-unit>
+      <trans-unit id="4bc7d3555cc5e7252eb5389afdf80668">
+        <source>Here is a preview of how your page will appear in search engine results.</source>
+        <target xml:lang="zh-TW">此處呈現搜尋引擎顯示結果的預覽畫面。</target>
+        <note>Line: 57</note>
       </trans-unit>
     </body>
   </file>

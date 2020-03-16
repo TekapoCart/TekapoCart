@@ -1,5 +1,5 @@
 {*
-* 2007-2018 PrestaShop
+* 2007-2019 PrestaShop and Contributors
 *
 * NOTICE OF LICENSE
 *

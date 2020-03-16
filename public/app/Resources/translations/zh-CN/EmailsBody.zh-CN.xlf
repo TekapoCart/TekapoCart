@@ -56,7 +56,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/order_changed.p
       </trans-unit>
       <trans-unit id="992ed3f1f7ce7be683fd4051138b693e" approved="yes">
         <source><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}?id_order={order_name}">"Guest Tracking"</a> section on our shop.]]></source>
-        <target xml:lang="zh-CN"><![CDATA[如果您是游客账户，您可以在我们店铺的  <a href="{guest_tracking_url}?id_order={order_name}">"游客追踪"</a>  页面追踪您的订单。]]></target>
+        <target xml:lang="zh-CN"><![CDATA[如果您是游客账户，您可以在我们店铺的  <a href="{guest_tracking_url}?order_reference={order_name}">"游客追踪"</a>  页面追踪您的订单。]]></target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/order_changed.php:49</note>
       </trans-unit>
@@ -323,16 +323,6 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/productoutofsto
         <target xml:lang="zh-CN"><![CDATA[建议您打开商品管理页面来补充库存。]]></target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/productoutofstock.php:26</note>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="modules/ps_emailgenerator/templates/core/order_conf.php" source-language="en" target-language="zh-CN" datatype="plaintext">
-    <body>
-      <trans-unit id="b4556791acee238c77be9ed338a29e80" approved="yes">
-        <source>Thank you for shopping with {shop_name}!</source>
-        <target xml:lang="zh-CN">感谢在 {shop_name} 购物！</target>
-        <note>Context:
-File: modules/ps_emailgenerator/templates/core/order_conf.php:7</note>
       </trans-unit>
     </body>
   </file>
@@ -738,15 +728,20 @@ File: modules/ps_emailgenerator/templates/core/shipped.php:7</note>
       </trans-unit>
       <trans-unit id="747cf5c8587184b9e489ff897d97c20d" approved="yes">
         <source>Shipped</source>
-        <target xml:lang="zh-CN">已发货</target>
+        <target xml:lang="zh-CN">已出货通知</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/shipped.php:22</note>
       </trans-unit>
       <trans-unit id="e9933131bfeef332fc84561f8e23aeba" approved="yes">
         <source><![CDATA[Your order with the reference <span><strong>{order_name}</strong></span> has been shipped.]]></source>
-        <target xml:lang="zh-CN"><![CDATA[您的订单<span><strong>{order_name}</strong></span> 已经发货。]]></target>
+        <target xml:lang="zh-CN"><![CDATA[您的订单<span><strong>{order_name}</strong></span> 已经出货，请留意到货状况。]]></target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/shipped.php:25</note>
+      </trans-unit>
+      <trans-unit id="f3ebde38fb84b9d5677bf2600e4270da" approved="yes">
+        <source>Tracking number</source>
+        <target xml:lang="zh-CN">配送编号</target>
+        <note>Line: 251</note>
       </trans-unit>
     </body>
   </file>
@@ -810,7 +805,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:4
       </trans-unit>
       <trans-unit id="0eede552438475bdfe820c13f24c9399" approved="yes">
         <source>Total price</source>
-        <target xml:lang="zh-CN">总价</target>
+        <target xml:lang="zh-CN">金额</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:51</note>
       </trans-unit>
@@ -846,7 +841,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:1
       </trans-unit>
       <trans-unit id="ea067eb37801c5aab1a1c685eb97d601" approved="yes">
         <source>Total paid</source>
-        <target xml:lang="zh-CN">总计支付</target>
+        <target xml:lang="zh-CN">总计</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:207</note>
       </trans-unit>
@@ -970,7 +965,7 @@ File: modules/ps_emailgenerator/templates/core/forward_msg.php:26</note>
     <body>
       <trans-unit id="ac32eb3619340a6b6aff41d9797665d4" approved="yes">
         <source>Order changed</source>
-        <target xml:lang="zh-CN">订单改变</target>
+        <target xml:lang="zh-CN">订单已修改</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/order_changed.php:21</note>
       </trans-unit>
@@ -989,6 +984,11 @@ File: modules/ps_emailgenerator/templates/core/order_changed.php:24</note>
         <target xml:lang="zh-CN">感谢您在 {shop_name} 下的订单 {order_name}。</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/outofstock.php:7</note>
+      </trans-unit>
+      <trans-unit id="e57e950cfde3e24c3674f9266753edec" approved="yes">
+        <source><![CDATA[Follow your order and download your invoice on our shop, go to the <a href="{history_url}" target="_blank">Order history and details</a> section of your customer account.]]></source>
+        <target xml:lang="zh-CN"><![CDATA[查看订单状态请至「<a href="{guest_tracking_url}">订单查询</a>」。]]></target>
+        <note>Line: 319</note>
       </trans-unit>
       <trans-unit id="e25d137c27dca2618629678d2df71113" approved="yes">
         <source>Item(s) out of stock</source>
@@ -1138,6 +1138,35 @@ File: modules/ps_emailgenerator/templates/modules/referralprogram/referralprogra
       </trans-unit>
     </body>
   </file>
+  <file original="mails/themes/modern/modules/ps_emailalerts/order_changed.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="ac32eb3619340a6b6aff41d9797665d4" approved="yes">
+        <source>Order changed</source>
+        <target xml:lang="zh-CN">订单已修改</target>
+        <note>Line: 180</note>
+      </trans-unit>
+      <trans-unit id="681a0aa2d158085f63f86c84900fa989" approved="yes">
+        <source>Your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1] has been changed by the merchant.</source>
+        <target xml:lang="zh-CN">Your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1] has been changed by the merchant.</target>
+        <note>Line: 247</note>
+      </trans-unit>
+      <trans-unit id="869a6d7d8b6af1ca14f874356141ac45" approved="yes">
+        <source><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}" target="_blank">Guest Tracking</a> section on our shop.]]></source>
+        <target xml:lang="zh-CN"><![CDATA[访客结帐，查看订单请至「<a href="{guest_tracking_url}?order_reference={order_name}">非会员订单查询</a>」。]]></target>
+        <note>Line: 317</note>
+      </trans-unit>
+      <trans-unit id="af6c5b694abbb964eec098febaa5d31d" approved="yes">
+        <source>Order ID {order_name}</source>
+        <target xml:lang="zh-CN">Order ID {order_name}</target>
+        <note>Line: 180</note>
+      </trans-unit>
+      <trans-unit id="c03924df23d22785084b06a548ca9976" approved="yes">
+        <source>Go to your customer account to learn more about it.</source>
+        <target xml:lang="zh-CN">Go to your customer account to learn more about it.</target>
+        <note>Line: 254</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="modules/ps_emailgenerator/templates/modules/ps_emailalerts/productcoverage.php" source-language="en" target-language="zh-CN" datatype="plaintext">
     <body>
       <trans-unit id="6983ddb3442f4ad4a3b94e94a1ebd3dc" approved="yes">
@@ -1214,9 +1243,119 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailsubscription/newslette
     <body>
       <trans-unit id="4e1c51e233f1ed368c58db9ef09010ba" approved="yes">
         <source>Thank you for subscribing to our newsletter.</source>
-        <target xml:lang="zh-CN">感谢订阅我们的电子简报。</target>
+        <target xml:lang="zh-CN">感谢订阅我们的电子报。</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailsubscription/newsletter_conf.php:22</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/core/reply_msg.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="2ddbd3a9b06eadccdea8e1b372830d69" approved="yes">
+        <source>Please do not reply directly to this email, we will not receive it.</source>
+        <target xml:lang="zh-TW">此信件为系统自动传送，请勿直接回复，感谢您的配合。</target>
+        <note>Line: 245</note>
+      </trans-unit>
+      <trans-unit id="25a836f644cf544e8dee516a0a842965" approved="yes">
+        <source>Adding our email address as a contact to ensure all messages are delivered to your Inbox.</source>
+        <target xml:lang="zh-TW">如要确保收到信件，可将此信箱加入通讯录。</target>
+        <note>Line: 245</note>
+      </trans-unit>
+      <trans-unit id="b0faef9417304909de0960b57582cd1c" approved="yes">
+        <source>Reply msg</source>
+        <target xml:lang="zh-TW">Reply msg</target>
+        <note>Line: 3</note>
+      </trans-unit>
+      <trans-unit id="7e4e256f10a59674290c89dd1bba1312" approved="yes">
+        <source><![CDATA[In order to reply, click on the following link: <a href="{link}" target="_blank">{link}</a>]]></source>
+        <target xml:lang="zh-TW"><![CDATA[In order to reply, click on the following link: <a href="{link}" target="_blank">{link}</a>]]></target>
+        <note>Line: 246</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/core/shipped.html.twig" source-language="en-US" target-language="zh-CN" datatype="plaintext">
+    <body>
+      <trans-unit id="747cf5c8587184b9e489ff897d97c20d" approved="yes">
+        <source>Shipped</source>
+        <target xml:lang="zh-CN">已出货通知</target>
+        <note>Line: 3</note>
+      </trans-unit>
+      <trans-unit id="da825075a1643697f1540f1c946c01f1" approved="yes">
+        <source>Your order with the reference [1]{order_name}[/1] has been shipped.</source>
+        <target xml:lang="zh-CN">您的订单 [1]{order_name}[/1] 已经出货，请留意到货状况。</target>
+        <note>Line: 247</note>
+      </trans-unit>
+      <trans-unit id="f3ebde38fb84b9d5677bf2600e4270da" approved="yes">
+        <source>Tracking number</source>
+        <target xml:lang="zh-CN">配送編號</target>
+        <note>Line: 251</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/core/payment_error.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="b06c5ecc37b9cd61a0cab0534ed1f15d" approved="yes">
+        <source>Payment Error</source>
+        <target xml:lang="zh-CN">付款失败通知</target>
+        <note>Line: 3</note>
+      </trans-unit>
+      <trans-unit id="1e97d97a923eaddd810e056c828e99ea" approved="yes">
+        <source>Payment error</source>
+        <target xml:lang="zh-CN">付款发生错误</target>
+        <note>Line: 179</note>
+      </trans-unit>
+      <trans-unit id="e1a66dba9aa7c8399229122ca7528b77" approved="yes">
+        <source>We have encountered an error while processing your payment for your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1]. Please contact us as soon as possible.</source>
+        <target xml:lang="zh-CN">We have encountered an error while processing your payment for your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1]. Please contact us as soon as possible.</target>
+        <note>Line: 246</note>
+      </trans-unit>
+      <trans-unit id="b8dfec752b0cb58a3bc3c7479e4dd44c" approved="yes">
+        <source>You can expect delivery as soon as your payment is received.</source>
+        <target xml:lang="zh-CN">在确认款项前我们无法进行出货作业，造成不便敬请见谅。</target>
+        <note>Line: 248</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/core/order_merchant_comment.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="2769d37f4eb00f2c9b940ee928f1b426" approved="yes">
+        <source>Message from {shop_name}</source>
+        <target xml:lang="zh-CN">来自 {shop_name} 的新讯息</target>
+        <note>Line: 180</note>
+      </trans-unit>
+      <trans-unit id="940663fd4428d2c86f9a4780b6574028" approved="yes">
+        <source>Message:</source>
+        <target xml:lang="zh-CN">讯息：</target>
+        <note>Line: 314</note>
+      </trans-unit>
+      <trans-unit id="15c197c97ee33f7da7df21d315fb7f71" approved="yes">
+        <source>You have received a new message from [1]{shop_name}[/1] regarding order with the reference [1]{order_name}[/1].</source>
+        <target xml:lang="zh-CN">您收到了一则由 [1]{shop_name}[/1] 发出关于订单 [1]{order_name}[/1] 的讯息。</target>
+        <note>Line: 247</note>
+      </trans-unit>
+      <trans-unit id="371e76fdc916e1fc3818f6b96dee5219" approved="yes">
+        <source>Order merchant comment</source>
+        <target xml:lang="zh-CN">Order merchant comment</target>
+        <note>Line: 3</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/core/order_conf.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="fb077ecba55e5552916bde26d8b9e794" approved="yes">
+        <source>Order confirmation</source>
+        <target xml:lang="zh-CN">Order confirmation</target>
+        <note>Line: 3</note>
+      </trans-unit>
+      <trans-unit id="ca102bf009d3e0d62a4fc6918b20110e" approved="yes">
+        <source>Thank you for shopping on [1]{shop_name}[/1]!</source>
+        <target xml:lang="zh-CN">感谢您对 [1]{shop_name}[/1] 的支持并承蒙订购！</target>
+        <note>Line: 53</note>
+      </trans-unit>
+      <trans-unit id="0c32014af02c2c3002c12e0b2725f1e9" approved="yes">
+        <source>The order is confirmed but does not mean that the payment was successful, please go to the website to check the order status. Thank you.</source>
+        <target xml:lang="zh-CN">订单成立但不代表付款成功，请至官网确认订单状态，谢谢。</target>
+        <note>Line: 53</note>
       </trans-unit>
     </body>
   </file>

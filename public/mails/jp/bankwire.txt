@@ -1,0 +1,30 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+{shop_name} にてご注文ありがとうございます!
+
+注文番号 {order_name} - Pending payment
+
+Your order with the reference {order_name} has been placed successfully. You can expect delivery as soon as your payment is received.
+
+Payment method: bank wire
+
+You have decided to pay by bank wire. Here is the information you need for your transfer:
+
+金額:  {total_paid}
+
+口座所有者:  {bankwire_owner}
+
+口座詳細: {bankwire_details}
+
+銀行住所: {bankwire_address}
+
+Please specify your order reference in the bankwire description.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

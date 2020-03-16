@@ -2,7 +2,7 @@
 <module>
     <name>ps_shoppingcart</name>
     <displayName><![CDATA[購物車]]></displayName>
-    <version><![CDATA[2.0.1]]></version>
+    <version><![CDATA[2.0.3]]></version>
     <description><![CDATA[新增一個內含客戶購物車資訊區塊。]]></description>
     <author><![CDATA[PrestaShop]]></author>
     <tab><![CDATA[front_office_features]]></tab>

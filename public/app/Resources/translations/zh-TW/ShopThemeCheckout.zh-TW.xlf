@@ -238,7 +238,7 @@ File: controllers/front/DiscountController.php:162</note>
     <body>
       <trans-unit id="8bbbace7ffb26d61b400c72ffe493f4d" approved="yes">
         <source>Guest order tracking</source>
-        <target xml:lang="zh-TW">非會員訂單查詢</target>
+        <target xml:lang="zh-TW">訂單查詢</target>
         <note>Context:
 File: controllers/front/GuestTrackingController.php:151</note>
       </trans-unit>
@@ -260,7 +260,7 @@ File: src/Adapter/Order/OrderPresenter.php:245</note>
       </trans-unit>
       <trans-unit id="ea067eb37801c5aab1a1c685eb97d601" approved="yes">
         <source>Total paid</source>
-        <target xml:lang="zh-TW">總付款額</target>
+        <target xml:lang="zh-TW">總計</target>
         <note>Context:
 File: src/Adapter/Order/OrderPresenter.php:290</note>
       </trans-unit>
@@ -386,9 +386,19 @@ File: themes/StarterTheme/templates/checkout/_partials/customer-form.tpl:30</not
     <body>
       <trans-unit id="2cee9edacddde0856a46d7db6aff9110" approved="yes">
         <source>Order items</source>
-        <target xml:lang="zh-TW">訂單商品</target>
+        <target xml:lang="zh-TW">購買項目</target>
         <note>Context:
 File: themes/classic/templates/checkout/_partials/order-confirmation-table.tpl:28</note>
+      </trans-unit>
+      <trans-unit id="6c957f72dc8cdacc75762f2cbdcdfaf2" approved="yes">
+        <source>Unit price</source>
+        <target xml:lang="zh-TW">單價</target>
+        <note>Line: 29</note>
+      </trans-unit>
+      <trans-unit id="db205f01b4fd580fb5daa9072d96849d" approved="yes">
+        <source>Total products</source>
+        <target xml:lang="zh-TW">金額</target>
+        <note>Line: 31</note>
       </trans-unit>
     </body>
   </file>
@@ -498,7 +508,7 @@ File: themes/classic/templates/checkout/_partials/steps/addresses.tpl:82</note>
       </trans-unit>
       <trans-unit id="baa63a898921164abe2d1d532ab27e79" approved="yes">
         <source>Your Invoice Address</source>
-        <target xml:lang="zh-TW">您的發票地址</target>
+        <target xml:lang="zh-TW">配送地址</target>
         <note>Context:
 File: themes/classic/templates/checkout/_partials/steps/addresses.tpl:91</note>
       </trans-unit>
@@ -558,7 +568,7 @@ File: themes/StarterTheme/templates/checkout/order-confirmation.tpl:60</note>
       </trans-unit>
       <trans-unit id="286b82fc158785899ecbe309809b7057" approved="yes">
         <source>Shipping method %method_name%</source>
-        <target xml:lang="zh-TW">送貨方式：%method_name%</target>
+        <target xml:lang="zh-TW">配送方式：%method_name%</target>
         <note>Context:
 File: themes/StarterTheme/templates/checkout/order-confirmation.tpl:62</note>
       </trans-unit>
@@ -580,7 +590,7 @@ File: themes/classic/templates/checkout/order-confirmation.tpl:16</note>
       </trans-unit>
       <trans-unit id="bd2edc30f97526c7529487985060ce00" approved="yes">
         <source>You can print this page or take a screenshot for future reference.</source>
-        <target xml:lang="zh-TW">建議您先截圖本頁以便日後查詢。</target>
+        <target xml:lang="zh-TW">您可以列印或截圖本頁以便日後查詢。</target>
         <note>Context:
 File: themes/classic/templates/checkout/order-confirmation.tpl:16</note>
       </trans-unit>
@@ -616,7 +626,13 @@ File: themes/classic/templates/checkout/order-confirmation.tpl:61</note>
       </trans-unit>
       <trans-unit id="080753487a8bc0bb9a5275bcb9951516" approved="yes">
         <source>Shipping method: %method%</source>
-        <target xml:lang="zh-TW">送貨方式：%method%</target>
+        <target xml:lang="zh-TW">配送方式：%method%</target>
+        <note>Context:
+File: themes/classic/templates/checkout/order-confirmation.tpl:64</note>
+      </trans-unit>
+      <trans-unit id="d4108d6d9bf267ecd5b1f08b6bce2c06" approved="yes">
+        <source>Order status: %state%</source>
+        <target xml:lang="zh-TW">訂單狀態：%state%</target>
         <note>Context:
 File: themes/classic/templates/checkout/order-confirmation.tpl:64</note>
       </trans-unit>
@@ -702,7 +718,7 @@ File: themes/classic/templates/customer/order-detail.tpl:197</note>
       </trans-unit>
       <trans-unit id="5068c162a60b5859f973f701333f45c5" approved="yes">
         <source>Tracking number</source>
-        <target xml:lang="zh-TW">追蹤號碼</target>
+        <target xml:lang="zh-TW">配送編號</target>
         <note>Context:
 File: themes/classic/templates/customer/order-detail.tpl:200</note>
       </trans-unit>

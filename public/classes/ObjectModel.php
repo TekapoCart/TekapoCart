@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -186,6 +186,14 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
     }
 
     /**
+     * reset static cache (eg unit testing purpose).
+     */
+    public static function resetStaticCache()
+    {
+        static::$loaded_classes = array();
+    }
+
+    /**
      * Returns object validation rules (fields validity).
      *
      * @param string $class Child class name for static use (optional)
@@ -234,7 +242,7 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
             }
         }
 
-        if (!is_null($translator)) {
+        if (null !== $translator) {
             $this->translator = $translator;
         }
 
@@ -259,9 +267,9 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
 
     protected function trans($id, array $parameters = array(), $domain = null, $locale = null)
     {
-        if (is_null($this->translator)) {
+        if (null === $this->translator) {
             $this->translator = Context::getContext()->getTranslator();
-            if (is_null($this->translator)) {
+            if (null === $this->translator) {
                 return $id;
             }
         }
@@ -615,7 +623,8 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
     {
         $definition = ObjectModel::getDefinition($this);
 
-        $res = Db::getInstance()->getRow('
+        $res = Db::getInstance()->getRow(
+            '
 					SELECT *
 					FROM `' . _DB_PREFIX_ . bqSQL($definition['table']) . '`
 					WHERE `' . bqSQL($definition['primary']) . '` = ' . (int) $this->id
@@ -627,8 +636,13 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
         unset($res[$definition['primary']]);
         foreach ($res as $field => &$value) {
             if (isset($definition['fields'][$field])) {
-                $value = ObjectModel::formatValue($value, $definition['fields'][$field]['type'], false, true,
-                                                  !empty($definition['fields'][$field]['allow_null']));
+                $value = ObjectModel::formatValue(
+                    $value,
+                    $definition['fields'][$field]['type'],
+                    false,
+                    true,
+                    !empty($definition['fields'][$field]['allow_null'])
+                );
             }
         }
 
@@ -650,8 +664,13 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
             foreach ($result as &$row) {
                 foreach ($row as $field => &$value) {
                     if (isset($definition['fields'][$field])) {
-                        $value = ObjectModel::formatValue($value, $definition['fields'][$field]['type'], false, true,
-                                                          !empty($definition['fields'][$field]['allow_null']));
+                        $value = ObjectModel::formatValue(
+                            $value,
+                            $definition['fields'][$field]['type'],
+                            false,
+                            true,
+                            !empty($definition['fields'][$field]['allow_null'])
+                        );
                     }
                 }
             }
@@ -1114,7 +1133,8 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
                         return $this->trans('The %1$s field is too long (%2$d chars max).', array($this->displayFieldName($field, get_class($this)), $size['max']), 'Admin.Notifications.Error');
                     }
                 } else {
-                    return $this->trans('The length of property %1$s is currently %2$d chars. It must be between %3$d and %4$d chars.',
+                    return $this->trans(
+                        'The length of property %1$s is currently %2$d chars. It must be between %3$d and %4$d chars.',
                         array(
                             get_class($this) . '->' . $field,
                             $length,
@@ -1301,7 +1321,7 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
             }
         }
 
-        if (isset($this->{$ws_params_attribute_name}['retrieveData']) && isset($this->{$ws_params_attribute_name}['retrieveData']['retrieveMethod'])) {
+        if (isset($this->{$ws_params_attribute_name}['retrieveData'], $this->{$ws_params_attribute_name}['retrieveData']['retrieveMethod'])) {
             unset($default_resource_parameters['retrieveData']['retrieveMethod']);
         }
 
@@ -1426,9 +1446,9 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
                 throw new PrestaShopException('Validation function not found. ' . $data['validate']);
             }
 
-            $value = Tools::getValue($field);
+            $value = Tools::getValue($field, null);
 
-            if (empty($value)) {
+            if ($value === null) {
                 $errors[$field] = $this->trans('The field %s is required.', array(self::displayFieldName($field, get_class($this), $htmlentities)), 'Admin.Notifications.Error');
             }
         }
@@ -1533,7 +1553,8 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
         $objectName = $this->getObjectName();
         if (!Db::getInstance()->execute(
             'DELETE FROM ' . _DB_PREFIX_ . 'required_field'
-            . " WHERE object_name = '" . Db::getInstance()->escape($objectName) . "'")
+            . " WHERE object_name = '" . Db::getInstance()->escape($objectName) . "'"
+        )
         ) {
             return false;
         }
@@ -1581,7 +1602,8 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
 
         $cache_id = 'objectmodel_shop_' . $this->def['classname'] . '_' . (int) $this->id . '-' . (int) $id_shop;
         if (!ObjectModel::$cache_objects || !Cache::isStored($cache_id)) {
-            $associated = (bool) Db::getInstance()->getValue('
+            $associated = (bool) Db::getInstance()->getValue(
+                '
 				SELECT id_shop
 				FROM `' . pSQL(_DB_PREFIX_ . $this->def['table']) . '_shop`
 				WHERE `' . $this->def['primary'] . '` = ' . (int) $this->id . '
@@ -1727,7 +1749,7 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
      */
     public function isMultiShopField($field)
     {
-        return isset($this->def['fields'][$field]) && isset($this->def['fields'][$field]['shop']) && $this->def['fields'][$field]['shop'];
+        return !empty($this->def['fields'][$field]['shop']);
     }
 
     /**
@@ -1837,10 +1859,12 @@ abstract class ObjectModelCore implements \PrestaShop\PrestaShop\Core\Foundation
      */
     public static function existsInDatabase($id_entity, $table)
     {
-        $row = Db::getInstance()->getRow('
+        $row = Db::getInstance()->getRow(
+            '
 			SELECT `id_' . bqSQL($table) . '` as id
 			FROM `' . _DB_PREFIX_ . bqSQL($table) . '` e
-			WHERE e.`id_' . bqSQL($table) . '` = ' . (int) $id_entity, false
+			WHERE e.`id_' . bqSQL($table) . '` = ' . (int) $id_entity,
+            false
         );
 
         return isset($row['id']);

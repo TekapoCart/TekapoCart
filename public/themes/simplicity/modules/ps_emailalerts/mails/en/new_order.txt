@@ -1,0 +1,46 @@
+Please do not reply directly to this email, we will not receive it.
+Adding our email address as a contact to ensure all messages are delivered to your Inbox.
+
+{shop_url}
+
+Congratulations!
+
+A new order was placed on {shop_name} by the following customer: {firstname} {lastname} ({email})
+
+Order details
+
+Order: {order_name} Placed on {date}
+
+Payment: {payment}
+
+SKU	Product	Unit price	Qty	Total price   {items}
+Products	{total_products}
+Discounts	{total_discounts}
+Gift-wrapping	{total_wrapping}
+Shipping	{total_shipping}
+Including total tax	{total_tax_paid}
+Total paid	{total_paid}
+
+Carrier
+
+Carrier: {carrier}
+
+Payment: {payment}
+
+Delivery address
+
+{delivery_block_html}
+
+Billing address
+
+{invoice_block_html}
+
+Customer message:
+
+{message}
+
+You can track your order status via the 「[Order Tracking]({guest_tracking_url})」.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

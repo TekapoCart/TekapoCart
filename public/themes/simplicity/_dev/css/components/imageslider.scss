@@ -1,35 +1,23 @@
 .carousel {
-  /*box-shadow: 1px 1px 7px 0 rgba(0, 0, 0, 0.15);*/
-  /*margin-bottom: 1.5rem;*/
   overflow-x: hidden;
   .direction {
     z-index: auto;
   }
   .carousel-inner {
-    /*height: 340px;*/
     margin-bottom: 0;
     overflow-x: hidden;
-    @media (max-width: 767px) {
-      height: auto;
-    }
   }
   .carousel-item {
     height: 100%;
     img {
-      @media (max-width: 767px) {
-        max-width: 100%;
-        height: auto;
-      }
-      @media (min-width: 768px) {
-        width: 100%;
-        margin-left: 0;
-      }
+      width: 100%;
+      max-width: 100%;
+      height: auto;
     }
     .caption {
       position: absolute;
-      width: 100%;
-
-      top: 20%;
+      bottom: 28px;
+      left: 90px;
       .caption-description {
         font-size: 50px;
         line-height: 90px;
@@ -42,12 +30,7 @@
 
     }
     figure {
-      margin-bottom: 0;
-      /*
-      @media (max-width: 767px) {
-        margin: 0;
-      }
-      */
+      margin: 0;
     }
   }
   .carousel-control {
@@ -88,14 +71,8 @@
 
 @include media-breakpoint-down(lg) {
   .carousel {
-    .carousel-item {
-      .caption {
-        top: 15%;
-        .caption-description {
-          font-size: 40px;
-          line-height: 70px;
-        }
-      }
+    .carousel-inner {
+      height: auto;
     }
   }
 }
@@ -104,11 +81,16 @@
   .carousel {
     .carousel-item {
       .caption {
-        top: 10%;
-        .caption-description {
-          font-size: 35px;
-          line-height: 60px;
+        bottom: calc(50% - 2rem);
+        left: 10%;
+      }
+      .caption {
+        .display-1 {
+          font-size: 2rem;
         }
+      }
+      .caption-description {
+        display: none;
       }
     }
   }
@@ -118,14 +100,18 @@
   .carousel {
     .carousel-item {
       .caption {
-        top: 15%;
-        .caption-description {
-          font-size: 16px;
-          line-height: 25px;
-          .material-icons {
-            margin-bottom: 3px;
-            font-size: 20px;
-          }
+        bottom: calc(50% - 1.5rem);
+      }
+      .caption {
+        .display-1 {
+          font-size: 1.5rem;
+        }
+      }
+    }
+    .carousel-control {
+      .icon-prev, .icon-next {
+        i {
+          font-size: 2rem;
         }
       }
     }

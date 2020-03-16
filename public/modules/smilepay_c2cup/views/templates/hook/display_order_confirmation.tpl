@@ -1,5 +1,5 @@
 <h3 class="card-title h3">{l s='Pickup Info' mod='smilepay_c2cup'}</h3>
-{if smilepay_c2cup_status == 1}
+{if $smilepay_c2cup_status == 1}
     <dl>
         <dt>{l s='c2c Pur_name :' mod='smilepay_c2cup'}</dt>{* 取貨人 *}
         <dd>{$smilepay_c2cup_customer_name}</dd>

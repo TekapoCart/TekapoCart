@@ -64,6 +64,18 @@ File: themes/classic/templates/customer/my-account.tpl:38</note>
         <note>Context:
 File: themes/classic/templates/customer/my-account.tpl:62</note>
       </trans-unit>
+      <trans-unit id="d520143a7c98ecaaf79a086042992eda" approved="yes">
+        <source>Login Successful</source>
+        <target xml:lang="ja">Login Successful</target>
+        <note>Context:
+File: admin-dev/themes/default/template/controllers/modules/page.tpl:32</note>
+      </trans-unit>
+      <trans-unit id="e32ec920d817f25e2ddfe854f1155a38" approved="yes">
+        <source>Login Unsuccessful</source>
+        <target xml:lang="ja">Login Unsuccessful</target>
+        <note>Context:
+File: admin-dev/themes/default/template/controllers/modules/page.tpl:32</note>
+      </trans-unit>
     </body>
   </file>
   <file original="themes/classic/templates/customer/history.tpl" source-language="en" target-language="ja" datatype="plaintext">

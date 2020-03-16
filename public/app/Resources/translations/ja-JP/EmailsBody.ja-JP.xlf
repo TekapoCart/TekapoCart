@@ -32,7 +32,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/order_changed.p
       </trans-unit>
       <trans-unit id="992ed3f1f7ce7be683fd4051138b693e" approved="yes">
         <source><![CDATA[If you have a guest account, you can follow your order via the <a href="{guest_tracking_url}?id_order={order_name}">"Guest Tracking"</a> section on our shop.]]></source>
-        <target xml:lang="ja"><![CDATA[ゲストアカウントをお持ちの場合、ショップの <a href="{guest_tracking_url}?id_order={order_name}">"ゲストでのご注文"</a> コーナーよりご注文内容を確認いただけます。]]></target>
+        <target xml:lang="ja"><![CDATA[ゲストアカウントをお持ちの場合、ショップの <a href="{guest_tracking_url}?order_reference={order_name}">"ゲストでのご注文"</a> コーナーよりご注文内容を確認いただけます。]]></target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/order_changed.php:49</note>
       </trans-unit>
@@ -156,7 +156,7 @@ File: modules/ps_emailgenerator/templates/core/import.php:24</note>
     <body>
       <trans-unit id="3baf03ed2980c9f339731f052c12b37d" approved="yes">
         <source>Order canceled</source>
-        <target xml:lang="ja">注文はキャンセルされました</target>
+        <target xml:lang="ja">ご注文をキャンセルいたしました。</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/order_canceled.php:21</note>
       </trans-unit>
@@ -499,26 +499,6 @@ File: modules/ps_emailgenerator/templates/core/order_return_state.php:24</note>
       </trans-unit>
     </body>
   </file>
-  <file original="modules/ps_emailgenerator/templates/core/header_order_conf.php" source-language="en" target-language="ja" datatype="plaintext">
-    <body>
-      <trans-unit id="2769d37f4eb00f2c9b940ee928f1b426" approved="yes">
-        <source>Message from {shop_name}</source>
-        <target xml:lang="ja">{shop_name} からのお知らせ</target>
-        <note>Context:
-File: modules/ps_emailgenerator/templates/core/header_order_conf.php:6</note>
-      </trans-unit>
-    </body>
-  </file>
-  <file original="modules/ps_emailgenerator/templates/core/order_merchant_comment.php" source-language="en" target-language="ja" datatype="plaintext">
-    <body>
-      <trans-unit id="940663fd4428d2c86f9a4780b6574028" approved="yes">
-        <source>Message:</source>
-        <target xml:lang="ja">メッセージ:</target>
-        <note>Context:
-File: modules/ps_emailgenerator/templates/core/order_merchant_comment.php:25</note>
-      </trans-unit>
-    </body>
-  </file>
   <file original="modules/ps_emailgenerator/templates/modules/ps_emailalerts/return_slip.php" source-language="en" target-language="ja" datatype="plaintext">
     <body>
       <trans-unit id="5c1cc11c191c9a0f32d16439618ed3bb" approved="yes">
@@ -649,13 +629,13 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:2
       </trans-unit>
       <trans-unit id="101f2450ccefbd344b37971c5d27f96d" approved="yes">
         <source>Placed on</source>
-        <target xml:lang="ja">作成日時</target>
+        <target xml:lang="ja">注文日</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:31</note>
       </trans-unit>
       <trans-unit id="a0e8e26f6f9354192425b9a23227a5ba" approved="yes">
         <source>Payment:</source>
-        <target xml:lang="ja">支払い：</target>
+        <target xml:lang="ja">お支払い：</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:32</note>
       </trans-unit>
@@ -667,7 +647,7 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:4
       </trans-unit>
       <trans-unit id="0eede552438475bdfe820c13f24c9399" approved="yes">
         <source>Total price</source>
-        <target xml:lang="ja">合計金額</target>
+        <target xml:lang="ja">小計</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:51</note>
       </trans-unit>
@@ -703,13 +683,13 @@ File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:1
       </trans-unit>
       <trans-unit id="ea067eb37801c5aab1a1c685eb97d601" approved="yes">
         <source>Total paid</source>
-        <target xml:lang="ja">支払い合計</target>
+        <target xml:lang="ja">合計</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:207</note>
       </trans-unit>
       <trans-unit id="f8617a92ba0a0a4eabee724eab7c9f48" approved="yes">
         <source>Carrier:</source>
-        <target xml:lang="ja">配送：</target>
+        <target xml:lang="ja">配送方法：</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailalerts/new_order.php:241</note>
       </trans-unit>
@@ -815,16 +795,30 @@ File: modules/ps_emailgenerator/templates/core/forward_msg.php:26</note>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/order_changed.php:21</note>
       </trans-unit>
-      <trans-unit id="0e6321e9d36186e957652f07d88116a5" approved="yes">
-        <source><![CDATA[Your order with the reference <span><strong>{order_name}</strong></span> from <span><strong>{shop_name}</strong></span> has been changed by the merchant.]]></source>
-        <target xml:lang="ja"><![CDATA[<span><strong>{shop_name}</strong></span> でのご注文 <span><strong>{order_name}</strong></span> は、ショップによって変更されました。]]></target>
-        <note>Context:
-File: modules/ps_emailgenerator/templates/core/order_changed.php:24</note>
+      <trans-unit id="681a0aa2d158085f63f86c84900fa989" approved="yes">
+        <source>Your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1] has been changed by the merchant.</source>
+        <target xml:lang="ja">Your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1] has been changed by the merchant.</target>
+        <note>Line: 247</note>
+      </trans-unit>
+      <trans-unit id="9435e0068772ec8c135acd33e1b45ee3" approved="yes">
+        <source>We look forward to serving you again.</source>
+        <target xml:lang="zh-TW">またのご利用をお待ち申し上げております。</target>
+        <note>Line: 247</note>
+      </trans-unit>
+      <trans-unit id="af6c5b694abbb964eec098febaa5d31d" approved="yes">
+        <source>Order ID {order_name}</source>
+        <target xml:lang="zh-TW">注文番号 {order_name}</target>
+        <note>Line: 180</note>
       </trans-unit>
     </body>
   </file>
   <file original="modules/ps_emailgenerator/templates/core/outofstock.php" source-language="en" target-language="ja" datatype="plaintext">
     <body>
+      <trans-unit id="e57e950cfde3e24c3674f9266753edec" approved="yes">
+        <source><![CDATA[Follow your order and download your invoice on our shop, go to the <a href="{history_url}" target="_blank">Order history and details</a> section of your customer account.]]></source>
+        <target xml:lang="ja"><![CDATA[ご注文内容の詳細は「<a href="{guest_tracking_url}">注文履歴</a>」。]]></target>
+        <note>Line: 319</note>
+      </trans-unit>
       <trans-unit id="e25d137c27dca2618629678d2df71113" approved="yes">
         <source>Item(s) out of stock</source>
         <target xml:lang="ja">商品在庫切れ</target>
@@ -909,6 +903,116 @@ File: modules/ps_emailgenerator/templates/modules/referralprogram/referralprogra
         <target xml:lang="ja">メールマガジンに登録ありがとうございます。</target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/modules/ps_emailsubscription/newsletter_conf.php:22</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/core/order_conf.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="fb077ecba55e5552916bde26d8b9e794" approved="yes">
+        <source>Order confirmation</source>
+        <target xml:lang="ja">Order confirmation</target>
+        <note>Line: 3</note>
+      </trans-unit>
+      <trans-unit id="ca102bf009d3e0d62a4fc6918b20110e" approved="yes">
+        <source>Thank you for shopping on [1]{shop_name}[/1]!</source>
+        <target xml:lang="ja">[1]{shop_name}[/1] をご利用いただき誠にありがとうございます。お客様からのご注文内容は以下の通りです。</target>
+        <note>Line: 53</note>
+      </trans-unit>
+      <trans-unit id="0c32014af02c2c3002c12e0b2725f1e9" approved="yes">
+        <source>The order is confirmed but does not mean that the payment was successful, please go to the website to check the order status. Thank you.</source>
+        <target xml:lang="ja">The order is confirmed but does not mean that the payment was successful, please go to the website to check the order status. Thank you.</target>
+        <note>Line: 53</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/core/payment_error.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="b06c5ecc37b9cd61a0cab0534ed1f15d" approved="yes">
+        <source>Payment Error</source>
+        <target xml:lang="ja">Payment Error</target>
+        <note>Line: 3</note>
+      </trans-unit>
+      <trans-unit id="1e97d97a923eaddd810e056c828e99ea" approved="yes">
+        <source>Payment error</source>
+        <target xml:lang="ja">決済に失敗しました</target>
+        <note>Line: 179</note>
+      </trans-unit>
+      <trans-unit id="e1a66dba9aa7c8399229122ca7528b77" approved="yes">
+        <source>We have encountered an error while processing your payment for your order with the reference [1]{order_name}[/1] from [1]{shop_name}[/1]. Please contact us as soon as possible.</source>
+        <target xml:lang="ja">エラーが発生し、購入できない方、お問い合わせください。</target>
+        <note>Line: 246</note>
+      </trans-unit>
+      <trans-unit id="b8dfec752b0cb58a3bc3c7479e4dd44c" approved="yes">
+        <source>You can expect delivery as soon as your payment is received.</source>
+        <target xml:lang="ja">ご入金を確認後に商品を発送致します。</target>
+        <note>Line: 248</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/core/reply_msg.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="2ddbd3a9b06eadccdea8e1b372830d69" approved="yes">
+        <source>Please do not reply directly to this email, we will not receive it.</source>
+        <target xml:lang="ja">このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。</target>
+        <note>Line: 245</note>
+      </trans-unit>
+      <trans-unit id="25a836f644cf544e8dee516a0a842965" approved="yes">
+        <source>Adding our email address as a contact to ensure all messages are delivered to your Inbox.</source>
+        <target xml:lang="ja">自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。</target>
+        <note>Line: 245</note>
+      </trans-unit>
+      <trans-unit id="b0faef9417304909de0960b57582cd1c" approved="yes">
+        <source>Reply msg</source>
+        <target xml:lang="ja">Reply msg</target>
+        <note>Line: 3</note>
+      </trans-unit>
+      <trans-unit id="7e4e256f10a59674290c89dd1bba1312" approved="yes">
+        <source><![CDATA[In order to reply, click on the following link: <a href="{link}" target="_blank">{link}</a>]]></source>
+        <target xml:lang="ja"><![CDATA[In order to reply, click on the following link: <a href="{link}" target="_blank">{link}</a>]]></target>
+        <note>Line: 246</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/core/shipped.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="747cf5c8587184b9e489ff897d97c20d" approved="yes">
+        <source>Shipped</source>
+        <target xml:lang="ja">ご注文頂いた商品を発送致します</target>
+        <note>Line: 3</note>
+      </trans-unit>
+      <trans-unit id="da825075a1643697f1540f1c946c01f1" approved="yes">
+        <source>Your order with the reference [1]{order_name}[/1] has been shipped.</source>
+        <target xml:lang="ja">注文番号 [1]{order_name}[/1] ご注文商品を発送しました。</target>
+        <note>Line: 247</note>
+      </trans-unit>
+      <trans-unit id="f3ebde38fb84b9d5677bf2600e4270da" approved="yes">
+        <source>Tracking number</source>
+        <target xml:lang="ja">お問い合わせ番号</target>
+        <note>Line: 251</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="mails/themes/modern/core/order_merchant_comment.html.twig" source-language="en-US" target-language="zh-TW" datatype="plaintext">
+    <body>
+      <trans-unit id="2769d37f4eb00f2c9b940ee928f1b426" approved="yes">
+        <source>Message from {shop_name}</source>
+        <target xml:lang="ja">{shop_name} からのお支払いについて</target>
+        <note>Line: 180</note>
+      </trans-unit>
+      <trans-unit id="940663fd4428d2c86f9a4780b6574028" approved="yes">
+        <source>Message:</source>
+        <target xml:lang="ja">口座情報：</target>
+        <note>Line: 314</note>
+      </trans-unit>
+      <trans-unit id="15c197c97ee33f7da7df21d315fb7f71" approved="yes">
+        <source>You have received a new message from [1]{shop_name}[/1] regarding order with the reference [1]{order_name}[/1].</source>
+        <target xml:lang="ja">注文番号：[1]{order_name}[/1]。</target>
+        <note>Line: 247</note>
+      </trans-unit>
+      <trans-unit id="371e76fdc916e1fc3818f6b96dee5219" approved="yes">
+        <source>Order merchant comment</source>
+        <target xml:lang="ja">Order merchant comment</target>
+        <note>Line: 3</note>
       </trans-unit>
     </body>
   </file>

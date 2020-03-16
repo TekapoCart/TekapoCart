@@ -1,0 +1,26 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+{shop_name} にてご注文ありがとうございます!
+
+注文番号 {order_name} - Awaiting payment by check
+
+Your order with the reference {order_name} has been placed successfully. You can expect delivery as soon as your payment is received.
+
+Payment method: check
+
+You have decided to pay by bank check. Here is the information you need for your check:
+
+金額:  {total_paid}
+
+以下の注文は支払い可能  {check_name}
+
+小切手送付先：  {check_address_html}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

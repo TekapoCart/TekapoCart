@@ -15,7 +15,7 @@
             'secret' => 'tMiUMy8UHXi9siBLjJx0vPotpQU9aO3tCw1ezZ9DG7bt0r4kePVOQXah',
             'ps_caching' => 'CacheMemcache',
             'ps_cache_enable' => false,
-            'ps_creation_date' => '2019-01-31',
+            'ps_creation_date' => '2020-02-01',
             'locale' => 'zh-TW',
             'cookie_key' => 'Wb2qt02MkKcQjLLPrfjet2yEtWX5UcBHev7CkKq1eUn8IWNegxHujBYn',
             'cookie_iv' => 'C3KU6QDE',

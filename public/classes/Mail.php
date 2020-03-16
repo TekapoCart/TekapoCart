@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -152,34 +152,40 @@ class MailCore extends ObjectModel
             $idShop = Context::getContext()->shop->id;
         }
 
-        $keepGoing = array_reduce(
-            Hook::exec(
-                'actionEmailSendBefore',
-                [
-                    'idLang' => &$idLang,
-                    'template' => &$template,
-                    'subject' => &$subject,
-                    'templateVars' => &$templateVars,
-                    'to' => &$to,
-                    'toName' => &$toName,
-                    'from' => &$from,
-                    'fromName' => &$fromName,
-                    'fileAttachment' => &$fileAttachment,
-                    'mode_smtp' => &$mode_smtp,
-                    'templatePath' => &$templatePath,
-                    'die' => &$die,
-                    'idShop' => &$idShop,
-                    'bcc' => &$bcc,
-                    'replyTo' => &$replyTo,
-                ],
-                null,
-                true
-            ),
-            function ($carry, $item) {
-                return ($item === false) ? false : $carry;
-            },
+        $hookBeforeEmailResult = Hook::exec(
+            'actionEmailSendBefore',
+            [
+                'idLang' => &$idLang,
+                'template' => &$template,
+                'subject' => &$subject,
+                'templateVars' => &$templateVars,
+                'to' => &$to,
+                'toName' => &$toName,
+                'from' => &$from,
+                'fromName' => &$fromName,
+                'fileAttachment' => &$fileAttachment,
+                'mode_smtp' => &$mode_smtp,
+                'templatePath' => &$templatePath,
+                'die' => &$die,
+                'idShop' => &$idShop,
+                'bcc' => &$bcc,
+                'replyTo' => &$replyTo,
+            ],
+            null,
             true
         );
+
+        if ($hookBeforeEmailResult === null) {
+            $keepGoing = false;
+        } else {
+            $keepGoing = array_reduce(
+                $hookBeforeEmailResult,
+                function ($carry, $item) {
+                    return ($item === false) ? false : $carry;
+                },
+                true
+            );
+        }
 
         if (!$keepGoing) {
             return true;
@@ -200,6 +206,9 @@ class MailCore extends ObjectModel
                 'PS_MAIL_SMTP_ENCRYPTION',
                 'PS_MAIL_SMTP_PORT',
                 'PS_MAIL_TYPE',
+
+                // suzy: 2019-12-22 AWS SES 比較特殊，設定 from
+                'PS_MAIL_DOMAIN',
             ],
             null,
             null,
@@ -211,7 +220,6 @@ class MailCore extends ObjectModel
             $configuration['PS_MAIL_USER'] = Configuration::get('PS_FOLLOW_UP_SMTP_USER');
             $configuration['PS_MAIL_PASSWD'] = Configuration::get('PS_FOLLOW_UP_SMTP_PASSWD');
         }
-
 
         // Returns immediately if emails are deactivated
         if ($configuration['PS_MAIL_METHOD'] == self::METHOD_DISABLE) {
@@ -235,6 +243,11 @@ class MailCore extends ObjectModel
 
         if (!isset($configuration['PS_MAIL_SMTP_PORT'])) {
             $configuration['PS_MAIL_SMTP_PORT'] = 'default';
+        }
+
+        // suzy: 2019-12-22 AWS SES 比較特殊，設定 from
+        if (strpos($configuration['PS_MAIL_SERVER'], 'amazonaws.com') !== false) {
+            $from = $configuration['PS_MAIL_DOMAIN'];
         }
 
         /*
@@ -275,7 +288,7 @@ class MailCore extends ObjectModel
         }
 
         // if bcc is not null, make sure it's a vaild e-mail
-        if (!is_null($bcc) && !is_array($bcc) && !Validate::isEmail($bcc)) {
+        if (null !== $bcc && !is_array($bcc) && !Validate::isEmail($bcc)) {
             self::dieOrLog($die, 'Error: parameter "bcc" is corrupted');
             $bcc = null;
         }
@@ -302,7 +315,10 @@ class MailCore extends ObjectModel
         }
 
         /* Construct multiple recipients list if needed */
-        $message = \Swift_Message::newInstance();
+        // suzy: 2020-01-19 升級 swiftmailer 6
+//        $message = \Swift_Message::newInstance();
+        $message = new Swift_Message();
+
         if (is_array($to) && isset($to)) {
             foreach ($to as $key => $addr) {
                 $addr = trim($addr);
@@ -355,22 +371,34 @@ class MailCore extends ObjectModel
                     return false;
                 }
 
-                $connection = \Swift_SmtpTransport::newInstance(
+                // suzy: 2020-01-19 升級 swiftmailer 6
+//                $connection = \Swift_SmtpTransport::newInstance(
+//                    $configuration['PS_MAIL_SERVER'],
+//                    $configuration['PS_MAIL_SMTP_PORT'],
+//                    $configuration['PS_MAIL_SMTP_ENCRYPTION']
+//                )
+                $connection = (new Swift_SmtpTransport(
                     $configuration['PS_MAIL_SERVER'],
                     $configuration['PS_MAIL_SMTP_PORT'],
                     $configuration['PS_MAIL_SMTP_ENCRYPTION']
-                )
+                ))
                     ->setUsername($configuration['PS_MAIL_USER'])
                     ->setPassword($configuration['PS_MAIL_PASSWD']);
             } else {
-                $connection = \Swift_MailTransport::newInstance();
+                // suzy: 2020-01-19 升級 swiftmailer 6
+//                $connection = \Swift_MailTransport::newInstance();
+                $connection = new Swift_SendmailTransport();
+
             }
 
             if (!$connection) {
                 return false;
             }
 
-            $swift = \Swift_Mailer::newInstance($connection);
+            // suzy: 2020-01-19 升級 swiftmailer 6
+//            $swift = \Swift_Mailer::newInstance($connection);
+            $swift = new Swift_Mailer($connection);
+
             /* Get templates content */
             $iso = Language::getIsoById((int) $idLang);
             $isoDefault = Language::getIsoById((int) Configuration::get('PS_LANG_DEFAULT'));
@@ -428,6 +456,7 @@ class MailCore extends ObjectModel
                     );
                 } else {
                     $templatePathExists = true;
+
                     break;
                 }
             }
@@ -472,7 +501,7 @@ class MailCore extends ObjectModel
             );
 
             /* Create mail and attach differents parts */
-            $subject = '[' . Configuration::get('PS_SHOP_NAME', null, null, $idShop) . '] ' . $subject;
+            $subject = '[' . Tools::safeOutput($configuration['PS_SHOP_NAME']) . '] ' . $subject;
             $message->setSubject($subject);
 
             $message->setCharset('utf-8');
@@ -481,7 +510,9 @@ class MailCore extends ObjectModel
             $message->setId(Mail::generateId());
 
             if (!($replyTo && Validate::isEmail($replyTo))) {
-                $replyTo = $from;
+                // suzy: 2019-12-22 replyTo 改成一律使用商店 E-Mail
+                // $replyTo = $from;
+                $replyTo = $configuration['PS_SHOP_EMAIL'];
             }
 
             if (isset($replyTo) && $replyTo) {
@@ -512,7 +543,7 @@ class MailCore extends ObjectModel
                 Context::getContext()->link = new Link();
             }
 
-            $templateVars['{shop_name}'] = Tools::safeOutput(Configuration::get('PS_SHOP_NAME', null, null, $idShop));
+            $templateVars['{shop_name}'] = Tools::safeOutput($configuration['PS_SHOP_NAME']);
             $templateVars['{shop_url}'] = Context::getContext()->link->getPageLink(
                 'index',
                 true,
@@ -579,7 +610,7 @@ class MailCore extends ObjectModel
                 }
 
                 foreach ($fileAttachment as $attachment) {
-                    if (isset($attachment['content']) && isset($attachment['name']) && isset($attachment['mime'])) {
+                    if (isset($attachment['content'], $attachment['name'], $attachment['mime'])) {
                         $message->attach(
                             \Swift_Attachment::newInstance()->setFilename(
                                 $attachment['name']
@@ -700,7 +731,7 @@ class MailCore extends ObjectModel
      */
     public static function sendMailTest(
         $smtpChecked,
-        $smtp_server,
+        $smtpServer,
         $content,
         $subject,
         $type,
@@ -712,20 +743,39 @@ class MailCore extends ObjectModel
         $smtpEncryption
     ) {
         $result = false;
+
         try {
             if ($smtpChecked) {
                 if (Tools::strtolower($smtpEncryption) === 'off') {
                     $smtpEncryption = false;
                 }
-                $smtp = \Swift_SmtpTransport::newInstance($smtp_server, $smtpPort, $smtpEncryption)
+
+                // suzy: 2020-01-19 升級 swiftmailer 6
+//                $smtp = \Swift_SmtpTransport::newInstance($smtpServer, $smtpPort, $smtpEncryption)
+//                    ->setUsername($smtpLogin)
+//                    ->setPassword($smtpPassword);
+//                $swift = \Swift_Mailer::newInstance($smtp);
+
+
+                $connection = (new Swift_SmtpTransport(
+                    $smtpServer,
+                    $smtpPort,
+                    $smtpEncryption
+                ))
                     ->setUsername($smtpLogin)
                     ->setPassword($smtpPassword);
-                $swift = \Swift_Mailer::newInstance($smtp);
+
             } else {
-                $swift = \Swift_Mailer::newInstance(\Swift_MailTransport::newInstance());
+                // suzy: 2020-01-19 升級 swiftmailer 6
+//                $swift = \Swift_Mailer::newInstance(\Swift_MailTransport::newInstance());
+                $connection = new Swift_SendmailTransport();
             }
 
-            $message = \Swift_Message::newInstance();
+            // suzy: 2020-01-19 升級 swiftmailer 6
+//            $message = \Swift_Message::newInstance();
+
+            $swift = new Swift_Mailer($connection);
+            $message = new Swift_Message();
 
             $message
                 ->setFrom($from)
@@ -878,6 +928,9 @@ class MailCore extends ObjectModel
     /**
      * Automatically convert email to Punycode.
      *
+     * Try to use INTL_IDNA_VARIANT_UTS46 only if defined, else use INTL_IDNA_VARIANT_2003
+     * See https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003
+     *
      * @param string $to Email address
      *
      * @return string
@@ -889,7 +942,19 @@ class MailCore extends ObjectModel
             return $to;
         }
 
-        return $address[0] . '@' . idn_to_ascii($address[1], 0, INTL_IDNA_VARIANT_UTS46);
+        if (defined('INTL_IDNA_VARIANT_UTS46')) {
+            return $address[0] . '@' . idn_to_ascii($address[1], 0, INTL_IDNA_VARIANT_UTS46);
+        }
+
+        /*
+         * INTL_IDNA_VARIANT_2003 const will be removed in PHP 8.
+         * See https://wiki.php.net/rfc/deprecate-and-remove-intl_idna_variant_2003
+         */
+        if (defined('INTL_IDNA_VARIANT_2003')) {
+            return $address[0] . '@' . idn_to_ascii($address[1], 0, INTL_IDNA_VARIANT_2003);
+        }
+
+        return $address[0] . '@' . idn_to_ascii($address[1]);
     }
 
     /**

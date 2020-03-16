@@ -22,18 +22,34 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
+{if $page.page_name != 'cart'}
 <div id="_desktop_cart">
   <div class="blockcart {*cart-preview*} {if $cart.products_count > 0}active{else}inactive{/if}" data-refresh-url="{$refresh_url}">
     <div class="header">
-      {if $cart.products_count > 0}
       <a rel="nofollow" href="{$cart_url}">
-      {/if}
       <i class="material-icons shopping-cart">shopping_cart</i>
-      {*<span class="hidden-sm-down">{l s='Cart' d='Shop.Theme.Checkout'}</span>*}
       <span class="cart-products-count">{if $cart.products_count > 99}99+{elseif $cart.products_count > 0 }{$cart.products_count}{else} {/if}</span>
-      {if $cart.products_count > 0}
       </a>
-      {/if}
+    </div>
+    <div class="body hidden-xs-up">
+      <ul>
+        {foreach from=$cart.products item=product}
+          <li>{include 'module:ps_shoppingcart/ps_shoppingcart-product-line.tpl' product=$product}</li>
+        {/foreach}
+      </ul>
+      <div class="cart-subtotals">
+        {foreach from=$cart.subtotals item="subtotal"}
+          <div class="{$subtotal.type}">
+            <span class="label">{$subtotal.label}</span>
+            <span class="value">{$subtotal.amount}</span>
+          </div>
+        {/foreach}
+      </div>
+      <div class="cart-total">
+        <span class="label">{$cart.totals.total.label}</span>
+        <span class="value">{$cart.totals.total.amount}</span>
+      </div>
     </div>
   </div>
 </div>
+{/if}

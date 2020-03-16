@@ -1082,7 +1082,7 @@ class Ps_EmailAlerts extends Module
                         'is_bool' => true,
                         'label' => '新訊息',
                         'name' => 'CONTACTFORM_SEND_NOTIFICATION_EMAIL',
-                        'desc' => '聯絡我們表單送出後，資料會記錄在後台的「客服問答」。若您需要新訊息通知，請設定「是」，系統會發送 E-Mail 通知您。',
+                        'desc' => '聯絡我們有新訊息時發送通知信。聯絡我們訊息亦會記錄在後台的「客服問答」。',
                         'values' => array(
                             array(
                                 'id' => 'active_on',

@@ -12,17 +12,17 @@
 @import "components/header";
 @import "components/checkout";
 @import "components/customer";
-@import "components/forgotten-password";
-@import "components/renew-password";
+// @import "components/forgotten-password";
+// @import "components/renew-password";
 @import "components/imageslider";
 @import "components/featuredproducts";
 @import "components/custom-text";
 @import "components/categories";
 @import "components/products";
 @import "components/cart";
-@import "components/block-reassurance";
+// @import "components/block-reassurance";
 @import "components/quickview";
-@import "components/stores";
+// @import "components/stores";
 @import "components/footer";
 @import "components/contact";
 @import "components/errors";
@@ -32,6 +32,7 @@
 @import "components/faq";
 @import "components/cms";
 @import "components/socialfollow";
+@import "components/sociallogin";
 
 // @import "components/sitemap";
 
@@ -280,11 +281,26 @@ button:focus {
 }
 
 .table-bordered {
+  thead {
+    th, td {
+      border-bottom-width: 1px;
+    }
+  }
   th, td {
     border: 1px solid $table-border-color;
   }
+
+  &.table-order {
+    th, td {
+      border: 1px solid $gray-lighter;
+    }
+  }
 }
 
+img.lazyload:not([src]) {
+  // visibility: hidden;
+  opacity: 0.001;
+}
 
 
 // dark mode

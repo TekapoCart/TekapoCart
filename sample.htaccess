@@ -12,9 +12,7 @@ RewriteEngine on
 
 #Domain: shop1.presta.shop
 RewriteRule . - [E=REWRITEBASE:/]
-RewriteRule ^api$ api/ [L]
-
-RewriteRule ^api/(.*)$ %{ENV:REWRITEBASE}webservice/dispatcher.php?url=$1 [QSA,L]
+RewriteRule ^api(?:/(.*))?$ %{ENV:REWRITEBASE}webservice/dispatcher.php?url=$1 [QSA,L]
 
 # Images
 RewriteRule ^([0-9])(\-[_a-zA-Z0-9-]*)?(-[0-9]+)?/.+\.jpg$ %{ENV:REWRITEBASE}img/p/$1/$1$2$3.jpg [L]
@@ -36,7 +34,6 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ %{ENV:REWRITEBASE}index.php [NC,L]
-</IfModule>
 
 AddType application/vnd.ms-fontobject .eot
 AddType font/ttf .ttf
@@ -54,7 +51,7 @@ AddType font/woff2 .woff2
 </FilesMatch>
 
 #If rewrite mod isn't enabled
-ErrorDocument 404 /index.php?controller=404
-ErrorDocument 403 /index.php?controller=404
+ErrorDocument 404 /page-not-found
+ErrorDocument 403 /page-not-found
 
 # ~~end~~ Do not remove this comment, Prestashop will keep automatically the code outside this comment when .htaccess will be generated again

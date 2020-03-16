@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -39,7 +39,9 @@ if (_PS_MODE_DEV_ === true) {
     define('_PS_DEBUG_SQL_', false);
 }
 
-define('_PS_DEBUG_PROFILING_', false);
+if (!defined('_PS_DEBUG_PROFILING_')) {
+    define('_PS_DEBUG_PROFILING_', false);
+}
 define('_PS_MODE_DEMO_', false);
 
 $currentDir = dirname(__FILE__);
@@ -68,7 +70,7 @@ if (defined('_PS_ADMIN_DIR_')) {
 }
 if (!defined('_PS_CACHE_DIR_')) {
     $prestashopCacheDir =  _PS_ROOT_DIR_.'/var/cache/'.(_PS_MODE_DEV_ ? 'dev': 'prod'). DIRECTORY_SEPARATOR;
-    define('_PS_CACHE_DIR_',$prestashopCacheDir);
+    define('_PS_CACHE_DIR_', $prestashopCacheDir);
 }
 define('_PS_CONFIG_DIR_', _PS_CORE_DIR_.'/config/');
 define('_PS_CUSTOM_CONFIG_FILE_', _PS_CONFIG_DIR_.'settings_custom.inc.php');
@@ -132,7 +134,9 @@ define('_PS_SUPP_IMG_DIR_', _PS_IMG_DIR_.'su/');
 define('_PS_TMP_IMG_DIR_', _PS_IMG_DIR_.'tmp/');
 
 // suzy: 2019-01-05 貼紙功能
-define('_PS_STICKER_IMG_DIR_', _PS_IMG_DIR_.'/cms/sticker/');
+define('_PS_STICKER_IMG_DIR_', _PS_IMG_DIR_.'cms/sticker/');
+// suzy: 2020-02-23 更改模組圖片儲存路徑
+define('_PS_MOD_IMG_DIR_', _PS_IMG_DIR_.'mod/');
 
 /* settings php */
 define('_PS_TRANS_PATTERN_', '(.*[^\\\\])');

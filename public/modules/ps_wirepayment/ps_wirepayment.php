@@ -87,16 +87,31 @@ class Ps_Wirepayment extends PaymentModule
                                         '{bankwire_details}' => nl2br(Configuration::get('BANK_WIRE_DETAILS')),
                                         '{bankwire_address}' => nl2br(Configuration::get('BANK_WIRE_ADDRESS')),
                                         // suzy: 2018-10-28 顯示保留天數
-                                        '{bankwire_reservation_days}' => Configuration::get('BANK_WIRE_RESERVATION_DAYS'),
+                                        // '{bankwire_reservation_days}' => Configuration::get('BANK_WIRE_RESERVATION_DAYS'),
                                         // suzy: 2018-11-02 顯示匯款完成提醒訊息
-                                        '{bankwireCustomText}' => Tools::nl2br(Configuration::get('BANK_WIRE_CUSTOM_TEXT', $this->context->language->id)),
+                                        '{bankwire_custom_text}' => Tools::nl2br(Configuration::get('BANK_WIRE_CUSTOM_TEXT', $this->context->language->id)),
+                                        // suzy: 2019-11-19 翻譯
+                                        '{bankwire_trans_subtitle}' => $this->trans('Payment Info', array(), 'Modules.Wirepayment.Shop'),
+                                        '{bankwire_trans_owner}' => $this->trans('Name of account owner', array(), 'Modules.Wirepayment.Shop'),
+                                        '{bankwire_trans_bank}' => $this->trans('Bank name', array(), 'Modules.Wirepayment.Shop'),
+                                        '{bankwire_trans_reserve_msg}' => $this->trans(
+                                            'Goods will be reserved %s days for you and we\'ll process the order immediately after receiving the payment.',
+                                            [
+                                                '%s' => Configuration::get('BANK_WIRE_RESERVATION_DAYS'),
+                                            ],
+                                            'Modules.Wirepayment.Shop'),
                                         );
     }
 
     public function install()
     {
         Configuration::updateValue(self::FLAG_DISPLAY_PAYMENT_INVITE, true);
-        if (!parent::install() || !$this->registerHook('paymentReturn') || !$this->registerHook('paymentOptions')) {
+        if (!parent::install()
+            || !$this->registerHook('paymentReturn')
+            || !$this->registerHook('paymentOptions')
+            || !$this->registerHook('displayAdminOrderTabOrder')
+            || !$this->registerHook('displayAdminOrderContentOrder')
+        ) {
             return false;
         }
         return true;
@@ -214,15 +229,14 @@ class Ps_Wirepayment extends PaymentModule
 //        if (!$this->active || !Configuration::get(self::FLAG_DISPLAY_PAYMENT_INVITE)) {
 //            return;
 //        }
-        if (!$this->active) {
-            return;
-        }
 
         $state = $params['order']->getCurrentState();
         if (
             in_array(
                 $state,
                 array(
+                    // suzy: 2020-01-27 支援舊 state 10
+                    10,
                     Configuration::get('PS_OS_BANKWIRE'),
                     Configuration::get('PS_OS_OUTOFSTOCK'),
                     Configuration::get('PS_OS_OUTOFSTOCK_UNPAID'),
@@ -323,6 +337,25 @@ class Ps_Wirepayment extends PaymentModule
         return $this->fetch('module:ps_wirepayment/views/templates/hook/order_detail.tpl');
     }
 
+    // suzy: 2020-01-27 後台訂單詳細頁籤
+    public function hookDisplayAdminOrderTabOrder($params)
+    {
+        if ($params['order']->module === 'ps_wirepayment') {
+            $this->smarty->assign(array(
+                'tab_title' => $this->trans('Pay by bank wire', array(), 'Modules.Wirepayment.Shop'),
+            ));
+            return $this->display(__FILE__, '/views/templates/hook/tab_order.tpl');
+        }
+
+    }
+
+    // suzy: 2020-01-27 後台訂單詳細頁籤內容
+    public function hookDisplayAdminOrderContentOrder($params)
+    {
+        if ($params['order']->module === 'ps_wirepayment') {
+            return $this->display(__FILE__, '/views/templates/hook/content_order.tpl');
+        }
+    }
 
     public function checkCurrency($cart)
     {
@@ -371,6 +404,14 @@ class Ps_Wirepayment extends PaymentModule
                 ),
                 'submit' => array(
                     'title' => $this->trans('Save', array(), 'Admin.Actions'),
+                ),
+                // suzy: 2020-01-29 加返迴按鈕
+                'buttons' => array(
+                    array(
+                        'href' => $this->context->link->getAdminLink('AdminPayment', false).'&token='.Tools::getAdminTokenLite('AdminPayment'),
+                        'title' => '返回金物流模組',
+                        'icon' => 'process-icon-back'
+                    )
                 )
             ),
         );

@@ -29,7 +29,7 @@
 {/block}
 
 {block name='page_content'}
-  <form id="guestOrderTrackingForm" action="{$urls.pages.guest_tracking}" method="get">
+  <form id="guestOrderTrackingForm" action="{$urls.pages.guest_tracking}" method="post">
     <header>
       <p>{l s='To track your order, please enter the following information:' d='Shop.Theme.Customeraccount'}</p>
     </header>

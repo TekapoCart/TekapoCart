@@ -22,7 +22,7 @@ File: controllers/admin/AdminPaymentPreferencesController.php:256</note>
       </trans-unit>
       <trans-unit id="27acfbd58a7ff9f12c9ac05dd94733c5" approved="yes">
         <source>Please mark each checkbox for the carrier, or carrier, for which you want the payment module(s) to be available.</source>
-        <target xml:lang="zh-TW">請選擇這個付款模組適用的承運商。</target>
+        <target xml:lang="zh-TW">請選擇這個付款模組適用的配送方式。</target>
         <note>Context:
 File: controllers/admin/AdminPaymentPreferencesController.php:263</note>
       </trans-unit>

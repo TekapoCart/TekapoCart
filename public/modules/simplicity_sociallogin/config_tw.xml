@@ -3,7 +3,7 @@
     <name>simplicity_sociallogin</name>
     <displayName><![CDATA[Social Login 社群登入]]></displayName>
     <version><![CDATA[1.0.0]]></version>
-    <description><![CDATA[支援使用 Facebook 帳號登入。]]></description>
+    <description><![CDATA[支援使用 Google、Facebook 會員登入。]]></description>
     <author><![CDATA[TekapoCart]]></author>
     <tab><![CDATA[]]></tab>
     <is_configurable>1</is_configurable>

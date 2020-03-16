@@ -31,8 +31,6 @@
   /*margin-bottom: 0.625rem;*/
 }
 .block-contact {
-  border-left: $gray-light 2px solid;
-  padding-left: 3rem;
   color: $gray;
   font-size: 0.875rem;
   .block-contact-title{
@@ -60,6 +58,12 @@
 .block-social {
   text-align: center;
   margin-top: 1em;
+  ul {
+    // display: flex;
+    @include media-breakpoint-down(sm) {
+      flex-flow: wrap;
+    }
+  }
 }
 .block-social li {
   height: 2.5rem;
@@ -69,6 +73,15 @@
   display: inline-block;
   margin: 0.125rem;
   cursor: pointer;
+
+  @include media-breakpoint-down(sm) {
+    // height: 2rem;
+    // width: 2rem;
+    // margin-right: 1.3rem;
+    // margin-bottom: 1.3rem;
+    background-size: contain;
+  }
+
   &:hover {
     background-color: $social-background-hover;
   }

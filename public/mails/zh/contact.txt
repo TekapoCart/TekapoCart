@@ -1,0 +1,20 @@
+此信件为系统自动传送，请勿直接回复，感谢您的配合。
+如要确保收到信件，可将此信箱加入通讯录。
+
+{shop_url}
+
+来自店铺{shop_name} 客户的留言
+
+Customer Email Address: {email}
+
+Order ID #:  {order_name}
+
+附件： {attached_file}
+
+客户留言：
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

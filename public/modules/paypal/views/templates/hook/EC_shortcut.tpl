@@ -1,5 +1,5 @@
 {*
-* 2007-2018 PrestaShop
+* 2007-2019 PrestaShop
 *
 * NOTICE OF LICENSE
 *
@@ -17,10 +17,11 @@
 * versions in the future. If you wish to customize PrestaShop for your
 * needs please refer to http://www.prestashop.com for more information.
 *
-*  @author    PrestaShop SA <contact@prestashop.com>
-*  @copyright 2007-2018 PrestaShop SA
-*  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
-*  International Registered Trademark & Property of PrestaShop SA
+*  @author 2007-2019 PayPal
+ *  @author 202 ecommerce <tech@202-ecommerce.com>
+*  @copyright PayPal
+*  @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+*
 *}
 
 <div id="container_express_checkout" style="float:right; margin: 10px 40px 0 0">
@@ -30,7 +31,6 @@
         <input type="hidden" name="combination" value="" id="paypal_combination"/>
         <input type="hidden" name="express_checkout" value="{$PayPal_payment_type|escape:'htmlall':'UTF-8'}"/>
         <input type="hidden" name="current_shop_url" id="paypal_url_page" value="" />
-        <input type="hidden" name="bn" value="{$PayPal_tracking_code|escape:'htmlall':'UTF-8'}" />
         <input type="hidden" id="in_context_checkout_enabled" value="0">
         <input type="hidden" id="source_page"  name="source_page" value="product">
         <input type="hidden" id="es_cs_product_attribute" value="{$es_cs_product_attribute|escape:'htmlall':'UTF-8'}" />

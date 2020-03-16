@@ -29,12 +29,15 @@
 {/block}
 
 {block name='head' append}
+  <meta property="fb:app_id" content="{$shop.fb_app_id}">
   <meta property="og:type" content="product">
   <meta property="og:url" content="{$urls.current_url}">
   <meta property="og:title" content="{$page.meta.title}">
   <meta property="og:site_name" content="{$shop.name}">
   <meta property="og:description" content="{$page.meta.description}">
   <meta property="og:image" content="{$product.cover.large.url}">
+  <meta property="og:image:width" content="{$product.cover.bySize.large_default.width}">
+  <meta property="og:image:height" content="{$product.cover.bySize.large_default.height}">
   <meta property="product:pretax_price:amount" content="{$product.price_tax_exc}">
   <meta property="product:pretax_price:currency" content="{$currency.iso_code}">
   <meta property="product:price:amount" content="{$product.price_amount}">
@@ -43,6 +46,10 @@
   <meta property="product:weight:value" content="{$product.weight}">
   <meta property="product:weight:units" content="{$product.weight_unit}">
   {/if}
+  <meta property="twitter:title" content="{$page.meta.title}">
+  <meta property="twitter:image" content="{$product.cover.bySize.large_default.url}">
+  <meta name="twitter:image:width" content="{$product.cover.bySize.large_default.width}">
+  <meta name="twitter:image:height" content="{$product.cover.bySize.large_default.height}">
 {/block}
 
 {block name='content'}

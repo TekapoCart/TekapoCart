@@ -1,0 +1,46 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+如要確保收到信件，可將此信箱加入通訊錄。
+
+{shop_url}
+
+恭喜！
+
+A new order was placed on {shop_name} by the following customer: {firstname} {lastname} ({email})
+
+訂單明細
+
+訂單編號： {order_name} 訂購日期： {date}
+
+付款方式： {payment}
+
+編號	商品	單價	數量	金額   {items}
+商品	{total_products}
+折扣	{total_discounts}
+禮品包裝	{total_wrapping}
+運費	{total_shipping}
+Including total tax	{total_tax_paid}
+總計	{total_paid}
+
+Carrier
+
+配送方式： {carrier}
+
+付款方式： {payment}
+
+配送地址
+
+{delivery_block_html}
+
+帳單地址
+
+{invoice_block_html}
+
+客戶訊息：
+
+{message}
+
+查看訂單狀態請至「[訂單查詢]({guest_tracking_url})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

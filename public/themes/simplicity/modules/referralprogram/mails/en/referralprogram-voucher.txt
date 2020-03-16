@@ -1,0 +1,17 @@
+Please do not reply directly to this email, we will not receive it.
+Adding our email address as a contact to ensure all messages are delivered to your Inbox.
+
+{shop_url}
+
+Hi {firstname} {lastname},
+
+Sponsorship Program
+
+We have created a voucher in your name for referring a friend.
+Here is the code of your voucher: {voucher_num}, with an amount of {voucher_num}
+
+Simply copy/paste this code during the payment process for your next order.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

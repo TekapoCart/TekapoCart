@@ -49,7 +49,7 @@
       </trans-unit>
       <trans-unit id="bdf0482e95f48fd33fae3765df4dcf06">
         <source>Please set up the following sitemap URL in your Google Webmaster account:</source>
-        <target xml:lang="zh-TW">請在您的 Google Webmaster 帳戶中設定以下網址：（只需設定一次）</target>
+        <target xml:lang="zh-TW">請在您的 Google Search Console 帳戶中設定以下網址：（只需設定一次）</target>
         <note>Line: 52</note>
       </trans-unit>
       <trans-unit id="8d260d2aae84bcc75ba695a141c1fa11">

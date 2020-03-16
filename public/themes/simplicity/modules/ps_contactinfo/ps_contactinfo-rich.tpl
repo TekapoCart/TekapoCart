@@ -38,7 +38,7 @@
     <hr/>
   {/if}
 
-  {* if $contact_infos.email}
+  {if $contact_infos.email && $display_email}
     <div class="block">
       <div class="icon"><i class="material-icons">&#xE158;</i></div>
       <div class="data email">
@@ -47,7 +47,7 @@
       </div>
     </div>
     <hr/>
-  {/if *}
+  {/if}
 
   {if $contact_infos.phone}
     <div class="block">

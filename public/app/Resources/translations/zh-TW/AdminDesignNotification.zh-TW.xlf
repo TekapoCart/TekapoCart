@@ -32,7 +32,7 @@ File: controllers/admin/AdminThemesController.php:377</note>
       </trans-unit>
       <trans-unit id="3cb5c48f468125102a98fe83a277029d" approved="yes">
         <source>Warning: if no email logo is available, the main logo will be used instead.</source>
-        <target xml:lang="zh-TW">警告：如沒有定義電郵徽標，將會改用主徽標。</target>
+        <target xml:lang="zh-TW">若無通知信 LOGO，將使用網站 LOGO。</target>
         <note>Context:
 File: controllers/admin/AdminThemesController.php:423</note>
       </trans-unit>

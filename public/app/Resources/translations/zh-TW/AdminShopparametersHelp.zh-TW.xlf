@@ -246,7 +246,7 @@ File: controllers/admin/AdminGroupsController.php:111</note>
       </trans-unit>
       <trans-unit id="e3e0c764f81f1a3677d59aa238fddd14" approved="yes">
         <source>The group defined for your identified guest customers (used in guest checkout).</source>
-        <target xml:lang="zh-TW">這個群組用來識別訪客客戶（用在訪客結帳）</target>
+        <target xml:lang="zh-TW">這個群組用來識別有訂單的訪客（用在訪客結帳）</target>
         <note>Context:
 File: controllers/admin/AdminGroupsController.php:119</note>
       </trans-unit>
@@ -276,22 +276,22 @@ File: controllers/admin/AdminGroupsController.php:330</note>
       </trans-unit>
       <trans-unit id="d38245fbe312b2dafef8450b67e94f50" approved="yes">
         <source>%group_name% - All persons without a customer account or customers that are not logged in.</source>
-        <target xml:lang="zh-TW">%group_name% - 未成為會員，無結帳記錄。</target>
+        <target xml:lang="zh-TW">%group_name% ：非會員，無結帳。</target>
         <note>Line: 612</note>
       </trans-unit>
       <trans-unit id="5125d0fd7b81fee95b7e4b7689a878a9" approved="yes">
         <source>%group_name% - All persons who placed an order through Guest Checkout.</source>
-        <target xml:lang="zh-TW">%group_name% - 未成為會員，有結帳記錄。</target>
+        <target xml:lang="zh-TW">%group_name% ：非會員，有結帳。</target>
         <note>Line: 613</note>
       </trans-unit>
       <trans-unit id="96f090b06e329e3d192c0ea3701f8cb5" approved="yes">
         <source>%group_name% - All persons who created an account on this site.</source>
-        <target xml:lang="zh-TW">%group_name% - 有成為會員，有結帳記錄。</target>
+        <target xml:lang="zh-TW">%group_name% ：已成為會員。</target>
         <note>Line: 614</note>
       </trans-unit>
       <trans-unit id="a2ce271cf6d8afe81168fbfc4ccb492c" approved="yes">
         <source>PrestaShop has three default customer groups:</source>
-        <target xml:lang="zh-TW">TekapoCart 有三個預設群組：</target>
+        <target xml:lang="zh-TW">TekapoCart 預設客戶群組定義說明：</target>
         <note>Line: 616</note>
       </trans-unit>
     </body>
@@ -322,19 +322,19 @@ File: controllers/admin/AdminReferrersController.php:272</note>
     <body>
       <trans-unit id="500294c9fd031bb4f00a82b5d27dc22c" approved="yes">
         <source>If you own an SSL certificate for your shop's domain name, you can activate SSL encryption (https://) for customer account identification and order processing.</source>
-        <target xml:lang="zh-TW">如果您的主機商提供 SSL 證書 ，您可以啟用 SSL 加密 (https://) 來保護客戶的帳戶資料與訂單處理資訊。</target>
+        <target xml:lang="zh-TW">如果您的主機支援 SSL 憑證，您可以啟用 SSL 連線來保護客戶的個人資料與訂單資訊。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/preferences.html.twig:49</note>
       </trans-unit>
       <trans-unit id="d86a9baf93dba6b27dbbb04cef8d3aae" approved="yes">
         <source>When enabled, all the pages of your shop will be SSL-secured.</source>
-        <target xml:lang="zh-TW">強迫所有商店使用SSL。</target>
+        <target xml:lang="zh-TW">強制全部商店使用 SSL 連線。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/preferences.html.twig:60</note>
       </trans-unit>
       <trans-unit id="a1202480ddcd8665114515ca380c0e5b" approved="yes">
         <source>Enable or disable token in the Front Office to improve PrestaShop's security.</source>
-        <target xml:lang="zh-TW">啟用或停用前台憑證來加強商店的安全</target>
+        <target xml:lang="zh-TW">啟用或停用前台 token（通行證）來加強商店的安全</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/preferences.html.twig:66</note>
       </trans-unit>

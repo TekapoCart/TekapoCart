@@ -1,0 +1,17 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+如要確保收到信件，可將此信箱加入通訊錄。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+Sponsorship Program
+
+為了感謝您的推薦，我們已發出優惠折扣碼給您。
+優惠折扣碼： {voucher_num}，金額為 {voucher_num}
+
+只需在訂購流程複製/貼上此代碼。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -292,7 +292,7 @@ File: themes/classic/modules/ps_contactinfo/ps_contactinfo-rich.tpl:27</note>
       </trans-unit>
       <trans-unit id="1300caaefd15b839f37952dc7cc75d82" approved="yes">
         <source>Call us:</source>
-        <target xml:lang="ja">お電話ください：</target>
+        <target xml:lang="ja">お問い合わせ専用電話番号</target>
         <note>Context:
 File: themes/classic/modules/ps_contactinfo/ps_contactinfo-rich.tpl:37</note>
       </trans-unit>
@@ -376,7 +376,7 @@ File: themes/classic/templates/errors/not-found.tpl:29</note>
     <body>
       <trans-unit id="44749712dbec183e983dcd78a7736c41" approved="yes">
         <source>Date</source>
-        <target xml:lang="ja">注文日時</target>
+        <target xml:lang="ja">注文日</target>
         <note>Context:
 File: themes/classic/templates/customer/order-detail.tpl:188</note>
       </trans-unit>

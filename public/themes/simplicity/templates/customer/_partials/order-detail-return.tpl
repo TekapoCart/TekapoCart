@@ -26,7 +26,8 @@
   <form id="order-return-form" action="{$urls.pages.order_follow}" method="post">
 
     <div class="box hidden-sm-down">
-      <table id="order-products" class="table table-bordered return">
+      <h3>{l s='Order items' d='Shop.Theme.Checkout'}</h3>
+      <table id="order-products" class="table table-bordered return table-order">
         <thead class="thead-default">
           <tr>
             <th class="head-checkbox"><input type="checkbox"/></th>

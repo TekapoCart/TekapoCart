@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -155,19 +155,9 @@ class AdminQuickAccessesControllerCore extends AdminController
 
     public function getQuickAccessesList()
     {
-        $links = QuickAccess::getQuickAccesses($this->context->language->id);
+        $links = QuickAccess::getQuickAccessesWithToken($this->context->language->id, (int) $this->context->employee->id);
 
-        return json_encode(array_map(array($this, 'getLinkToken'), $links));
-    }
-
-    public function getLinkToken($item)
-    {
-        $url = parse_url($item['link']);
-        parse_str($url['query'], $query);
-        $controller = $query['controller'];
-        $item['token'] = Tools::getAdminTokenLite($controller);
-
-        return $item;
+        return json_encode($links);
     }
 
     public function addQuickLink()

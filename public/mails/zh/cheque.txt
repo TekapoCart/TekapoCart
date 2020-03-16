@@ -1,0 +1,26 @@
+此信件为系统自动传送，请勿直接回复，感谢您的配合。
+如要确保收到信件，可将此信箱加入通讯录。
+
+{shop_url}
+
+您好 {firstname} {lastname},
+
+Thank you for shopping with {shop_name}!
+
+Order ID {order_name} - Awaiting payment by check
+
+Your order with the reference {order_name} has been placed successfully. You can expect delivery as soon as your payment is received.
+
+Payment method: check
+
+You have decided to pay by bank check. Here is the information you need for your check:
+
+金额  {total_paid}
+
+收款人：  {check_name}
+
+请邮寄支票到：  {check_address_html}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

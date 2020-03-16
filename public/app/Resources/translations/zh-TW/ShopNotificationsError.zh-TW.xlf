@@ -64,6 +64,11 @@ File: modules/trackingfront/trackingfront.php:99</note>
         <note>Context:
 File: classes/form/CustomerForm.php:114</note>
       </trans-unit>
+      <trans-unit id="eefb581d7c421334e62a68223c7a242a">
+        <source>The email is already used, please choose another one or sign in</source>
+        <target xml:lang="zh-TW">E-Mail 已被使用，請用另一個 E-Mail 或登入</target>
+        <note>Line: 112</note>
+      </trans-unit>
     </body>
   </file>
   <file original="classes/stock/SupplyOrderDetail.php" source-language="en" target-language="zh-TW" datatype="plaintext">
@@ -166,7 +171,7 @@ File: classes/CartRule.php:655</note>
       </trans-unit>
       <trans-unit id="fd6034a1544218709264bfa5c70ffb69" approved="yes">
         <source>You cannot use this voucher in your country of delivery</source>
-        <target xml:lang="zh-TW">此優惠券不適用於您送貨的國家</target>
+        <target xml:lang="zh-TW">此優惠券不適用於您配送的國家</target>
         <note>Context:
 File: classes/CartRule.php:663</note>
       </trans-unit>
@@ -512,7 +517,7 @@ File: controllers/front/OrderController.php:67</note>
     <body>
       <trans-unit id="ea34b5c6cf6511c7c9e23cf7bf5d6792" approved="yes">
         <source>Your address is incomplete, please update it.</source>
-        <target xml:lang="zh-TW">您的地址不完整，請更新。</target>
+        <target xml:lang="zh-TW">配送資訊格式有誤，請重新編輯。</target>
         <note>Context:
 File: themes/classic/templates/checkout/_partials/steps/addresses.tpl:116</note>
       </trans-unit>
@@ -542,13 +547,13 @@ File: controllers/front/IdentityController.php:60</note>
     <body>
       <trans-unit id="ddb329ec6521925a245fbe1334d2ce18" approved="yes">
         <source>Please provide the required information</source>
-        <target xml:lang="zh-TW">請完整提供必填資訊</target>
+        <target xml:lang="zh-TW">請填寫必填資訊</target>
         <note>Context:
 File: controllers/front/GuestTrackingController.php:63</note>
       </trans-unit>
       <trans-unit id="ac68011e87111c9833dab09935bd88f3" approved="yes">
         <source>We couldn't find your order with the information provided, please try again</source>
-        <target xml:lang="zh-TW">我們使用所提供的信息找不到您的購物訂單，請重試</target>
+        <target xml:lang="zh-TW">查無訂單或輸入資訊有誤，請重新輸入</target>
         <note>Context:
 File: controllers/front/GuestTrackingController.php:83</note>
       </trans-unit>
@@ -616,7 +621,7 @@ File: controllers/front/CartController.php:606</note>
       </trans-unit>
       <trans-unit id="9a7c79186c1ff1cd48b31ed6caf6ff48" approved="yes">
         <source>The item %product% in your cart is no longer available in this quantity. You cannot proceed with your order until the quantity is adjusted.</source>
-        <target xml:lang="zh-TW">你的購物車中的項目（%product%）沒有足夠的庫存。請調整數量再繼續下單。</target>
+        <target xml:lang="zh-TW">商品（%product%）庫存不足，請先調整購物車數量再繼續結帳流程。</target>
         <note>Context:
 File: controllers/front/CartController.php:599</note>
       </trans-unit>

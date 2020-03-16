@@ -1,0 +1,18 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+{lastname} {firstname} 様
+
+{meta_products}
+
+注文番号 {order_name} - 送信中
+
+Your order with the reference {order_name} is on its way.
+
+次のリンクよりご注文商品の配送状況をご確認いただけます： {followup}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

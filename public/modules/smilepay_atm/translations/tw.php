@@ -2,7 +2,7 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_ec02595c27d5f172d9ff8d8cddc7143b'] = 'ATM 虛擬帳號';
+$_MODULE['<{smilepay_atm}prestashop>smilepay_atm_ec02595c27d5f172d9ff8d8cddc7143b'] = 'SmilePay ATM 虛擬帳號';
 $_MODULE['<{smilepay_atm}prestashop>smilepay_atm_fa214007826415a21a8456e3e09f999d'] = '您確定移除設定資料？';
 $_MODULE['<{smilepay_atm}prestashop>smilepay_atm_b5f2ad24bfa2d2eb49e86020aa246df4'] = '商家代號、商家驗證參數需正確設定模組中。';
 $_MODULE['<{smilepay_atm}prestashop>smilepay_atm_4402acab1c8f90dcf4a31dc96833bd86'] = '沒有相關貨幣可以設定';

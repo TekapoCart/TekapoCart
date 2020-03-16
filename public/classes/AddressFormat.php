@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -29,6 +29,8 @@
  */
 class AddressFormatCore extends ObjectModel
 {
+    const FORMAT_NEW_LINE = "\n";
+
     /** @var int $id_address_format Address format */
     public $id_address_format;
 
@@ -150,8 +152,10 @@ class AddressFormatCore extends ObjectModel
                 ': ' . $className . ': ' . $fieldName;
             }
 
-            unset($obj);
-            unset($reflect);
+            unset(
+                $obj,
+                $reflect
+            );
         }
 
         return $isValid;
@@ -215,7 +219,7 @@ class AddressFormatCore extends ObjectModel
         $fieldsValidate = Address::getFieldsValidate();
         $usedKeyList = array();
 
-        $multipleLineFields = explode("\n", $this->format);
+        $multipleLineFields = explode(self::FORMAT_NEW_LINE, $this->format);
         if ($multipleLineFields && is_array($multipleLineFields)) {
             foreach ($multipleLineFields as $lineField) {
                 if (($patternsName = preg_split(self::_CLEANING_REGEX_, $lineField, -1, PREG_SPLIT_NO_EMPTY))) {
@@ -386,7 +390,7 @@ class AddressFormatCore extends ObjectModel
      *
      * @return string
      */
-    public static function generateAddress(Address $address, $patternRules = array(), $newLine = "\r\n", $separator = ' ', $style = array())
+    public static function generateAddress(Address $address, $patternRules = array(), $newLine = self::FORMAT_NEW_LINE, $separator = ' ', $style = array())
     {
         $addressFields = AddressFormat::getOrderedAddressFields($address->id_country);
         $addressFormatedValues = AddressFormat::getFormattedAddressFieldsValues($address, $addressFields);
@@ -430,7 +434,7 @@ class AddressFormatCore extends ObjectModel
         return AddressFormat::generateAddress(
             $params['address'],
             (isset($params['patternRules']) ? $params['patternRules'] : array()),
-            (isset($params['newLine']) ? $params['newLine'] : "\r\n"),
+            (isset($params['newLine']) ? $params['newLine'] : self::FORMAT_NEW_LINE),
             (isset($params['separator']) ? $params['separator'] : ' '),
             (isset($params['style']) ? $params['style'] : array())
         );
@@ -458,8 +462,10 @@ class AddressFormatCore extends ObjectModel
                     $propertyList[] = $propertyName;
                 }
             }
-            unset($object);
-            unset($reflect);
+            unset(
+                $object,
+                $reflect
+            );
         }
 
         return $propertyList;
@@ -492,8 +498,10 @@ class AddressFormatCore extends ObjectModel
                     }
                 }
             }
-            unset($object);
-            unset($reflect);
+            unset(
+                $object,
+                $reflect
+            );
         }
 
         return $objectList;
@@ -511,7 +519,7 @@ class AddressFormatCore extends ObjectModel
     public static function getOrderedAddressFields($idCountry = 0, $splitAll = false, $cleaned = false)
     {
         $out = array();
-        $fieldSet = explode("\n", AddressFormat::getAddressCountryFormat($idCountry));
+        $fieldSet = explode(AddressFormat::FORMAT_NEW_LINE, AddressFormat::getAddressCountryFormat($idCountry));
         foreach ($fieldSet as $fieldItem) {
             if ($splitAll) {
                 if ($cleaned) {
@@ -586,6 +594,9 @@ class AddressFormatCore extends ObjectModel
         if (empty($out)) {
             $out = $this->getFormatDB(Configuration::get('PS_COUNTRY_DEFAULT'));
         }
+        if (Country::isNeedDniByCountryId($idCountry) && false === strpos($out, 'dni')) {
+            $out .= AddressFormat::FORMAT_NEW_LINE . 'dni';
+        }
 
         return $out;
     }
@@ -593,7 +604,7 @@ class AddressFormatCore extends ObjectModel
     /**
      * @param int $idCountry
      *
-     * @return false|null|string
+     * @return false|string|null
      *
      * @deprecated 1.7.0
      */
@@ -607,7 +618,7 @@ class AddressFormatCore extends ObjectModel
      *
      * @param int $idCountry Country ID
      *
-     * @return false|null|string Address format
+     * @return false|string|null Address format
      *
      * @since 1.7.0
      */
@@ -636,4 +647,93 @@ class AddressFormatCore extends ObjectModel
 
         return array_unique(array_merge($address->getFieldsRequiredDB(), AddressFormat::$requireFormFieldsList));
     }
+
+    public static function generateAddressForStore(Address $address, $patternRules = array(), $newLine = "\r\n", $separator = ' ', $style = array())
+    {
+        $addressFields = AddressFormat::getOrderedAddressFields($address->id_country);
+        $addressFormatedValues = AddressFormat::getFormattedAddressFieldsValues($address, $addressFields);
+
+        // suzy: 2018-09-07 台灣特定 format for 商店資訊
+        if ($address->id_country == 203 && $addressFormatedValues['address1'] !== 'N/A') {
+            $addressText = $addressFormatedValues['city'] . $addressFormatedValues['address1'] . $newLine;
+            $addressText .= $addressFormatedValues['postcode'] . ' ' . $addressFormatedValues['Country:name'];
+            return $addressText;
+        }
+
+        $addressText = '';
+        foreach ($addressFields as $line) {
+            if (($patternsList = preg_split(self::_CLEANING_REGEX_, $line, -1, PREG_SPLIT_NO_EMPTY))) {
+                $tmpText = '';
+                foreach ($patternsList as $pattern) {
+                    if ((!array_key_exists('avoid', $patternRules)) ||
+                        (is_array($patternRules) && array_key_exists('avoid', $patternRules) && !in_array($pattern, $patternRules['avoid']))) {
+                        $tmpText .= (isset($addressFormatedValues[$pattern]) && !empty($addressFormatedValues[$pattern])) ?
+                            (((isset($style[$pattern])) ?
+                                    (sprintf($style[$pattern], $addressFormatedValues[$pattern])) :
+                                    $addressFormatedValues[$pattern]).$separator) : '';
+                    }
+                }
+                $tmpText = trim($tmpText);
+                $addressText .= (!empty($tmpText)) ? $tmpText.$newLine: '';
+            }
+        }
+
+        $addressText = preg_replace('/'.preg_quote($newLine, '/').'$/i', '', $addressText);
+        $addressText = rtrim($addressText, $separator);
+
+        return $addressText;
+    }
+
+    public static function generateAddressWithMask(Address $address, $patternRules = array(), $newLine = "\r\n", $separator = ' ', $style = array())
+    {
+        $addressFields = AddressFormat::getOrderedAddressFields($address->id_country);
+        $addressFormatedValues = AddressFormat::getFormattedAddressFieldsValues($address, $addressFields);
+
+        $addressText = '';
+        foreach ($addressFields as $line) {
+
+            if (($patternsList = preg_split(self::_CLEANING_REGEX_, $line, -1, PREG_SPLIT_NO_EMPTY))) {
+                $tmpText = '';
+
+                foreach ($patternsList as $pattern) {
+                    if ((!array_key_exists('avoid', $patternRules)) ||
+                        (is_array($patternRules) && array_key_exists('avoid', $patternRules) && !in_array($pattern, $patternRules['avoid']))) {
+
+                        // suzy: 2018-09-13 處理遮罩
+//                        $tmpText .= (isset($addressFormatedValues[$pattern]) && !empty($addressFormatedValues[$pattern])) ?
+//                            (((isset($style[$pattern])) ?
+//                                    (sprintf($style[$pattern], $addressFormatedValues[$pattern])) :
+//                                    $addressFormatedValues[$pattern]).$separator) : '';
+
+                        if (isset($addressFormatedValues[$pattern]) && !empty($addressFormatedValues[$pattern])) {
+
+                            $maskText = $addressFormatedValues[$pattern];
+                            if ($pattern == 'firstname') {
+                                $maskText = Tools::maskString($maskText, 'name');
+                            } else if ($pattern == 'address1') {
+                                $maskText = Tools::maskString($maskText, 'address');
+                            }
+
+                            if (isset($style[$pattern])) {
+                                $maskText = sprintf($style[$pattern], $maskText);
+                            }
+
+                            $maskText .= $separator;
+                        } else {
+                            $maskText = '';
+                        }
+                        $tmpText .= $maskText;
+                    }
+                }
+                $tmpText = trim($tmpText);
+                $addressText .= (!empty($tmpText)) ? $tmpText.$newLine: '';
+            }
+        }
+
+        $addressText = preg_replace('/'.preg_quote($newLine, '/').'$/i', '', $addressText);
+        $addressText = rtrim($addressText, $separator);
+
+        return $addressText;
+    }
+
 }

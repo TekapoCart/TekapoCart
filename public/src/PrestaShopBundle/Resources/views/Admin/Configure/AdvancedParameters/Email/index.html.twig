@@ -1,5 +1,5 @@
 {#**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,15 +15,24 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *#}
 {% extends '@PrestaShop/Admin/layout.html.twig' %}
 {% trans_default_domain 'Admin.Advparameters.Feature' %}
+
+{# suzy: 2019-10-09 加入「通知信規則」模組連結 #}
+{% set layoutHeaderToolbarBtn = {
+  'add': {
+    'href': getAdminLink('AdminModules', true, {'configure': 'ps_emailalerts'}),
+    'desc': '通知信規則',
+    'icon': 'edit'
+  }
+} %}
 
 {% block content %}
   {% if isEmailLogsEnabled %}

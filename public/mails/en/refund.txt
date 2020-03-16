@@ -1,0 +1,14 @@
+Please do not reply directly to this email, we will not receive it.
+Adding our email address as a contact to ensure all messages are delivered to your Inbox.
+
+{shop_url}
+
+Hi {firstname} {lastname},
+
+Order ID {order_name} - Refund processed
+
+We have processed your refund for your order with the reference {order_name} from {shop_name}.
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

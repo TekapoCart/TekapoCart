@@ -1,5 +1,5 @@
 {**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
@@ -41,8 +41,8 @@
 	{if $input.type == 'text_customer'}
 		{if isset($customer)}
 			<div class="col-lg-9">
-				<a class="btn btn-default" href="?tab=AdminCustomers&amp;id_customer={$customer->id|intval}&amp;viewcustomer&amp;token={$tokenCustomer}">
-					<i class="icon-eye-open"></i> {* suzy: 2018-09-17 調整姓氏 *}{$customer->firstname} {$customer->lastname} ({$customer->email})
+				<a class="btn btn-default" href="{$customer_view_url}">
+					<i class="icon-eye-open"></i> {$customer->lastname} {$customer->firstname} ({$customer->email})
 				</a>
 			</div>
 			<input type="hidden" name="id_customer" value="{$customer->id}" />

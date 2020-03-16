@@ -2,8 +2,8 @@
 <module>
     <name>ps_emailsubscription</name>
     <displayName><![CDATA[訂閱電子報]]></displayName>
-    <version><![CDATA[2.3.0]]></version>
-    <description><![CDATA[新增一張訂閱電子報的表格。]]></description>
+    <version><![CDATA[2.5.0]]></version>
+    <description><![CDATA[顯示訂閱電子報表格。]]></description>
     <author><![CDATA[PrestaShop]]></author>
     <tab><![CDATA[]]></tab>
 	<confirmUninstall><![CDATA[確定要刪除所有的聯絡人？]]></confirmUninstall>

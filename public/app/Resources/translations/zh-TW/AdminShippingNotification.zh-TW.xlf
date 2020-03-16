@@ -28,7 +28,7 @@ File: controllers/admin/AdminCarrierWizardController.php:836</note>
       </trans-unit>
       <trans-unit id="2222c64a45d69edbf16dd5fb81db904b" approved="yes">
         <source>An error occurred while saving carrier zones.</source>
-        <target xml:lang="zh-TW">無法儲存，請檢查承運商配送區域是否有錯誤！</target>
+        <target xml:lang="zh-TW">無法儲存，請檢查配送方式配送區域是否有誤！</target>
         <note>Context:
 File: controllers/admin/AdminCarrierWizardController.php:841</note>
       </trans-unit>

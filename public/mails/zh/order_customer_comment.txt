@@ -1,0 +1,20 @@
+此信件为系统自动传送，请勿直接回复，感谢您的配合。
+如要确保收到信件，可将此信箱加入通讯录。
+
+{shop_url}
+
+您好 {firstname} {lastname},
+
+Message from customer
+
+您收到了一条留言关于订单 {order_name}.
+
+客户 {firstname} {lastname} ({email})
+
+客户留言：
+
+{message}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,5 +1,5 @@
 {**
- * 2007-2017 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,30 +15,53 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2017 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
 {block name='product_miniature_item'}
-  <article data-sticker="{$product.sticker}" class="product-miniature js-product-miniature {if isset($cssClass)}{$cssClass}{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}">
-
-    {if strlen($product.sticker) > 0}<div class="sticker" style="background-image: url('/img/cms/sticker/{$product.sticker}');{if strpos($product.sticker, 'nshift') !== false} top: 0; left: 0;{/if}"></div>{/if}
+  <article data-sticker="{$product.sticker}" class="product-miniature js-product-miniature {if isset($cssClass)}{$cssClass}{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
+    {if strlen($product.sticker) > 0}<div class="sticker" style="background-image: url('{$urls.img_ps_url}cms/sticker/{$product.sticker}');{if strpos($product.sticker, 'nshift') !== false} top: 0; left: 0;{/if}"></div>{/if}
     <div class="thumbnail-container">
       {block name='product_thumbnail'}
-        <a href="{$product.url}" class="thumbnail product-thumbnail">
-          <img
-            alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
-            src="/img/1px.png"
-            {*data-full-size-image-url="{$product.cover.large.url}"*}
-            data-home-default="{$product.cover.bySize.home_default.url}"
-            data-home-default-mobile="{$product.cover.bySize.small_default.url}"
-            class="js_thumbnail_product"
-            {*loading="lazy"*}
-          >
-        </a>
+        {if $product.cover}
+            <a href="{$product.url}" class="thumbnail product-thumbnail">
+              {*<img
+                src="/img/1px.png"
+                alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                data-home-default="{$product.cover.bySize.home_default.url}"
+                data-home-default-mobile="{$product.cover.bySize.small_default.url}"
+                class="js_thumbnail_product"
+              />*}
+              {if $product.cover.bySize.home_default.has_webp}
+                {assign 'type' array('.jpg', '.jpeg', '.png', '.gif')}
+                <img
+                  alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                  data-src-desktop-webp="{$product.cover.bySize.home_default.url|replace:$type:'.webp'}"
+                  data-src-mobile-webp="{$product.cover.bySize.small_default.url|replace:$type:'.webp'}"
+                  data-src-desktop="{$product.cover.bySize.home_default.url}"
+                  data-src-mobile="{$product.cover.bySize.small_default.url}"
+                  data-src="{$product.cover.bySize.home_default.url}"
+                  class="lazyload"
+              />
+              {else}
+                <img
+                  alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:70:'...'}{/if}"
+                  data-src-desktop="{$product.cover.bySize.home_default.url}"
+                  data-src-mobile="{$product.cover.bySize.small_default.url}"
+                  data-src="{$product.cover.bySize.home_default.url}"
+                  class="lazyload"
+                />
+              {/if}
+            </a>
+        {else}
+            <a href="{$product.url}" class="thumbnail product-thumbnail">
+              <img src="{$urls.no_picture_image.bySize.home_default.url}" />
+            </a>
+        {/if}
       {/block}
 
       {* 遮罩專用 品名＆價格 *}

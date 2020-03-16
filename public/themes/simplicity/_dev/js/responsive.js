@@ -25,6 +25,10 @@
 import $ from 'jquery';
 import prestashop from 'prestashop';
 
+// suzy: 2020-02-23 lazysizes
+import lazySizes from './lib/lazysizes.min';
+lazySizes.cfg.init = false;
+
 prestashop.responsive = prestashop.responsive || {};
 
 prestashop.responsive.current_width = window.innerWidth;
@@ -64,24 +68,68 @@ function toggleMobileStyles()
 	});
 }
 
-// suzy: 2018-06-17 列表頁商品圖 桌機手機圖尺寸切換
+// suzy: 支援 webp
+function webpIsSupported(callback)
+{
+    // If the browser doesn't have the method createImageBitmap, you can't display webp format
+    if(!window.createImageBitmap) {
+        callback(false);
+        return;
+    }
+
+    // Base64 representation of a white point image
+    var webpdata = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=';
+
+    // Retrieve the Image in Blob Format
+    fetch(webpdata).then(function(response) {
+        return response.blob();
+    }).then(function(blob) {
+        // If the createImageBitmap method succeeds, return true, otherwise false
+        createImageBitmap(blob).then(function() {
+            callback(true);
+        }, function() {
+            callback(false);
+        });
+    });
+}
+
+// suzy: 桌機手機圖尺寸切換
 function toggleThumbnails()
 {
-    if (prestashop.responsive.mobile) {
-        $('.js_thumbnail_product').each(function(idx) {
-            // var target = $('#' + el.id);
-			if ($(this).attr('data-home-default-mobile').length > 0) {
-                $(this).attr('src', $(this).attr('data-home-default-mobile'));
-			}
-        });
-    } else {
-        $('.js_thumbnail_product').each(function(idx) {
-            // var target = $('#' + el.id);
-			if ($(this).attr('data-home-default').length > 0) {
-                $(this).attr('src', $(this).attr('data-home-default'));
-			}
-        });
-    }
+    webpIsSupported(function(isSupported) {
+
+        if (isSupported) {
+
+            $('.js_toggle_thumbnail').each(function() {
+
+                var device = prestashop.responsive.mobile ? 'mobile' : 'desktop';
+
+                if ($(this).attr('data-src-' + device + '-webp')) {
+                    if ($(this).attr('src') !== $(this).attr('data-src-' + device + '-webp')) {
+                        $(this).attr('src', $(this).attr('data-src-' + device + '-webp'));
+                    }
+                } else if ($(this).attr('data-src-' + device)) {
+                    if ($(this).attr('src') !== $(this).attr('data-src-' + device)) {
+                        $(this).attr('src', $(this).attr('data-src-' + device));
+                    }
+                }
+            });
+
+        } else{
+
+            $('.js_toggle_thumbnail').each(function() {
+
+                var device = prestashop.responsive.mobile ? 'mobile' : 'desktop';
+
+                if ($(this).attr('data-src-' + device)) {
+                    if ($(this).attr('src') !== $(this).attr('data-src-' + device)) {
+                        $(this).attr('src', $(this).attr('data-src-' + device));
+                    }
+                }
+            });
+        }
+    });
+
 }
 
 $(window).on('resize', function() {
@@ -93,6 +141,8 @@ $(window).on('resize', function() {
   prestashop.responsive.mobile = prestashop.responsive.current_width < prestashop.responsive.min_width;
 	if (_toggle) {
 		toggleMobileStyles();
+
+        // suzy: 桌機手機圖尺寸切換
         toggleThumbnails();
 	}
 });
@@ -101,8 +151,51 @@ $(document).ready(function() {
 	if (prestashop.responsive.mobile) {
 		toggleMobileStyles();
 	}
+
+    // suzy: 桌機手機圖尺寸切換
     toggleThumbnails();
+
+	// suzy: 2020-02-23 lazysizes
+    webpIsSupported(function(isSupported) {
+
+        if (isSupported) {
+
+            document.addEventListener('lazybeforeunveil', function(e){
+                if (e.target.hasAttribute('data-src-desktop-webp') && e.target.hasAttribute('data-src-mobile-webp')) {
+                    if (prestashop.responsive.mobile) {
+                        e.target.setAttribute('data-src', e.target.getAttribute('data-src-mobile-webp'));
+                    } else {
+                        e.target.setAttribute('data-src', e.target.getAttribute('data-src-desktop-webp'));
+                    }
+                } else if (e.target.hasAttribute('data-src-desktop') && e.target.hasAttribute('data-src-mobile')) {
+                    if (prestashop.responsive.mobile) {
+                        e.target.setAttribute('data-src', e.target.getAttribute('data-src-mobile'));
+                    } else {
+                        e.target.setAttribute('data-src', e.target.getAttribute('data-src-desktop'));
+                    }
+                }
+            });
+
+            lazySizes.init();
+
+        } else{
+
+            document.addEventListener('lazybeforeunveil', function(e){
+                if (e.target.hasAttribute('data-src-desktop') && e.target.hasAttribute('data-src-mobile')) {
+                    if (prestashop.responsive.mobile) {
+                        e.target.setAttribute('data-src', e.target.getAttribute('data-src-mobile'));
+                    } else {
+                        e.target.setAttribute('data-src', e.target.getAttribute('data-src-desktop'));
+                    }
+                }
+            });
+
+            lazySizes.init();
+        }
+    });
+
 });
 $( document ).ajaxComplete(function() {
+    // suzy: 桌機手機圖尺寸切換
     toggleThumbnails();
 });

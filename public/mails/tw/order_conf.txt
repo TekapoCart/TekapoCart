@@ -1,0 +1,31 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+如要確保收到信件，可將此信箱加入通訊錄。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+感謝您對 {shop_name} 的支持並承蒙訂購！
+
+訂單明細
+
+訂單編號： {order_name}
+
+訂購日期： {date}
+
+付款方式： {payment}
+
+配送方式： {carrier}
+{extra_info}
+
+編號	商品	單價	數量	金額  {products_txt} {discounts_txt}
+運費	{total_shipping}
+總計	{total_paid}
+
+訂單成立但不代表付款成功，請至官網確認訂單狀態，謝謝。
+
+查看訂單狀態請至「[訂單查詢]({guest_tracking_url})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

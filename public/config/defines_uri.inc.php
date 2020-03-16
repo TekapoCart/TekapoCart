@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -57,6 +57,9 @@ define('_THEME_LANG_DIR_', _PS_IMG_.'l/');
 define('_THEME_COL_DIR_', _PS_IMG_.'co/');
 define('_THEME_GENDERS_DIR_', _PS_IMG_.'genders/');
 define('_PS_PROD_IMG_', _PS_IMG_.'p/');
+
+// suzy: 2020-02-23 更改模組圖片儲存路徑
+define('_PS_MOD_IMG_', __PS_BASE_URI__.'img/mod/');
 
 /* Other URLs */
 define('_PS_JS_DIR_', __PS_BASE_URI__.'js/');

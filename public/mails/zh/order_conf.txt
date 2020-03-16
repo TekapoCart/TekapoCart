@@ -1,0 +1,31 @@
+此信件为系统自动传送，请勿直接回复，感谢您的配合。
+如要确保收到信件，可将此信箱加入通讯录。
+
+{shop_url}
+
+您好 {firstname} {lastname},
+
+感谢您对 {shop_name} 的支持并承蒙订购！
+
+订单详细
+
+订单： {order_name}
+
+下单： {date}
+
+支付： {payment}
+
+配送商： {carrier}
+{extra_info}
+
+参考	产品	单价	数量	金额  {products_txt} {discounts_txt}
+配送	{total_shipping}
+总计	{total_paid}
+
+订单成立但不代表付款成功，请至官网确认订单状态，谢谢。
+
+查看订单状态请至「[订单查询]({guest_tracking_url})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

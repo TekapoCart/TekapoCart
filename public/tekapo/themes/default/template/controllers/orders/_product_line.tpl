@@ -1,5 +1,5 @@
 {**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
@@ -182,34 +182,37 @@
 			<div class="{if $product['quantity_refundable'] > 0}col-lg-8{else}col-lg-12{/if}">
 				<label class="control-label">
 					<span class="title_box ">{l s='Amount' d='Admin.Global'}</span>
-					<small class="text-muted">({$smarty.capture.TaxMethod})</small>
-				</label>
-				<div class="input-group">
-					{if $currencySymbolBeforeAmount}<div class="input-group-addon">{$currency->sign}</div>{/if}
-					<input onchange="checkPartialRefundProductAmount(this)" type="text" name="partialRefundProduct[{$product['id_order_detail']}]" />
-					{if !$currencySymbolBeforeAmount}<div class="input-group-addon">{$currency->sign}</div>{/if}
-				</div>
-        <p class="help-block"><i class="icon-warning-sign"></i> {l s='(Max %amount_refundable% %tax_method%)' sprintf=[ '%amount_refundable%' => Tools::displayPrice(Tools::ps_round($amount_refundable, 2), $currency->id), '%tax_method%' => $smarty.capture.TaxMethod] d='Admin.Orderscustomers.Help'}</p>
-			</div>
-		</div>
-		{/if}
-	</td>
-	{if ($can_edit && !$order->hasBeenDelivered())}
-	<td class="product_invoice" style="display: none;">
-		{if sizeof($invoices_collection)}
-		<select name="product_invoice" class="edit_product_invoice">
-			{foreach from=$invoices_collection item=invoice}
-			<option value="{$invoice->id}" {if $invoice->id == $product['id_order_invoice']}selected="selected"{/if}>
-				#{Configuration::get('PS_INVOICE_PREFIX', $current_id_lang, null, $order->id_shop)}{'%06d'|sprintf:$invoice->number}
-			</option>
-			{/foreach}
-		</select>
-		{else}
-		&nbsp;
-		{/if}
-	</td>
-	<td class="product_action text-right">
-		{* edit/delete controls *}
+                    {* suzy: 2018-09-12 隱藏「未稅」<small class="text-muted">({$smarty.capture.TaxMethod})</small>*}
+                </label>
+                <div class="input-group">
+                    {if $currencySymbolBeforeAmount}<div class="input-group-addon">{$currency->sign}</div>{/if}
+                    <input onchange="checkPartialRefundProductAmount(this)" type="text" name="partialRefundProduct[{$product['id_order_detail']}]" />
+                    {if !$currencySymbolBeforeAmount}<div class="input-group-addon">{$currency->sign}</div>{/if}
+                </div>
+        <p class="help-block"><i class="icon-warning-sign"></i>
+			{* suzy: 2018-09-12 隱藏「未稅」l s='(Max %amount_refundable% %tax_method%)' sprintf=[ '%amount_refundable%' => Tools::displayPrice(Tools::ps_round($amount_refundable, 2), $currency->id), '%tax_method%' => $smarty.capture.TaxMethod] d='Admin.Orderscustomers.Help'*}
+            {l s='(Max %amount_refundable%)' sprintf=[ '%amount_refundable%' => Tools::displayPrice(Tools::ps_round($amount_refundable, 2), $currency->id)] d='Admin.Orderscustomers.Help'}
+		</p>
+            </div>
+        </div>
+        {/if}
+    </td>
+    {if ($can_edit && !$order->hasBeenDelivered())}
+    <td class="product_invoice" style="display: none;">
+        {if sizeof($invoices_collection)}
+        <select name="product_invoice" class="edit_product_invoice">
+            {foreach from=$invoices_collection item=invoice}
+            <option value="{$invoice->id}" {if $invoice->id == $product['id_order_invoice']}selected="selected"{/if}>
+                #{Configuration::get('PS_INVOICE_PREFIX', $current_id_lang, null, $order->id_shop)}{'%06d'|sprintf:$invoice->number}
+            </option>
+            {/foreach}
+        </select>
+        {else}
+        &nbsp;
+        {/if}
+    </td>
+    <td class="product_action text-right">
+        {* edit/delete controls *}
 		<div class="btn-group" id="btn_group_action">
 			<button type="button" class="btn btn-default edit_product_change_link">
 				<i class="icon-pencil"></i>

@@ -3,9 +3,10 @@
     <name>gsitemap</name>
     <displayName><![CDATA[Google Sitemap]]></displayName>
     <version><![CDATA[4.1.0]]></version>
-    <description><![CDATA[產生您的 Google Sitemap 檔案]]></description>
+    <description><![CDATA[產生 Google Sitemap]]></description>
     <author><![CDATA[PrestaShop]]></author>
     <tab><![CDATA[seo]]></tab>
+	<confirmUninstall><![CDATA[Are you sure you want to uninstall this module?]]></confirmUninstall>
     <is_configurable>1</is_configurable>
     <need_instance>0</need_instance>
 	<limited_countries></limited_countries>

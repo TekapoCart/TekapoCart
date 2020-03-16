@@ -1,0 +1,30 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+如要確保收到信件，可將此信箱加入通訊錄。
+
+{shop_url}
+
+嗨 {lastname}{firstname}
+
+感謝您在 {shop_name} 成為會員。
+
+Your login details on {shop_name}
+
+以下是您的登入記錄：
+
+Email address: {email}
+
+重要安全提示：
+
+1. 永遠小心保護您的的帳號資料安全。
+
+2. 絕不向任何人透露您的登入帳號密碼。
+
+3. 定期更改密碼。
+
+4. 如懷疑有人違法使用您的帳號，請立即通知我們。
+
+您現在可以開始在我們的商店盡情購物了： [{shop_name}]({shop_url})
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

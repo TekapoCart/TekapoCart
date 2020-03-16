@@ -16,13 +16,13 @@ File: controllers/admin/AdminLoginController.php:79</note>
       </trans-unit>
       <trans-unit id="1414e6b52fb36401e73871528bfb074d" approved="yes">
         <source>The employee does not exist, or the password provided is incorrect.</source>
-        <target xml:lang="zh-TW">這個員工不存在，或是提供的密碼有誤。</target>
+        <target xml:lang="zh-TW">這個管理者不存在，或是提供的密碼有誤。</target>
         <note>Context:
 File: controllers/admin/AdminLoginController.php:203</note>
       </trans-unit>
       <trans-unit id="54a27a9a29b0e113daa86220ba7e7880" approved="yes">
         <source>This employee does not manage the shop anymore (either the shop has been deleted or permissions have been revoked).</source>
-        <target xml:lang="zh-TW">員工不再管理這個商店（商店被刪除或是權限被調整）。</target>
+        <target xml:lang="zh-TW">此管理者不再管理這個商店（商店被刪除或是權限被調整）。</target>
         <note>Context:
 File: controllers/admin/AdminLoginController.php:206</note>
       </trans-unit>

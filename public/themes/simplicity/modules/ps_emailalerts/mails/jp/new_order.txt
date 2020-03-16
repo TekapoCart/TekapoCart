@@ -1,0 +1,46 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+おめでとうございます ！
+
+A new order was placed on {shop_name} by the following customer: {firstname} {lastname} ({email})
+
+注文明細
+
+注文 {order_name} 注文日 {date}
+
+お支払い： {payment}
+
+番号	商品	単価	数量	小計   {items}
+商品	{total_products}
+割引	{total_discounts}
+ギフトラッピング	{total_wrapping}
+送料	{total_shipping}
+Including total tax	{total_tax_paid}
+合計	{total_paid}
+
+Carrier
+
+配送方法： {carrier}
+
+お支払い： {payment}
+
+配送先住所
+
+{delivery_block_html}
+
+請求先住所
+
+{invoice_block_html}
+
+顧客メッセージ：
+
+{message}
+
+ご注文内容の詳細は「[注文履歴]({guest_tracking_url})」。
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

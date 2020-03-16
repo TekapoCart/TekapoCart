@@ -1,5 +1,5 @@
 {**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
@@ -45,22 +45,16 @@
 		{if !$initial}
 			<h4 class="message-item-heading">
 				<i class="icon-mail-reply text-muted"></i>
-				    {* suzy: 2018-09-22 調整姓名顯示 *}
-					{if $message.system == 1}
-					    系統
-					{elseif $type == 'customer'}
+					{if $type == 'customer'}
 						{$message.customer_name|escape:'html':'UTF-8'}
 					{else}
-
 						{$message.employee_name|escape:'html':'UTF-8'}
 					{/if}
 			</h4>
-		{elseif $message.system == 1}{* suzy: 2018-09-22 自加顯示判斷 *}
-			<span style="font-size: 15px;">系統</span>
 		{/if}
 		<span class="message-date">&nbsp;<i class="icon-calendar"></i> - {dateFormat date=$message.date_add full=0} - <i class="icon-time"></i> {$message.date_add|substr:11:5}</span>
-		{* suzy: 2018-09-22 加入「隱藏」顯示 *}
-		{if $message.private == 1}(隱藏){/if}
+        {* suzy: 2018-09-22 加入「隱藏」顯示 *}
+        {if $message.private == 1}(隱藏){/if}
 		{if isset($message.file_name)} <span class="message-product">&nbsp;<i class="icon-link"></i> <a href="{$message.file_name|escape:'html':'UTF-8'}" class="_blank">{l s="Attachment" d='Admin.Catalog.Feature'}</a></span>{/if}
 		{if isset($message.product_name)} <span class="message-attachment">&nbsp;<i class="icon-book"></i> <a href="{$message.product_link|escape:'html':'UTF-8'}" class="_blank">{l s="Product" d='Admin.Global'} {$message.product_name|escape:'html':'UTF-8'} </a></span>{/if}
 		<p class="message-item-text">{$message.message|escape:'html':'UTF-8'|nl2br}</p>

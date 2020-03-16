@@ -30,7 +30,7 @@
 
 {else}
 
-  <div class="form-group row {if !empty($field.errors)}has-error{/if}{if !empty($field.type == 'password')}hidden-xs-up{/if}">
+  <div class="form-group row {if !empty($field.errors)}has-error{/if}{if $field.type == 'password'}hidden-xs-up{/if}">
     {if $field.type !== 'checkbox' &&
         $field.type !== 'radio-buttons' &&
         $field.type !== 'password' &&
@@ -162,7 +162,34 @@
           </div>
         {/block}
 
+      {elseif $field.type === 'email' && $page.page_name === 'identity'}
+
+          {block name='form_field_item_other'}
+              <input
+                      class="form-control"
+                      name="{$field.name}"
+                      type="email"
+                      value="{$field.value}"
+                      placeholder="{$field.label}{if $field.name == 'phone_mobile' || $field.name == 'firstname' || $field.name == 'lastname'} ({l s='required' d='Shop.Theme.Checkout'}){/if}"
+                      {if isset($field.availableValues.placeholder)}placeholder="{$field.availableValues.placeholder}"{/if}
+                      {if $field.maxLength}maxlength="{$field.maxLength}"{/if}
+                      readonly
+              >
+              {if isset($field.availableValues.comment)}
+                  <span class="form-control-comment">
+              {$field.availableValues.comment}
+            </span>
+              {/if}
+          {/block}
+
       {else}
+
+
+        {if isset($formFields.id_country) && $formFields.id_country.value == 203 && $field.name == 'city'}
+            <select name="county" class="form-control form-control-select half"></select>
+            <select name="district" class="form-control form-control-select half"></select>
+            {$field.type='hidden'}
+        {/if}
 
         {block name='form_field_item_other'}
           <input

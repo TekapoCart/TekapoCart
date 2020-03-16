@@ -33,6 +33,7 @@
 {/block}
 
 {block name='order_messages'}
+  {include file='customer/_partials/order-messages.tpl'}
 {/block}
 
 {block name='page_footer'}

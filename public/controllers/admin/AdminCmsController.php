@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -35,8 +35,16 @@ class AdminCmsControllerCore extends AdminController
 
     protected $position_identifier = 'id_cms';
 
+    /**
+     * @deprecated since 1.7.6, to be removed in the next minor
+     */
     public function __construct()
     {
+        @trigger_error(
+            'The AdminCmsController is deprecated and will be removed in the next minor',
+            E_USER_DEPRECATED
+        );
+
         $this->bootstrap = true;
         $this->table = 'cms';
         $this->list_id = 'cms';
@@ -61,22 +69,11 @@ class AdminCmsControllerCore extends AdminController
                 'align' => 'center',
                 'class' => 'fixed-width-xs',
             ),
-            // suzy: 2018-10-12 修改文字
-            /*
             'link_rewrite' => array(
                 'title' => $this->trans('URL', array(), 'Admin.Global'),
             ),
             'meta_title' => array(
                 'title' => $this->trans('Title', array(), 'Admin.Global'),
-                'filter_key' => 'b!meta_title',
-                'maxlength' => 50,
-            ),
-            */
-            'link_rewrite' => array(
-                'title' => '連結',
-            ),
-            'meta_title' => array(
-                'title' => '標題',
                 'filter_key' => 'b!meta_title',
                 'maxlength' => 50,
             ),
@@ -174,9 +171,7 @@ class AdminCmsControllerCore extends AdminController
                 ),
                 array(
                     'type' => 'text',
-                    // suzy: 2019-02-01 修改標題
-                    // 'label' => $this->trans('Title', array(), 'Admin.Global'),
-                    'label' => '標題',
+                    'label' => $this->trans('Title', array(), 'Admin.Global'),
                     'name' => 'meta_title',
                     'id' => 'name', // for copyMeta2friendlyURL compatibility
                     'lang' => true,
@@ -194,9 +189,7 @@ class AdminCmsControllerCore extends AdminController
                     'name' => 'link_rewrite',
                     'required' => true,
                     'lang' => true,
-                    // suzy: 2019-02-01 改 hint
-                    // 'hint' => $this->trans('Only letters and the hyphen (-) character are allowed.', array(), 'Admin.Design.Feature'),
-                    'hint' => $this->trans('Only letters, numbers, underscore (_) and the minus (-) character are allowed.', array(), 'Admin.Catalog.Help'),
+                    'hint' => $this->trans('Only letters and the hyphen (-) character are allowed.', array(), 'Admin.Design.Feature'),
                 ),
                 array(
                     'type' => 'text',
@@ -221,7 +214,7 @@ class AdminCmsControllerCore extends AdminController
                     'name' => 'meta_keywords',
                     'lang' => true,
                     'hint' => array(
-                        $this->trans('To add "tags" click in the field, write something, and then press "Enter."', array(), 'Admin.Design.Help'),
+                        $this->trans('To add tags, click in the field, write something, and then press the "Enter" key.', array(), 'Admin.Shopparameters.Help'),
                         $this->trans('Invalid characters:', array(), 'Admin.Notifications.Info') . ' &lt;&gt;;=#{}',
                     ),
                 ),
@@ -279,7 +272,8 @@ class AdminCmsControllerCore extends AdminController
                 'title' => $this->trans('Save', array(), 'Admin.Actions'),
             ),
             'buttons' => array(
-                /* suzy: 2018-09-16 改成 Save and stay
+                // suzy: 2018-09-16 改成 Save and stay
+                /*
                 'save_and_preview' => array(
                     'name' => 'viewcms',
                     'type' => 'submit',
@@ -295,6 +289,7 @@ class AdminCmsControllerCore extends AdminController
                     'class' => 'btn btn-default pull-right',
                     'icon' => 'process-icon-save-and-stay',
                 ),
+
             ),
         );
 
@@ -315,7 +310,7 @@ class AdminCmsControllerCore extends AdminController
             'PS_ALLOW_ACCENTED_CHARS_URL', (int) Configuration::get('PS_ALLOW_ACCENTED_CHARS_URL'),
         );
 
-        // 修正 tpl 吃不到數值的問題
+        // suzy: 修正 tpl 吃不到數值的問題
         $this->context->smarty->assign(array(
             'active' => $this->object->active,
             'PS_ALLOW_ACCENTED_CHARS_URL' => (int) Configuration::get('PS_ALLOW_ACCENTED_CHARS_URL'),
@@ -408,7 +403,6 @@ class AdminCmsControllerCore extends AdminController
             if (count($this->errors)) {
                 return false;
             }
-
             if (!$id_cms = (int) Tools::getValue('id_cms')) {
                 $cms = new CMS();
                 $this->copyFromPost($cms, 'cms');
@@ -492,10 +486,11 @@ class AdminCmsControllerCore extends AdminController
     {
         $preview_url = $this->context->link->getCMSLink($cms, null, null, $this->context->language->id);
         if (!$cms->active) {
-            $params = http_build_query(array(
-                'adtoken' => Tools::getAdminTokenLite('AdminCmsContent'),
-                'ad' => basename(_PS_ADMIN_DIR_),
-                'id_employee' => (int) $this->context->employee->id,
+            $params = http_build_query(
+                array(
+                    'adtoken' => Tools::getAdminTokenLite('AdminCmsContent'),
+                    'ad' => basename(_PS_ADMIN_DIR_),
+                    'id_employee' => (int) $this->context->employee->id,
                 )
             );
             $preview_url .= (strpos($preview_url, '?') === false ? '?' : '&') . $params;

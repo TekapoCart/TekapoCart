@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -35,8 +35,7 @@ class AdminAddressesControllerCore extends AdminController
     public function __construct()
     {
         $this->bootstrap = true;
-        // suzy: 2018-07-28 不需顯示 必填欄位
-        // $this->required_database = true;
+        $this->required_database = true;
         $this->required_fields = array('company', 'address2', 'postcode', 'other', 'phone', 'phone_mobile', 'vat_number', 'dni');
         $this->table = 'address';
         $this->className = 'CustomerAddress';
@@ -84,9 +83,9 @@ class AdminAddressesControllerCore extends AdminController
                 'filter_key' => 'a!firstname',
                 'maxlength' => 30,
             ),
-            // suzy: 2018-09-22 新增欄位 電話
+            // suzy: 2018-09-22 新增欄位 手機
             'phone_mobile' => array(
-                'title' => '電話'
+                'title' => '手機'
             ),
             'address1' => array(
                 'title' => $this->trans('Address', array(), 'Admin.Global'),
@@ -154,7 +153,8 @@ class AdminAddressesControllerCore extends AdminController
                     'name' => 'id_customer',
                     'required' => false,
                 ),
-                /* suzy: 2018-09-26 隱藏 Identification
+                // suzy: 2018-09-26 隱藏 Identification
+                /*
                 array(
                     'type' => 'text',
                     'label' => $this->trans('Identification number', array(), 'Admin.Orderscustomers.Feature'),
@@ -166,9 +166,7 @@ class AdminAddressesControllerCore extends AdminController
                 */
                 array(
                     'type' => 'text',
-                    // suzy: 2018-09-26 名稱
-                    //'label' => $this->trans('Address alias', array(), 'Admin.Orderscustomers.Feature'),
-                    'label' => '名稱',
+                    'label' => $this->trans('Address alias', array(), 'Admin.Orderscustomers.Feature'),
                     'name' => 'alias',
                     'required' => true,
                     'col' => '4',
@@ -176,9 +174,7 @@ class AdminAddressesControllerCore extends AdminController
                 ),
                 array(
                     'type' => 'textarea',
-                    // suzy: 2018-09-26 備註
-                    //'label' => $this->trans('Other', array(), 'Admin.Global'),
-                    'label' => '備註',
+                    'label' => $this->trans('Other', array(), 'Admin.Global'),
                     'name' => 'other',
                     'required' => false,
                     'cols' => 15,
@@ -211,12 +207,14 @@ class AdminAddressesControllerCore extends AdminController
         }
         if ($id_customer) {
             $customer = new Customer((int) $id_customer);
-            $token_customer = Tools::getAdminToken('AdminCustomers' . (int) (Tab::getIdFromClassName('AdminCustomers')) . (int) $this->context->employee->id);
         }
 
         $this->tpl_form_vars = array(
             'customer' => isset($customer) ? $customer : null,
-            'tokenCustomer' => isset($token_customer) ? $token_customer : null,
+            'customer_view_url' => $this->context->link->getAdminLink('AdminCustomers', true, [], [
+                'viewcustomer' => 1,
+                'id_customer' => $id_customer,
+            ]),
             'back_url' => urldecode(Tools::getValue('back')),
         );
 
@@ -455,6 +453,18 @@ class AdminAddressesControllerCore extends AdminController
                 //update order shipping cost
                 $order = new Order($id_order);
                 $order->refreshShippingCost();
+
+                // update cart
+                $cart = Cart::getCartByOrderId($id_order);
+                if (Validate::isLoadedObject($cart)) {
+                    if ($address_type == 'invoice') {
+                        $cart->id_address_invoice = (int) $this->object->id;
+                    } else {
+                        $cart->id_address_delivery = (int) $this->object->id;
+                    }
+                    $cart->update();
+                }
+                // redirect
                 Tools::redirectAdmin(urldecode(Tools::getValue('back')) . '&conf=4');
             }
         }
@@ -515,6 +525,11 @@ class AdminAddressesControllerCore extends AdminController
                 echo json_encode(array('infos' => pSQL($customer['firstname']) . '_' . pSQL($customer['lastname']) . '_' . pSQL($customer['company'])));
             }
         }
+
+        if (Tools::isSubmit('dni_required')) {
+            echo json_encode(['dni_required' => Address::dniRequired((int) Tools::getValue('id_country'))]);
+        }
+
         die;
     }
 
@@ -552,6 +567,7 @@ class AdminAddressesControllerCore extends AdminController
                 $to_delete = new Address((int) $id);
                 if ($to_delete->isUsed()) {
                     $deleted = true;
+
                     break;
                 }
             }

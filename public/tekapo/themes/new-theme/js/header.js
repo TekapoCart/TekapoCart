@@ -1,5 +1,5 @@
 /**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -15,10 +15,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -75,7 +75,7 @@ export default class Header {
             var quicklink_list = '';
             $.each(data, (index) => {
               if (typeof data[index]['name'] !== 'undefined')
-                quicklink_list += '<li><a href="' + data[index]['link'] + '&token=' + data[index]['token'] + '"><i class="icon-chevron-right"></i> ' + data[index]['name'] + '</a></li>';
+                quicklink_list += '<li><a href="' + data[index]['link'] + '"><i class="icon-chevron-right"></i> ' + data[index]['name'] + '</a></li>';
             });
 
             if (typeof data['has_errors'] !== 'undefined' && data['has_errors'])
@@ -87,7 +87,9 @@ export default class Header {
                   });
               });
             else if (quicklink_list) {
-              $("#header_quick ul.dropdown-menu").html(quicklink_list);
+              $('#header_quick ul.dropdown-menu .divider').prevAll().remove();
+              $('#header_quick ul.dropdown-menu').prepend(quicklink_list);
+              $(e.target).remove();
               window.showSuccessMessage(window.update_success_msg);
             }
           }
@@ -137,10 +139,9 @@ export default class Header {
 
   updateEmployeeNotifications() {
     $.post(
-      baseAdminDir + "ajax.php",
+      admin_notification_push_link,
       {
-        "updateElementEmployee": "1",
-        "updateElementEmployeeType": $('.notification-center .nav-link.active').attr('data-type')
+        "type": $('.notification-center .nav-link.active').attr('data-type')
       }
     );
   }

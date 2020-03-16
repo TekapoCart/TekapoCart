@@ -33,12 +33,20 @@ use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 
 class Ps_Emailsubscription extends Module implements WidgetInterface
 {
+    /**
+     * @var string Name of the module running on PS 1.6.x. Used for data migration.
+     */
+    const PS_16_EQUIVALENT_MODULE = 'blocknewsletter';
+
     const GUEST_NOT_REGISTERED = -1;
     const CUSTOMER_NOT_REGISTERED = 0;
     const GUEST_REGISTERED = 1;
     const CUSTOMER_REGISTERED = 2;
 
     const LEGAL_PRIVACY = 'LEGAL_PRIVACY';
+
+    const TPL_COLUMN = 'ps_emailsubscription-column.tpl';
+    const TPL_DEFAULT = 'ps_emailsubscription.tpl';
 
     public function __construct(EntityManager $entity_manager)
     {
@@ -57,7 +65,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
 
         $this->entity_manager = $entity_manager;
 
-        $this->version = '2.3.0';
+        $this->version = '2.5.0';
         $this->author = 'PrestaShop';
         $this->error = false;
         $this->valid = false;
@@ -91,7 +99,6 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
     {
         if (
             !parent::install()
-            || !Configuration::updateValue('PS_NEWSLETTER_RAND', rand().rand())
             || !$this->registerHook(
                 array(
                     'displayFooterBefore',
@@ -107,8 +114,15 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
             return false;
         }
 
-        Configuration::updateValue('NW_SALT', Tools::passwdGen(16));
+        if ($this->uninstallPrestaShop16Module()) {
+            // 1.6 Module exist and was uninstalled
+            Db::getInstance()->execute('RENAME TABLE `'._DB_PREFIX_.'newsletter` to `'._DB_PREFIX_.'emailsubscription`');
+        } else {
+            Configuration::updateValue('PS_NEWSLETTER_RAND', mt_rand() . mt_rand());
+            Configuration::updateValue('NW_SALT', Tools::passwdGen(16));
+        }
 
+        // New data
         $conditions = array();
         $languages = Language::getLanguages(false);
         foreach ($languages as $lang) {
@@ -126,6 +140,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
             `ip_registration_newsletter` varchar(15) NOT NULL,
             `http_referer` VARCHAR(255) NULL,
             `active` TINYINT(1) NOT NULL DEFAULT \'0\',
+            `id_lang` int(10) NOT NULL DEFAULT \'0\',
             PRIMARY KEY(`id`)
         ) ENGINE='._MYSQL_ENGINE_.' default CHARSET=utf8');
     }
@@ -135,6 +150,27 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
         Db::getInstance()->execute('DROP TABLE IF EXISTS '._DB_PREFIX_.'emailsubscription');
 
         return parent::uninstall();
+    }
+
+    /**
+     * Migrate data from 1.6 equivalent module (if applicable), then uninstall
+     */
+    public function uninstallPrestaShop16Module()
+    {
+        if (!Module::isInstalled(self::PS_16_EQUIVALENT_MODULE)) {
+            return false;
+        }
+        $oldModule = Module::getInstanceByName(self::PS_16_EQUIVALENT_MODULE);
+        if ($oldModule) {
+            // This closure calls the parent class to prevent data to be erased
+            // It allows the new module to be configured without migration
+            $parentUninstallClosure = function() {
+                return parent::uninstall();
+            };
+            $parentUninstallClosure = $parentUninstallClosure->bindTo($oldModule, get_class($oldModule));
+            $parentUninstallClosure();
+        }
+        return true;
     }
 
     public function getContent()
@@ -224,6 +260,10 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
                 'active' => 'subscribed',
                 'search' => false,
             ),
+            'iso_code' => array(
+                'title' => $this->trans('Iso language', array(), 'Modules.Emailsubscription.Admin'),
+                'search' => false,
+            ),
             'newsletter_date_add' => array(
                 'title' => $this->trans('Subscribed on', array(), 'Modules.Emailsubscription.Admin'),
                 'type' => 'date',
@@ -267,6 +307,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
     {
         $this->smarty->assign(array(
             // suzy: 2018-09-21 應為「瀏覽」非「編輯」，updatecustomer 改成 viewcustomer
+            // 'href' => 'index.php?controller=AdminCustomers&id_customer='.(int) $id.'&updatecustomer&token='.Tools::getAdminTokenLite('AdminCustomers'),
             'href' => 'index.php?controller=AdminCustomers&id_customer='.(int) $id.'&viewcustomer&token='.Tools::getAdminTokenLite('AdminCustomers'),
             'action' => $this->trans('View', array(), 'Admin.Actions'),
             'disable' => !((int) $id > 0),
@@ -335,10 +376,15 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
 
     /**
      * Register in email subscription.
+     *
+     * @param string|null $hookName
+     * @return bool|string
      */
-    public function newsletterRegistration()
+    public function newsletterRegistration($hookName = null)
     {
-
+        if (empty($_POST['blockHookName']) || $_POST['blockHookName'] !== $hookName) {
+            return false;
+        }
         if (empty($_POST['email']) || !Validate::isEmail($_POST['email'])) {
             return $this->error = $this->trans('Invalid email address.', array(), 'Shop.Notifications.Error');
         } elseif ($_POST['action'] == '1') {
@@ -402,12 +448,13 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
     public function getSubscribers()
     {
         $dbquery = new DbQuery();
-        $dbquery->select('c.`id_customer` AS `id`, s.`name` AS `shop_name`, gl.`name` AS `gender`, c.`lastname`, c.`firstname`, c.`email`, c.`newsletter` AS `subscribed`, c.`newsletter_date_add`');
+        $dbquery->select('c.`id_customer` AS `id`, s.`name` AS `shop_name`, gl.`name` AS `gender`, c.`lastname`, c.`firstname`, c.`email`, c.`newsletter` AS `subscribed`, c.`newsletter_date_add`, l.`iso_code`');
         $dbquery->from('customer', 'c');
         $dbquery->leftJoin('shop', 's', 's.id_shop = c.id_shop');
         $dbquery->leftJoin('gender', 'g', 'g.id_gender = c.id_gender');
         $dbquery->leftJoin('gender_lang', 'gl', 'g.id_gender = gl.id_gender AND gl.id_lang = '.(int) $this->context->employee->id_lang);
         $dbquery->where('c.`newsletter` = 1');
+        $dbquery->leftJoin('lang', 'l', 'l.id_lang = c.id_lang');
         if ($this->_searched_email) {
             $dbquery->where('c.`email` LIKE \'%'.pSQL($this->_searched_email).'%\' ');
         }
@@ -418,9 +465,10 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
         $customers = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($dbquery->build());
 
         $dbquery = new DbQuery();
-        $dbquery->select('CONCAT(\'N\', e.`id`) AS `id`, s.`name` AS `shop_name`, NULL AS `gender`, NULL AS `lastname`, NULL AS `firstname`, e.`email`, e.`active` AS `subscribed`, e.`newsletter_date_add`');
+        $dbquery->select('CONCAT(\'N\', e.`id`) AS `id`, s.`name` AS `shop_name`, NULL AS `gender`, NULL AS `lastname`, NULL AS `firstname`, e.`email`, e.`active` AS `subscribed`, e.`newsletter_date_add`, l.`iso_code`');
         $dbquery->from('emailsubscription', 'e');
         $dbquery->leftJoin('shop', 's', 's.id_shop = e.id_shop');
+        $dbquery->leftJoin('lang', 'l', 'l.id_lang = e.id_lang');
         $dbquery->where('e.`active` = 1');
         if ($this->_searched_email) {
             $dbquery->where('e.`email` LIKE \'%'.pSQL($this->_searched_email).'%\' ');
@@ -519,7 +567,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
      */
     protected function registerGuest($email, $active = true)
     {
-        $sql = 'INSERT INTO '._DB_PREFIX_.'emailsubscription (id_shop, id_shop_group, email, newsletter_date_add, ip_registration_newsletter, http_referer, active)
+        $sql = 'INSERT INTO '._DB_PREFIX_.'emailsubscription (id_shop, id_shop_group, email, newsletter_date_add, ip_registration_newsletter, http_referer, active, id_lang)
                 VALUES
                 ('.$this->context->shop->id.',
                 '.$this->context->shop->id_shop_group.',
@@ -532,7 +580,8 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
                     WHERE c.id_guest = '.(int) $this->context->customer->id.'
                     ORDER BY c.date_add DESC LIMIT 1
                 ),
-                '.(int) $active.'
+                '.(int) $active.',
+                '. $this->context->language->id . '
                 )';
 
         return Db::getInstance()->execute($sql);
@@ -766,26 +815,36 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
 
     public function renderWidget($hookName = null, array $configuration = [])
     {
-        $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
-        $this->context->smarty->assign(array('id_module' => $this->id));
+        if ($hookName == null && isset($configuration['hook'])) {
+            $hookName = $configuration['hook'];
+        }
 
-        return $this->fetch('module:ps_emailsubscription/views/templates/hook/ps_emailsubscription.tpl');
+        $template_file = ($hookName == 'displayLeftColumn') ? self::TPL_COLUMN : self::TPL_DEFAULT;
+        $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
+        $this->context->smarty->assign(array(
+            'id_module' => $this->id,
+            'hookName' => $hookName
+        ));
+
+        return $this->fetch('module:ps_emailsubscription/views/templates/hook/'.$template_file);
     }
 
     public function getWidgetVariables($hookName = null, array $configuration = [])
     {
         $variables = [];
-
-        $variables['value'] = Tools::getValue('email', '');
+        $variables['value'] = '';
         $variables['msg'] = '';
         $variables['conditions'] = Configuration::get('NW_CONDITIONS', $this->context->language->id);
 
         if (Tools::isSubmit('submitNewsletter')) {
-            $this->newsletterRegistration();
+            $this->error = $this->valid = '';
+            $this->newsletterRegistration($hookName);
             if ($this->error) {
+                $variables['value'] = Tools::getValue('email', '');
                 $variables['msg'] = $this->error;
                 $variables['nw_error'] = true;
             } elseif ($this->valid) {
+                $variables['value'] = Tools::getValue('email', '');
                 $variables['msg'] = $this->valid;
                 $variables['nw_error'] = false;
             }
@@ -963,7 +1022,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
                         'type' => 'select',
                         'label' => $this->trans('Customers\' country', array(), 'Modules.Emailsubscription.Admin'),
                         // suzy: 2018-09-26 隱藏說明
-                        //'desc' => $this->trans('Filter customers by country.', array(), 'Modules.Emailsubscription.Admin'),
+                        // 'desc' => $this->trans('Filter customers by country.', array(), 'Modules.Emailsubscription.Admin'),
                         'name' => 'COUNTRY',
                         'required' => false,
                         'default_value' => (int) $this->context->country->id,
@@ -977,8 +1036,8 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
                         'type' => 'select',
                         'label' => $this->trans('Newsletter subscribers', array(), 'Modules.Emailsubscription.Admin'),
                         // suzy: 2018-09-26 隱藏說明
-                        //'desc' => $this->trans('Filter customers who have subscribed to the newsletter or not, and who have an account or not.', array(), 'Modules.Emailsubscription.Admin'),
-                        //'hint' => $this->trans('Customers can subscribe to your newsletter when registering, or by entering their email in the newsletter form.', array(), 'Modules.Emailsubscription.Admin'),
+                        // 'desc' => $this->trans('Filter customers who have subscribed to the newsletter or not, and who have an account or not.', array(), 'Modules.Emailsubscription.Admin'),
+                        // 'hint' => $this->trans('Customers can subscribe to your newsletter when registering, or by entering their email in the newsletter form.', array(), 'Modules.Emailsubscription.Admin'),
                         'name' => 'SUSCRIBERS',
                         'required' => false,
                         'default_value' => (int) $this->context->country->id,
@@ -993,7 +1052,6 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
                             'name' => 'name',
                         ),
                     ),
-                    /* suzy: 2018-09-26 隱藏
                     array(
                         'type' => 'select',
                         'label' => $this->trans('Partner offers subscribers', array(), 'Modules.Emailsubscription.Admin'),
@@ -1011,7 +1069,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
                             'id' => 'id',
                             'name' => 'name',
                         ),
-                    ),*/
+                    ),
                     array(
                         'type' => 'hidden',
                         'name' => 'action',
@@ -1120,7 +1178,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
             if (!$nb = count($result)) {
                 $this->_html .= $this->displayError($this->trans('No customers found with these filters!', array(), 'Modules.Emailsubscription.Admin'));
             } elseif ($fd = @fopen(dirname(__FILE__).'/'.strval(preg_replace('#\.{2,}#', '.', Tools::getValue('action'))).'_'.$this->file, 'w')) {
-                $header = array('id', 'shop_name', 'gender', 'lastname', 'firstname', 'email', 'subscribed', 'subscribed_on');
+                $header = array('id', 'shop_name', 'gender', 'lastname', 'firstname', 'email', 'subscribed', 'subscribed_on','iso_language');
                 $array_to_export = array_merge(array($header), $result);
                 foreach ($array_to_export as $tab) {
                     $this->myFputCsv($fd, $tab);
@@ -1187,12 +1245,13 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
         $customers = array();
         if ($who == 1 || $who == 0 || $who == 3) {
             $dbquery = new DbQuery();
-            $dbquery->select('c.`id_customer` AS `id`, s.`name` AS `shop_name`, gl.`name` AS `gender`, c.`lastname`, c.`firstname`, c.`email`, c.`newsletter` AS `subscribed`, c.`newsletter_date_add`');
+            $dbquery->select('c.`id_customer` AS `id`, s.`name` AS `shop_name`, gl.`name` AS `gender`, c.`lastname`, c.`firstname`, c.`email`, c.`newsletter` AS `subscribed`, c.`newsletter_date_add`, l.`iso_code`');
             $dbquery->from('customer', 'c');
             $dbquery->leftJoin('shop', 's', 's.id_shop = c.id_shop');
             $dbquery->leftJoin('gender', 'g', 'g.id_gender = c.id_gender');
             $dbquery->leftJoin('gender_lang', 'gl', 'g.id_gender = gl.id_gender AND gl.id_lang = '.$this->context->employee->id_lang);
             $dbquery->where('c.`newsletter` = '.($who == 3 ? 0 : 1));
+            $dbquery->leftJoin('lang', 'l', 'l.id_lang = c.id_lang');
             if ($optin == 2 || $optin == 1) {
                 $dbquery->where('c.`optin` = '.($optin == 1 ? 0 : 1));
             }
@@ -1216,14 +1275,14 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
         $non_customers = array();
         if (($who == 0 || $who == 2) && (!$optin || $optin == 2) && !$country) {
             $dbquery = new DbQuery();
-            $dbquery->select('CONCAT(\'N\', e.`id`) AS `id`, s.`name` AS `shop_name`, NULL AS `gender`, NULL AS `lastname`, NULL AS `firstname`, e.`email`, e.`active` AS `subscribed`, e.`newsletter_date_add`');
+            $dbquery->select('CONCAT(\'N\', e.`id`) AS `id`, s.`name` AS `shop_name`, NULL AS `gender`, NULL AS `lastname`, NULL AS `firstname`, e.`email`, e.`active` AS `subscribed`, e.`newsletter_date_add`, l.`iso_code`');
             $dbquery->from('emailsubscription', 'e');
             $dbquery->leftJoin('shop', 's', 's.id_shop = e.id_shop');
             $dbquery->where('e.`active` = 1');
+            $dbquery->leftJoin('lang', 'l', 'l.id_lang = e.id_lang');
             if ($id_shop) {
                 $dbquery->where('e.`id_shop` = '.$id_shop);
             }
-
             $non_customers = Db::getInstance()->executeS($dbquery->build());
         }
 
@@ -1294,7 +1353,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
             if (Db::getInstance()->execute($sql)) {
                 return json_encode(true);
             }
-            return json_encode($this->l('Newsletter subscription: Unable to delete customer using email.'));
+            return json_encode($this->trans('Newsletter subscription: no email to delete, this customer has not registered.', array(), 'Modules.Emailsubscription.Admin'));
         }
     }
     public function hookActionExportGDPRData($customer)
@@ -1304,8 +1363,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
             if ($res = Db::getInstance()->ExecuteS($sql)) {
                 return json_encode($res);
             }
-            return json_encode($this->l('Newsletter subscription: Unable to export customer using email.'));
+            return json_encode($this->trans('Newsletter subscription: no email to export, this customer has not registered.', array(), 'Modules.Emailsubscription.Admin'));
        }
    }
-
 }

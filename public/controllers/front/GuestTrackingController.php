@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -30,7 +30,7 @@ class GuestTrackingControllerCore extends FrontController
     public $ssl = true;
     public $auth = false;
     public $php_self = 'guest-tracking';
-    private $order;
+    protected $order;
 
     /**
      * Initialize guest tracking controller.
@@ -59,11 +59,12 @@ class GuestTrackingControllerCore extends FrontController
         if (!$email && !$order_reference) {
             return;
         } elseif (!$email || !$order_reference) {
-            $this->errors[] = $this->getTranslator()->trans(
-                'Please provide the required information',
-                array(),
-                'Shop.Notifications.Info' // suzy: 2019-07-06 Error 改 Info
-            );
+            // suzy: 2019-11-19 改現示錯誤訊息規則
+//            $this->errors[] = $this->getTranslator()->trans(
+//                'Please provide the required information',
+//                array(),
+//                'Shop.Notifications.Error'
+//            );
 
             return;
         }
@@ -130,7 +131,9 @@ class GuestTrackingControllerCore extends FrontController
 
         if ((int) $this->order->isReturnable()) {
             $this->info[] = $this->trans(
-                'You cannot return merchandise with a guest account.', array(), 'Shop.Notifications.Warning'
+                'You cannot return merchandise with a guest account.',
+                array(),
+                'Shop.Notifications.Warning'
             );
         }
 

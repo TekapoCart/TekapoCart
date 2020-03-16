@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,10 +16,10 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
@@ -28,12 +28,12 @@ namespace PrestaShop\PrestaShop\Core\Localization\Currency;
 
 use PrestaShop\PrestaShop\Core\Localization\Currency;
 use PrestaShop\PrestaShop\Core\Localization\Currency\RepositoryInterface as CurrencyRepositoryInterface;
-use PrestaShop\PrestaShop\Core\Localization\Currency\DataRepositoryInterface as CurrencyDataRepositoryInterface;
+use PrestaShop\PrestaShop\Core\Localization\Currency\DataSourceInterface as CurrencyDataSourceInterface;
 
 /**
  * Currency repository class.
  *
- * Used to get Currency instances (by currency code for example)
+ * Used to get Localization/Currency instances (by currency code for example)
  */
 class Repository implements CurrencyRepositoryInterface
 {
@@ -46,31 +46,33 @@ class Repository implements CurrencyRepositoryInterface
     protected $currencies;
 
     /**
-     * @var CurrencyDataRepositoryInterface
+     * @var CurrencyDataSourceInterface
      */
-    protected $dataRepository;
+    protected $dataSource;
 
-    public function __construct(CurrencyDataRepositoryInterface $dataRepository)
+    public function __construct(CurrencyDataSourceInterface $dataSource)
     {
-        $this->dataRepository = $dataRepository;
+        $this->dataSource = $dataSource;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCurrency($currencyCode)
+    public function getCurrency($currencyCode, $localeCode)
     {
         if (!isset($this->currencies[$currencyCode])) {
-            $data = $this->dataRepository->getDataByCurrencyCode($currencyCode);
+            $data = $this->dataSource->getLocalizedCurrencyData(
+                new LocalizedCurrencyId($currencyCode, $localeCode)
+            );
 
             $this->currencies[$currencyCode] = new Currency(
-                $data['isActive'],
-                $data['conversionRate'],
-                $data['isoCode'],
-                $data['numericIsoCode'],
-                $data['symbols'],
-                $data['precision'],
-                $data['names']
+                $data->isActive(),
+                $data->getConversionRate(),
+                $data->getIsoCode(),
+                $data->getNumericIsoCode(),
+                $data->getSymbols(),
+                $data->getPrecision(),
+                $data->getNames()
             );
         }
 
@@ -78,10 +80,42 @@ class Repository implements CurrencyRepositoryInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getAvailableCurrencies($localeCode)
+    {
+        return $this->formatCurrencies($this->dataSource->getAvailableCurrenciesData($localeCode));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllInstalledCurrencies($localeCode)
+    {
+        return $this->formatCurrencies($this->dataSource->getAllInstalledCurrenciesData($localeCode));
+    }
+
+    /**
+     * @param array $currenciesData
+     *
      * @return CurrencyCollection
      */
-    public function getInstalledCurrencies()
+    private function formatCurrencies(array $currenciesData)
     {
-        // TODO : implement this method
+        $currencies = new CurrencyCollection();
+        /** @var CurrencyData $currencyDatum */
+        foreach ($currenciesData as $currencyDatum) {
+            $currencies->add(new Currency(
+                $currencyDatum->isActive(),
+                $currencyDatum->getConversionRate(),
+                $currencyDatum->getIsoCode(),
+                $currencyDatum->getNumericIsoCode(),
+                $currencyDatum->getSymbols(),
+                $currencyDatum->getPrecision(),
+                $currencyDatum->getNames()
+            ));
+        }
+
+        return $currencies;
     }
 }

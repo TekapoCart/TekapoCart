@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop.
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,24 +16,24 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
 
 namespace PrestaShop\PrestaShop\Adapter\Presenter\Order;
 
-use PrestaShop\PrestaShop\Adapter\Presenter\AbstractLazyArray;
 use Cart;
 use Configuration;
 use Context;
 use HistoryController;
-use PrestaShopException;
 use Order;
+use PrestaShop\PrestaShop\Adapter\Presenter\AbstractLazyArray;
 use PrestaShopBundle\Translation\TranslatorComponent;
+use PrestaShopException;
 use Tools;
 
 class OrderDetailLazyArray extends AbstractLazyArray
@@ -44,7 +44,7 @@ class OrderDetailLazyArray extends AbstractLazyArray
     /** @var Context */
     private $context;
 
-    /* @var TranslatorComponent */
+    /** @var TranslatorComponent */
     private $translator;
 
     /**
@@ -66,6 +66,17 @@ class OrderDetailLazyArray extends AbstractLazyArray
     public function getId()
     {
         return $this->order->id;
+    }
+
+    /**
+     * suzy: 2020-02-18 在 order-history 顯示配送方式
+     * @arrayAccess
+     *
+     * @return int
+     */
+    public function getCarrierId()
+    {
+        return $this->order->id_carrier;
     }
 
     /**

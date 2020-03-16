@@ -1,0 +1,14 @@
+此信件為系統自動傳送，請勿直接回覆，感謝您的配合。
+如要確保收到信件，可將此信箱加入通訊錄。
+
+{shop_url}
+
+嗨
+
+電子報訂閱
+
+感謝您的訂閱。新訂戶即可獲得優惠折扣碼： {discount}
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

@@ -1,0 +1,20 @@
+このメールは、ご注文いただきますと自動的に送信されているため返信は回答できかねます。
+自動的に「迷惑メールフォルダ」へ振り分けられてしまうことがありますので、連絡先を追加してください。
+
+{shop_url}
+
+{firstname_friend} {lastname_friend}, Join us!
+
+Your friend {firstname} {lastname} wants to refer you on [{shop_name}]({shop_url})!
+
+We are pleased to offer you a voucher worth {discount} that you can use on your next order. Get referred and earn a discount voucher of {discount}!
+
+[It's very easy to sign up, just click here!]({link})
+
+When signing up, don't forget to provide the email address of your referring friend: {email}.
+
+Best regards,
+
+[{shop_name}]({shop_url})
+
+Powered by [TekapoCart](https://www.tekapo.io/)

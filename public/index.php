@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2018 PrestaShop
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -16,20 +16,19 @@
  *
  * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
  * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to http://www.prestashop.com for more information.
+ * needs please refer to https://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2018 PrestaShop SA
+ * @copyright 2007-2019 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
 
 // suzy: 2019-02-02 第一語言 URL 不加 iso code
-// if (empty($_GET['id_lang']) && !empty($_GET['switch_lang'])) {
 if (empty($_GET['id_lang'])) {
     $_GET['id_lang'] = 1;
     $_GET['isolang'] = 'tw';
 }
 
-require(dirname(__FILE__).'/config/config.inc.php');
+require dirname(__FILE__).'/config/config.inc.php';
 Dispatcher::getInstance()->dispatch();

@@ -16,7 +16,7 @@ File: classes/PrestaShopBackup.php:166</note>
       </trans-unit>
       <trans-unit id="c1c8a564c10a0efe07bb4e4b20d88cc9" approved="yes">
         <source>Invalid ID</source>
-        <target xml:lang="zh-TW">無效編號</target>
+        <target xml:lang="zh-TW">無效 ID</target>
         <note>Context:
 File: classes/PrestaShopBackup.php:167</note>
       </trans-unit>
@@ -134,7 +134,7 @@ File: controllers/admin/AdminImportController.php:1299</note>
       </trans-unit>
       <trans-unit id="7a1bebdbf5770873f8172ecf27b2aa50" approved="yes">
         <source>The category ID must be unique. It can't be the same as the one for the parent category (ID: %1$s).</source>
-        <target xml:lang="zh-TW">分類編號必須是獨特的。不能和母分類 （ID: %1$s）的一樣。</target>
+        <target xml:lang="zh-TW">分類 ID 必須是唯一。不能和母分類 （ID: %1$s）相同。</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:1321</note>
       </trans-unit>
@@ -146,7 +146,7 @@ File: controllers/admin/AdminImportController.php:1335</note>
       </trans-unit>
       <trans-unit id="1123af3eab25b7475419fcaecc6c3beb" approved="yes">
         <source>%category_name% (ID: %id%) cannot be saved</source>
-        <target xml:lang="zh-TW">%category_name% (編號：%id%) 無法儲存</target>
+        <target xml:lang="zh-TW">%category_name% (ID：%id%) 無法儲存</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:1360</note>
       </trans-unit>
@@ -194,7 +194,7 @@ File: controllers/admin/AdminImportController.php:1698</note>
       </trans-unit>
       <trans-unit id="43bf950e043950e2da10f917b902c131" approved="yes">
         <source>%1$s (ID: %2$s) cannot be saved</source>
-        <target xml:lang="zh-TW">%1$s (編號：%2$s) 無法儲存</target>
+        <target xml:lang="zh-TW">%1$s (ID：%2$s) 無法儲存</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:3846</note>
       </trans-unit>
@@ -272,7 +272,7 @@ File: controllers/admin/AdminImportController.php:2772</note>
       </trans-unit>
       <trans-unit id="5c8707f79dbdd3abb28a8aa09e34f02f" approved="yes">
         <source>No image was found for combination with id_product = %s and image position = %s.</source>
-        <target xml:lang="zh-TW">找不到組合的圖片，產品編號 = %s 、圖片位置 = %s</target>
+        <target xml:lang="zh-TW">找不到組合的圖片，產品 ID = %s 、圖片位置 = %s</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:2494</note>
       </trans-unit>
@@ -326,7 +326,7 @@ File: controllers/admin/AdminImportController.php:3247</note>
       </trans-unit>
       <trans-unit id="597cf702e07f3b35431d2a499b00cefd" approved="yes">
         <source>%1$s does not exist in database %2$s (ID: %3$s), and therefore cannot be saved</source>
-        <target xml:lang="zh-TW">%1$s 不存在於資料庫 %2$s (編號：%3$s) ，無法儲存。</target>
+        <target xml:lang="zh-TW">%1$s 不存在於資料庫 %2$s (ID：%3$s) ，無法儲存。</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:3257</note>
       </trans-unit>
@@ -338,13 +338,13 @@ File: controllers/admin/AdminImportController.php:3234</note>
       </trans-unit>
       <trans-unit id="4a69d9da990728e003654d32a0b283a4" approved="yes">
         <source>The customer ID #%d does not exist in the database, and therefore cannot be validated.</source>
-        <target xml:lang="zh-TW">客戶編號 %d 不存在於數據庫中因此無法驗證。</target>
+        <target xml:lang="zh-TW">客戶 ID %d 不存在於數據庫中因此無法驗證。</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:3270</note>
       </trans-unit>
       <trans-unit id="608ec99cc3ef74d962769c1958a1fa62" approved="yes">
         <source>The customer ID #%d does not exist in the database, and therefore cannot be saved.</source>
-        <target xml:lang="zh-TW">客戶編號 %d 不存在於數據庫中因此無法儲存。</target>
+        <target xml:lang="zh-TW">客戶 ID %d 不存在於數據庫中因此無法儲存。</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:3278</note>
       </trans-unit>
@@ -386,7 +386,7 @@ File: controllers/admin/AdminImportController.php:3928</note>
       </trans-unit>
       <trans-unit id="b390e8c2a66fd018293fb44a5b8208c8" approved="yes">
         <source>Currency ID (%id%) is not valid (at line %line%).</source>
-        <target xml:lang="zh-TW">貨幣編號（%id%）無效（在第%line%行）。</target>
+        <target xml:lang="zh-TW">貨幣 ID（%id%）無效（在第%line%行）。</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:3931</note>
       </trans-unit>
