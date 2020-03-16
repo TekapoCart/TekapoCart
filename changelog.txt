@@ -81,7 +81,7 @@ Vendor
 - overtrue/pinyin
 - recca0120/twzipcode
 Steps
-- install ezship, ezship_home, tc_pod, ecpay_711, ecpay_tcat, tc_cvs
+- install ezship, ezship_home, tc_pod, ecpay_711, ecpay_tcat, tc_711
 - upgrade Paypal
 - run 2020-01-09.sql
 - uninstall smilepay, ps_cashondelivery
