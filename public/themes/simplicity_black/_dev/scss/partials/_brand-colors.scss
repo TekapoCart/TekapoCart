@@ -50,7 +50,8 @@ a:focus,
 body#checkout a:hover,
 .faq .q:before,
 .dropdown-item:focus,
-.dropdown-item:hover {
+.dropdown-item:hover,
+.pagination .current a {
   color: $primary-link-color;
 }
 
@@ -69,12 +70,12 @@ body#checkout a:hover,
 .ps-alert-success .item i svg,
 .ps-alert-success .item,
 .btn-primary {
-  background-color: $primary-link-color;
+  background-color: $primary-background-color;
 }
 
 @media (max-width: 991px) {
   .block-social li {
-    background-color: $primary-link-color;
+    background-color: $primary-background-color;;
   }
 }
 
@@ -86,4 +87,8 @@ body#checkout a:hover,
 .btn-primary:disabled:hover,
 .btn-primary:disabled:focus {
   background-color: $primary-link-disabled-hover;
+}
+
+#blockcart-modal .modal-title i.material-icons {
+  color: #fff;
 }
