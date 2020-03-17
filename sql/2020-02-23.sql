@@ -1,3 +1,0 @@
-INSERT INTO `ps_configuration` (`id_shop_group`, `id_shop`, `name`, `value`, `date_add`, `date_upd`) VALUES (NULL, NULL, 'PS_LOGO_WIDTH', '1830', NOW(), NOW());
-INSERT INTO `ps_configuration` (`id_shop_group`, `id_shop`, `name`, `value`, `date_add`, `date_upd`) VALUES (NULL, NULL, 'PS_LOGO_SMALL', 'logo_small.jpg', NOW(), NOW());
-INSERT INTO `ps_configuration` (`id_shop_group`, `id_shop`, `name`, `value`, `date_add`, `date_upd`) VALUES (NULL, NULL, 'PS_LOGO_SMALL_WIDTH', '450', NOW(), NOW());
