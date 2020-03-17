@@ -1,3 +1,7 @@
+#blockcart-modal .product-name {
+  color: $primary-color;
+}
+
 .block_newsletter input[type=text]:focus,
 .block_newsletter form input[type="text"]:focus,
 body#checkout section.checkout-step .address-item.selected,
@@ -11,7 +15,7 @@ body#checkout section.checkout-step .address-item.selected,
 .tabs .nav-tabs .nav-link.active,
 #_desktop_top_menu .top-menu .current > a,
 .faq .q {
-  border-color: $primary-link-color;
+  border-color: $primary-color;
 }
 
 a,
@@ -40,7 +44,6 @@ a:focus,
 .top-menu .sub-menu a:hover,
 #mobile_top_menu_wrapper .top-menu .current > a,
 .product-price,
-#blockcart-modal .product-name,
 .done,
 .product-line-grid-body > .product-line-info > .available,
 #product-availability .product-available,
@@ -81,12 +84,12 @@ body#checkout a:hover,
 
 .btn-primary:hover,
 .btn-primary:focus {
-  background-color: $primary-link-hover;
+  background-color: $primary-background-hover;
 }
 
 .btn-primary:disabled:hover,
 .btn-primary:disabled:focus {
-  background-color: $primary-link-disabled-hover;
+  background-color: $primary-background-disabled-hover;
 }
 
 #blockcart-modal .modal-title i.material-icons {
