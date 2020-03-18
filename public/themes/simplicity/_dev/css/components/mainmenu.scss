@@ -69,6 +69,7 @@
 
 #_desktop_top_menu {
   display: inline-block;
+  text-align: justify;
   > ul {
     > li {
       display: inline-block;
@@ -87,6 +88,20 @@
     .current > a {
       color: $brand-primary-hover;
     }
+  }
+}
+
+@include media-breakpoint-down(md) { /* 992px 以下 */
+  #_desktop_top_menu {
+    max-width: 960px;
+    padding: 0 15px;
+  }
+}
+
+@include media-breakpoint-down(sm) { /* 768px 以下 */
+  #_desktop_top_menu {
+    max-width: 720px;
+    padding: 0 15px;
   }
 }
 
