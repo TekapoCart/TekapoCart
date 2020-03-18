@@ -696,21 +696,21 @@
     display: inline-block;
     li {
       display: inline-block;
-      margin: 0 4px 4px 0;
+      margin: 0 8px 8px 0;
       word-wrap: break-word;
       overflow-wrap: break-word;
       a {
         display: block;
-        padding: 0 12px;
-        height: 32px;
-        line-height: 32px;
-        border-radius: 32px;
-        background-color: $brand-primary;
+        padding: 0 10px;
+        height: 30px;
+        line-height: 28px;
+        background-color: $gray-light;
         font-size: $font-size-lg;
         transition: opacity ease .2s;
-        color: $brand-background;
+        color: $gray;
         &:hover {
-          background-color: darken($brand-primary, 10%);
+          background-color: darken($gray-light, 10%);
+          color: $gray-darker;
         }
       }
     }
