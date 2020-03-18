@@ -1334,11 +1334,12 @@ class AdminControllerCore extends Controller
                     $this->redirect_after = self::$currentIndex . '&token=' . $this->token;
                 }
 
-                // suzy: 2018-09-26 修正切換 zone、country、優惠活動時，正式機 $_SERVER['HTTP_REFERER'] 抓不到東西
+                // suzy: 2018-09-26 修正切換 zone、country、優惠活動、承運商時，正式機 $_SERVER['HTTP_REFERER'] 抓不到東西
                 if (
                     strstr(self::$currentIndex, 'AdminCartRules') ||
                     strstr(self::$currentIndex, 'AdminZones') ||
-                    strstr(self::$currentIndex, 'AdminCountries')
+                    strstr(self::$currentIndex, 'AdminCountries') ||
+                    strstr(self::$currentIndex, 'AdminCarriers')
                 ) {
                     $this->redirect_after = self::$currentIndex . '&token=' . $this->token;
                 }
