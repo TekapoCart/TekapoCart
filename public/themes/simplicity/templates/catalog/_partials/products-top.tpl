@@ -24,7 +24,7 @@
  *}
 {if $configuration.show_sort_in_listing}
 <div id="js-product-list-top" class="row products-selection">
-  <div class="col-md-6 hidden-sm-down total-products">
+  <div class="col-md-6 {*hidden-sm-down *}total-products">
     {if $listing.pagination.total_items > 1}
       {l s='There are %product_count% products.' d='Shop.Theme.Catalog' sprintf=['%product_count%' => $listing.pagination.total_items]}
     {elseif $listing.pagination.total_items > 0}
