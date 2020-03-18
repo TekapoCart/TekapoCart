@@ -1,4 +1,10 @@
-#blockcart-modal .product-name {
+#blockcart-modal .product-name,
+#product-availability .product-available,
+.done,
+.product-price,
+.block-categories .arrows .arrow-right,
+.product-line-grid-body > .product-line-info > .available,
+.faq .q:before {
   color: $primary-color;
 }
 
@@ -33,7 +39,6 @@ a:focus,
 .block-categories .category-sub-menu .current,
 .block-categories .collapse-icons .add:hover,
 .block-categories .collapse-icons .remove:hover,
-.block-categories .arrows .arrow-right,
 .block-categories .arrows .arrow-down:hover,
 .simplicity-search-widget form label:hover,
 #products .highlighted-informations .quick-view:hover,
@@ -43,15 +48,10 @@ a:focus,
 .page-my-account #content .links a:hover i,
 .top-menu .sub-menu a:hover,
 #mobile_top_menu_wrapper .top-menu .current > a,
-.product-price,
-.done,
-.product-line-grid-body > .product-line-info > .available,
-#product-availability .product-available,
 .tabs .nav-tabs .nav-link.active,
 #_desktop_top_menu .top-menu .current > a,
 #_desktop_top_menu .top-menu a:hover[data-depth="0"],
 body#checkout a:hover,
-.faq .q:before,
 .dropdown-item:focus,
 .dropdown-item:hover,
 .pagination .current a {
@@ -67,8 +67,7 @@ body#checkout a:hover,
 .group-span-filestyle .btn-default,
 .custom-radio input[type="radio"]:checked + span,
 .block-social li:hover,
-.products-sort-order .select-list:hover,
-.facet-dropdown .select-list:hover,
+
 #blockcart-modal .modal-header,
 .ps-alert-success .item i svg,
 .ps-alert-success .item,
@@ -76,14 +75,10 @@ body#checkout a:hover,
   background-color: $primary-background-color;
 }
 
-@media (max-width: 991px) {
-  .block-social li {
-    background-color: $primary-background-color;;
-  }
-}
-
 .btn-primary:hover,
-.btn-primary:focus {
+.btn-primary:focus,
+.facet-dropdown .select-list:hover,
+.products-sort-order .select-list:hover {
   background-color: $primary-background-hover;
 }
 
@@ -94,4 +89,10 @@ body#checkout a:hover,
 
 #blockcart-modal .modal-title i.material-icons {
   color: #fff;
+}
+
+@media (max-width: 991px) {
+  .block-social li {
+    background-color: $primary-background-color;;
+  }
 }
