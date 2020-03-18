@@ -91,7 +91,7 @@
     color: $gray-darker;
     padding: 3px $dropdown-item-padding-x;
     &.current {
-      background-color: $focus-background;
+      background: none;
       color: $gray-darker;
       &:hover {
         color: $gray-darker;
