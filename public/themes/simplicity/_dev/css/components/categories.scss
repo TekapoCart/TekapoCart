@@ -216,6 +216,7 @@
     font-size: 18px;
     &:not(.previous):not(.next) {
       letter-spacing: 0.125rem;
+      padding: 0 3px;
     }
     &:not(.disabled):hover {
       color: $brand-primary-hover;

@@ -139,7 +139,7 @@
     width: calc(100% - 30px);
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; }
+    /* suzy: 2020-03-18 不斷行 white-space: nowrap; */ }
 
 
 /*# sourceMappingURL=front.css.map*/
