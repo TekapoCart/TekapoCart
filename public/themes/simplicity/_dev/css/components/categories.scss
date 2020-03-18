@@ -91,9 +91,10 @@
     color: $gray-darker;
     padding: 3px $dropdown-item-padding-x;
     &.current {
-      background: none;
+      background-color: $focus-background;
       color: $gray-darker;
       &:hover {
+        background-color: $focus-background;
         color: $gray-darker;
       }
     }
@@ -101,7 +102,7 @@
       // background: $brand-primary-hover;
       // color: white;
       // text-decoration: none;
-      background: none;
+      background-color: $brand-background;
       color: $brand-primary;
     }
   }
