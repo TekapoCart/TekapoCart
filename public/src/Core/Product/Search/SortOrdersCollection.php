@@ -64,6 +64,7 @@ final class SortOrdersCollection
             (new SortOrder('product', 'date_add', 'desc'))->setLabel(
                 $this->translator->trans('New Arrival', array(), 'Shop.Theme.Catalog')
             ),
+
             (new SortOrder('product', 'price', 'asc'))->setLabel(
                 $this->translator->trans('Price, low to high', array(), 'Shop.Theme.Catalog')
             ),
