@@ -103,9 +103,12 @@ class PricesDropProductSearchProvider implements ProductSearchProviderInterface
                     (new SortOrder('product', 'name', 'asc'))->setLabel(
                         $this->translator->trans('Name, A to Z', array(), 'Shop.Theme.Catalog')
                     ),
-                    (new SortOrder('product', 'name', 'desc'))->setLabel(
-                        $this->translator->trans('Name, Z to A', array(), 'Shop.Theme.Catalog')
-                    ),
+
+                    // suzy: 2020-03-18 分類頁顯示排序下拉
+//                    (new SortOrder('product', 'name', 'desc'))->setLabel(
+//                        $this->translator->trans('Name, Z to A', array(), 'Shop.Theme.Catalog')
+//                    ),
+
                     (new SortOrder('product', 'price', 'asc'))->setLabel(
                         $this->translator->trans('Price, low to high', array(), 'Shop.Theme.Catalog')
                     ),
