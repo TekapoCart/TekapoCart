@@ -52,10 +52,21 @@ class SearchControllerCore extends ProductListingFrontController
 
         $this->search_tag = Tools::getValue('tag');
 
+        $keywords = [];
+        if (!empty($this->search_string)) {
+            $keywords [] = $this->search_string;
+        }
+        if (!empty($this->search_tag)) {
+            $keywords [] = $this->search_tag;
+        }
+
         $this->context->smarty->assign(
             array(
                 'search_string' => $this->search_string,
                 'search_tag' => $this->search_tag,
+
+                // suzy: 2020-03-18 meta title, meta description
+                'seo_title' => $this->getTranslator()->trans('Search results', array(), 'Shop.Theme.Catalog') . '：' . implode(', ', $keywords),
             )
         );
     }
@@ -102,7 +113,17 @@ class SearchControllerCore extends ProductListingFrontController
 
     public function getListingLabel()
     {
-        return $this->getTranslator()->trans('Search results', array(), 'Shop.Theme.Catalog');
+        // suzy: 2020-03-18 搜尋頁標題顯示關鍵字
+        // return $this->getTranslator()->trans('Search results', array(), 'Shop.Theme.Catalog');
+
+        $keywords = [];
+        if (!empty($this->search_string)) {
+            $keywords [] = $this->search_string;
+        }
+        if (!empty($this->search_tag)) {
+            $keywords [] = $this->search_tag;
+        }
+        return $this->getTranslator()->trans('Search results', array(), 'Shop.Theme.Catalog') . '：' . implode(', ', $keywords);
     }
 
     public function getBreadcrumbLinks()
