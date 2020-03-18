@@ -5,13 +5,15 @@
     input[type="text"] {
       position: absolute;
       height: 44px;
-      margin-top: 5px;
-      margin-right: 10px;
       border: 1px solid transparent;
-      padding-left: 10px;
       background-color: transparent;
       outline: none;
       color: $gray-darker;
+      &:focus {
+        margin-top: 5px;
+        margin-right: 10px;
+        padding-left: 10px;
+      }
     }
     label {
       cursor: pointer;
@@ -94,7 +96,7 @@
   .simplicity-search-widget {
     form {
       input[type="text"] {
-        width: 40px;
+        width: 0;
         &:focus {
           position: absolute;
           width: 150px;
