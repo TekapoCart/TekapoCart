@@ -30,31 +30,43 @@ File: classes/controller/FrontController.php:1539</note>
     <body>
       <trans-unit id="05d61847840bcddb5d37374de3be0ccc" approved="yes">
         <source>Name, A to Z</source>
-        <target xml:lang="zh-TW">名稱： A 到 Z</target>
+        <target xml:lang="zh-TW">品名 A-Z</target>
         <note>Context:
 File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:87</note>
       </trans-unit>
       <trans-unit id="e21f2ef58ff858167655c18a874f9706" approved="yes">
         <source>Name, Z to A</source>
-        <target xml:lang="zh-TW">名稱： 從 Z 到 A</target>
+        <target xml:lang="zh-TW">品名 Z-A</target>
         <note>Context:
 File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:90</note>
       </trans-unit>
       <trans-unit id="e2174d7435696694b8f4d984d99eef03" approved="yes">
         <source>Price, low to high</source>
-        <target xml:lang="zh-TW">價格： 從低到高</target>
+        <target xml:lang="zh-TW">價格低到高</target>
         <note>Context:
 File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:93</note>
       </trans-unit>
       <trans-unit id="0ee81913615b71aba7dc8bbf1f144672" approved="yes">
         <source>Price, high to low</source>
-        <target xml:lang="zh-TW">價格： 從高到低</target>
+        <target xml:lang="zh-TW">價格高到低</target>
+        <note>Context:
+File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:96</note>
+      </trans-unit>
+      <trans-unit id="06935560825762bbb2d20a4a3ed69e4f" approved="yes">
+        <source>New Arrival</source>
+        <target xml:lang="zh-TW">最新上架</target>
+        <note>Context:
+File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:96</note>
+      </trans-unit>
+      <trans-unit id="52f5e0bc3859bc5f5e25130b6c7e8881" approved="yes">
+        <source>Position</source>
+        <target xml:lang="zh-TW">綜合排名</target>
         <note>Context:
 File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:96</note>
       </trans-unit>
       <trans-unit id="b56ffaa1656269759857ba14573dc144" approved="yes">
         <source>Sales, highest to lowest</source>
-        <target xml:lang="zh-TW">銷售額：從最高到最低</target>
+        <target xml:lang="zh-TW">銷量排行</target>
         <note>Context:
 File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:57</note>
       </trans-unit>
@@ -318,7 +330,7 @@ File: src/Core/Product/ProductPresenter.php:729</note>
     <body>
       <trans-unit id="ad24ffca4f9e9c0c7e80fe1512df6db9" approved="yes">
         <source>Relevance</source>
-        <target xml:lang="zh-TW">相關性</target>
+        <target xml:lang="zh-TW">相關度</target>
         <note>Context:
 File: src/Core/Product/Search/SortOrderFactory.php:45</note>
       </trans-unit>
@@ -506,13 +518,13 @@ File: themes/StarterTheme/templates/catalog/_partials/active_filters.tpl:30</not
     <body>
       <trans-unit id="498007f495e00b14f415d5f6ae6a1362" approved="yes">
         <source>There are %product_count% products.</source>
-        <target xml:lang="zh-TW">有 %product_count% 項結果</target>
+        <target xml:lang="zh-TW">共 %product_count% 件</target>
         <note>Context:
 File: themes/classic/templates/catalog/_partials/products-top.tpl:28</note>
       </trans-unit>
       <trans-unit id="79ac892bd1769d83ef1c16dae9f4eddd" approved="yes">
         <source>There is 1 product.</source>
-        <target xml:lang="zh-TW">有1項商品。</target>
+        <target xml:lang="zh-TW">有 1 件</target>
         <note>Context:
 File: themes/classic/templates/catalog/_partials/products-top.tpl:30</note>
       </trans-unit>
@@ -522,7 +534,7 @@ File: themes/classic/templates/catalog/_partials/products-top.tpl:30</note>
     <body>
       <trans-unit id="fb526aaa0add86e4e124263db50438c8" approved="yes">
         <source>Showing %from%-%to% of %total% item(s)</source>
-        <target xml:lang="zh-TW">顯示 %total% 件商品中的 %from% 至 %to% 件</target>
+        <target xml:lang="zh-TW">共 %total% 件，顯示 %from% 至 %to% 件</target>
         <note>Context:
 File: themes/classic/templates/_partials/pagination.tpl:28</note>
       </trans-unit>

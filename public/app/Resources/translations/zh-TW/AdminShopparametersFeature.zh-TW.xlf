@@ -657,7 +657,7 @@ File: controllers/admin/AdminSearchConfController.php:200</note>
       </trans-unit>
       <trans-unit id="a9f445d59022dee4cb33385aef61620f" approved="yes">
         <source>The "weight" represents its importance and relevance for the ranking of the products when completing a new search.</source>
-        <target xml:lang="zh-TW">「權重」(weight) 代表著建立新的搜尋時商品的重要性與相關性</target>
+        <target xml:lang="zh-TW">「權重」(weight) 代表著建立新的搜尋時商品的重要性與相關度</target>
         <note>Context:
 File: controllers/admin/AdminSearchConfController.php:204</note>
       </trans-unit>
@@ -1918,7 +1918,7 @@ File: admin-dev/themes/default/template/controllers/referrers/helpers/view/view.
       </trans-unit>
       <trans-unit id="3cfcde53f39184634bc7b2344479fbc4">
         <source>Position inside category</source>
-        <target xml:lang="zh-TW">商品排序位置</target>
+        <target xml:lang="zh-TW">在分類下商品排序</target>
         <note>Line: 54</note>
       </trans-unit>
       <trans-unit id="1be6f9eb563f3bf85c78b4219bf09de9">

@@ -76,21 +76,35 @@ class SearchProvider implements FacetsRendererInterface, ProductSearchProviderIn
     {
         $sortPosAsc = new SortOrder('product', 'position', 'asc');
         $sortNameAsc = new SortOrder('product', 'name', 'asc');
-        $sortNameDesc = new SortOrder('product', 'name', 'desc');
+
+        // suzy: 2020-03-18 分類頁顯示排序下拉
+//        $sortNameDesc = new SortOrder('product', 'name', 'desc');
+        $sortDateAddAsc = new SortOrder('product', 'date_add', 'desc');
+
         $sortPriceAsc = new SortOrder('product', 'price', 'asc');
         $sortPriceDesc = new SortOrder('product', 'price', 'desc');
         $translator = $this->module->getTranslator();
 
         return [
+            // suzy: 2020-03-18 分類頁顯示排序下拉
+//            $sortPosAsc->setLabel(
+//                $translator->trans('Relevance', [], 'Modules.Facetedsearch.Shop')
+//            ),
             $sortPosAsc->setLabel(
-                $translator->trans('Relevance', [], 'Modules.Facetedsearch.Shop')
+                $translator->trans('Position', [], 'Shop.Theme.Catalog')
             ),
+
             $sortNameAsc->setLabel(
                 $translator->trans('Name, A to Z', [], 'Shop.Theme.Catalog')
             ),
-            $sortNameDesc->setLabel(
-                $translator->trans('Name, Z to A', [], 'Shop.Theme.Catalog')
+            // suzy: 2020-03-18 分類頁顯示排序下拉
+//            $sortNameDesc->setLabel(
+//                $translator->trans('Name, Z to A', [], 'Shop.Theme.Catalog')
+//            ),
+            $sortDateAddAsc->setLabel(
+                $translator->trans('New Arrival', [], 'Shop.Theme.Catalog')
             ),
+
             $sortPriceAsc->setLabel(
                 $translator->trans('Price, low to high', [], 'Shop.Theme.Catalog')
             ),

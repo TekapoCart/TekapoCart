@@ -74,7 +74,7 @@ File: modules/ps_facetedsearch/ps_facetedsearch.php:2294</note>
     <body>
       <trans-unit id="ad24ffca4f9e9c0c7e80fe1512df6db9" approved="yes">
         <source>Relevance</source>
-        <target xml:lang="zh-TW">相關性</target>
+        <target xml:lang="zh-TW">相關度</target>
         <note>Context:
 File: modules/ps_facetedsearch/src/Ps_FacetedsearchProductSearchProvider.php:121</note>
       </trans-unit>

@@ -52,6 +52,18 @@ File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:93</note>
         <note>Context:
 File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:96</note>
       </trans-unit>
+      <trans-unit id="06935560825762bbb2d20a4a3ed69e4f" approved="yes">
+        <source>New Arrival</source>
+        <target xml:lang="en">New Arrival</target>
+        <note>Context:
+File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:96</note>
+      </trans-unit>
+      <trans-unit id="52f5e0bc3859bc5f5e25130b6c7e8881" approved="yes">
+        <source>Position</source>
+        <target xml:lang="en">Re-Ranking</target>
+        <note>Context:
+File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:96</note>
+      </trans-unit>
       <trans-unit id="b56ffaa1656269759857ba14573dc144" approved="yes">
         <source>Sales, highest to lowest</source>
         <target xml:lang="en">Sales, highest to lowest</target>

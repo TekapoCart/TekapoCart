@@ -726,7 +726,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/Lists/produ
       </trans-unit>
       <trans-unit id="52f5e0bc3859bc5f5e25130b6c7e8881" approved="yes">
         <source>Position</source>
-        <target xml:lang="zh-CN">位置</target>
+        <target xml:lang="zh-CN">排序</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/Lists/products_table.html.twig:72</note>
       </trans-unit>
