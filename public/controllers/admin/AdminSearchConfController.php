@@ -137,6 +137,14 @@ class AdminSearchConfControllerCore extends AdminController
                         'type' => 'bool',
                         'desc' => '在商品頁的社群分享按鈕上方顯示標籤。',
                     ),
+                    // suzy: 分類頁顯示排序下拉
+                    'TC_SEARCH_SHOW_SORT_IN_LISTING' => array(
+                        'title' => '分類頁顯示排序下拉',
+                        'validation' => 'isBool',
+                        'cast' => 'intval',
+                        'type' => 'bool',
+                        'desc' => '在分類頁的標題下方顯示排序下拉。',
+                    ),
 
                     'PS_SEARCH_START' => array(
                         'title' => $this->trans('Search within word', array(), 'Admin.Shopparameters.Feature'),

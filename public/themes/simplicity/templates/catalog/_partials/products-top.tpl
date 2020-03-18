@@ -22,37 +22,38 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
-{*
+{if $configuration.show_sort_in_listing}
 <div id="js-product-list-top" class="row products-selection">
   <div class="col-md-6 hidden-sm-down total-products">
     {if $listing.pagination.total_items > 1}
-      <p>{l s='There are %product_count% products.' d='Shop.Theme.Catalog' sprintf=['%product_count%' => $listing.pagination.total_items]}</p>
+      {l s='There are %product_count% products.' d='Shop.Theme.Catalog' sprintf=['%product_count%' => $listing.pagination.total_items]}
     {elseif $listing.pagination.total_items > 0}
-      <p>{l s='There is 1 product.' d='Shop.Theme.Catalog'}</p>
+      {l s='There is 1 product.' d='Shop.Theme.Catalog'}
     {/if}
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 text-xs-right">
     <div class="row sort-by-row">
 
       {block name='sort_by'}
         {include file='catalog/_partials/sort-orders.tpl' sort_orders=$listing.sort_orders}
       {/block}
 
-      {if !empty($listing.rendered_facets)}
+      {* if !empty($listing.rendered_facets)}
         <div class="col-sm-3 col-xs-4 hidden-md-up filter-button">
           <button id="search_filter_toggler" class="btn btn-secondary">
             {l s='Filter' d='Shop.Theme.Actions'}
           </button>
         </div>
-      {/if}
+      {/if*}
     </div>
   </div>
-  <div class="col-sm-12 hidden-md-up text-sm-center showing">
+  {*<div class="col-sm-12 hidden-md-up text-sm-center showing">
     {l s='Showing %from%-%to% of %total% item(s)' d='Shop.Theme.Catalog' sprintf=[
     '%from%' => $listing.pagination.items_shown_from ,
     '%to%' => $listing.pagination.items_shown_to,
     '%total%' => $listing.pagination.total_items
     ]}
-  </div>
+  </div>*}
 </div>
-*}
+{/if}
+

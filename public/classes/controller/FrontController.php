@@ -1571,12 +1571,16 @@ class FrontControllerCore extends Controller
         // suzy: 2020-03-06 商品頁顯示標籤
         $show_tag_in_product = Configuration::get('TC_SEARCH_SHOW_TAGS_IN_PRODUCT');
 
+        // suzy: 2020-03-18 分類頁顯示排序下拉
+        $show_sort_in_listing = Configuration::get('TC_SEARCH_SHOW_SORT_IN_LISTING');
+
         return array(
 
             'body_bg_css' => $body_bg_css,
             'mobile_type' => $mobile_type,
             'logo_max_width' => $logo_max_width,
             'show_tag_in_product' => $show_tag_in_product,
+            'show_sort_in_listing' => $show_sort_in_listing,
 
             'display_taxes_label' => $this->getDisplayTaxesLabel(),
             'display_prices_tax_incl' => (bool) (new TaxConfiguration())->includeTaxes(),

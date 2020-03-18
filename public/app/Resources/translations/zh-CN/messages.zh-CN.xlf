@@ -213,7 +213,7 @@ File: controllers/admin/AdminTabsController.php:154</note>
       </trans-unit>
       <trans-unit id="52f5e0bc3859bc5f5e25130b6c7e8881" approved="yes">
         <source>Position</source>
-        <target xml:lang="zh-CN">位置</target>
+        <target xml:lang="zh-CN">排序</target>
         <note>Context:
 File: controllers/admin/AdminTabsController.php:80</note>
       </trans-unit>
