@@ -23,17 +23,17 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 <div class="product-additional-info">
-  {hook h='displayProductAdditionalInfo' product=$product}
-
-  {* if $configuration.show_tag_in_product && isset($product.tags) && $product.tags|@count }
+  {if $configuration.show_tag_in_product && isset($product.tags[1][0]) && strlen($product.tags[1][0]) > 0}
     <div class="product-tags">
       <ul>
         {foreach from=$product.tags item=tag}
           {foreach from=$tag item=value}
-            <li><a href="{$link->getPageLink('search', true, NULL, "tag={$value|urlencode}")}">#{$value|escape:html:'UTF-8'}</a></li>
+            <li>{$key} {$kk}<a href="{$link->getPageLink('search', true, NULL, "tag={$value|urlencode}")}">{$value|escape:html:'UTF-8'}</a></li>
           {/foreach}
         {/foreach}
       </ul>
     </div>
-  {/if*}
+  {/if}
+
+  {hook h='displayProductAdditionalInfo' product=$product}
 </div>
