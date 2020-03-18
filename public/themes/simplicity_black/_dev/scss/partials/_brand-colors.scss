@@ -54,7 +54,8 @@ a:focus,
 body#checkout a:hover,
 .dropdown-item:focus,
 .dropdown-item:hover,
-.pagination .current a {
+.pagination .current a,
+.select-list:hover {
   color: $primary-link-color;
 }
 

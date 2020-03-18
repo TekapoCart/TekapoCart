@@ -80,7 +80,7 @@
     display: inline-block;
     // width: 100%;
     color: $gray-darker;
-    background: white;
+    // background: white;
     padding: 5px 0 5px 10px;
     cursor: pointer;
     // border: $input-btn-border-width solid $input-border-color;
@@ -91,7 +91,7 @@
     color: $gray-darker;
     padding: 3px $dropdown-item-padding-x;
     &.current {
-      background-color: $focus-background;;
+      background-color: $focus-background;
       color: $gray-darker;
       &:hover {
         color: $gray-darker;
@@ -101,6 +101,7 @@
       // background: $brand-primary-hover;
       // color: white;
       // text-decoration: none;
+      background: none;
       color: $brand-primary;
     }
   }
