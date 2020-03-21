@@ -173,6 +173,7 @@ final class CustomerGridDefinitionFactory extends AbstractGridDefinitionFactory
                     'route_param_name' => 'customerId',
                 ])
             )
+            // suzy: 2020-03-16 客戶列表欄位顯示調整
 //            ->add(
 //                (new ToggleColumn('newsletter'))
 //                ->setName($this->trans('Newsletter', [], 'Admin.Global'))

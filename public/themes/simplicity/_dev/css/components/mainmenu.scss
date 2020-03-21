@@ -90,24 +90,41 @@
     }
   }
 }
+#header {
+  .header-bottom {
+    #_desktop_top_menu {
+      padding: 0 15px;
+    }
+  }
+}
 
-@include media-breakpoint-down(md) { /* 992px 以下 */
+@media only screen and (min-width: 1200px) {
   #header {
     .header-bottom {
       #_desktop_top_menu {
-        max-width: 960px;
-        padding: 0 15px;
+        max-width: 1140px;
       }
     }
   }
 }
 
-@include media-breakpoint-down(sm) { /* 768px 以下 */
+/* 包含 iPad Pro (1024px) */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  #header {
+    .header-bottom {
+      #_desktop_top_menu {
+        max-width: 960px;
+      }
+    }
+  }
+}
+
+/* 包含 iPad (768px) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
   #header {
     .header-bottom {
       #_desktop_top_menu {
         max-width: 720px;
-        padding: 0 15px;
       }
     }
   }

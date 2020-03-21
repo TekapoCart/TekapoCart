@@ -30,7 +30,7 @@ File: classes/controller/FrontController.php:1539</note>
     <body>
       <trans-unit id="05d61847840bcddb5d37374de3be0ccc" approved="yes">
         <source>Name, A to Z</source>
-        <target xml:lang="zh-TW">品名 A-Z</target>
+        <target xml:lang="zh-TW">品名排序</target>
         <note>Context:
 File: src/Adapter/BestSales/BestSalesProductSearchProvider.php:87</note>
       </trans-unit>

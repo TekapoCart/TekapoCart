@@ -318,6 +318,14 @@ class FrameworkBundleAdminController extends Controller
      */
     protected function actionIsAllowed($action, $object = '', $suffix = '')
     {
+
+        // suzy: 2020-03-20 商品 Bulk Action
+        if ($action == 'addcategory_all' || $action == 'addcarrier_all' || $action == 'addtag_all') {
+            $action = 'activate_all';
+        } elseif ($action == 'delcategory_all' || $action == 'delcarrier_all' || $action == 'deltag_all') {
+            $action = 'deactivate_all';
+        }
+
         return (
                 $action === 'delete' . $suffix && $this->isGranted(PageVoter::DELETE, $object)
             ) || (

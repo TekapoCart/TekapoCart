@@ -712,13 +712,13 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:66</note>
     <body>
       <trans-unit id="f4158fa3500ce1523a52bee74971f5f2" approved="yes">
         <source>Product(s) successfully activated.</source>
-        <target xml:lang="zh-TW">商品成功啟動。</target>
+        <target xml:lang="zh-TW">商品成功顯示。</target>
         <note>Context:
 File: src/PrestaShopBundle/Controller/Admin/ProductController.php:741</note>
       </trans-unit>
       <trans-unit id="25b325c47f9b5f88d7820b079bafa02e" approved="yes">
         <source>Product(s) successfully deactivated.</source>
-        <target xml:lang="zh-TW">商品成功下線。</target>
+        <target xml:lang="zh-TW">商品成功隱藏。</target>
         <note>Context:
 File: src/PrestaShopBundle/Controller/Admin/ProductController.php:761</note>
       </trans-unit>
@@ -830,7 +830,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/catalog.htm
       </trans-unit>
       <trans-unit id="e927fc858b3eccca1323ed79add38ed6" approved="yes">
         <source>Activation in progress...</source>
-        <target xml:lang="zh-TW">啟動中...</target>
+        <target xml:lang="zh-TW">顯示中...</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/catalog.html.twig:138</note>
       </trans-unit>

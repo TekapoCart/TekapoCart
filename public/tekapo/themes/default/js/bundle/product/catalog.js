@@ -184,6 +184,41 @@ function bulkModalAction(allItems, postUrl, redirectUrl, action) {
     return;
   }
 
+
+  // suzy: 2020-03-20 商品 Bulk Action
+  if (action == 'addcategory_all') {
+    if ($('#addcategory_id').val().length === 0) {
+      alert('請輸入分類 ID');
+      return;
+    }
+  } else if (action == 'delcategory_all') {
+      if ($('#delcategory_id').val().length === 0) {
+          alert('請輸入分類 ID');
+          return;
+      }
+  } else if (action == 'addcarrier_all') {
+      if ($('#addcarrier_id').val().length === 0) {
+          alert('請輸入配送 ID');
+          return;
+      }
+  } else if (action == 'delcarrier_all') {
+      if ($('#delcarrier_id').val().length === 0) {
+          alert('請輸入配送 ID');
+          return;
+      }
+  } else if (action == 'addtag_all') {
+      if ($('#addtag_id').val().length === 0) {
+          alert('請輸入標籤 ID');
+          return;
+      }
+  } else if (action == 'deltag_all') {
+      if ($('#deltag_id').val().length === 0) {
+          alert('請輸入標籤 ID');
+          return;
+      }
+  }
+
+
   var targetModal = $('#catalog_' + action + '_modal');
   targetModal.modal('show');
 
@@ -209,11 +244,30 @@ function bulkModalAction(allItems, postUrl, redirectUrl, action) {
     var item0 = $(items.shift()).val();
     currentItemIdx++;
 
+
+    // suzy: 2020-03-20 商品 Bulk Action
+    var data = {bulk_action_selected_products: [item0]};
+    if (action == 'addcategory_all') {
+      data = {bulk_action_selected_products: [item0], category_id: $('#addcategory_id').val(), main: $('#addcategory_id_main').prop("checked")};
+    } else if (action == 'delcategory_all') {
+      data = {bulk_action_selected_products: [item0], category_id: $('#delcategory_id').val()};
+    } else if (action == 'addcarrier_all') {
+      data = {bulk_action_selected_products: [item0], carrier_id: $('#addcarrier_id').val()};
+    } else if (action == 'delcarrier_all') {
+      data = {bulk_action_selected_products: [item0], carrier_id: $('#delcarrier_id').val()};
+    } else if (action == 'addtag_all') {
+      data = {bulk_action_selected_products: [item0], tag_id: $('#addtag_id').val()};
+    } else if (action == 'deltag_all') {
+      data = {bulk_action_selected_products: [item0], tag_id: $('#deltag_id').val()};
+    }
+
+    console.log(details.attr('default-value'));
+
     details.html(details.attr('default-value').replace(/\.\.\./, '') + ' (#' + item0 + ')');
     $.ajax({
       type: 'POST',
       url: postUrl,
-      data: {bulk_action_selected_products: [item0]},
+      data: data, // suzy: 2020-03-20 商品 Bulk Action
       success: function (data, status) {
         progressBar.css('width', (currentItemIdx * 100 / itemsCount) + '%');
         progressBar.find('span').html(currentItemIdx + ' / ' + itemsCount);
@@ -278,6 +332,15 @@ function bulkProductAction(element, action) {
       break;
 
     case 'deactivate_all':
+
+    // suzy: 2020-03-20 商品 Bulk Action
+    case 'addcategory_all':
+    case 'delcategory_all':
+    case 'addcarrier_all':
+    case 'delcarrier_all':
+    case 'addtag_all':
+    case 'deltag_all':
+
       postUrl = urlHandler.attr('bulkurl').replace(/activate_all/, action);
       redirectUrl = urlHandler.attr('redirecturl');
 

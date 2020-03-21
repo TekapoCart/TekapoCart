@@ -75,13 +75,14 @@ admin_product_list:
         sortOrder: last|asc|desc
         view: full|quicknav
 
+# suzy: 2020-03-20 商品 Bulk Action
 admin_product_bulk_action:
     path:     /bulk/{action}
     methods:  [POST]
     defaults:
         _controller: PrestaShopBundle:Admin/Product:bulk
     requirements:
-        action: activate_all|deactivate_all|delete_all|duplicate_all
+        action: activate_all|deactivate_all|delete_all|duplicate_all|addcategory_all|delcategory_all|addcarrier_all|delcarrier_all|addtag_all|deltag_all
 
 admin_product_unit_action:
     path:     /unit/{action}/{id}
