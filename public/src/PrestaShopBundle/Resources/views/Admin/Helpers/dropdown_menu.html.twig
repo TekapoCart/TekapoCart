@@ -60,12 +60,23 @@
           class="dropdown-item" href="{{ entry.href|default("#") }}"
           {% if entry.onclick is defined %}onclick="{{ entry.onclick }}"{% endif %}
           {% if entry.target is defined %}target="{{ entry.target }}"{% endif %}
+          style="display: inline" {# suzy: 2020-03-20 商品 Bulk Action #}
         >
           {% if entry.icon %}
             <i class="material-icons">{{ entry.icon }}</i>
           {% endif %}
           {{ entry.label|default('') }}
         </a>
+
+        {# suzy: 2020-03-20 商品 Bulk Action #}
+        {% if entry.input %}
+          <span>
+            <input type="text" id="{{ entry.input }}" placeholder="ID" class="form-control" style="display: inline; width: 40px; padding: 0 5px; margin-right: 5px;" />
+            {% if entry.input == 'addcategory_id' %}
+              <input type="checkbox" id="{{ entry.input }}_main"> 主分類
+            {% endif %}
+          </span>
+        {% endif %}
       {% endif %}
     {% endfor %}
   </div>

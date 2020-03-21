@@ -174,13 +174,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/Blocks/filt
       </trans-unit>
       <trans-unit id="7bbd046ab824701b2e019e5d07d6ab99" approved="yes">
         <source>Activate selection</source>
-        <target xml:lang="zh-TW">啟用選取項目</target>
+        <target xml:lang="zh-TW">顯示選取項目</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/Blocks/filters.html.twig:86</note>
       </trans-unit>
       <trans-unit id="fa870a208f7f70af5ead1f1992f6d9e2" approved="yes">
         <source>Deactivate selection</source>
-        <target xml:lang="zh-TW">停用選取項目</target>
+        <target xml:lang="zh-TW">隱藏選取項目</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/CatalogPage/Blocks/filters.html.twig:90</note>
       </trans-unit>

@@ -115,6 +115,63 @@
             }
           ]) %}
 
+          {# suzy: 2020-03-20 商品 Bulk Action #}
+          {% set buttons_action = buttons_action|merge([
+            {
+              "divider": true
+            }, {
+              "onclick": "bulkProductAction(this, 'addcategory_all');",
+              "icon": "playlist_add",
+              "label": '加入分類',
+              "input": 'addcategory_id'
+            },
+            {
+              "divider": true
+            }, {
+              "onclick": "bulkProductAction(this, 'delcategory_all');",
+              "icon": "delete",
+              "label": '移除分類',
+              "input": 'delcategory_id'
+            }
+          ]) %}
+          {% set buttons_action = buttons_action|merge([
+            {
+              "divider": true
+            }, {
+              "onclick": "bulkProductAction(this, 'addcarrier_all');",
+              "icon": "playlist_add",
+              "label": '加入配送',
+              "input": 'addcarrier_id'
+            },
+            {
+              "divider": true
+            },
+            {
+              "onclick": "bulkProductAction(this, 'delcarrier_all');",
+              "icon": "delete",
+              "label": '移除配送',
+              "input": 'delcarrier_id'
+            }
+          ]) %}
+          {% set buttons_action = buttons_action|merge([
+            {
+            "divider": true
+            }, {
+            "onclick": "bulkProductAction(this, 'addtag_all');",
+            "icon": "playlist_add",
+            "label": '加入標籤',
+            "input": 'addtag_id'
+            },
+            {
+            "divider": true
+            }, {
+            "onclick": "bulkProductAction(this, 'deltag_all');",
+            "icon": "delete",
+            "label": '移除標籤',
+            "input": 'deltag_id'
+            }
+          ]) %}
+
           {% include '@PrestaShop/Admin/Helpers/dropdown_menu.html.twig' with {
             'div_style': "btn-group dropdown bulk-catalog",
             'button_id': "product_bulk_menu",

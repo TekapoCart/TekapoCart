@@ -207,6 +207,132 @@
     {% endblock %}
   {% endembed %}
 
+
+
+  {# suzy: 2020-03-20 商品 Bulk Action #}
+  {# Add category ID to product modal #}
+  {% embed '@PrestaShop/Admin/Helpers/bootstrap_popup.html.twig' with {
+    'id': "catalog_addcategory_all_modal",
+    'title': "選取項目加入分類 ID "|trans({}, 'Admin.Catalog.Notification'),
+    'closable': true,
+    'progressbar': {
+      'id': "catalog_addcategory_all_progression",
+      'label': "加入分類 ID..."|trans({}, 'Admin.Catalog.Notification')
+    },
+    'actions': [],
+  }%}
+    {% block content %}
+      <div class="modal-body">
+        {{ '加入分類 ID 中...'|trans({}, 'Admin.Catalog.Notification') }}
+        <span id="catalog_addcategory_all_failure" style="display: none;color: darkred;">
+          {{ '加入分類 ID 失敗。'|trans({}, 'Admin.Catalog.Notification') }}
+        </span>
+      </div>
+    {% endblock %}
+  {% endembed %}
+  {# Del category ID to product modal #}
+  {% embed '@PrestaShop/Admin/Helpers/bootstrap_popup.html.twig' with {
+    'id': "catalog_delcategory_all_modal",
+    'title': "選取項目移除分類 ID "|trans({}, 'Admin.Catalog.Notification'),
+    'closable': true,
+    'progressbar': {
+    'id': "catalog_delcategory_all_progression",
+    'label': "移除分類 ID..."|trans({}, 'Admin.Catalog.Notification')
+    },
+    'actions': [],
+  }%}
+    {% block content %}
+      <div class="modal-body">
+        {{ '移除分類 ID 中...'|trans({}, 'Admin.Catalog.Notification') }}
+        <span id="catalog_delcategory_all_failure" style="display: none;color: darkred;">
+          {{ '移除分類 ID 失敗。'|trans({}, 'Admin.Catalog.Notification') }}
+        </span>
+      </div>
+    {% endblock %}
+  {% endembed %}
+  {# Add carrier ID to product modal #}
+  {% embed '@PrestaShop/Admin/Helpers/bootstrap_popup.html.twig' with {
+    'id': "catalog_addcarrier_all_modal",
+    'title': "選取項目加入配送方式 ID "|trans({}, 'Admin.Catalog.Notification'),
+    'closable': true,
+    'progressbar': {
+    'id': "catalog_addcarrier_all_progression",
+    'label': "加入配送方式 ID..."|trans({}, 'Admin.Catalog.Notification')
+    },
+    'actions': [],
+  }%}
+    {% block content %}
+      <div class="modal-body">
+        {{ '加入配送方式 ID 中...'|trans({}, 'Admin.Catalog.Notification') }}
+        <span id="catalog_addcarrier_all_failure" style="display: none;color: darkred;">
+          {{ '加入配送方式 ID 失敗。'|trans({}, 'Admin.Catalog.Notification') }}
+        </span>
+      </div>
+    {% endblock %}
+  {% endembed %}
+  {# Del carrier ID to product modal #}
+  {% embed '@PrestaShop/Admin/Helpers/bootstrap_popup.html.twig' with {
+    'id': "catalog_delcarrier_all_modal",
+    'title': "選取項目移除配送方式 ID "|trans({}, 'Admin.Catalog.Notification'),
+    'closable': true,
+    'progressbar': {
+    'id': "catalog_delcarrier_all_progression",
+    'label': "移除配送方式 ID..."|trans({}, 'Admin.Catalog.Notification')
+    },
+    'actions': [],
+  }%}
+    {% block content %}
+      <div class="modal-body">
+        {{ '移除配送方式 ID 中...'|trans({}, 'Admin.Catalog.Notification') }}
+        <span id="catalog_delcarrier_all_failure" style="display: none;color: darkred;">
+          {{ '移除配送方式 ID 失敗。'|trans({}, 'Admin.Catalog.Notification') }}
+        </span>
+      </div>
+    {% endblock %}
+  {% endembed %}
+  {# Add tag ID to product modal #}
+  {% embed '@PrestaShop/Admin/Helpers/bootstrap_popup.html.twig' with {
+    'id': "catalog_addtag_all_modal",
+    'title': "選取項目加入標籤 ID "|trans({}, 'Admin.Catalog.Notification'),
+    'closable': true,
+    'progressbar': {
+    'id': "catalog_addtag_all_progression",
+    'label': "加入標籤 ID..."|trans({}, 'Admin.Catalog.Notification')
+    },
+    'actions': [],
+  }%}
+    {% block content %}
+      <div class="modal-body">
+        {{ '加入標籤 ID 中...'|trans({}, 'Admin.Catalog.Notification') }}
+        <span id="catalog_addtag_all_failure" style="display: none;color: darkred;">
+          {{ '加入標籤 ID 失敗。'|trans({}, 'Admin.Catalog.Notification') }}
+        </span>
+      </div>
+    {% endblock %}
+  {% endembed %}
+  {# Del tag ID to product modal #}
+  {% embed '@PrestaShop/Admin/Helpers/bootstrap_popup.html.twig' with {
+    'id': "catalog_deltag_all_modal",
+    'title': "選取項目移除標籤 ID "|trans({}, 'Admin.Catalog.Notification'),
+    'closable': true,
+    'progressbar': {
+    'id': "catalog_deltag_all_progression",
+    'label': "移除標籤 ID..."|trans({}, 'Admin.Catalog.Notification')
+    },
+    'actions': [],
+  }%}
+    {% block content %}
+      <div class="modal-body">
+        {{ '移除標籤 ID 中...'|trans({}, 'Admin.Catalog.Notification') }}
+        <span id="catalog_deltag_all_failure" style="display: none;color: darkred;">
+          {{ '移除標籤 ID 失敗。'|trans({}, 'Admin.Catalog.Notification') }}
+        </span>
+      </div>
+    {% endblock %}
+  {% endembed %}
+
+
+
   {% embed '@PrestaShop/Admin/Helpers/bootstrap_popup.html.twig' with {
     'id': "catalog_sql_query_modal",
     'title': "SQL query"|trans({}, 'Admin.Global'),

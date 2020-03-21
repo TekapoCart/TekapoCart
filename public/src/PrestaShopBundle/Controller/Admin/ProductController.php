@@ -747,6 +747,253 @@ class ProductController extends FrameworkBundleAdminController
             }
 
             switch ($action) {
+
+                // suzy: 2020-03-20 商品 Bulk Action
+                case 'addcategory_all':
+
+                    $category_id = $request->request->get('category_id');
+                    $main = $request->request->get('main');
+
+                    if (count($productIdList) < 1) {
+                        throw new \Exception('Should always receive at least one ID. Zero given.', 5003);
+                    }
+
+                    $failedIdList = array();
+                    foreach ($productIdList as $productId) {
+                        $product = new Product($productId);
+                        if (isset($product->id) && $product->id && Product::existsInDatabase((int) $product->id, 'product')) {
+                            if ($main === true) {
+                                $product->id_category_default = $category_id;
+                                $product->update();
+                            }
+                            $product->addToCategories([$category_id]);
+                        } else {
+                            $failedIdList[] = $productId;
+                        }
+                    }
+
+                    if (count($failedIdList) > 0) {
+                        throw new \Exception('Cannot add category ID on many requested products.', 5004);
+                    }
+
+                    if (empty($hasMessages)) {
+                        $this->addFlash(
+                            'success',
+                            $this->trans('商品成功加入分類。', 'Admin.Catalog.Notification')
+                        );
+                    }
+
+                    $logger->info('Category ID added: (' . implode(',', $productIdList) . ').');
+
+                    break;
+                case 'delcategory_all':
+
+                    $category_id = $request->request->get('category_id');
+
+                    if (count($productIdList) < 1) {
+                        throw new \Exception('Should always receive at least one ID. Zero given.', 5003);
+                    }
+
+                    $failedIdList = array();
+                    foreach ($productIdList as $productId) {
+                        $product = new Product($productId);
+                        if (isset($product->id) && $product->id && Product::existsInDatabase((int) $product->id, 'product')) {
+
+                            if ($product->id_category_default == $category_id) {
+                                $failedIdList[] = $productId;
+                                continue;
+                            }
+
+                            $product->deleteCategory($category_id);
+                        } else {
+                            $failedIdList[] = $productId;
+                        }
+                    }
+
+                    if (count($failedIdList) > 0) {
+                        throw new \Exception('Cannot add category ID on many requested products.', 5004);
+                    }
+
+                    if (empty($hasMessages)) {
+                        $this->addFlash(
+                            'success',
+                            $this->trans('商品成功移除分類。', 'Admin.Catalog.Notification')
+                        );
+                    }
+
+                    $logger->info('Category ID deleted: (' . implode(',', $productIdList) . ').');
+
+                    break;
+                case 'addcarrier_all':
+
+                    $carrier_id = $request->request->get('carrier_id');
+
+                    if (count($productIdList) < 1) {
+                        throw new \Exception('Should always receive at least one ID. Zero given.', 5003);
+                    }
+
+                    $failedIdList = array();
+                    foreach ($productIdList as $productId) {
+                        $product = new Product($productId);
+                        if (isset($product->id) && $product->id && Product::existsInDatabase((int) $product->id, 'product')) {
+
+                            $carrier_selected_list = [];
+                            foreach ($product->getCarriers() as $carrier) {
+                                $carrier_selected_list[] = $carrier['id_carrier'];
+                            }
+
+                            $carrier_selected_list[] = (int) $carrier_id;
+
+                            $product->setCarriers($carrier_selected_list);
+
+                        } else {
+                            $failedIdList[] = $productId;
+                        }
+                    }
+
+                    if (count($failedIdList) > 0) {
+                        throw new \Exception('Cannot add carrier ID on many requested products.', 5004);
+                    }
+
+                    if (empty($hasMessages)) {
+                        $this->addFlash(
+                            'success',
+                            $this->trans('商品成功加入配送。', 'Admin.Catalog.Notification')
+                        );
+                    }
+
+                    $logger->info('Carrier ID added: (' . implode(',', $productIdList) . ').');
+
+                    break;
+                case 'delcarrier_all':
+
+                    $carrier_id = $request->request->get('carrier_id');
+
+                    if (count($productIdList) < 1) {
+                        throw new \Exception('Should always receive at least one ID. Zero given.', 5003);
+                    }
+
+                    $failedIdList = array();
+                    foreach ($productIdList as $productId) {
+                        $product = new Product($productId);
+                        if (isset($product->id) && $product->id && Product::existsInDatabase((int) $product->id, 'product')) {
+
+                            $carrier_selected_list = [];
+                            foreach ($product->getCarriers() as $carrier) {
+                                if ($carrier['id_carrier'] == $carrier_id) {
+                                    continue;
+                                }
+                                $carrier_selected_list[] = $carrier['id_carrier'];
+                            }
+
+                            $product->setCarriers($carrier_selected_list);
+
+                        } else {
+                            $failedIdList[] = $productId;
+                        }
+                    }
+
+                    if (count($failedIdList) > 0) {
+                        throw new \Exception('Cannot add carrier ID on many requested products.', 5004);
+                    }
+
+                    if (empty($hasMessages)) {
+                        $this->addFlash(
+                            'success',
+                            $this->trans('商品成功移除配送。', 'Admin.Catalog.Notification')
+                        );
+                    }
+
+                    $logger->info('Carrier ID deleted: (' . implode(',', $productIdList) . ').');
+
+                    break;
+                case 'addtag_all':
+
+                    $tag_id = $request->request->get('tag_id');
+
+                    if (count($productIdList) < 1) {
+                        throw new \Exception('Should always receive at least one ID. Zero given.', 5003);
+                    }
+
+                    $failedIdList = array();
+                    foreach ($productIdList as $productId) {
+                        $product = new Product($productId);
+                        if (isset($product->id) && $product->id && Product::existsInDatabase((int) $product->id, 'product')) {
+
+                            $tag_selected_list = [];
+                            foreach ($product->getWsTags() as $tag) {
+                                $tag_selected_list[]['id'] = $tag['id'];
+                                if ($tag['id'] == $tag_id) {
+                                    unset($tag_id);
+                                }
+                            }
+                            if (isset($tag_id)) {
+                                $tag_selected_list[]['id'] = (int) $tag_id;
+                            }
+
+                            $product->setWsTags($tag_selected_list);
+
+                        } else {
+                            $failedIdList[] = $productId;
+                        }
+                    }
+
+                    if (count($failedIdList) > 0) {
+                        throw new \Exception('Cannot add tag ID on many requested products.', 5004);
+                    }
+
+                    if (empty($hasMessages)) {
+                        $this->addFlash(
+                            'success',
+                            $this->trans('商品成功加入標籤。', 'Admin.Catalog.Notification')
+                        );
+                    }
+
+                    $logger->info('Tag ID added: (' . implode(',', $productIdList) . ').');
+
+                    break;
+                case 'deltag_all':
+
+                    $tag_id = $request->request->get('tag_id');
+
+                    if (count($productIdList) < 1) {
+                        throw new \Exception('Should always receive at least one ID. Zero given.', 5003);
+                    }
+
+                    $failedIdList = array();
+                    foreach ($productIdList as $productId) {
+                        $product = new Product($productId);
+                        if (isset($product->id) && $product->id && Product::existsInDatabase((int) $product->id, 'product')) {
+
+                            $tag_selected_list = [];
+                            foreach ($product->getWsTags() as $tag) {
+                                if ($tag['id'] == $tag_id) {
+                                    continue;
+                                }
+                                $tag_selected_list[]['id'] = $tag['id'];
+                            }
+
+                            $product->setWsTags($tag_selected_list);
+
+                        } else {
+                            $failedIdList[] = $productId;
+                        }
+                    }
+
+                    if (count($failedIdList) > 0) {
+                        throw new \Exception('Cannot add tag ID on many requested products.', 5004);
+                    }
+
+                    if (empty($hasMessages)) {
+                        $this->addFlash(
+                            'success',
+                            $this->trans('商品成功移除標籤。', 'Admin.Catalog.Notification')
+                        );
+                    }
+
+                    $logger->info('Tag ID deleted: (' . implode(',', $productIdList) . ').');
+
+                    break;
                 case 'activate_all':
                     $hookDispatcher->dispatchWithParameters(
                         'actionAdminActivateBefore',
