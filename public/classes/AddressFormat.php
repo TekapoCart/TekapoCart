@@ -653,10 +653,10 @@ class AddressFormatCore extends ObjectModel
         $addressFields = AddressFormat::getOrderedAddressFields($address->id_country);
         $addressFormatedValues = AddressFormat::getFormattedAddressFieldsValues($address, $addressFields);
 
-        // suzy: 2018-09-07 台灣特定 format for 商店資訊
+        // suzy: 2018-09-07 台灣特定 format for 店鋪資訊
         if ($address->id_country == 203 && $addressFormatedValues['address1'] !== 'N/A') {
-            $addressText = $addressFormatedValues['city'] . $addressFormatedValues['address1'] . $newLine;
-            $addressText .= $addressFormatedValues['postcode'] . ' ' . $addressFormatedValues['Country:name'];
+            $addressText = $addressFormatedValues['city'] . $addressFormatedValues['address1'];
+            // $addressText .= $newLine . $addressFormatedValues['postcode'] . ' ' . $addressFormatedValues['Country:name'];
             return $addressText;
         }
 

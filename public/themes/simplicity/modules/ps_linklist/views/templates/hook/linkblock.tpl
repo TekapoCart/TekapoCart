@@ -22,38 +22,35 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
-<div class="col-md-12 links">
-  <div class="row">
-  {foreach $linkBlocks as $linkBlock}
-    <div class="col-md-3 wrapper">
-      <h3 class="h3 hidden-sm-down">{$linkBlock.title}</h3>
-      {assign var=_expand_id value=10|mt_rand:100000}
-      <div class="title clearfix hidden-md-up" data-target="#footer_sub_menu_{$_expand_id}" data-toggle="collapse">
-        <span class="h3">{$linkBlock.title}</span>
-        <span class="float-xs-right">
-          <span class="navbar-toggler collapse-icons">
-            <i class="material-icons add">&#xE313;</i>
-            <i class="material-icons remove">&#xE316;</i>
-          </span>
+
+
+{foreach $linkBlocks as $linkBlock}
+  <div class="col-md-3 links wrapper">
+    <h3 class="h3 hidden-sm-down">{$linkBlock.title}</h3>
+    {assign var=_expand_id value=10|mt_rand:100000}
+    <div class="title clearfix hidden-md-up" data-target="#footer_sub_menu_{$_expand_id}" data-toggle="collapse">
+      <span class="h3">{$linkBlock.title}</span>
+      <span class="float-xs-right">
+        <span class="navbar-toggler collapse-icons">
+          <i class="material-icons add">&#xE313;</i>
+          <i class="material-icons remove">&#xE316;</i>
         </span>
-      </div>
-      <ul id="footer_sub_menu_{$_expand_id}" class="collapse">
-        {foreach $linkBlock.links as $link}
-          <li>
-            <a
-                id="{$link.id}-{$linkBlock.id}"
-                class="{$link.class}"
-                href="{$link.url}"
-                title="{$link.description}"
-                {if !empty($link.target)} target="{$link.target}" rel="noreferrer"{/if}
-            >
-              {$link.title}
-            </a>
-          </li>
-        {/foreach}
-      </ul>
+      </span>
     </div>
-  {/foreach}
+    <ul id="footer_sub_menu_{$_expand_id}" class="collapse">
+      {foreach $linkBlock.links as $link}
+        <li>
+          <a
+            id="{$link.id}-{$linkBlock.id}"
+            class="{$link.class}"
+            href="{$link.url}"
+            title="{$link.description}"
+            {if !empty($link.target)} target="{$link.target}" rel="noreferrer"{/if}
+          >
+            {$link.title}
+          </a>
+        </li>
+      {/foreach}
+    </ul>
   </div>
-</div>
-<div class="clearfix"></div>
+{/foreach}

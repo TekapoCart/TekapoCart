@@ -25,29 +25,31 @@
 
 <div class="block-contact col-md-3 links wrapper">
   <div class="hidden-sm-down">
-    <h4 class="text-uppercase block-contact-title">{l s='Store information' d='Shop.Theme.Global'}</h4>
+    <h3 class="text-uppercase block-contact-title">{l s='Store information' d='Shop.Theme.Global'}</h3>
       {*$contact_infos.address.formatted nofilter*}
 
-      {if $contact_infos.address.address1}{$contact_infos.address.address1}<br>{/if}
+      {*if $contact_infos.address.address1}{$contact_infos.address.address1}<br>{/if}
       {if $contact_infos.address.address2}{$contact_infos.address.address2}<br>{/if}
-      {$contact_infos.address.postcode} {$contact_infos.address.city}
+      {$contact_infos.address.postcode} {$contact_infos.address.city*}
+
+      {$contact_infos.address.formatted nofilter}
 
       {if $contact_infos.phone}
-        <br>
+        <br>{$contact_infos.phone}
         {* [1][/1] is for a HTML tag. *}
-        {l s='Call us: [1]%phone%[/1]'
+        {*l s='Call us: [1]%phone%[/1]'
           sprintf=[
           '[1]' => '<span>',
           '[/1]' => '</span>',
           '%phone%' => $contact_infos.phone
           ]
           d='Shop.Theme.Global'
-        }
+        *}
       {/if}
       {if $contact_infos.fax}
-        <br>
+        <br>{$contact_infos.fax}
         {* [1][/1] is for a HTML tag. *}
-        {l
+        {*l
           s='Fax: [1]%fax%[/1]'
           sprintf=[
             '[1]' => '<span>',
@@ -55,12 +57,12 @@
             '%fax%' => $contact_infos.fax
           ]
           d='Shop.Theme.Global'
-        }
+        *}
       {/if}
       {if $contact_infos.email && $display_email}
-        <br>
+        <br>{$contact_infos.email}
         {* [1][/1] is for a HTML tag. *}
-        {l
+        {*l
           s='Email us: [1]%email%[/1]'
           sprintf=[
             '[1]' => '<a href="mailto:'|cat:$contact_infos.email|cat:'" class="dropdown">',
@@ -68,12 +70,12 @@
             '%email%' => $contact_infos.email
           ]
           d='Shop.Theme.Global'
-        }
+        *}
       {/if}
   </div>
   <div class="hidden-md-up">
     <div class="title">
-      <a class="h3" href="{$urls.pages.stores}">{l s='Store information' d='Shop.Theme.Global'}</a>
+      <a class="h3" href="{$urls.pages.contact}">{l s='Store information' d='Shop.Theme.Global'}</a>
     </div>
   </div>
 </div>
