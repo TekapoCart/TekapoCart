@@ -156,7 +156,7 @@ $(document).ready(() => {
   prestashop.on('updateProductList', (data) => {
 
     // suzy: 2020-03-21 After next page - go to top
-    let target = $("#wrapper");
+    let target = $("#products");
     if (target.length) {
       $('html, body').animate({
         scrollTop: target.offset().top
