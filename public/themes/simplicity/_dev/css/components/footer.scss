@@ -1,6 +1,7 @@
 .block_newsletter {
   @include search-box;
   font-size: $font-size-sm;
+  margin-bottom: 0.625rem;
   p {
     padding-top: $small-space;
   }
@@ -31,10 +32,20 @@
   /*margin-bottom: 0.625rem;*/
 }
 .block-contact {
-  color: $gray;
   font-size: 0.875rem;
   .block-contact-title{
     color:$gray-darker;
+  }
+  ul {
+    color: $gray;
+    .icon {
+      display: inline-block;
+      width: 30px;
+      vertical-align: bottom;
+    }
+    img {
+      width: 24px;
+    }
   }
 }
 .linklist {
@@ -186,7 +197,6 @@
 
 @include media-breakpoint-down(sm) {
   .block_newsletter {
-    padding-bottom: 0.625rem;
     border-bottom: 1px solid $footer-border-color;
   }
   .footer-container {
