@@ -24,58 +24,46 @@
  *}
 
 <div class="block-contact col-md-3 links wrapper">
-  <div class="hidden-sm-down">
-    <h3 class="text-uppercase block-contact-title">{l s='Store information' d='Shop.Theme.Global'}</h3>
-      {*$contact_infos.address.formatted nofilter*}
 
-      {*if $contact_infos.address.address1}{$contact_infos.address.address1}<br>{/if}
-      {if $contact_infos.address.address2}{$contact_infos.address.address2}<br>{/if}
-      {$contact_infos.address.postcode} {$contact_infos.address.city*}
+  <h3 class="block-contact-title hidden-sm-down">{l s='Store information' d='Shop.Theme.Global'}</h3>
 
-      {$contact_infos.address.formatted nofilter}
+  {*
 
-      {if $contact_infos.phone}
-        <br>{$contact_infos.phone}
-        {* [1][/1] is for a HTML tag. *}
-        {*l s='Call us: [1]%phone%[/1]'
-          sprintf=[
-          '[1]' => '<span>',
-          '[/1]' => '</span>',
-          '%phone%' => $contact_infos.phone
-          ]
-          d='Shop.Theme.Global'
-        *}
-      {/if}
-      {if $contact_infos.fax}
-        <br>{$contact_infos.fax}
-        {* [1][/1] is for a HTML tag. *}
-        {*l
-          s='Fax: [1]%fax%[/1]'
-          sprintf=[
-            '[1]' => '<span>',
-            '[/1]' => '</span>',
-            '%fax%' => $contact_infos.fax
-          ]
-          d='Shop.Theme.Global'
-        *}
-      {/if}
-      {if $contact_infos.email && $display_email}
-        <br>{$contact_infos.email}
-        {* [1][/1] is for a HTML tag. *}
-        {*l
-          s='Email us: [1]%email%[/1]'
-          sprintf=[
-            '[1]' => '<a href="mailto:'|cat:$contact_infos.email|cat:'" class="dropdown">',
-            '[/1]' => '</a>',
-            '%email%' => $contact_infos.email
-          ]
-          d='Shop.Theme.Global'
-        *}
-      {/if}
+
+
+
+
+
+  <br>{$contact_infos.address.formatted nofilter}
+
+  <br>{$contact_infos.details|escape:'htmlall'|nl2br nofilter *}
+
+
+  <div class="title clearfix hidden-md-up" data-target="#footer_sub_menu_contactinfo" data-toggle="collapse">
+    <span class="h3">{l s='Store information' d='Shop.Theme.Global'}</span>
+    <span class="float-xs-right">
+      <span class="navbar-toggler collapse-icons">
+        <i class="material-icons add"></i>
+        <i class="material-icons remove"></i>
+      </span>
+    </span>
   </div>
-  <div class="hidden-md-up">
-    <div class="title">
-      <a class="h3" href="{$urls.pages.contact}">{l s='Store information' d='Shop.Theme.Global'}</a>
-    </div>
-  </div>
+
+  <ul id="footer_sub_menu_contactinfo" class="collapse">
+    <li>
+      <div class="icon"><img src="{$shop.logo_mail}" alt="{$contact_infos.company}"></div>{$contact_infos.company}
+    </li>
+    {if $contact_infos.email}
+      <li><div class="icon"><i class="material-icons">&#xE158;</i></div>{$contact_infos.email}</li>
+    {/if}
+    {if $contact_infos.phone}
+      <li><div class="icon"><i class="material-icons">&#xE0CD;</i></div>{$contact_infos.phone}</li>
+    {/if}
+    {if $contact_infos.fax}
+      <li><div class="icon"><i class="material-icons">&#xE0DF;</i></div>{$contact_infos.fax}</li>
+    {/if}
+    <li><div class="icon"><i class="material-icons">&#xE55F;</i></div>{$contact_infos.address.formatted nofilter}</li>
+
+  </ul>
+
 </div>
