@@ -53,7 +53,7 @@
     <li>
       <div class="icon"><img src="{$shop.logo_mail}" alt="{$contact_infos.company}"></div>{$contact_infos.company}
     </li>
-    {if $contact_infos.email}
+    {if $contact_infos.email && $display_email}
       <li><div class="icon"><i class="material-icons">&#xE158;</i></div>{$contact_infos.email}</li>
     {/if}
     {if $contact_infos.phone}
