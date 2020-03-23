@@ -77,11 +77,17 @@ body#checkout a:hover,
 
 .btn-primary:hover,
 .btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
 .facet-dropdown .select-list:hover {
   background-color: $primary-background-hover;
 }
 
 .btn-primary:disabled:hover,
+.btn-primary:disabled.focus,
 .btn-primary:disabled:focus {
   background-color: $primary-background-disabled-hover;
 }

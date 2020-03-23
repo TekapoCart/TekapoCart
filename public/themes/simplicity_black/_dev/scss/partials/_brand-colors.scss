@@ -87,7 +87,7 @@ body#checkout a:hover,
 }
 
 .btn-primary:disabled:hover,
-.btn-primary:disabled.focus
+.btn-primary:disabled.focus,
 .btn-primary:disabled:focus {
   background-color: $primary-background-disabled-hover;
 }
