@@ -68,7 +68,6 @@ body#checkout a:hover,
 .group-span-filestyle .btn-default,
 .custom-radio input[type="radio"]:checked + span,
 .block-social li:hover,
-
 #blockcart-modal .modal-header,
 .ps-alert-success .item i svg,
 .ps-alert-success .item,
@@ -87,12 +86,13 @@ body#checkout a:hover,
   background-color: $primary-background-disabled-hover;
 }
 
-#blockcart-modal .modal-title i.material-icons {
-  color: #fff;
-}
-
 @media (max-width: 991px) {
   .block-social li {
-    background-color: $primary-background-color;;
+    background-color: $primary-background-color;
   }
+}
+
+// 尚未歸類 Part
+#blockcart-modal .modal-title i.material-icons {
+  color: #fff;
 }
