@@ -9,6 +9,7 @@ public/img/s/*
 !public/img/tmp/index.php
 !public/img/s/index.php
 
+public/themes/*/_dev/package-lock.json
 public/themes/*/_dev/node_modules/*
 
 public/.htaccess
