@@ -762,7 +762,7 @@ class ProductController extends FrameworkBundleAdminController
                     foreach ($productIdList as $productId) {
                         $product = new Product($productId);
                         if (isset($product->id) && $product->id && Product::existsInDatabase((int) $product->id, 'product')) {
-                            if ($main === true) {
+                            if ($main) {
                                 $product->id_category_default = $category_id;
                                 $product->update();
                             }
