@@ -1,3 +1,13 @@
+#blockcart-modal .product-name,
+#product-availability .product-available,
+.done,
+.product-price,
+.block-categories .arrows .arrow-right,
+.product-line-grid-body > .product-line-info > .available,
+.faq .q:before {
+  color: $primary-color;
+}
+
 .block_newsletter input[type=text]:focus,
 .block_newsletter form input[type="text"]:focus,
 body#checkout section.checkout-step .address-item.selected,
@@ -11,7 +21,7 @@ body#checkout section.checkout-step .address-item.selected,
 .tabs .nav-tabs .nav-link.active,
 #_desktop_top_menu .top-menu .current > a,
 .faq .q {
-  border-color: $primary-link-color;
+  border-color: $primary-color;
 }
 
 a,
@@ -29,7 +39,6 @@ a:focus,
 .block-categories .category-sub-menu .current,
 .block-categories .collapse-icons .add:hover,
 .block-categories .collapse-icons .remove:hover,
-.block-categories .arrows .arrow-right,
 .block-categories .arrows .arrow-down:hover,
 .simplicity-search-widget form label:hover,
 #products .highlighted-informations .quick-view:hover,
@@ -39,18 +48,14 @@ a:focus,
 .page-my-account #content .links a:hover i,
 .top-menu .sub-menu a:hover,
 #mobile_top_menu_wrapper .top-menu .current > a,
-.product-price,
-#blockcart-modal .product-name,
-.done,
-.product-line-grid-body > .product-line-info > .available,
-#product-availability .product-available,
 .tabs .nav-tabs .nav-link.active,
 #_desktop_top_menu .top-menu .current > a,
 #_desktop_top_menu .top-menu a:hover[data-depth="0"],
 body#checkout a:hover,
-.faq .q:before,
 .dropdown-item:focus,
-.dropdown-item:hover {
+.dropdown-item:hover,
+.pagination .current a,
+.products-sort-order .select-list:hover {
   color: $primary-link-color;
 }
 
@@ -63,27 +68,26 @@ body#checkout a:hover,
 .group-span-filestyle .btn-default,
 .custom-radio input[type="radio"]:checked + span,
 .block-social li:hover,
-.products-sort-order .select-list:hover,
-.facet-dropdown .select-list:hover,
 #blockcart-modal .modal-header,
 .ps-alert-success .item i svg,
 .ps-alert-success .item,
 .btn-primary {
-  background-color: $primary-link-color;
-}
-
-@media (max-width: 991px) {
-  .block-social li {
-    background-color: $primary-link-color;
-  }
+  background-color: $primary-background-color;
 }
 
 .btn-primary:hover,
-.btn-primary:focus {
-  background-color: $primary-link-hover;
+.btn-primary:focus,
+.facet-dropdown .select-list:hover {
+  background-color: $primary-background-hover;
 }
 
 .btn-primary:disabled:hover,
 .btn-primary:disabled:focus {
-  background-color: $primary-link-disabled-hover;
+  background-color: $primary-background-disabled-hover;
+}
+
+@media (max-width: 991px) {
+  .block-social li {
+    background-color: $primary-background-color;
+  }
 }
