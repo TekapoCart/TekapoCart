@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>simplicity_logo</name>
-    <displayName><![CDATA[LOGO & BG]]></displayName>
+    <displayName><![CDATA[LOGO & BG & CSS]]></displayName>
     <version><![CDATA[1.0.0]]></version>
-    <description><![CDATA[LOGO & BG 設定]]></description>
+    <description><![CDATA[LOGO & BG & CSS 設定]]></description>
     <author><![CDATA[TekapoCart]]></author>
     <tab><![CDATA[]]></tab>
     <is_configurable>1</is_configurable>

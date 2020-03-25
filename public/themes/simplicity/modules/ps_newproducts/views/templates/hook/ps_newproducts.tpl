@@ -22,13 +22,12 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
-
 <section class="newproducts featured-products clearfix mt-2">
   {if strlen($label) > 0}
-  <div>
-    <h3 class="display3-size" style="display:inline-block;">{$label}{*l s='New products' d='Shop.Theme.Catalog'*}</h3>
+  <div class="heading">
+    <h3>{$label}{*l s='New products' d='Shop.Theme.Catalog'*}</h3>
     {if $products.showMore }
-    <a href="{$allNewProductsLink}" style="margin-top: 5px; float: right">{l s='More' d='Admin.Navigation.Menu'}</a>
+    <a href="{$allNewProductsLink}">{l s='More' d='Admin.Navigation.Menu'}</a>
     {/if}
   </div>
   {/if}
