@@ -2610,6 +2610,19 @@ class ToolsCore
             fwrite($write_fd, "RewriteCond %{HTTP:Authorization} ^(.*)\nRewriteRule . - [E=HTTP_AUTHORIZATION:%1]\n\n");
         }
 
+        // suzy: 2020-03-26 301 轉址
+        if (Configuration::get('SIMPLICITY_URL_REDIRECT_BLOCK')) {
+            $url_redirect_block = explode(PHP_EOL, Configuration::get('SIMPLICITY_URL_REDIRECT_BLOCK'));
+            foreach ($url_redirect_block as $line) {
+                if (strlen($line) > 0) {
+                    $urls = explode(' ', $line);
+                    if (is_array($urls) && count($urls) === 2) {
+                        fwrite($write_fd, "Redirect 301 " . $urls[0] . " " . $urls[1] . "\n");
+                    }
+                }
+            }
+        }
+
         foreach ($domains as $domain => $list_uri) {
             // As we use regex in the htaccess, ipv6 surrounded by brackets must be escaped
             $domain = str_replace(['[', ']'], ['\[', '\]'], $domain);

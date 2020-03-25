@@ -46,8 +46,8 @@ class Simplicity_Logo extends Module implements WidgetInterface
 
         parent::__construct();
 
-        $this->displayName = 'LOGO & BG & CSS';
-        $this->description = 'LOGO & BG & CSS 設定';
+        $this->displayName = 'LOGO & BG & 微客製 & 轉址';
+        $this->description = 'LOGO & BG & 微客製 & 轉址 設定';
 
         $this->templateFile = 'module:simplicity_logo/simplicity_logo.tpl';
     }
@@ -142,6 +142,26 @@ class Simplicity_Logo extends Module implements WidgetInterface
                 Configuration::updateValue('SIMPLICITY_LOGO_MOBILE_TYPE', 0);
             }
 
+            $custom_css_block = Tools::getValue('custom_css_block');
+            if (!empty($custom_css_block)) {
+                $path = _PS_ROOT_DIR_ . '/themes/' . $this->context->shop->theme_name . '/assets/css/custom.css';
+                if (file_exists($path)) {
+                    if ($write_fd = @fopen($path, 'wb')) {
+                        fwrite($write_fd, $custom_css_block);
+                        fclose($write_fd);
+                    }
+                }
+            }
+
+            $url_redirect_block = Tools::getValue('url_redirect_block');
+            if (!empty($url_redirect_block)) {
+                Configuration::updateValue('SIMPLICITY_URL_REDIRECT_BLOCK', $url_redirect_block);
+                Tools::generateHtaccess();
+            } else {
+                Configuration::updateValue('SIMPLICITY_URL_REDIRECT_BLOCK', '');
+            }
+
+
             Tools::clearCache();
 
             if (!$output) {
@@ -172,6 +192,16 @@ class Simplicity_Logo extends Module implements WidgetInterface
         $helper->fields_value['body_bg_css'] = Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS');
 
         $helper->fields_value['mobile_type'] = Configuration::get('SIMPLICITY_LOGO_MOBILE_TYPE');
+
+        $path = _PS_ROOT_DIR_ . '/themes/' . $this->context->shop->theme_name . '/assets/css/custom.css';
+        if (file_exists($path)) {
+            $content = file_get_contents($path);
+            $helper->fields_value['custom_css_block'] = $content;
+        } else {
+            $helper->fields_value['custom_css_block'] = '找不到 custom.css';
+        }
+
+        $helper->fields_value['url_redirect_block'] = Configuration::get('SIMPLICITY_URL_REDIRECT_BLOCK');
 
         $helper->submit_action = 'subMOD';
 
@@ -258,6 +288,23 @@ class Simplicity_Logo extends Module implements WidgetInterface
                         'desc' => '「LOGO 置左」適合扁 LOGO、「LOGO 置中」適合方塊 LOGO。預設為「LOGO 置左」。'
                     ),
 
+                    array(
+                        'type' => 'textarea',
+                        'name' => 'custom_css_block',
+                        'label' => '微客製 / custom.css',
+                        'cols' => 30,
+                        'rows' => 5,
+                        'desc' => '新增/覆蓋/自訂 CSS 樣式，檔案所在位置 /themes/' . $this->context->shop->theme_name . '/assets/css/custom.css。<br>若切換佈景，則會讀取新佈景的 custom.css。<br>儲存前請先確認符合標準格式 <a href="https://jigsaw.w3.org/css-validator/#validate_by_input" target="_target">線上檢查</a>。',
+                    ),
+
+                    array(
+                        'type' => 'textarea',
+                        'name' => 'url_redirect_block',
+                        'label' => '301 轉址',
+                        'cols' => 30,
+                        'rows' => 5,
+                        'desc' => '永久轉址設定，一組網址一行，網址之間空一格，前面要有 /。<br>例：<br>/old/url /new/url<br>/old-cat/old-product /new-cat/new-product',
+                    ),
 
                 ),
                 'submit' => array(
