@@ -24,10 +24,10 @@
  *}
 <section class="bestsellers featured-products clearfix mt-2">
   {if strlen($label) > 0}
-  <div>
-    <h3 class="display4-size" style="display:inline-block;">{$label}{*l s='Best Sellers' d='Shop.Theme.Catalog'*}</h3>
+  <div class="heading">
+    <h3>{$label}{*l s='Best Sellers' d='Shop.Theme.Catalog'*}</h3>
     {if $products.showMore }
-    <a href="{$allBestSellers}" style="margin-top: 5px; float: right">{l s='All best sellers' d='Shop.Theme.Catalog'}</a>
+    <a href="{$allBestSellers}">{l s='All best sellers' d='Shop.Theme.Catalog'}</a>
     {/if}
   </div>
   {/if}
