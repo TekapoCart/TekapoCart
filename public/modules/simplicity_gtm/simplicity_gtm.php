@@ -184,6 +184,8 @@ class Simplicity_Gtm extends Module
         $products = [];
 
         switch ($controller) {
+            case 'index':
+                break;
             case 'search':
             case 'category':
             case 'bestsales':

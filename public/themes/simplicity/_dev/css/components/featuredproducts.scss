@@ -292,6 +292,12 @@
   }
 }
 
+@include media-breakpoint-down(sm) {
+  .highlighted-informations {
+    display: none;
+  }
+}
+
 
 /************************************************************************************************/
 @media only screen and (min-width: 1200px) {
