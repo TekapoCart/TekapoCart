@@ -5,6 +5,7 @@
   }
   .modal-content {
     background: $focus-background;
+    width: 100%;
     min-height: 28.13rem;
   }
   .modal-header {
@@ -26,7 +27,7 @@
   .images-container {
     display: flex;
     z-index: 1;
-    min-height: 21.88rem;
+    // min-height: 21.88rem;
     .product-images > li.thumb-container > .thumb {
       width: 100%;
       max-width: 4.938rem;
@@ -54,6 +55,7 @@
     }
     .arrow-down {
       position: absolute;
+      left: 0;
       bottom: -1.875rem;
       cursor: pointer;
     }
@@ -61,5 +63,24 @@
   .social-sharing {
     margin-top: 0;
     margin-left: $extra-large-space;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .quickview {
+    .product-cover {
+      min-width: 80%;
+    }
+    .social-sharing {
+      margin-left: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 374px) {
+  .quickview {
+    .social-sharing {
+      zoom: 0.85;
+    }
   }
 }
