@@ -353,6 +353,25 @@ class DispatcherCore
         // Execute hook dispatcher before
         Hook::exec('actionDispatcherBefore', array('controller_type' => $this->front_controller));
 
+        // suzy: 2020-03-26 301 轉址
+        if ($this->controller == 'pagenotfound') {
+            if (Configuration::get('SIMPLICITY_URL_REDIRECT_BLOCK')) {
+                $url_redirect_block = explode(PHP_EOL, Configuration::get('SIMPLICITY_URL_REDIRECT_BLOCK'));
+                foreach ($url_redirect_block as $line) {
+                    if (strlen($line) > 0) {
+                        $urls = explode(' ', $line);
+                        if (is_array($urls) && count($urls) === 2) {
+                            if ($this->request_uri == $urls[0]) {
+                                header("HTTP/1.1 301 Moved Permanently");
+                                header("Location: " . Tools::getShopDomainSsl(true)  . $urls[1]);
+                                exit;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         // Dispatch with right front controller
         switch ($this->front_controller) {
             // Dispatch front office controller
@@ -1012,6 +1031,7 @@ class DispatcherCore
 
         // Use routes ? (for url rewriting)
         if ($this->use_routes && !$controller && !defined('_PS_ADMIN_DIR_')) {
+
             if (!$this->request_uri) {
                 return strtolower($this->controller_not_found);
             }
