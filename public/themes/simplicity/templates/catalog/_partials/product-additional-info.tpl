@@ -28,7 +28,7 @@
       <ul>
         {foreach from=$product.tags item=tag}
           {foreach from=$tag item=value}
-            <li>{$key} {$kk}<a href="{$link->getPageLink('search', true, NULL, "tag={$value|urlencode}")}">{$value|escape:html:'UTF-8'}</a></li>
+            <li><a href="{$link->getPageLink('search', true, NULL, "tag={$value|urlencode}")}">{$value|escape:html:'UTF-8'}</a></li>
           {/foreach}
         {/foreach}
       </ul>
