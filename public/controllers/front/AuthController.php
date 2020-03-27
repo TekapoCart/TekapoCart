@@ -109,4 +109,14 @@ class AuthControllerCore extends FrontController
             return $this->redirectWithNotifications(__PS_BASE_URI__);
         }
     }
+
+    // suzy: 2020-03-27 調整麵包屑
+    public function getBreadcrumbLinks()
+    {
+        $breadcrumb = parent::getBreadcrumbLinks();
+        $breadcrumb['links'][] = [
+            'title' => $this->trans('Log in', array(), 'Shop.Theme.Global'),
+        ];
+        return $breadcrumb;
+    }
 }
