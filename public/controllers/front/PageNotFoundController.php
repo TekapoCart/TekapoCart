@@ -36,6 +36,23 @@ class PageNotFoundControllerCore extends FrontController
      */
     public function initContent()
     {
+        // suzy: 2020-03-26 301 轉址
+        if (Configuration::get('SIMPLICITY_URL_REDIRECT_BLOCK')) {
+            $url_redirect_block = explode(PHP_EOL, Configuration::get('SIMPLICITY_URL_REDIRECT_BLOCK'));
+            foreach ($url_redirect_block as $line) {
+                if (strlen($line) > 0) {
+                    $urls = explode(' ', $line);
+                    if (is_array($urls) && count($urls) === 2) {
+                        if ($_SERVER['REQUEST_URI'] == $urls[0]) {
+                            header("HTTP/1.1 301 Moved Permanently");
+                            header("Location: " . Tools::getShopDomainSsl(true)  . $urls[1]);
+                            exit;
+                        }
+                    }
+                }
+            }
+        }
+
         header('HTTP/1.1 404 Not Found');
         header('Status: 404 Not Found');
         $this->context->cookie->disallowWriting();
