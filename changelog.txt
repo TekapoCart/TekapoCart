@@ -8,8 +8,21 @@ Improve
 - 開店成功通知信加註三點須知
 - 清除按鈕時更新的 time flag 加進 css, js 的版號判斷
 - 隱藏部份統計模組
+- PWA
+- Webservice
+- 分類頁顯示排序下拉
+- 內建佈景 css 移到 child.scss
+- 後台商品 Bulk Action 支援新增/移除 分類、運送、標籤
+- 手機版 會員登入 選單連結變粗體
+- displayFooter 加回店鋪資訊
+- 後台可編輯 CSS、301 轉址
 Fix
 - quickview 的商品圖 large_default 改成 home_default
+- 改寫 cron 檢查條件
+- 訂單成立頁隱藏內建的地址區塊 (用 need_address 控制)
+- header-bottom 的 ps_mainmenu RWD 設最大寬
+- 分類頁 換頁 go to top
+- 修正 內建佈景 btn-primary 按下去還是預設色的問題
 
 *******************************************
 * 1.1.8 (March 03, 2020)
@@ -34,16 +47,20 @@ DB
 Improve
 - Lighthouse Performance
 Steps
-- mkdir -p ./img/mod/ps_imageslider
+- mkdir -p ./public/img/mod/ps_imageslider
 - mv ./public/modules/ps_imageslider/images/* ./public/img/mod/ps_imageslider/
 - mkdir -p ./public/img/mod/ps_banner
 - mv ./public/modules/ps_banner/img/* ./public/img/mod/ps_banner/
+
+- demo 機才要 copy：
 - cp -a ./img/p/* ./public/img/p
 - cp -a ./img/mod/* ./public/img/mod
 - cp ./img/logo.jpg ./public/img/
 - cp ./img/logo_small.jpg ./public/img/
+
 DB
-- 2020-02-23.sql
+- demo 機才要執行：
+- 2020-02-23-check.sql
 
 *******************************************
 * 1.1.5 (February 11, 2020)
