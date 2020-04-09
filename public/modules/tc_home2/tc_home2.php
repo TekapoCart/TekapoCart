@@ -6,50 +6,19 @@ if (!defined('_PS_VERSION_')) {
 
 use Recca0120\Twzipcode\Zipcode;
 
-include_once _PS_MODULE_DIR_ . 'ecpay_711/classes/TcOrderShipping.php';
-include_once _PS_MODULE_DIR_ . 'ecpay_711/classes/TcCartShipping.php';
+include_once _PS_MODULE_DIR_ . 'tc_711/classes/TcOrderShipping.php';
+include_once _PS_MODULE_DIR_ . 'tc_711/classes/TcCartShipping.php';
 
-class Ecpay_Tcat extends CarrierModule
+class Tc_Home2 extends CarrierModule
 {
 
-    private $ecpayParams = [];
+    private $tcHomeParams = [];
 
     private $deliveryTimeOptions = [];
 
-    private $islandZipcode = [
-        // 連江縣
-        209,
-        210,
-        211,
-        212,
-        // 龜山島
-        261,
-        290,
-        // 釣魚台列嶼
-        817,
-        819,
-        // 南海諸島
-        880,
-        881,
-        882,
-        883,
-        884,
-        // 澎湖縣
-        885,
-        890,
-        891,
-        892,
-        893,
-        894,
-        // 金門縣
-        896,
-        // 蘭嶼
-        952,
-    ];
-
     public function __construct()
     {
-        $this->name = 'ecpay_tcat';
+        $this->name = 'tc_home2';
         $this->tab = 'shipping_logistics';
         $this->version = '1.0';
         $this->author = 'TekapoCart';
@@ -57,25 +26,29 @@ class Ecpay_Tcat extends CarrierModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('ECPay TCAT Home delivery');
-        $this->description = '不支援貨到付款。';
-        $this->confirmUninstall = $this->l('Do you want to uninstall ecpay_tcat module?');
+        $this->displayName = $this->l('TekapoCart Home delivery') . ' 2';
+        $this->description = '無需申請物流平台，商家自行申請配送編號（物流編號）、托運單。';
+        $this->confirmUninstall = $this->l('Do you want to uninstall tc_home2 module?');
 
-        $invoke_result = $this->invokeEcpaySDK();
+        $invoke_result = $this->invokeTCSDK();
         if (!$invoke_result) {
-            throw new Exception($this->l('ECPay SDK is missing.'));
+            throw new Exception($this->l('TC SDK is missing.'));
         }
 
-        $this->ecpayParams = [
-            'ecpay_sender_address',
-            'ecpay_sender_postcode',
-            'ecpay_parcel_pickup_time',
+        $this->tcHomeParams = [
+            'tc_sender_address',
+            'tc_sender_postcode',
+            'tc_home2_free_shipping_same_city',
+            'tc_home2_free_shipping_island',
+            'tc_home2_island_enable',
+            'tc_home2_island_fee',
+            'tc_parcel_pickup_time_enable',
         ];
 
         $this->deliveryTimeOptions = [
-            EcpayScheduledDeliveryTime::UNLIMITED => $this->l('No Limit'),
-            EcpayScheduledDeliveryTime::TIME_B4_13 => $this->l('Before 1PM'),
-            EcpayScheduledDeliveryTime::TIME_14_18 => $this->l('2~6PM'),
+            TC_ScheduledDeliveryTime::UNLIMITED => $this->l('No Limit'),
+            TC_ScheduledDeliveryTime::TIME_B4_13 => $this->l('Before 1PM'),
+            TC_ScheduledDeliveryTime::TIME_14_18 => $this->l('2~6PM'),
         ];
     }
 
@@ -98,7 +71,7 @@ class Ecpay_Tcat extends CarrierModule
     private function installCarrier()
     {
         $carrier = new Carrier();
-        $carrier->name = $this->l('Home delivery');
+        $carrier->name = $this->l('Home delivery') . ' 2';
         $carrier->active = 1;
         $carrier->shipping_handling = 0;
         $carrier->shipping_external = 1;
@@ -134,14 +107,19 @@ class Ecpay_Tcat extends CarrierModule
             return false;
         }
 
-        $scheduled_data = $this->getScheduledData($this->context->cart->id, $params['carrier']['id']);
+        if (Configuration::get('tc_parcel_pickup_time_enable')) {
+            $scheduled_data = $this->getScheduledData($this->context->cart->id, $params['carrier']['id']);
 
-        $this->smarty->assign([
-            'scheduled_data' => $scheduled_data,
-            'dropdown_options' => $this->deliveryTimeOptions,
-        ]);
+            $this->smarty->assign([
+                'scheduled_data' => $scheduled_data,
+                'dropdown_options' => $this->deliveryTimeOptions,
+            ]);
 
-        return $this->display(__FILE__, 'display_carrier_extra_content.tpl');
+            return $this->display(__FILE__, 'display_carrier_extra_content.tpl');
+        }
+
+        return false;
+
     }
 
     public function hookDisplayOrderConfirmation($params)
@@ -248,7 +226,7 @@ class Ecpay_Tcat extends CarrierModule
         }
 
         $scheduled_data = [
-            'delivery_time' => Tools::getValue('scheduled_delivery_time', EcpayScheduledDeliveryTime::UNLIMITED),
+            'delivery_time' => Tools::getValue('scheduled_delivery_time', TC_ScheduledDeliveryTime::UNLIMITED),
         ];
 
         $this->saveScheduledData($scheduled_data);
@@ -291,35 +269,10 @@ class Ecpay_Tcat extends CarrierModule
                 'return_message' => $tcOrderShipping['return_message'],
             ));
 
-            if (!empty($tcOrderShipping['sn_id'])) {
-
-                // 產生托運單
-                try {
-                    $AL = new EcpayLogistics();
-                    $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
-                    $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
-                    $AL->Send = array(
-                        'MerchantID' => Configuration::get('ecpay_logistics_merchant_id'),
-                        'AllPayLogisticsID' => $tcOrderShipping['sn_id'],
-                    );
-                    $print_html = $AL->PrintTradeDoc('產生托運單');
-
-                    $this->smarty->assign([
-                        'print_html' => $print_html,
-                    ]);
-                } catch (Exception $e) {
-                    echo $e->getMessage();
-                }
-
-                $this->smarty->assign([
-                    'sn_id' => $tcOrderShipping['sn_id'],
-                ]);
-            }
-
         }
 
-        // 建立新 ECPay 訂單 / 重送 ECPay 訂單
-        $resend_url = $this->context->link->getModuleLink('ecpay_tcat', 'resendShippingOrder', ['order_id' => $params['order']->id]);
+        // 建立新物流訂單 / 重送物流訂單
+        $resend_url = $this->context->link->getModuleLink('tc_home2', 'resendShippingOrder', ['order_id' => $params['order']->id]);
         $this->smarty->assign([
             'resend_url' => $resend_url,
         ]);
@@ -362,6 +315,14 @@ class Ecpay_Tcat extends CarrierModule
             $this->context->controller->errors[] = $this->l('Invalid delivery address');
         }
 
+        // 未開放離島寄送
+        if (!Configuration::get('tc_home2_island_enable')) {
+
+            if (in_array($receiverZipcode->zip3(), $this->islandZipcode)) {
+                $this->context->controller->errors[] = $this->l('No delivery to island');
+            }
+        }
+
         if ($this->context->controller->errors) {
             return false;
         }
@@ -374,7 +335,7 @@ class Ecpay_Tcat extends CarrierModule
         $html_content = '';
 
         # Update the settings
-        if (Tools::isSubmit('ecpay_submit')) {
+        if (Tools::isSubmit('tc_submit')) {
             # Validate the POST parameters
             $this->postValidation();
 
@@ -395,8 +356,8 @@ class Ecpay_Tcat extends CarrierModule
     private function postValidation()
     {
         $required_fields = array(
-            'ecpay_sender_address' => '寄件人地址',
-            'ecpay_sender_postcode' => '寄件人郵遞區號',
+            'tc_sender_address' => '寄件人地址',
+            'tc_sender_postcode' => '寄件人郵遞區號',
         );
 
         foreach ($required_fields as $field_name => $field_desc) {
@@ -413,29 +374,92 @@ class Ecpay_Tcat extends CarrierModule
         # Set the configurations for generating a setting form
         $fields_form[0]['form'] = array(
             'legend' => array(
-                'title' => $this->l('ECPay configuration'),
+                'title' => $this->l('configuration'),
             ),
             'input' => array(
                 array(
                     'type' => 'text',
                     'label' => '寄件人地址',
-                    'name' => 'ecpay_sender_address',
+                    'name' => 'tc_sender_address',
                     'required' => true,
                 ),
                 array(
                     'type' => 'text',
                     'label' => '寄件人郵遞區號',
-                    'name' => 'ecpay_sender_postcode',
+                    'name' => 'tc_sender_postcode',
+                    'class' => 'fixed-width-lg',
+                    'desc' => '請輸入三碼郵遞區號',
                     'required' => true,
+                ),
+                array(
+                    'type' => 'switch',
+                    'label' => '顯示預定取件時段',
+                    'name' => 'tc_parcel_pickup_time_enable',
+                    'is_bool' => true,
+                    'values' => array(
+                        array(
+                            'id' => 'active_on',
+                            'value' => 1,
+                            'label' => $this->l('Enabled'),
+                        ),
+                        array(
+                            'id' => 'active_off',
+                            'value' => 0,
+                            'label' => $this->l('Disabled'),
+                        ),
+                    ),
+                    'desc' => '前台顯示取件時段選單：不限時、13 時前、14~18時',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => '免運金額 - 同縣市',
+                    'name' => 'tc_home2_free_shipping_same_city',
+                    'class' => 'fixed-width-md',
+                    'prefix' => $this->context->currency->sign,
+                    'desc' => '與寄件人同縣市的免運門檻，若無請留空',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => '免運金額 - 離島',
+                    'name' => 'tc_home2_free_shipping_island',
+                    'class' => 'fixed-width-md',
+                    'prefix' => $this->context->currency->sign,
+                    'desc' => '離島地區的免運門檻，若無請留空',
+                ),
+                array(
+                    'type' => 'switch',
+                    'label' => '開放離島寄送',
+                    'name' => 'tc_home2_island_enable',
+                    'is_bool' => true,
+                    'values' => array(
+                        array(
+                            'id' => 'active_on',
+                            'value' => 1,
+                            'label' => $this->l('Enabled'),
+                        ),
+                        array(
+                            'id' => 'active_off',
+                            'value' => 0,
+                            'label' => $this->l('Disabled'),
+                        ),
+                    ),
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => '離島追加運費',
+                    'name' => 'tc_home2_island_fee',
+                    'class' => 'fixed-width-md',
+                    'prefix' => $this->context->currency->sign,
+                    'desc' => '若無請留空',
                 ),
             ),
             'submit' => array(
-                'name' => 'ecpay_submit',
+                'name' => 'tc_submit',
                 'title' => $this->l('Save'),
             ),
             'buttons' => array(
                 array(
-                    'href' => $this->context->link->getAdminLink('AdminPayment', false).'&token='.Tools::getAdminTokenLite('AdminPayment'),
+                    'href' => $this->context->link->getAdminLink('AdminPayment', false) . '&token=' . Tools::getAdminTokenLite('AdminPayment'),
                     'title' => '返回金物流模組',
                     'icon' => 'process-icon-back'
                 )
@@ -458,7 +482,7 @@ class Ecpay_Tcat extends CarrierModule
         $helper->allow_employee_form_lang = $default_lang;
 
         # Load the current settings
-        foreach ($this->ecpayParams as $param_name) {
+        foreach ($this->tcHomeParams as $param_name) {
             $helper->fields_value[$param_name] = Configuration::get($param_name);
         }
 
@@ -468,7 +492,7 @@ class Ecpay_Tcat extends CarrierModule
     private function postProcess()
     {
 
-        foreach ($this->ecpayParams as $param_name) {
+        foreach ($this->tcHomeParams as $param_name) {
 
             if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
                 return $this->displayError($param_name . ' ' . $this->l('updated failed'));
@@ -480,6 +504,51 @@ class Ecpay_Tcat extends CarrierModule
 
     public function getOrderShippingCost($params, $shipping_cost)
     {
+        $free_shipping_same_city = (int) Configuration::get('tc_home2_free_shipping_same_city');
+        $free_shipping_island = (int) Configuration::get('tc_home2_free_shipping_island');
+        $island_fee = (int) Configuration::get('tc_home2_island_fee');
+
+        if ($free_shipping_same_city <= 0 && $free_shipping_island <= 0 && $island_fee <= 0) {
+            return $shipping_cost;
+        }
+
+        $orderTotal = $this->context->cart->getOrderTotal(true, Cart::ONLY_PRODUCTS);
+
+        $address = new Address(intval($this->context->cart->id_address_delivery));
+
+        $senderZipcode = Zipcode::parse(Configuration::get('tc_sender_address'));
+        $receiverZipcode = Zipcode::parse($address->city . $address->address1 . $address->address2);
+
+        // 免運金額 - 全台
+        // 在承運商設定
+
+        // 免運金額 - 同縣市
+        if ($free_shipping_same_city > 0) {
+            $senderCity = $senderZipcode->county();
+            $receiverCity = $receiverZipcode->county();
+            if ($senderCity == $receiverCity && $orderTotal > $free_shipping_same_city) {
+                return 0;
+            }
+        }
+
+        // 免運金額 - 離島
+        if ($free_shipping_island > 0) {
+            if (!in_array($senderZipcode->zip3(), TC_Zipcode::island()) && in_array($receiverZipcode->zip3(), TC_Zipcode::island()) && $orderTotal > $free_shipping_island) {
+                return 0;
+            } elseif (in_array($senderZipcode->zip3(), TC_Zipcode::island()) && !in_array($receiverZipcode->zip3(), TC_Zipcode::island()) && $orderTotal > $free_shipping_island) {
+                return 0;
+            }
+        }
+
+        // 離島追加運費
+        if ($island_fee > 0) {
+            if (!in_array($senderZipcode->zip3(), TC_Zipcode::island()) && in_array($receiverZipcode->zip3(), TC_Zipcode::island())) {
+                return $shipping_cost + $island_fee;
+            } elseif (in_array($senderZipcode->zip3(), TC_Zipcode::island()) && !in_array($receiverZipcode->zip3(), TC_Zipcode::island())) {
+                return $shipping_cost + $island_fee;
+            }
+        }
+
         return $shipping_cost;
     }
 
@@ -488,10 +557,10 @@ class Ecpay_Tcat extends CarrierModule
         return 0;
     }
 
-    public function invokeEcpaySDK()
+    public function invokeTCSDK()
     {
-        if (!class_exists('EcpayLogistics', false)) {
-            if (!include(_PS_MODULE_DIR_ . '/ecpay_711/lib/Ecpay.Logistic.Integration.php')) {
+        if (!class_exists('TC_ShippingMethod', false)) {
+            if (!include(_PS_MODULE_DIR_ . '/tc_711/lib/TC.Integration.php')) {
                 return false;
             }
         }
@@ -507,12 +576,6 @@ class Ecpay_Tcat extends CarrierModule
                 throw new Exception(sprintf('Order %s is not found.', $order_id));
             }
 
-            $AL = new EcpayLogistics();
-            $AL->HashKey = Configuration::get('ecpay_logistics_hash_key');
-            $AL->HashIV = Configuration::get('ecpay_logistics_hash_iv');
-            $AL->Send['MerchantID'] = Configuration::get('ecpay_logistics_merchant_id');
-            $AL->Send['MerchantTradeNo'] = $order->reference . '-' . Tools::passwdGen(3, 'NO_NUMERIC');
-
             $tcOrderShipping = TcOrderShipping::getLogByOrderId($order_id);
             if (!$tcOrderShipping) {
                 $tcOrderShipping = new TcOrderShipping();
@@ -526,112 +589,25 @@ class Ecpay_Tcat extends CarrierModule
             $tcOrderShipping->order_reference = $order->reference;
             $tcOrderShipping->module = $this->name;
 
-            $AL->Send['MerchantTradeDate'] = date('Y/m/d H:i:s', strtotime($order->date_add));
-
-            $AL->Send['LogisticsType'] = EcpayLogisticsType::HOME;
-            $AL->Send['LogisticsSubType'] = EcpayLogisticsSubType::TCAT;
-            $tcOrderShipping->send_status = $AL->Send['LogisticsSubType'];
-
-            $AL->Send['GoodsAmount'] = $this->formatOrderTotal($order->getOrdersTotalPaid());
-
-            $AL->Send['IsCollection'] = EcpayIsCollection::NO;
-            $AL->Send['CollectionAmount'] = 0;
-            $tcOrderShipping->pay_type = $AL->Send['IsCollection'];
-
-            $AL->Send['GoodsName'] = $this->l('A Package Of Online Goods');
-
-            $AL->Send['SenderName'] = Configuration::get('ecpay_sender_name');
-            $AL->Send['SenderCellPhone'] = Configuration::get('ecpay_sender_cellphone');
-
             $address = new Address(intval($order->id_address_delivery));
-            $AL->Send['ReceiverName'] = $address->lastname . $address->firstname;
-            $AL->Send['ReceiverCellPhone'] = $address->phone_mobile;
-            $tcOrderShipping->rv_name = $AL->Send['ReceiverName'];
-            $tcOrderShipping->rv_mobile = $AL->Send['ReceiverCellPhone'];
+            $tcOrderShipping->rv_name = $address->lastname . $address->firstname;
+            $tcOrderShipping->rv_mobile = $address->phone_mobile;
 
-            $customer = new Customer(intval($order->id_customer));
-            $AL->Send['ReceiverEmail'] = $customer->email;
-
-            $AL->Send['TradeDesc'] = '';
-            $AL->Send['ServerReplyURL'] = $this->context->link->getModuleLink('ecpay_711', 'response', []);
-            $AL->Send['Remark'] = '';
-
-            $AL->SendExtend = [];
-            $AL->SendExtend['SenderZipCode'] = empty(Configuration::get('ecpay_sender_postcode')) ? '郵遞區號尚未設定' : Configuration::get('ecpay_sender_postcode');
-            $AL->SendExtend['SenderAddress'] = empty(Configuration::get('ecpay_sender_address')) ? '地址尚未設定' : Configuration::get('ecpay_sender_address');
-
-            $AL->SendExtend['ReceiverZipCode'] = $address->postcode;
-            $AL->SendExtend['ReceiverAddress'] = $address->city . $address->address1 . $address->address2;
-
-            $tcOrderShipping->rv_zip = $AL->SendExtend['ReceiverZipCode'];
-            $tcOrderShipping->rv_address = $AL->SendExtend['ReceiverAddress'];
-
-            $AL->SendExtend['Temperature'] = EcpayTemperature::ROOM;
-
-            $senderZipcode = Zipcode::parse($AL->SendExtend['SenderAddress']);
-            $senderCity = $senderZipcode->county();
-
-            $receiverZipcode = Zipcode::parse($AL->SendExtend['ReceiverAddress']);
-            $receiverCity = $receiverZipcode->county();
-
-            if ($senderCity == $receiverCity) {
-                $AL->SendExtend['Distance'] = EcpayDistance::SAME;
-            } elseif (in_array($receiverZipcode->zip3(), $this->islandZipcode)) {
-                $AL->SendExtend['Distance'] = EcpayDistance::ISLAND;
-            } else {
-                $AL->SendExtend['Distance'] = EcpayDistance::OTHER;
-            }
-            $tcOrderShipping->distance = $AL->SendExtend['Distance'];
-
-            $carrier = new Carrier($order->id_carrier);
-            $dimension = $carrier->max_width + $carrier->max_height + $carrier->max_depth;
-            if ($dimension <= 60) {
-                $AL->SendExtend['Specification'] = EcpaySpecification::CM_60;
-            } elseif ($dimension <= 90) {
-                $AL->SendExtend['Specification'] = EcpaySpecification::CM_90;
-            } elseif ($dimension <= 120) {
-                $AL->SendExtend['Specification'] = EcpaySpecification::CM_120;
-            } elseif ($dimension <= 150) {
-                $AL->SendExtend['Specification'] = EcpaySpecification::CM_150;
-            }
-            $tcOrderShipping->specification = $AL->SendExtend['Specification'];
-
-            $AL->SendExtend['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
+            $tcOrderShipping->rv_zip = $address->postcode;
+            $tcOrderShipping->rv_address = $address->city . $address->address1 . $address->address2;
 
             if (!empty($tcOrderShipping->id)) {
-                $AL->SendExtend['ScheduledDeliveryTime'] = $tcOrderShipping->delivery_time;
+
             } else {
                 $scheduled_data = $this->getScheduledData($order->id_cart, $order->id_carrier);
-                $AL->SendExtend['ScheduledDeliveryTime'] = $scheduled_data['delivery_time'];
-                $tcOrderShipping->delivery_time = $AL->SendExtend['ScheduledDeliveryTime'];
+                $tcOrderShipping->delivery_time = $scheduled_data['delivery_time'];
             }
 
             $tcOrderShipping->save();
-
-            // 注意 request timeout 可能
-            $feedback = $AL->BGCreateShippingOrder();
-            unset($AL);
-
-            if (isset($feedback['ErrorMessage'])) {
-                $tcOrderShipping->appendMessage('return_message', $feedback['ErrorMessage']);
-                $tcOrderShipping->save();
-                throw new Exception($feedback['ErrorMessage']);
-            }
-
-            $tcOrderShipping->sn_id = $feedback['AllPayLogisticsID'];
-            $tcOrderShipping->return_status = $feedback['RtnCode'];
-            $tcOrderShipping->appendMessage('return_message', $feedback['RtnMsg'], $feedback['UpdateStatusDate']);
-            $tcOrderShipping->cvs_shipping_number = $feedback['CVSPaymentNo'];
-            $tcOrderShipping->cvs_validation_number = $feedback['CVSValidationNo'];
-            $tcOrderShipping->save();
-
-            if ($order->getWsShippingNumber() != $feedback['BookingNote']) {
-                $order->setWsShippingNumber($feedback['BookingNote']);
-            }
 
         } catch (Exception $e) {
 
-            Ecpay_Tcat::logMessage(sprintf('Ecpay_Tcat createShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
+            Tc_Home2::logMessage(sprintf('Tc_Home2 createShippingOrder %s exception: %s', $order_id, $e->getMessage()), true);
         }
     }
 
@@ -662,7 +638,7 @@ class Ecpay_Tcat extends CarrierModule
 
     public static function logMessage($message, $is_append = false)
     {
-        $path = _PS_LOG_DIR_ . 'ecpay_logistics.log';
+        $path = _PS_LOG_DIR_ . 'tc_logistics.log';
 
         if (!$is_append) {
             return file_put_contents($path, date('Y/m/d H:i:s') . ' - ' . $message . "\n", LOCK_EX);

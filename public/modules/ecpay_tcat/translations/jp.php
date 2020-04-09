@@ -4,6 +4,7 @@ global $_MODULE;
 $_MODULE = array();
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_0702d52268ee17b84d632e557699d4fa'] = 'ECPay TCAT Home delivery';
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_560c7dd45f44a78faa1aa6ca1c2ebae2'] = 'ECPay configuration';
+$_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_ebc1c8328f25c6ccb2ff00dd27b56693'] = ' is required.';
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_ad0322901b80cf443ba23c6544946ef9'] = '2-3 days';
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_6cefaa978ccec960693d10cefeb2c2bf'] = 'Home delivery';
 $_MODULE['<{ecpay_tcat}prestashop>ecpay_tcat_2084d4d72acfc24b948650eec4baf1c4'] = 'Receiver name over limit';

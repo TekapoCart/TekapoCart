@@ -21,7 +21,7 @@ class Tc_Pod extends PaymentModule
 
         parent::__construct();
 
-        $this->displayName = $this->l('Payment on Delivery');
+        $this->displayName = $this->l('TekapoCart Payment on Delivery');
         $this->description = 'https://www.tekapo.io/';
         $this->confirmUninstall = $this->l('Do you want to uninstall TekapoCart POD module?');
 
@@ -50,12 +50,15 @@ class Tc_Pod extends PaymentModule
             return;
         }
 
-        // 允許的物流模組 ezship, ezship_home, ecpay_711
+        // 允許的物流模組 ezship, ezship_home, ecpay_711, tc_home, tc_home2, tc_home3
         $carrier = new Carrier($this->context->cart->id_carrier);
         if (!in_array($carrier->external_module_name, [
             'ezship',
             'ezship_home',
             'ecpay_711',
+            'tc_home',
+            'tc_home2',
+            'tc_home3',
         ])
         ) {
             return false;
