@@ -1,6 +1,27 @@
 TekapoCart <hi@tekapo.io>
 -------------------------------------------
 *******************************************
+* 1.2.0 (April 10, 2020)
+*******************************************
+Improve
+- 運送方式 TekapoCart 宅配
+- 開始支援 api
+- 店鋪資訊
+- 內建子佈景樣式與 custom.css 分離
+- 後台可編輯 CSS、301 轉址
+- 商品原圖過大，用 large_default 取代的 script (rm_orig.sh)
+Fix
+- 修正 quick view 若圖未 load 會跑版
+- 訂單成立頁隱藏內建的地址區塊 (用 need_address 控制)
+- btn-primary 按下去還是預設色的問題
+- header-bottom 的 ps_mainmenu RWD 設最大寬
+- 登入頁置中、加麵包屑
+DB
+- 2020-03-11.sql
+- 2020-03-23.sql
+- 2020-04-09.sql
+
+*******************************************
 * 1.1.9 (March 06, 2020)
 *******************************************
 Improve
@@ -15,14 +36,9 @@ Improve
 - 後台商品 Bulk Action 支援新增/移除 分類、運送、標籤
 - 手機版 會員登入 選單連結變粗體
 - displayFooter 加回店鋪資訊
-- 後台可編輯 CSS、301 轉址
 Fix
 - quickview 的商品圖 large_default 改成 home_default
 - 改寫 cron 檢查條件
-- 訂單成立頁隱藏內建的地址區塊 (用 need_address 控制)
-- header-bottom 的 ps_mainmenu RWD 設最大寬
-- 分類頁 換頁 go to top
-- 修正 內建佈景 btn-primary 按下去還是預設色的問題
 
 *******************************************
 * 1.1.8 (March 03, 2020)
