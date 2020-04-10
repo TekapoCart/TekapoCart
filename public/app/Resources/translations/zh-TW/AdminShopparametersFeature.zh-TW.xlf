@@ -1071,7 +1071,7 @@ File: controllers/admin/AdminGroupsController.php:110</note>
       </trans-unit>
       <trans-unit id="312541921a98c69b0f3ac8f5de1b6bb3" approved="yes">
         <source>Guests group</source>
-        <target xml:lang="zh-TW">訪客（已結帳）群組</target>
+        <target xml:lang="zh-TW">訪客（有購物車記錄）群組</target>
         <note>Context:
 File: controllers/admin/AdminGroupsController.php:118</note>
       </trans-unit>
