@@ -261,14 +261,17 @@
     </tab>
     <tab class_name="AdminPayment" display_type="default_list">
         <module name="ps_wirepayment" position="1"/>
-        <module name="tc_711" position="2"/>
-        <module name="tc_pod" position="3"/>
-        <module name="ezship" position="4"/>
-        <module name="ezship_home" position="5"/>
-        <module name="ecpay" position="6"/>
-        <module name="ecpay_711" position="7"/>
-        <module name="ecpay_tcat" position="8"/>
-        <module name="paypal" position="9"/>
+        <module name="tc_pod" position="2"/>
+        <module name="tc_711" position="3"/>
+        <module name="tc_home" position="4"/>
+        <module name="tc_home2" position="5"/>
+        <module name="tc_home3" position="6"/>
+        <module name="ezship" position="7"/>
+        <module name="ezship_home" position="8"/>
+        <module name="ecpay" position="9"/>
+        <module name="ecpay_711" position="10"/>
+        <module name="ecpay_tcat" position="11"/>
+        <module name="paypal" position="12"/>
     </tab>
     <tab class_name="AdminCarriers" display_type="slider_list">
         <module name="bpostshm" position="1"/>

@@ -79,7 +79,7 @@ class Simplicity_GtmResponseModuleFrontController extends ModuleFrontController
                                 }
 
                                 foreach ($indexed_products as $key => $product) {
-                                    $track_products[$key] = $this->module->reformatProduct($product);
+                                    $track_products[$key] = Tools::reformatProduct($product);
                                 }
                             }
 

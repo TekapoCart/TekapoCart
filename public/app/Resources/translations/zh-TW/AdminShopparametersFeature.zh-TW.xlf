@@ -1071,7 +1071,7 @@ File: controllers/admin/AdminGroupsController.php:110</note>
       </trans-unit>
       <trans-unit id="312541921a98c69b0f3ac8f5de1b6bb3" approved="yes">
         <source>Guests group</source>
-        <target xml:lang="zh-TW">訪客（已結帳）群組</target>
+        <target xml:lang="zh-TW">訪客（有購物車記錄）群組</target>
         <note>Context:
 File: controllers/admin/AdminGroupsController.php:118</note>
       </trans-unit>
@@ -1776,9 +1776,15 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/mainte
       </trans-unit>
       <trans-unit id="daf835712085aaaf81818e7ebfeb66b8" approved="yes">
         <source>Maintenance IP</source>
-        <target xml:lang="zh-TW">維護IP：</target>
+        <target xml:lang="zh-TW">維護 IP：</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/maintenance.html.twig:50</note>
+      </trans-unit>
+      <trans-unit id="9278432c5d2aec1ac4f42c23a941af21" approved="yes">
+        <source>Custom maintenance text</source>
+        <target xml:lang="zh-TW">維護中前台顯示文字</target>
+        <note>Context:
+File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/maintenance.html.twig:55</note>
       </trans-unit>
     </body>
   </file>

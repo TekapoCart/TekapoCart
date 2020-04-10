@@ -10,7 +10,7 @@ include_once _PS_MODULE_DIR_ . 'tc_711/classes/TcCartShipping.php';
 class Tc_711 extends CarrierModule
 {
 
-    private $tcCvsParams = [];
+    private $tc711Params = [];
 
     public function __construct()
     {
@@ -26,7 +26,7 @@ class Tc_711 extends CarrierModule
         $this->description = '無需申請物流平台，商家自行申請交貨便代碼，不支援取貨付款。';
         $this->confirmUninstall = $this->l('Do you want to uninstall tc_711 module?');
 
-        $this->tcCvsParams = [
+        $this->tc711Params = [
             'tc_711_sender_location',
             'tc_711_island_fee',
             'tc_711_kinmen_store_ids',
@@ -406,7 +406,7 @@ class Tc_711 extends CarrierModule
         $html_content = '';
 
         # Update the settings
-        if (Tools::isSubmit('tc_711_submit')) {
+        if (Tools::isSubmit('tc_submit')) {
             # Validate the POST parameters
             $this->postValidation();
 
@@ -465,7 +465,7 @@ class Tc_711 extends CarrierModule
                     'type' => 'text',
                     'label' => '離島追加運費',
                     'name' => 'tc_711_island_fee',
-                    'required' => true,
+                    'desc' => '若無請填 0',
                 ),
                 array(
                     'type' => 'textarea',
@@ -475,7 +475,7 @@ class Tc_711 extends CarrierModule
                 ),
             ),
             'submit' => array(
-                'name' => 'tc_711_submit',
+                'name' => 'tc_submit',
                 'title' => $this->l('Save'),
             ),
             'buttons' => array(
@@ -503,7 +503,7 @@ class Tc_711 extends CarrierModule
         $helper->allow_employee_form_lang = $default_lang;
 
         # Load the current settings
-        foreach ($this->tcCvsParams as $param_name) {
+        foreach ($this->tc711Params as $param_name) {
             $helper->fields_value[$param_name] = Configuration::get($param_name);
 
             if ($param_name === 'tc_711_island_fee') {
@@ -528,7 +528,7 @@ class Tc_711 extends CarrierModule
             $_POST['tc_711_penghu_store_ids'] = '153869,195081,900795,951106,188201,941833,909574,113883,151391,922201,941202,930545,113506,880590,892571,901891,900762,987806,142869,184140,981750,166740';
         }
 
-        foreach ($this->tcCvsParams as $param_name) {
+        foreach ($this->tc711Params as $param_name) {
 
             if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
                 return $this->displayError($param_name . ' ' . $this->l('updated failed'));
@@ -540,12 +540,6 @@ class Tc_711 extends CarrierModule
 
     public function getOrderShippingCost($params, $shipping_cost)
     {
-
-        $carrier = new Carrier($this->context->cart->id_carrier);
-        if ($carrier->external_module_name !== $this->name) {
-            return $shipping_cost;
-        }
-
         $store_data = $this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier);
         if ($store_data && strlen($store_data['code']) > 0) {
             if (Configuration::get('tc_711_sender_location') == 1) {

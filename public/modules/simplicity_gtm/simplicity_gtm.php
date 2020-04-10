@@ -220,7 +220,7 @@ class Simplicity_Gtm extends Module
             $visibleProducts = [];
             foreach ($products as $product) {
                 $key = $product['id_product'] . '-' . $product['id_product_attribute'];
-                $visibleProducts[$key] = $this->reformatProduct($product);
+                $visibleProducts[$key] = Tools::reformatProduct($product);
             }
 
             $this->context->smarty->assign(array(
@@ -684,93 +684,10 @@ class Simplicity_Gtm extends Module
 
         $reformat_products = [];
         foreach ($products as $product) {
-            $reformat_products[] = $this->reformatProduct($product);
+            $reformat_products[] = Tools::reformatProduct($product);
         }
 
         return $reformat_products;
-    }
-
-    public function reformatProduct($product, $position = null, $list = null, $quantity_wanted = null)
-    {
-        $id_product = isset($product['id_product']) ? $product['id_product'] : $product['id'];
-
-        // attribute
-        $id_product_attribute = 0;
-        if (isset($product['id_product_attribute']) && $product['id_product_attribute'] > 0) {
-            // checkout
-            $id_product_attribute = $product['id_product_attribute'];
-        } elseif (isset($product['product_attribute_id']) && $product['product_attribute_id'] > 0) {
-            // order confirmation
-            $id_product_attribute = $product['product_attribute_id'];
-        } elseif (isset($product['cache_default_attribute']) && $product['cache_default_attribute'] > 0) {
-            // order confirmation
-            $id_product_attribute = $product['cache_default_attribute'];
-        }
-
-        // Variants
-        if ($id_product_attribute > 0) {
-            $attributes = Product::getAttributesParams($id_product, $id_product_attribute);
-            $attribute_names = [];
-            foreach ($attributes as $attribute) {
-                $attribute_names[] = $attribute['group'] . ' ' . $attribute['name'];
-            }
-            $product['variant'] = [
-                'name' => implode(', ', $attribute_names),
-                'price' => Product::getPriceStatic($id_product, true, $id_product_attribute, 2),
-            ];
-        }
-
-        // CategoriesPath
-        if ($product['id_category_default'] > 0) {
-            $product['category_path'] = $this->getCategoryPath($product['id_category_default']);
-        }
-
-        // price
-        if (isset($product['variant'])) {
-            $product_price_wt = $product['variant']['price'];
-        } elseif (isset($product['price_amount'])) {
-            // product page and lists
-            $product_price_wt = $product['price_amount'];
-        } elseif (isset($product['price_wt'])) {
-            // cart
-            $product_price_wt = $product['price_wt'];
-        } elseif (isset($product['product_price_wt'])) {
-            // checkout
-            $product_price_wt = $product['product_price_wt'];
-        }
-
-        // quantity
-        if (isset($product['cart_quantity']) && $product['cart_quantity'] > 0 && $quantity_wanted == null) {
-            // cart
-            $quantity_wanted = $product['cart_quantity'];
-        } elseif (isset($product['product_quantity']) && $product['product_quantity'] > 0 && $quantity_wanted == null) {
-            // checkout
-            $quantity_wanted = $product['product_quantity'];
-        } elseif (isset($product['product_quantity_refunded']) &&
-            $product['product_quantity_refunded'] > 0 &&
-            $quantity_wanted == null
-        ) {
-            // refund
-            $quantity_wanted = $product['product_quantity_refunded'];
-        }
-
-        return array(
-            'id' => isset($product['id_product']) ? $product['id_product'] : $product['id'],
-            'name' => isset($product['name']) ? $product['name'] : $product['product_name'],
-            'variant' => isset($product['variant']) ? $product['variant']['name'] : null,
-            'brand' => isset($product['manufacturer_name']) ? $product['manufacturer_name'] : null,
-            'category' => isset($product['category_path']) ? $product['category_path'] : null,
-            'position' => isset($position) ? (int)$position : null,
-            'list' => isset($list) ? $list : null,
-            'price' => isset($product_price_wt) ? (float)round($product_price_wt, 2) : null,
-            'quantity' => (int)$quantity_wanted > 0 ? (int)$quantity_wanted : null,
-            // used on scroll tracking for Remarketing Dynamic
-            'id_attribute' => isset($id_product_attribute) ? $id_product_attribute : null,
-            'ean13' => isset($product['ean13']) ? $product['ean13'] : null,
-            'reference' => isset($product['reference']) ? $product['reference'] : null,
-            'upc' => isset($product['upc']) ? $product['upc'] : null
-        );
-
     }
 
     private function getCoupons($order)
@@ -783,55 +700,6 @@ class Simplicity_Gtm extends Module
             }
         }
         return $coupons;
-    }
-
-    private function getCategoryPath($id_category)
-    {
-        $cache_key = __CLASS__ . '::getCategoryPath_' . $id_category;
-
-        if (!Cache::isStored($cache_key)) {
-            $context = Context::getContext();
-
-            $id_category = (int)$id_category;
-            if ($id_category == 1) {
-                return '';
-            }
-
-            $pipe = '/';
-
-            $full_path = '';
-
-            $interval = Category::getInterval($id_category);
-            $id_root_category = $context->shop->getCategory();
-            $interval_root = Category::getInterval($id_root_category);
-
-            if ($interval) {
-                $sql = 'SELECT cl.name
-                        FROM ' . _DB_PREFIX_ . 'category c
-                        LEFT JOIN ' . _DB_PREFIX_ . 'category_lang cl
-                            ON (cl.id_category = c.id_category' . Shop::addSqlRestrictionOnLang('cl') . ')
-                        WHERE c.nleft <= ' . (int)$interval['nleft'] . '
-                            AND c.nright >= ' . (int)$interval['nright'] . '
-                            AND c.nleft >= ' . (int)$interval_root['nleft'] . '
-                            AND c.nright <= ' . (int)$interval_root['nright'] . '
-                            AND cl.id_lang = ' . (int)$context->language->id . '
-                            AND c.active = 1
-                            AND c.level_depth > ' . (int)$interval_root['level_depth'] . '
-                        ORDER BY c.level_depth ASC';
-                $categories = Db::getInstance()->executeS($sql);
-
-                $n = 1;
-                $n_categories = count($categories);
-                foreach ($categories as $category) {
-                    $full_path .= $category['name'] . (($n++ != $n_categories) ? $pipe : '');
-                }
-                Cache::store($cache_key, $full_path);
-
-                return $full_path;
-            }
-        }
-
-        return Cache::retrieve($cache_key);
     }
 
     private function getNamesWithoutVariant($products, $id_lang, $id_shop)

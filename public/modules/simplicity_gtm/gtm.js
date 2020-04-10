@@ -31,7 +31,7 @@ function GtmJs() {
 
     GtmJs.prototype.getInstance = this;
 
-    // 商品列表 scroll - scrollTracking
+    // 商品列表 scroll - scrollTracking (ajax)
     publicValues.eventScroll = function () {
 
         clearTimeout(privateValues.scrollTimeout);
@@ -350,7 +350,7 @@ function GtmJs() {
 
     }
 
-    // 商品列表點擊 - productClick (ajax)
+    // 商品列表點擊 - productClick (1/2 ajax)
     publicValues.eventClickList = function (event) {
         var target = delegateEvents(['.js-product-miniature .quick-view', '.js-product-miniature .product-thumbnail', '.js-product-miniature .product-title a', '.js-product-miniature .variant-links a', '.js-product-miniature .product-no-desc-overlay a'], event.target),
             classList,
@@ -400,52 +400,86 @@ function GtmJs() {
                 }
                 idProduct = idProduct + '-' + idProductAttribute;
 
-                /////////////////////////////////////////
+                product = publicValues.visibleProducts[idProduct];
 
-                $.post(
-                    privateValues.moduleUrl + 'response',
-                    {
-                        'action': 'product',
-                        'products_position': privateValues.productsPosition,
-                        'list': list,
-                        'visible_products': publicValues.visibleProducts,
-                        'id_products': [idProduct],
-                        'token': publicValues.shopSettings.token
-                    },
-                    function(data) {
-                        products = data;
-                        if (typeof products === 'object') {
-                            /////////////////////////////////////////
-                            var dataLayerObj = {
-                                'event': 'productClick',
-                                'eventCategory': 'engagement',
-                                'eventAction': 'select_content',
-                                'eventLabel': (link ? 'product_list' : 'quick_view'),
-                                'eventValue': ''
-                            };
-                            if (publicValues.guaSettings.trackingId) {
-                                dataLayerObj.ecommerce = {
-                                    'currencyCode': publicValues.shopSettings.currency,
-                                    'click': {
-                                        'actionField': {'list': list},
-                                        'products': [getProductLayer(products[0], 'gua')]
-                                    }
+                if (product) {
+
+                    /////////////////////////////////////////
+                    var dataLayerObj = {
+                        'event': 'productClick',
+                        'eventCategory': 'engagement',
+                        'eventAction': 'select_content',
+                        'eventLabel': (link ? 'product_list' : 'quick_view'),
+                        'eventValue': ''
+                    };
+                    if (publicValues.guaSettings.trackingId) {
+                        dataLayerObj.ecommerce = {
+                            'currencyCode': publicValues.shopSettings.currency,
+                            'click': {
+                                'actionField': {'list': list},
+                                'products': [getProductLayer(product, 'gua')]
+                            }
+                        };
+                    }
+                    if (link) {
+                        privateValues.redirectLink = link;
+                        dataLayerObj.eventCallback = callbackWithTimeout(
+                            function () {
+                                redirectLink();
+                            },
+                            2000
+                        );
+                    }
+                    pushDataLayer(dataLayerObj);
+                    /////////////////////////////////////////
+
+                } else {
+
+                    /////////////////////////////////////////
+                    $.post(
+                        privateValues.moduleUrl + 'response',
+                        {
+                            'action': 'product',
+                            'products_position': privateValues.productsPosition,
+                            'list': list,
+                            'visible_products': publicValues.visibleProducts,
+                            'id_products': [idProduct],
+                            'token': publicValues.shopSettings.token
+                        },
+                        function(data) {
+                            products = data;
+                            if (typeof products === 'object') {
+                                /////////////////////////////////////////
+                                var dataLayerObj = {
+                                    'event': 'productClick',
+                                    'eventCategory': 'engagement',
+                                    'eventAction': 'select_content',
+                                    'eventLabel': (link ? 'product_list' : 'quick_view'),
+                                    'eventValue': ''
                                 };
+                                if (publicValues.guaSettings.trackingId) {
+                                    dataLayerObj.ecommerce = {
+                                        'currencyCode': publicValues.shopSettings.currency,
+                                        'click': {
+                                            'actionField': {'list': list},
+                                            'products': [getProductLayer(products[0], 'gua')]
+                                        }
+                                    };
+                                }
+                                if (link) {
+                                    privateValues.redirectLink = link;
+                                    dataLayerObj.eventCallback = callbackWithTimeout(
+                                        function () {
+                                            redirectLink();
+                                        },
+                                        2000
+                                    );
+                                }
+                                pushDataLayer(dataLayerObj);
+                                /////////////////////////////////////////
                             }
-                            if (link) {
-                                privateValues.redirectLink = link;
-                                dataLayerObj.eventCallback = callbackWithTimeout(
-                                    function () {
-                                        redirectLink();
-                                    },
-                                    2000
-                                );
-                            }
-                            pushDataLayer(dataLayerObj);
-                            /////////////////////////////////////////
-                        }
 
-                    }, 'json').fail(function(error) {
+                        }, 'json').fail(function(error) {
                         console.warn(error.responseText);
                         if (link) {
                             privateValues.redirectLink = link;
@@ -453,7 +487,9 @@ function GtmJs() {
                         }
                     });
 
-                /////////////////////////////////////////
+                    /////////////////////////////////////////
+
+                }
 
             } else {
                 document.location = link;
@@ -461,7 +497,7 @@ function GtmJs() {
         }
     }
 
-    // 商品加入購物車 - addToCart
+    // 商品加入購物車 - addToCart (1/2 ajax)
     publicValues.eventAddToCart = function (event) {
         var list,
             idProduct,
@@ -488,43 +524,114 @@ function GtmJs() {
                 }
                 idProduct = idProduct + '-' + idProductAttribute;
                 product = publicValues.visibleProducts[idProduct];
-                product.quantity = quantityWanted;
-                var dataLayerObj = {
-                        'event': 'addToCart',
-                        'eventCategory': 'ecommerce',
-                        'eventAction': 'add_to_cart',
-                        'eventLabel': '',
-                        'eventValue': ''
-                    },
-                    remarketingLayer = {};
-                if (publicValues.guaSettings.trackingId) {
-                    dataLayerObj.ecommerce = {
-                        'currencyCode': publicValues.shopSettings.currency,
-                        'add': {
-                            'actionField': {'list': list},
-                            'products': [getProductLayer(product, 'gua')]
+
+                if (product) {
+
+                    /////////////////////////////////////////
+                    product.quantity = quantityWanted;
+                    var dataLayerObj = {
+                            'event': 'addToCart',
+                            'eventCategory': 'ecommerce',
+                            'eventAction': 'add_to_cart',
+                            'eventLabel': '',
+                            'eventValue': ''
+                        },
+                        remarketingLayer = {};
+                    if (publicValues.guaSettings.trackingId) {
+                        dataLayerObj.ecommerce = {
+                            'currencyCode': publicValues.shopSettings.currency,
+                            'add': {
+                                'actionField': {'list': list},
+                                'products': [getProductLayer(product, 'gua')]
+                            }
+                        };
+                        if (publicValues.guaSettings.dynamicRemarketing) {
+                            remarketingLayer = getRemarketingLayer(publicValues.visibleProducts);
+                            Object.assign(dataLayerObj, remarketingLayer);
                         }
-                    };
-                    if (publicValues.guaSettings.dynamicRemarketing) {
-                        remarketingLayer = getRemarketingLayer(publicValues.visibleProducts);
-                        Object.assign(dataLayerObj, remarketingLayer);
                     }
-                }
-                if (publicValues.facebookSettings.trackingId) {
-                    dataLayerObj.facebook = {
-                        'contents': [getProductLayer(product, 'facebook')],
-                        'contentType': 'product'
+                    if (publicValues.facebookSettings.trackingId) {
+                        dataLayerObj.facebook = {
+                            'contents': [getProductLayer(product, 'facebook')],
+                            'contentType': 'product'
+                        };
+                    }
+                    dataLayerObj.common = {
+                        'product': getProductLayer(product, 'common')
                     };
+                    pushDataLayer(dataLayerObj);
+                    /////////////////////////////////////////
+
+                } else {
+
+                    /////////////////////////////////////////
+                    $.post(
+                        privateValues.moduleUrl + 'response',
+                        {
+                            'action': 'product',
+                            'products_position': privateValues.productsPosition,
+                            'list': list,
+                            'visible_products': publicValues.visibleProducts,
+                            'id_products': [idProduct],
+                            'token': publicValues.shopSettings.token
+                        },
+                        function(data) {
+                            products = data;
+                            if (typeof products === 'object') {
+                                /////////////////////////////////////////
+                                product = products[0];
+                                product.quantity = quantityWanted;
+                                var dataLayerObj = {
+                                        'event': 'addToCart',
+                                        'eventCategory': 'ecommerce',
+                                        'eventAction': 'add_to_cart',
+                                        'eventLabel': '',
+                                        'eventValue': ''
+                                    },
+                                    remarketingLayer = {};
+                                if (publicValues.guaSettings.trackingId) {
+                                    dataLayerObj.ecommerce = {
+                                        'currencyCode': publicValues.shopSettings.currency,
+                                        'add': {
+                                            'actionField': {'list': list},
+                                            'products': [getProductLayer(product, 'gua')]
+                                        }
+                                    };
+                                    if (publicValues.guaSettings.dynamicRemarketing) {
+                                        remarketingLayer = getRemarketingLayer(products);
+                                        Object.assign(dataLayerObj, remarketingLayer);
+                                    }
+                                }
+                                if (publicValues.facebookSettings.trackingId) {
+                                    dataLayerObj.facebook = {
+                                        'contents': [getProductLayer(product, 'facebook')],
+                                        'contentType': 'product'
+                                    };
+                                }
+                                dataLayerObj.common = {
+                                    'product': getProductLayer(product, 'common')
+                                };
+                                pushDataLayer(dataLayerObj);
+                                /////////////////////////////////////////
+                            }
+
+                        }, 'json').fail(function(error) {
+                        console.warn(error.responseText);
+                        if (link) {
+                            privateValues.redirectLink = link;
+                            redirectLink();
+                        }
+                    });
+
+                    /////////////////////////////////////////
                 }
-                dataLayerObj.common = {
-                    'product': getProductLayer(product, 'common')
-                };
-                pushDataLayer(dataLayerObj);
+
+
             }
         }
     }
 
-    // 商品數量增加 - addToCart
+    // 商品數量增加 - addToCart (1/2 ajax)
     publicValues.eventIncreaseQty = function (event) {
         var target = delegateEvents(['.js-increase-product-quantity'], event.target),
             mainNode,
@@ -548,38 +655,110 @@ function GtmJs() {
                 }
                 idProduct = idProduct + '-' + idProductAttribute;
                 product = publicValues.visibleProducts[idProduct];
-                product.quantity = quantityWanted;
-                var dataLayerObj = {
-                        'event': 'addToCart',
-                        'eventCategory': 'ecommerce',
-                        'eventAction': 'add_to_cart',
-                        'eventLabel': '',
-                        'eventValue': ''
-                    },
-                    remarketingLayer = {};
-                if (publicValues.guaSettings.trackingId) {
-                    dataLayerObj.ecommerce = {
-                        'currencyCode': publicValues.shopSettings.currency,
-                        'add': {
-                            'actionField': {'list': list},
-                            'products': [getProductLayer(product, 'gua')]
+
+                if (product) {
+
+                    /////////////////////////////////////////
+                    product.quantity = quantityWanted;
+                    var dataLayerObj = {
+                            'event': 'addToCart',
+                            'eventCategory': 'ecommerce',
+                            'eventAction': 'add_to_cart',
+                            'eventLabel': '',
+                            'eventValue': ''
+                        },
+                        remarketingLayer = {};
+                    if (publicValues.guaSettings.trackingId) {
+                        dataLayerObj.ecommerce = {
+                            'currencyCode': publicValues.shopSettings.currency,
+                            'add': {
+                                'actionField': {'list': list},
+                                'products': [getProductLayer(product, 'gua')]
+                            }
+                        };
+                        if (publicValues.guaSettings.dynamicRemarketing) {
+                            remarketingLayer = getRemarketingLayer(publicValues.visibleProducts);
+                            Object.assign(dataLayerObj, remarketingLayer);
                         }
-                    };
-                    if (publicValues.guaSettings.dynamicRemarketing) {
-                        remarketingLayer = getRemarketingLayer(publicValues.visibleProducts);
-                        Object.assign(dataLayerObj, remarketingLayer);
                     }
-                }
-                if (publicValues.facebookSettings.trackingId) {
-                    dataLayerObj.facebook = {
-                        'contents': [getProductLayer(product, 'facebook')],
-                        'contentType': 'product'
+                    if (publicValues.facebookSettings.trackingId) {
+                        dataLayerObj.facebook = {
+                            'contents': [getProductLayer(product, 'facebook')],
+                            'contentType': 'product'
+                        };
+                    }
+                    dataLayerObj.common = {
+                        'product': getProductLayer(product, 'common')
                     };
+                    pushDataLayer(dataLayerObj);
+                    /////////////////////////////////////////
+
+                } else {
+
+                    /////////////////////////////////////////
+                    $.post(
+                        privateValues.moduleUrl + 'response',
+                        {
+                            'action': 'product',
+                            'products_position': privateValues.productsPosition,
+                            'list': list,
+                            'visible_products': publicValues.visibleProducts,
+                            'id_products': [idProduct],
+                            'token': publicValues.shopSettings.token
+                        },
+                        function(data) {
+                            products = data;
+                            if (typeof products === 'object') {
+                                /////////////////////////////////////////
+                                product = products[0];
+                                product.quantity = quantityWanted;
+                                var dataLayerObj = {
+                                        'event': 'addToCart',
+                                        'eventCategory': 'ecommerce',
+                                        'eventAction': 'add_to_cart',
+                                        'eventLabel': '',
+                                        'eventValue': ''
+                                    },
+                                    remarketingLayer = {};
+                                if (publicValues.guaSettings.trackingId) {
+                                    dataLayerObj.ecommerce = {
+                                        'currencyCode': publicValues.shopSettings.currency,
+                                        'add': {
+                                            'actionField': {'list': list},
+                                            'products': [getProductLayer(product, 'gua')]
+                                        }
+                                    };
+                                    if (publicValues.guaSettings.dynamicRemarketing) {
+                                        remarketingLayer = getRemarketingLayer(products);
+                                        Object.assign(dataLayerObj, remarketingLayer);
+                                    }
+                                }
+                                if (publicValues.facebookSettings.trackingId) {
+                                    dataLayerObj.facebook = {
+                                        'contents': [getProductLayer(product, 'facebook')],
+                                        'contentType': 'product'
+                                    };
+                                }
+                                dataLayerObj.common = {
+                                    'product': getProductLayer(product, 'common')
+                                };
+                                pushDataLayer(dataLayerObj);
+                                /////////////////////////////////////////
+                            }
+
+                        }, 'json').fail(function(error) {
+                        console.warn(error.responseText);
+                        if (link) {
+                            privateValues.redirectLink = link;
+                            redirectLink();
+                        }
+                    });
+
+                    /////////////////////////////////////////
+
                 }
-                dataLayerObj.common = {
-                    'product': getProductLayer(product, 'common')
-                };
-                pushDataLayer(dataLayerObj);
+
+
             }
         }
     }
@@ -606,27 +785,87 @@ function GtmJs() {
                 }
                 idProduct = idProduct + '-' + idProductAttribute;
                 product = publicValues.visibleProducts[idProduct];
-                product.quantity = quantityRemoved;
 
-                var dataLayerObj = {
-                    'event': 'removeFromCart',
-                    'eventCategory': 'ecommerce',
-                    'eventAction': 'remove_from_cart',
-                    'eventLabel': '',
-                    'eventValue': ''
-                };
+                if (product) {
 
-                if (publicValues.guaSettings.trackingId) {
-                    dataLayerObj.ecommerce = {
-                        'currencyCode': publicValues.shopSettings.currency,
-                        'remove': {
-                            'actionField': {'list': list},
-                            'products': getProductLayer(product, 'gua')
-                        }
+                    /////////////////////////////////////////
+                    product.quantity = quantityRemoved;
+
+                    var dataLayerObj = {
+                        'event': 'removeFromCart',
+                        'eventCategory': 'ecommerce',
+                        'eventAction': 'remove_from_cart',
+                        'eventLabel': '',
+                        'eventValue': ''
                     };
+
+                    if (publicValues.guaSettings.trackingId) {
+                        dataLayerObj.ecommerce = {
+                            'currencyCode': publicValues.shopSettings.currency,
+                            'remove': {
+                                'actionField': {'list': list},
+                                'products': getProductLayer(product, 'gua')
+                            }
+                        };
+                    }
+
+                    pushDataLayer(dataLayerObj);
+                    /////////////////////////////////////////
+
+                } else {
+
+                    /////////////////////////////////////////
+                    $.post(
+                        privateValues.moduleUrl + 'response',
+                        {
+                            'action': 'product',
+                            'products_position': privateValues.productsPosition,
+                            'list': list,
+                            'visible_products': publicValues.visibleProducts,
+                            'id_products': [idProduct],
+                            'token': publicValues.shopSettings.token
+                        },
+                        function(data) {
+                            products = data;
+                            if (typeof products === 'object') {
+                                /////////////////////////////////////////
+                                product = products[0];
+                                product.quantity = quantityRemoved;
+
+                                var dataLayerObj = {
+                                    'event': 'removeFromCart',
+                                    'eventCategory': 'ecommerce',
+                                    'eventAction': 'remove_from_cart',
+                                    'eventLabel': '',
+                                    'eventValue': ''
+                                };
+
+                                if (publicValues.guaSettings.trackingId) {
+                                    dataLayerObj.ecommerce = {
+                                        'currencyCode': publicValues.shopSettings.currency,
+                                        'remove': {
+                                            'actionField': {'list': list},
+                                            'products': getProductLayer(product, 'gua')
+                                        }
+                                    };
+                                }
+
+                                pushDataLayer(dataLayerObj);
+                                /////////////////////////////////////////
+                            }
+
+                        }, 'json').fail(function(error) {
+                        console.warn(error.responseText);
+                        if (link) {
+                            privateValues.redirectLink = link;
+                            redirectLink();
+                        }
+                    });
+                    /////////////////////////////////////////
+
                 }
 
-                pushDataLayer(dataLayerObj);
+
             }
         }
     }
@@ -654,27 +893,84 @@ function GtmJs() {
                 }
                 idProduct = idProduct + '-' + idProductAttribute;
                 product = publicValues.visibleProducts[idProduct];
-                product.quantity = quantityRemoved;
 
-                var dataLayerObj = {
-                    'event': 'removeFromCart',
-                    'eventCategory': 'ecommerce',
-                    'eventAction': 'remove_from_cart',
-                    'eventLabel': '',
-                    'eventValue': ''
-                };
+                if (product) {
 
-                if (publicValues.guaSettings.trackingId) {
-                    dataLayerObj.ecommerce = {
-                        'currencyCode': publicValues.shopSettings.currency,
-                        'remove': {
-                            'actionField': {'list': list},
-                            'products': getProductLayer(product, 'gua')
-                        }
+                    /////////////////////////////////////////
+                    product.quantity = quantityRemoved;
+
+                    var dataLayerObj = {
+                        'event': 'removeFromCart',
+                        'eventCategory': 'ecommerce',
+                        'eventAction': 'remove_from_cart',
+                        'eventLabel': '',
+                        'eventValue': ''
                     };
-                }
 
-                pushDataLayer(dataLayerObj);
+                    if (publicValues.guaSettings.trackingId) {
+                        dataLayerObj.ecommerce = {
+                            'currencyCode': publicValues.shopSettings.currency,
+                            'remove': {
+                                'actionField': {'list': list},
+                                'products': getProductLayer(product, 'gua')
+                            }
+                        };
+                    }
+
+                    pushDataLayer(dataLayerObj);
+                    /////////////////////////////////////////
+
+                } else {
+
+                    /////////////////////////////////////////
+                    $.post(
+                        privateValues.moduleUrl + 'response',
+                        {
+                            'action': 'product',
+                            'products_position': privateValues.productsPosition,
+                            'list': list,
+                            'visible_products': publicValues.visibleProducts,
+                            'id_products': [idProduct],
+                            'token': publicValues.shopSettings.token
+                        },
+                        function(data) {
+                            products = data;
+                            if (typeof products === 'object') {
+                                /////////////////////////////////////////
+                                product = products[0];
+                                product.quantity = quantityRemoved;
+
+                                var dataLayerObj = {
+                                    'event': 'removeFromCart',
+                                    'eventCategory': 'ecommerce',
+                                    'eventAction': 'remove_from_cart',
+                                    'eventLabel': '',
+                                    'eventValue': ''
+                                };
+
+                                if (publicValues.guaSettings.trackingId) {
+                                    dataLayerObj.ecommerce = {
+                                        'currencyCode': publicValues.shopSettings.currency,
+                                        'remove': {
+                                            'actionField': {'list': list},
+                                            'products': getProductLayer(product, 'gua')
+                                        }
+                                    };
+                                }
+
+                                pushDataLayer(dataLayerObj);
+                                /////////////////////////////////////////
+                            }
+
+                        }, 'json').fail(function(error) {
+                        console.warn(error.responseText);
+                        if (link) {
+                            privateValues.redirectLink = link;
+                            redirectLink();
+                        }
+                    });
+                    /////////////////////////////////////////
+                }
             }
         }
     }

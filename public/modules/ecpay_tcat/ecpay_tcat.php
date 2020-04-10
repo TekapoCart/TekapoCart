@@ -16,6 +16,37 @@ class Ecpay_Tcat extends CarrierModule
 
     private $deliveryTimeOptions = [];
 
+    private $islandZipcode = [
+        // 連江縣
+        209,
+        210,
+        211,
+        212,
+        // 龜山島
+        261,
+        290,
+        // 釣魚台列嶼
+        817,
+        819,
+        // 南海諸島
+        880,
+        881,
+        882,
+        883,
+        884,
+        // 澎湖縣
+        885,
+        890,
+        891,
+        892,
+        893,
+        894,
+        // 金門縣
+        896,
+        // 蘭嶼
+        952,
+    ];
+
     public function __construct()
     {
         $this->name = 'ecpay_tcat';
@@ -371,7 +402,7 @@ class Ecpay_Tcat extends CarrierModule
         foreach ($required_fields as $field_name => $field_desc) {
             $tmp_field_value = Tools::getValue($field_name);
             if (empty($tmp_field_value)) {
-                $this->postError = $field_desc . $this->l(' is required');
+                $this->postError = $field_desc . $this->l(' is required.');
                 return;
             }
         }
@@ -397,21 +428,6 @@ class Ecpay_Tcat extends CarrierModule
                     'name' => 'ecpay_sender_postcode',
                     'required' => true,
                 ),
-                array(
-                    'type' => 'select',
-                    'label' => '預定取件時段',
-                    'name' => 'ecpay_parcel_pickup_time',
-                    'options' => array(
-                        'query' => array(
-                            array('id' => '4', 'name' => '不限時'),
-                            array('id' => '1', 'name' => '13 前'),
-                            array('id' => '3', 'name' => '14~18時'),
-                        ),
-                        'id' => 'id',
-                        'name' => 'name'
-                    ),
-                ),
-
             ),
             'submit' => array(
                 'name' => 'ecpay_submit',
@@ -541,7 +557,7 @@ class Ecpay_Tcat extends CarrierModule
             $AL->Send['Remark'] = '';
 
             $AL->SendExtend = [];
-            $AL->SendExtend['SenderZipCode'] = empty(Configuration::get('ecpay_sender_postcode')) ? '無名氏' : Configuration::get('ecpay_sender_postcode');
+            $AL->SendExtend['SenderZipCode'] = empty(Configuration::get('ecpay_sender_postcode')) ? '郵遞區號尚未設定' : Configuration::get('ecpay_sender_postcode');
             $AL->SendExtend['SenderAddress'] = empty(Configuration::get('ecpay_sender_address')) ? '地址尚未設定' : Configuration::get('ecpay_sender_address');
 
             $AL->SendExtend['ReceiverZipCode'] = $address->postcode;
@@ -558,39 +574,9 @@ class Ecpay_Tcat extends CarrierModule
             $receiverZipcode = Zipcode::parse($AL->SendExtend['ReceiverAddress']);
             $receiverCity = $receiverZipcode->county();
 
-            $islandZipcode = [
-                // 連江縣
-                209,
-                210,
-                211,
-                212,
-                // 龜山島
-                261,
-                290,
-                // 釣魚台列嶼
-                817,
-                819,
-                // 南海諸島
-                880,
-                881,
-                882,
-                883,
-                884,
-                // 澎湖縣
-                885,
-                890,
-                891,
-                892,
-                893,
-                894,
-                // 金門縣
-                896,
-                // 蘭嶼
-                952,
-            ];
             if ($senderCity == $receiverCity) {
                 $AL->SendExtend['Distance'] = EcpayDistance::SAME;
-            } elseif (in_array($receiverZipcode->zip3(), $islandZipcode)) {
+            } elseif (in_array($receiverZipcode->zip3(), $this->islandZipcode)) {
                 $AL->SendExtend['Distance'] = EcpayDistance::ISLAND;
             } else {
                 $AL->SendExtend['Distance'] = EcpayDistance::OTHER;
@@ -671,7 +657,7 @@ class Ecpay_Tcat extends CarrierModule
     {
         $cart_id = $this->context->cart->id;
         $carrier_id = $this->context->cart->id_carrier;
-        TcCartShipping::saveScheduledData($cart_id, $carrier_id, $scheduled_data, $this->name);
+        TcCartShipping::saveScheduledData($cart_id, $carrier_id, $scheduled_data);
     }
 
     public static function logMessage($message, $is_append = false)
