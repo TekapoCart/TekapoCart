@@ -38,6 +38,7 @@ class Tc_Home3 extends CarrierModule
         $this->tcHomeParams = [
             'tc_sender_address',
             'tc_sender_postcode',
+            'tc_home3_same_city_fee',
             'tc_home3_free_shipping_same_city',
             'tc_home3_free_shipping_island',
             'tc_home3_island_enable',
@@ -412,19 +413,19 @@ class Tc_Home3 extends CarrierModule
                 ),
                 array(
                     'type' => 'text',
-                    'label' => '免運金額 - 同縣市',
+                    'label' => '同縣市抵扣運費',
+                    'name' => 'tc_home3_same_city_fee',
+                    'class' => 'fixed-width-md',
+                    'prefix' => $this->context->currency->sign,
+                    'desc' => '與寄件人同縣市，若無請留空',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => '同縣市免運金額',
                     'name' => 'tc_home3_free_shipping_same_city',
                     'class' => 'fixed-width-md',
                     'prefix' => $this->context->currency->sign,
                     'desc' => '與寄件人同縣市的免運門檻，若無請留空',
-                ),
-                array(
-                    'type' => 'text',
-                    'label' => '免運金額 - 離島',
-                    'name' => 'tc_home3_free_shipping_island',
-                    'class' => 'fixed-width-md',
-                    'prefix' => $this->context->currency->sign,
-                    'desc' => '離島地區的免運門檻，若無請留空',
                 ),
                 array(
                     'type' => 'switch',
@@ -451,6 +452,14 @@ class Tc_Home3 extends CarrierModule
                     'class' => 'fixed-width-md',
                     'prefix' => $this->context->currency->sign,
                     'desc' => '若無請留空',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => '離島免運金額',
+                    'name' => 'tc_home3_free_shipping_island',
+                    'class' => 'fixed-width-md',
+                    'prefix' => $this->context->currency->sign,
+                    'desc' => '離島地區的免運門檻，若無請留空',
                 ),
             ),
             'submit' => array(
@@ -505,10 +514,12 @@ class Tc_Home3 extends CarrierModule
     public function getOrderShippingCost($params, $shipping_cost)
     {
         $free_shipping_same_city = (int) Configuration::get('tc_home3_free_shipping_same_city');
+        $shipping_fee_same_city = (int) Configuration::get('tc_home3_same_city_fee');
+
         $free_shipping_island = (int) Configuration::get('tc_home3_free_shipping_island');
         $island_fee = (int) Configuration::get('tc_home3_island_fee');
 
-        if ($free_shipping_same_city <= 0 && $free_shipping_island <= 0 && $island_fee <= 0) {
+        if ($free_shipping_same_city <= 0 && $shipping_fee_same_city <= 0 && $free_shipping_island <= 0 && $island_fee <= 0) {
             return $shipping_cost;
         }
 
@@ -519,35 +530,43 @@ class Tc_Home3 extends CarrierModule
         $senderZipcode = Zipcode::parse(Configuration::get('tc_sender_address'));
         $receiverZipcode = Zipcode::parse($address->city . $address->address1 . $address->address2);
 
-        // 免運金額 - 全台
-        // 在承運商設定
+        // 本島 在承運商設定
 
-        // 免運金額 - 同縣市
-        if ($free_shipping_same_city > 0) {
+        // 同縣市
+        if ($shipping_fee_same_city > 0 || $free_shipping_same_city > 0) {
             $senderCity = $senderZipcode->county();
             $receiverCity = $receiverZipcode->county();
-            if ($senderCity == $receiverCity && $orderTotal > $free_shipping_same_city) {
-                return 0;
+            if ($senderCity == $receiverCity) {
+                // 免運金額
+                if ($orderTotal > $free_shipping_same_city) {
+                    return 0;
+                }
+                // 抵免運費
+                if ($shipping_fee_same_city > 0) {
+                    return $shipping_cost - $shipping_fee_same_city > 0 ? $shipping_cost - $shipping_fee_same_city > 0 : 0;
+                }
+                return $shipping_cost;
             }
         }
 
-        // 免運金額 - 離島
-        if ($free_shipping_island > 0) {
-            if (!in_array($senderZipcode->zip3(), TC_Zipcode::island()) && in_array($receiverZipcode->zip3(), TC_Zipcode::island()) && $orderTotal > $free_shipping_island) {
-                return 0;
-            } elseif (in_array($senderZipcode->zip3(), TC_Zipcode::island()) && !in_array($receiverZipcode->zip3(), TC_Zipcode::island()) && $orderTotal > $free_shipping_island) {
-                return 0;
+        // 離島
+        if ($island_fee > 0 || $free_shipping_island > 0) {
+            $senderZip = $senderZipcode->zip3();
+            $receiverZip = $receiverZipcode->zip3();
+            if ((!in_array($senderZip, TC_Zipcode::island()) && in_array($receiverZip, TC_Zipcode::island())) ||
+                (in_array($senderZip, TC_Zipcode::island()) && !in_array($receiverZip, TC_Zipcode::island()))) {
+                // 免運金額
+                if ($orderTotal > $free_shipping_island) {
+                    return 0;
+                }
+                // 追加運費
+                if ($island_fee > 0) {
+                    return $shipping_cost + $island_fee > 0 ? $shipping_cost + $island_fee : 0;
+                }
+                return $shipping_cost;
             }
         }
 
-        // 離島追加運費
-        if ($island_fee > 0) {
-            if (!in_array($senderZipcode->zip3(), TC_Zipcode::island()) && in_array($receiverZipcode->zip3(), TC_Zipcode::island())) {
-                return $shipping_cost + $island_fee;
-            } elseif (in_array($senderZipcode->zip3(), TC_Zipcode::island()) && !in_array($receiverZipcode->zip3(), TC_Zipcode::island())) {
-                return $shipping_cost + $island_fee;
-            }
-        }
 
         return $shipping_cost;
     }
