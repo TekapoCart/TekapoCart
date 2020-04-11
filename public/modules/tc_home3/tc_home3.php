@@ -227,7 +227,7 @@ class Tc_Home3 extends CarrierModule
         }
 
         $scheduled_data = [
-            'delivery_time' => Tools::getValue('scheduled_delivery_time', TC_ScheduledDeliveryTime::UNLIMITED),
+            'delivery_time' => Tools::getValue($this->name . '_scheduled_delivery_time', TC_ScheduledDeliveryTime::UNLIMITED),
         ];
 
         $this->saveScheduledData($scheduled_data);
