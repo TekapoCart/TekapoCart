@@ -425,7 +425,7 @@ class Tc_Home3 extends CarrierModule
                     'name' => 'tc_home3_free_shipping_same_city',
                     'class' => 'fixed-width-md',
                     'prefix' => $this->context->currency->sign,
-                    'desc' => '與寄件人同縣市免運門檻，若無請留空',
+                    'desc' => '與寄件人同縣市的免運門檻，若無請留空',
                 ),
                 array(
                     'type' => 'switch',
@@ -451,7 +451,7 @@ class Tc_Home3 extends CarrierModule
                     'name' => 'tc_home3_island_fee',
                     'class' => 'fixed-width-md',
                     'prefix' => $this->context->currency->sign,
-                    'desc' => '若無請留空',
+                    'desc' => '離島地區需追加的運費，若無請留空',
                 ),
                 array(
                     'type' => 'text',
