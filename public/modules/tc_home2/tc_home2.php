@@ -543,7 +543,7 @@ class Tc_Home2 extends CarrierModule
                 }
                 // 抵免運費
                 if ($shipping_fee_same_city > 0) {
-                    return $shipping_cost - $shipping_fee_same_city > 0 ? $shipping_cost - $shipping_fee_same_city > 0 : 0;
+                    return $shipping_cost - $shipping_fee_same_city > 0 ? $shipping_cost - $shipping_fee_same_city : 0;
                 }
                 return $shipping_cost;
             }
