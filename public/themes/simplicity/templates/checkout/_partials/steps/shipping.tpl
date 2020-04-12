@@ -36,6 +36,7 @@
         id="js-delivery"
         data-url-update="{url entity='order' params=['ajax' => 1, 'action' => 'selectDeliveryOption']}"
         method="post"
+        autocomplete="off"
       >
         <div class="form-fields">
           {block name='delivery_options'}
