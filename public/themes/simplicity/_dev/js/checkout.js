@@ -48,7 +48,7 @@ function setUpCheckout() {
   });
 }
 
-// suzy: 2018-07-15 - 「小計」、「運費」、「總計」 只在 3.配送方式 4. 付款方式 顯示
+// suzy: 2018-07-15 - 「運費」、「總計」 只在 3.配送方式 4. 付款方式 顯示
 //                  - 「確認結帳」按鈕 只在 4. 付款方式 顯示
 function toggleTotal() {
     if ($('.js-current-step').attr('id') != 'checkout-delivery-step' &&
@@ -57,12 +57,7 @@ function toggleTotal() {
         $('#cart-subtotal-shipping').addClass('hidden-xs-up');
         $('#cart-summary-separator').addClass('hidden-xs-up');
         $('.cart-total').addClass('hidden-xs-up');
-
     } else {
-
-        $('#cart-subtotal-products').removeClass('hidden-xs-up');
-        $('#cart-subtotal-discount').removeClass('hidden-xs-up');
-
         $('#cart-subtotal-shipping').removeClass('hidden-xs-up');
         $('#cart-summary-separator').removeClass('hidden-xs-up');
         $('.cart-total').removeClass('hidden-xs-up');
