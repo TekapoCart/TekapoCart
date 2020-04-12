@@ -90,6 +90,7 @@ class Tc_711 extends CarrierModule
                 `rv_address` VARCHAR(255) NULL DEFAULT NULL,
                 `distance` VARCHAR(2) NULL DEFAULT NULL COMMENT "ecpay: 宅配距離",
                 `specification` VARCHAR(4) NULL DEFAULT NULL COMMENT "ecpay: 包裹規格",
+                `delivery_date` VARCHAR(10) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達日",
                 `delivery_time` VARCHAR(2) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達時段",
                 `sn_id` VARCHAR(64) NULL DEFAULT NULL COMMENT "ezship: 店到店編號, ecpay: 物流交易編號",
                 `return_status` VARCHAR(50) NULL DEFAULT NULL,

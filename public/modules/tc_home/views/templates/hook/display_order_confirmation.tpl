@@ -10,6 +10,10 @@
     <dd>{$receiver_postcode}</dd>
     <dt>{l s='Receiver Address' mod='tc_home'}：</dt>
     <dd>{$receiver_address}</dd>
+    {if isset($scheduled_data['delivery_date'])}
+        <dt>{l s='Delivery Date' mod='tc_home'}：</dt>
+        <dd>{$scheduled_data['delivery_date']}</dd>
+    {/if}
     {if isset($dropdown_options[$scheduled_data['delivery_time']])}
     <dt>{l s='Delivery Time' mod='tc_home'}：</dt>
     <dd>{$dropdown_options[$scheduled_data['delivery_time']]}</dd>
