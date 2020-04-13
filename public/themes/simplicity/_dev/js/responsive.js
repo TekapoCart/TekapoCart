@@ -150,7 +150,7 @@ $(window).on('resize', function() {
 });
 
 $(document).ready(function() {
-	if (prestashop.responsive.mobile) {
+	if (window.innerWidth < 768) {
 		toggleMobileStyles();
 	}
 
