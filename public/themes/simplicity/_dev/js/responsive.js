@@ -148,10 +148,7 @@ $(window).on('resize', function() {
 });
 
 $(document).ready(function() {
-    // suzy: 改掉 prestashop.responsive.mobile
-	if (window.innerWidth < 768) {
-        prestashop.responsive.current_width = window.innerWidth;
-        prestashop.responsive.mobile = prestashop.responsive.current_width < prestashop.responsive.min_width;
+	if (prestashop.responsive.mobile) {
 		toggleMobileStyles();
 	}
 
@@ -201,4 +198,12 @@ $(document).ready(function() {
 $( document ).ajaxComplete(function() {
     // suzy: 桌機手機圖尺寸切換
     toggleThumbnails();
+});
+
+$(window).load(function() {
+    if (window.innerWidth < 768 !== prestashop.responsive.mobile) {
+        prestashop.responsive.current_width = window.innerWidth;
+        prestashop.responsive.mobile = prestashop.responsive.current_width < prestashop.responsive.min_width;
+        toggleMobileStyles();
+    }
 });
