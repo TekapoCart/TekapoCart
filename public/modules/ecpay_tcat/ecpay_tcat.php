@@ -69,7 +69,6 @@ class Ecpay_Tcat extends CarrierModule
         $this->ecpayParams = [
             'ecpay_sender_address',
             'ecpay_sender_postcode',
-            'ecpay_parcel_pickup_time',
         ];
 
         $this->deliveryTimeOptions = [
@@ -596,8 +595,7 @@ class Ecpay_Tcat extends CarrierModule
             }
             $tcOrderShipping->specification = $AL->SendExtend['Specification'];
 
-            $AL->SendExtend['ScheduledPickupTime'] = Configuration::get('ecpay_parcel_pickup_time');
-
+            $AL->SendExtend['ScheduledPickupTime'] = EcpayScheduledDeliveryTime::UNLIMITED;
             if (!empty($tcOrderShipping->id)) {
                 $AL->SendExtend['ScheduledDeliveryTime'] = $tcOrderShipping->delivery_time;
             } else {

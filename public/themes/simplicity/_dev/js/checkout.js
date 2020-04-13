@@ -55,11 +55,9 @@ function toggleTotal() {
         $('.js-current-step').attr('id') != 'checkout-payment-step') {
 
         $('#cart-subtotal-shipping').addClass('hidden-xs-up');
-        $('#cart-summary-separator').addClass('hidden-xs-up');
         $('.cart-total').addClass('hidden-xs-up');
     } else {
         $('#cart-subtotal-shipping').removeClass('hidden-xs-up');
-        $('#cart-summary-separator').removeClass('hidden-xs-up');
         $('.cart-total').removeClass('hidden-xs-up');
     }
 
@@ -104,13 +102,12 @@ $(document).ready(() => {
       toggleTotal();
   });
 
+});
 
-  if ($('.js-current-step').attr('id') == 'checkout-delivery-step') {
-      $(document).ajaxComplete(function() {
-          toggleTotal();
-      });
-  }
-
+$(document).ajaxComplete(function() {
+    if ($('.js-current-step').attr('id') == 'checkout-delivery-step') {
+        toggleTotal();
+    }
 });
 
 
