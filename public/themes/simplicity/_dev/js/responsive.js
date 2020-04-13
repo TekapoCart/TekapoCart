@@ -33,9 +33,7 @@ prestashop.responsive = prestashop.responsive || {};
 
 prestashop.responsive.current_width = window.innerWidth;
 prestashop.responsive.min_width = 768;
-// suzy: 2020-04-13 寬度不正確問題
-// prestashop.responsive.mobile = prestashop.responsive.current_width < prestashop.responsive.min_width;
-prestashop.responsive.mobile = window.innerWidth < prestashop.responsive.min_width;
+prestashop.responsive.mobile = prestashop.responsive.current_width < prestashop.responsive.min_width;
 
 function swapChildren(obj1, obj2)
 {
@@ -46,7 +44,8 @@ function swapChildren(obj1, obj2)
 
 function toggleMobileStyles()
 {
-	if (prestashop.responsive.mobile) {
+    // suzy: 改掉 prestashop.responsive.mobile
+	if (window.innerWidth < 768) {
 		$("*[id^='_desktop_']").each(function(idx, el) {
 			var target = $('#' + el.id.replace('_desktop_', '_mobile_'));
 			if (target.length) {
@@ -150,6 +149,7 @@ $(window).on('resize', function() {
 });
 
 $(document).ready(function() {
+    // suzy: 改掉 prestashop.responsive.mobile
 	if (window.innerWidth < 768) {
 		toggleMobileStyles();
 	}
