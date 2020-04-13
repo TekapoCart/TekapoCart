@@ -33,7 +33,9 @@ prestashop.responsive = prestashop.responsive || {};
 
 prestashop.responsive.current_width = window.innerWidth;
 prestashop.responsive.min_width = 768;
-prestashop.responsive.mobile = prestashop.responsive.current_width < prestashop.responsive.min_width;
+// suzy: 2020-04-13 寬度不正確問題
+// prestashop.responsive.mobile = prestashop.responsive.current_width < prestashop.responsive.min_width;
+prestashop.responsive.mobile = window.innerWidth < prestashop.responsive.min_width;
 
 function swapChildren(obj1, obj2)
 {
