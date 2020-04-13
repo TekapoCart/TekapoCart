@@ -82,8 +82,6 @@ if ($lastParametersModificationTime) {
             $config = Yaml::parseFile($yamlParametersFilepath);
             $exportPhpConfigFile($config, $cachedParameters);
         }
-
-        $filesystem->chmod($cachedParameters, 0660);
     }
 
     $config = require_once _PS_CACHE_DIR_ . 'appParameters.php';
