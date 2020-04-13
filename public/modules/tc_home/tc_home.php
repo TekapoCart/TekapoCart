@@ -366,7 +366,7 @@ class Tc_Home extends CarrierModule
             $this->context->controller->errors[] = $this->l('Invalid delivery address');
         }
 
-        // 不 開放離島寄送
+        // 開放離島寄送
         if (!Configuration::get('tc_home_island_enable')) {
 
             if (in_array($receiverZipcode->zip3(), TC_Zipcode::island())) {
