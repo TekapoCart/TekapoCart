@@ -238,7 +238,7 @@ class Tc_Home2 extends CarrierModule
             $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order', true, null, null, array('step' => 2)));
         }
 
-        // validate 預定取件日期
+        // validate 預定送達日期
         $delivery_date = Tools::getValue($this->name . '_scheduled_delivery_date');
         if (strtotime($delivery_date) === FALSE || strtotime($delivery_date) < 0) {
             $delivery_date = '';
@@ -477,7 +477,7 @@ class Tc_Home2 extends CarrierModule
                 ),
                 array(
                     'type' => 'switch',
-                    'label' => '開放預定取件日期',
+                    'label' => '開放預定送達日期',
                     'name' => 'tc_parcel_pickup_date_enable',
                     'is_bool' => true,
                     'values' => array(
@@ -496,7 +496,7 @@ class Tc_Home2 extends CarrierModule
                 ),
                 array(
                     'type' => 'text',
-                    'label' => '預定取件日期起始日',
+                    'label' => '預定送達日期起始日',
                     'name' => 'tc_parcel_pickup_date_begin',
                     'class' => 'fixed-width-md',
                     'prefix' => 'D＋',
@@ -504,7 +504,7 @@ class Tc_Home2 extends CarrierModule
                 ),
                 array(
                     'type' => 'checkbox',
-                    'label' => '預定取件日期排除',
+                    'label' => '預定送達日期排除',
                     'name' => 'tc_parcel_pickup_date_disable',
                     'values' => array(
                         'query' => array(
