@@ -49,6 +49,9 @@ if (!class_exists('TcOrderShipping')) {
         /** @var string parcel specification requested by ECPay API */
         public $specification;
 
+        /** @var string parcel delivery date requested by ECPay API */
+        public $delivery_date;
+
         /** @var string parcel delivery time requested by ECPay API */
         public $delivery_time;
 
@@ -105,6 +108,7 @@ if (!class_exists('TcOrderShipping')) {
                 'rv_address' => array('type' => self::TYPE_STRING, 'validate' => 'isAddress'),
                 'distance' => array('type' => self::TYPE_STRING),
                 'specification' => array('type' => self::TYPE_STRING),
+                'delivery_date' => array('type' => self::TYPE_STRING),
                 'delivery_time' => array('type' => self::TYPE_STRING),
                 'sn_id' => array('type' => self::TYPE_STRING, 'validate' => 'isTrackingNumber'),
                 'return_status' => array('type' => self::TYPE_STRING),

@@ -427,6 +427,23 @@ body#checkout {
     /*background: white;*/
     color: $gray;
   }
+
+  // datepicker
+  .ui-widget {
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  .ui-datepicker {
+    td {
+      span, a {
+        text-align: center;
+      }
+    }
+  }
+  .ui-corner-all {
+    border-radius: 0;
+  }
+
 }
 /**** ORDER CONFIRMATION *****/
 #order-details {

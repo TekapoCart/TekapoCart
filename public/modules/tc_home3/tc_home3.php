@@ -38,11 +38,18 @@ class Tc_Home3 extends CarrierModule
         $this->tcHomeParams = [
             'tc_sender_address',
             'tc_sender_postcode',
+
             'tc_home3_same_city_fee',
             'tc_home3_free_shipping_same_city',
-            'tc_home3_free_shipping_island',
+
             'tc_home3_island_enable',
             'tc_home3_island_fee',
+            'tc_home3_free_shipping_island',
+
+            'tc_parcel_pickup_date_enable',
+            'tc_parcel_pickup_date_begin',
+            'tc_parcel_pickup_date_disable',
+
             'tc_parcel_pickup_time_enable',
         ];
 
@@ -108,12 +115,15 @@ class Tc_Home3 extends CarrierModule
             return false;
         }
 
-        if (Configuration::get('tc_parcel_pickup_time_enable')) {
+        if (Configuration::get('tc_parcel_pickup_date_enable') || Configuration::get('tc_parcel_pickup_time_enable')) {
+
             $scheduled_data = $this->getScheduledData($this->context->cart->id, $params['carrier']['id']);
 
             $this->smarty->assign([
                 'scheduled_data' => $scheduled_data,
                 'dropdown_options' => $this->deliveryTimeOptions,
+                'parcel_pickup_date_begin' => (int) Configuration::get('tc_parcel_pickup_date_begin'),
+                'parcel_pickup_date_disable' => Configuration::get('tc_parcel_pickup_date_disable'),
             ]);
 
             return $this->display(__FILE__, 'display_carrier_extra_content.tpl');
@@ -139,6 +149,7 @@ class Tc_Home3 extends CarrierModule
 
         $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
+            $scheduled_data['delivery_date'] = $tcOrderShipping['delivery_date'];
             $scheduled_data['delivery_time'] = $tcOrderShipping['delivery_time'];
         } else {
             $scheduled_data = $this->getScheduledData($params['order']->id_cart, $params['order']->id_carrier);
@@ -174,6 +185,7 @@ class Tc_Home3 extends CarrierModule
 
         $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
+            $scheduled_data['delivery_date'] = $tcOrderShipping['delivery_date'];
             $scheduled_data['delivery_time'] = $tcOrderShipping['delivery_time'];
 
             $this->smarty->assign(array(
@@ -226,8 +238,28 @@ class Tc_Home3 extends CarrierModule
             $this->context->controller->redirectWithNotifications($this->context->link->getPageLink('order', true, null, null, array('step' => 2)));
         }
 
+        // validate 預定送達日期
+        $delivery_date = Tools::getValue($this->name . '_scheduled_delivery_date');
+        if (strtotime($delivery_date) === FALSE || strtotime($delivery_date) < 0) {
+            $delivery_date = '';
+        } else {
+            $delivery_date = date('Y/m/d', strtotime($delivery_date));
+            $tc_parcel_pickup_date_begin = (int) Configuration::get('tc_parcel_pickup_date_begin');
+            $default_delivery_date = date('Y/m/d', strtotime("+$tc_parcel_pickup_date_begin days"));
+            if ($delivery_date < $default_delivery_date) {
+                $delivery_date = '';
+            }
+        }
+
+        // validate 預定取件時段
+        $delivery_time = Tools::getValue($this->name . '_scheduled_delivery_time');
+        if (!in_array($delivery_time, array_keys($this->deliveryTimeOptions))) {
+            $delivery_time = TC_ScheduledDeliveryTime::UNLIMITED;
+        }
+
         $scheduled_data = [
-            'delivery_time' => Tools::getValue($this->name . '_scheduled_delivery_time', TC_ScheduledDeliveryTime::UNLIMITED),
+            'delivery_date' => $delivery_date,
+            'delivery_time' => $delivery_time,
         ];
 
         $this->saveScheduledData($scheduled_data);
@@ -261,6 +293,7 @@ class Tc_Home3 extends CarrierModule
         $tcOrderShipping = TcOrderShipping::getLogByOrderId($params['order']->id, 'array');
         if ($tcOrderShipping) {
             $scheduled_data = [
+                'delivery_date' => $tcOrderShipping['delivery_date'],
                 'delivery_time' => $this->deliveryTimeOptions[$tcOrderShipping['delivery_time']],
             ];
 
@@ -316,7 +349,7 @@ class Tc_Home3 extends CarrierModule
             $this->context->controller->errors[] = $this->l('Invalid delivery address');
         }
 
-        // 未開放離島寄送
+        // 開放離島寄送
         if (!Configuration::get('tc_home3_island_enable')) {
 
             if (in_array($receiverZipcode->zip3(), $this->islandZipcode)) {
@@ -393,39 +426,20 @@ class Tc_Home3 extends CarrierModule
                     'required' => true,
                 ),
                 array(
-                    'type' => 'switch',
-                    'label' => '顯示預定取件時段',
-                    'name' => 'tc_parcel_pickup_time_enable',
-                    'is_bool' => true,
-                    'values' => array(
-                        array(
-                            'id' => 'active_on',
-                            'value' => 1,
-                            'label' => $this->l('Enabled'),
-                        ),
-                        array(
-                            'id' => 'active_off',
-                            'value' => 0,
-                            'label' => $this->l('Disabled'),
-                        ),
-                    ),
-                    'desc' => '前台顯示取件時段選單：不限時、13 時前、14~18時',
-                ),
-                array(
                     'type' => 'text',
                     'label' => '同縣市抵扣運費',
                     'name' => 'tc_home3_same_city_fee',
                     'class' => 'fixed-width-md',
                     'prefix' => $this->context->currency->sign,
-                    'desc' => '與寄件人同縣市可減少的運費，若無請留空',
+                    'desc' => '與寄件人同縣市可減少的金額，請輸入 0 以上的整數，若無請留空',
                 ),
                 array(
                     'type' => 'text',
-                    'label' => '同縣市免運金額',
+                    'label' => '同縣市免運門檻',
                     'name' => 'tc_home3_free_shipping_same_city',
                     'class' => 'fixed-width-md',
                     'prefix' => $this->context->currency->sign,
-                    'desc' => '與寄件人同縣市的免運門檻，若無請留空',
+                    'desc' => '達到免運的訂單金額，若無請留空',
                 ),
                 array(
                     'type' => 'switch',
@@ -451,15 +465,81 @@ class Tc_Home3 extends CarrierModule
                     'name' => 'tc_home3_island_fee',
                     'class' => 'fixed-width-md',
                     'prefix' => $this->context->currency->sign,
-                    'desc' => '離島地區需追加的運費，若無請留空',
+                    'desc' => '離島地區需加收的金額，請輸入 0 以上的整數，若無請留空',
                 ),
                 array(
                     'type' => 'text',
-                    'label' => '離島免運金額',
+                    'label' => '離島免運門檻',
                     'name' => 'tc_home3_free_shipping_island',
                     'class' => 'fixed-width-md',
                     'prefix' => $this->context->currency->sign,
-                    'desc' => '離島地區的免運門檻，若無請留空',
+                    'desc' => '達到免運的訂單金額，若無請留空',
+                ),
+                array(
+                    'type' => 'switch',
+                    'label' => '開放預定送達日期',
+                    'name' => 'tc_parcel_pickup_date_enable',
+                    'is_bool' => true,
+                    'values' => array(
+                        array(
+                            'id' => 'active_on',
+                            'value' => 1,
+                            'label' => $this->l('Enabled'),
+                        ),
+                        array(
+                            'id' => 'active_off',
+                            'value' => 0,
+                            'label' => $this->l('Disabled'),
+                        ),
+                    ),
+                    'desc' => '前台顯示取件日期',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => '預定送達日期起始日',
+                    'name' => 'tc_parcel_pickup_date_begin',
+                    'class' => 'fixed-width-md',
+                    'prefix' => 'D＋',
+                    'desc' => '以「D＋3」為例：4/1 送出訂單，可預定 4/4 之後 1 個月內的日期，請輸入 0 以上的整數，若無請留空',
+                ),
+                array(
+                    'type' => 'checkbox',
+                    'label' => '預定送達日期排除',
+                    'name' => 'tc_parcel_pickup_date_disable',
+                    'values' => array(
+                        'query' => array(
+                            array('id' => '0', 'name' => '週日', 'val' => 1),
+                            array('id' => '1', 'name' => '週一', 'val' => 1),
+                            array('id' => '2', 'name' => '週二', 'val' => 1),
+                            array('id' => '3', 'name' => '週三', 'val' => 1),
+                            array('id' => '4', 'name' => '週四', 'val' => 1),
+                            array('id' => '5', 'name' => '週五', 'val' => 1),
+                            array('id' => '6', 'name' => '週六', 'val' => 1),
+                        ),
+                        'id' => 'id',
+                        'name' => 'name',
+                        'value' => '1',
+                    ),
+                    'desc' => '可設定排除假日，例如：黑貓週日無配送服務',
+                ),
+                array(
+                    'type' => 'switch',
+                    'label' => '開放預定取件時段',
+                    'name' => 'tc_parcel_pickup_time_enable',
+                    'is_bool' => true,
+                    'values' => array(
+                        array(
+                            'id' => 'active_on',
+                            'value' => 1,
+                            'label' => $this->l('Enabled'),
+                        ),
+                        array(
+                            'id' => 'active_off',
+                            'value' => 0,
+                            'label' => $this->l('Disabled'),
+                        ),
+                    ),
+                    'desc' => '前台顯示取件時段選單：不限時、13 時前、14~18時',
                 ),
             ),
             'submit' => array(
@@ -492,7 +572,18 @@ class Tc_Home3 extends CarrierModule
 
         # Load the current settings
         foreach ($this->tcHomeParams as $param_name) {
-            $helper->fields_value[$param_name] = Configuration::get($param_name);
+            if ($param_name == 'tc_parcel_pickup_date_disable') {
+                if (strlen(Configuration::get($param_name)) > 0) {
+                    $arr = explode(',', Configuration::get($param_name));
+                    for ($i = 0; $i < 7; $i++) {
+                        if (in_array($i, $arr)) {
+                            $helper->fields_value[$param_name . '_' . $i] = 1;
+                        }
+                    }
+                }
+            } else {
+                $helper->fields_value[$param_name] = Configuration::get($param_name);
+            }
         }
 
         return $helper->generateForm($fields_form);
@@ -500,6 +591,17 @@ class Tc_Home3 extends CarrierModule
 
     private function postProcess()
     {
+        $arr = [];
+        for ($i = 0; $i < 7; $i++) {
+            if (Tools::getValue('tc_parcel_pickup_date_disable_' . $i) == 1) {
+                $arr[] = $i;
+            }
+        }
+        if (count($arr) > 0) {
+            $_POST['tc_parcel_pickup_date_disable'] = implode(',', $arr);
+        } else {
+            $_POST['tc_parcel_pickup_date_disable'] = '';
+        }
 
         foreach ($this->tcHomeParams as $param_name) {
 
@@ -566,7 +668,6 @@ class Tc_Home3 extends CarrierModule
                 return $shipping_cost;
             }
         }
-
 
         return $shipping_cost;
     }
@@ -641,6 +742,7 @@ class Tc_Home3 extends CarrierModule
 
         if ($tcCartShipping) {
             return [
+                'delivery_date' => $tcCartShipping['delivery_date'],
                 'delivery_time' => $tcCartShipping['delivery_time'],
             ];
         } else {

@@ -44,6 +44,14 @@
         text-align: center;
       }
     }
+    &.ui-datepicker-calendar {
+      th {
+        padding: 0;
+      }
+      td {
+        padding: 0;
+      }
+    }
   }
 }
 #authentication {

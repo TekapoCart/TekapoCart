@@ -2,6 +2,8 @@
     {if isset($scheduled_data)}
         <div class="row">
             <div class="col-md-6">
+                預定送達日期：{$scheduled_data['delivery_date']}
+                <br>
                 預定送達時段：{$scheduled_data['delivery_time']}
             </div>
             <div class="col-md-6">

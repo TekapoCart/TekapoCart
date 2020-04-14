@@ -27,7 +27,7 @@
 
   {foreach from=$cart.subtotals item="subtotal"}
     {if $subtotal.value && $subtotal.type !== 'tax'}
-      <div class="cart-summary-line cart-summary-subtotals" id="cart-subtotal-{$subtotal.type}">
+      <div class="cart-summary-line cart-summary-subtotals{if $subtotal.type == 'shipping'} hidden-xs-up{/if}" id="cart-subtotal-{$subtotal.type}">
 
         <span class="label">
             {$subtotal.label}

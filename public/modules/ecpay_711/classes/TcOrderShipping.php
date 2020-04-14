@@ -10,7 +10,7 @@ if (!class_exists('TcOrderShipping')) {
         /** @var string order reference */
         public $order_reference;
 
-        /** @var string logistics module ezship, ezship_home, ecpay_711, ecpay_cat, tc_711 ... */
+        /** @var string logistics module ezship, ezship_home, ecpay_711, ecpay_tcat, tc_711 ... */
         public $module;
 
         /** @var string send status */
@@ -48,6 +48,9 @@ if (!class_exists('TcOrderShipping')) {
 
         /** @var string parcel specification requested by ECPay API */
         public $specification;
+
+        /** @var string parcel delivery date requested by ECPay API */
+        public $delivery_date;
 
         /** @var string parcel delivery time requested by ECPay API */
         public $delivery_time;
@@ -105,6 +108,7 @@ if (!class_exists('TcOrderShipping')) {
                 'rv_address' => array('type' => self::TYPE_STRING, 'validate' => 'isAddress'),
                 'distance' => array('type' => self::TYPE_STRING),
                 'specification' => array('type' => self::TYPE_STRING),
+                'delivery_date' => array('type' => self::TYPE_STRING),
                 'delivery_time' => array('type' => self::TYPE_STRING),
                 'sn_id' => array('type' => self::TYPE_STRING, 'validate' => 'isTrackingNumber'),
                 'return_status' => array('type' => self::TYPE_STRING),

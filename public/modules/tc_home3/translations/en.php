@@ -21,6 +21,7 @@ $_MODULE['<{tc_home3}prestashop>display_order_confirmation_a01a6be1f61438ab40073
 $_MODULE['<{tc_home3}prestashop>display_order_confirmation_628ea294212a46ece79f0236f20133fd'] = 'Receiver City';
 $_MODULE['<{tc_home3}prestashop>display_order_confirmation_f4fc962d5586a24d453a3b0f26e6faea'] = 'Receiver Postcode';
 $_MODULE['<{tc_home3}prestashop>display_order_confirmation_c5b8c2379912db4b6ace799089d2c65c'] = 'Receiver Address';
+$_MODULE['<{tc_home3}prestashop>display_order_confirmation_565604fcc77e100f38aea77aa0fe26b4'] = 'Delivery Date';
 $_MODULE['<{tc_home3}prestashop>display_order_confirmation_205b01b3197cf06688f6ed574faf5664'] = 'Delivery Time';
 
 $_MODULE['<{tc_home3}prestashop>display_order_detail_4d1c2dd237da2d9c3dba6abfeb5b7639'] = 'Pickup Info';
@@ -29,5 +30,10 @@ $_MODULE['<{tc_home3}prestashop>display_order_detail_a01a6be1f61438ab400738791a6
 $_MODULE['<{tc_home3}prestashop>display_order_detail_628ea294212a46ece79f0236f20133fd'] = 'Receiver City';
 $_MODULE['<{tc_home3}prestashop>display_order_detail_f4fc962d5586a24d453a3b0f26e6faea'] = 'Receiver Postcode';
 $_MODULE['<{tc_home3}prestashop>display_order_detail_c5b8c2379912db4b6ace799089d2c65c'] = 'Receiver Address';
+$_MODULE['<{tc_home3}prestashop>display_order_detail_565604fcc77e100f38aea77aa0fe26b4'] = 'Delivery Date';
 $_MODULE['<{tc_home3}prestashop>display_order_detail_205b01b3197cf06688f6ed574faf5664'] = 'Delivery Time';
 $_MODULE['<{tc_home3}prestashop>display_order_detail_1165eb193193f8ee509397d92f1e47ee'] = 'Shipping Log';
+
+$_MODULE['<{tc_home3}prestashop>display_carrier_extra_content_565604fcc77e100f38aea77aa0fe26b4'] = 'Delivery Date';
+$_MODULE['<{tc_home3}prestashop>display_carrier_extra_content_205b01b3197cf06688f6ed574faf5664'] = 'Delivery Time';
+$_MODULE['<{tc_home3}prestashop>display_carrier_extra_content_c9b0872391b322a2eabe828d0b7353c5'] = 'No Limit';
