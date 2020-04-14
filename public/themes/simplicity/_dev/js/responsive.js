@@ -195,14 +195,14 @@ $(document).ready(function() {
     });
 
 });
-$( document ).ajaxComplete(function() {
+$(document).ajaxComplete(function() {
     // suzy: 桌機手機圖尺寸切換
     toggleThumbnails();
 });
 
 $(window).load(function() {
-    if (window.innerWidth < 768 !== prestashop.responsive.mobile) {
-        prestashop.responsive.current_width = window.innerWidth;
+    if ($(window).width() < 768 !== prestashop.responsive.mobile) {
+        prestashop.responsive.current_width = $(window).width();
         prestashop.responsive.mobile = prestashop.responsive.current_width < prestashop.responsive.min_width;
         toggleMobileStyles();
     }
