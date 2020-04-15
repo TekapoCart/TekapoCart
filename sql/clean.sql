@@ -128,5 +128,9 @@ UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ecpay_sender_address';
 UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ecpay_sender_postcode';
 UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='ecpay_parcel_pickup_time';
 
+-- tc
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='tc_sender_address';
+UPDATE `ps_configuration` SET `value`=NULL WHERE `name`='tc_sender_postcode';
+
 
 UPDATE `ps_employee` SET `id_last_order` = '0' WHERE `ps_employee`.`id_employee` = 1;
