@@ -37,7 +37,7 @@
                     商品寄出後，將「狀態」更新為「已出貨」，客戶便會收到已出貨通知信。
                 </blockquote>
                 <blockquote style="font-size: 12px;">
-                    貼心提醒：使用 ezShip 「輕鬆袋、迷你袋」的店家，請先瞭解相關說明。
+                    使用 ezShip 「輕鬆袋、迷你袋」服務，須登錄專用編號，<a href="#" target="_blank">進一步瞭解</a>。
                 </blockquote>
             </div>
             <div class="col-md-6">

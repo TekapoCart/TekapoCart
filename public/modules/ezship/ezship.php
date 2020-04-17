@@ -234,11 +234,14 @@ class EzShip extends CarrierModule
             $store_data['name'] = $tcOrderShipping['store_name'];
             $store_data['addr'] = $tcOrderShipping['store_addr'];
 
+            $order = new Order($params['order']->id);
+
             $this->smarty->assign(array(
                 'receiver_name' => $address->lastname . Tools::maskString($address->firstname, 'name'),
                 'receiver_phone' => Tools::maskString($phone, 'phone'),
                 'store_data' => $store_data,
                 'return_message' => $tcOrderShipping['return_message'],
+                'shipping_number' => $order->getWsShippingNumber(),
             ));
         }
 
