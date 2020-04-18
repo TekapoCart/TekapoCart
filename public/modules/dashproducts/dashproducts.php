@@ -103,7 +103,9 @@ class dashproducts extends Module
         $header = array(
             array('title' => $this->trans('Customer Name', array(), 'Modules.Dashproducts.Admin'), 'class' => 'text-left'),
             array('title' => $this->trans('Products', array(), 'Admin.Global'), 'class' => 'text-center'),
-            array('title' => $this->trans('Total', array(), 'Admin.Global').' '.$this->trans('Tax excl.', array(), 'Admin.Global'), 'class' => 'text-center'),
+            // suzy: 2020-04-18 隱藏未稅
+            // array('title' => $this->trans('Total', array(), 'Admin.Global').' '.$this->trans('Tax excl.', array(), 'Admin.Global'), 'class' => 'text-center'),
+            array('title' => $this->trans('Total', array(), 'Admin.Global')),
             array('title' => $this->trans('Date', array(), 'Admin.Global'), 'class' => 'text-center'),
             array('title' => $this->trans('Status', array(), 'Admin.Global'), 'class' => 'text-center'),
             array('title' => '', 'class' => 'text-right'),
