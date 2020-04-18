@@ -542,10 +542,10 @@ class Tc_711 extends CarrierModule
     public function getOrderShippingCost($params, $shipping_cost)
     {
 
-        $carrier = new Carrier($this->context->cart->id_carrier);
-        if ($carrier->external_module_name !== $this->name) {
-            return $shipping_cost;
-        }
+//        $carrier = new Carrier($this->context->cart->id_carrier);
+//        if ($carrier->external_module_name !== $this->name) {
+//            return $shipping_cost;
+//        }
 
         $store_data = $this->getStoreData($this->context->cart->id, $this->context->cart->id_carrier);
         if ($store_data && strlen($store_data['code']) > 0) {
