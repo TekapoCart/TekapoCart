@@ -633,10 +633,10 @@ class Tc_Home extends CarrierModule
     public function getOrderShippingCost($params, $shipping_cost)
     {
 
-        $carrier = new Carrier($this->context->cart->id_carrier);
-        if ($carrier->external_module_name !== $this->name) {
-            return $shipping_cost;
-        }
+//        $carrier = new Carrier($this->context->cart->id_carrier);
+//        if ($carrier->external_module_name !== $this->name) {
+//            return $shipping_cost;
+//        }
 
         $free_shipping_same_city = (int) Configuration::get('tc_home_free_shipping_same_city');
         $shipping_fee_same_city = (int) Configuration::get('tc_home_same_city_fee');
@@ -645,6 +645,10 @@ class Tc_Home extends CarrierModule
         $island_fee = (int) Configuration::get('tc_home_island_fee');
 
         if ($free_shipping_same_city <= 0 && $shipping_fee_same_city <= 0 && $free_shipping_island <= 0 && $island_fee <= 0) {
+            return $shipping_cost;
+        }
+
+        if (intval($this->context->cart->id_address_delivery) == 0) {
             return $shipping_cost;
         }
 
