@@ -632,6 +632,12 @@ class Tc_Home extends CarrierModule
 
     public function getOrderShippingCost($params, $shipping_cost)
     {
+
+        $carrier = new Carrier($this->context->cart->id_carrier);
+        if ($carrier->external_module_name !== $this->name) {
+            return $shipping_cost;
+        }
+
         $free_shipping_same_city = (int) Configuration::get('tc_home_free_shipping_same_city');
         $shipping_fee_same_city = (int) Configuration::get('tc_home_same_city_fee');
 
@@ -657,7 +663,7 @@ class Tc_Home extends CarrierModule
             $receiverCity = $receiverZipcode->county();
             if ($senderCity == $receiverCity) {
                 // 免運金額
-                if ($orderTotal > $free_shipping_same_city) {
+                if ($free_shipping_same_city > 0 && $orderTotal > $free_shipping_same_city) {
                     return 0;
                 }
                 // 抵免運費
@@ -675,7 +681,7 @@ class Tc_Home extends CarrierModule
             if ((!in_array($senderZip, TC_Zipcode::island()) && in_array($receiverZip, TC_Zipcode::island())) ||
                 (in_array($senderZip, TC_Zipcode::island()) && !in_array($receiverZip, TC_Zipcode::island()))) {
                 // 免運金額
-                if ($orderTotal > $free_shipping_island) {
+                if ($free_shipping_island > 0 && $orderTotal > $free_shipping_island) {
                     return 0;
                 }
                 // 追加運費

@@ -36,4 +36,4 @@ $_MODULE['<{ezship}prestashop>display_order_detail_cd37457c859cdb020b00b94a27cf1
 $_MODULE['<{ezship}prestashop>display_order_detail_e3fb0b5e9ce53fe70b119648fc217f44'] = '门市名称';
 $_MODULE['<{ezship}prestashop>display_order_detail_653d48136a36d3fddd3a805948a4d8ef'] = '门市地址';
 $_MODULE['<{ezship}prestashop>display_order_detail_84d7eb8328d9be05d4c14469200b8c88'] = '商品抵达指定门市后，将会有简讯通知取货';
-$_MODULE['<{ezship}prestashop>display_order_detail_1165eb193193f8ee509397d92f1e47ee'] = '物流追踪';
+$_MODULE['<{ezship}prestashop>display_order_detail_921c7640480f37ec16f8585ddb83af9f'] = '查配送状态';

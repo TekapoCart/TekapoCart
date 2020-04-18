@@ -26,15 +26,23 @@
                 </button>
                 <script type="text/javascript">
                     $('.resend-order').on('click', function () {
-                        if (confirm('請注意：重送訂單將取得新「ezShip 編號」，確定繼續？')) {
+                        if (confirm('請注意：重送訂單將取得新「店到店編號」，確定繼續？')) {
                             window.open('{$resend_url nofilter}', '_self');
                         }
                     });
                 </script>
+                <br>
+                <br>
+                <blockquote style="font-size: 12px;">
+                    商品寄出後，將「狀態」更新為「已出貨」，客戶便會收到已出貨通知信。
+                </blockquote>
+                <blockquote style="font-size: 12px;">
+                    使用 ezShip 「輕鬆袋、迷你袋」服務，須登錄專用編號，<a href="#" target="_blank">進一步瞭解</a>。
+                </blockquote>
             </div>
             <div class="col-md-6">
                 {if isset($sn_id) && $sn_id != '00000000'}
-                    <p>ezShip 編號：{$sn_id}</p>
+                    <p>店到店編號：{$sn_id}</p>
                 {/if}
                 {if strlen($return_status) > 0}
                     <p>物流回傳狀態：{$return_status}</p>

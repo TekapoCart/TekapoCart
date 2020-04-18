@@ -7,7 +7,7 @@
             </button>
             <script type="text/javascript">
                 $('.resend-order').on('click', function () {
-                    if (confirm('請注意：重送訂單將取得新「ezShip 編號」，確定繼續？')) {
+                    if (confirm('請注意：重送訂單將取得新「店到宅編號」，確定繼續？')) {
                         window.open('{$resend_url nofilter}', '_self');
                     }
                 });
@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-6">
             {if isset($sn_id) && $sn_id != '00000000'}
-                <p>ezShip 編號：{$sn_id}</p>
+                <p>店到宅編號：{$sn_id}</p>
             {/if}
             {if strlen($return_status) > 0}
                 <p>物流回傳狀態：{$return_status}</p>

@@ -320,6 +320,12 @@ class EzShip_CheckOutFeedback extends EzShip_Aio
 
         // 重新整理回傳參數
         foreach ($arParameters as $keys => $value) {
+
+            if ($keys == 'sn_id' && strlen($value) > 11) {
+                array_push($arErrors, 'sn_id verify fail.');
+                continue;
+            }
+
             if ($keys != 'webPara') {
                 $arFeedback[$keys] = $value;
             }
