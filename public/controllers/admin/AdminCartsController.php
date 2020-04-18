@@ -110,11 +110,21 @@ class AdminCartsControllerCore extends AdminController
                 'filter_key' => 'ca!name',
             ),
             'date_add' => array(
-                'title' => $this->trans('Date', array(), 'Admin.Global'),
+                // suzy: 2020-04-18 修改 title
+                // 'title' => $this->trans('Date', array(), 'Admin.Global'),
+                'title' => '建立時間',
                 'align' => 'text-left',
                 'type' => 'datetime',
                 'class' => 'fixed-width-lg',
                 'filter_key' => 'a!date_add',
+            ),
+            // suzy: 2020-04-18 加入 更新時間
+            'date_upd' => array(
+                'title' => '更新時間',
+                'align' => 'text-left',
+                'type' => 'datetime',
+                'class' => 'fixed-width-lg',
+                'filter_key' => 'a!date_upd',
             ),
         );
 

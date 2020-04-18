@@ -490,6 +490,7 @@ class AdminModulesPositionsControllerCore extends AdminController
                 'ps_contactinfo',
                 'ps_crossselling',
                 'ps_categoryproducts',
+                'ps_contactinfo',
                 'ps_currencyselector',
                 'ps_customersignin',
                 'ps_customtext',
