@@ -23,7 +23,7 @@ class Tc_711 extends CarrierModule
         parent::__construct();
 
         $this->displayName = $this->l('TekapoCart 7-11 pickup in-store');
-        $this->description = '無需申請物流平台，商家自行申請交貨便代碼，不支援取貨付款。';
+        $this->description = '無需申請物流串接服務，商家自行申請交貨便代碼，不支援取貨付款。';
         $this->confirmUninstall = $this->l('Do you want to uninstall tc_711 module?');
 
         $this->tc711Params = [
@@ -230,10 +230,13 @@ class Tc_711 extends CarrierModule
             $store_data['name'] = $tcOrderShipping['store_name'];
             $store_data['addr'] = $tcOrderShipping['store_addr'];
 
+            $order = new Order($params['order']->id);
+
             $this->smarty->assign(array(
                 'receiver_name' => $address->lastname . Tools::maskString($address->firstname, 'name'),
                 'receiver_phone' => Tools::maskString($phone, 'phone'),
                 'store_data' => $store_data,
+                'shipping_number' => $order->getWsShippingNumber(),
             ));
         }
 

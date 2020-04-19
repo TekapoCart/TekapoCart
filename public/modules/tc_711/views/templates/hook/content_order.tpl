@@ -21,6 +21,11 @@
                         }
                     });
                 </script>
+                <br>
+                <br>
+                <blockquote style="font-size: 12px;">
+                    商品寄出後，將「狀態」更新為「已出貨」，客戶便會收到已出貨通知信。
+                </blockquote>
             </div>
             <div class="col-md-6">
                 {if strlen($change_store_message) > 0}
