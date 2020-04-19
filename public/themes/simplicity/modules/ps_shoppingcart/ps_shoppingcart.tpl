@@ -24,7 +24,7 @@
  *}
 {if $page.page_name != 'cart'}
 <div id="_desktop_cart">
-  <div class="blockcart {*cart-preview*} {if $cart.products_count > 0}active{else}inactive{/if}" data-refresh-url="{$refresh_url}">
+  <div class="blockcart{*cart-preview*} {if $cart.products_count > 0}active{else}inactive{/if}" data-refresh-url="{$refresh_url}">
     <div class="header">
       <a rel="nofollow" href="{$cart_url}">
       <i class="material-icons shopping-cart">shopping_cart</i>
