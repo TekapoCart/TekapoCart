@@ -5,7 +5,7 @@
     background-position: center bottom;
     a {
       display: block;
-      padding: 30px 40px;
+      padding: 30px 35px;
       color: #fff;
       .icon-wrapper {
         width: 55px;
@@ -103,7 +103,12 @@
 }
 
 // filter_drama
-#cms-page-item-8 {
+#cms-page-item-8,
+#cms-page-item-38,
+#cms-page-item-39,
+#cms-page-item-42,
+#cms-page-item-46,
+#cms-page-item-47 {
   .icon {
     &:before {
       content: "\e3dd";
@@ -116,6 +121,15 @@
   .icon {
     &:before {
       content: "\e8b8";
+    }
+  }
+}
+
+// dvr
+#cms-page-item-17 {
+  .icon {
+    &:before {
+      content: "\e1b2";
     }
   }
 }
