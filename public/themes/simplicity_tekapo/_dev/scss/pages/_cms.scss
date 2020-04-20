@@ -1,0 +1,32 @@
+.cms-page-list {
+  .cms-page-cover {
+    height: 175px;
+    text-align: center;
+    background-position: center bottom;
+    a {
+      display: block;
+      padding: 30px 40px;
+      color: #fff;
+      .icon-wrapper {
+        width: 55px;
+        height: 55px;
+        margin: 0 auto;
+        background-color: rgba(0, 0, 0, .4);
+        border-radius: 34px;
+        .material-icons {
+          line-height: 55px;
+          font-size: 28px;
+        }
+      }
+      h3 {
+        margin-top: 20px;
+        font-size: 20px;
+      }
+    }
+
+  }
+  .cms-page-desc {
+    margin: 10px 0;
+  }
+
+}
