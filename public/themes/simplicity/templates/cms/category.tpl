@@ -43,7 +43,7 @@
           {foreach from=$sub_categories item=sub_category}
           <li class="cms-subcategory-item">
             <a href="{$sub_category.link}">
-              {if isset($sub_category.image)}<img src="{$sub_category.image}">{/if}
+              {if isset($sub_category.image)}<img src="{$sub_category.image}?{$shop.ccccss_version}">{/if}
               <h3 class="cms-subcategory-title">{$sub_category.name}</h3>
               {if $sub_category.meta_description}<div class="cms-subcategory-desc">{$sub_category.meta_description|truncate:70:'...'}</div>{/if}
             </a>
@@ -60,7 +60,7 @@
           {foreach from=$cms_pages item=cms_page}
           <li class="cms-page-item">
             <a href="{$cms_page.link}">
-              {if isset($cms_page.image)}<img src="{$cms_page.image}">{/if}
+              {if isset($cms_page.image)}<img src="{$cms_page.image}?{$shop.ccccss_version}">{/if}
               <h3 class="cms-page-title">{$cms_page.meta_title}</h3>
               {if $cms_page.meta_description}<div class="cms-page-desc">{$cms_page.meta_description|truncate:70:'...'}</div>{/if}
             </a>
