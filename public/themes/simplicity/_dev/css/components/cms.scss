@@ -49,6 +49,12 @@
     li {
       width: 100%;
       padding: 10px 0;
+      &:nth-child(3n),
+      &:nth-child(3n+1),
+      &:nth-child(3n-1) {
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
   }
 }
