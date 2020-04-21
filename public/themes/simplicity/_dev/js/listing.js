@@ -156,12 +156,14 @@ $(document).ready(() => {
   prestashop.on('updateProductList', (data) => {
 
     // suzy: 2020-03-21 After next page - go to top
-    let target = $("#products");
-    if (target.length) {
-      $('html, body').animate({
-        scrollTop: target.offset().top
-      }, 0);
-    }
+    // suzy: 2020-04-21 發現 back button 無作用 改成把 js-search-link 拿掉
+    // 原本的作法將來可以改成 lazyload
+    // let target = $("#products");
+    // if (target.length) {
+    //   $('html, body').animate({
+    //     scrollTop: target.offset().top
+    //   }, 0);
+    // }
 
     updateProductListDOM(data);
   });
