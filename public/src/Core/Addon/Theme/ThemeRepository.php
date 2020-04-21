@@ -97,8 +97,15 @@ class ThemeRepository implements AddonRepositoryInterface
 
     public function getListExcluding(array $exclude)
     {
+
+        // suzy: 2020-04-20 後台不顯示 simplicity_tekapo
+        if (!in_array('simplicity_tekapo', $exclude)) {
+            $exclude[] = 'simplicity_tekapo';
+        }
+
         $filter = (new AddonListFilter())
             ->setExclude($exclude);
+
 
         return $this->getFilteredList($filter);
     }

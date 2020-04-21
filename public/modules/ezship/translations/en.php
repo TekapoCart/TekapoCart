@@ -38,4 +38,3 @@ $_MODULE['<{ezship}prestashop>display_order_detail_653d48136a36d3fddd3a805948a4d
 $_MODULE['<{ezship}prestashop>display_order_detail_84d7eb8328d9be05d4c14469200b8c88'] = 'SMS notification will be sent when the goods arrive.';
 $_MODULE['<{ezship}prestashop>display_order_detail_1165eb193193f8ee509397d92f1e47ee'] = 'Shipping Log';
 $_MODULE['<{ezship}prestashop>display_order_detail_921c7640480f37ec16f8585ddb83af9f'] = 'Track delivery status';
-$_MODULE['<{ezship}prestashop>display_order_detail_921c7640480f37ec16f8585ddb83af9f'] = 'Track delivery status';

@@ -3,7 +3,7 @@
     <name>tc_home</name>
     <displayName><![CDATA[TekapoCart 宅配]]></displayName>
     <version><![CDATA[1.0]]></version>
-    <description><![CDATA[無需申請物流平台，商家自行申請配送編號（物流編號）、托運單。]]></description>
+    <description><![CDATA[無需申請物流串接服務，商家自行申請配送編號（物流編號）、托運單。]]></description>
     <author><![CDATA[TekapoCart]]></author>
     <tab><![CDATA[shipping_logistics]]></tab>
 	<confirmUninstall><![CDATA[Do you want to uninstall tc_home module?]]></confirmUninstall>

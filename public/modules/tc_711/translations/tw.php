@@ -32,3 +32,4 @@ $_MODULE['<{tc_711}prestashop>display_order_detail_cd37457c859cdb020b00b94a27cf1
 $_MODULE['<{tc_711}prestashop>display_order_detail_e3fb0b5e9ce53fe70b119648fc217f44'] = '門市店名';
 $_MODULE['<{tc_711}prestashop>display_order_detail_653d48136a36d3fddd3a805948a4d8ef'] = '門市地址';
 $_MODULE['<{tc_711}prestashop>display_order_detail_84d7eb8328d9be05d4c14469200b8c88'] = '商品抵達指定門市後，將會有簡訊通知取貨';
+$_MODULE['<{tc_711}prestashop>display_order_detail_921c7640480f37ec16f8585ddb83af9f'] = '查配送狀態';

@@ -27,7 +27,7 @@ class Tc_Home extends CarrierModule
         parent::__construct();
 
         $this->displayName = $this->l('TekapoCart Home delivery');
-        $this->description = '無需申請物流平台，商家自行申請配送編號（物流編號）、托運單。';
+        $this->description = '無需申請物流串接服務，商家自行申請配送編號（物流編號）、托運單。';
         $this->confirmUninstall = $this->l('Do you want to uninstall tc_home module?');
 
         $invoke_result = $this->invokeTCSDK();

@@ -26,7 +26,7 @@
     <div class="user-info">
         {if $logged}
             <a class="account" href="{$my_account_url}" title="{l s='View my customer account' d='Shop.Theme.Customeraccount'}" rel="nofollow">
-                <span class="hidden-md-up">{l s='View my customer account' d='Shop.Theme.Customeraccount'}</span>
+                <span class="text hidden-md-up">{l s='View my customer account' d='Shop.Theme.Customeraccount'}</span>
                 <span class="icon"><i class="material-icons logged">person</i></span>
                 {*<span class="hidden-sm-down">{$customerName}</span>*}
             </a>

@@ -92,6 +92,10 @@ body#checkout a:hover,
   background-color: $primary-background-disabled-hover;
 }
 
+.alert-success {
+  background: lighten($primary-background-color, 30%);
+}
+
 @media (max-width: 991px) {
   .block-social li {
     background-color: $primary-background-color;

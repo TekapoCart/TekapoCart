@@ -1,3 +1,16 @@
+.alert {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 15px 20px;
+}
+.alert-success {
+  background: lighten($brand-primary, 30%);
+  border: none;
+  color: $gray-dark;
+}
+
+/*
 .ps-alert-error {
   margin-bottom: 0;
 }
@@ -47,3 +60,4 @@
     }
   }
 }
+*/

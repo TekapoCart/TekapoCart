@@ -66,7 +66,7 @@
   <meta name="msapplication-navbutton-color" content="{$shop.theme_color}">
 
   <link rel="manifest" href="/manifest_{$shop.id}.json">
-  <link rel="mask-icon" href="/img/cms/pwa/safari-pinned-tab.svg?{$shop.cccjs_version}" color="{$shop.theme_color}">
+  <link rel="mask-icon" href="/img/cms/pwa/safari-pinned-tab.svg?{$smarty.const._TC_VERSION_DATE_}{$shop.ccccss_version}" color="{$shop.theme_color}">
   <meta name="theme-color" content="{$shop.theme_color}">
 
   <meta name="apple-mobile-web-app-capable" content="yes">

@@ -10,7 +10,19 @@
     display: inline-block;
     vertical-align: top;
     margin-bottom: 20px;
-    padding: 10px;
+
+    padding: 10px 0;
+
+    &:nth-child(3n) {
+      padding-left: 10px;
+    }
+    &:nth-child(3n+1) {
+      padding-right: 10px;
+    }
+    &:nth-child(3n-1) {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
 
   img {
@@ -26,7 +38,23 @@
   .cms-page-desc,
   .cms-subcategory-desc {
     color: $gray-darker;
-    font-size: 14px;
+    font-size: 15px;
   }
 
+}
+
+@include media-breakpoint-down(md) {
+  .cms-page-list,
+  .cms-subcategory-list {
+    li {
+      width: 100%;
+      padding: 10px 0;
+      &:nth-child(3n),
+      &:nth-child(3n+1),
+      &:nth-child(3n-1) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
 }

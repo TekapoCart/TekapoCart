@@ -112,7 +112,31 @@ class Simplicity_Sociallogin extends Module
             session_start();
         }
 
-        $_SESSION['social_login_back'] = $this->context->link->getPageLink('my-account');
+        $controller = Tools::getValue('controller');
+        switch ($controller) {
+            case 'index':
+            case 'bestsales':
+            case 'cart':
+            case 'category':
+            case 'cms':
+            case 'contact':
+            case 'newproducts':
+            case 'order':
+            case 'orderconfirmation':
+            case 'pricesdrop':
+            case 'product':
+            case 'search':
+            case 'viewedproducts':
+                $_SESSION['social_login_back'] = $this->context->shop->getBaseURL(true, false) . $_SERVER['REQUEST_URI'];
+                break;
+            case 'guesttracking':
+                $_SESSION['social_login_back'] = $this->context->link->getPageLink('my-account');
+                break;
+            default:
+                if (!isset($_SESSION['social_login_back']) || empty($_SESSION['social_login_back'])) {
+                    $_SESSION['social_login_back'] = $this->context->link->getPageLink('my-account');
+                }
+        }
 
         $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
         $this->smarty->assign('g_login_url', $this->getGLoginUrl());
@@ -172,7 +196,8 @@ class Simplicity_Sociallogin extends Module
         }
         $back = isset($_SESSION['social_login_back']) ? $_SESSION['social_login_back'] : $this->context->link->getPageLink('my-account');
 
-        $this->context->controller->success[] = $this->trans('Login Successful', array(), 'Shop.Theme.Customeraccount');
+        // $this->trans('Login Successful', array(), 'Shop.Theme.Customeraccount');
+        $this->context->controller->success[] = $user['first_name'] . ' ' . $this->trans('Welcome!', array(), 'Emails.Subject');
         $this->context->controller->redirectWithNotifications($back);
     }
 

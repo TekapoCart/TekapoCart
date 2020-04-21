@@ -24,7 +24,7 @@ File: classes/order/OrderHistory.php:166</note>
     <body>
       <trans-unit id="9a843f20677a52ca79af903123147af0" approved="yes">
         <source>Welcome!</source>
-        <target xml:lang="zh-CN">歡迎您！</target>
+        <target xml:lang="zh-CN">歡迎！</target>
         <note>Context:
 File: classes/form/CustomerPersister.php:213</note>
       </trans-unit>

@@ -64,6 +64,9 @@ ul {
       &.external {
         transform: translate(3px, -3px);
       }
+      &.download {
+        transform: translate(0, -3px);
+      }
     }
   }
 }

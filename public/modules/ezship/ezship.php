@@ -16,7 +16,7 @@ class EzShip extends CarrierModule
     {
         $this->name = 'ezship';
         $this->tab = 'shipping_logistics';
-        $this->version = '1.0';
+        $this->version = '1.1';
         $this->author = 'TekapoCart';
         $this->bootstrap = true;
 
