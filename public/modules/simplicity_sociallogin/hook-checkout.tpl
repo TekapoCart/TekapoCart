@@ -1,4 +1,5 @@
 {if !isset($logged)}
+    {if !empty($g_login_url) || !empty($fb_login_url)}
     <div>
         {if !empty($g_login_url)}
         <a href="{$g_login_url}" rel="nofollow" title="{l s='Log in with Google' mod='simplicity_sociallogin'}" class="sociallogin-btn">
@@ -13,4 +14,5 @@
     </div>
     <p>{l s='To speed up the checkout process, login in to get your name and E-Mail.' mod='simplicity_sociallogin'}</p>
     <hr>
+    {/if}
 {/if}
