@@ -346,11 +346,6 @@ class Tc_Home extends CarrierModule
             $this->context->controller->errors[] = $this->l('Receiver name over limit');
         }
 
-        $Pattern = '/^([\x{4e00}-\x{9fff}\x{3400}-\x{4dbf}]{2,5}|[a-zA-Z]{4,10})$/u';
-        if (!preg_match($Pattern, $address->lastname . $address->firstname)) {
-            $this->context->controller->errors[] = $this->l('Invalid receiver name format');
-        }
-
         if (!preg_match("/^[0][9][0-9]{8,8}\$/", $address->phone_mobile)) {
             $this->context->controller->errors[] = $this->l('Invalid mobile phone format');
         }
