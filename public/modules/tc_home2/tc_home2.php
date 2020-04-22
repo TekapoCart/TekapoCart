@@ -320,7 +320,7 @@ class Tc_Home2 extends CarrierModule
         $address = new Address(intval($params['cart']->id_address_delivery));
 
         if (!preg_match("/[^a-zA-Z0-9 ]/", $address->lastname . $address->firstname)) {
-            $limit_name_number = 10;
+            $limit_name_number = 50;
         } else {
             $limit_name_number = 5;
         }
