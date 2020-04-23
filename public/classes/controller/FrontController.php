@@ -352,12 +352,22 @@ class FrontControllerCore extends Controller
 
         if (isset($_GET['logout']) || ($this->context->customer->logged && Customer::isBanned($this->context->customer->id))) {
 
+            // suzy: 2018-09-25 不讓 Browser Keep Cache
+            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+            header("Cache-Control: post-check=0, pre-check=0", false);
+            header("Pragma: no-cache");
+
             $this->context->customer->logout();
 
             // suzy: 2018-09-25 修正轉頁兩次的問題（登出後轉回會員中心又再轉到首頁）
             // Tools::redirect(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null);
             Tools::redirect($link->getPageLink('index'));
         } elseif (isset($_GET['mylogout'])) {
+
+            // suzy: 2018-09-25 不讓 Browser Keep Cache
+            header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+            header("Cache-Control: post-check=0, pre-check=0", false);
+            header("Pragma: no-cache");
 
             $this->context->customer->mylogout();
 
