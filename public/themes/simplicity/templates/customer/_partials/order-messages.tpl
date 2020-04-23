@@ -68,29 +68,29 @@
 {/block}
 
 {block name='order_messages_table'}
-    {if $order.messages}
-      <div class="box messages">
-        <h3>{l s='Messages' d='Shop.Theme.Customeraccount'}</h3>
-          {foreach from=$order.messages item=message}
-            <div class="message row">
+  {if $order.messages}
+    <div class="box messages">
+      <h3>{l s='Messages' d='Shop.Theme.Customeraccount'}</h3>
+      {foreach from=$order.messages item=message}
+        <div class="message row">
 
-                {if $message.system != 1}
-                    {* 系統 *}
-                  <div class="col-xs-12 col-sm-4">
-                    <div class="title" style="font-weight: 700;">{$message.name}</div>
-                    <div class="date">{$message.message_date}</div>
-                  </div>
-                {/if}
+        {if $message.system != 1}
+          {* 系統 *}
+          <div class="col-xs-12 col-sm-4">
+            <div class="title" style="font-weight: 700;">{$message.name}</div>
+            <div class="date">{$message.message_date}</div>
+          </div>
+        {/if}
 
-              <div class="col-xs-12 col-sm-8">
-                  {if $message.system == 1}
-                      {$message.message|replace:',':'<br>' nofilter}
-                  {else}
-                      {$message.message nofilter}
-                  {/if}
-              </div>
-            </div>
-          {/foreach}
+        <div class="col-xs-12 col-sm-8">
+          {if $message.system == 1}
+            {$message.message|replace:',':'<br>' nofilter}
+          {else}
+            {$message.message nofilter}
+          {/if}
+        </div>
       </div>
-    {/if}
+      {/foreach}
+    </div>
+  {/if}
 {/block}
