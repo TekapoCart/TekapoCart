@@ -33,6 +33,11 @@
           {/foreach}
         </ul>
       </div>
+      {if !$notifications.nw_error}
+        <div class="col-xs-12" style="text-align: center; margin: 20px 0;">
+          <a href="{$urls.base_url}" class="btn btn-secondary" >{l s='Back' d='messages'}{l s='Home' d='Shop.Theme.Global'}</a>
+        </div>
+      {/if}
     {/if}
 
     {if !$notifications || $notifications.nw_error}
