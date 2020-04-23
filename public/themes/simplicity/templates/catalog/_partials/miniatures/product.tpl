@@ -81,12 +81,15 @@
 
       <div class="product-description">
         {block name='product_name'}
-          <h3 class="h3 product-title"><a href="{$product.url}">{$product.name|truncate:70:'...'}</a></h3>
+          <h3 class="h3 product-title" itemprop="name"><a href="{$product.url}">{$product.name|truncate:70:'...'}</a></h3>
         {/block}
 
         {block name='product_price_and_shipping'}
           {if $product.show_price}
-            <div class="product-price-and-shipping">
+            <div class="product-price-and-shipping"
+                 itemprop="offers"
+                 itemscope
+                 itemtype="https://schema.org/Offer">
 
               {if $product.has_discount}
                 {hook h='displayProductPriceBlock' product=$product type="old_price"}
