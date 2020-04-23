@@ -93,7 +93,8 @@ body#checkout a:hover,
 }
 
 .alert-success {
-  background: lighten($primary-background-color, 30%);
+  // 灰底配黑字不能看，用湖水預設色
+  // background: lighten($primary-background-color, 30%);
 }
 
 @media (max-width: 991px) {
