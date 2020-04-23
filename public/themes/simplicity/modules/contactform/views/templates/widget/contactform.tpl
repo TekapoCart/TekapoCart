@@ -104,7 +104,7 @@
               class="form-control"
               name="message"
               placeholder="{l s='How can we help?' d='Shop.Forms.Help'}"
-              rows="3"
+              rows="8"
             >{if $contact.message}{$contact.message}{/if}</textarea>
           </div>
         </div>

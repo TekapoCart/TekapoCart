@@ -22,34 +22,6 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
-{block name='order_messages_table'}
-  {if $order.messages}
-    <div class="box messages">
-      <h3>{l s='Messages' d='Shop.Theme.Customeraccount'}</h3>
-      {foreach from=$order.messages item=message}
-        <div class="message row">
-
-          {if $message.system != 1}
-            {* 系統 *}
-            <div class="col-xs-12 {*col-sm-4*}">
-                {$message.name}<br/>
-                {$message.message_date}
-            </div>
-          {/if}
-
-          <div class="col-xs-12 {*col-sm-8*}">
-            {if $message.system == 1}
-                {$message.message|replace:',':'<br>' nofilter}
-            {else}
-                {$message.message nofilter}
-            {/if}
-          </div>
-        </div>
-      {/foreach}
-    </div>
-  {/if}
-{/block}
-
 {block name='order_message_form'}
   {if $customer.is_logged && !$customer.is_guest}
   <section class="order-message-form box">
@@ -93,4 +65,32 @@
     </form>
   </section>
   {/if}
+{/block}
+
+{block name='order_messages_table'}
+    {if $order.messages}
+      <div class="box messages">
+        <h3>{l s='Messages' d='Shop.Theme.Customeraccount'}</h3>
+          {foreach from=$order.messages item=message}
+            <div class="message row">
+
+                {if $message.system != 1}
+                    {* 系統 *}
+                  <div class="col-xs-12 col-sm-4">
+                    <div class="title" style="font-weight: 700;">{$message.name}</div>
+                    <div class="date">{$message.message_date}</div>
+                  </div>
+                {/if}
+
+              <div class="col-xs-12 col-sm-8">
+                  {if $message.system == 1}
+                      {$message.message|replace:',':'<br>' nofilter}
+                  {else}
+                      {$message.message nofilter}
+                  {/if}
+              </div>
+            </div>
+          {/foreach}
+      </div>
+    {/if}
 {/block}
