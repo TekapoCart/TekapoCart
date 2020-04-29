@@ -4,10 +4,8 @@
     background-image: gradient(linear, left top, right top, color-stop(0, $theme-green-color-darker), color-stop(0.5, $theme-blue-color));
   }
 
-  .copyright a, 
-  .footer-container li a,
-  .footer-container h3 {
-    color: #fff;
+  #footer {
+    background: #fff;
   }
 }
 
