@@ -1,7 +1,13 @@
-.cms-id-55 {
+#cms.cms-id-55 {
   main {
     background-image: -webkit-gradient( linear, left top, right top, color-stop(0, $theme-green-color-darker), color-stop(0.5, $theme-blue-color) );
     background-image: gradient( linear, left top, right top, color-stop(0, $theme-green-color-darker), color-stop(0.5, $theme-blue-color) );
+  }
+
+  .copyright {
+    a {
+      color: #fff;
+    }
   }
 }
 
@@ -30,7 +36,7 @@
     a {
       color: #fff;
       &:hover {
-        color: $theme-pink-color;
+        text-decoration: underline;
       }
     }
   }
@@ -48,7 +54,7 @@
       padding-left: 30px;
       padding-right: 30px;
       &.active {
-        text-decoration: underline;
+        background-color: $theme-pink-color;
         color: #fff;
       }
     }
@@ -65,7 +71,7 @@
         text-align: center;
         width: 33.3%;
       }
-      &:first-child, &:last-child {
+      &:last-child {
         td {
           border: none;
         }
@@ -89,12 +95,6 @@
   p {
     text-align: justify;
     margin-bottom: 4px;
-  }
-
-  .copyright {
-    a {
-      color: #fff;
-    }
   }
 
 }
