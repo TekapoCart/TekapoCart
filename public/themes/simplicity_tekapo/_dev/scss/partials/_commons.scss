@@ -109,13 +109,18 @@ body.cms-id-18,
 body.cms-id-22,
 body.cms-id-35,
 body.cms-id-36,
-body.cms-id-37 {
+body.cms-id-37,
+body.cms-id-5 {
   .breadcrumb {
     display: none;
   }
 }
 
-
+.cms-id-5 {
+  .page-content.page-cms p {
+    color: #fff;
+  }
+}
 
 
 

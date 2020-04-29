@@ -1,0 +1,133 @@
+.cms-id-55 {
+  main {
+    background-image: -webkit-gradient( linear, left top, right top, color-stop(0, $theme-green-color-darker), color-stop(0.5, $theme-blue-color) );
+    background-image: gradient( linear, left top, right top, color-stop(0, $theme-green-color-darker), color-stop(0.5, $theme-blue-color) );
+  }
+}
+
+.pricing {
+  color: #fff;
+  .heading {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    h4 {
+      font-size: 21px;
+      line-height: 31.5px;
+    }
+  }
+  h2 {
+    font-size: 25px;
+  }
+  .price {
+    .amount {
+      font-size: 28px;
+    }
+    a {
+      color: #fff;
+      &:hover {
+        color: $theme-pink-color;
+      }
+    }
+  }
+  .subtitle {
+    font-size: 12px;
+  }
+  .summary {
+    display: none;
+    margin-bottom: 8px;
+  }
+  .button {
+    margin: 10px;
+    text-align: center;
+    a {
+      line-height: 48px;
+      padding-left: 30px;
+      padding-right: 30px;
+      &.active {
+        background-color: $theme-pink-color;
+        color: #fff;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    tr {
+      td {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.5);
+        text-align: center;
+        width: 33.3%;
+        &:first-child {
+          text-align: left;
+        }
+      }
+      &:first-child, &:last-child {
+        td {
+          border: none;
+        }
+      }
+    }
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  p {
+    text-align: justify;
+    margin-bottom: 4px;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .pricing {
+    .heading {
+      margin-top: 40px;
+      margin-bottom: 30px;
+      h1 {
+        font-size: 34px;
+      }
+      h4 {
+        font-size: 18px;
+        line-height: 31.5px;
+      }
+    }
+    h2 {
+      font-size: 20px;
+    }
+    .price {
+      .amount {
+        font-size: 20px;
+      }
+    }
+    .button {
+      margin-bottom: 10px;
+      a {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+    table {
+      tr {
+        td {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width : 374px) {
+  .pricing {
+    zoom: 0.85;
+  }
+}
