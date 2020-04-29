@@ -3,12 +3,6 @@
     background-image: -webkit-gradient(linear, left top, right top, color-stop(0, $theme-green-color-darker), color-stop(0.5, $theme-blue-color));
     background-image: gradient(linear, left top, right top, color-stop(0, $theme-green-color-darker), color-stop(0.5, $theme-blue-color));
   }
-
-  .copyright {
-    a {
-      color: #fff;
-    }
-  }
 }
 
 .pricing {
