@@ -13,7 +13,7 @@
   display: none;
 }
 
-#contact, .cms-id-55 {
+#contact {
   .dropdown-item[data-depth="0"] {
     color: #fff;
   }
@@ -34,7 +34,7 @@
   }
 }
 
-#index {
+#index, #cms.cms-id-55 {
   .dropdown-item[data-depth="0"] {
     color: hsla(0, 0%, 100%, .65);
   }
