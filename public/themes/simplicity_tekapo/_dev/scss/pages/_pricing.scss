@@ -20,7 +20,7 @@
       line-height: 31.5px;
     }
   }
-  h2 {
+  h2, h3 {
     font-size: 25px;
   }
   .price {
@@ -48,7 +48,7 @@
       padding-left: 30px;
       padding-right: 30px;
       &.active {
-        background-color: $theme-pink-color;
+        text-decoration: underline;
         color: #fff;
       }
     }
@@ -64,13 +64,19 @@
         border-bottom: 1px solid rgba(255,255,255,0.5);
         text-align: center;
         width: 33.3%;
-        &:first-child {
-          text-align: left;
-        }
       }
       &:first-child, &:last-child {
         td {
           border: none;
+        }
+      }
+    }
+    &.compare {
+      tr {
+        td {
+          &:first-child {
+            text-align: left;
+          }
         }
       }
     }
@@ -83,6 +89,12 @@
   p {
     text-align: justify;
     margin-bottom: 4px;
+  }
+
+  .copyright {
+    a {
+      color: #fff;
+    }
   }
 
 }
@@ -102,6 +114,9 @@
     }
     h2 {
       font-size: 20px;
+    }
+    h3 {
+      font-size: 18px;
     }
     .price {
       .amount {
