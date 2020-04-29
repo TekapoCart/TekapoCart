@@ -42,7 +42,7 @@
           <div class="col-md-12">
             {*<h3>{l s='Contact us' d='Shop.Theme.Global'}</h3>*}
             <h3>與 TekapoCart 聯絡</h3>
-            <p>透過 E-Mail 免費支援獲得所需要的專家協助。</p>
+            <p>透過 E-Mail 獲得所需要的協助。</p>
           </div>
         </div>
 
