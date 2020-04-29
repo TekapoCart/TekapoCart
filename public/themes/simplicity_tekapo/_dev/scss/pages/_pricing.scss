@@ -1,7 +1,7 @@
 #cms.cms-id-55 {
   main {
-    background-image: -webkit-gradient( linear, left top, right top, color-stop(0, $theme-green-color-darker), color-stop(0.5, $theme-blue-color) );
-    background-image: gradient( linear, left top, right top, color-stop(0, $theme-green-color-darker), color-stop(0.5, $theme-blue-color) );
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, $theme-green-color-darker), color-stop(0.5, $theme-blue-color));
+    background-image: gradient(linear, left top, right top, color-stop(0, $theme-green-color-darker), color-stop(0.5, $theme-blue-color));
   }
 
   .copyright {
@@ -67,7 +67,7 @@
     tr {
       td {
         padding: 8px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.5);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         text-align: center;
         width: 33.3%;
       }
@@ -95,6 +95,11 @@
   p {
     text-align: justify;
     margin-bottom: 4px;
+  }
+
+  hr {
+    width: 90%;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
   }
 
 }
@@ -140,7 +145,7 @@
   }
 }
 
-@media (max-width : 374px) {
+@media (max-width: 374px) {
   .pricing {
     zoom: 0.85;
   }
