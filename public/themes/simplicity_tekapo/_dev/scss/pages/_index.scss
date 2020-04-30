@@ -3,115 +3,128 @@
     position: relative;
     z-index: 10;
   }
-  .hero-red {
-    background-image: linear-gradient(-280deg, #67c8c2, #5cb4ae);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
+  #content {
+    .hero-red {
+      background-image: linear-gradient(-280deg, #67c8c2, #5cb4ae);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+    .hero-background {
+      // background-image: url(https://www.tekapo.io/img/cms/index/hero-background-shift.jpg);
+      background-image: url(https://www.tekapo.io/img/cms/index/hero-background.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position-y: -250px;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      opacity: .4;
+      mix-blend-mode: overlay;
+    }
+    .index-content {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      padding: 0 15px;
+    }
+    h1 {
+      font-size: 64px;
+      text-shadow: 1px 2px rgba(0,0,0,.1);
+      padding-top: 120px;
+      margin-bottom: .5em;
+      line-height: 75px;
+      color: #fff;
+      font-weight: 700;
+    }
+    h2 {
+      font-weight: 400;
+      font-size: 26px;
+      color: #fff;
+      margin-bottom: 0
+    }
+    h3 {
+      font-weight: 400;
+      font-size: 26px;
+      line-height: 39px;
+      max-width: 800px;
+      margin: 40px auto;
+    }
+    h4 {
+      font-size: 32px;
+      line-height: 39px;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
   }
-  .hero-background {
-    // background-image: url(https://www.tekapo.io/img/cms/index/hero-background-shift.jpg);
-    background-image: url(https://www.tekapo.io/img/cms/index/hero-background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-y: -250px;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    z-index: 2;
-    opacity: .4;
-    mix-blend-mode: overlay;
-  }
-  .index-content {
-    position: relative;
-    z-index: 5;
-    text-align: center;
-    padding: 0 15px;
-  }
-  h1 {
-    font-size: 64px;
-    text-shadow: 1px 2px rgba(0,0,0,.1);
-    padding-top: 120px;
-    margin-bottom: .5em;
-    line-height: 75px;
-    color: #fff;
-    font-weight: 700;
-  }
-  h2 {
-    font-weight: 400;
-    font-size: 26px;
-    color: #fff;
-    margin-bottom: 0
-  }
-  h3 {
-    font-weight: 400;
-    font-size: 26px;
-    line-height: 39px;
-    max-width: 800px;
-    margin: 40px auto;
-  }
-  h4 {
-    font-size: 32px;
-    line-height: 39px;
-    font-weight: 400;
-    margin-bottom: 32px;
-  }
+
 
 }
 
 @media (min-width: 1200px) {
   #index {
-    .hero-red {
-      min-height: 700px;
+    #content {
+      .hero-red {
+        min-height: 700px;
+      }
     }
   }
 }
 
 @media (max-width: 1199px) {
   #index {
-    .hero-background {
-      background-position-y: 0;
+    #content {
+      .hero-background {
+        background-position-y: 0;
+      }
     }
   }
 }
 
 @media (max-width: 991px) {
   #index {
-    h1 {
-      font-size: 48px;
+    #content {
+      h1 {
+        font-size: 48px;
+      }
     }
   }
 }
 
 @media (max-width: 767px) {
   #index {
-    .hero-red {
-      max-height: 667px;
-    }
-    .hero-background {
-      max-height: 667px;
-    }
-    h1 {
-      padding-top: 32px;
-      font-size: 30px;
-      line-height: 42px;
-    }
-    h2 {
-      font-size: 22px;
-      line-height: 39px;
-    }
-    h3 {
-      font-size: 21px;
+    #content {
+      .hero-red {
+        max-height: 667px;
+      }
+      .hero-background {
+        max-height: 667px;
+      }
+      h1 {
+        padding-top: 32px;
+        font-size: 30px;
+        line-height: 42px;
+      }
+      h2 {
+        font-size: 22px;
+        line-height: 39px;
+      }
+      h3 {
+        font-size: 21px;
+      }
     }
   }
 }
 
 @media (max-width : 374px) {
   .index {
-    zoom: 0.85;
+    #content {
+      zoom: 0.85;
+    }
   }
 }
