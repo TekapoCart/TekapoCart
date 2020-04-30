@@ -21,38 +21,35 @@
   }
 }
 
-#contact, #cms.cms-id-55 {
-  .dropdown-item[data-depth="0"] {
-    color: #fff;
-  }
-  .mobile {
-    .top-menu {
-      a[data-depth="0"] {
-        color: #373a3c;
-      }
-      .current > a {
-        color: $theme-green-color;
-      }
-    }
-  }
-}
-
 #index {
   .dropdown-item[data-depth="0"] {
     color: hsla(0, 0%, 100%, .65);
   }
+}
+
+#contact, #cms.cms-id-55 {
+  .dropdown-item[data-depth="0"] {
+    color: #fff;
+  }
+}
+
+#index,
+#contact,
+#cms.cms-id-55 {
   .mobile {
     .top-menu {
       a[data-depth="0"] {
         color: #373a3c;
       }
-      .current > a {
-        color: $theme-green-color;
-      }
     }
   }
-}
+  .top-menu {
+    .current > a {
+      color: $theme-green-color;
+    }
+  }
 
+}
 
 
 @media (max-width: 767px) {
