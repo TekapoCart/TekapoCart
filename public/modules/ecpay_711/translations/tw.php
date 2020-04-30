@@ -4,7 +4,7 @@ global $_MODULE;
 $_MODULE = array();
 $_MODULE['<{ecpay_711}prestashop>ecpay_711_73e864dcf7bac19424feb50c21a2bb95'] = 'ECPay 7-11 取貨';
 $_MODULE['<{ecpay_711}prestashop>ecpay_711_560c7dd45f44a78faa1aa6ca1c2ebae2'] = 'ECPay 設定';
-$_MODULE['<{ecpay_711}prestashop>ecpay_711_0a52705fa22f830ab8ed2a0ef93995b6'] = 'ECPay 會員編號（MerchantID）';
+$_MODULE['<{ecpay_711}prestashop>ecpay_711_0a52705fa22f830ab8ed2a0ef93995b6'] = 'ECPay 商店代號 MerchantID';
 $_MODULE['<{ecpay_711}prestashop>ecpay_711_3a218abceb7424f4d1689b3a415bc289'] = 'ECPay 物流介接 HashKey';
 $_MODULE['<{ecpay_711}prestashop>ecpay_711_bec0b104d6347525c2e7be865233fc69'] = 'ECPay 物流介接 HashIV';
 $_MODULE['<{ecpay_711}prestashop>ecpay_711_1eb11ae44569c9c62ba97448234b5fc9'] = '寄件人姓名';
