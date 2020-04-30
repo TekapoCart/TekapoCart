@@ -14,6 +14,14 @@
 }
 
 #contact {
+  #header #menu-icon .material-icons {
+    border: 1px solid #f6f6f6;
+    background: #f6f6f6;
+    border-radius: 4px;
+  }
+}
+
+#contact, #cms.cms-id-55 {
   .dropdown-item[data-depth="0"] {
     color: #fff;
   }
@@ -27,14 +35,9 @@
       }
     }
   }
-  #header #menu-icon .material-icons {
-    border: 1px solid #f6f6f6;
-    background: #f6f6f6;
-    border-radius: 4px;
-  }
 }
 
-#index, #cms.cms-id-55 {
+#index {
   .dropdown-item[data-depth="0"] {
     color: hsla(0, 0%, 100%, .65);
   }
