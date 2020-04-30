@@ -23,12 +23,10 @@
 
 #contact, #cms.cms-id-55 {
   #_desktop_top_menu {
-    #top_menu {
+    .top_menu {
       li {
-        &:not(.current) {
-          a[data-depth="0"] {
-            color: #fff;
-          }
+        &:not(.current) > a {
+          color: #fff;
         }
       }
     }
