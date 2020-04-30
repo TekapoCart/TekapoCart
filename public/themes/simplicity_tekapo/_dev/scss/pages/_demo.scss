@@ -28,12 +28,11 @@
     h6 {
       font-size: 20px;
     }
-    /*
     &:hover {
-      padding-top: 25px;
-      margin-left: -3px;
-      margin-right: -3px;
-      box-shadow: 7px 7px 23px 0 rgba(0, 0, 0, 0.25);
+      //padding-top: 25px;
+      //margin-left: -3px;
+      //margin-right: -3px;
+      //box-shadow: 7px 7px 23px 0 rgba(0, 0, 0, 0.25);
       cursor: pointer;
       li {
         background: $theme-green-color;
@@ -43,7 +42,7 @@
         color: $theme-green-color;
       }
     }
-    */
+
   }
 }
 
