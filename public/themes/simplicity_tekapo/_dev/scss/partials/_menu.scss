@@ -24,10 +24,11 @@
 #contact, #cms.cms-id-55 {
   #_desktop_top_menu {
     .top_menu {
-      li {
-        &:not(.current) > a {
-          color: #fff;
-        }
+      a[data-depth="0"] {
+        color: #fff;
+      }
+      .current > a {
+        color: $theme-green-color;
       }
     }
   }
@@ -43,7 +44,7 @@
       a[data-depth="0"] {
         color: #373a3c;
       }
-      .current > a[data-depth="0"] {
+      .current > a {
         color: $theme-green-color;
       }
     }
