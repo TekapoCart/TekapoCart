@@ -44,20 +44,15 @@
       }
     }
   }
-  .subtitle {
+  .subtitle, .price  {
     font-size: 12px;
   }
-  .summary, .price {
+  .summary{
     margin-bottom: 8px;
   }
   .button {
     margin: 10px;
     text-align: center;
-    a {
-      line-height: 48px;
-      padding-left: 30px;
-      padding-right: 30px;
-    }
   }
 
   table {
