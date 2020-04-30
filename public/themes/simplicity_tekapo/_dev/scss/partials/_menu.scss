@@ -22,17 +22,19 @@
 }
 
 #contact, #cms.cms-id-55 {
-  #_desktop_top_menu {
-    .top_menu {
+  .dropdown-item[data-depth="0"] {
+    color: #fff;
+  }
+  .mobile {
+    .top-menu {
       a[data-depth="0"] {
-        color: #fff;
+        color: #373a3c;
       }
       .current > a {
         color: $theme-green-color;
       }
     }
   }
-
 }
 
 #index {
