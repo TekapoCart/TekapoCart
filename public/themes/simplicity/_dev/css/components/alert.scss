@@ -3,6 +3,9 @@
   font-weight: 700;
   text-align: center;
   padding: 15px 20px;
+  ul {
+    margin-bottom: 0;
+  }
 }
 .alert-success {
   background: lighten($brand-primary, 30%);

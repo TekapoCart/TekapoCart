@@ -8,7 +8,8 @@
 .cms-id-22,
 .cms-id-35,
 .cms-id-36,
-.cms-id-37 {
+.cms-id-37,
+.cms-id-55 {
   .call-to-action {
     display: block;
     max-width: 1120px;
@@ -27,6 +28,7 @@
     .call {
       color: #fff;
       background-color: $theme-green-color;
+      margin-bottom: 10px;
     }
   }
 }

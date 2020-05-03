@@ -71,23 +71,15 @@ ul {
   }
 }
 
-.one {
-  visibility: hidden;
-  margin-left: -15px;
-  margin-right: 5px;
-  &:after {
-    visibility: visible;
-    content: '🥇';
-  }
-
-}
-
 /*
   14 terms
   16 about
   18 feature
   22 demo
   35 theme
+  36 包浩斯
+  37 乾隆
+  55 pricing
 */
 
 /* 滿版 */
@@ -109,14 +101,16 @@ body.cms-id-18,
 body.cms-id-22,
 body.cms-id-35,
 body.cms-id-36,
-body.cms-id-37 {
+body.cms-id-37,
+body.cms-id-55 {
   .breadcrumb {
     display: none;
   }
 }
 
-
-
-
-
+.cms-id-55 {
+  .page-content.page-cms p {
+    color: #fff;
+  }
+}
 

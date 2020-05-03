@@ -22,7 +22,7 @@ File: modules/contactform/contactform.php:475</note>
       </trans-unit>
       <trans-unit id="56682052b2576fd6944f23dcad609107" approved="yes">
         <source>An error occurred while sending the message, please try again.</source>
-        <target xml:lang="zh-TW">發送信息時發生錯誤，請重試。</target>
+        <target xml:lang="zh-TW">發送訊息時發生錯誤，請稍後再試。</target>
         <note>Context:
 File: modules/contactform/contactform.php:485</note>
       </trans-unit>
