@@ -842,7 +842,9 @@ class ProductController extends FrameworkBundleAdminController
 
                             $carrier_selected_list = [];
                             foreach ($product->getCarriers() as $carrier) {
-                                $carrier_selected_list[] = $carrier['id_carrier'];
+                                $carrier = new \Carrier($carrier['id_carrier']);
+                                $id_reference = $carrier->id_reference;
+                                $carrier_selected_list[] = $carrier->id_reference;
                             }
 
                             $carrier_selected_list[] = (int) $id_reference;
@@ -885,10 +887,13 @@ class ProductController extends FrameworkBundleAdminController
 
                             $carrier_selected_list = [];
                             foreach ($product->getCarriers() as $carrier) {
-                                if ($carrier['id_carrier'] == $id_reference) {
+                                $carrier = new \Carrier($carrier['id_carrier']);
+
+                                if ($carrier->id_reference == $id_reference) {
                                     continue;
                                 }
-                                $carrier_selected_list[] = $carrier['id_carrier'];
+
+                                $carrier_selected_list[] = $carrier->id_reference;
                             }
 
                             $product->setCarriers($carrier_selected_list);
