@@ -57,7 +57,7 @@
   }
   margin: 25px calc((100% - #{$thumb-width + 7} * #{$divider}) / (#{$divider} * 2));
 
-  .sticker {
+  .product-sticker {
     width: $thumb-width / 3.46;
     height: $thumb-width / 3.46;
     top: 0 - $thumb-width / 10;
@@ -91,7 +91,7 @@
   }
   margin: 10px calc((100% - #{$thumb-width + 4} * #{$divider}) / (#{$divider} * 2));
 
-  .sticker {
+  .product-sticker {
     width: $thumb-width / 3.46;
     height: $thumb-width / 3.46;
     top: 0 - $thumb-width / (10 + 2); /* 微調 + 2 */

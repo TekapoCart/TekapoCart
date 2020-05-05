@@ -266,20 +266,6 @@
     }
   }
 
-  /* 貼紙功能 */
-  .product-miniature {
-    position: relative;
-    .sticker {
-      position: absolute;
-      z-index: 1;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-      color: transparent;
-      content: ' ';
-    }
-  }
-
 }
 
 #footer .featured-products {

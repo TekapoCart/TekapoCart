@@ -121,6 +121,15 @@
   }
 }
 
+/* 包含 iPad (768px) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .product-quantity {
+    #quantity_wanted {
+      width: 2.4rem;
+    }
+  }
+}
+
 .product-discounts {
   margin-bottom: 1.5rem;
   > .product-discounts-title {
@@ -234,8 +243,30 @@
   }
 }
 
+/* 貼紙功能 */
+.product-miniature {
+  position: relative;
+}
+.product-sticker {
+  position: absolute;
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  color: transparent;
+  content: ' ';
+}
+.page-content {
+  .product-sticker {
+    width: 80px;
+    height: 80px;
+    top: -24px;
+    left: -15px;
+  }
+}
+
 .product-cover {
-  min-width: 300px;
+  // min-width: 300px;
   margin-bottom: $medium-space;
   position: relative;
   img {

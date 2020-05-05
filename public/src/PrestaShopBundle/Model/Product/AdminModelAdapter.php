@@ -118,6 +118,9 @@ class AdminModelAdapter extends \PrestaShopBundle\Model\AdminModelAdapter
         'low_stock_alert',
         'available_date',
         'ecotax',
+
+        // suzy: 2020-05-05 貼紙功能
+        'sticker',
     );
 
     /**
@@ -653,6 +656,8 @@ class AdminModelAdapter extends \PrestaShopBundle\Model\AdminModelAdapter
             'default_supplier' => $product->id_supplier,
             'custom_fields' => $this->getCustomFields($product),
             'attachments' => $this->getProductAttachments($product),
+            // suzy: 2020-05-05 貼紙功能
+            'sticker' => $product->sticker,
         );
     }
 

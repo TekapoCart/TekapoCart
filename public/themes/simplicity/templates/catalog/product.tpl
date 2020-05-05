@@ -68,6 +68,7 @@
                     <li class="product-flag {$flag.type}">{$flag.label}</li>
                   {/foreach}
                 </ul>
+                {if strlen($product.sticker) > 0}<div class="product-sticker" style="background-image: url('{$urls.img_ps_url}cms/sticker/{$product.sticker}');{if strpos($product.sticker, 'nshift') !== false} top: 0; left: 0;{/if}"></div>{/if}
               {/block}
 
               {block name='product_cover_thumbnails'}

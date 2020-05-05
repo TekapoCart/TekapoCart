@@ -161,6 +161,11 @@ class AdminProductsControllerCore extends AdminController
             if ($this->checkMultishopBox('show_condition', $this->context)) {
                 $object->show_condition = (int) Tools::getValue('show_condition');
             }
+
+            // suzy: 2020-05-05 貼紙功能
+            if ($this->checkMultishopBox('sticker', $this->context)) {
+                $object->sticker = (int) Tools::getValue('sticker');
+            }
         }
         if ($this->isTabSubmitted('Prices')) {
             $object->on_sale = (int) Tools::getValue('on_sale');
