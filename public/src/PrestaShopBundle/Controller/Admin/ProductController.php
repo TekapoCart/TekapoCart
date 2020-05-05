@@ -843,7 +843,6 @@ class ProductController extends FrameworkBundleAdminController
                             $carrier_selected_list = [];
                             foreach ($product->getCarriers() as $carrier) {
                                 $carrier = new \Carrier($carrier['id_carrier']);
-                                $id_reference = $carrier->id_reference;
                                 $carrier_selected_list[] = $carrier->id_reference;
                             }
 
