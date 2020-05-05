@@ -827,6 +827,9 @@ class ProductController extends FrameworkBundleAdminController
                 case 'addcarrier_all':
 
                     $carrier_id = $request->request->get('carrier_id');
+                    $carrier = new \Carrier($carrier_id);
+                    $id_reference = $carrier->id_reference;
+
 
                     if (count($productIdList) < 1) {
                         throw new \Exception('Should always receive at least one ID. Zero given.', 5003);
@@ -842,7 +845,7 @@ class ProductController extends FrameworkBundleAdminController
                                 $carrier_selected_list[] = $carrier['id_carrier'];
                             }
 
-                            $carrier_selected_list[] = (int) $carrier_id;
+                            $carrier_selected_list[] = (int) $id_reference;
 
                             $product->setCarriers($carrier_selected_list);
 
@@ -868,6 +871,8 @@ class ProductController extends FrameworkBundleAdminController
                 case 'delcarrier_all':
 
                     $carrier_id = $request->request->get('carrier_id');
+                    $carrier = new \Carrier($carrier_id);
+                    $id_reference = $carrier->id_reference;
 
                     if (count($productIdList) < 1) {
                         throw new \Exception('Should always receive at least one ID. Zero given.', 5003);
@@ -880,7 +885,7 @@ class ProductController extends FrameworkBundleAdminController
 
                             $carrier_selected_list = [];
                             foreach ($product->getCarriers() as $carrier) {
-                                if ($carrier['id_carrier'] == $carrier_id) {
+                                if ($carrier['id_carrier'] == $id_reference) {
                                     continue;
                                 }
                                 $carrier_selected_list[] = $carrier['id_carrier'];
