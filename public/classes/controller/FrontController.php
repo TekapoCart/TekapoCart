@@ -1586,6 +1586,9 @@ class FrontControllerCore extends Controller
         // suzy: 2020-03-18 分類頁顯示排序下拉
         $show_sort_in_listing = Configuration::get('TC_SEARCH_SHOW_SORT_IN_LISTING');
 
+        // suzy: 2020-05-06 商品列表顯示加入購物車按鈕
+        $show_add_cart_in_listing = Configuration::get('SIMPLICITY_SHOW_ADD_CART_IN_LISTING');
+
         return array(
 
             'body_bg_css' => $body_bg_css,
@@ -1593,6 +1596,7 @@ class FrontControllerCore extends Controller
             'logo_max_width' => $logo_max_width,
             'show_tag_in_product' => $show_tag_in_product,
             'show_sort_in_listing' => $show_sort_in_listing,
+            'show_add_cart_in_listing' => $show_add_cart_in_listing,
 
             'display_taxes_label' => $this->getDisplayTaxesLabel(),
             'display_prices_tax_incl' => (bool) (new TaxConfiguration())->includeTaxes(),

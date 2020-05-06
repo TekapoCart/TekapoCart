@@ -36,15 +36,40 @@
     position: relative;
     // margin-bottom: 1.563rem;
 
+    .highlighted-informations {
+      position: absolute;
+      // bottom: 1.25rem;
+      // transition: bottom .3s;
+      transition: visibility .3s;
+      visibility: hidden;
+      height: 80px;
+      bottom: 80px;
+      padding-top: 13px;
+      z-index: 0;
+      background: $brand-background;
+      opacity: 0.75;
+      text-align: center;
+      overflow: hidden;
+
+      &.no-variants {
+        height: 50px
+      }
+      .quick-view {
+        color: $gray;
+        font-size: $base-font-size;
+        &:hover {
+          color: $brand-primary-hover;
+        }
+      }
+
+    }
+
     &:hover, &:focus {
       .highlighted-informations {
-        // bottom: 5.5rem;
+        bottom: 80px;
         visibility: visible;
         &::after {
           opacity: 1;
-        }
-        &.no-variants {
-          // bottom: 4.2rem;
         }
       }
       .product-description::after {
@@ -57,6 +82,7 @@
         opacity: .25;
       }
     }
+
     //.product-thumbnail {
     //  position: relative;
     //  height: calc(100% - 70px);
@@ -70,6 +96,23 @@
     //    margin: auto;
     //  }
     //}
+  }
+  &.has-button {
+    .thumbnail-container {
+      .highlighted-informations {
+        bottom: 80px + 3 + 30;
+      }
+      .product-title {
+        height: 37px;
+        overflow-x: hidden;
+      }
+      &:hover, &:focus {
+        .highlighted-informations {
+          bottom: 80px + 3 + 30;
+        }
+      }
+    }
+
   }
   .products-section-title {
     text-align: center;
@@ -85,8 +128,6 @@
     font-weight: $font-weight-bold;
     text-align: center;
   }
-  .quick-view {
-  }
   .variant-links {
     position: relative;
     text-align: center;
@@ -96,32 +137,6 @@
     min-height: 2.5rem;
     background: $brand-background;
   }
-  .highlighted-informations {
-    position: absolute;
-    // bottom: 1.25rem;
-    // transition: bottom .3s;
-    bottom: 80px;
-    transition: visibility .3s;
-    visibility: hidden;
-    padding-top: 0.625rem;
-    z-index: 0;
-    background: $brand-background;
-    opacity: 0.75;
-    text-align: center;
-    height: 80px;
-    overflow: hidden;
-    .quick-view {
-      color: $gray;
-      font-size: $base-font-size;
-      &:hover {
-        color: $brand-primary-hover;
-      }
-    }
-
-    &.no-variants {
-      height: 50px
-    }
-  }
   .product-description {
     // position: absolute;
     z-index: 1;
@@ -130,6 +145,13 @@
     // bottom: 0;
     padding: 0 5px 5px 5px;
     // background: $brand-background;
+  }
+  .product-button {
+    margin-top: 10px;
+    a {
+      font-size: 14px;
+      box-shadow: none;
+    }
   }
 
   .product-miniature {
@@ -279,8 +301,12 @@
 }
 
 @include media-breakpoint-down(sm) {
-  .highlighted-informations {
-    display: none;
+  #products, .featured-products, .product-accessories, .product-miniature {
+    .thumbnail-container {
+      .highlighted-informations {
+        display: none;
+      }
+    }
   }
 }
 
@@ -626,7 +652,7 @@
     .product-title {
       margin-top: 0.5rem;
     }
-    .product-title a, .product-price-and-shipping, .regular-price {
+    .product-title a, .product-price-and-shipping, .regular-price, .product-button a {
       font-size: 0.7rem;
       line-height: 1rem;
     }
@@ -691,7 +717,7 @@
     .product-title {
       margin-top: 0.5rem;
     }
-    .product-title a, .product-price-and-shipping, .regular-price {
+    .product-title a, .product-price-and-shipping, .regular-price, .product-button a {
       font-size: 0.7rem;
       line-height: 1rem;
     }

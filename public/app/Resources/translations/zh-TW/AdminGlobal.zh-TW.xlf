@@ -380,7 +380,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductCustomField.php:81</note>
       </trans-unit>
       <trans-unit id="b651efdb98a5d6bd2b3935d0c3f4a5e2" approved="yes">
         <source>Required</source>
-        <target xml:lang="zh-TW">必要設定</target>
+        <target xml:lang="zh-TW">必填</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductCustomField.php:90</note>
       </trans-unit>

@@ -161,6 +161,10 @@ class Simplicity_Logo extends Module implements WidgetInterface
                 Configuration::updateValue('SIMPLICITY_URL_REDIRECT_BLOCK', '');
             }
 
+            $show_add_cart_in_listing = Tools::getValue('show_add_cart_in_listing');
+            if (ValidateCore::isGenericName($show_add_cart_in_listing)) {
+                Configuration::updateValue('SIMPLICITY_SHOW_ADD_CART_IN_LISTING', $show_add_cart_in_listing);
+            }
 
             Tools::clearCache();
 
@@ -202,6 +206,8 @@ class Simplicity_Logo extends Module implements WidgetInterface
         }
 
         $helper->fields_value['url_redirect_block'] = Configuration::get('SIMPLICITY_URL_REDIRECT_BLOCK');
+
+        $helper->fields_value['show_add_cart_in_listing'] = Configuration::get('SIMPLICITY_SHOW_ADD_CART_IN_LISTING');
 
         $helper->submit_action = 'subMOD';
 
@@ -305,7 +311,24 @@ class Simplicity_Logo extends Module implements WidgetInterface
                         'rows' => 5,
                         'desc' => '永久轉址設定，一組網址一行，網址之間空一格，前面要有 /。<br>例：<br>/old/url /new/url<br>/old-cat/old-product /new-cat/new-product',
                     ),
-
+                    array(
+                        'type' => 'switch',
+                        'label' => '商品列表顯示加入購物車按鈕',
+                        'name' => 'show_add_cart_in_listing',
+                        'is_bool' => true,
+                        'values' => array(
+                            array(
+                                'id' => 'active_on',
+                                'value' => 1,
+                                'label' => $this->l('Enabled'),
+                            ),
+                            array(
+                                'id' => 'active_off',
+                                'value' => 0,
+                                'label' => $this->l('Disabled'),
+                            ),
+                        ),
+                    ),
                 ),
                 'submit' => array(
                     'title' => $this->trans('Save', array(), 'Admin.Actions')

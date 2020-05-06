@@ -49,6 +49,11 @@
     width: $thumb-width + 7;
     height: $thumb-width + 90;
   }
+  &.has-button {
+    .thumbnail-container {
+      height: $thumb-width + 90 + 30;
+    }
+  }
   .highlighted-informations {
     width: $thumb-width + 7;
   }
@@ -63,6 +68,7 @@
     top: 0 - $thumb-width / 10;
     left: 0 - $thumb-width / 15;
   }
+
 }
 @mixin product-miniature-desktop-left-column($thumb-width, $divider) {
   margin: 25px calc((100% - #{$thumb-width + 7} * (#{$divider} - 1) ) / ( (#{$divider} - 1) * 2));
@@ -82,6 +88,11 @@
   .thumbnail-container {
     width: $thumb-width + 4;
     height: $thumb-width + 4 + 90;
+  }
+  &.has-button {
+    .thumbnail-container {
+      height: $thumb-width + 90 + 30;
+    }
   }
   .highlighted-informations {
     width: $thumb-width + 4;

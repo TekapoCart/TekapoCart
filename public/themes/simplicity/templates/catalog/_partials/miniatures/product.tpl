@@ -23,7 +23,7 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 {block name='product_miniature_item'}
-  <article class="product-miniature js-product-miniature {if isset($cssClass)}{$cssClass}{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
+  <article class="product-miniature js-product-miniature{if isset($cssClass)} {$cssClass}{/if}{if $configuration.show_add_cart_in_listing} has-button{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
     {if strlen($product.sticker) > 0}<div class="product-sticker" style="background-image: url('{$urls.img_ps_url}cms/sticker/{$product.sticker}');{if strpos($product.sticker, 'nshift') !== false} top: 0; left: 0;{/if}"></div>{/if}
     <div class="thumbnail-container">
       {block name='product_thumbnail'}
@@ -111,6 +111,7 @@
               {hook h='displayProductPriceBlock' product=$product type='unit_price'}
 
               {hook h='displayProductPriceBlock' product=$product type='weight'}
+
             </div>
           {/if}
         {/block}
@@ -118,6 +119,33 @@
         {block name='product_reviews'}
           {hook h='displayProductListReviews' product=$product}
         {/block}
+
+        {* 商品列表顯示加入購物車按鈕 *}
+        {if $configuration.show_add_cart_in_listing && !$configuration.is_catalog && $product.show_price}
+        <div class="product-button">
+          {if $product.main_variants}
+            <div class="clearfix atc_div">
+              <a class="btn btn-secondary quick-view" href="#" data-link-action="quickview">
+                  選擇屬性
+              </a>
+            </div>
+          {elseif !$product.add_to_cart_url}
+          {else}
+              <div class="clearfix atc_div">
+                  <form action="{$urls.pages.cart}" method="post" id="add-to-cart-or-refresh">
+                      <input type="hidden" name="token" value="{$static_token}">
+                      <input type="hidden" name="id_product" value="{$product.id}" id="product_page_product_id">
+                      <input type="hidden" name="qty" value="{$product.minimal_quantity}" min="{$product.minimal_quantity}">
+                      <a class="btn btn-secondary add-to-cart" data-button-action="add-to-cart" type="submit">
+                          {l s='Add to cart' d='Shop.Theme.Actions'}
+                      </a>
+                  </form>
+              </div>
+          {/if}
+        </div>
+        {/if}
+
+
       </div>
 
       {block name='product_flags'}
@@ -141,7 +169,7 @@
           {/if}
         {/block}
       </div>
-
     </div>
+
   </article>
 {/block}

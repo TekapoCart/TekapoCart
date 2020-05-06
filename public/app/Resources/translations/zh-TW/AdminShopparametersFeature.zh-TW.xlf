@@ -1661,7 +1661,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="01dabe7ae47f9848c5e38f353a8f866f" approved="yes">
         <source>Display the "add to cart" button when a product has attributes</source>
-        <target xml:lang="zh-TW">商品有屬性時顯示「加入到購物車」</target>
+        <target xml:lang="zh-TW">商品有屬性時顯示「加入購物車」</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_page.html.twig:55</note>
       </trans-unit>
