@@ -27,7 +27,7 @@
   <div class="heading">
     <h3>{$label}{*l s='Best Sellers' d='Shop.Theme.Catalog'*}</h3>
     {if $products.showMore }
-    <a href="{$allBestSellers}">{l s='All best sellers' d='Shop.Theme.Catalog'}</a>
+    <a href="{$allBestSellers}">{l s='More' d='Admin.Navigation.Menu'}</a>
     {/if}
   </div>
   {/if}
@@ -39,7 +39,12 @@
       {include file="catalog/_partials/miniatures/product.tpl" product=$product cssClass='desktop-5 mobile-3 no-flag'}
     {/foreach}
   </div>
-  {*<a class="all-product-link float-xs-left float-md-right h4" href="{$allBestSellers}">
-    {l s='All best sellers' d='Shop.Theme.Catalog'}<i class="material-icons">&#xE315;</i>
-  </a>*}
+
+  <div class="all-product">
+    <a class="all-product-link" href="{$allBestSellers}">
+    {*{l s='All best sellers' d='Shop.Theme.Catalog'}<i class="material-icons">&#xE315;</i>*}
+    {l s='More' d='Admin.Navigation.Menu'}
+    </a>
+  </div>
+
 </section>

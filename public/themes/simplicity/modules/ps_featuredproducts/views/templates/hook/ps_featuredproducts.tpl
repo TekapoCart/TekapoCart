@@ -39,7 +39,12 @@
       {include file="catalog/_partials/miniatures/product.tpl" product=$product}
     {/foreach}
   </div>
-  {*<a class="all-product-link float-xs-left float-md-right h4" href="{$allProductsLink}">
-    {l s='All products' d='Shop.Theme.Catalog'}<i class="material-icons">&#xE315;</i>
-  </a>*}
+
+  <div class="all-product">
+    <a class="all-product-link" href="{$allProductsLink}">
+    {*{l s='All products' d='Shop.Theme.Catalog'}<i class="material-icons">&#xE315;</i>*}
+    {l s='More' d='Admin.Navigation.Menu'}
+    </a>
+  </div>
+
 </section>
