@@ -72,7 +72,7 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             'navigation_column' => '左側欄',
             'product_management' => '商品',
             'product_detail' => '商品額外資訊',
-            'product_block' => '推薦商品',
+            'product_block' => '加強曝光商品區塊',
 
         );
     }
@@ -189,8 +189,8 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                         // suzy: 2019-12-10 中文翻譯
                         // $this->l('Pagination'),
                         // $this->l('Set the numbers of products you want to display per page and how.'),
-                        '進階設定',
-                        '商品全域設定',
+                        '商品設定',
+                        '更多商品相關詳細設定',
                     ),
                 ),
             );

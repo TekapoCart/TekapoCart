@@ -343,7 +343,7 @@ File: controllers/admin/AdminStoresController.php:465</note>
       </trans-unit>
       <trans-unit id="5dd532f0a63d89c5af0243b74732f63c" approved="yes">
         <source>Contact details</source>
-        <target xml:lang="zh-TW">商店詳細資訊</target>
+        <target xml:lang="zh-TW">商家資訊</target>
         <note>Context:
 File: controllers/admin/AdminStoresController.php:538</note>
       </trans-unit>

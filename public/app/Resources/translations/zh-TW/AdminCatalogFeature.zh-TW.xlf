@@ -214,43 +214,43 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductInformation.php:287</note>
     <body>
       <trans-unit id="428a70e43c5371126c0fb675e98c61d5" approved="yes">
         <source>List of empty categories:</source>
-        <target xml:lang="zh-TW">空白分類列表：</target>
+        <target xml:lang="zh-TW">無商品分類</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:114</note>
       </trans-unit>
       <trans-unit id="0181e2b8568143a3608fea8e657a81cb" approved="yes">
         <source>List of products with combinations but without available quantities for sale:</source>
-        <target xml:lang="zh-TW">無庫存的商品列表(含屬性)：</target>
+        <target xml:lang="zh-TW">無庫存商品（含屬性）</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:158</note>
       </trans-unit>
       <trans-unit id="d06aa90bdc7545b64a808ef956b20b77" approved="yes">
         <source>List of products without combinations and without available quantities for sale:</source>
-        <target xml:lang="zh-TW">無庫存可銷售的商品列表(不含屬性)：</target>
+        <target xml:lang="zh-TW">無庫存可銷售的商品（不含屬性）</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:202</note>
       </trans-unit>
       <trans-unit id="40be52ec4b8eab2321f116914858ce6a" approved="yes">
         <source>List of disabled products</source>
-        <target xml:lang="zh-TW">停售產品列表：</target>
+        <target xml:lang="zh-TW">停售產品</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:232</note>
       </trans-unit>
       <trans-unit id="c205cafb2813572f3f96669cf2b97cf0" approved="yes">
         <source>List of products without images</source>
-        <target xml:lang="zh-TW">無圖像商品列表</target>
+        <target xml:lang="zh-TW">無圖片商品</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:263</note>
       </trans-unit>
       <trans-unit id="eaff59412c15abca3419aee22b02d726" approved="yes">
         <source>List of products without description</source>
-        <target xml:lang="zh-TW">無描述商品列表</target>
+        <target xml:lang="zh-TW">無商品說明商品</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:299</note>
       </trans-unit>
       <trans-unit id="3368abb84d65a50813d1ed17708ec130" approved="yes">
         <source>List of products without price</source>
-        <target xml:lang="zh-TW">無價格商品列表</target>
+        <target xml:lang="zh-TW">無價格商品</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:330</note>
       </trans-unit>
@@ -440,13 +440,13 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductCombination.php:191</note>
     <body>
       <trans-unit id="78167a214fe755d9a2f5a7f2bc62cecf" approved="yes">
         <source>Low stock level</source>
-        <target xml:lang="zh-TW">最低庫存</target>
+        <target xml:lang="zh-TW">安全庫存</target>
         <note>Context:
 File: src/PrestaShopBundle/Controller/Api/StockController.php:164</note>
       </trans-unit>
       <trans-unit id="0826c628f8c5f6895c8a1e27e99457fb" approved="yes">
         <source>Send me an email when the quantity is below or equals this level</source>
-        <target xml:lang="zh-TW">當庫存少於或等於此數量時發信通知我</target>
+        <target xml:lang="zh-TW">當庫存少於或等於此數字時發信通知我</target>
         <note>Context:
 File: src/PrestaShopBundle/Controller/Api/StockController.php:165</note>
       </trans-unit>
@@ -842,6 +842,11 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/esse
         <target xml:lang="zh-TW">有庫存時顯示文字</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductQuantity.php:197</note>
+      </trans-unit>
+      <trans-unit id="cdba184783a0253218efd734da81a9da">
+        <source>Stock location</source>
+        <target xml:lang="zh-TW">倉位</target>
+        <note>Line: 166</note>
       </trans-unit>
       <trans-unit id="b2c80334809f9130d46e89b66b6d8544" approved="yes">
         <source>Create combinations</source>
@@ -1569,37 +1574,37 @@ File: controllers/admin/AdminCustomerThreadsController.php:228</note>
       </trans-unit>
       <trans-unit id="693c61ec70b6c06dbd376fd208a125a0" approved="yes">
         <source>Total threads</source>
-        <target xml:lang="zh-TW">討論帖總計</target>
+        <target xml:lang="zh-TW">問題總數</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:281</note>
       </trans-unit>
       <trans-unit id="068f62c804cc9c4cd4f6dfc5b5d3ecaa" approved="yes">
         <source>Threads pending</source>
-        <target xml:lang="zh-TW">等待中的討論帖</target>
+        <target xml:lang="zh-TW">等待回覆</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:282</note>
       </trans-unit>
       <trans-unit id="2fb7efc7cfbbb4672a5f3a021f1a2462" approved="yes">
         <source>Total number of customer messages</source>
-        <target xml:lang="zh-TW">客戶訊息數量總計</target>
+        <target xml:lang="zh-TW">客戶詢問</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:283</note>
       </trans-unit>
       <trans-unit id="8d937d958b984dde93c972a335f87d4b" approved="yes">
         <source>Total number of employee messages</source>
-        <target xml:lang="zh-TW">員工訊息總數</target>
+        <target xml:lang="zh-TW">管理者回覆</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:284</note>
       </trans-unit>
       <trans-unit id="da2f2f1035487e79b7f5bfd9c5c3eeab" approved="yes">
         <source>Unread threads</source>
-        <target xml:lang="zh-TW">未讀取討論帖</target>
+        <target xml:lang="zh-TW">未讀取</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:285</note>
       </trans-unit>
       <trans-unit id="939315783ef4f2eb1cbdac37f3fd1e6b" approved="yes">
         <source>Closed threads</source>
-        <target xml:lang="zh-TW">已結案討論帖</target>
+        <target xml:lang="zh-TW">已結案</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:286</note>
       </trans-unit>
@@ -1611,7 +1616,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:410</note>
       </trans-unit>
       <trans-unit id="0134539df13231b95613415c0a75af42" approved="yes">
         <source>Pending Discussion Threads</source>
-        <target xml:lang="zh-TW">尚待回覆的主題</target>
+        <target xml:lang="zh-TW">尚待回覆問題</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:549</note>
       </trans-unit>
@@ -1623,7 +1628,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:561</note>
       </trans-unit>
       <trans-unit id="6092e157634b78d790fc607b587d1274" approved="yes">
         <source>Messages per Thread</source>
-        <target xml:lang="zh-TW">每主題的訊息</target>
+        <target xml:lang="zh-TW">平均問題訊息</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:574</note>
       </trans-unit>
@@ -2066,7 +2071,7 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:61</note>
       </trans-unit>
       <trans-unit id="898bed66d82aeaab1d62875fd3657c40" approved="yes">
         <source>Movements</source>
-        <target xml:lang="zh-TW">變動記錄</target>
+        <target xml:lang="zh-TW">變更記錄</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:63</note>
       </trans-unit>
@@ -2084,13 +2089,13 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:68</note>
       </trans-unit>
       <trans-unit id="5896dcc83ab833241ff671debffff23b" approved="yes">
         <source>Low stock level:</source>
-        <target xml:lang="zh-TW">最低庫存：</target>
+        <target xml:lang="zh-TW">安全庫存：</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:69</note>
       </trans-unit>
       <trans-unit id="82bbaa81a9926aed70bfc811302bddaf" approved="yes">
         <source>Low stock alert:</source>
-        <target xml:lang="zh-TW">低庫存警示：</target>
+        <target xml:lang="zh-TW">安全庫存提醒：</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:70</note>
       </trans-unit>

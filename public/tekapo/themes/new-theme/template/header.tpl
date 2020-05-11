@@ -82,8 +82,8 @@
 
 {if isset($css_files)}
   {foreach from=$css_files key=css_uri item=media}
-    {* suzy: 2020-03-17 加上版號 ?v=1.7.6.3 *}
-    <link href="{$css_uri|escape:'html':'UTF-8'}?v=1.7.6.3" rel="stylesheet" type="text/css"/>
+    {* suzy: 2020-03-17 加上版號 *}
+    <link href="{$css_uri|escape:'html':'UTF-8'}?v={$ps_version}" rel="stylesheet" type="text/css"/>
   {/foreach}
 {/if}
 

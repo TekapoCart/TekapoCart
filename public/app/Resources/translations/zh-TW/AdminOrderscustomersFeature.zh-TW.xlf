@@ -331,7 +331,7 @@ File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.
       </trans-unit>
       <trans-unit id="a7136d956fbff49c3912e44722dbf000" approved="yes">
         <source>Add a private note</source>
-        <target xml:lang="zh-TW">新增私密備註</target>
+        <target xml:lang="zh-TW">新增隱藏備註</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.tpl:362</note>
       </trans-unit>
@@ -425,7 +425,7 @@ File: controllers/admin/AdminCustomersController.php:148</note>
       </trans-unit>
       <trans-unit id="888d7e26fb1b4271a83269c91134ed67" approved="yes">
         <source>Manage your Customers</source>
-        <target xml:lang="zh-TW">管理客戶</target>
+        <target xml:lang="zh-TW">客戶列表</target>
         <note>Context:
 File: controllers/admin/AdminCustomersController.php:246</note>
       </trans-unit>
@@ -437,7 +437,7 @@ File: controllers/admin/AdminCustomersController.php:252</note>
       </trans-unit>
       <trans-unit id="69ebc35efeb4f755ec3e9c44b4da635c" approved="yes">
         <source>Editing customer %name%</source>
-        <target xml:lang="zh-TW">編輯顧客 %name%</target>
+        <target xml:lang="zh-TW">編輯客戶 %name%</target>
         <note>Context:
 File: controllers/admin/AdminCustomersController.php:260</note>
       </trans-unit>
@@ -1213,13 +1213,13 @@ File: controllers/admin/AdminAddressesController.php:136</note>
     <body>
       <trans-unit id="38d6bc03067212bb0c2633f8a57d5881" approved="yes">
         <source>Order messages</source>
-        <target xml:lang="zh-TW">訂單訊息</target>
+        <target xml:lang="zh-TW">回覆訊息</target>
         <note>Context:
 File: controllers/admin/AdminOrderMessageController.php:74</note>
       </trans-unit>
       <trans-unit id="80c05dda6b88c30a777e8777e23be8d7" approved="yes">
         <source>Add new order message</source>
-        <target xml:lang="zh-TW">新增訂單訊息</target>
+        <target xml:lang="zh-TW">新增回覆訊息</target>
         <note>Context:
 File: controllers/admin/AdminOrderMessageController.php:105</note>
       </trans-unit>
@@ -1449,13 +1449,13 @@ File: controllers/admin/AdminSlipController.php:107</note>
     <body>
       <trans-unit id="90855df1b2d1240c62d81bd35d4cfb06" approved="yes">
         <source>Non ordered</source>
-        <target xml:lang="zh-TW">未下單</target>
+        <target xml:lang="zh-TW">尚未下單</target>
         <note>Context:
 File: controllers/admin/AdminCartsController.php:48</note>
       </trans-unit>
       <trans-unit id="121401ccf0e3e23bcefe6a454f0f0601" approved="yes">
         <source>Abandoned cart</source>
-        <target xml:lang="zh-TW">未結購物車</target>
+        <target xml:lang="zh-TW">購物車未結</target>
         <note>Context:
 File: controllers/admin/AdminCartsController.php:62</note>
       </trans-unit>
@@ -1467,7 +1467,7 @@ File: controllers/admin/AdminCartsController.php:132</note>
       </trans-unit>
       <trans-unit id="54e85d70ea67acdcc86963b14d6223a8" approved="yes">
         <source>Abandoned Carts</source>
-        <target xml:lang="zh-TW">未結購物車</target>
+        <target xml:lang="zh-TW">購物車未結</target>
         <note>Context:
 File: controllers/admin/AdminCartsController.php:167</note>
       </trans-unit>
@@ -1957,13 +1957,13 @@ File: admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl:
       </trans-unit>
       <trans-unit id="f56d50312cd90c7dec77c0472f20fee0" approved="yes">
         <source>No order was created from this cart.</source>
-        <target xml:lang="zh-TW">此購物車記錄尚未成立訂單</target>
+        <target xml:lang="zh-TW">未成立訂單</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl:73</note>
       </trans-unit>
       <trans-unit id="4f36361240acdff526598021f5459a87" approved="yes">
         <source>Create an order from this cart.</source>
-        <target xml:lang="zh-TW">從這個購物車建立訂單</target>
+        <target xml:lang="zh-TW">以此購物車紀錄建立訂單</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl:75</note>
       </trans-unit>
@@ -1981,7 +1981,7 @@ File: admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl:
       </trans-unit>
       <trans-unit id="0bf157acdf9fe272c1379ff0b5442372" approved="yes">
         <source>Total cost of products:</source>
-        <target xml:lang="zh-TW">商品成本總計：</target>
+        <target xml:lang="zh-TW">商品總計：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl:168</note>
       </trans-unit>
@@ -1999,7 +1999,7 @@ File: admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl:
       </trans-unit>
       <trans-unit id="80fde97fb8929b8bea9ebcf5241be2f9" approved="yes">
         <source>Total shipping costs:</source>
-        <target xml:lang="zh-TW">運費總計：</target>
+        <target xml:lang="zh-TW">運費：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl:185</note>
       </trans-unit>

@@ -23,7 +23,7 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 <div id="container" class="row">
-	<div class="sidebar navigation col-md-2">{* suzy: 2019-08-15 col-md-3 改 2 *}
+	<div class="sidebar navigation col-md-12">{* suzy: 2019-08-15 col-md-3 改 12 *}
 		<nav class="list-group categorieList">
 		{if count($modules)}
 			{foreach $modules as $module}

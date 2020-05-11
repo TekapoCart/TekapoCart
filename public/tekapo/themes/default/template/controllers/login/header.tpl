@@ -43,7 +43,8 @@
             {$shop_name} 後台 {if $meta_title != ''}{if isset($navigationPipe)}{$navigationPipe|escape:'html':'UTF-8'}{else}&gt;{/if} {$meta_title}{/if} {* suzy: 2018-09-12 隱藏 (PrestaShop&trade;)*}
 		</title>
 		{foreach from=$css_files key=css_uri item=media}
-			<link href="{$css_uri}" rel="stylesheet" type="text/css" media="{$media}" />
+            {* suzy: 2020-03-17 加上版號 *}
+			<link href="{$css_uri|escape:'html':'UTF-8'}?v={$ps_version}" rel="stylesheet" type="text/css" media="{$media}" />
 		{/foreach}
 		{foreach from=$js_files item=js_uri}
 			<script type="text/javascript" src="{$js_uri}"></script>

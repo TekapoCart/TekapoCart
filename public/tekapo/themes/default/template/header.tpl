@@ -88,7 +88,8 @@
 {/if}
 {if isset($css_files)}
 {foreach from=$css_files key=css_uri item=media}
-  <link href="{$css_uri|escape:'html':'UTF-8'}" rel="stylesheet" type="text/css"/>
+  {* suzy: 2020-03-17 加上版號 *}
+  <link href="{$css_uri|escape:'html':'UTF-8'}?v={$ps_version}" rel="stylesheet" type="text/css"/>
 {/foreach}
 {/if}
   {if (isset($js_def) && count($js_def) || isset($js_files) && count($js_files))}
@@ -118,7 +119,7 @@
       {* Logo *}
       {* suzy: <a id="header_logo" href="{$default_tab_link|escape:'html':'UTF-8'}"></a>*}
       {* suzy: 2018-08-12 換 shop version <span id="shop_version">{$ps_version}</span>*}
-      <span style="font-family:Verdana; font-size: 1.31rem; font-weight: bold; padding: 3px 17px 0 16px; color: #fff; background: #67C8C2">
+      <span style="font-family:Verdana; font-size: 1.31rem; font-weight: bold; padding: 3px 14px 0 15px; color: #fff; background: #67C8C2">
 		TekapoCart <span style="padding-left: 5px; padding-right: 3px; font-size: 0.6rem; font-weight: normal; color: #eee;">{$tekapocart_version}</span>
       </span>
 

@@ -86,7 +86,7 @@
     <body>
       <trans-unit id="abe01af80b6bc9f1fa34feaa068336b2" approved="yes">
         <source>New message regarding your order</source>
-        <target xml:lang="zh-TW">訂單訊息</target>
+        <target xml:lang="zh-TW">回覆訊息</target>
         <note>Line: 658</note>
       </trans-unit>
       <trans-unit id="10e7889bf2e6fd95e25936d2c11e92be" approved="yes">

@@ -15,7 +15,7 @@
       {* Logo *}
       <i class="material-icons js-mobile-menu">menu</i>
       {*<a id="header_logo" class="logo float-left" href="{$default_tab_link|escape:'html':'UTF-8'}"></a>*}
-      <span style="font-family:Verdana; font-size: 1.31rem; font-weight: bold; padding: 3px 17px 0 16px; color: #fff; background: #67C8C2">
+      <span style="font-family:Verdana; font-size: 1.31rem; font-weight: bold; padding: 3px 14px 0 15px; color: #fff; background: #67C8C2">
 	  TekapoCart <span style="padding-left: 5px; padding-right: 3px; font-size: 0.6rem; font-weight: normal; color: #eee;">{$tekapocart_version}</span></span>
       {* suzy: 2018-08-12 換 shop version <span id="shop_version">{$ps_version}</span>*}
 
@@ -96,9 +96,9 @@
           {if $change_passwd_alert}
             <div class="alert alert-danger">
                 {if $controller_name == 'AdminEmployees'}
-                  請於下方的「更改密碼。。。」修改。
+                  <p class="alert-text">請於下方的「更改密碼。。。」修改。</p>
                 {else}
-                  恭喜您成功登入！您的密碼還是初始設定，基於安全考量，請立即更改您的密碼。前往 <a href="{$link->getAdminLink('AdminEmployees', true, [], ['id_employee' => $employee->id|intval, 'updateemployee' => 1])|escape:'html':'UTF-8'}">個人資料</a> 修改。
+                  <p class="alert-text">恭喜您成功登入！您的密碼還是初始設定，基於安全考量，請立即更改您的密碼。前往 <a href="{$link->getAdminLink('AdminEmployees', true, [], ['id_employee' => $employee->id|intval, 'updateemployee' => 1])|escape:'html':'UTF-8'}">個人資料</a> 修改。</p>
                 {/if}
             </div>
           {/if}

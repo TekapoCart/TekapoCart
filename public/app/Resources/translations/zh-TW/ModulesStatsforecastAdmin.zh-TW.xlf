@@ -10,7 +10,7 @@ File: modules/statsforecast/statsforecast.php:53</note>
       </trans-unit>
       <trans-unit id="7a27f506c0104592dcb95c31e650cfed" approved="yes">
         <source>The listed amounts do not include tax.</source>
-        <target xml:lang="zh-TW">所顯示金額不含稅。</target>
+        <target xml:lang="zh-TW">顯示金額不含稅。</target>
         <note>Context:
 File: modules/statsforecast/statsforecast.php:144</note>
       </trans-unit>

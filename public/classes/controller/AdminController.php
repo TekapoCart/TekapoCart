@@ -2694,6 +2694,9 @@ class AdminControllerCore extends Controller
             $this->addCSS(__PS_BASE_URI__ . $this->admin_webpath . '/themes/new-theme/public/theme.css', 'all', 1);
             $this->addJS(__PS_BASE_URI__ . $this->admin_webpath . '/themes/new-theme/public/main.bundle.js');
             $this->addJqueryPlugin(array('chosen'));
+
+            // suzy: 2020-05-10 new-theme 也要 overrides.css
+            $this->addCSS(__PS_BASE_URI__ . $this->admin_webpath . '/themes/default/css/overrides.css', 'all', PHP_INT_MAX);
         } else {
             //Bootstrap
             $this->addCSS(__PS_BASE_URI__ . $this->admin_webpath . '/themes/' . $this->bo_theme . '/css/' . $this->bo_css, 'all', 0);

@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="82ad4f0be97f8f36d31e2540aacb155d" approved="yes">
         <source>No customers</source>
-        <target xml:lang="zh-TW">無客戶</target>
+        <target xml:lang="zh-TW">無</target>
         <note>Context:
 File: controllers/admin/AdminStatsController.php:777</note>
       </trans-unit>
