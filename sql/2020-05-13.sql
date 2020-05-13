@@ -1,0 +1,1 @@
+UPDATE `ps_meta` SET `configurable` = '0' WHERE `ps_meta`.`id_meta` = 53;
