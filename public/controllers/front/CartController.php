@@ -128,6 +128,11 @@ class CartControllerCore extends FrontController
         $updatedProduct = reset($updatedProducts);
         $productQuantity = $updatedProduct['quantity'];
 
+        // suzy: 2018-10-12 不讓 Browser Keep Cache
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
+
         if (!$this->errors) {
             $cartPresenter = new CartPresenter();
             $presentedCart = $cartPresenter->present($this->context->cart);
