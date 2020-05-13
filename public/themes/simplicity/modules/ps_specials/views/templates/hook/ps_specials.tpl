@@ -23,7 +23,7 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 
-<section class="specials featured-products clearfix mt-2">
+<section class="specials featured-products clearfix">
   {if strlen($label) > 0}
   <div>
     <h3 class="display4-size" style="display:inline-block;">{$label}{*l s='On sale' d='Shop.Theme.Catalog'*}</h3>

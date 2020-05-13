@@ -49,7 +49,7 @@
     width: $thumb-width + 7;
     height: $thumb-width + 90;
   }
-  &.has-button {
+  &.has-button:not(.no-desc) {
     .thumbnail-container {
       height: $thumb-width + 90 + 30;
     }
@@ -60,8 +60,10 @@
   .product-description {
     width: $thumb-width + 7;
   }
-  margin: 25px calc((100% - #{$thumb-width + 7} * #{$divider}) / (#{$divider} * 2));
-
+  margin: 15px calc((100% - #{$thumb-width + 7} * #{$divider}) / (#{$divider} * 2));
+  &.has-button:not(.no-desc) {
+    margin-bottom: 35px;
+  }
   .product-sticker {
     width: $thumb-width / 3.46;
     height: $thumb-width / 3.46;
@@ -71,7 +73,10 @@
 
 }
 @mixin product-miniature-desktop-left-column($thumb-width, $divider) {
-  margin: 25px calc((100% - #{$thumb-width + 7} * (#{$divider} - 1) ) / ( (#{$divider} - 1) * 2));
+  margin: 15px calc((100% - #{$thumb-width + 7} * (#{$divider} - 1) ) / ( (#{$divider} - 1) * 2));
+  &.has-button:not(.no-desc) {
+    margin-bottom: 35px;
+  }
 }
 @mixin product-miniature-desktop-no-desc($thumb-width) {
   .thumbnail-container {
@@ -89,7 +94,7 @@
     width: $thumb-width + 4;
     height: $thumb-width + 4 + 90;
   }
-  &.has-button {
+  &.has-button:not(.no-desc) {
     .thumbnail-container {
       height: $thumb-width + 90 + 30;
     }
@@ -101,6 +106,12 @@
     width: $thumb-width + 4;
   }
   margin: 10px calc((100% - #{$thumb-width + 4} * #{$divider}) / (#{$divider} * 2));
+  &.has-button:not(.no-desc) {
+    margin-bottom: 25px;
+    &.mobile-3 {
+      margin-bottom: 15px;
+    }
+  }
 
   .product-sticker {
     width: $thumb-width / 3.46;
@@ -110,7 +121,6 @@
   }
 }
 @mixin product-miniature-mobile-no-desc($thumb-width) {
-  padding-bottom: 0;
   .thumbnail-container {
     height: $thumb-width + 4;
     margin-bottom: 0;
