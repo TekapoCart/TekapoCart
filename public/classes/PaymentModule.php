@@ -1093,7 +1093,10 @@ abstract class PaymentModuleCore extends Module
 
             // If the reduction is not applicable to this order, then continue with the next one
             if (!$values['tax_excl']) {
-                continue;
+                // suzy: 2020-05-13 需支援送贈品
+                if ($cartRule->gift_product == 0) {
+                    continue;
+                }
             }
 
             // IF
