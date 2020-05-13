@@ -104,6 +104,11 @@ class AdminModulesPositionsControllerCore extends AdminController
         'viewedproducts' => '瀏覽紀錄',
     ];
 
+    // suzy: 2020-05-12 模組名稱
+    public $module_name_mapping = [
+        'module-loyalty-default' => '會員中心 回饋點數',
+    ];
+
     /**
      * @deprecated since 1.7.6, to be removed in the next minor
      */
@@ -579,23 +584,28 @@ class AdminModulesPositionsControllerCore extends AdminController
             $content .= ' (' . $shop->name . ')';
         }
 
+        // suzy: 2020-05-12 隱藏 CUSTOM
+//        $content .= '<p>
+//					<select size="25" id="em_list_' . $shop_id . '" multiple="multiple">
+//					<option disabled="disabled">'
+//                    . $this->trans('___________ CUSTOM ___________', array(), 'Admin.Design.Feature')
+//                    . '</option>';
         $content .= '<p>
 					<select size="25" id="em_list_' . $shop_id . '" multiple="multiple">
-					<option disabled="disabled">'
-                    . $this->trans('___________ CUSTOM ___________', array(), 'Admin.Design.Feature')
-                    . '</option>';
+					';
 
         /** @todo do something better with controllers */
         $controllers = Dispatcher::getControllers(_PS_FRONT_CONTROLLER_DIR_);
         ksort($controllers);
 
-        foreach ($file_list as $k => $v) {
-            if (!array_key_exists($v, $controllers)) {
-                $content .= '<option value="' . $v . '">' . $v . '</option>';
-            }
-        }
-
-        $content .= '<option disabled="disabled">' . $this->trans('____________ CORE ____________', array(), 'Admin.Design.Feature') . '</option>';
+        // suzy: 2020-05-12 隱藏 CUSTOM
+//        foreach ($file_list as $k => $v) {
+//            if (!array_key_exists($v, $controllers)) {
+//                $content .= '<option value="' . $v . '">' . $v . '</option>';
+//            }
+//        }
+//
+//        $content .= '<option disabled="disabled">' . $this->trans('____________ CORE ____________', array(), 'Admin.Design.Feature') . '</option>';
 
         foreach ($controllers as $k => $v) {
             // suzy: 2018-08-13 頁面名稱 顯示中文方便閱讀
@@ -608,16 +618,29 @@ class AdminModulesPositionsControllerCore extends AdminController
             $content .= '<option value="' . $k . '">' . $name . ' [' . $k . ']</option>';
         }
 
-        // suzy: 2018-08-13 隱藏「管理模組控制器」、「前台模組控制器」
-        if (_PS_MODE_DEV_ === true) {
-            $modules_controllers_type = array('admin' => $this->trans('Admin modules controller', array(), 'Admin.Design.Feature'), 'front' => $this->trans('Front modules controller', array(), 'Admin.Design.Feature'));
-            foreach ($modules_controllers_type as $type => $label) {
-                $content .= '<option disabled="disabled">____________ ' . $label . ' ____________</option>';
-                $all_modules_controllers = Dispatcher::getModuleControllers($type);
-                foreach ($all_modules_controllers as $module => $modules_controllers) {
-                    foreach ($modules_controllers as $cont) {
-                        $content .= '<option value="module-' . $module . '-' . $cont . '">module-' . $module . '-' . $cont . '</option>';
+        $modules_controllers_type = array('admin' => $this->trans('Admin modules controller', array(), 'Admin.Design.Feature'), 'front' => $this->trans('Front modules controller', array(), 'Admin.Design.Feature'));
+        foreach ($modules_controllers_type as $type => $label) {
+
+            // suzy: 2020-05-12 隱藏「後台模組」、隱藏「前台模組」標題
+            if ($type == 'admin') {
+                continue;
+            }
+//            $content .= '<option disabled="disabled">____________ ' . $label . ' ____________</option>';
+
+            $all_modules_controllers = Dispatcher::getModuleControllers($type);
+            foreach ($all_modules_controllers as $module => $modules_controllers) {
+                foreach ($modules_controllers as $cont) {
+
+                    // suzy: 2020-05-12 篩選「前台模組」
+                    $k = 'module-' . $module . '-' . $cont;
+                    $name = array_key_exists($k, $this->module_name_mapping) ? $this->module_name_mapping[$k] : '';
+                    if (empty($name)) {
+                        continue;
                     }
+
+                    // suzy: 2020-05-12 篩選「前台模組」顯示中文方便閱讀
+                    // $content .= '<option value="module-' . $module . '-' . $cont . '">module-' . $module . '-' . $cont . '</option>';
+                    $content .= '<option value="module' . $module . $cont . '">' . $name . ' [module' . $module . $cont . ']</option>';
                 }
             }
         }
