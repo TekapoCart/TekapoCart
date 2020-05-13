@@ -33,14 +33,12 @@
       </div>
     {/block}
 
-    <section id="products">
+    <section id="products" class="product-list">
       {if $listing.products|count}
 
-        <div id="">
-          {block name='product_list_top'}
-            {include file='catalog/_partials/products-top.tpl' listing=$listing}
-          {/block}
-        </div>
+        {block name='product_list_top'}
+          {include file='catalog/_partials/products-top.tpl' listing=$listing}
+        {/block}
 
         {block name='product_list_active_filters'}
           {*<div id="" class="hidden-sm-down">

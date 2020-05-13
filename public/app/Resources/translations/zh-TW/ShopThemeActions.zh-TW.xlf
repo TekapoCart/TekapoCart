@@ -74,6 +74,12 @@ File: themes/classic/templates/catalog/product.tpl:212</note>
   </file>
   <file original="themes/classic/templates/catalog/_partials/product-add-to-cart.tpl" source-language="en" target-language="zh-TW" datatype="plaintext">
     <body>
+      <trans-unit id="3f4feb8c51ce154787effb9702b234f8" approved="yes">
+        <source>Select variants</source>
+        <target xml:lang="zh-TW">選擇規格</target>
+        <note>Context:
+File: themes/classic/templates/catalog/_partials/product-add-to-cart.tpl:53</note>
+      </trans-unit>
       <trans-unit id="2d0f6b8300be19cf35e89e66f0677f95" approved="yes">
         <source>Add to cart</source>
         <target xml:lang="zh-TW">加入購物車</target>

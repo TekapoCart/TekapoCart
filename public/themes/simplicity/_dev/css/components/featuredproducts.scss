@@ -2,7 +2,7 @@
   margin-bottom: 15px;
 }
 
-#products, .featured-products, .product-accessories, .product-miniature {
+.product-list, .featured-products, .product-accessories, .product-miniature {
 
   .heading {
     h3 {
@@ -154,6 +154,10 @@
     a {
       font-size: 14px;
       box-shadow: none;
+      color: $gray-darker;
+      &:hover {
+        color: $gray-darker;
+      }
     }
   }
 

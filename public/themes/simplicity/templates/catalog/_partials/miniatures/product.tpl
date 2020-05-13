@@ -124,23 +124,19 @@
         {if $configuration.show_add_cart_in_listing && !$configuration.is_catalog && $product.show_price}
         <div class="product-button">
           {if $product.main_variants}
-            <div class="clearfix atc_div">
               <a class="btn btn-secondary quick-view" href="#" data-link-action="quickview">
-                  選擇屬性
+                  {l s='Select variants' d='Shop.Theme.Actions'}
               </a>
-            </div>
           {elseif !$product.add_to_cart_url}
           {else}
-              <div class="clearfix atc_div">
-                  <form action="{$urls.pages.cart}" method="post" id="add-to-cart-or-refresh">
-                      <input type="hidden" name="token" value="{$static_token}">
-                      <input type="hidden" name="id_product" value="{$product.id}" id="product_page_product_id">
-                      <input type="hidden" name="qty" value="{$product.minimal_quantity}" min="{$product.minimal_quantity}">
-                      <a class="btn btn-secondary add-to-cart" data-button-action="add-to-cart" type="submit">
-                          {l s='Add to cart' d='Shop.Theme.Actions'}
-                      </a>
-                  </form>
-              </div>
+              <form action="{$urls.pages.cart}" method="post">
+                  <input type="hidden" name="token" value="{$static_token}">
+                  <input type="hidden" name="id_product" value="{$product.id}">
+                  <input type="hidden" name="qty" value="{$product.minimal_quantity}" min="{$product.minimal_quantity}">
+                  <a class="btn btn-secondary add-to-cart" data-button-action="add-to-cart" type="submit">
+                      {l s='Add to cart' d='Shop.Theme.Actions'}
+                  </a>
+              </form>
           {/if}
         </div>
         {/if}
