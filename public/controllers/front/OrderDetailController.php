@@ -184,9 +184,18 @@ class OrderDetailControllerCore extends FrontController
             if (Validate::isLoadedObject($order) && $order->id_customer == $this->context->customer->id) {
                 $this->order_to_display = (new OrderPresenter())->present($order);
 
+                // suzy: 2020-05-13 加上折扣明細
+                $discounts = $order->getCartRules();
+                foreach ($discounts as &$discount) {
+                    $discount['value_formatted'] = $this->context->getCurrentLocale()->formatPrice($discount['value'], $this->context->currency->iso_code);
+                }
+
                 $this->context->smarty->assign([
                     'order' => $this->order_to_display,
                     'HOOK_DISPLAYORDERDETAIL' => Hook::exec('displayOrderDetail', ['order' => $order]),
+
+                    // suzy: 2020-05-13 加上折扣明細
+                    'discounts' => $discounts,
                 ]);
             } else {
                 $this->redirect_after = '404';

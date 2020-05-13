@@ -99,11 +99,20 @@ class OrderConfirmationControllerCore extends FrontController
 
         parent::initContent();
 
+        // suzy: 2020-05-13 加上折扣明細
+        $discounts = $order->getCartRules();
+        foreach ($discounts as &$discount) {
+            $discount['value_formatted'] = $this->context->getCurrentLocale()->formatPrice($discount['value'], $this->context->currency->iso_code);
+        }
+
         $this->context->smarty->assign(array(
             'HOOK_ORDER_CONFIRMATION' => $this->displayOrderConfirmation($order),
             'HOOK_PAYMENT_RETURN' => $this->displayPaymentReturn($order),
             'order' => $presentedOrder,
             'register_form' => $register_form,
+
+            // suzy: 2020-05-13 加上折扣明細
+            'discounts' => $discounts,
         ));
 
         if ($this->context->customer->is_guest) {
