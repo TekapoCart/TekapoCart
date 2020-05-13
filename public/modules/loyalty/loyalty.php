@@ -76,22 +76,19 @@ class Loyalty extends Module
 
         if (!parent::install()
             || !$this->installDB()
-            || !$this->registerHook('extraRight')
-            || !$this->registerHook('updateOrderStatus')
             || !$this->registerHook('actionValidateOrder')
             || !$this->registerHook('actionOrderStatusUpdate')
-            || !$this->registerHook('newOrder')
-            || !$this->registerHook('adminCustomers')
-            || !$this->registerHook('shoppingCart')
-            || !$this->registerHook('displayExpressCheckout')
-            || !$this->registerHook('orderReturn')
-            || !$this->registerHook('cancelProduct')
-            || !$this->registerHook('customerAccount')
+            || !$this->registerHook('displayAdminCustomers')
+            || !$this->registerHook('displayCustomerAccount')
+            || !$this->registerHook('actionOrderReturn')
+            || !$this->registerHook('actionProductCancel')
             || !$this->registerHook('displayReassurance')
-            || !Configuration::updateValue('PS_LOYALTY_POINT_VALUE', '0.20')
-            || !Configuration::updateValue('PS_LOYALTY_MINIMAL', 0)
-            || !Configuration::updateValue('PS_LOYALTY_POINT_RATE', '10')
-            || !Configuration::updateValue('PS_LOYALTY_NONE_AWARD', '1')
+            || !$this->registerHook('displayExpressCheckout')
+            || !$this->registerHook('displayCheckoutSummaryBottom')
+            || !Configuration::updateValue('PS_LOYALTY_POINT_VALUE', '1')
+            || !Configuration::updateValue('PS_LOYALTY_MINIMAL', 5000)
+            || !Configuration::updateValue('PS_LOYALTY_POINT_RATE', '100')
+            || !Configuration::updateValue('PS_LOYALTY_NONE_AWARD', '0')
             || !Configuration::updateValue('PS_LOYALTY_TAX', '0')
             || !Configuration::updateValue('PS_LOYALTY_VALIDITY_PERIOD', '0')
         ) {
@@ -115,8 +112,6 @@ class Loyalty extends Module
         $category_config = rtrim($category_config, ',');
         Configuration::updateValue('PS_LOYALTY_VOUCHER_CATEGORY', $category_config);
 
-        /* This hook is optional */
-        $this->registerHook('displayMyAccountBlock');
         if (!LoyaltyStateModule::insertDefaultData()) {
             return false;
         }
@@ -290,20 +285,7 @@ class Loyalty extends Module
         return $this->html;
     }
 
-    /* Hook display on product detail */
     public function hookDisplayReassurance($params)
-    {
-        return $this->hookExtraRight($params);
-    }
-
-    /* Hook display on product detail */
-    public function hookDisplayRightColumnProduct($params)
-    {
-        return $this->hookExtraRight($params);
-    }
-
-    /* Hook display on product detail */
-    public function hookExtraRight($params)
     {
         include_once(dirname(__FILE__) . '/LoyaltyModule.php');
 
@@ -347,14 +329,10 @@ class Loyalty extends Module
 
     public function hookDisplayCustomerAccount()
     {
-//        $this->smarty->assign(array(
-//            'loyalty_dir' => $this->_path
-//        ));
         return $this->display(__FILE__, 'views/templates/hook/my-account.tpl');
     }
 
-    /* Catch product returns and substract loyalty points */
-    public function hookOrderReturn($params)
+    public function hookActionOrderReturn($params)
     {
         include_once(dirname(__FILE__) . '/LoyaltyStateModule.php');
         include_once(dirname(__FILE__) . '/LoyaltyModule.php');
@@ -384,7 +362,6 @@ class Loyalty extends Module
         $loyalty_new->save();
     }
 
-    /* Hook display on shopping cart summary */
     public function hookDisplayExpressCheckout($params)
     {
         include_once(dirname(__FILE__) . '/LoyaltyModule.php');
@@ -411,12 +388,6 @@ class Loyalty extends Module
 
     public function hookActionValidateOrder($params)
     {
-        return $this->hookNewOrder($params);
-    }
-
-    /* Hook called when a new order is created */
-    public function hookNewOrder($params)
-    {
         include_once(dirname(__FILE__) . '/LoyaltyStateModule.php');
         include_once(dirname(__FILE__) . '/LoyaltyModule.php');
 
@@ -438,16 +409,9 @@ class Loyalty extends Module
             }
             return $loyalty->save();
         }
-
     }
 
     public function hookActionOrderStatusUpdate($params)
-    {
-        return $this->hookUpdateOrderStatus($params);
-    }
-
-    /* Hook called when an order change its status */
-    public function hookUpdateOrderStatus($params)
     {
         include_once(dirname(__FILE__) . '/LoyaltyStateModule.php');
         include_once(dirname(__FILE__) . '/LoyaltyModule.php');
@@ -484,8 +448,7 @@ class Loyalty extends Module
         return true;
     }
 
-    /* Hook display in tab AdminCustomers on BO */
-    public function hookAdminCustomers($params)
+    public function hookDisplayAdminCustomers($params)
     {
         include_once(dirname(__FILE__) . '/LoyaltyModule.php');
         include_once(dirname(__FILE__) . '/LoyaltyStateModule.php');
@@ -543,7 +506,7 @@ class Loyalty extends Module
 
     }
 
-    public function hookCancelProduct($params)
+    public function hookActionProductCancel($params)
     {
         include_once(dirname(__FILE__) . '/LoyaltyStateModule.php');
         include_once(dirname(__FILE__) . '/LoyaltyModule.php');
