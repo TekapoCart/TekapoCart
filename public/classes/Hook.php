@@ -867,6 +867,8 @@ class HookCore extends ObjectModel
 
                 //check if current controller is a module controller
                 if (isset($controller_obj->module) && Validate::isLoadedObject($controller_obj->module)) {
+                    // suzy: 2020-05-12 找到 module 的 controller
+                    $controller = $controller_obj->module->controllers[0];
                     $controller = 'module-' . $controller_obj->module->name . '-' . $controller;
                 }
 
