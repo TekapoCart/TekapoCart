@@ -593,6 +593,8 @@ class Ps_EmailAlerts extends Module
 
     public function hookDisplayCustomerAccount($params)
     {
+        // suzy: 2020-05-13 暫時隱藏
+        return;
         return $this->customer_qty ? $this->display(__FILE__, 'my-account.tpl') : null;
     }
 

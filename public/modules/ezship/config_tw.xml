@@ -2,7 +2,7 @@
 <module>
     <name>ezship</name>
     <displayName><![CDATA[ezShip 超商取貨]]></displayName>
-    <version><![CDATA[1.0]]></version>
+    <version><![CDATA[1.1]]></version>
     <description><![CDATA[OK超商 / 萊爾富 / 全家取貨，支援取貨付款。]]></description>
     <author><![CDATA[TekapoCart]]></author>
     <tab><![CDATA[shipping_logistics]]></tab>

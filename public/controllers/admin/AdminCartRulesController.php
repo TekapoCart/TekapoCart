@@ -48,7 +48,9 @@ class AdminCartRulesControllerCore extends AdminController
             'name' => array('title' => $this->trans('Name', array(), 'Admin.Global')),
             'priority' => array('title' => $this->trans('Priority', array(), 'Admin.Global'), 'align' => 'center', 'class' => 'fixed-width-xs'),
             'code' => array('title' => $this->trans('Code', array(), 'Admin.Global'), 'class' => 'fixed-width-sm'),
-            'quantity' => array('title' => $this->trans('Quantity', array(), 'Admin.Catalog.Feature'), 'align' => 'center', 'class' => 'fixed-width-xs'),
+            // suzy: 2020-05-11 Quantity 應該是 Total available
+            // 'quantity' => array('title' => $this->trans('Quantity', array(), 'Admin.Catalog.Feature'), 'align' => 'center', 'class' => 'fixed-width-xs'),
+            'quantity' => array('title' => $this->trans('Total available', array(), 'Admin.Catalog.Feature'), 'align' => 'center', 'class' => 'fixed-width-xs'),
             'date_to' => array('title' => $this->trans('Expiration date', array(), 'Admin.Catalog.Feature'), 'type' => 'datetime', 'class' => 'fixed-width-lg'),
             'active' => array('title' => $this->trans('Status', array(), 'Admin.Global'), 'active' => 'status', 'type' => 'bool', 'align' => 'center', 'class' => 'fixed-width-xs', 'orderby' => false),
         );
