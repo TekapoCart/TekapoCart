@@ -176,13 +176,13 @@ File: classes/module/Module.php:2899</note>
       </trans-unit>
       <trans-unit id="a08302edbf2d9f7ddd43ae8bd1de5caa" approved="yes">
         <source>The property %1$s in the class %2$s is already defined.</source>
-        <target xml:lang="zh-TW">屬性 %1$s 在分類 %2$s 已經定義過</target>
+        <target xml:lang="zh-TW">The property %1$s in the class %2$s is already defined.</target>
         <note>Context:
 File: classes/module/Module.php:2844</note>
       </trans-unit>
       <trans-unit id="7893f5f2917811b37c628f787c83af8a" approved="yes">
         <source>Failed to override property %1$s in class %2$s.</source>
-        <target xml:lang="zh-TW">無法覆蓋 %2$s 類的 %1$s 屬性。</target>
+        <target xml:lang="zh-TW">Failed to override property %1$s in class %2$s.</target>
         <note>Context:
 File: classes/module/Module.php:2907</note>
       </trans-unit>
@@ -476,7 +476,7 @@ File: src/PrestaShopBundle/Controller/Admin/ModuleController.php:771</note>
       </trans-unit>
       <trans-unit id="980b6caee06822f8c5df45eb7db277be">
         <source>The module transplanted successfully to the hook.</source>
-        <target xml:lang="zh-TW">模組位置移動成功。</target>
+        <target xml:lang="zh-TW">模組位置調整成功。</target>
         <note>Line: 220</note>
       </trans-unit>
     </body>

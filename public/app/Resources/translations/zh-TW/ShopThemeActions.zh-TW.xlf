@@ -270,7 +270,7 @@ File: themes/StarterTheme/templates/checkout/_partials/cart-voucher.tpl:44</note
     <body>
       <trans-unit id="12a7a93d72ded50311b52c7d0a853e3c" approved="yes">
         <source>Take advantage of our exclusive offers:</source>
-        <target xml:lang="zh-TW">獨家優惠：</target>
+        <target xml:lang="zh-TW">專屬優惠券：</target>
         <note>Context:
 File: themes/classic/templates/checkout/_partials/cart-voucher.tpl:70</note>
       </trans-unit>

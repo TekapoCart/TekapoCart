@@ -502,15 +502,15 @@ class CartPresenter implements PresenterInterface
             }
 
             if (isset($cartVoucher['reduction_percent']) && $cartVoucher['reduction_amount'] == '0.00') {
-                $cartVoucher['reduction_formatted'] = $cartVoucher['reduction_percent'] . '%';
+                // suzy: 2020-05-13 remove useless decimal zeros
+                $cartVoucher['reduction_formatted'] = ($cartVoucher['reduction_percent'] + 0) . '%';
             } elseif (isset($cartVoucher['reduction_amount']) && $cartVoucher['reduction_amount'] > 0) {
-                $value = $this->includeTaxes() ? $cartVoucher['reduction_amount'] : $cartVoucher['value_tax_exc'];
+                // suzy: 2020-05-13 value_tax_exc 改成 value_real
+                $value = $this->includeTaxes() ? $cartVoucher['reduction_amount'] : $cartVoucher['value_real'];
                 $cartVoucher['reduction_formatted'] = $this->priceFormatter->convertAndFormat($value);
             }
 
             $vouchers[$cartVoucher['id_cart_rule']]['reduction_formatted'] = '-' . $cartVoucher['reduction_formatted'];
-            // suzy: 2018-09-13 非優惠折扣碼的活動，購物車畫面不要出現垃圾筒
-            /*
             $vouchers[$cartVoucher['id_cart_rule']]['delete_url'] = $this->link->getPageLink(
                 'cart',
                 true,
@@ -520,8 +520,16 @@ class CartPresenter implements PresenterInterface
                     'token' => Tools::getToken(false),
                 )
             );
-            */
-            $vouchers[$cartVoucher['id_cart_rule']]['delete_url'] = '';
+
+            // suzy: 2020-05-13 支援贈品顯示
+            if ($cartVoucher['reduction_amount'] == '0.00' && $cartVoucher['reduction_percent'] == '0.00') {
+                $vouchers[$cartVoucher['id_cart_rule']]['reduction_formatted'] = $this->priceFormatter->convertAndFormat(0);
+            }
+
+            // suzy: 2018-09-13 非優惠折扣碼的活動，購物車畫面不要出現垃圾筒
+            if (empty($cartVoucher['code'])) {
+                $vouchers[$cartVoucher['id_cart_rule']]['delete_url'] = '';
+            }
         }
 
         return array(

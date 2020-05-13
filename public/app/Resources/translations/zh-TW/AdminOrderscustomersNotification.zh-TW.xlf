@@ -118,7 +118,7 @@ File: controllers/admin/AdminPdfController.php:90</note>
       </trans-unit>
       <trans-unit id="48607ff5af8c52b5efbc057b852a37ee" approved="yes">
         <source>No invoice was found.</source>
-        <target xml:lang="zh-TW">找不到發票</target>
+        <target xml:lang="zh-TW">找不到銷貨單</target>
         <note>Context:
 File: controllers/admin/AdminPdfController.php:141</note>
       </trans-unit>
@@ -142,7 +142,7 @@ File: controllers/admin/AdminPdfController.php:157</note>
       </trans-unit>
       <trans-unit id="d7e5dfc920c9871caaf7562d8ba9ab36" approved="yes">
         <source>The order invoice cannot be found within your database.</source>
-        <target xml:lang="zh-TW">資料庫找不到這個訂單發票</target>
+        <target xml:lang="zh-TW">資料庫找不到這個訂單銷貨單</target>
         <note>Context:
 File: controllers/admin/AdminPdfController.php:200</note>
       </trans-unit>
@@ -362,7 +362,7 @@ File: controllers/admin/AdminOrdersController.php:1172</note>
       </trans-unit>
       <trans-unit id="06fc8d486e9f83c5810a21857da7b656" approved="yes">
         <source>The invoice is invalid.</source>
-        <target xml:lang="zh-TW">發票有誤</target>
+        <target xml:lang="zh-TW">銷貨單有誤</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1174</note>
       </trans-unit>
@@ -380,13 +380,13 @@ File: controllers/admin/AdminOrdersController.php:1179</note>
       </trans-unit>
       <trans-unit id="0d906d12a6321e5f13e69dab92e39a4e" approved="yes">
         <source>The invoice note was not saved.</source>
-        <target xml:lang="zh-TW">發票備註沒有儲存</target>
+        <target xml:lang="zh-TW">銷貨單備註沒有儲存</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1196</note>
       </trans-unit>
       <trans-unit id="7f5a75ac350db917dc60cfbd8299da5b" approved="yes">
         <source>Failed to upload the invoice and edit its note.</source>
-        <target xml:lang="zh-TW">無法上傳發票及編輯備註。</target>
+        <target xml:lang="zh-TW">無法上傳銷貨單及編輯備註。</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1202</note>
       </trans-unit>
@@ -398,7 +398,7 @@ File: controllers/admin/AdminOrdersController.php:1222</note>
       </trans-unit>
       <trans-unit id="a9320eb7be798958cba0a93262521ede" approved="yes">
         <source>This invoice address country is not active.</source>
-        <target xml:lang="zh-TW">此發票地址國家尚未激活。</target>
+        <target xml:lang="zh-TW">此銷貨單地址的國家尚未啟用。</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1224</note>
       </trans-unit>
@@ -416,13 +416,13 @@ File: controllers/admin/AdminOrdersController.php:1351</note>
       </trans-unit>
       <trans-unit id="8dcb8970b8eeeac73c8d312d1db3d1f9" approved="yes">
         <source>Invoice management has been disabled.</source>
-        <target xml:lang="zh-TW">發票管理已經停用</target>
+        <target xml:lang="zh-TW">銷貨單管理已經停用</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1358</note>
       </trans-unit>
       <trans-unit id="f98321e34948f600959c5c4200c953c8" approved="yes">
         <source>This order already has an invoice.</source>
-        <target xml:lang="zh-TW">這個訂單已經有一張發票</target>
+        <target xml:lang="zh-TW">這個訂單已經有一張銷貨單</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1360</note>
       </trans-unit>
@@ -446,7 +446,7 @@ File: controllers/admin/AdminOrdersController.php:1447</note>
       </trans-unit>
       <trans-unit id="8dc19f50ae30ac7d61e67c795b32fd47" approved="yes">
         <source>The discount value is greater than the order invoice total.</source>
-        <target xml:lang="zh-TW">折扣數值大於訂單發票總計</target>
+        <target xml:lang="zh-TW">折扣數值大於訂單銷貨單總計</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1467</note>
       </trans-unit>
@@ -572,7 +572,7 @@ File: controllers/admin/AdminOrdersController.php:2768</note>
       </trans-unit>
       <trans-unit id="823eba6da615c2a384cf8e13cd70980b" approved="yes">
         <source>The invoice object cannot be loaded.</source>
-        <target xml:lang="zh-TW">發票物件無法載入</target>
+        <target xml:lang="zh-TW">銷貨單物件無法載入</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:2702</note>
       </trans-unit>
@@ -590,7 +590,7 @@ File: controllers/admin/AdminOrdersController.php:2790</note>
       </trans-unit>
       <trans-unit id="675b81dace2c99f5ef5eb6ac3f69dbe4" approved="yes">
         <source>You cannot use this invoice for the order</source>
-        <target xml:lang="zh-TW">訂單不能夠使用這個發票</target>
+        <target xml:lang="zh-TW">訂單不能夠使用這個銷貨單</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:2731</note>
       </trans-unit>
@@ -640,7 +640,7 @@ File: controllers/admin/AdminSearchController.php:124</note>
       </trans-unit>
       <trans-unit id="3b27bc623d860beacbe5d5cde18fdec0" approved="yes">
         <source>No invoice was found with this ID:</source>
-        <target xml:lang="zh-TW">這個 ID 找不到發票：</target>
+        <target xml:lang="zh-TW">這個 ID 找不到銷貨單：</target>
         <note>Context:
 File: controllers/admin/AdminSearchController.php:134</note>
       </trans-unit>
@@ -756,7 +756,7 @@ File: controllers/admin/AdminSlipController.php:158</note>
     <body>
       <trans-unit id="f775c161c8662af8f70a128ad5779036" approved="yes">
         <source>No invoice has been found for this period.</source>
-        <target xml:lang="zh-TW">此期間無發票</target>
+        <target xml:lang="zh-TW">此期間無銷貨單</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:270</note>
       </trans-unit>
@@ -768,13 +768,13 @@ File: controllers/admin/AdminInvoicesController.php:274</note>
       </trans-unit>
       <trans-unit id="7af95cd9cbe318a15ef10e5e30000501" approved="yes">
         <source>No invoice has been found for this status.</source>
-        <target xml:lang="zh-TW">此訂單狀態尚無發票。</target>
+        <target xml:lang="zh-TW">此訂單狀態尚無銷貨單。</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:282</note>
       </trans-unit>
       <trans-unit id="599b433088f71a8712de225a693ce20e" approved="yes">
         <source>Invalid invoice number.</source>
-        <target xml:lang="zh-TW">無效的發票號碼(必須是 &gt;</target>
+        <target xml:lang="zh-TW">無效的銷貨單號碼(必須是 &gt;</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:292</note>
       </trans-unit>
@@ -936,7 +936,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="e2103a9e878a2280b3163e5ee098cbdf" approved="yes">
         <source>Are you sure you want to create a new invoice?</source>
-        <target xml:lang="zh-TW">您確定要建立新發票？</target>
+        <target xml:lang="zh-TW">您確定要建立新銷貨單？</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:44</note>
       </trans-unit>

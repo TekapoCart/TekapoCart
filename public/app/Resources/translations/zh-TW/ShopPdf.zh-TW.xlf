@@ -56,7 +56,7 @@ File: classes/pdf/HTMLTemplateOrderReturn.php:119</note>
     <body>
       <trans-unit id="466eadd40b3c10580e3ab4e8061161ce" approved="yes">
         <source>Invoice</source>
-        <target xml:lang="zh-TW">發票</target>
+        <target xml:lang="zh-TW">銷貨單</target>
         <note>Context:
 File: classes/pdf/HTMLTemplateInvoice.php:74</note>
       </trans-unit>
@@ -72,13 +72,13 @@ File: classes/pdf/HTMLTemplateInvoice.php:186</note>
     <body>
       <trans-unit id="4e065ba1bec1d62b2d5450256612fa96" approved="yes">
         <source>Invoice Number</source>
-        <target xml:lang="zh-TW">發票號碼</target>
+        <target xml:lang="zh-TW">銷貨單號碼</target>
         <note>Context:
 File: pdf/invoice.summary-tab.tpl:27</note>
       </trans-unit>
       <trans-unit id="440ac606343b8a66acad0d2978786d2a" approved="yes">
         <source>Invoice Date</source>
-        <target xml:lang="zh-TW">發票日期</target>
+        <target xml:lang="zh-TW">銷貨單日期</target>
         <note>Context:
 File: pdf/invoice.summary-tab.tpl:28</note>
       </trans-unit>
@@ -646,7 +646,7 @@ File: pdf/order-return.summary-tab.tpl:31</note>
     <body>
       <trans-unit id="ff5db4935fb0fbf583796b50f05e25bc" approved="yes">
         <source>An electronic version of this invoice is available in your account. To access it, log in to our website using your e-mail address and password (which you created when placing your first order).</source>
-        <target xml:lang="zh-TW">此發票的電子版本已經添加到您的帳戶。登入系統後即可檢視。</target>
+        <target xml:lang="zh-TW">此銷貨單的電子版本已經添加到您的帳戶。登入系統後即可檢視。</target>
         <note>Context:
 File: pdf/footer.tpl:29</note>
       </trans-unit>

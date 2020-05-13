@@ -110,31 +110,31 @@ File: controllers/admin/AdminSlipController.php:80</note>
     <body>
       <trans-unit id="60422879211a12247e5da14751a59ac3" approved="yes">
         <source>If enabled, your customers will receive an invoice for the purchase.</source>
-        <target xml:lang="zh-TW">如啟用, 您的客戶會在訂購後收到發票。</target>
+        <target xml:lang="zh-TW">如啟用, 您的客戶會在訂購後收到銷貨單。</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:42</note>
       </trans-unit>
       <trans-unit id="0e963c5b7a1b6bb67429c7d0e7f45741" approved="yes">
         <source>Adds an image in front of the product name on the invoice</source>
-        <target xml:lang="zh-TW">在發票上商品名稱前添加圖片。</target>
+        <target xml:lang="zh-TW">在銷貨單上商品名稱前添加圖片。</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:54</note>
       </trans-unit>
       <trans-unit id="7b87585267aed27676374641013ab66e" approved="yes">
         <source>Freely definable prefix for invoice number (e.g. #IN00001).</source>
-        <target xml:lang="zh-TW">自由定義的發票號碼前綴（例如＃IN00001）。</target>
+        <target xml:lang="zh-TW">自由定義的銷貨單號碼前綴（例如＃IN00001）。</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:61</note>
       </trans-unit>
       <trans-unit id="e3501dec19c50333c49b4d7d66931abc" approved="yes">
         <source>This text will appear at the bottom of the invoice, below your company details.</source>
-        <target xml:lang="zh-TW">這段文字內容會出現在發票底部，公司資料下方。</target>
+        <target xml:lang="zh-TW">這段文字內容會出現在銷貨單底部，公司資料下方。</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:108</note>
       </trans-unit>
       <trans-unit id="4e00dcdfbf2f4a6156c01fb15ded75c5" approved="yes">
         <source>Choose an invoice model.</source>
-        <target xml:lang="zh-TW">選擇發票模式</target>
+        <target xml:lang="zh-TW">選擇銷貨單模式</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:114</note>
       </trans-unit>
@@ -242,7 +242,7 @@ File: admin-dev/themes/default/template/controllers/return/helpers/form/form.tpl
     <body>
       <trans-unit id="576e650084068ed747fb3b22196dcd70" approved="yes">
         <source>If you chooses to create this discount for all invoices, only one discount will be created per order invoice.</source>
-        <target xml:lang="zh-TW">如果您選擇建立這個折扣到所有發票，每個訂單發票只會使用一個折扣</target>
+        <target xml:lang="zh-TW">如果您選擇建立這個折扣到所有銷貨單，每個訂單銷貨單只會使用一個折扣</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/_discount_form.tpl:92</note>
       </trans-unit>

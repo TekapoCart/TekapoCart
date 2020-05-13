@@ -91,9 +91,9 @@
         </a>
       {/if}
 
-      {* suzy: 2018-07-30 暫時隱藏 block name='display_customer_account'}
+      {block name='display_customer_account'}
         {hook h='displayCustomerAccount'}
-      {/block*}
+      {/block}
 
     </div>
   </div>

@@ -24,22 +24,20 @@
  *}
 {if $cart.vouchers.allowed}
   {block name='cart_voucher'}
-    <div class="block-promo card-block">
-        <div class="cart-voucher">
-        {if $cart.vouchers.added}
-          {block name='cart_voucher_list'}
-            <ul class="promo-name card-block">
-              {foreach from=$cart.vouchers.added item=voucher}
+
+    <div class="block-promo card-block cart-voucher">
+
+        {if $cart.discounts|count > 0}
+          {*<p class="block-promo promo-highlighted">
+            {l s='Take advantage of our exclusive offers:' d='Shop.Theme.Actions'}
+          </p>*}
+          <ul class="js-discount promo-discounts">
+            {foreach from=$cart.discounts item=discount}
               <li class="cart-summary-line">
-                <span class="label">{$voucher.name}</span>
-                <div class="float-xs-right">
-                  <span>{$voucher.reduction_formatted}</span>
-                  <a href="{$voucher.delete_url}" data-link-action="remove-voucher"><i class="material-icons">&#xE872;</i></a>
-                </div>
+                <span class="label"><span class="code">{$discount.code}</span> - {$discount.name}</span>
               </li>
-              {/foreach}
-            </ul>
-          {/block}
+            {/foreach}
+          </ul>
         {/if}
 
         {*
@@ -76,21 +74,20 @@
           </div>
         </div>
 
-        {if $cart.discounts|count > 0}
-          <p class="block-promo promo-highlighted">
-            {l s='Take advantage of our exclusive offers:' d='Shop.Theme.Actions'}
-          </p>
-          <ul class="js-discount card-block promo-discounts">
-          {foreach from=$cart.discounts item=discount}
+        {if $cart.vouchers.added}
+          {block name='cart_voucher_list'}
+          <ul class="promo-name">
+            {foreach from=$cart.vouchers.added item=voucher}
             <li class="cart-summary-line">
-              <span class="label">
-                <span class="code">{$discount.code}</span> - {$discount.name}
-              </span>
+              <span class="label">{$voucher.name} {if $voucher.delete_url}<a href="{$voucher.delete_url}" data-link-action="remove-voucher"><i class="material-icons">close</i></a>{/if}</span>
+              <div class="float-xs-right">
+                <span>{$voucher.reduction_formatted}</span>
+              </div>
             </li>
-          {/foreach}
+            {/foreach}
           </ul>
+          {/block}
         {/if}
-      </div>
     </div>
   {/block}
 {/if}

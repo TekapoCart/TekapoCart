@@ -36,9 +36,10 @@
         <button type="button" class="btn btn-primary disabled" disabled>{l s='Proceed to checkout' d='Shop.Theme.Actions'}</button>
       </div>
     {else}
+      {hook h='displayExpressCheckout'}
+
       <div class="text-xs-right">
         <a href="{$urls.pages.order}" class="btn btn-primary">{l s='Proceed to checkout' d='Shop.Theme.Actions'}</a>
-        {hook h='displayExpressCheckout'}
       </div>
     {/if}
   </div>

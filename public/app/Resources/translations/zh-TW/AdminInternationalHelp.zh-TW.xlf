@@ -28,7 +28,7 @@ File: controllers/admin/AdminTaxesController.php:106</note>
       </trans-unit>
       <trans-unit id="76fcfab4720e7e09c9ef0afbd9fe8ed9" approved="yes">
         <source>Tax name to display in carts and on invoices (e.g. "VAT").</source>
-        <target xml:lang="zh-TW">稅名稱將會顯示在購物車和發票中，如VAT。</target>
+        <target xml:lang="zh-TW">稅名稱將會顯示在購物車和銷貨單中，如VAT。</target>
         <note>Context:
 File: controllers/admin/AdminTaxesController.php:203</note>
       </trans-unit>

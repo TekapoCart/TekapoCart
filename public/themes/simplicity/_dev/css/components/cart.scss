@@ -71,7 +71,7 @@
   .value {
     color: $brand-tertiary;
     &::before {
-      content: '-';
+      // content: '-';
     }
   }
 }
@@ -98,9 +98,9 @@
 .cart-grid-right {
   .promo-discounts {
     margin-bottom: 0;
-    text-align: center;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    // text-align: center;
+    // padding-top: .5rem;
+    // padding-bottom: .5rem;
     .cart-summary-line {
       .label {
         font-size: 1rem;
@@ -128,12 +128,13 @@
   }
 }
 .block-promo {
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
+  border-bottom: 1px $brand-border-color solid;
   .promo-code {
     /*padding: 1.60rem;*/
     /*background: $gray-light;*/
-    margin-bottom: 1rem;
-    padding-top: 1rem;
+    margin-bottom: 1.6rem;
+    // padding-top: 1rem;
 
     .alert-danger {
       position: relative;
@@ -185,10 +186,10 @@
     margin-bottom: 0;
     a {
       font-weight: $font-weight-normal;
-      color: $gray-darker;
+      color: $gray;
       display: inline-block;
       i {
-        font-size: 20px;
+        font-size: 18px;
         vertical-align: text-bottom;
       }
     }
@@ -200,7 +201,8 @@
     .cart-summary-line {
       .label {
         font-weight: normal;
-        color: $gray-dark;
+        // color: $gray-dark;
+        color: $gray;
       }
       span {
         color: $warning-second;
@@ -230,9 +232,9 @@
   }
   &.promo-highlighted {
     /*padding: 1.25rem;*/
-    padding: 0 1rem;
+    // padding: 0 1rem;
     margin-bottom: 0;
-    text-align: center;
+    // text-align: center;
   }
   p {
     margin-bottom: 0;

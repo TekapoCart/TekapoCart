@@ -101,11 +101,17 @@
         </tr>
       {/foreach}
       <tfoot>
+        {foreach $discounts as $discount}
+          <tr class="text-xs-right">
+            <td colspan="3">{$discount['name']}</td>
+            <td>{if $discount['value'] !== '0.00'}- {/if}{$discount['value_formatted']}</td>
+          </tr>
+        {/foreach}
         {foreach $order.subtotals as $line}
-          {if $line.value}
+          {if $line.value && $line.type !== 'discount'}
             <tr class="text-xs-right line-{$line.type}">
               <td colspan="3">{$line.label}</td>
-              <td>{$line.value}</td>
+              <td>{if $line.type == 'discount'}- {/if}{$line.value}</td>
             </tr>
           {/if}
         {/foreach}

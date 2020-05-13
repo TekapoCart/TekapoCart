@@ -90,6 +90,11 @@ File: src/Adapter/Cart/CartPresenter.php:380</note>
         <note>Context:
 File: src/Adapter/Cart/CartPresenter.php:428</note>
       </trans-unit>
+      <trans-unit id="40d906eb5dd9a2734d0c20c437e2ff68" approved="yes">
+        <source>Discount(s)</source>
+        <target xml:lang="zh-TW">折扣</target>
+        <note>Line: 342</note>
+      </trans-unit>
     </body>
   </file>
   <file original="classes/checkout/DeliveryOptionsFinder.php" source-language="en" target-language="zh-TW" datatype="plaintext">
@@ -152,7 +157,7 @@ File: themes/classic/templates/customer/history.tpl:42</note>
       </trans-unit>
       <trans-unit id="466eadd40b3c10580e3ab4e8061161ce" approved="yes">
         <source>Invoice</source>
-        <target xml:lang="zh-TW">發票</target>
+        <target xml:lang="zh-TW">銷貨單</target>
         <note>Context:
 File: themes/classic/templates/customer/history.tpl:43</note>
       </trans-unit>
@@ -336,7 +341,7 @@ File: themes/classic/templates/checkout/_partials/cart-detailed-product-line.tpl
     <body>
       <trans-unit id="5c74d926c4b89517ad64133990d04413" approved="yes">
         <source>Use this address for invoice too</source>
-        <target xml:lang="zh-TW">使用這個地址作為發票地址</target>
+        <target xml:lang="zh-TW">使用這個地址作為銷貨單地址</target>
         <note>Context:
 File: themes/classic/templates/checkout/_partials/address-form.tpl:26</note>
       </trans-unit>
@@ -496,7 +501,7 @@ File: themes/classic/templates/checkout/_partials/steps/addresses.tpl:36</note>
       </trans-unit>
       <trans-unit id="dc024b376ebf01abd90cf4d5e4dca1c7" approved="yes">
         <source>The selected address will be used as your personal address (for invoice).</source>
-        <target xml:lang="zh-TW">選定的地址將作為您的個人地址（發票）。</target>
+        <target xml:lang="zh-TW">選定的地址將作為您的個人地址（用於銷貨單）。</target>
         <note>Context:
 File: themes/classic/templates/checkout/_partials/steps/addresses.tpl:45</note>
       </trans-unit>
@@ -596,7 +601,7 @@ File: themes/classic/templates/checkout/order-confirmation.tpl:16</note>
       </trans-unit>
       <trans-unit id="186f9a937f0afc4cce2bbc4087dfd3fa" approved="yes">
         <source>You can also [1]download your invoice[/1]</source>
-        <target xml:lang="zh-TW">您可以[1]下載您的發票[/1]</target>
+        <target xml:lang="zh-TW">您可以[1]下載您的銷貨單[/1]</target>
         <note>Context:
 File: themes/classic/templates/checkout/order-confirmation.tpl:23</note>
       </trans-unit>
@@ -642,7 +647,7 @@ File: themes/classic/templates/checkout/order-confirmation.tpl:64</note>
     <body>
       <trans-unit id="ca0dbad92a874b2f69b549293387925e" approved="yes">
         <source>Code</source>
-        <target xml:lang="zh-TW">代碼</target>
+        <target xml:lang="zh-TW">折扣碼</target>
         <note>Context:
 File: themes/classic/templates/customer/discount.tpl:64</note>
       </trans-unit>
@@ -654,19 +659,19 @@ File: themes/classic/templates/customer/discount.tpl:68</note>
       </trans-unit>
       <trans-unit id="689202409e48743b914713f96d93947c" approved="yes">
         <source>Value</source>
-        <target xml:lang="zh-TW">數值</target>
+        <target xml:lang="zh-TW">折扣金額</target>
         <note>Context:
 File: themes/classic/templates/customer/discount.tpl:76</note>
       </trans-unit>
       <trans-unit id="a1d0ec6d56f8833a078b5a7ac4caf2d4" approved="yes">
         <source>Minimum</source>
-        <target xml:lang="zh-TW">最低</target>
+        <target xml:lang="zh-TW">最低消費金額</target>
         <note>Context:
 File: themes/classic/templates/customer/discount.tpl:80</note>
       </trans-unit>
       <trans-unit id="eb2527806a7e1ef48009eaaa785368fe" approved="yes">
         <source>Cumulative</source>
-        <target xml:lang="zh-TW">累計</target>
+        <target xml:lang="zh-TW">是否可分次使用</target>
         <note>Context:
 File: themes/classic/templates/customer/discount.tpl:84</note>
       </trans-unit>

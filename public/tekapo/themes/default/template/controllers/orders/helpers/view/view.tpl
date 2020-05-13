@@ -127,12 +127,10 @@
         </div>
         <!-- Orders Actions -->
         <div class="{* suzy: 2019-02-05 隱藏 css class "well" *} hidden-print">
-          {* suzy: 2019-02-05 隱藏列印訂單
           <a class="btn btn-default" href="javascript:window.print()">
             <i class="icon-print"></i>
             {l s='Print order' d='Admin.Orderscustomers.Feature'}
           </a>
-          *}
           &nbsp;
           {if Configuration::get('PS_INVOICE') && count($invoices_collection) && $order->invoice_number}
             <a data-selenium-id="view_invoice" class="btn btn-default _blank" href="{$link->getAdminLink('AdminPdf', true, [], ['submitAction' => 'generateInvoicePDF', 'id_order' => $order->id|intval])|escape:'html':'UTF-8'}">
@@ -140,28 +138,22 @@
               {l s='View invoice' d='Admin.Orderscustomers.Feature'}
             </a>
           {else}
-            {* suzy: 2018-09-12 隱藏 X 無發票
             <span class="span label label-inactive">
               <i class="icon-remove"></i>
               {l s='No invoice' d='Admin.Orderscustomers.Feature'}
             </span>
-            *}
           {/if}
           &nbsp;
           {if $order->delivery_number}
-            {* suzy: 2019-12-05 隱藏 檢視出貨單 按鈕
             <a class="btn btn-default _blank"  href="{$link->getAdminLink('AdminPdf', true, [], ['submitAction' => 'generateDeliverySlipPDF', 'id_order' => $order->id|intval])|escape:'html':'UTF-8'}">
               <i class="icon-truck"></i>
               {l s='View delivery slip' d='Admin.Orderscustomers.Feature'}
             </a>
-            *}
           {else}
-            {* suzy: 2018-09-12 隱藏 X 無出貨單
             <span class="span label label-inactive">
               <i class="icon-remove"></i>
               {l s='No delivery slip' d='Admin.Orderscustomers.Feature'}
             </span>
-            *}
           {/if}
           &nbsp;
           {if Configuration::get('PS_ORDER_RETURN')}
@@ -1069,7 +1061,7 @@
                     <tbody>
                       {foreach from=$discounts item=discount}
                       <tr>
-                        <td>{$discount['name']}</td>
+                        <td>{$discount['name']} (#{$discount['id_cart_rule']})</td>
                         <td>
                         {if $discount['value'] != 0.00}
                           -
@@ -1078,7 +1070,7 @@
                         </td>
                         {if $can_edit}
                         <td>
-                          <a href="{$current_index}&amp;submitDeleteVoucher&amp;id_order_cart_rule={$discount['id_order_cart_rule']}&amp;id_order={$order->id}&amp;token={$smarty.get.token|escape:'html':'UTF-8'}">
+                          <a href="{$current_index}&submitDeleteVoucher&id_order_cart_rule={$discount['id_order_cart_rule']}&id_order={$order->id}&token={$smarty.get.token|escape:'html':'UTF-8'}">
                             <i class="icon-minus-sign"></i>
                             {l s='Delete voucher' d='Admin.Orderscustomers.Feature'}
                           </a>

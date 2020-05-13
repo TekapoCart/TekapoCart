@@ -24,7 +24,8 @@
  *}
 
 <!--  TAX DETAILS -->
-{if $tax_exempt}
+{* suzy: 2020-05-13 隱藏 tax *}
+{* if $tax_exempt}
 
 	{l s='Exempt of VAT according to section 259B of the General Tax Code.' d='Shop.Pdf' pdf='true'}
 
@@ -97,5 +98,5 @@
 		</tbody>
 	</table>
 
-{/if}
+{/if *}
 <!--  / TAX DETAILS -->

@@ -50,46 +50,31 @@
             <td class="text-xs-right">{$cart_rule.quantity_for_user}</td>
             <td>{$cart_rule.value}</td>
             <td>{$cart_rule.voucher_minimal}</td>
-            <td>{$cart_rule.voucher_cumulable}</td>
+            <td>{if $cart_rule.partial_use == 1}是{else}否{/if}</td>
             <td>{$cart_rule.voucher_date}</td>
           </tr>
         {/foreach}
       </tbody>
     </table>
-    <div class="cart-rules hidden-md-up">
-      {foreach from=$cart_rules item=slip}
-        <div class="cart-rule">
-          <ul>
-            <li>
-              <strong>{l s='Code' d='Shop.Theme.Checkout'}</strong>
-              {$cart_rule.code}
-            </li>
-            <li>
-              <strong>{l s='Description' d='Shop.Theme.Checkout'}</strong>
-              {$cart_rule.name}
-            </li>
-            <li>
-              <strong>{l s='Quantity' d='Shop.Theme.Checkout'}</strong>
-              {$cart_rule.quantity_for_user}
-            </li>
-            <li>
-              <strong>{l s='Value' d='Shop.Theme.Checkout'}</strong>
-              {$cart_rule.value}
-            </li>
-            <li>
-              <strong>{l s='Minimum' d='Shop.Theme.Checkout'}</strong>
-              {$cart_rule.voucher_minimal}
-            </li>
-            <li>
-              <strong>{l s='Cumulative' d='Shop.Theme.Checkout'}</strong>
-              {$cart_rule.voucher_cumulable}
-            </li>
-            <li>
-              <strong>{l s='Expiration date' d='Shop.Theme.Checkout'}</strong>
-              {$cart_rule.voucher_date}
-            </li>
-          </ul>
-        </div>
+    <div class="cart-rules hidden-md-up definition-list">
+      {foreach from=$cart_rules item=cart_rule}
+        <dl>
+          <dt>{l s='Code' d='Shop.Theme.Checkout'}</dt>
+          <dd>{$cart_rule.code}</dd>
+          <dt>{l s='Description' d='Shop.Theme.Checkout'}</dt>
+          <dd>{$cart_rule.name}</dd>
+          <dt>{l s='Quantity' d='Shop.Theme.Checkout'}</dt>
+          <dd>{$cart_rule.quantity_for_user}</dd>
+          <dt>{l s='Value' d='Shop.Theme.Checkout'}</dt>
+          <dd>{$cart_rule.value}</dd>
+          <dt>{l s='Minimum' d='Shop.Theme.Checkout'}</dt>
+          <dd>{$cart_rule.voucher_minimal}</dd>
+          <dt>{l s='Cumulative' d='Shop.Theme.Checkout'}</dt>
+          <dd>{$cart_rule.voucher_cumulable}</dd>
+          <dt>{l s='Expiration date' d='Shop.Theme.Checkout'}</dt>
+          <dd>{$cart_rule.voucher_date}</dd>
+        </dl>
+        <hr>
       {/foreach}
     </div>
   {/if}

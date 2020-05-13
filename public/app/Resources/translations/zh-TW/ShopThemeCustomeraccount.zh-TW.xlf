@@ -579,7 +579,7 @@ File: themes/classic/templates/customer/order-detail.tpl:38</note>
       </trans-unit>
       <trans-unit id="e682495785e844d491378817aa34aa3f" approved="yes">
         <source>Download your invoice as a PDF file.</source>
-        <target xml:lang="zh-TW">以 PDF 格式下載發票</target>
+        <target xml:lang="zh-TW">下載銷貨單</target>
         <note>Context:
 File: themes/classic/templates/customer/order-detail.tpl:62</note>
       </trans-unit>

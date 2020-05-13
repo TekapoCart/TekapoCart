@@ -122,7 +122,7 @@
       </trans-unit>
       <trans-unit id="99f89e9a116e1c07f62ba17fb0312db6" approved="yes">
         <source><![CDATA[You can review this credit slip and download your invoice from the <a href="{history_url}">"My credit slips"</a> section of your account by clicking <a href="{my_account_url}">"My account"</a> on our shop.]]></source>
-        <target xml:lang="zh-TW"><![CDATA[您可以檢視折讓單，<a href="{history_url}">「我的折讓單」</a>，並從我們的商店： <a href="{my_account_url}"> "我的帳户"</a> 下載您的發票。]]></target>
+        <target xml:lang="zh-TW"><![CDATA[您可以檢視折讓單，<a href="{history_url}">「我的折讓單」</a>，並從我們的商店： <a href="{my_account_url}"> "我的帳户"</a> 下載您的銷貨單。]]></target>
         <note>Line: 45</note>
       </trans-unit>
       <trans-unit id="4c15700279d273ce67d98810a4b87943" approved="yes">
@@ -528,7 +528,7 @@
     <body>
       <trans-unit id="fce4d5217e51f199cfbd10ae913cc5dd" approved="yes">
         <source><![CDATA[You can review your order and download your invoice from the <a href="{history_url}">"Order history"</a> section of your customer account by clicking <a href="{my_account_url}">"My account"</a> on our shop.]]></source>
-        <target xml:lang="zh-TW"><![CDATA[查看訂單和下載你的收據，請點擊<a href="{my_account_url}">「會員專區」</a>然後<a href="{history_url}">「訂單記錄」</a>。]]></target>
+        <target xml:lang="zh-TW"><![CDATA[查看訂單和下載你的銷貨單，請點擊<a href="{my_account_url}">「會員專區」</a>然後<a href="{history_url}">「訂單記錄」</a>。]]></target>
         <note>Line: 45</note>
       </trans-unit>
       <trans-unit id="008400d8db73946ba53b2d7f091eb845" approved="yes">
@@ -2129,7 +2129,7 @@ File: modules/ps_emailgenerator/templates/core/voucher.php:24</note>
       </trans-unit>
       <trans-unit id="25cecf399c0cd872952ced4a7d150e0d" approved="yes">
         <source><![CDATA[<span><strong>Voucher code: {voucher_num}</strong></span> in the amount of <span><strong>{voucher_amount}</strong></span>]]></source>
-        <target xml:lang="zh-TW"><![CDATA[<span><strong>優惠券代碼：{voucher_num}</strong></span> 金額 <span><strong>{voucher_amount}</strong></span>]]></target>
+        <target xml:lang="zh-TW"><![CDATA[<span><strong>優惠券折扣碼：{voucher_num}</strong></span> 金額 <span><strong>{voucher_amount}</strong></span>]]></target>
         <note>Context:
 File: modules/ps_emailgenerator/templates/core/voucher.php:25</note>
       </trans-unit>

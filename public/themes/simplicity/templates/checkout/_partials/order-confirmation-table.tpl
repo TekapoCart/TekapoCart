@@ -100,8 +100,14 @@
       <hr>
 
       <table>
+        {foreach $discounts as $discount}
+            <tr>
+              <td>{$discount['name']}</td>
+              <td>{if $discount['value'] !== '0.00'}- {/if}{$discount['value_formatted']}</td>
+            </tr>
+        {/foreach}
         {foreach $subtotals as $subtotal}
-          {if $subtotal.type !== 'tax' && $subtotal.label !== null}
+          {if $subtotal.type !== 'tax' && $subtotal.label !== null && $subtotal.type !== 'discount'}
             <tr>
               <td>{$subtotal.label}</td>
               <td>{if 'discount' == $subtotal.type}-&nbsp;{/if}{$subtotal.value}</td>

@@ -110,7 +110,7 @@ File: classes/LocalizationPack.php:153</note>
       </trans-unit>
       <trans-unit id="be9fddade234ff9b16a1d92d62963b8e" approved="yes">
         <source>Invalid state properties.</source>
-        <target xml:lang="zh-TW">無效的狀態屬性。</target>
+        <target xml:lang="zh-TW">無效的狀態。</target>
         <note>Context:
 File: classes/LocalizationPack.php:163</note>
       </trans-unit>
@@ -152,7 +152,7 @@ File: classes/LocalizationPack.php:242</note>
       </trans-unit>
       <trans-unit id="19f29a24f0ccb9b96b37182473b27d63" approved="yes">
         <source>Invalid currency properties.</source>
-        <target xml:lang="zh-TW">無效的貨幣屬性。</target>
+        <target xml:lang="zh-TW">無效的貨幣。</target>
         <note>Context:
 File: classes/LocalizationPack.php:322</note>
       </trans-unit>

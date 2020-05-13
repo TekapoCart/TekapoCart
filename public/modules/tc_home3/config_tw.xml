@@ -6,7 +6,7 @@
     <description><![CDATA[無需申請物流串接服務，商家自行申請配送編號（物流編號）、托運單。]]></description>
     <author><![CDATA[TekapoCart]]></author>
     <tab><![CDATA[shipping_logistics]]></tab>
-	<confirmUninstall><![CDATA[Do you want to uninstall tc_home module?]]></confirmUninstall>
+	<confirmUninstall><![CDATA[Do you want to uninstall tc_home3 module?]]></confirmUninstall>
     <is_configurable>1</is_configurable>
     <need_instance>1</need_instance>
 	<limited_countries></limited_countries>

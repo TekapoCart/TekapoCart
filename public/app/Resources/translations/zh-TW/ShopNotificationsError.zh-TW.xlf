@@ -213,7 +213,7 @@ File: classes/CartRule.php:770</note>
       </trans-unit>
       <trans-unit id="4837d38bc896f38c39d6f7024e466967" approved="yes">
         <source>This voucher is not combinable with an other voucher already in your cart: %s</source>
-        <target xml:lang="zh-TW">此券不可與其他已經在您的購物車的優惠券同時使用：%s</target>
+        <target xml:lang="zh-TW">此優惠券無法同時使用：%s</target>
         <note>Context:
 File: classes/CartRule.php:788</note>
       </trans-unit>
@@ -385,19 +385,19 @@ File: controllers/front/ProductController.php:806</note>
     <body>
       <trans-unit id="6b9cc232bf4044274ec42062b60736fb" approved="yes">
         <source>Invoices are disabled in this shop.</source>
-        <target xml:lang="zh-TW">本店停用發票功能。</target>
+        <target xml:lang="zh-TW">本店停用銷貨單功能。</target>
         <note>Context:
 File: controllers/front/PdfInvoiceController.php:44</note>
       </trans-unit>
       <trans-unit id="2ef90fa1b9369f1ad3ca66852ca464a2" approved="yes">
         <source>The invoice was not found.</source>
-        <target xml:lang="zh-TW">找不到這個發票</target>
+        <target xml:lang="zh-TW">找不到這個銷貨單</target>
         <note>Context:
 File: controllers/front/PdfInvoiceController.php:57</note>
       </trans-unit>
       <trans-unit id="8200c4097227159b14dd0669b8dfe22c" approved="yes">
         <source>No invoice is available.</source>
-        <target xml:lang="zh-TW">沒有可用發票</target>
+        <target xml:lang="zh-TW">沒有可用銷貨單</target>
         <note>Context:
 File: controllers/front/PdfInvoiceController.php:61</note>
       </trans-unit>
@@ -579,19 +579,19 @@ File: controllers/front/listing/CategoryController.php:82</note>
     <body>
       <trans-unit id="897bbb78781eb767eee3a4ac3e820185" approved="yes">
         <source>You must enter a voucher code.</source>
-        <target xml:lang="zh-TW">您必須輸入一個優惠券代碼。</target>
+        <target xml:lang="zh-TW">請輸入優惠券折扣碼</target>
         <note>Context:
 File: controllers/front/CartController.php:239</note>
       </trans-unit>
       <trans-unit id="417d63b1effb110e438d4b4b9f0fbd95" approved="yes">
         <source>The voucher code is invalid.</source>
-        <target xml:lang="zh-TW">優惠券代碼無效。</target>
+        <target xml:lang="zh-TW">折扣碼無效</target>
         <note>Context:
 File: controllers/front/CartController.php:245</note>
       </trans-unit>
       <trans-unit id="d21c3bf7d25db04b73e7e269aef555fe" approved="yes">
         <source>This voucher does not exist.</source>
-        <target xml:lang="zh-TW">此優惠券不存在。</target>
+        <target xml:lang="zh-TW">此折扣碼不存在</target>
         <note>Context:
 File: controllers/front/CartController.php:260</note>
       </trans-unit>

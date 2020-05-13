@@ -24,8 +24,6 @@
  *}
 <section id="js-checkout-summary" class="card js-cart" data-refresh-url="{$urls.pages.cart}?ajax=1&action=refresh">
 
-    <div class="{*card-block*}">
-
     {block name='hook_checkout_summary_top'}
       {hook h='displayCheckoutSummaryTop'}
     {/block}
@@ -54,6 +52,10 @@
       </div>
     {/block}
 
+    {block name='cart_summary_voucher'}
+      {include file='checkout/_partials/cart-voucher.tpl'}
+    {/block}
+
     {block name='cart_summary_subtotals'}
         {include file='checkout/_partials/cart-summary-subtotals.tpl' cart=$cart}
     {/block}
@@ -62,14 +64,13 @@
         {include file='checkout/_partials/cart-summary-totals.tpl' cart=$cart}
     {/block}
 
-    </div>
-
-    {*block name='cart_summary_voucher'}
-        {include file='checkout/_partials/cart-voucher.tpl'}
-    {/block*}
-
     {* 從 payment.tpl 搬過來 start *}
     <div class="card-block">
+
+      {block name='hook_checkout_summary_bottom'}
+          {hook h='displayCheckoutSummaryBottom'}
+      {/block}
+
       <div id="payment-confirmation" class="text-xs-center text-sm-right{if !isset($selected_payment_option)} hidden-xs-up{/if}">
         <div class="ps-shown-by-js">
           <button type="submit" {if !isset($selected_payment_option) } disabled {/if} class="btn btn-primary center-block">

@@ -44,3 +44,21 @@ table.table {
 .categorieList .list-group-item {
     display: inline-block;
 }
+
+#tabOrder {
+    margin-top: 10px;
+}
+
+.bootstrap .label.label-inactive {
+    font-size: 12px;
+    padding: 6px 8px;
+}
+
+.bootstrap .list-empty .list-empty-msg {
+    font-size: 0.8rem
+}
+
+.bootstrap .list-empty .list-empty-icon {
+    font-size: 34px;
+    margin-bottom: 10px;
+}

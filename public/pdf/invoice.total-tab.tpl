@@ -69,6 +69,7 @@
 		</tr>
 	{/if}
 
+	{* suzy: 2020-05-13 隱藏 總計(未稅)
 	<tr class="bold">
 		<td class="grey">
 			{l s='Total (Tax excl.)' d='Shop.Pdf' pdf='true'}
@@ -77,6 +78,7 @@
 			{displayPrice currency=$order->id_currency price=$footer.total_paid_tax_excl}
 		</td>
 	</tr>
+	*}
 	{if $footer.total_taxes > 0}
 	<tr class="bold">
 		<td class="grey">

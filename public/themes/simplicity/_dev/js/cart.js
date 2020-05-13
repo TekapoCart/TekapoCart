@@ -315,7 +315,8 @@ $(document).ready(() => {
 
       $discountInput.val($code.text());
       // Show promo code field
-      $('#promo-code').collapse('show');
+      // suzy: 2020-05-11 不需要此 collapse 特效
+      // $('#promo-code').collapse('show');
       $('.display-promo').hide($timeoutEffect);
 
       return false;

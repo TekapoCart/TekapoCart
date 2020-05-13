@@ -709,7 +709,7 @@ File: admin-dev/themes/default/template/controllers/orders/form.tpl:1486</note>
       </trans-unit>
       <trans-unit id="58a13b9a4e13f53cf70a60bf583321e1" approved="yes">
         <source>Total vouchers (Tax excl.)</source>
-        <target xml:lang="zh-TW">優惠券總計（未稅）</target>
+        <target xml:lang="zh-TW">折扣總計（未稅）</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/form.tpl:1492</note>
       </trans-unit>
@@ -809,19 +809,19 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
       </trans-unit>
       <trans-unit id="be4254ec37a7bf0d2babdf04bce774cf" approved="yes">
         <source>Print order</source>
-        <target xml:lang="zh-TW">列印訂單</target>
+        <target xml:lang="zh-TW">列印本頁訂單資訊</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:131</note>
       </trans-unit>
       <trans-unit id="a6ecff447ea8327b43f5d16a924fb6be" approved="yes">
         <source>View invoice</source>
-        <target xml:lang="zh-TW">檢視發票</target>
+        <target xml:lang="zh-TW">檢視銷貨單</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:137</note>
       </trans-unit>
       <trans-unit id="f8246f1c2cfd9a81a376223428bd09d7" approved="yes">
         <source>No invoice</source>
-        <target xml:lang="zh-TW">無發票</target>
+        <target xml:lang="zh-TW">無銷貨單</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl:142</note>
       </trans-unit>
@@ -1285,13 +1285,13 @@ File: controllers/admin/AdminInvoicesController.php:53</note>
       </trans-unit>
       <trans-unit id="1b107c8f50c81b4b3497765849934a1c" approved="yes">
         <source>Invoice options</source>
-        <target xml:lang="zh-TW">發票選項</target>
+        <target xml:lang="zh-TW">銷貨單選項</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:38</note>
       </trans-unit>
       <trans-unit id="916e303456985cc95e3f551665b0314f" approved="yes">
         <source>Enable invoices</source>
-        <target xml:lang="zh-TW">啟動發票</target>
+        <target xml:lang="zh-TW">啟用銷貨單</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:41</note>
       </trans-unit>
@@ -1303,19 +1303,19 @@ File: controllers/admin/AdminInvoicesController.php:47</note>
       </trans-unit>
       <trans-unit id="82c9667c9ef1dc29e479d080eaa998db" approved="yes">
         <source>Invoice prefix</source>
-        <target xml:lang="zh-TW">發票號碼前綴</target>
+        <target xml:lang="zh-TW">銷貨單號碼前綴</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:60</note>
       </trans-unit>
       <trans-unit id="ffd9d577464b4a615096c6d0c9c490ae" approved="yes">
         <source>Add current year to invoice number</source>
-        <target xml:lang="zh-TW">將當前年份附加至發票編號</target>
+        <target xml:lang="zh-TW">將當前年份附加至銷貨單編號</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:66</note>
       </trans-unit>
       <trans-unit id="adb5bc3c76ab4f69fc050090e05998c7" approved="yes">
         <source>Reset sequential invoice number at the beginning of the year</source>
-        <target xml:lang="zh-TW">在年初重置發票編號</target>
+        <target xml:lang="zh-TW">在年初重置銷貨單編號</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:71</note>
       </trans-unit>
@@ -1339,7 +1339,7 @@ File: controllers/admin/AdminInvoicesController.php:84</note>
       </trans-unit>
       <trans-unit id="8ae4286d38bb2235def98fd68d7420d2" approved="yes">
         <source>Invoice number</source>
-        <target xml:lang="zh-TW">發票號碼</target>
+        <target xml:lang="zh-TW">銷貨單號碼</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:88</note>
       </trans-unit>
@@ -1351,13 +1351,13 @@ File: controllers/admin/AdminInvoicesController.php:107</note>
       </trans-unit>
       <trans-unit id="e57758881f26d49452c5ca0fd9fc140e" approved="yes">
         <source>Invoice model</source>
-        <target xml:lang="zh-TW">發票模板</target>
+        <target xml:lang="zh-TW">銷貨單模板</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:113</note>
       </trans-unit>
       <trans-unit id="57826bb01dcd3fa7c0de235ff4bb8ca3" approved="yes">
         <source>Use the disk as cache for PDF invoices</source>
-        <target xml:lang="zh-TW">使用硬碟來快取產生PDF發票</target>
+        <target xml:lang="zh-TW">使用硬碟來快取產生PDF銷貨單</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:120</note>
       </trans-unit>
@@ -1375,7 +1375,7 @@ File: controllers/admin/AdminInvoicesController.php:158</note>
       </trans-unit>
       <trans-unit id="c491f71acb93db711c341417e8c6be9e" approved="yes">
         <source>Print PDF invoices</source>
-        <target xml:lang="zh-TW">列印PDF格式發票</target>
+        <target xml:lang="zh-TW">列印PDF格式銷貨單</target>
         <note>Context:
 File: controllers/admin/AdminInvoicesController.php:172</note>
       </trans-unit>
@@ -1561,7 +1561,7 @@ File: controllers/admin/AdminOrdersController.php:792</note>
       </trans-unit>
       <trans-unit id="bbee72681d2c075d95355d3d9ccefb4e" approved="yes">
         <source>Credit card slip for order #%d</source>
-        <target xml:lang="zh-TW">訂單 #%d 的信用卡發票</target>
+        <target xml:lang="zh-TW">訂單 #%d 的信用卡單據</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1061</note>
       </trans-unit>
@@ -1855,7 +1855,7 @@ File: admin-dev/themes/default/template/controllers/customer_threads/helpers/vie
       </trans-unit>
       <trans-unit id="04427d6ba3fb03f0951b27ddd7c05af5" approved="yes">
         <source>Orders and messages timeline</source>
-        <target xml:lang="zh-TW">訂單訊息時間軸</target>
+        <target xml:lang="zh-TW">訊息時間軸</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/helpers/view/view.tpl:130</note>
       </trans-unit>
@@ -1987,7 +1987,7 @@ File: admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl:
       </trans-unit>
       <trans-unit id="3e69f668660d41b577a8da0fb53f6fa8" approved="yes">
         <source>Total value of vouchers:</source>
-        <target xml:lang="zh-TW">優惠券總計：</target>
+        <target xml:lang="zh-TW">折扣總計：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/carts/helpers/view/view.tpl:173</note>
       </trans-unit>
@@ -2095,7 +2095,7 @@ File: admin-dev/themes/default/template/controllers/addresses/helpers/form/form.
     <body>
       <trans-unit id="41953cbf836297b3c96b137a2b789ccb" approved="yes">
         <source>Apply on all invoices</source>
-        <target xml:lang="zh-TW">套用到所有發票</target>
+        <target xml:lang="zh-TW">套用到所有銷貨單</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/_discount_form.tpl:88</note>
       </trans-unit>
@@ -2105,13 +2105,13 @@ File: admin-dev/themes/default/template/controllers/orders/_discount_form.tpl:88
     <body>
       <trans-unit id="200e62e510bab9b03c912e10a5363a7a" approved="yes">
         <source>Create a new invoice</source>
-        <target xml:lang="zh-TW">建立新發票</target>
+        <target xml:lang="zh-TW">建立新銷貨單</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/_new_product.tpl:86</note>
       </trans-unit>
       <trans-unit id="4800d00deaa0a28a18151d76feb858cb" approved="yes">
         <source>New invoice information</source>
-        <target xml:lang="zh-TW">新發票資訊</target>
+        <target xml:lang="zh-TW">新銷貨單資訊</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/_new_product.tpl:105</note>
       </trans-unit>
@@ -2225,7 +2225,7 @@ File: admin-dev/themes/default/template/controllers/orders/_documents.tpl:127</n
       </trans-unit>
       <trans-unit id="80cb34a90bc2178e9219ccc4ab106867" approved="yes">
         <source>Generate invoice</source>
-        <target xml:lang="zh-TW">產生發票</target>
+        <target xml:lang="zh-TW">產生銷貨單</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/_documents.tpl:170</note>
       </trans-unit>

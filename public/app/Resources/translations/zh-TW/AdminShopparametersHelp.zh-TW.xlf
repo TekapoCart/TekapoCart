@@ -358,7 +358,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/prefer
       </trans-unit>
       <trans-unit id="2b116a3c74c816d853b7d86abf838ebb" approved="yes">
         <source>You can choose when to round prices: either on each item, each line or the total (of an invoice, for example).</source>
-        <target xml:lang="zh-TW">選擇如何進位價格。可以選擇每件商品、小計或總合(如發票)。</target>
+        <target xml:lang="zh-TW">選擇如何進位價格。可以選擇每件商品、小計或總合(如銷貨單)。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/preferences.html.twig:90</note>
       </trans-unit>
