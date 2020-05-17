@@ -114,13 +114,14 @@ final class RequestSqlGridDefinitionFactory extends AbstractGridDefinitionFactor
                     'field' => 'name',
                 ])
             )
-            ->add(
-                (new DataColumn('sql'))
-                ->setName($this->trans('SQL query', [], 'Admin.Advparameters.Feature'))
-                ->setOptions([
-                    'field' => 'sql',
-                ])
-            )
+            // suzy: 2020-05-17 隱藏列表顯示大串 sql
+//            ->add(
+//                (new DataColumn('sql'))
+//                ->setName($this->trans('SQL query', [], 'Admin.Advparameters.Feature'))
+//                ->setOptions([
+//                    'field' => 'sql',
+//                ])
+//            )
             ->add(
                 (new ActionColumn('actions'))
                 ->setName($this->trans('Actions', [], 'Admin.Global'))
