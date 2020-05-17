@@ -10,7 +10,7 @@ File: modules/ps_facetedsearch/ps_facetedsearch.php:57</note>
       </trans-unit>
       <trans-unit id="0b3be13d3fe8cfc942ae7e8a64f3718b">
         <source>Displays a block allowing multiple filters.</source>
-        <target>相近價格、同屬性、規格商品自動歸類。</target>
+        <target>相近價格、同規格、同特色商品自動歸類。</target>
         <note>Context:
 File: modules/ps_facetedsearch/ps_facetedsearch.php:58</note>
       </trans-unit>
@@ -224,13 +224,13 @@ File: modules/ps_facetedsearch/views/templates/admin/add.tpl:243</note>
       </trans-unit>
       <trans-unit id="db6b86d05039c4f657a28647f8eb5140" approved="yes">
         <source>Attribute group: %name% (%count% attributes)</source>
-        <target xml:lang="zh-TW">屬性組：%name%（%count% 屬性）</target>
+        <target xml:lang="zh-TW">規格：%name%（%count% 項）</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/add.tpl:281</note>
       </trans-unit>
       <trans-unit id="788a474b0e55d612b3d500743c6251a0" approved="yes">
         <source>Attribute group: %name% (%count% attribute)</source>
-        <target xml:lang="zh-TW">屬性組：%name%（%count% 屬性）</target>
+        <target xml:lang="zh-TW">規格：%name%（%count% 項）</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/add.tpl:290</note>
       </trans-unit>
@@ -242,13 +242,13 @@ File: modules/ps_facetedsearch/views/templates/admin/add.tpl:300</note>
       </trans-unit>
       <trans-unit id="4127fb33c1db9597f3c881ae057f1370" approved="yes">
         <source>Feature: %name% (%count% values)</source>
-        <target xml:lang="zh-TW">屬性組合：%name%（%count% 值）</target>
+        <target xml:lang="zh-TW">特色：%name%（%count% 項）</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/add.tpl:346</note>
       </trans-unit>
       <trans-unit id="cadad7b648bb2b1d3f22421b00a14fd2" approved="yes">
         <source>Feature: %name% (%count% value)</source>
-        <target xml:lang="zh-TW">特性組：%name%（%count% 值）</target>
+        <target xml:lang="zh-TW">特性：%name%（%count% 項）</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/add.tpl:355</note>
       </trans-unit>
@@ -270,7 +270,7 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:206</note>
       </trans-unit>
       <trans-unit id="fc11f4442332d8b86f01335df9d28444" approved="yes">
         <source>Build attributes and features indexes</source>
-        <target xml:lang="zh-TW">重建屬性＆規格索引</target>
+        <target xml:lang="zh-TW">重建規格＆特色索引</target>
         <note>Line: 36</note>
       </trans-unit>
       <trans-unit id="1f0f8b59397f34d499b181297714713a" approved="yes">
@@ -328,7 +328,7 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:21</note>
       </trans-unit>
       <trans-unit id="df2bbc994d10995dcffdf96dbb7acbb1" approved="yes">
         <source>Indexes and caches</source>
-        <target xml:lang="zh-TW">索引和快取</target>
+        <target xml:lang="zh-TW">建立索引和清除快取</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:25</note>
       </trans-unit>
@@ -351,25 +351,25 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:32</note>
       </trans-unit>
       <trans-unit id="d47f700b6db025d98cae0b340ed847e9" approved="yes">
         <source>Build attribute index</source>
-        <target xml:lang="zh-TW">建立屬性索引</target>
+        <target xml:lang="zh-TW">建立規格索引</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:33</note>
       </trans-unit>
       <trans-unit id="53795c3624ae2361363780589aa2aa42" approved="yes">
         <source>You can set a cron job that will rebuild price index using the following URL:</source>
-        <target xml:lang="zh-TW">您可以設定系統排程執行下面網址來重建您的索引：</target>
+        <target xml:lang="zh-TW">您可以設定系統排程執行下面網址來重建索引：</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:38</note>
       </trans-unit>
       <trans-unit id="e43b32b88c77e49f06144cd1ffaeba96" approved="yes">
         <source>You can set a cron job that will rebuild attribute index using the following URL:</source>
-        <target xml:lang="zh-TW">您可以設定系統排程執行下面網址來重建您的索引：</target>
+        <target xml:lang="zh-TW">您可以設定系統排程執行下面網址來重建索引：</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:43</note>
       </trans-unit>
       <trans-unit id="16349835364cf839e6670b0de7da6362" approved="yes">
         <source>A nightly rebuild is recommended.</source>
-        <target xml:lang="zh-TW">當商品有異動時可執行重建動作</target>
+        <target xml:lang="zh-TW">當商品有變動時可執行重建動作</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:49</note>
       </trans-unit>
@@ -381,7 +381,7 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:53</note>
       </trans-unit>
       <trans-unit id="f7f19392da30e81c3abf433ce7b8ca38" approved="yes">
         <source>Created on</source>
-        <target xml:lang="zh-TW">創建於</target>
+        <target xml:lang="zh-TW">建立時間</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:62</note>
       </trans-unit>
@@ -441,7 +441,7 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:197</note>
       </trans-unit>
       <trans-unit id="49afa0d9ad5c1f8bf5413b9dc8a252c9" approved="yes">
         <source>Attribute indexing finished</source>
-        <target xml:lang="zh-TW">屬性索引完成</target>
+        <target xml:lang="zh-TW">規格索引完成</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:198</note>
       </trans-unit>
@@ -453,7 +453,7 @@ File: modules/ps_facetedsearch/views/templates/admin/view.tpl:199</note>
       </trans-unit>
       <trans-unit id="414301b329318b3e916c5b91b0ca9126" approved="yes">
         <source>Attribute indexing failed</source>
-        <target xml:lang="zh-TW">屬性索引失敗</target>
+        <target xml:lang="zh-TW">規格索引失敗</target>
         <note>Context:
 File: modules/ps_facetedsearch/views/templates/admin/view.tpl:200</note>
       </trans-unit>

@@ -412,7 +412,7 @@ File: classes/lang/KeysReference/FeatureLang.php:32</note>
       </trans-unit>
       <trans-unit id="9fc2d28c05ed9eb1d75ba4465abf15a9" approved="yes">
         <source>Properties</source>
-        <target xml:lang="zh-TW">屬性</target>
+        <target xml:lang="zh-TW">規格</target>
         <note>Context:
 File: classes/lang/KeysReference/FeatureLang.php:33</note>
       </trans-unit>

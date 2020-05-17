@@ -224,13 +224,13 @@ File: controllers/admin/AdminSearchConfController.php:190</note>
       </trans-unit>
       <trans-unit id="786471035f60ea5955fd93f6998e8637" approved="yes">
         <source>Enter each alias separated by a comma (e.g. 'prestshop,preztashop,prestasohp').</source>
-        <target xml:lang="zh-TW">已逗點分隔多個代稱 (例如 openshop ,opensohp)</target>
+        <target xml:lang="zh-TW">以逗點分隔字詞（例如 草莓,芒果）</target>
         <note>Context:
 File: controllers/admin/AdminSearchConfController.php:351</note>
       </trans-unit>
       <trans-unit id="01d2aac5d20787a1e873f2bdc79b514a" approved="yes">
         <source>Search this word instead.</source>
-        <target xml:lang="zh-TW">搜尋關鍵字 </target>
+        <target xml:lang="zh-TW">搜尋關鍵字</target>
         <note>Context:
 File: controllers/admin/AdminSearchConfController.php:360</note>
       </trans-unit>
@@ -291,7 +291,7 @@ File: controllers/admin/AdminGroupsController.php:330</note>
       </trans-unit>
       <trans-unit id="a2ce271cf6d8afe81168fbfc4ccb492c" approved="yes">
         <source>PrestaShop has three default customer groups:</source>
-        <target xml:lang="zh-TW">TekapoCart 客戶分級定義：</target>
+        <target xml:lang="zh-TW">TekapoCart 內建 3 客戶群組：</target>
         <note>Line: 616</note>
       </trans-unit>
     </body>

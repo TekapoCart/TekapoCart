@@ -582,7 +582,7 @@ File: admin-dev/themes/default/template/controllers/images/content.tpl:107</note
         </trans-unit>
         <trans-unit id="10d79e2800631feee6411615a72eb79e">
           <source>My theme for %name% shop</source>
-          <target xml:lang="zh-TW">可使用的佈景主題</target>
+          <target xml:lang="zh-TW">佈景主題</target>
           <note>Line: 82</note>
         </trans-unit>
       </body>

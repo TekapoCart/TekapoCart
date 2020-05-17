@@ -92,19 +92,19 @@ File: controllers/admin/AdminProductsController.php:676</note>
       </trans-unit>
       <trans-unit id="043432664c5abe8a28c4e7ad7191bccf" approved="yes">
         <source>The price attribute is required.</source>
-        <target xml:lang="zh-TW">價格屬性是必填的</target>
+        <target xml:lang="zh-TW">價格為必填</target>
         <note>Context:
 File: controllers/admin/AdminProductsController.php:716</note>
       </trans-unit>
       <trans-unit id="251db6b140bc5b3adcbe0c5efadb3c7d" approved="yes">
         <source>You must add at least one attribute.</source>
-        <target xml:lang="zh-TW">您必須至少新增一個屬性。</target>
+        <target xml:lang="zh-TW">您必須至少新增一個規格。</target>
         <note>Context:
 File: controllers/admin/AdminProductsController.php:719</note>
       </trans-unit>
       <trans-unit id="e22a6ea51eb74bee7acaa4acf2846c7b" approved="yes">
         <source>This combination already exists.</source>
-        <target xml:lang="zh-TW">此屬性已經存在</target>
+        <target xml:lang="zh-TW">此組合已經存在</target>
         <note>Context:
 File: controllers/admin/AdminProductsController.php:799</note>
       </trans-unit>
@@ -254,7 +254,7 @@ File: controllers/admin/AdminProductsController.php:2052</note>
       </trans-unit>
       <trans-unit id="2ac6fe3cbae5ffcef53a6bdddf888d70" approved="yes">
         <source>The expiration-date attribute is required.</source>
-        <target xml:lang="zh-TW">到期日屬性是必填的</target>
+        <target xml:lang="zh-TW">到期日是必填</target>
         <note>Context:
 File: controllers/admin/AdminProductsController.php:2227</note>
       </trans-unit>
@@ -364,13 +364,13 @@ File: controllers/admin/AdminAttributesGroupsController.php:118</note>
       </trans-unit>
       <trans-unit id="caecb49a7eec394177d054db34995bc0" approved="yes">
         <source>The attribute value "%1$s" already exist for %2$s language</source>
-        <target xml:lang="zh-TW">此屬性值“%1$s”已存在於語系 %2$s</target>
+        <target xml:lang="zh-TW">此數值“%1$s”已存在於語系 %2$s</target>
         <note>Context:
 File: controllers/admin/AdminAttributesGroupsController.php:406</note>
       </trans-unit>
       <trans-unit id="7f7cd1de48a84bc7ba0dfcde99de2604" approved="yes">
         <source>Failed to delete the attribute.</source>
-        <target xml:lang="zh-TW">刪除屬性時發生錯誤</target>
+        <target xml:lang="zh-TW">刪除規格時發生錯誤</target>
         <note>Context:
 File: controllers/admin/AdminAttributesGroupsController.php:757</note>
       </trans-unit>
@@ -566,7 +566,7 @@ File: controllers/admin/AdminCartsController.php:467</note>
       </trans-unit>
       <trans-unit id="89ecb554b799211aca0441e691419963" approved="yes">
         <source>This product cannot be added to the cart.</source>
-        <target xml:lang="zh-TW">無法將此商品添加到購物車。</target>
+        <target xml:lang="zh-TW">無法將此商品加到購物車</target>
         <note>Context:
 File: controllers/admin/AdminCartsController.php:474</note>
       </trans-unit>
@@ -626,7 +626,7 @@ File: controllers/admin/AdminFeaturesController.php:435</note>
     <body>
       <trans-unit id="1ef611e55a4e10ff65c1e64f962281c8" approved="yes">
         <source>Please select at least one attribute.</source>
-        <target xml:lang="zh-TW">請至少選擇一個屬性</target>
+        <target xml:lang="zh-TW">請至少選擇一個規格</target>
         <note>Context:
 File: controllers/admin/AdminAttributeGeneratorController.php:118</note>
       </trans-unit>
@@ -788,7 +788,7 @@ File: src/Adapter/Attribute/AdminAttributeGeneratorControllerWrapper.php:116</no
       </trans-unit>
       <trans-unit id="160f1ab34ecfb437b1767602d5ee093f" approved="yes">
         <source>You cannot delete this attribute.</source>
-        <target xml:lang="zh-TW">無法刪除的屬性</target>
+        <target xml:lang="zh-TW">無法刪除規格</target>
         <note>Context:
 File: src/Adapter/Attribute/AdminAttributeGeneratorControllerWrapper.php:123</note>
       </trans-unit>
@@ -945,7 +945,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
       </trans-unit>
       <trans-unit id="9bbbc84f839137c71e79f1b8eaafc5b7" approved="yes">
         <source>Friendly URLs are currently enabled.</source>
-        <target xml:lang="zh-TW">友善連結現在​​被使用。</target>
+        <target xml:lang="zh-TW">友善網址現在​​被使用。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_seo.html.twig:74</note>
       </trans-unit>
@@ -983,7 +983,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
     <body>
       <trans-unit id="1b89ef639dabfd2f6eb19886f7c9f8c8" approved="yes">
         <source>This will delete all the combinations. Do you wish to proceed?</source>
-        <target xml:lang="zh-TW">這將刪除所有屬性。 您要繼續嗎？</target>
+        <target xml:lang="zh-TW">這將刪除所有組合。 您要繼續嗎？</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.html.twig:326</note>
       </trans-unit>
@@ -995,13 +995,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.htm
       </trans-unit>
       <trans-unit id="dfd19ad4f089996c7eabcd5935f75e98" approved="yes">
         <source>A pack of products can't have combinations.</source>
-        <target xml:lang="zh-TW">包裝商品不能有屬性。</target>
+        <target xml:lang="zh-TW">包裝商品不能有組合。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.html.twig:346</note>
       </trans-unit>
       <trans-unit id="5b75fdc0df647e8ac5275e31554dd0f9" approved="yes">
         <source>A virtual product can't have combinations.</source>
-        <target xml:lang="zh-TW">虛擬商品不能有屬性。</target>
+        <target xml:lang="zh-TW">虛擬商品不能有組合。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.html.twig:347</note>
       </trans-unit>

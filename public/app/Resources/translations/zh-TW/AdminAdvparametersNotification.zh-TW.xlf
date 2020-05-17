@@ -76,7 +76,7 @@ File: src/Core/Import/File/FileUploader.php:111</note>
       </trans-unit>
       <trans-unit id="0bedafc96db94da3f85caa7101944eb5" approved="yes">
         <source>The uploaded file exceeds the post_max_size directive in php.ini. If your server configuration allows it, you may add a directive in your .htaccess, for example:</source>
-        <target xml:lang="zh-TW">Php.ini裡上傳的文件超過大小上限。如果你的服務器配置允許，你可以在你的.htaccess裡添加一個指令。</target>
+        <target xml:lang="zh-TW">Php.ini裡上傳的文件超過大小上限。如果你的服務器設定允許，你可以在你的.htaccess裡添加一個指令。</target>
         <note>Context:
 File: src/Core/Import/File/FileUploader.php:114</note>
       </trans-unit>
@@ -446,7 +446,7 @@ File: controllers/admin/AdminImportController.php:4047</note>
       </trans-unit>
       <trans-unit id="5e063c49ce8203f2ca7a496da24b819e" approved="yes">
         <source>Product/Attribute (%d/%d) cannot be added twice (at line %d).</source>
-        <target xml:lang="zh-TW">商品/屬性（%d/%d）不能添加兩次（在%d行）。</target>
+        <target xml:lang="zh-TW">商品/規格（%d/%d）不能添加兩次（在%d行）。</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:4065</note>
       </trans-unit>
@@ -654,7 +654,7 @@ File: controllers/admin/AdminRequestSqlController.php:401</note>
       </trans-unit>
       <trans-unit id="9caefacc2d658e65a31461564c163624" approved="yes">
         <source>The "%attribute%" attribute does not exist in the "%table%" table.</source>
-        <target xml:lang="zh-TW">屬性 %attribute% 不存在於 "%table%" 數據表中。</target>
+        <target xml:lang="zh-TW">規格 %attribute% 不存在於 "%table%" 數據表中。</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:487</note>
       </trans-unit>
@@ -690,7 +690,7 @@ File: controllers/admin/AdminRequestSqlController.php:506</note>
       </trans-unit>
       <trans-unit id="7b4dd672e3b87269079894e693ce9b76" approved="yes">
         <source>When multiple tables are used, each attribute must refer back to a table.</source>
-        <target xml:lang="zh-TW">使用多個資料表時，每個屬性必須連回一個資料表</target>
+        <target xml:lang="zh-TW">使用多個資料表時，每個規格必須連回一個資料表</target>
         <note>Context:
 File: controllers/admin/AdminRequestSqlController.php:514</note>
       </trans-unit>

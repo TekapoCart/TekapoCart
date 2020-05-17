@@ -54,7 +54,7 @@ File: controllers/admin/AdminCustomersController.php:206</note>
       </trans-unit>
       <trans-unit id="bde13610a2ae2521b30aa7821d553862" approved="yes">
         <source>There is no status defined for this order.</source>
-        <target xml:lang="zh-TW">此訂單沒有任何狀態。</target>
+        <target xml:lang="zh-TW">無狀態</target>
         <note>Context:
 File: controllers/admin/AdminCustomersController.php:726</note>
       </trans-unit>

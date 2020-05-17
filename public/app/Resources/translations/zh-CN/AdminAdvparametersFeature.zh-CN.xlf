@@ -170,7 +170,7 @@ File: controllers/admin/AdminEmailsController.php:223</note>
       </trans-unit>
       <trans-unit id="94fc5d3be31c72a400c50aae395f1f1f" approved="yes">
         <source>This is a test message. Your server is now configured to send email.</source>
-        <target xml:lang="zh-CN">这是一条测试消息。您的服务器现在配置为发送电子邮件。</target>
+        <target xml:lang="zh-CN">这是一条测试消息。您的服务器现在設定为发送电子邮件。</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:235</note>
       </trans-unit>
@@ -1563,7 +1563,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/Lo
     <body>
       <trans-unit id="8b9a96e40ebcda35ce12190b41789b64" approved="yes">
         <source>Configuration information</source>
-        <target xml:lang="zh-CN">配置信息</target>
+        <target xml:lang="zh-CN">設定信息</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/system_information.html.twig:33</note>
       </trans-unit>
@@ -1683,7 +1683,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/sy
       </trans-unit>
       <trans-unit id="4e37aa2987c0876f7f7b2104927df1a1" approved="yes">
         <source>Mail configuration</source>
-        <target xml:lang="zh-CN">配置邮件</target>
+        <target xml:lang="zh-CN">設定邮件</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/system_information.html.twig:129</note>
       </trans-unit>

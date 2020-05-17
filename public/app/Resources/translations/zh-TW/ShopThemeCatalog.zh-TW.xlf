@@ -296,7 +296,7 @@ File: src/Core/Product/ProductPresenter.php:385</note>
       </trans-unit>
       <trans-unit id="cb3c718c905f00adbb6735f55bfb38ef" approved="yes">
         <source>Product available with different options</source>
-        <target xml:lang="zh-TW">此商品有多屬性</target>
+        <target xml:lang="zh-TW">此商品有多規格</target>
         <note>Context:
 File: src/Core/Product/ProductPresenter.php:490</note>
       </trans-unit>

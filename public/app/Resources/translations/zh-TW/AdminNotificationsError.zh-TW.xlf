@@ -360,7 +360,7 @@ File: classes/Meta.php:105</note>
     <body>
       <trans-unit id="05c210d25ce1e9ad49a27d570f82b090" approved="yes">
         <source>[%s] is not a valid configuration key</source>
-        <target xml:lang="zh-TW">[%s] 不是一個有效的配置指令。</target>
+        <target xml:lang="zh-TW">[%s] 不是一個有效的設定指令。</target>
         <note>Context:
 File: classes/Configuration.php:425</note>
       </trans-unit>

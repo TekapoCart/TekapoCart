@@ -28,7 +28,7 @@ File: install-dev/classes/controllerHttp.php:113</note>
       </trans-unit>
       <trans-unit id="3c4e32d95f12c00d16a76057a7af18f6" approved="yes">
         <source>System configuration</source>
-        <target xml:lang="zh-TW">系統配置</target>
+        <target xml:lang="zh-TW">系統設定</target>
         <note>Context:
 File: install-dev/classes/controllerHttp.php:118</note>
       </trans-unit>

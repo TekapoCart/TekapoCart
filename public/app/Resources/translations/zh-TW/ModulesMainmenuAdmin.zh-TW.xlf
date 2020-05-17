@@ -114,7 +114,7 @@ File: modules/ps_mainmenu/ps_mainmenu.php:1022</note>
       </trans-unit>
       <trans-unit id="0a112e5da975d8eaf28df9219c397764" approved="yes">
         <source>All active products combinations quantities will be changed</source>
-        <target xml:lang="zh-TW">所有可使用屬性的數量將被更新</target>
+        <target xml:lang="zh-TW">所有可使用組合的數量將被更新</target>
         <note>Context:
 File: modules/ps_mainmenu/ps_mainmenu.php:1026</note>
       </trans-unit>
@@ -163,7 +163,7 @@ File: modules/ps_mainmenu/ps_mainmenu.php:1326</note>
       </trans-unit>
       <trans-unit id="387a8014f530f080bf2f3be723f8c164" approved="yes">
         <source>Link list</source>
-        <target xml:lang="zh-TW">連結列表</target>
+        <target xml:lang="zh-TW">連結區塊</target>
         <note>Context:
 File: modules/ps_mainmenu/ps_mainmenu.php:1357</note>
       </trans-unit>

@@ -501,7 +501,7 @@ File: src/PrestaShopBundle/Command/ModuleCommand.php:154</note>
       </trans-unit>
       <trans-unit id="e92af04f3580fee9164214abd4b621a4" approved="yes">
         <source>Validation of configuration details failed:</source>
-        <target xml:lang="zh-TW">配置細節認證失敗：</target>
+        <target xml:lang="zh-TW">設定細節認證失敗：</target>
         <note>Context:
 File: src/PrestaShopBundle/Command/ModuleCommand.php:130</note>
       </trans-unit>

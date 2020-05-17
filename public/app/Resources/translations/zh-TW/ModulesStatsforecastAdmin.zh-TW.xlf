@@ -202,7 +202,7 @@ File: modules/statsforecast/statsforecast.php:564</note>
       </trans-unit>
       <trans-unit id="8471eed257db7258f935588a664ba4f3" approved="yes">
         <source>Attribute distribution</source>
-        <target xml:lang="zh-TW">屬性分佈</target>
+        <target xml:lang="zh-TW">規格分佈</target>
         <note>Context:
 File: modules/statsforecast/statsforecast.php:585</note>
       </trans-unit>

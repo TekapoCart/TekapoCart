@@ -225,7 +225,7 @@ File: controllers/admin/AdminWebserviceController.php:84</note>
       </trans-unit>
       <trans-unit id="c03f07bc287e77654a26af409b4d93fa" approved="yes">
         <source>Before choosing "Yes", check that PHP is not configured as an Apache module on your server.</source>
-        <target xml:lang="zh-CN">在选择“是”，请检查PHP没有配置为您的服务器上的Apache模块。</target>
+        <target xml:lang="zh-CN">在选择“是”，请检查PHP没有設定为您的服务器上的Apache模块。</target>
         <note>Context:
 File: controllers/admin/AdminWebserviceController.php:96</note>
       </trans-unit>

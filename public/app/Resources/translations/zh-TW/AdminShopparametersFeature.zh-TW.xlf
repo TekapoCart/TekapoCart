@@ -621,7 +621,7 @@ File: controllers/admin/AdminSearchConfController.php:91</note>
       </trans-unit>
       <trans-unit id="9ed967cf992b654e59df8663fce97d59" approved="yes">
         <source>You can set a cron job that will rebuild your index using the following URL:</source>
-        <target xml:lang="zh-TW">您可以設定系統排程執行下面網址來重建您的索引：</target>
+        <target xml:lang="zh-TW">您可以設定系統排程執行下面網址來重建索引：</target>
         <note>Context:
 File: controllers/admin/AdminSearchConfController.php:94</note>
       </trans-unit>
@@ -717,7 +717,7 @@ File: controllers/admin/AdminSearchConfController.php:265</note>
       </trans-unit>
       <trans-unit id="1b25f9ffbf4d185dbb985380a04732cc" approved="yes">
         <source>Attributes weight</source>
-        <target xml:lang="zh-TW">屬性權重</target>
+        <target xml:lang="zh-TW">規格權重</target>
         <note>Context:
 File: controllers/admin/AdminSearchConfController.php:271</note>
       </trans-unit>
@@ -799,13 +799,13 @@ File: controllers/admin/AdminMetaController.php:118</note>
       </trans-unit>
       <trans-unit id="7959e21ff0b83542251ca0b4e9a62eea" approved="yes">
         <source>Generate robots.txt file</source>
-        <target xml:lang="zh-TW">產生robots.txt檔案</target>
+        <target xml:lang="zh-TW">產生 robots.txt</target>
         <note>Context:
 File: controllers/admin/AdminMetaController.php:135</note>
       </trans-unit>
       <trans-unit id="345d6249c20c6319bb09edaaf536744b" approved="yes">
         <source>Robots file generation</source>
-        <target xml:lang="zh-TW">Robots檔案產生</target>
+        <target xml:lang="zh-TW">重新產生 robots.txt</target>
         <note>Context:
 File: controllers/admin/AdminMetaController.php:143</note>
       </trans-unit>
@@ -1071,7 +1071,7 @@ File: controllers/admin/AdminGroupsController.php:110</note>
       </trans-unit>
       <trans-unit id="312541921a98c69b0f3ac8f5de1b6bb3" approved="yes">
         <source>Guests group</source>
-        <target xml:lang="zh-TW">訪客（有購物車記錄）群組</target>
+        <target xml:lang="zh-TW">訪客（有購物紀錄）群組</target>
         <note>Context:
 File: controllers/admin/AdminGroupsController.php:118</note>
       </trans-unit>
@@ -1457,7 +1457,7 @@ File: controllers/admin/AdminStatusesController.php:302</note>
       </trans-unit>
       <trans-unit id="6d6c83be0e74d3b3d041cd61fa607ede" approved="yes">
         <source>Allow a customer to download and view PDF versions of his/her invoices.</source>
-        <target xml:lang="zh-TW">允許一個客戶下載以及檢視發票的 PDF 版本</target>
+        <target xml:lang="zh-TW">允許一個客戶下載以及檢視銷貨單的 PDF 版本</target>
         <note>Context:
 File: controllers/admin/AdminStatusesController.php:313</note>
       </trans-unit>
@@ -1475,7 +1475,7 @@ File: controllers/admin/AdminStatusesController.php:335</note>
       </trans-unit>
       <trans-unit id="05ffab376e5c4a64caa28a1c4bd9fc0d" approved="yes">
         <source>Attach invoice PDF to email.</source>
-        <target xml:lang="zh-TW">在電子郵件中附上發票PDF。</target>
+        <target xml:lang="zh-TW">在電子郵件中附上銷貨單PDF。</target>
         <note>Context:
 File: controllers/admin/AdminStatusesController.php:346</note>
       </trans-unit>
@@ -1661,13 +1661,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="01dabe7ae47f9848c5e38f353a8f866f" approved="yes">
         <source>Display the "add to cart" button when a product has attributes</source>
-        <target xml:lang="zh-TW">商品有屬性時顯示「加入購物車」</target>
+        <target xml:lang="zh-TW">商品有規格時顯示「加入購物車」</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_page.html.twig:55</note>
       </trans-unit>
       <trans-unit id="0a91cf360875af4259f26bc7e2971132">
         <source>Separator of attribute anchor on the product links</source>
-        <target xml:lang="zh-TW">商品連結屬性分隔符號</target>
+        <target xml:lang="zh-TW">商品連結規格分隔符號</target>
         <note>Line: 71</note>
       </trans-unit>
       <trans-unit id="f7699b3d1af7fe3cdb3a6ff301940fdf" approved="yes">
@@ -1760,7 +1760,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="65055b5469b4ad0c6f799ad782d1ebe5" approved="yes">
         <source>Default pack stock management</source>
-        <target xml:lang="zh-TW">預設組合庫存管理</target>
+        <target xml:lang="zh-TW">預設庫存管理</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_stock.html.twig:80</note>
       </trans-unit>
@@ -1960,6 +1960,20 @@ File: admin-dev/themes/default/template/controllers/referrers/helpers/view/view.
         <source>Decrement both.</source>
         <target xml:lang="zh-TW">同時扣除組合及商品庫存</target>
         <note>Line: 75</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/TrafficSeo/Meta/Blocks/seo_options_configuration.html.twig" source-language="en-US" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="49b28884b3ba83e6b5379973a3e1873f">
+        <source>SEO options</source>
+        <target xml:lang="zh-TW">SEO 設定</target>
+        <note>Line: 32</note>
+      </trans-unit>
+      <trans-unit id="18a405e3df98774d6fe16c522825ca02">
+        <source>Display attributes in the product meta title</source>
+        <target xml:lang="zh-TW">在商品頁，Page Title 顯示商品規格</target>
+        <note>Line: 38</note>
       </trans-unit>
     </body>
   </file>

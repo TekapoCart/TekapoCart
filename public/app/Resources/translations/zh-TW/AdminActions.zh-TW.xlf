@@ -632,7 +632,7 @@ File: admin-dev/themes/default/template/controllers/tags/helpers/form/form.tpl:5
     <body>
       <trans-unit id="f1206f9fadc5ce41694f69129aecac26" approved="yes">
         <source>Configure</source>
-        <target xml:lang="zh-TW">配置</target>
+        <target xml:lang="zh-TW">設定</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/modules/configure.tpl:44</note>
       </trans-unit>
@@ -694,13 +694,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/ProductImage/form.html.twig:43<
     <body>
       <trans-unit id="4c41e0bd957698b58100a5c687d757d9" approved="yes">
         <source>Select all</source>
-        <target xml:lang="zh-TW">選擇全部</target>
+        <target xml:lang="zh-TW">全選</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/countries/helpers/list/list_footer.tpl:37</note>
       </trans-unit>
       <trans-unit id="237c7b6874386141a095e321c9fdfd38" approved="yes">
         <source>Unselect all</source>
-        <target xml:lang="zh-TW">全部不選</target>
+        <target xml:lang="zh-TW">全不選</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/countries/helpers/list/list_footer.tpl:42</note>
       </trans-unit>

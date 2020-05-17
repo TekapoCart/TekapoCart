@@ -98,7 +98,7 @@ File: controllers/admin/AdminProductsController.php:1086</note>
       </trans-unit>
       <trans-unit id="c22861f3c2065a12f51c5f1fb2f83b54" approved="yes">
         <source>An error occurred while updating the custom configuration.</source>
-        <target xml:lang="zh-CN">在更新客户模式配置的时候发生了错误。</target>
+        <target xml:lang="zh-CN">在更新客户模式設定的时候发生了错误。</target>
         <note>Context:
 File: controllers/admin/AdminProductsController.php:1073</note>
       </trans-unit>

@@ -220,13 +220,13 @@ File: controllers/admin/AdminTrackingController.php:114</note>
       </trans-unit>
       <trans-unit id="0181e2b8568143a3608fea8e657a81cb" approved="yes">
         <source>List of products with combinations but without available quantities for sale:</source>
-        <target xml:lang="zh-TW">無庫存商品（含屬性）</target>
+        <target xml:lang="zh-TW">無庫存商品（多規格）</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:158</note>
       </trans-unit>
       <trans-unit id="d06aa90bdc7545b64a808ef956b20b77" approved="yes">
         <source>List of products without combinations and without available quantities for sale:</source>
-        <target xml:lang="zh-TW">無庫存可銷售的商品（不含屬性）</target>
+        <target xml:lang="zh-TW">無庫存可銷售的商品（一般商品）</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:202</note>
       </trans-unit>
@@ -244,7 +244,7 @@ File: controllers/admin/AdminTrackingController.php:263</note>
       </trans-unit>
       <trans-unit id="eaff59412c15abca3419aee22b02d726" approved="yes">
         <source>List of products without description</source>
-        <target xml:lang="zh-TW">無商品說明商品</target>
+        <target xml:lang="zh-TW">無商品說明</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:299</note>
       </trans-unit>
@@ -308,7 +308,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pric
       </trans-unit>
       <trans-unit id="47ac923d219501859fb68fed8c8db77b" approved="yes">
         <source>Combination</source>
-        <target xml:lang="zh-TW">屬性</target>
+        <target xml:lang="zh-TW">組合</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/pricing.html.twig:143</note>
       </trans-unit>
@@ -360,19 +360,19 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
       </trans-unit>
       <trans-unit id="7e64da36262d906a23b4b8614018bcd1" approved="yes">
         <source>Manage your product combinations</source>
-        <target xml:lang="zh-TW">管理您的屬性</target>
+        <target xml:lang="zh-TW">管理您的組合</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_combinations.html.twig:28</note>
       </trans-unit>
       <trans-unit id="146cda0589b3eb8697196bdc05e6b049" approved="yes">
         <source>Bulk actions ([1]/[2] combination(s) selected)</source>
-        <target xml:lang="zh-TW">批次操作（己選 [1]/[2] 個屬性）</target>
+        <target xml:lang="zh-TW">批次操作（己選 [1]/[2] 個組合）</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_combinations.html.twig:67</note>
       </trans-unit>
       <trans-unit id="7c52393eaa879dd8c3081f4c3c847846" approved="yes">
         <source>Default combination</source>
-        <target xml:lang="zh-TW">預設屬性</target>
+        <target xml:lang="zh-TW">預設封面</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_combinations.html.twig:93</note>
       </trans-unit>
@@ -424,13 +424,13 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductCombination.php:137</note>
       </trans-unit>
       <trans-unit id="e9d0876ad242d421e19d583f6f379f5f" approved="yes">
         <source>Set as default combination</source>
-        <target xml:lang="zh-TW">設為預設屬性</target>
+        <target xml:lang="zh-TW">設為封面</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductCombination.php:168</note>
       </trans-unit>
       <trans-unit id="a22ed40bafe8f07b6d02c4a4966c8aea" approved="yes">
         <source>Select images of this combination:</source>
-        <target xml:lang="zh-TW">選擇屬性圖片：</target>
+        <target xml:lang="zh-TW">選擇組合圖片：</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductCombination.php:191</note>
       </trans-unit>
@@ -452,7 +452,7 @@ File: src/PrestaShopBundle/Controller/Api/StockController.php:165</note>
       </trans-unit>
       <trans-unit id="5321a616e36742f66aa933956e839217" approved="yes">
         <source>Combination name</source>
-        <target xml:lang="zh-TW">屬性名稱</target>
+        <target xml:lang="zh-TW">組合名稱</target>
         <note>Context:
 File: src/PrestaShopBundle/Controller/Api/StockController.php:158</note>
       </trans-unit>
@@ -817,19 +817,19 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/esse
       </trans-unit>
       <trans-unit id="8408c9e822e4412516d0ac876d683b6c" approved="yes">
         <source>Add a feature</source>
-        <target xml:lang="zh-TW">新增規格</target>
+        <target xml:lang="zh-TW">新增特色</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/essentials.html.twig:128</note>
       </trans-unit>
       <trans-unit id="90d98afb8f4c3436765b9eb47127577d" approved="yes">
         <source>Simple product</source>
-        <target xml:lang="zh-TW">簡易商品</target>
+        <target xml:lang="zh-TW">一般商品</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/essentials.html.twig:161</note>
       </trans-unit>
       <trans-unit id="f99f15e7e2a30d8522f0a39ecf6bcc0d" approved="yes">
         <source>Product with combinations</source>
-        <target xml:lang="zh-TW">屬性商品</target>
+        <target xml:lang="zh-TW">多規格</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Panels/essentials.html.twig:167</note>
       </trans-unit>
@@ -850,7 +850,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductQuantity.php:197</note>
       </trans-unit>
       <trans-unit id="b2c80334809f9130d46e89b66b6d8544" approved="yes">
         <source>Create combinations</source>
-        <target xml:lang="zh-TW">新增屬性</target>
+        <target xml:lang="zh-TW">新增規格</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductQuantity.php:90</note>
       </trans-unit>
@@ -862,7 +862,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductQuantity.php:99</note>
       </trans-unit>
       <trans-unit id="4aeb39ce058edebf91ef47818c092420" approved="yes">
         <source>The available quantities for the current product and its combinations are based on the stock in your warehouse (using the advanced stock management system). </source>
-        <target xml:lang="zh-TW">當前商品及其屬性組合的可用數量基於倉庫中的庫存（使用高級庫存管理系統）。 </target>
+        <target xml:lang="zh-TW">當前商品及其組合的可用數量基於倉庫中的庫存（使用高級庫存管理系統）。 </target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductQuantity.php:115</note>
       </trans-unit>
@@ -1140,7 +1140,7 @@ File: src/PrestaShopBundle/Controller/Admin/ProductController.php:1064</note>
     <body>
       <trans-unit id="447da4af35bd09b4d501afb8a2090909" approved="yes">
         <source>Add new cart rule</source>
-        <target xml:lang="zh-TW">新增優惠活動</target>
+        <target xml:lang="zh-TW">新增條件折扣</target>
         <note>Context:
 File: controllers/admin/AdminCartRulesController.php:136</note>
       </trans-unit>
@@ -1152,7 +1152,7 @@ File: controllers/admin/AdminCartRulesController.php:678</note>
       </trans-unit>
       <trans-unit id="65b7eaeb9ba4e9903f82297face9f7cd" approved="yes">
         <source>Cart Rules</source>
-        <target xml:lang="zh-TW">優惠活動</target>
+        <target xml:lang="zh-TW">條件折扣</target>
         <note>Context:
 File: controllers/admin/AdminCartRulesController.php:678</note>
       </trans-unit>
@@ -1180,13 +1180,13 @@ File: controllers/admin/AdminSpecificPriceRuleController.php:131</note>
       </trans-unit>
       <trans-unit id="c1da0bfd4d60d1aab58fcf8a8e933972" approved="yes">
         <source>Add new catalog price rule</source>
-        <target xml:lang="zh-TW">新增特價規則</target>
+        <target xml:lang="zh-TW">新增全館特價</target>
         <note>Context:
 File: controllers/admin/AdminSpecificPriceRuleController.php:143</note>
       </trans-unit>
       <trans-unit id="e5bfab8b7f97b8f0b19ad7e393d7c566" approved="yes">
         <source>Catalog price rules</source>
-        <target xml:lang="zh-TW">特價規則</target>
+        <target xml:lang="zh-TW">全館特價</target>
         <note>Context:
 File: controllers/admin/AdminSpecificPriceRuleController.php:177</note>
       </trans-unit>
@@ -1254,25 +1254,25 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductSpecificPrice.php:259</note
     <body>
       <trans-unit id="d6ae681fcd58f1e1936ca97da36528ff" approved="yes">
         <source>Add a new feature</source>
-        <target xml:lang="zh-TW">新增規格</target>
+        <target xml:lang="zh-TW">新增特色</target>
         <note>Context:
 File: controllers/admin/AdminFeaturesController.php:157</note>
       </trans-unit>
       <trans-unit id="5f46be79c24b6cde1ff2176a2ce917e9" approved="yes">
         <source>Add new feature</source>
-        <target xml:lang="zh-TW">新增規格</target>
+        <target xml:lang="zh-TW">新增特色</target>
         <note>Context:
 File: controllers/admin/AdminFeaturesController.php:197</note>
       </trans-unit>
       <trans-unit id="ef8edef8db1844688f6a542b9cf45742" approved="yes">
         <source>Edit New Feature</source>
-        <target xml:lang="zh-TW">編輯新規格</target>
+        <target xml:lang="zh-TW">編輯新特色</target>
         <note>Context:
 File: controllers/admin/AdminFeaturesController.php:276</note>
       </trans-unit>
       <trans-unit id="dd261387b1ad7605716e5edbc0164028" approved="yes">
         <source>Add New Feature</source>
-        <target xml:lang="zh-TW">新增規格</target>
+        <target xml:lang="zh-TW">新增特色</target>
         <note>Context:
 File: controllers/admin/AdminFeaturesController.php:281</note>
       </trans-unit>
@@ -1300,7 +1300,7 @@ File: src/PrestaShopBundle/Form/Admin/Feature/ProductFeature.php:75</note>
       </trans-unit>
       <trans-unit id="5ebd6e1c1cdeac7a7c1896ab842d98da" approved="yes">
         <source>Choose a feature</source>
-        <target xml:lang="zh-TW">選擇規格</target>
+        <target xml:lang="zh-TW">選擇特色</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Feature/ProductFeature.php:84</note>
       </trans-unit>
@@ -1334,7 +1334,7 @@ File: controllers/admin/AdminAttributesGroupsController.php:628</note>
       </trans-unit>
       <trans-unit id="fce2e84f3cce0e5351e85e9f0cb20107" approved="yes">
         <source>Add New Value</source>
-        <target xml:lang="zh-TW">新增規格</target>
+        <target xml:lang="zh-TW">新增特色</target>
         <note>Context:
 File: controllers/admin/AdminAttributesGroupsController.php:631</note>
       </trans-unit>
@@ -1370,7 +1370,7 @@ File: controllers/admin/AdminAttributesGroupsController.php:182</note>
       </trans-unit>
       <trans-unit id="287234a1ff35a314b5b6bc4e5828e745" approved="yes">
         <source>Attributes</source>
-        <target xml:lang="zh-TW">屬性</target>
+        <target xml:lang="zh-TW">規格</target>
         <note>Context:
 File: controllers/admin/AdminAttributesGroupsController.php:188</note>
       </trans-unit>
@@ -1382,13 +1382,13 @@ File: controllers/admin/AdminAttributesGroupsController.php:203</note>
       </trans-unit>
       <trans-unit id="17af8baa9b3f90e936589069e4223280" approved="yes">
         <source>Attribute type</source>
-        <target xml:lang="zh-TW">屬性類型</target>
+        <target xml:lang="zh-TW">規格類型</target>
         <note>Context:
 File: controllers/admin/AdminAttributesGroupsController.php:212</note>
       </trans-unit>
       <trans-unit id="0e010c6b3fb88bf4277c880d1657787a" approved="yes">
         <source>Attribute group</source>
-        <target xml:lang="zh-TW">屬性群組</target>
+        <target xml:lang="zh-TW">規格群組</target>
         <note>Context:
 File: controllers/admin/AdminAttributesGroupsController.php:261</note>
       </trans-unit>
@@ -1400,7 +1400,7 @@ File: controllers/admin/AdminAttributesGroupsController.php:322</note>
       </trans-unit>
       <trans-unit id="00039b674d8ced58313546dcab88a032" approved="yes">
         <source>Add new attribute</source>
-        <target xml:lang="zh-TW">新增屬性</target>
+        <target xml:lang="zh-TW">新增規格</target>
         <note>Context:
 File: controllers/admin/AdminAttributesGroupsController.php:512</note>
       </trans-unit>
@@ -1412,25 +1412,25 @@ File: controllers/admin/AdminAttributesGroupsController.php:526</note>
       </trans-unit>
       <trans-unit id="71e8f8a090925f75719dfa0a5eae059e" approved="yes">
         <source>Add New Values</source>
-        <target xml:lang="zh-TW">新增規格</target>
+        <target xml:lang="zh-TW">新增特色</target>
         <note>Context:
 File: controllers/admin/AdminAttributesGroupsController.php:564</note>
       </trans-unit>
       <trans-unit id="52729803b243ea9693a892161d5b8e38" approved="yes">
         <source>Add New Attributes</source>
-        <target xml:lang="zh-TW">新增屬性</target>
+        <target xml:lang="zh-TW">新增規格</target>
         <note>Context:
 File: controllers/admin/AdminAttributesGroupsController.php:576</note>
       </trans-unit>
       <trans-unit id="1f40023e11d8401b0bffadc419135247" approved="yes">
         <source>Edit New Attribute</source>
-        <target xml:lang="zh-TW">編輯新屬性</target>
+        <target xml:lang="zh-TW">編輯新規格</target>
         <note>Context:
 File: controllers/admin/AdminAttributesGroupsController.php:593</note>
       </trans-unit>
       <trans-unit id="713271e705e5269fc82684445cd063a8" approved="yes">
         <source>Add New Attribute</source>
-        <target xml:lang="zh-TW">新增屬性</target>
+        <target xml:lang="zh-TW">新增規格</target>
         <note>Context:
 File: controllers/admin/AdminAttributesGroupsController.php:597</note>
       </trans-unit>
@@ -1440,7 +1440,7 @@ File: controllers/admin/AdminAttributesGroupsController.php:597</note>
     <body>
       <trans-unit id="81315cfd898aada1e99e0034b4b078c3" approved="yes">
         <source>Attributes generator</source>
-        <target xml:lang="zh-TW">屬性產生器</target>
+        <target xml:lang="zh-TW">規格產生器</target>
         <note>Context:
 File: controllers/admin/AdminAttributeGeneratorController.php:216</note>
       </trans-unit>
@@ -1800,7 +1800,7 @@ File: admin-dev/themes/default/template/controllers/customer_threads/helpers/vie
     <body>
       <trans-unit id="b9208b03bcc9eb4a336258dcdcb66207" approved="yes">
         <source>Combinations</source>
-        <target xml:lang="zh-TW">屬性</target>
+        <target xml:lang="zh-TW">規格組合</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.html.twig:342</note>
       </trans-unit>
@@ -1866,7 +1866,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.htm
       </trans-unit>
       <trans-unit id="fd6d6ce9526e7db581ba81ee86373e9e" approved="yes">
         <source>Choose a module to configure</source>
-        <target xml:lang="zh-TW">選擇要配置的模組</target>
+        <target xml:lang="zh-TW">選擇要設定的模組</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/product.html.twig:192</note>
       </trans-unit>
@@ -1916,7 +1916,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductSeo.php:111</note>
       </trans-unit>
       <trans-unit id="1dec4f55522b828fe5dacf8478021a9e" approved="yes">
         <source>Friendly URL</source>
-        <target xml:lang="zh-TW">友善連結</target>
+        <target xml:lang="zh-TW">友善網址</target>
         <note>Context:
 File: src/PrestaShopBundle/Form/Admin/Product/ProductSeo.php:128</note>
       </trans-unit>
@@ -2235,7 +2235,7 @@ File: admin-dev/themes/default/template/controllers/manufacturers/helpers/view/v
       </trans-unit>
       <trans-unit id="1caa6ff629641a4eb20f190f7a0539ca" approved="yes">
         <source>Attribute name</source>
-        <target xml:lang="zh-TW">屬性名稱</target>
+        <target xml:lang="zh-TW">規格名稱</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/manufacturers/helpers/view/view.tpl:119</note>
       </trans-unit>
@@ -2257,7 +2257,7 @@ File: admin-dev/themes/default/template/controllers/manufacturers/helpers/view/v
     <body>
       <trans-unit id="4e021cd834848e751e2d1bc66cee697d" approved="yes">
         <source>All combinations</source>
-        <target xml:lang="zh-TW">所有屬性</target>
+        <target xml:lang="zh-TW">所有組合</target>
         <note>Context:
 File: src/Adapter/Product/AdminProductWrapper.php:378</note>
       </trans-unit>
@@ -2403,13 +2403,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Blocks/foot
     <body>
       <trans-unit id="1374a796a4d88166ce5107eb6aec41ff" approved="yes">
         <source>Prev. combination</source>
-        <target xml:lang="zh-TW">上一個屬性</target>
+        <target xml:lang="zh-TW">上一個組合</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_combination.html.twig:55</note>
       </trans-unit>
       <trans-unit id="3c9d5cac3c3b1b3f40ef1d6ce929ad6e" approved="yes">
         <source>Next combination</source>
-        <target xml:lang="zh-TW">下一個屬性</target>
+        <target xml:lang="zh-TW">下一個組合</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_combination.html.twig:56</note>
       </trans-unit>
@@ -2421,7 +2421,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
       </trans-unit>
       <trans-unit id="96aed2644a3249464e20729dc8c39fb2" approved="yes">
         <source>Combination details</source>
-        <target xml:lang="zh-TW">屬性詳細</target>
+        <target xml:lang="zh-TW">組合明細</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_combination.html.twig:63</note>
       </trans-unit>
@@ -2439,7 +2439,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
       </trans-unit>
       <trans-unit id="2477a8ca4d9fe0ce57184d2ae0c59647" approved="yes">
         <source>Does this combination have a different price per unit?</source>
-        <target xml:lang="zh-TW">這個屬性是否有不同的單位價格？</target>
+        <target xml:lang="zh-TW">這個組合是否有不同的單位價格？</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_combination.html.twig:173</note>
       </trans-unit>
@@ -2525,7 +2525,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
     <body>
       <trans-unit id="1ea5630be8a472f075b184deb7256e3d" approved="yes">
         <source>You can increase or decrease low stock levels in bulk. You cannot disable them in bulk: you have to do it on a per-combination basis.</source>
-        <target xml:lang="zh-TW">您可以批次增加或減少庫存量。 您無法批次禁用它們：您必須以屬性為基礎進行操作。</target>
+        <target xml:lang="zh-TW">您可以批次增加或減少庫存量。 您無法批次禁用它們：您必須組合為基礎進行操作。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_combinations_bulk.html.twig:78</note>
       </trans-unit>
@@ -2537,7 +2537,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
       </trans-unit>
       <trans-unit id="c24933abc09a6487f63ea8ddce98bfd4" approved="yes">
         <source>Delete combinations</source>
-        <target xml:lang="zh-TW">刪除屬性</target>
+        <target xml:lang="zh-TW">刪除組合</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_combinations_bulk.html.twig:95</note>
       </trans-unit>
@@ -2722,7 +2722,7 @@ File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:
       </trans-unit>
       <trans-unit id="f507c7574b6368f942ea9a2b959d8ec9" approved="yes">
         <source>Partial use</source>
-        <target xml:lang="zh-TW">是否可部份使用</target>
+        <target xml:lang="zh-TW">折扣碼是否可分次使用</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/informations.tpl:113</note>
       </trans-unit>
@@ -2844,19 +2844,19 @@ File: admin-dev/themes/default/template/controllers/cart_rules/conditions.tpl:23
       </trans-unit>
       <trans-unit id="eb8bd4a7aeee5a49102d5269113b1142" approved="yes">
         <source>Compatibility with other cart rules</source>
-        <target xml:lang="zh-TW">與其它優惠活動的相容性</target>
+        <target xml:lang="zh-TW">選擇與其他條件折扣併用</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/conditions.tpl:251</note>
       </trans-unit>
       <trans-unit id="06d8251983d901d62c12ed00fe65ddc1" approved="yes">
         <source>Uncombinable cart rules</source>
-        <target xml:lang="zh-TW">無法組合的優惠活動</target>
+        <target xml:lang="zh-TW">無法併用</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/conditions.tpl:259</note>
       </trans-unit>
       <trans-unit id="53fb9df3249c49828006e57434d02d65" approved="yes">
         <source>Combinable cart rules</source>
-        <target xml:lang="zh-TW">可組合的優惠活動</target>
+        <target xml:lang="zh-TW">可併用</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/conditions.tpl:267</note>
       </trans-unit>
@@ -2890,7 +2890,7 @@ File: admin-dev/themes/default/template/controllers/cart_rules/conditions.tpl:31
     <body>
       <trans-unit id="48bc4d0ad8c02bb7d116b43d907570e2" approved="yes">
         <source>Cart rule</source>
-        <target xml:lang="zh-TW">優惠活動</target>
+        <target xml:lang="zh-TW">條件折扣</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/cart_rules/form.tpl:26</note>
       </trans-unit>

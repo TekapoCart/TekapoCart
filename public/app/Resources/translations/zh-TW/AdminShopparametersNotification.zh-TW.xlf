@@ -22,7 +22,7 @@ File: controllers/admin/AdminMetaController.php:139</note>
       </trans-unit>
       <trans-unit id="10ebcb160107c452a2fc3c51804fc780" approved="yes">
         <source>Your robots.txt file MUST be in your website's root directory and nowhere else (e.g. http://www.example.com/robots.txt).</source>
-        <target xml:lang="zh-TW">您的 robots.txt 檔案必須放在網站根目錄 (例如 http://www.yoursite.com/robots.txt).</target>
+        <target xml:lang="zh-TW">robots.txt 已經存在，存放在 http://www.yoursite.com/robots.txt，只有當網址有變動時，才需重新產生。</target>
         <note>Context:
 File: controllers/admin/AdminMetaController.php:132
  Comment: Options to generate robot.txt</note>

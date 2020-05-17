@@ -76,25 +76,25 @@ File: modules/dashproducts/dashproducts.php:383</note>
       </trans-unit>
       <trans-unit id="85bf7474324d7d02725e4dca586afcd9" approved="yes">
         <source>Number of "Recent Orders" to display</source>
-        <target xml:lang="zh-TW">顯示“最近的訂單”數量</target>
+        <target xml:lang="zh-TW">顯示「最新訂單」數量</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:528</note>
       </trans-unit>
       <trans-unit id="735b8c7f6d50b4c6f818deeab3cdea4a" approved="yes">
         <source>Number of "Best Sellers" to display</source>
-        <target xml:lang="zh-TW">顯示“最佳賣家”的數量</target>
+        <target xml:lang="zh-TW">顯示「熱賣商品」數量</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:532</note>
       </trans-unit>
       <trans-unit id="14d24dddc4c67abf8364b980b2ccd5a2" approved="yes">
         <source>Number of "Most Viewed" to display</source>
-        <target xml:lang="zh-TW">顯示“最多瀏覽數商品”的數量</target>
+        <target xml:lang="zh-TW">顯示「最多瀏覽商品」數量</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:536</note>
       </trans-unit>
       <trans-unit id="f1ee1eaab342241138d45f35f4d8466a" approved="yes">
         <source>Number of "Top Searches" to display</source>
-        <target xml:lang="zh-TW">顯示“熱門搜尋”的數量</target>
+        <target xml:lang="zh-TW">顯示「熱門搜尋」的數量</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:540</note>
       </trans-unit>
@@ -104,13 +104,13 @@ File: modules/dashproducts/dashproducts.php:540</note>
     <body>
       <trans-unit id="3e361ce73ecabd6524af286d55809ed7" approved="yes">
         <source>Products and Sales</source>
-        <target xml:lang="zh-TW">商品與銷售</target>
+        <target xml:lang="zh-TW">銷售概況</target>
         <note>Context:
 File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:28</note>
       </trans-unit>
       <trans-unit id="fd3458547ef9c3a8bd0e1e1b4ef2b4dd" approved="yes">
         <source>Recent Orders</source>
-        <target xml:lang="zh-TW">最近的訂單</target>
+        <target xml:lang="zh-TW">最新訂單</target>
         <note>Context:
 File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:50</note>
       </trans-unit>

@@ -62,19 +62,19 @@ File: controllers/admin/AdminEmailsController.php:75</note>
       </trans-unit>
       <trans-unit id="ec76c5b544633d334c7a3f92db1c7efd" approved="yes">
         <source>Send emails to</source>
-        <target xml:lang="zh-TW">訂單客服信箱</target>
+        <target xml:lang="zh-TW">接收通知信的信箱</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:96</note>
       </trans-unit>
       <trans-unit id="982bb3f2cc4922620fd3aee7ff15b552" approved="yes">
         <source>Never send emails (may be useful for testing purposes)</source>
-        <target xml:lang="zh-TW">不要發出任何通知信（測試的時候適用）</target>
+        <target xml:lang="zh-TW">不要發出任何通知信</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:110</note>
       </trans-unit>
       <trans-unit id="e6095b01597caf275fb24fa766fb8a57" approved="yes">
         <source>Set my own SMTP parameters (for advanced users ONLY)</source>
-        <target xml:lang="zh-TW">設定我自己的 SMTP</target>
+        <target xml:lang="zh-TW">設定我自己的 SMTP（建議選項）</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:111</note>
       </trans-unit>
@@ -152,19 +152,19 @@ File: controllers/admin/AdminEmailsController.php:187</note>
       </trans-unit>
       <trans-unit id="a8a9e7c120e7020435d955d3a0c96471" approved="yes">
         <source>Test your email configuration</source>
-        <target xml:lang="zh-TW">測試您通知信的設定</target>
+        <target xml:lang="zh-TW">發送測試</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:197</note>
       </trans-unit>
       <trans-unit id="5f23f9739fa16efc7ddd06bb03096998" approved="yes">
         <source>Send a test email to</source>
-        <target xml:lang="zh-TW">傳送測試郵件至</target>
+        <target xml:lang="zh-TW">檢查是否正確設定，發送一封測試信至</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:201</note>
       </trans-unit>
       <trans-unit id="16186ead9220c2a4646402c69109cfa0" approved="yes">
         <source>Send a test email</source>
-        <target xml:lang="zh-TW">發送測試 E-Mail</target>
+        <target xml:lang="zh-TW">發送</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:211</note>
       </trans-unit>
@@ -252,7 +252,7 @@ File: controllers/admin/AdminImportController.php:125</note>
       </trans-unit>
       <trans-unit id="8ae880593c2afcc7da6d3530513a05d6" approved="yes">
         <source>Attribute (Name:Type:Position)</source>
-        <target xml:lang="zh-TW">屬性 (名稱：類型：位置)</target>
+        <target xml:lang="zh-TW">規格 (名稱：類型：位置)</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:127</note>
       </trans-unit>
@@ -294,7 +294,7 @@ File: controllers/admin/AdminImportController.php:144</note>
       </trans-unit>
       <trans-unit id="e933b93c26b14c12ac7818867e54c5d9" approved="yes">
         <source>Combination availability date</source>
-        <target xml:lang="zh-TW">屬性發售日</target>
+        <target xml:lang="zh-TW">組合發售日</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:145</note>
       </trans-unit>
@@ -696,7 +696,7 @@ File: controllers/admin/AdminImportController.php:570</note>
       </trans-unit>
       <trans-unit id="41b00531a619d5e0f965854e352529f1" approved="yes">
         <source>Product Attribute ID</source>
-        <target xml:lang="zh-TW">商品屬性 ID</target>
+        <target xml:lang="zh-TW">商品規格 ID</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:571</note>
       </trans-unit>
@@ -766,7 +766,7 @@ File: admin-dev/themes/default/template/controllers/orders/helpers/view/view.tpl
     <body>
       <trans-unit id="ecb833e2dc5d6c03d4d0cddf1b15e85a" approved="yes">
         <source>Severity (1-4)</source>
-        <target xml:lang="zh-TW">嚴重程度(1-4)</target>
+        <target xml:lang="zh-TW">嚴重層級 (1-4)</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/LogsPage/Blocks/table.html.twig:39</note>
       </trans-unit>
@@ -794,13 +794,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/Lo
     <body>
       <trans-unit id="5d1f62be1608c8c55ca77098efe5f053" approved="yes">
         <source>Logs by email</source>
-        <target xml:lang="zh-TW">電子郵件記錄</target>
+        <target xml:lang="zh-TW">傳送 E-Mail 通知</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/LogsPage/logs.html.twig:46</note>
       </trans-unit>
       <trans-unit id="daf5a89c7110f00485d0737ff765e830" approved="yes">
         <source>Minimum severity level</source>
-        <target xml:lang="zh-TW">最小嚴重程度層級：</target>
+        <target xml:lang="zh-TW">請選擇層級數字 1-5</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/LogsPage/logs.html.twig:52</note>
       </trans-unit>
@@ -850,7 +850,7 @@ File: controllers/admin/AdminShopController.php:547</note>
       </trans-unit>
       <trans-unit id="4ae24b703273d53941a17737bb2b1a9a" approved="yes">
         <source>Product combinations</source>
-        <target xml:lang="zh-TW">屬性</target>
+        <target xml:lang="zh-TW">組合</target>
         <note>Context:
 File: controllers/admin/AdminShopController.php:549</note>
       </trans-unit>
@@ -874,7 +874,7 @@ File: controllers/admin/AdminShopController.php:553</note>
       </trans-unit>
       <trans-unit id="775a3ab6add326ef93f2382f49f9e500" approved="yes">
         <source>Attribute groups</source>
-        <target xml:lang="zh-TW">屬性群組</target>
+        <target xml:lang="zh-TW">規格群組</target>
         <note>Context:
 File: controllers/admin/AdminShopController.php:554</note>
       </trans-unit>
@@ -892,7 +892,7 @@ File: controllers/admin/AdminShopController.php:559</note>
       </trans-unit>
       <trans-unit id="3b8c8bf8ab2226d5a44454a20ad7fafb" approved="yes">
         <source>Cart rules</source>
-        <target xml:lang="zh-TW">優惠活動</target>
+        <target xml:lang="zh-TW">條件折扣</target>
         <note>Context:
 File: controllers/admin/AdminShopController.php:561</note>
       </trans-unit>
@@ -1519,7 +1519,7 @@ File: src/PrestaShopBundle/Controller/Api/StockController.php:155</note>
       </trans-unit>
       <trans-unit id="ae5977a08e8a3d45283789d99c67c3c3" approved="yes">
         <source>Combination reference</source>
-        <target xml:lang="zh-TW">屬性編號</target>
+        <target xml:lang="zh-TW">組合編號</target>
         <note>Context:
 File: src/PrestaShopBundle/Controller/Api/StockController.php:156</note>
       </trans-unit>
@@ -1667,7 +1667,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/Bl
     <body>
       <trans-unit id="c9869fa659bd86f03aba826acd8db5b5" approved="yes">
         <source>Meaning of severity levels:</source>
-        <target xml:lang="zh-TW">安全層級的定義：</target>
+        <target xml:lang="zh-TW">嚴重程度的定義：</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/LogsPage/Blocks/severity_levels.html.twig:34</note>
       </trans-unit>
@@ -1831,7 +1831,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/sy
       </trans-unit>
       <trans-unit id="cffa72aaebae1bd90bbe1b8d827ecb1c" approved="yes">
         <source>You are using your own SMTP parameters.</source>
-        <target xml:lang="zh-TW">您使用自己的SMTP參數</target>
+        <target xml:lang="zh-TW">您使用自己的 SMTP 參數</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/system_information.html.twig:139</note>
       </trans-unit>
@@ -1843,7 +1843,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/sy
       </trans-unit>
       <trans-unit id="5489d25adfc42d3aadcb90b679405bda" approved="yes">
         <source>SMTP username:</source>
-        <target xml:lang="zh-TW">SMTP用户名稱：</target>
+        <target xml:lang="zh-TW">SMTP 帳號名稱：</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/system_information.html.twig:144</note>
       </trans-unit>

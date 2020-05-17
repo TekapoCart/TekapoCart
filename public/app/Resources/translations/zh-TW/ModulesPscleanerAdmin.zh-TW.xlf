@@ -76,7 +76,7 @@ File: modules/pscleaner/pscleaner.php:394</note>
       </trans-unit>
       <trans-unit id="da69e50b7440e12fe63287904819eaa3" approved="yes">
         <source>I understand that all the catalog data will be removed without possible rollback: products, features, categories, tags, images, prices, attachments, scenes, stocks, attribute groups and values, manufacturers, suppliers...</source>
-        <target xml:lang="zh-TW">我明白所有商品目錄資料將被刪除，而删除是不可能回滾的：商品，特點, 特性，分類，標籤，圖像，價格，附件，製造商，屬性群組及值，等等。。。</target>
+        <target xml:lang="zh-TW">我明白所有商品資料將被刪除，並且不能回復的：商品、規格、特色、分類、標籤、圖片、價格、檔案、製造商、規格群組及數值等等。</target>
         <note>Context:
 File: modules/pscleaner/pscleaner.php:401</note>
       </trans-unit>

@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="b5750478c3c490d2c1df5dfdfdd6b7a4" approved="yes">
         <source>Link List</source>
-        <target xml:lang="zh-TW">連結列表</target>
+        <target xml:lang="zh-TW">連結區塊</target>
         <note>Context:
 File: modules/ps_linklist/ps_linklist.php:57</note>
       </trans-unit>

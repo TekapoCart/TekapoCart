@@ -319,7 +319,7 @@ File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.
       </trans-unit>
       <trans-unit id="698e0d3e044a7ebe56308e190b82b326" approved="yes">
         <source>Purchased products</source>
-        <target xml:lang="zh-TW">已購買商品</target>
+        <target xml:lang="zh-TW">購買商品</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.tpl:308</note>
       </trans-unit>
@@ -331,7 +331,7 @@ File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.
       </trans-unit>
       <trans-unit id="a7136d956fbff49c3912e44722dbf000" approved="yes">
         <source>Add a private note</source>
-        <target xml:lang="zh-TW">新增隱藏備註</target>
+        <target xml:lang="zh-TW">隱藏備註</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.tpl:362</note>
       </trans-unit>

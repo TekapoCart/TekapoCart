@@ -10,7 +10,7 @@ File: controllers/admin/AdminMetaController.php:79</note>
       </trans-unit>
       <trans-unit id="6a9bb0bb3f61904834f4f436bbcaa1d2" approved="yes">
         <source>URL rewriting (mod_rewrite) is not active on your server, or it is not possible to check your server configuration. If you want to use Friendly URLs, you must activate this mod.</source>
-        <target xml:lang="zh-CN">URL重写（mod_rewrite）在您的服务器上没有激活，或者是无法检查您的服务器配置。如果你想使用友情链接，您必须激活这个mod。</target>
+        <target xml:lang="zh-CN">URL重写（mod_rewrite）在您的服务器上没有激活，或者是无法检查您的服务器設定。如果你想使用友情链接，您必须激活这个mod。</target>
         <note>Context:
 File: controllers/admin/AdminMetaController.php:83</note>
       </trans-unit>

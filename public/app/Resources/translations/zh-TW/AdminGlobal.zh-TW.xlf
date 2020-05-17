@@ -36,7 +36,7 @@ File: admin-dev/themes/default/template/controllers/orders/form.tpl:571</note>
       </trans-unit>
       <trans-unit id="068f80c7519d0528fb08e82137a72131" approved="yes">
         <source>Products</source>
-        <target xml:lang="zh-TW">商品列表</target>
+        <target xml:lang="zh-TW">商品</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/form.tpl:1174</note>
       </trans-unit>
@@ -132,7 +132,7 @@ File: admin-dev/themes/default/template/controllers/orders/form.tpl:1477</note>
       </trans-unit>
       <trans-unit id="466eadd40b3c10580e3ab4e8061161ce" approved="yes">
         <source>Invoice</source>
-        <target xml:lang="zh-TW">發票</target>
+        <target xml:lang="zh-TW">銷貨單</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/form.tpl:1382</note>
       </trans-unit>
@@ -150,7 +150,7 @@ File: admin-dev/themes/default/template/controllers/orders/form.tpl:1369</note>
       </trans-unit>
       <trans-unit id="47ac923d219501859fb68fed8c8db77b" approved="yes">
         <source>Combination</source>
-        <target xml:lang="zh-TW">屬性</target>
+        <target xml:lang="zh-TW">組合</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/form.tpl:643</note>
       </trans-unit>
@@ -308,7 +308,7 @@ File: src/Adapter/Product/AdminProductWrapper.php:407</note>
       </trans-unit>
       <trans-unit id="e4c4c68c7515704a91d90207067dcbbe" approved="yes">
         <source>All groups</source>
-        <target xml:lang="zh-TW">所有分組</target>
+        <target xml:lang="zh-TW">所有等級</target>
         <note>Context:
 File: src/Adapter/Product/AdminProductWrapper.php:409</note>
       </trans-unit>
@@ -332,7 +332,7 @@ File: src/Adapter/Product/AdminProductWrapper.php:356</note>
       </trans-unit>
       <trans-unit id="545f6c2f382c04810103b3e5e6f7d841" approved="yes">
         <source>Unlimited</source>
-        <target xml:lang="zh-TW">無限</target>
+        <target xml:lang="zh-TW">無限制</target>
         <note>Context:
 File: src/Adapter/Product/AdminProductWrapper.php:365</note>
       </trans-unit>
@@ -412,13 +412,13 @@ File: admin-dev/themes/default/template/controllers/specific_price_rule/helpers/
       </trans-unit>
       <trans-unit id="f2bbdf9f72c085adc4d0404e370f0f4c" approved="yes">
         <source>Attribute</source>
-        <target xml:lang="zh-TW">屬性</target>
+        <target xml:lang="zh-TW">規格</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/specific_price_rule/helpers/form/form.tpl:274</note>
       </trans-unit>
       <trans-unit id="287234a1ff35a314b5b6bc4e5828e745" approved="yes">
         <source>Attributes</source>
-        <target xml:lang="zh-TW">屬性</target>
+        <target xml:lang="zh-TW">規格</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/specific_price_rule/helpers/form/form.tpl:90</note>
       </trans-unit>
@@ -1125,7 +1125,7 @@ File: controllers/admin/AdminCmsController.php:155</note>
       </trans-unit>
       <trans-unit id="1dec4f55522b828fe5dacf8478021a9e" approved="yes">
         <source>Friendly URL</source>
-        <target xml:lang="zh-TW">友善連結</target>
+        <target xml:lang="zh-TW">友善網址</target>
         <note>Context:
 File: controllers/admin/AdminCmsController.php:165</note>
       </trans-unit>
@@ -1183,7 +1183,7 @@ File: controllers/admin/AdminCustomersController.php:660</note>
     <body>
       <trans-unit id="b9208b03bcc9eb4a336258dcdcb66207" approved="yes">
         <source>Combinations</source>
-        <target xml:lang="zh-TW">屬性</target>
+        <target xml:lang="zh-TW">組合</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/orders/_new_product.tpl:41</note>
       </trans-unit>
@@ -1559,7 +1559,7 @@ File: controllers/admin/AdminSlipController.php:63</note>
     <body>
       <trans-unit id="54e85d70ea67acdcc86963b14d6223a8" approved="yes">
         <source>Abandoned Carts</source>
-        <target xml:lang="zh-TW">未結購物車</target>
+        <target xml:lang="zh-TW">加入購物車紀錄</target>
         <note>Context:
 File: modules/dashactivity/views/templates/hook/dashboard_zone_one.tpl:83</note>
       </trans-unit>
@@ -1680,7 +1680,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
     <body>
       <trans-unit id="087fb8756d4add87f2d162304ccd486b">
         <source>No records found</source>
-        <target xml:lang="zh-TW">尚無紀錄</target>
+        <target xml:lang="zh-TW">無紀錄</target>
         <note>Line: 28</note>
       </trans-unit>
     </body>
@@ -1855,7 +1855,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Helpers/bootstrap_popup.html.tw
     <body>
       <trans-unit id="f1206f9fadc5ce41694f69129aecac26" approved="yes">
         <source>Configure</source>
-        <target xml:lang="zh-TW">配置</target>
+        <target xml:lang="zh-TW">設定</target>
         <note>Context:
 File: modules/dashgoals/views/templates/hook/dashboard_zone_two.tpl:46</note>
       </trans-unit>

@@ -206,7 +206,7 @@ File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.
       </trans-unit>
       <trans-unit id="566d26ec62e9c51270b7243440227dbb" approved="yes">
         <source>This note will be displayed to all employees but not to customers.</source>
-        <target xml:lang="zh-TW">私密備註僅供商店管理者檢視用途（客戶隱藏）。</target>
+        <target xml:lang="zh-TW">後台管理者才看得到此內容。</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customers/helpers/view/view.tpl:364</note>
       </trans-unit>

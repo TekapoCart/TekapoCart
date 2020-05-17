@@ -104,7 +104,7 @@ File: modules/ps_legalcompliance/ps_legalcompliance.php:1446</note>
       </trans-unit>
       <trans-unit id="2c5d047df77f799f0140d5e1881edd04" approved="yes">
         <source>As prices can vary from a combination to another, this label indicates that the final price may be higher.</source>
-        <target xml:lang="zh-TW">由於價格可以因屬性組合不同而不同，此標籤表示最終的價格可能比目前顯示得更高。</target>
+        <target xml:lang="zh-TW">由於價格可因規格不同而不同，此標籤表示最終的價格可能比目前顯示得更高。</target>
         <note>Context:
 File: modules/ps_legalcompliance/ps_legalcompliance.php:1450</note>
       </trans-unit>
