@@ -29,7 +29,8 @@ table.table {
     min-width: 45px;
 }
 
-#themes-logo-page .logo-configuration-card-body .logo-card .logo-image-container .header-logo {
+#themes-logo-page .logo-configuration-card-body .logo-card .logo-image-container .header-logo,
+#themes-logo-page .logo-configuration-card-body .logo-card .logo-image-container .invoice-logo {
     max-width: 200px;
 }
 
@@ -62,3 +63,19 @@ table.table {
     font-size: 34px;
     margin-bottom: 10px;
 }
+
+.bootstrap .page-head h4.page-subtitle {
+    margin-top: 6px;
+    position: relative;
+    left: 0;
+    font-size: 20px;
+}
+
+.bootstrap .page-head .page-title {
+    font-size: 20px;
+}
+
+.bootstrap .table tbody>tr>td {
+    padding: 7px;
+}
+
