@@ -948,6 +948,15 @@ class Ps_EmailAlerts extends Module
                     'class' => 'btn btn-default pull-right',
                     'name' => 'submitMailAlert',
                 ),
+
+                // suzy: 2020-05-15 加上返回按鈕
+                'buttons' => array(
+                    array(
+                        'href' => $this->context->link->getAdminLink('AdminEmails', false).'&token='.Tools::getAdminTokenLite('AdminEmails'),
+                        'title' => '返回通知信',
+                        'icon' => 'process-icon-back'
+                    )
+                )
             ),
         );
 

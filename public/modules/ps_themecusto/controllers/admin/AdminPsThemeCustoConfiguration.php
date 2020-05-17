@@ -120,7 +120,6 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 'modules' => array(
                     // suzy: 2018-08-21 新增 ps_customersignin、simplicity_sociallogin、simplicity_headerbar
                     'simplicity_headerbar' => 0,
-                    'simplicity_logo' => 0,
                     'ps_mainmenu' => 22321,
                     'ps_customersignin' => 0,
                     'simplicity_sociallogin' => 0,
@@ -217,7 +216,6 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 'modules' => array(
                     // suzy: 2018-08-21 新增 ps_customersignin、simplicity_sociallogin、simplicity_headerbar
                     'simplicity_headerbar' => 0,
-                    'simplicity_logo' => 0,
                     'ps_mainmenu' => 22321,
                     'ps_customersignin' => 0,
                     'simplicity_sociallogin' => 0,
@@ -382,7 +380,6 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                 'modules' => array(
                     // suzy: 2018-08-21 新增 ps_customersignin、simplicity_sociallogin、simplicity_headerbar
                     'simplicity_headerbar' => 0,
-                    'simplicity_logo' => 0,
                     'ps_mainmenu' => 22321,
                     'ps_customersignin' => 0,
                     'simplicity_sociallogin' => 0,

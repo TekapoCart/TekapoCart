@@ -543,7 +543,7 @@ class Tc_Home3 extends CarrierModule
             ),
             'buttons' => array(
                 array(
-                    'href' => $this->context->link->getAdminLink('AdminPayment', false) . '&token=' . Tools::getAdminTokenLite('AdminPayment'),
+                    'href' => $this->context->link->getAdminLink('AdminSimplicityModules', true),
                     'title' => '返回金物流模組',
                     'icon' => 'process-icon-back'
                 )

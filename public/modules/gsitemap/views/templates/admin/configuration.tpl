@@ -86,6 +86,10 @@
       {l s='You can edit these limits in your php.ini file. For more details, please contact your hosting provider.' d='Modules.Gsitemap.Admin'}</p>
    </div>
    {/if}
+   {* suzy: 2020-05-15 返回按鈕 *}
+   <div class="panel-footer">
+      <a href="{$back_theme_url}" class="btn btn-default"><i class="process-icon-back"></i> 返回數據分析＆應用</a>
+   </div>
 </div>
 
 <div class="panel">

@@ -996,6 +996,14 @@ class GShoppingFlux extends Module
                     'name' => 'submitFluxOptions',
                     'title' => $this->l('Save & Export'),
                 ),
+                // suzy: 2020-05-17 返回按鈕
+                'buttons' => array(
+                    array(
+                        'href' => $this->context->link->getAdminLink('AdminSimplicityMarketingModules', true),
+                        'title' => '返回數據分析＆應用',
+                        'icon' => 'process-icon-back'
+                    )
+                )
             ),
         );
 

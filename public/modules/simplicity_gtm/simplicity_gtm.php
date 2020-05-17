@@ -529,8 +529,8 @@ class Simplicity_Gtm extends Module
             ),
             'buttons' => array(
                 array(
-                    'href' => '#',
-                    'title' => '返回 XXXX',
+                    'href' => $this->context->link->getAdminLink('AdminSimplicityMarketingModules', true),
+                    'title' => '返回數據分析＆應用',
                     'icon' => 'process-icon-back'
                 )
             )

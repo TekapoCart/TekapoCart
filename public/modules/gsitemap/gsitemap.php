@@ -265,6 +265,11 @@ class Gsitemap extends Module
             'prestashop_ssl' => Configuration::get('PS_SSL_ENABLED'),
             'gsitemap_check_image_file' => Configuration::get('GSITEMAP_CHECK_IMAGE_FILE'),
             'shop' => $this->context->shop,
+
+            // suzy: 2020-05-14 返回按鈕
+            'back_theme_url' => $this->context->link->getAdminLink('AdminSimplicityMarketingModules', true),
+
+
         ));
 
         return $this->display(__FILE__, 'views/templates/admin/configuration.tpl');

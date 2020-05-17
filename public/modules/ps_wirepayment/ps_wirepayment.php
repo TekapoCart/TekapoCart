@@ -405,10 +405,10 @@ class Ps_Wirepayment extends PaymentModule
                 'submit' => array(
                     'title' => $this->trans('Save', array(), 'Admin.Actions'),
                 ),
-                // suzy: 2020-01-29 加返迴按鈕
+                // suzy: 2020-01-29 加返回按鈕
                 'buttons' => array(
                     array(
-                        'href' => $this->context->link->getAdminLink('AdminPayment', false).'&token='.Tools::getAdminTokenLite('AdminPayment'),
+                        'href' => $this->context->link->getAdminLink('AdminSimplicityModules', true),
                         'title' => '返回金物流模組',
                         'icon' => 'process-icon-back'
                     )

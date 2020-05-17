@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>ps_linklist</name>
-    <displayName><![CDATA[連結列表]]></displayName>
+    <displayName><![CDATA[連結區塊]]></displayName>
     <version><![CDATA[3.0.4]]></version>
     <description><![CDATA[新增一個連結區塊，可設定自訂頁面、也可自訂連結。]]></description>
     <author><![CDATA[PrestaShop]]></author>
