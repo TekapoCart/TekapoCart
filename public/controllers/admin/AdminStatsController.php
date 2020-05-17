@@ -29,24 +29,6 @@ use PrestaShop\PrestaShop\Core\Addon\Theme\ThemeManagerBuilder;
 
 class AdminStatsControllerCore extends AdminStatsTabController
 {
-    /* suzy: 2018-10-09 加 Header 連結、2019-02-28 加 Header 連結 */
-    public function initPageHeaderToolbar()
-    {
-        $this->page_header_toolbar_btn['module_simplicity_gtm'] = array(
-            'href' => $this->context->link->getAdminLink('AdminModules') . '&configure=simplicity_gtm',
-            'desc' => '設定 GTM 追蹤碼',
-            'icon' => 'process-icon-configure'
-        );
-
-        $this->page_header_toolbar_btn['module_gshoppingflux'] = array(
-            'href' => $this->context->link->getAdminLink('AdminModules') . '&configure=gshoppingflux',
-            'desc' => '上傳 Google Shopping Feed',
-            'icon' => 'process-icon-configure'
-        );
-
-        return parent::initPageHeaderToolbar();
-    }
-
     public static function getVisits($unique, $date_from, $date_to, $granularity = false)
     {
         $visits = ($granularity == false) ? 0 : array();

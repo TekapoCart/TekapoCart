@@ -182,7 +182,7 @@ class AdminCmsControllerCore extends AdminController
                         $this->trans('Invalid characters:', array(), 'Admin.Notifications.Info') . ' &lt;&gt;;=#{}',
                     ),
                 ),
-                // suzy: 2019-02-01 友善連結往上移
+                // suzy: 2019-02-01 友善網址往上移
                 array(
                     'type' => 'text',
                     'label' => $this->trans('Friendly URL', array(), 'Admin.Global'),
@@ -392,7 +392,7 @@ class AdminCmsControllerCore extends AdminController
             }
         } elseif (Tools::isSubmit('submitAddcms') || Tools::isSubmit('submitAddcmsAndPreview')) {
 
-            // suzy: 2019-08-20 自訂頁面 友善連結加強過濾
+            // suzy: 2019-08-20 自訂頁面 友善網址加強過濾
             foreach ($_POST as $key => $value) {
                 if (substr($key, 0, 12) === 'link_rewrite') {
                     $_POST[$key] = Tools::link_rewrite($value);

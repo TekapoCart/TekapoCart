@@ -57,9 +57,13 @@ class AdminSearchConfControllerCore extends AdminController
         );
 
         $this->fields_list = array(
-            'alias' => array('title' => $this->trans('Aliases', array(), 'Admin.Shopparameters.Feature')),
+            // suzy: 2020-05-14 修改翻譯
+            // 'alias' => array('title' => $this->trans('Aliases', array(), 'Admin.Shopparameters.Feature')),
+            'alias' => array('title' => '相似詞'),
             // Search is a noum here.
-            'search' => array('title' => $this->trans('Search', array(), 'Admin.Shopparameters.Feature')),
+            // suzy: 2020-05-14 修改翻譯
+            // 'search' => array('title' => $this->trans('Search', array(), 'Admin.Shopparameters.Feature')),
+            'search' => array('title' => '實際搜尋字詞'),
             'active' => array('title' => $this->trans('Status', array(), 'Admin.Global'), 'class' => 'fixed-width-sm', 'align' => 'center', 'active' => 'status', 'type' => 'bool', 'orderby' => false),
         );
 
@@ -323,17 +327,11 @@ class AdminSearchConfControllerCore extends AdminController
         if (empty($this->display)) {
             $this->page_header_toolbar_btn['new_alias'] = array(
                 'href' => self::$currentIndex . '&addalias&token=' . $this->token,
-                'desc' => $this->trans('Add new alias', array(), 'Admin.Shopparameters.Feature'),
+                // suzy: 2020-05-14 修改翻譯
+                // 'desc' => $this->trans('Add new alias', array(), 'Admin.Shopparameters.Feature'),
+                'desc' => '新增相似詞',
                 'icon' => 'process-icon-new',
             );
-
-            // suzy: 2018-09-27 加 Header 連結
-            $this->page_header_toolbar_btn['module_gsitemap'] = array(
-                'href' => $this->context->link->getAdminLink('AdminModules') . '&configure=gsitemap',
-                'desc' => 'Google Sitemap',
-                'icon' => 'process-icon-configure',
-            );
-
         }
         $this->identifier_name = 'alias';
         parent::initPageHeaderToolbar();
@@ -379,13 +377,17 @@ class AdminSearchConfControllerCore extends AdminController
     {
         $this->fields_form = array(
             'legend' => array(
-                'title' => $this->trans('Aliases', array(), 'Admin.Shopparameters.Feature'),
+                // suzy: 2020-05-14 修改翻譯
+                // 'title' => $this->trans('Aliases', array(), 'Admin.Shopparameters.Feature'),
+                'title' => '相似詞',
                 'icon' => 'icon-search',
             ),
             'input' => array(
                 array(
                     'type' => 'text',
-                    'label' => $this->trans('Alias', array(), 'Admin.Shopparameters.Feature'),
+                    // suzy: 2020-05-14 修改翻譯
+                    // 'label' => $this->trans('Alias', array(), 'Admin.Shopparameters.Feature'),
+                    'label' => '相似詞',
                     'name' => 'alias',
                     'required' => true,
                     'hint' => array(
@@ -395,7 +397,9 @@ class AdminSearchConfControllerCore extends AdminController
                 ),
                 array(
                     'type' => 'text',
-                    'label' => $this->trans('Result', array(), 'Admin.Shopparameters.Feature'),
+                    // suzy: 2020-05-14 修改翻譯
+                    // 'label' => $this->trans('Result', array(), 'Admin.Shopparameters.Feature'),
+                    'label' => '實際搜尋字詞',
                     'name' => 'search',
                     'required' => true,
                     'hint' => $this->trans('Search this word instead.', array(), 'Admin.Shopparameters.Help'),
