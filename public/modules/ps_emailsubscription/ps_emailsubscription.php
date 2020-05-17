@@ -212,7 +212,8 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
             }
             Tools::redirectAdmin($this->context->link->getAdminLink('AdminModules', false).'&configure='.$this->name.'&conf=4&token='.Tools::getAdminTokenLite('AdminModules'));
         } elseif (Tools::isSubmit('submitExport') && $action = Tools::getValue('action')) {
-            $this->export_csv();
+            // suzy: 2020-05-17 隱藏匯出
+            // $this->export_csv();
         } elseif (Tools::isSubmit('searchEmail')) {
             $this->_searched_email = Tools::getValue('searched_email');
         }
@@ -221,7 +222,8 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
         $this->_html .= $this->renderSearchForm();
         $this->_html .= $this->renderList();
 
-        $this->_html .= $this->renderExportForm();
+        // suzy: 2020-05-17 隱藏匯出
+        // $this->_html .= $this->renderExportForm();
 
         return $this->_html;
     }
@@ -254,12 +256,6 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
                 'title' => $this->trans('Email', array(), 'Admin.Global'),
                 'search' => false,
             ),
-            'subscribed' => array(
-                'title' => $this->trans('Subscribed', array(), 'Modules.Emailsubscription.Admin'),
-                'type' => 'bool',
-                'active' => 'subscribed',
-                'search' => false,
-            ),
             'iso_code' => array(
                 'title' => $this->trans('Iso language', array(), 'Modules.Emailsubscription.Admin'),
                 'search' => false,
@@ -267,6 +263,14 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
             'newsletter_date_add' => array(
                 'title' => $this->trans('Subscribed on', array(), 'Modules.Emailsubscription.Admin'),
                 'type' => 'date',
+                'search' => false,
+            ),
+
+            // suzy: 2020-05-17 欄位移到後方
+            'subscribed' => array(
+                'title' => $this->trans('Subscribed', array(), 'Modules.Emailsubscription.Admin'),
+                'type' => 'bool',
+                'active' => 'subscribed',
                 'search' => false,
             ),
         );
@@ -321,6 +325,7 @@ class Ps_Emailsubscription extends Module implements WidgetInterface
         $this->smarty->assign(array(
             'ajax' => $ajax,
             'enabled' => (bool) $value,
+            'confirm' => '確定將此訂戶取消訂閱/刪除資料？',
             'url_enable' => $this->_helperlist->currentIndex.'&'.$this->_helperlist->identifier.'='.$id.'&'.$active.$this->_helperlist->table.($ajax ? '&action='.$active.$this->_helperlist->table.'&ajax='.(int) $ajax : '').((int) $id_category && (int) $id_product ? '&id_category='.(int) $id_category : '').'&token='.$token,
         ));
 
