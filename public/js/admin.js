@@ -140,7 +140,7 @@ function copy2friendlyURL()
   if (typeof($('#link_rewrite_' + id_language).val()) == 'undefined')
     return;
 
-  // suzy: 2019-02-01 修正編輯分類標題時友善連結跟著連動
+  // suzy: 2019-02-01 修正編輯分類標題時友善網址跟著連動
   // if (typeof(id_product) == 'undefined')
   //   id_product = false;
   if (typeof($('#id_category').val()) == 'undefined')

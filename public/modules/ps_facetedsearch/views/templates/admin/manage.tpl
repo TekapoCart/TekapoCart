@@ -37,6 +37,7 @@
 			<a class="ajaxcall btn btn-default" href="{$clear_cache_url}">{l s='Clear cache' d='Modules.Facetedsearch.Admin'}</a>
 		</p>
 	</div>
+	{* suzy: 2020-05-14 隱藏 cron links text
 	<div class="row">
 		<div class="alert alert-info">
 			{l s='You can set a cron job that will rebuild price index using the following URL:' d='Modules.Facetedsearch.Admin'}
@@ -51,7 +52,7 @@
 	</div>
 	<div class="row">
 		<div class="alert alert-info">{l s='A nightly rebuild is recommended.' d='Modules.Facetedsearch.Admin'}</div>
-	</div>
+	</div>*}
 </div>
 <div class="panel">
 	<h3><i class="icon-cogs"></i> {l s='Filters templates' d='Modules.Facetedsearch.Admin'}<span class="badge">{$filters_templates|count}</span></h3>
@@ -106,9 +107,9 @@
 		<div class="row alert alert-warning">{l s='No filter template found.' d='Modules.Facetedsearch.Admin'}</div>
 	{/if}
 	{if empty($limit_warning)}
-	  <div class="panel-footer">
-		  <a class="btn btn-default pull-right" href="{$current_url}&amp;add_new_filters_template=1"><i class="process-icon-plus"></i> {l s='Add new template' d='Modules.Facetedsearch.Admin'}</a>
-	  </div>
+	<div class="panel-footer">
+	  <a class="btn btn-default pull-right" href="{$current_url}&amp;add_new_filters_template=1"><i class="process-icon-plus"></i> {l s='Add new template' d='Modules.Facetedsearch.Admin'}</a>
+	</div>
 	{/if}
 </div>
 <div class="panel">
