@@ -64,6 +64,8 @@ class AdminQuickAccessesControllerCore extends AdminController
             ),
             'link' => array(
                 'title' => $this->trans('Link', array(), 'Admin.Navigation.Header'),
+                // suzy: 2020-05-17 加上長度限制
+                'maxlength' => 75,
             ),
             'new_window' => array(
                 'title' => $this->trans('New window', array(), 'Admin.Navigation.Header'),
@@ -238,4 +240,13 @@ class AdminQuickAccessesControllerCore extends AdminController
 
         return $object;
     }
+
+    // suzy: 2020-05-17 正確產生可用連結
+    public function getList($id_lang, $order_by = null, $order_way = null, $start = 0, $limit = null, $id_lang_shop = false)
+    {
+        parent::getList($id_lang, $order_by, $order_way, $start, $limit, $id_lang_shop);
+
+        $this->_list = QuickAccess::getQuickAccessesWithToken($this->context->language->id, (int) $this->context->employee->id);
+    }
+
 }
