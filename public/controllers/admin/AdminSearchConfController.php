@@ -141,6 +141,7 @@ class AdminSearchConfControllerCore extends AdminController
                         'type' => 'bool',
                         'desc' => '在商品頁的社群分享按鈕上方顯示標籤。',
                     ),
+
                     // suzy: 分類頁顯示排序下拉
                     'TC_SEARCH_SHOW_SORT_IN_LISTING' => array(
                         'title' => '分類頁顯示排序下拉',
@@ -148,6 +149,16 @@ class AdminSearchConfControllerCore extends AdminController
                         'cast' => 'intval',
                         'type' => 'bool',
                         'desc' => '在分類頁的標題下方顯示排序下拉。',
+                    ),
+
+                    // suzy: 2020-05-18 301 轉址
+                    'url_redirect_block' => array(
+                        'title' => '301 轉址',
+                        'validation' => 'isGenericName',
+                        'type' => 'textarea',
+                        'cols' => 30,
+                        'rows' => 5,
+                        'desc' => '永久轉址設定，一組網址一行，網址之間空一格，前面要有 /。<br>例：<br>/old/url /new/url<br>/old-cat/old-product /new-cat/new-product',
                     ),
 
                     'PS_SEARCH_START' => array(

@@ -4,6 +4,8 @@ class AdminLoyaltyController extends ModuleAdminController
 {
     public $module;
 
+    protected $html = '';
+
     public function __construct()
     {
         parent::__construct();
@@ -19,9 +21,19 @@ class AdminLoyaltyController extends ModuleAdminController
     public function initContent()
     {
         $this->module->instanceDefaultStates();
-        $this->_postProcess();
-        $this->content = $this->renderForm();
+        $this->content = $this->_postProcess() . $this->renderForm();
         $this->context->smarty->assign('content', $this->content);
+    }
+
+    public function initPageHeaderToolbar()
+    {
+        $this->page_header_toolbar_btn['new_alias'] = array(
+            'href' => self::$currentIndex . '&token=' . $this->token,
+            'desc' => '重新整理',
+            'icon' => 'process-icon-refresh',
+        );
+
+        parent::initPageHeaderToolbar();
     }
 
     private function _postProcess()
@@ -47,57 +59,59 @@ class AdminLoyaltyController extends ModuleAdminController
                 );
                 Configuration::updateValue('PS_LOYALTY_VALIDITY_PERIOD', (int)(Tools::getValue('validity_period')));
 
-                $this->loyaltyStateValidation->id_order_state = (int)(Tools::getValue('id_order_state_validation'));
-                $this->loyaltyStateCancel->id_order_state = (int)(Tools::getValue('id_order_state_cancel'));
+                $this->module->loyaltyStateValidation->id_order_state = (int)(Tools::getValue('id_order_state_validation'));
+                $this->module->loyaltyStateCancel->id_order_state = (int)(Tools::getValue('id_order_state_cancel'));
 
                 $arrayVoucherDetails = array();
                 foreach ($languages as $language) {
                     $arrayVoucherDetails[(int)($language['id_lang'])] = Tools::getValue('voucher_details_' . (int)($language['id_lang']));
-                    $this->loyaltyStateDefault->name[(int)($language['id_lang'])] = Tools::getValue('default_loyalty_state_' . (int)($language['id_lang']));
-                    $this->loyaltyStateValidation->name[(int)($language['id_lang'])] = Tools::getValue('validation_loyalty_state_' . (int)($language['id_lang']));
-                    $this->loyaltyStateCancel->name[(int)($language['id_lang'])] = Tools::getValue('cancel_loyalty_state_' . (int)($language['id_lang']));
-                    $this->loyaltyStateConvert->name[(int)($language['id_lang'])] = Tools::getValue('convert_loyalty_state_' . (int)($language['id_lang']));
-                    $this->loyaltyStateNoneAward->name[(int)($language['id_lang'])] = Tools::getValue('none_award_loyalty_state_' . (int)($language['id_lang']));
+                    $this->module->loyaltyStateDefault->name[(int)($language['id_lang'])] = Tools::getValue('default_loyalty_state_' . (int)($language['id_lang']));
+                    $this->module->loyaltyStateValidation->name[(int)($language['id_lang'])] = Tools::getValue('validation_loyalty_state_' . (int)($language['id_lang']));
+                    $this->module->loyaltyStateCancel->name[(int)($language['id_lang'])] = Tools::getValue('cancel_loyalty_state_' . (int)($language['id_lang']));
+                    $this->module->loyaltyStateConvert->name[(int)($language['id_lang'])] = Tools::getValue('convert_loyalty_state_' . (int)($language['id_lang']));
+                    $this->module->loyaltyStateNoneAward->name[(int)($language['id_lang'])] = Tools::getValue('none_award_loyalty_state_' . (int)($language['id_lang']));
                 }
                 if (empty($arrayVoucherDetails[$id_lang_default])) {
                     $arrayVoucherDetails[$id_lang_default] = ' ';
                 }
                 Configuration::updateValue('PS_LOYALTY_VOUCHER_DETAILS', $arrayVoucherDetails);
 
-                if (empty($this->loyaltyStateDefault->name[$id_lang_default])) {
-                    $this->loyaltyStateDefault->name[$id_lang_default] = ' ';
+                if (empty($this->module->loyaltyStateDefault->name[$id_lang_default])) {
+                    $this->module->loyaltyStateDefault->name[$id_lang_default] = ' ';
                 }
-                $this->loyaltyStateDefault->save();
+                $this->module->loyaltyStateDefault->save();
 
-                if (empty($this->loyaltyStateValidation->name[$id_lang_default])) {
-                    $this->loyaltyStateValidation->name[$id_lang_default] = ' ';
+                if (empty($this->module->loyaltyStateValidation->name[$id_lang_default])) {
+                    $this->module->loyaltyStateValidation->name[$id_lang_default] = ' ';
                 }
-                $this->loyaltyStateValidation->save();
+                $this->module->loyaltyStateValidation->save();
 
-                if (empty($this->loyaltyStateCancel->name[$id_lang_default])) {
-                    $this->loyaltyStateCancel->name[$id_lang_default] = ' ';
+                if (empty($this->module->loyaltyStateCancel->name[$id_lang_default])) {
+                    $this->module->loyaltyStateCancel->name[$id_lang_default] = ' ';
                 }
-                $this->loyaltyStateCancel->save();
+                $this->module->loyaltyStateCancel->save();
 
-                if (empty($this->loyaltyStateConvert->name[$id_lang_default])) {
-                    $this->loyaltyStateConvert->name[$id_lang_default] = ' ';
+                if (empty($this->module->loyaltyStateConvert->name[$id_lang_default])) {
+                    $this->module->loyaltyStateConvert->name[$id_lang_default] = ' ';
                 }
-                $this->loyaltyStateConvert->save();
+                $this->module->loyaltyStateConvert->save();
 
-                if (empty($this->loyaltyStateNoneAward->name[$id_lang_default])) {
-                    $this->loyaltyStateNoneAward->name[$id_lang_default] = ' ';
+                if (empty($this->module->loyaltyStateNoneAward->name[$id_lang_default])) {
+                    $this->module->loyaltyStateNoneAward->name[$id_lang_default] = ' ';
                 }
-                $this->loyaltyStateNoneAward->save();
+                $this->module->loyaltyStateNoneAward->save();
 
-                $this->html .= $this->displayConfirmation($this->l('Settings updated.'));
+                $this->html .= $this->module->displayConfirmation($this->l('Settings updated.'));
             } else {
                 $errors = '';
                 foreach ($this->_errors as $error) {
                     $errors .= $error . '<br />';
                 }
-                $this->html .= $this->displayError($errors);
+                $this->html .= $this->module->displayError($errors);
             }
         }
+
+        return $this->html;
     }
 
     public function renderForm()
@@ -317,9 +331,8 @@ class AdminLoyaltyController extends ModuleAdminController
         $helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') ? Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG') : 0;
         $helper->identifier = $this->identifier;
         $helper->submit_action = 'submitLoyalty';
-        $helper->currentIndex = $this->context->link->getAdminLink('AdminModules',
-                false) . '&configure=' . $this->name . '&tab_module=' . $this->tab . '&module_name=' . $this->name;
-        $helper->token = Tools::getAdminTokenLite('AdminModules');
+        $helper->currentIndex = $this->context->link->getAdminLink('AdminLoyalty', true);
+        $helper->token = Tools::getAdminTokenLite('AdminLoyalty');
         $helper->tpl_vars = array(
             'fields_value' => $this->getConfigFieldsValues(),
             'languages' => $this->context->controller->getLanguages(),
@@ -348,8 +361,8 @@ class AdminLoyaltyController extends ModuleAdminController
             'PS_LOYALTY_NONE_AWARD' => Tools::getValue('PS_LOYALTY_NONE_AWARD', Configuration::get('PS_LOYALTY_NONE_AWARD')),
             'minimal' => Tools::getValue('PS_LOYALTY_MINIMAL', Configuration::get('PS_LOYALTY_MINIMAL')),
             'validity_period' => Tools::getValue('PS_LOYALTY_VALIDITY_PERIOD', Configuration::get('PS_LOYALTY_VALIDITY_PERIOD')),
-            'id_order_state_validation' => Tools::getValue('id_order_state_validation', $this->loyaltyStateValidation->id_order_state),
-            'id_order_state_cancel' => Tools::getValue('id_order_state_cancel', $this->loyaltyStateCancel->id_order_state),
+            'id_order_state_validation' => Tools::getValue('id_order_state_validation', $this->module->loyaltyStateValidation->id_order_state),
+            'id_order_state_cancel' => Tools::getValue('id_order_state_cancel', $this->module->loyaltyStateCancel->id_order_state),
             'PS_LOYALTY_TAX' => Tools::getValue('PS_LOYALTY_TAX', Configuration::get('PS_LOYALTY_TAX')),
             'PS_LOYALTY_ZONES_TAX[]' => Tools::getValue('PS_LOYALTY_ZONES_TAX', Tools::jsonDecode(Configuration::get('PS_LOYALTY_ZONES_TAX'))),
         );

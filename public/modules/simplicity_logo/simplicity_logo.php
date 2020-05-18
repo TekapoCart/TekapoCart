@@ -46,8 +46,8 @@ class Simplicity_Logo extends Module implements WidgetInterface
 
         parent::__construct();
 
-        $this->displayName = 'LOGO & BG & 微客製 & 轉址';
-        $this->description = 'LOGO & BG & 微客製 & 轉址 設定';
+        $this->displayName = '微客製';
+        $this->description = '微客製 設定';
 
         $this->templateFile = 'module:simplicity_logo/simplicity_logo.tpl';
     }

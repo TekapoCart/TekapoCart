@@ -8,7 +8,6 @@ class AdminSimplicityTweakController extends ModuleAdminController
     {
         parent::__construct();
         $this->bootstrap = true;
-
     }
 
     public function init()
@@ -22,7 +21,17 @@ class AdminSimplicityTweakController extends ModuleAdminController
 
         $this->content = $this->_postProcess() . $this->_getForm();
         $this->context->smarty->assign('content', $this->content);
+    }
 
+    public function initPageHeaderToolbar()
+    {
+        $this->page_header_toolbar_btn['new_alias'] = array(
+            'href' => self::$currentIndex . '&token=' . $this->token,
+            'desc' => '重新整理',
+            'icon' => 'process-icon-refresh',
+        );
+
+        parent::initPageHeaderToolbar();
     }
 
     private function _postProcess()
@@ -47,15 +56,11 @@ class AdminSimplicityTweakController extends ModuleAdminController
             $display_text = Tools::getValue('display_text');
             if (ValidateCore::isGenericName($display_text)) {
                 Configuration::updateValue('SIMPLICITY_LOGO_DISPLAY_TEXT', $display_text);
-            } else {
-                // $output .= $this->displayError('請正確填寫「LOGO 文字」');
             }
 
             $display_font = Tools::getValue('display_font');
             if (ValidateCore::isGenericName($display_font)) {
                 Configuration::updateValue('SIMPLICITY_LOGO_DISPLAY_FONT', $display_font);
-            } else {
-                // $output .= $this->displayError('請正確填寫「LOGO 文字字體」');
             }
 
             $logo_max_width_css = Tools::getValue('logo_max_width_css');
@@ -86,14 +91,6 @@ class AdminSimplicityTweakController extends ModuleAdminController
                 }
             }
 
-            $url_redirect_block = Tools::getValue('url_redirect_block');
-            if (!empty($url_redirect_block)) {
-                Configuration::updateValue('SIMPLICITY_URL_REDIRECT_BLOCK', $url_redirect_block);
-                Tools::generateHtaccess();
-            } else {
-                Configuration::updateValue('SIMPLICITY_URL_REDIRECT_BLOCK', '');
-            }
-
             $show_add_cart_in_listing = Tools::getValue('show_add_cart_in_listing');
             if (ValidateCore::isGenericName($show_add_cart_in_listing)) {
                 Configuration::updateValue('SIMPLICITY_SHOW_ADD_CART_IN_LISTING', $show_add_cart_in_listing);
@@ -102,7 +99,7 @@ class AdminSimplicityTweakController extends ModuleAdminController
             Tools::clearCache();
 
             if (!$output) {
-                $output = $this->displayConfirmation('設定已經成功更新。');
+                $output = $this->module->displayConfirmation('設定已經成功更新。');
             }
         }
 
@@ -117,8 +114,8 @@ class AdminSimplicityTweakController extends ModuleAdminController
         $helper->module = $this;
         $helper->name_controller = $this->name;
         $helper->identifier = $this->identifier;
-        $helper->token = Tools::getAdminTokenLite('AdminModules');
-        $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
+        $helper->token = Tools::getAdminTokenLite('AdminSimplicityTweak');
+        $helper->currentIndex = $this->context->link->getAdminLink('AdminSimplicityTweak', true);
         $helper->title = $this->displayName;
 
         $helper->fields_value['display_type'] = Configuration::get('SIMPLICITY_LOGO_DISPLAY_TYPE');
@@ -152,30 +149,39 @@ class AdminSimplicityTweakController extends ModuleAdminController
                 ),
                 'description' => '',
                 'input' => array(
+
+                    array(
+                        'type' => 'textarea',
+                        'name' => 'custom_css_block',
+                        'label' => 'custom.css',
+                        'cols' => 30,
+                        'rows' => 10,
+                        'desc' => '新增/覆蓋/自訂 CSS 樣式，檔案所在位置 /themes/' . $this->context->shop->theme_name . '/assets/css/custom.css。<br>若切換佈景，則會讀取新佈景的 custom.css。<br>儲存前請先確認符合標準格式 <a href="https://jigsaw.w3.org/css-validator/#validate_by_input" target="_target">線上檢查</a>。',
+                    ),
+
                     array(
                         'type' => 'select',
                         'name' => 'display_type',
-                        'label' => '顯示方式',
+                        'label' => 'LOGO 顯示',
                         'options' => array(
                             'query' => array(
-                                array('id' => 'image', 'name' => '圖像 LOGO'),
-                                array('id' => 'text', 'name' => '文字 LOGO'),
+                                array('id' => 'image', 'name' => '圖像'),
+                                array('id' => 'text', 'name' => '文字'),
                             ),
                             'id' => 'id',
                             'name' => 'name'
                         ),
-                        'required' => true,
-                        'desc' => '選擇「圖像 LOGO」或是「文字 LOGO」。預設為「圖像 LOGO」。'
+                        'desc' => '選擇「圖像」或是「文字」。預設為「圖像」。'
                     ),
                     array(
                         'type' => 'text',
                         'label' => 'LOGO 文字',
                         'name' => 'display_text',
-                        'desc' => '顯示方式為「文字 LOGO」方需填寫。'
+                        'desc' => 'LOGO 顯示為「文字」方需填寫。'
                     ),
                     array(
                         'type' => 'text',
-                        'label' => '文字 LOGO 字體',
+                        'label' => 'LOGO 文字 font-family',
                         'name' => 'display_font',
                         'desc' => '如需另設字體請填寫瀏覽器支援的字體 例如：Arial, Times New Roman, Verdana, Monospace 等，若無請留空白。<a href="https://zh.wikipedia.org/wiki/%E5%AD%97%E4%BD%93%E5%AE%B6%E6%97%8F" target="_blank">可用字體參考</a>'
                     ),
@@ -204,46 +210,27 @@ class AdminSimplicityTweakController extends ModuleAdminController
                     ),
 
                     array(
-                        'type' => 'text',
-                        'label' => '背景 CSS',
-                        'name' => 'body_bg_css',
-                        'desc' => "一行 CSS 搞定背景圖特效。<br>範例1：#ddebeb<br>範例2：url('https://raw.githubusercontent.com/TekapoCart/theme_resources/master/background/wood-1920.png') 0 0 repeat fixed #000"
-                    ),
-
-
-                    array(
                         'type' => 'select',
                         'name' => 'mobile_type',
-                        'label' => '手機版顯示方式',
+                        'label' => '手機版 LOGO 顯示',
                         'options' => array(
                             'query' => array(
-                                array('id' => '0', 'name' => 'LOGO 置左'),
-                                array('id' => '1', 'name' => 'LOGO 置中'),
+                                array('id' => '0', 'name' => '置左'),
+                                array('id' => '1', 'name' => '置中'),
                             ),
                             'id' => 'id',
                             'name' => 'name'
                         ),
-                        'required' => true,
-                        'desc' => '「LOGO 置左」適合扁 LOGO、「LOGO 置中」適合方塊 LOGO。預設為「LOGO 置左」。'
+                        'desc' => '「置左」適合扁 LOGO、「置中」適合方塊 LOGO。預設為「置左」。'
                     ),
 
                     array(
-                        'type' => 'textarea',
-                        'name' => 'custom_css_block',
-                        'label' => '微客製 / custom.css',
-                        'cols' => 30,
-                        'rows' => 5,
-                        'desc' => '新增/覆蓋/自訂 CSS 樣式，檔案所在位置 /themes/' . $this->context->shop->theme_name . '/assets/css/custom.css。<br>若切換佈景，則會讀取新佈景的 custom.css。<br>儲存前請先確認符合標準格式 <a href="https://jigsaw.w3.org/css-validator/#validate_by_input" target="_target">線上檢查</a>。',
+                        'type' => 'text',
+                        'label' => '網站背景 background',
+                        'name' => 'body_bg_css',
+                        'desc' => "一行 CSS 搞定背景圖特效。<br>範例1：#ddebeb<br>範例2：url('https://raw.githubusercontent.com/TekapoCart/theme_resources/master/background/wood-1920.png') 0 0 repeat fixed #000"
                     ),
 
-                    array(
-                        'type' => 'textarea',
-                        'name' => 'url_redirect_block',
-                        'label' => '301 轉址',
-                        'cols' => 30,
-                        'rows' => 5,
-                        'desc' => '永久轉址設定，一組網址一行，網址之間空一格，前面要有 /。<br>例：<br>/old/url /new/url<br>/old-cat/old-product /new-cat/new-product',
-                    ),
                     array(
                         'type' => 'switch',
                         'label' => '商品列表顯示加入購物車按鈕',

@@ -3,7 +3,7 @@
     <name>ps_facetedsearch</name>
     <displayName><![CDATA[篩選條件]]></displayName>
     <version><![CDATA[3.0.6]]></version>
-    <description><![CDATA[相近價格、同屬性、規格商品自動歸類。]]></description>
+    <description><![CDATA[相近價格、同規格、同特色商品自動歸類。]]></description>
     <author><![CDATA[PrestaShop]]></author>
     <tab><![CDATA[front_office_features]]></tab>
     <is_configurable>1</is_configurable>

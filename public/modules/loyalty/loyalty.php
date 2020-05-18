@@ -39,6 +39,12 @@ class Loyalty extends Module
 {
     protected $html = '';
 
+    public $loyaltyStateDefault;
+    public $loyaltyStateValidation;
+    public $loyaltyStateCancel;
+    public $loyaltyStateConvert;
+    public $loyaltyStateNoneAward;
+
     public function __construct()
     {
         $this->name = 'loyalty';

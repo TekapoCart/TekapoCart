@@ -4,9 +4,18 @@ TekapoCart <hi@tekapo.io>
 * 1.2.3 (May 20, 2020)
 *******************************************
 Improve
-- 調整後台選單文字
+- 大調後台選單：
+- loyalty、simplicity_logo 加 tab controller
+- 改寫金物流模組頁、新增數據分析＆應用頁
+- simplicity_logo 變微客製
 - 更名：商品屬性改規格、商品規格改特色
+- 加回 ps_googleanalytics 模組
+Fix
+- 後台快速連結可以正確產生可用連結
+- ps_emailsubscription 關閉匯出
 Steps
+- 2020-05-13.sql
+- 2020-05-19-ga-hooks.sql
 - 2020-05-20-tab.sql
 *******************************************
 * 1.2.2 (May 13, 2020)
@@ -21,7 +30,6 @@ Fix
 Steps
 - 2020-05-12.sql
 - install loyalty & save & disable
-- 2020-05-20.sql
 *******************************************
 * 1.2.1 (May 06, 2020)
 *******************************************
