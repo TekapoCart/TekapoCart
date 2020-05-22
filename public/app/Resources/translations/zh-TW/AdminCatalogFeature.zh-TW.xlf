@@ -2034,7 +2034,7 @@ File: src/PrestaShopBundle/Translation/Api/StockApi.php:48</note>
       </trans-unit>
       <trans-unit id="d0f06038b6b3aa5edc07c7a6fd3ca3f9" approved="yes">
         <source>Search a category</source>
-        <target xml:lang="zh-TW">搜索分類</target>
+        <target xml:lang="zh-TW">搜尋分類</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:49</note>
       </trans-unit>

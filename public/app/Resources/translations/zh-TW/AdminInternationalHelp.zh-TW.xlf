@@ -323,7 +323,7 @@ File: controllers/admin/AdminStatesController.php:185</note>
     <body>
       <trans-unit id="15ba451caecdf6917bcd4d150f33fb7c" approved="yes">
         <source>Search a word or expression, e.g.: "Order confirmation"</source>
-        <target xml:lang="zh-TW">搜索一個字或詞，例如：“訂單確認”</target>
+        <target xml:lang="zh-TW">搜尋一個字或詞，例如：「訂單確認」</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/InternationalApi.php:59</note>
       </trans-unit>

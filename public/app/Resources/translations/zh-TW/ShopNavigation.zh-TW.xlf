@@ -196,7 +196,7 @@ File: classes/lang/KeysReference/MetaLang.php:65</note>
       </trans-unit>
       <trans-unit id="86791147a83e82f4bf90927c84fa3f6f" approved="yes">
         <source>Lost ? Find what your are looking for</source>
-        <target xml:lang="zh-TW">再次搜索</target>
+        <target xml:lang="zh-TW">再次搜尋</target>
         <note>Context:
 File: classes/lang/KeysReference/MetaLang.php:67</note>
       </trans-unit>

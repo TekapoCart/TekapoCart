@@ -26,7 +26,7 @@ File: controllers/admin/AdminCarriersController.php:56</note>
     <body>
       <trans-unit id="4f29d8c727dcf2022ac241cb96c31083" approved="yes">
         <source>Empty recordset returned</source>
-        <target xml:lang="zh-TW">搜索結果是一個空的數據集</target>
+        <target xml:lang="zh-TW">搜尋結果是一個空的數據集</target>
         <note>Context:
 File: modules/statsbestsuppliers/statsbestsuppliers.php:53</note>
       </trans-unit>

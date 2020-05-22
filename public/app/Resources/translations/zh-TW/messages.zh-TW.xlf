@@ -1435,7 +1435,7 @@ File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:49</
       </trans-unit>
       <trans-unit id="f5945546981ef6e50e1fade1b386da04" approved="yes">
         <source>Search (e.g.: product reference, customer name…)</source>
-        <target xml:lang="zh-TW">搜索（例如：商品編號，客戶姓名...）</target>
+        <target xml:lang="zh-TW">搜尋（例如：商品編號，客戶姓名...）</target>
         <note>Context:
 File: admin-dev/themes/new-theme/template/components/layout/search_form.tpl:36</note>
       </trans-unit>

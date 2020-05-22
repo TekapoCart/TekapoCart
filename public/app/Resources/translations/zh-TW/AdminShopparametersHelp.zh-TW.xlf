@@ -170,7 +170,7 @@ File: controllers/admin/AdminSearchConfController.php:121</note>
       </trans-unit>
       <trans-unit id="d2e38e24e467d35cc5881e083e05b823" approved="yes">
         <source>With this option enabled, it also gives the good result if you search for “lous”, “ouse”, or anything contained in the word.</source>
-        <target xml:lang="zh-TW">啟用此選項，可以搜索"lous"、"ouse"或任何中間的字。</target>
+        <target xml:lang="zh-TW">啟用此選項，可以搜尋"lous"、"ouse"或任何中間的字。</target>
         <note>Context:
 File: controllers/admin/AdminSearchConfController.php:126</note>
       </trans-unit>

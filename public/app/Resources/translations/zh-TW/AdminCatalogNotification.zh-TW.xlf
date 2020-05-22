@@ -696,7 +696,7 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductInformation.php:303</note>
     <body>
       <trans-unit id="5566045e38ed5e7bb072b8d55f3ceb2f" approved="yes">
         <source>No product matches your search. Try changing search terms.</source>
-        <target xml:lang="zh-TW">沒有符合你搜索的商品。請試著改變搜索條件。</target>
+        <target xml:lang="zh-TW">沒有符合你搜尋的商品。請試著改變搜尋條件。</target>
         <note>Context:
 File: src/PrestaShopBundle/Translation/Api/StockApi.php:64</note>
       </trans-unit>
