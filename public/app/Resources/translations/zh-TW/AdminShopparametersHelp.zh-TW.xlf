@@ -276,12 +276,12 @@ File: controllers/admin/AdminGroupsController.php:330</note>
       </trans-unit>
       <trans-unit id="d38245fbe312b2dafef8450b67e94f50" approved="yes">
         <source>%group_name% - All persons without a customer account or customers that are not logged in.</source>
-        <target xml:lang="zh-TW">%group_name% ：非會員，無結帳。</target>
+        <target xml:lang="zh-TW">%group_name% ：非會員亦無結帳。</target>
         <note>Line: 612</note>
       </trans-unit>
       <trans-unit id="5125d0fd7b81fee95b7e4b7689a878a9" approved="yes">
         <source>%group_name% - All persons who placed an order through Guest Checkout.</source>
-        <target xml:lang="zh-TW">%group_name% ：非會員，有結帳。</target>
+        <target xml:lang="zh-TW">%group_name% ：仍是訪客身份。</target>
         <note>Line: 613</note>
       </trans-unit>
       <trans-unit id="96f090b06e329e3d192c0ea3701f8cb5" approved="yes">
@@ -538,13 +538,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
     <body>
       <trans-unit id="2724aaa50fa52662bc9b244cab7afcae" approved="yes">
         <source>Number of products displayed per page. Default is 10.</source>
-        <target xml:lang="zh-TW">每頁顯示產品的數量。預設為10。</target>
+        <target xml:lang="zh-TW">每頁顯示的數量。預設為10。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_pagination.html.twig:36</note>
       </trans-unit>
       <trans-unit id="c18179baaeadd4a2fc27fafd3d6f40b1" approved="yes">
         <source>The order in which products are displayed in the product list.</source>
-        <target xml:lang="zh-TW">產品列表中產品的顯示順序</target>
+        <target xml:lang="zh-TW">商品列表顯示順序</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_pagination.html.twig:41</note>
       </trans-unit>
@@ -560,13 +560,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
     <body>
       <trans-unit id="b9716d3d87447a2275318bf88ced7bf8" approved="yes">
         <source>After a customer logs in, you can recall and display the content of his/her last shopping cart.</source>
-        <target xml:lang="zh-TW">顧客登入後，可以顯示之前的購物車。</target>
+        <target xml:lang="zh-TW">會員登入後，顯示之前的購物車紀錄。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/customer_preferences_general.html.twig:37</note>
       </trans-unit>
       <trans-unit id="751e29d82b27256878d1a38f2be4e118" approved="yes">
         <source>Send an email with summary of the account information (email, password) after registration.</source>
-        <target xml:lang="zh-TW">註冊後，E-Mail 帳號資料給顧客(如 E-Mail、密碼)</target>
+        <target xml:lang="zh-TW">註冊後，E-Mail 帳號資料給會員(如 E-Mail、密碼)</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/customer_preferences_general.html.twig:42</note>
       </trans-unit>

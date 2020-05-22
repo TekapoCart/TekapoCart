@@ -1106,7 +1106,7 @@ File: controllers/admin/AdminModulesController.php:110</note>
       </trans-unit>
       <trans-unit id="2938c7f7e560ed972f8a4f68e80ff834" approved="yes">
         <source>Dashboard</source>
-        <target xml:lang="zh-TW">主控台</target>
+        <target xml:lang="zh-TW">儀表板</target>
         <note>Context:
 File: controllers/admin/AdminModulesController.php:111</note>
       </trans-unit>
@@ -3385,7 +3385,7 @@ File: admin-dev/themes/default/template/controllers/not_found/content.tpl:31</no
       </trans-unit>
       <trans-unit id="585c732d00a27a32cd9585fe481964cf" approved="yes">
         <source>Go to the dashboard</source>
-        <target xml:lang="zh-TW">前往主控台</target>
+        <target xml:lang="zh-TW">前往儀表板</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/not_found/content.tpl:35</note>
       </trans-unit>

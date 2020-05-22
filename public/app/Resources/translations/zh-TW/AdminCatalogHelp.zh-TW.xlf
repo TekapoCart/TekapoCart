@@ -494,7 +494,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:
       </trans-unit>
       <trans-unit id="a5b0a810681c7fca4581d7f7524009f4" approved="yes">
         <source>Take me out of there!</source>
-        <target xml:lang="zh-TW">回到管理後台主控台</target>
+        <target xml:lang="zh-TW">回到後台儀表板</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Security/compromised.html.twig:66</note>
       </trans-unit>

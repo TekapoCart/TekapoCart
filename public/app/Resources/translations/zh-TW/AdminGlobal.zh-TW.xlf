@@ -554,7 +554,7 @@ File: admin-dev/themes/default/template/controllers/countries/helpers/list/list_
     <body>
       <trans-unit id="11ff9f68afb6b8b5b8eda218d7c83a65" approved="yes">
         <source>Sales</source>
-        <target xml:lang="zh-TW">消費</target>
+        <target xml:lang="zh-TW">交易金額</target>
         <note>Context:
 File: modules/dashtrends/views/templates/hook/dashboard_zone_two.tpl:46</note>
       </trans-unit>
@@ -566,7 +566,7 @@ File: modules/dashtrends/views/templates/hook/dashboard_zone_two.tpl:66</note>
       </trans-unit>
       <trans-unit id="d7e637a6e9ff116de2fa89551240a94d" approved="yes">
         <source>Visits</source>
-        <target xml:lang="zh-TW">訪問</target>
+        <target xml:lang="zh-TW">造訪次數</target>
         <note>Context:
 File: modules/dashtrends/views/templates/hook/dashboard_zone_two.tpl:61</note>
       </trans-unit>

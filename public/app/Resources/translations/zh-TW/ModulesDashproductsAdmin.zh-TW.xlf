@@ -28,7 +28,7 @@ File: modules/dashproducts/dashproducts.php:150</note>
       </trans-unit>
       <trans-unit id="2aed3d711270a6ed67d21ec2d7cd4af8" approved="yes">
         <source>Total sold</source>
-        <target xml:lang="zh-TW">已賣出總計</target>
+        <target xml:lang="zh-TW">售出數量</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:180</note>
       </trans-unit>
@@ -58,43 +58,43 @@ File: modules/dashproducts/dashproducts.php:299</note>
       </trans-unit>
       <trans-unit id="1eb18ea1d018abef5759cef60ddc289b" approved="yes">
         <source>You must enable the "Save global page views" option from the "Data mining for statistics" module in order to display the most viewed products, or use the Google Analytics module.</source>
-        <target xml:lang="zh-TW">你必須從“資料分析與探勘”中啟用“儲存全域頁面檢視”選項來查看檢視次數最多的商品，或是使用 Google 分析模組。</target>
+        <target xml:lang="zh-TW">你必須啟用 gapi 模組來查看人氣商品。</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:363</note>
       </trans-unit>
       <trans-unit id="cf5f3091e30dee6597885d8c0e0c357f" approved="yes">
         <source>Term</source>
-        <target xml:lang="zh-TW">期限</target>
+        <target xml:lang="zh-TW">關鍵字</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:373</note>
       </trans-unit>
       <trans-unit id="fd69c5cf902969e6fb71d043085ddee6" approved="yes">
         <source>Results</source>
-        <target xml:lang="zh-TW">結果</target>
+        <target xml:lang="zh-TW">搜尋結果</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:383</note>
       </trans-unit>
       <trans-unit id="85bf7474324d7d02725e4dca586afcd9" approved="yes">
         <source>Number of "Recent Orders" to display</source>
-        <target xml:lang="zh-TW">顯示「最新訂單」數量</target>
+        <target xml:lang="zh-TW">顯示「新進訂單」數量</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:528</note>
       </trans-unit>
       <trans-unit id="735b8c7f6d50b4c6f818deeab3cdea4a" approved="yes">
         <source>Number of "Best Sellers" to display</source>
-        <target xml:lang="zh-TW">顯示「熱賣商品」數量</target>
+        <target xml:lang="zh-TW">顯示「銷售排行」數量</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:532</note>
       </trans-unit>
       <trans-unit id="14d24dddc4c67abf8364b980b2ccd5a2" approved="yes">
         <source>Number of "Most Viewed" to display</source>
-        <target xml:lang="zh-TW">顯示「最多瀏覽商品」數量</target>
+        <target xml:lang="zh-TW">顯示「人氣商品」數量</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:536</note>
       </trans-unit>
       <trans-unit id="f1ee1eaab342241138d45f35f4d8466a" approved="yes">
         <source>Number of "Top Searches" to display</source>
-        <target xml:lang="zh-TW">顯示「熱門搜尋」的數量</target>
+        <target xml:lang="zh-TW">顯示「熱門搜尋」數量</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:540</note>
       </trans-unit>
@@ -104,25 +104,25 @@ File: modules/dashproducts/dashproducts.php:540</note>
     <body>
       <trans-unit id="3e361ce73ecabd6524af286d55809ed7" approved="yes">
         <source>Products and Sales</source>
-        <target xml:lang="zh-TW">銷售概況</target>
+        <target xml:lang="zh-TW">商品與銷售排行</target>
         <note>Context:
 File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:28</note>
       </trans-unit>
       <trans-unit id="fd3458547ef9c3a8bd0e1e1b4ef2b4dd" approved="yes">
         <source>Recent Orders</source>
-        <target xml:lang="zh-TW">最新訂單</target>
+        <target xml:lang="zh-TW">新進訂單</target>
         <note>Context:
 File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:50</note>
       </trans-unit>
       <trans-unit id="d7b2933ba512ada478c97fa43dd7ebe6" approved="yes">
         <source>Best Sellers</source>
-        <target xml:lang="zh-TW">最近熱門</target>
+        <target xml:lang="zh-TW">銷售排行</target>
         <note>Context:
 File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:56</note>
       </trans-unit>
       <trans-unit id="be5006eb5af9ab6dbca803f8d3065bbc" approved="yes">
         <source>Most Viewed</source>
-        <target xml:lang="zh-TW">最多檢視</target>
+        <target xml:lang="zh-TW">人氣商品</target>
         <note>Context:
 File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:98</note>
       </trans-unit>
@@ -140,7 +140,7 @@ File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:76</note>
       </trans-unit>
       <trans-unit id="82f0f8d535196ce2a6ea16652d981f94" approved="yes">
         <source>Top %d products</source>
-        <target xml:lang="zh-TW">置頂 %d 筆商品</target>
+        <target xml:lang="zh-TW">前 %d 項商品</target>
         <note>Context:
 File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:86</note>
       </trans-unit>
@@ -158,7 +158,7 @@ File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:111</note
       </trans-unit>
       <trans-unit id="1daaca459ce1e6610e0b97a9ad723f27" approved="yes">
         <source>Top %d most search terms</source>
-        <target xml:lang="zh-TW">前 %d 筆熱門搜尋</target>
+        <target xml:lang="zh-TW">前 %d 次熱門搜尋</target>
         <note>Context:
 File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:110</note>
       </trans-unit>

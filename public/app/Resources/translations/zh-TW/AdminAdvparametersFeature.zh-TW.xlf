@@ -1967,19 +1967,19 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/ad
       </trans-unit>
       <trans-unit id="1b1befcb86d487715da458117710dfeb" approved="yes">
         <source>Show notifications for new orders</source>
-        <target xml:lang="zh-TW">有新訂單時顯示提醒</target>
+        <target xml:lang="zh-TW">有新訂單時顯示通知</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/administration.html.twig:122</note>
       </trans-unit>
       <trans-unit id="8004e61ca76ff500d1e6ee92f7cb7f93" approved="yes">
         <source>Show notifications for new customers</source>
-        <target xml:lang="zh-TW">新客戶註冊時顯示提醒</target>
+        <target xml:lang="zh-TW">新客戶註冊時顯示通知</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/administration.html.twig:127</note>
       </trans-unit>
       <trans-unit id="4e7ff7ca556a7ac8329ab27834e9631b" approved="yes">
         <source>Show notifications for new messages</source>
-        <target xml:lang="zh-TW">顯示新訊息提醒</target>
+        <target xml:lang="zh-TW">顯示新訊息通知</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/administration.html.twig:132</note>
       </trans-unit>
@@ -1989,7 +1989,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/ad
     <body>
       <trans-unit id="a274f4d4670213a9045ce258c6c56b80" approved="yes">
         <source>Notifications</source>
-        <target xml:lang="zh-TW">提醒</target>
+        <target xml:lang="zh-TW">通知</target>
         <note>Context:
 File: modules/dashactivity/views/templates/hook/dashboard_zone_one.tpl:99</note>
       </trans-unit>

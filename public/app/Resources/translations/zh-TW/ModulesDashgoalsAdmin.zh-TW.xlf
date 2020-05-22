@@ -4,13 +4,13 @@
     <body>
       <trans-unit id="50698c5b8ffaf2b7dd089898a244a668" approved="yes">
         <source>Dashboard Goals</source>
-        <target xml:lang="zh-TW">主控台目標</target>
+        <target xml:lang="zh-TW">儀表板目標</target>
         <note>Context:
 File: modules/dashgoals/dashgoals.php:49</note>
       </trans-unit>
       <trans-unit id="ac73c1d4a6befbca8cecf2171cd45d4f" approved="yes">
         <source>Adds a block with your store's forecast.</source>
-        <target xml:lang="zh-TW">新增商店預測區塊</target>
+        <target xml:lang="zh-TW">新增趨勢預測區塊</target>
         <note>Context:
 File: modules/dashgoals/dashgoals.php:50</note>
       </trans-unit>
@@ -88,7 +88,7 @@ File: modules/dashgoals/dashgoals.php:65</note>
       </trans-unit>
       <trans-unit id="71241798130f714cbd2786df3da2cf0b" approved="yes">
         <source>Average cart value</source>
-        <target xml:lang="zh-TW">平均購物車價值</target>
+        <target xml:lang="zh-TW">客單價</target>
         <note>Context:
 File: modules/dashgoals/dashgoals.php:193</note>
       </trans-unit>
@@ -128,13 +128,13 @@ File: modules/dashgoals/views/templates/hook/dashboard_zone_two.tpl:61</note>
       </trans-unit>
       <trans-unit id="8c804960da61b637c548c951652b0cac" approved="yes">
         <source>Average Cart Value</source>
-        <target xml:lang="zh-TW">平均購物車</target>
+        <target xml:lang="zh-TW">客單價</target>
         <note>Context:
 File: modules/dashgoals/views/templates/hook/dashboard_zone_two.tpl:64</note>
       </trans-unit>
       <trans-unit id="89c1265be62d3ba835a3d963db5956b0" approved="yes">
         <source>Forecast</source>
-        <target xml:lang="zh-TW">預測</target>
+        <target xml:lang="zh-TW">趨勢預測</target>
         <note>Context:
 File: modules/dashgoals/views/templates/hook/dashboard_zone_two.tpl:38</note>
       </trans-unit>

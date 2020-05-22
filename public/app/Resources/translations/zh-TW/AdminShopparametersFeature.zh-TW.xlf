@@ -353,7 +353,7 @@ File: controllers/admin/AdminStoresController.php:538</note>
     <body>
       <trans-unit id="d7e637a6e9ff116de2fa89551240a94d" approved="yes">
         <source>Visits</source>
-        <target xml:lang="zh-TW">訪問</target>
+        <target xml:lang="zh-TW">造訪次數</target>
         <note>Context:
 File: controllers/admin/AdminReferrersController.php:501</note>
       </trans-unit>
@@ -491,7 +491,7 @@ File: controllers/admin/AdminReferrersController.php:345</note>
       </trans-unit>
       <trans-unit id="10965b2740f42ad4887932c35cee26ab" approved="yes">
         <source>Unique visitors</source>
-        <target xml:lang="zh-TW">獨特的訪問者</target>
+        <target xml:lang="zh-TW">使用者數</target>
         <note>Context:
 File: controllers/admin/AdminReferrersController.php:499</note>
       </trans-unit>
@@ -503,7 +503,7 @@ File: controllers/admin/AdminReferrersController.php:502</note>
       </trans-unit>
       <trans-unit id="200f5c9c419f0a53d5d361eff7b33abc" approved="yes">
         <source>Registration rate</source>
-        <target xml:lang="zh-TW">登記率</target>
+        <target xml:lang="zh-TW">註冊率</target>
         <note>Context:
 File: controllers/admin/AdminReferrersController.php:506</note>
       </trans-unit>
@@ -1071,7 +1071,7 @@ File: controllers/admin/AdminGroupsController.php:110</note>
       </trans-unit>
       <trans-unit id="312541921a98c69b0f3ac8f5de1b6bb3" approved="yes">
         <source>Guests group</source>
-        <target xml:lang="zh-TW">訪客（有購物紀錄）群組</target>
+        <target xml:lang="zh-TW">訪客（有購物車紀錄）群組</target>
         <note>Context:
 File: controllers/admin/AdminGroupsController.php:118</note>
       </trans-unit>
@@ -1682,7 +1682,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
     <body>
       <trans-unit id="7e1b4ee573c4ef023904fd90eb9ddea7" approved="yes">
         <source>Products per page</source>
-        <target xml:lang="zh-TW">每頁顯示產品：</target>
+        <target xml:lang="zh-TW">每頁顯示數量：</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_pagination.html.twig:36</note>
       </trans-unit>

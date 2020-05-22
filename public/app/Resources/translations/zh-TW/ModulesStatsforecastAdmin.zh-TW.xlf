@@ -82,7 +82,7 @@ File: modules/statsforecast/statsforecast.php:240</note>
       </trans-unit>
       <trans-unit id="89c1265be62d3ba835a3d963db5956b0" approved="yes">
         <source>Forecast</source>
-        <target xml:lang="zh-TW">預測</target>
+        <target xml:lang="zh-TW">趨勢預測</target>
         <note>Context:
 File: modules/statsforecast/statsforecast.php:250</note>
       </trans-unit>
@@ -142,7 +142,7 @@ File: modules/statsforecast/statsforecast.php:420</note>
       </trans-unit>
       <trans-unit id="71241798130f714cbd2786df3da2cf0b" approved="yes">
         <source>Average cart value</source>
-        <target xml:lang="zh-TW">平均購物車價值</target>
+        <target xml:lang="zh-TW">客單價</target>
         <note>Context:
 File: modules/statsforecast/statsforecast.php:423</note>
       </trans-unit>
