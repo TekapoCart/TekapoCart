@@ -31,7 +31,7 @@
 <div class="clearfix"></div>
 <section id="dashtrends" class="panel widget{if $allow_push} allow_push{/if}">
 	<header class="panel-heading">
-		<i class="icon-bar-chart"></i> {l s='Dashboard' d='Modules.Dashtrends.Admin'}
+		<i class="icon-bar-chart"></i> 銷售統計圖表分析{*l s='Dashboard' d='Modules.Dashtrends.Admin'*}
 		<span class="panel-heading-action">
 			<a class="list-toolbar-btn" href="{$link->getAdminLink('AdminDashboard')|escape:'html':'UTF-8'}&amp;profitability_conf=1" title="{l s='Configure' d='Admin.Actions'}">
 				<i class="process-icon-configure"></i>

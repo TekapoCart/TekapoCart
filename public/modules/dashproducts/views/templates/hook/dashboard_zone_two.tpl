@@ -56,14 +56,12 @@
 						<span class="hidden-inline-xs">{l s='Best Sellers' d='Modules.Dashproducts.Admin'}</span>
 					</a>
 				</li>
-				{* suzy: 2018-09-05 隱藏 Most Viewed
 				<li>
 					<a href="#dash_most_viewed" data-toggle="tab">
 						<i class="icon-eye-open"></i>
 						<span class="hidden-inline-xs">{l s='Most Viewed' d='Modules.Dashproducts.Admin'}</span>
 					</a>
 				</li>
-                *}
 				<li>
 					<a href="#dash_top_search" data-toggle="tab">
 						<i class="icon-search"></i>

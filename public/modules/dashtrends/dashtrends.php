@@ -248,6 +248,8 @@ class dashtrends extends Module
 
     protected function addTaxSuffix()
     {
+        // suzy: 2020-05-22 不要加 TaxSuffix
+        return;
         return ' <small>'.$this->trans('Tax excl.', array(), 'Admin.Global').'</small>';
     }
 

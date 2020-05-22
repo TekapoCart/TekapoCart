@@ -64,6 +64,13 @@ class AdminDashboardControllerCore extends AdminController
         );
         */
 
+        // suzy: 2020-05-22 加重新整理按鈕
+        $this->page_header_toolbar_btn['new_alias'] = array(
+            'href' => self::$currentIndex . '&token=' . $this->token,
+            'desc' => '重新整理',
+            'icon' => 'process-icon-refresh',
+        );
+
         parent::initPageHeaderToolbar();
 
         // Remove the last element on this controller to match the title with the rule of the others
@@ -378,6 +385,12 @@ class AdminDashboardControllerCore extends AdminController
         }
 
         parent::postProcess();
+
+        // suzy: 2020-05-22 refresh 避開「確認重新提送表單」困擾
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            header('Location: ' . $_SERVER['REQUEST_URI']);
+            exit;
+        }
     }
 
     protected function getWarningDomainName()

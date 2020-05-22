@@ -134,7 +134,9 @@ Date.prototype.format = function(format) {
 
 $(document).ready(function() {
 	if (typeof date_subtitle === "undefined")
-		var date_subtitle = '(from %s to %s)';
+        // suzy: 2020-05-22 改中文
+		// var date_subtitle = '(from %s to %s)';
+        var date_subtitle = '(由 %s 至 %s)';
 
 	if (typeof date_format === "undefined")
 		var date_format = 'Y-mm-dd';

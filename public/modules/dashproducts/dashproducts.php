@@ -385,7 +385,9 @@ class dashproducts extends Module
             ),
             array(
                 'id' => 'name',
-                'title' => $this->trans('Search', array(), 'Admin.Shopparameters.Feature'),
+                // suzy: 2020-05-22 改文字
+                // 'title' => $this->trans('Search', array(), 'Admin.Shopparameters.Feature'),
+                'title' => '次數',
                 'class' => 'text-center'
             ),
             array(

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-    <name>dashgoals</name>
-    <displayName><![CDATA[儀表板目標]]></displayName>
-    <version><![CDATA[2.0.2]]></version>
-    <description><![CDATA[新增商店目標區塊]]></description>
+    <name>dashproducts</name>
+    <displayName><![CDATA[控制面板商品清單]]></displayName>
+    <version><![CDATA[2.0.4]]></version>
+    <description><![CDATA[新增一個包含最新訂單表格與商品排名的區塊]]></description>
     <author><![CDATA[PrestaShop]]></author>
     <tab><![CDATA[dashboard]]></tab>
     <is_configurable>0</is_configurable>

@@ -84,13 +84,10 @@
 		</div>
 	</div>
 	<div class="row">
-		{* suzy: 2018-09-05 隱藏左區塊
-		<div class="col-md-4 col-lg-3" id="hookDashboardZoneOne">
-			{$hookDashboardZoneOne}
-		</div>
-		*}
-		<div class="{* suzy: 2020-02-01 col-md-8 改成 col-md-12 col-lg-7*}col-md-12" id="hookDashboardZoneTwo">
-			{$hookDashboardZoneTwo}
+        {* suzy: 2020-05-22 zone 左右交換*}
+
+		<div class="col-md-8" id="hookDashboardZoneTwo">
+            {$hookDashboardZoneTwo}
 			{* suzy: 2018-06-11 隱藏 Add more dashboard modules
 			<div id="dashaddons" class="row-margin-bottom">
 				<a href="https://addons.prestashop.com/en/209-dashboards?utm_source=back-office&amp;utm_medium=dashboard&amp;utm_campaign=back-office-{$lang_iso|upper}&amp;utm_content={if $host_mode}cloud{else}download{/if}" class="_blank">
@@ -99,6 +96,11 @@
 			</div>
 			*}
 		</div>
+
+		<div class="col-md-4{* suzy: 2020-05-22 隱藏 class col-lg-3*}" id="hookDashboardZoneOne">
+            {$hookDashboardZoneOne}
+		</div>
+
 		{* suzy: 2018-06-11 隱藏 Prestashop News, Version, Related Links
 		<div class="col-md-12 col-lg-2">
 			<section class="dash_news panel">
