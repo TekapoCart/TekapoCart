@@ -89,7 +89,7 @@
 {if isset($css_files)}
 {foreach from=$css_files key=css_uri item=media}
   {* suzy: 2020-03-17 加上版號 *}
-  <link href="{$css_uri|escape:'html':'UTF-8'}?v={$ps_version}" rel="stylesheet" type="text/css"/>
+  <link href="{$css_uri|escape:'html':'UTF-8'}?v={$tekapocart_version}" rel="stylesheet" type="text/css"/>
 {/foreach}
 {/if}
   {if (isset($js_def) && count($js_def) || isset($js_files) && count($js_files))}

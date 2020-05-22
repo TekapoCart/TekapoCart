@@ -19,9 +19,9 @@ INSERT IGNORE INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES
 UPDATE `ps_group_lang` SET `name` = '訪客（有購物車紀錄）' WHERE `ps_group_lang`.`id_group` = 2 AND `ps_group_lang`.`id_lang` = 1;
 UPDATE `ps_group_lang` SET `name` = '访客（有购物車纪录）' WHERE `ps_group_lang`.`id_group` = 2 AND `ps_group_lang`.`id_lang` = 3;
 
-INSERT INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('2', '1', '7'), ('2', '2', '7'), ('2', '3', '7'), ('2', '4', '7');
-INSERT INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('3', '1', '7'), ('3', '2', '7'), ('3', '3', '7'), ('3', '4', '7');
-INSERT INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('4', '1', '7'), ('4', '2', '7'), ('4', '3', '7'), ('4', '4', '7');
+INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('2', '1', '7'), ('2', '2', '7'), ('2', '3', '7'), ('2', '4', '7');
+INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('3', '1', '7'), ('3', '2', '7'), ('3', '3', '7'), ('3', '4', '7');
+INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('4', '1', '7'), ('4', '2', '7'), ('4', '3', '7'), ('4', '4', '7');
 
 UPDATE `ps_hook_module` SET `position` = '2' WHERE `ps_hook_module`.`id_module` = 5 AND `ps_hook_module`.`id_shop` = 1 AND `ps_hook_module`.`id_hook` = 169;
 UPDATE `ps_hook_module` SET `position` = '2' WHERE `ps_hook_module`.`id_module` = 5 AND `ps_hook_module`.`id_shop` = 2 AND `ps_hook_module`.`id_hook` = 169;
