@@ -94,6 +94,10 @@ table.table {
     padding: 1px 7px;
 }
 
+.bootstrap .table.module_table tbody>tr>td {
+    padding: 7px;
+}
+
 #content.bootstrap .panel .panel-heading {
     font-size: 16px;
     height: 38px;
