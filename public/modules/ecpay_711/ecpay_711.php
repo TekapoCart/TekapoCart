@@ -51,7 +51,7 @@ class Ecpay_711 extends CarrierModule
             OR !$this->registerHook('displayOrderDetail')
             OR !$this->registerHook('displayAdminOrderTabOrder')
             OR !$this->registerHook('displayAdminOrderContentOrder')
-            OR !$this->registerHook('dashboardZoneTwo')
+            OR !$this->registerHook('dashboardZoneOne')
             OR !$this->installDb()
             OR !$this->installCarrier()
         ) {
@@ -436,7 +436,7 @@ class Ecpay_711 extends CarrierModule
 
     }
 
-    public function hookDashboardZoneTwo($params)
+    public function hookDashboardZoneOne($params)
     {
         $results = TcOrderShipping::getNotifyChangeStoreOrders();
         if (count($results) == 0) {
@@ -445,7 +445,7 @@ class Ecpay_711 extends CarrierModule
         $this->smarty->assign([
             'results' => $results,
         ]);
-        return $this->display(__FILE__, '/views/templates/hook/dashboard_zone_two.tpl');
+        return $this->display(__FILE__, '/views/templates/hook/dashboard_zone_one.tpl');
     }
 
     private function checkAddressInput($params)
