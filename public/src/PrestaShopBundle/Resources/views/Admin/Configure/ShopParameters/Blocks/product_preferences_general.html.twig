@@ -87,6 +87,33 @@
           </div>
         </div>
 
+        {# suzy: 2020-05-21 商品列表顯示加入購物車按鈕 #}
+        <div class="form-group row">
+          {{ ps.label_with_help(('商品列表顯示加入購物車按鈕'|trans), ('在商品列表的每個商品下方會顯示一顆加入購物車按鈕，若為多規格擇顯示選擇規格按鈕。'|trans({}, 'Admin.Shopparameters.Help'))) }}
+          <div class="col-sm">
+            {{ form_errors(generalForm.cart_in_listing) }}
+            {{ form_widget(generalForm.cart_in_listing) }}
+          </div>
+        </div>
+
+        {# suzy: 2020-05-21 分類頁顯示排序下拉 #}
+        <div class="form-group row">
+            {{ ps.label_with_help(('分類頁顯示排序下拉'|trans), ('在分類頁的標題下方顯示排序下拉。'|trans({}, 'Admin.Shopparameters.Help'))) }}
+          <div class="col-sm">
+              {{ form_errors(generalForm.sort_in_listing) }}
+              {{ form_widget(generalForm.sort_in_listing) }}
+          </div>
+        </div>
+
+        {# suzy: 2020-05-21 商品頁顯示標籤 #}
+        <div class="form-group row">
+            {{ ps.label_with_help(('商品頁顯示標籤'|trans), ('在商品頁的社群分享按鈕上方顯示標籤。'|trans({}, 'Admin.Shopparameters.Help'))) }}
+          <div class="col-sm">
+              {{ form_errors(generalForm.tag_in_product) }}
+              {{ form_widget(generalForm.tag_in_product) }}
+          </div>
+        </div>
+
         {% block product_general_preferences_form_rest %}
           {{ form_rest(generalForm) }}
         {% endblock %}

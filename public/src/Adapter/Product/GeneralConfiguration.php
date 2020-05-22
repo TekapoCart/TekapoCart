@@ -58,6 +58,16 @@ class GeneralConfiguration implements DataConfigurationInterface
             'quantity_discount' => $this->configuration->get('PS_QTY_DISCOUNT_ON_COMBINATION'),
             'force_friendly_url' => $this->configuration->getBoolean('PS_FORCE_FRIENDLY_PRODUCT'),
             'default_status' => $this->configuration->getBoolean('PS_PRODUCT_ACTIVATION_DEFAULT'),
+
+            // suzy: 2020-05-21 商品列表顯示加入購物車按鈕
+            'cart_in_listing' => $this->configuration->getBoolean('SIMPLICITY_SHOW_ADD_CART_IN_LISTING'),
+
+            // suzy: 2020-05-21 分類頁顯示排序下拉
+            'sort_in_listing' => $this->configuration->getBoolean('TC_SEARCH_SHOW_SORT_IN_LISTING'),
+
+            // suzy: 2020-05-21 商品頁顯示標籤
+            'tag_in_product' => $this->configuration->getBoolean('TC_SEARCH_SHOW_TAGS_IN_PRODUCT'),
+
         ];
     }
 
@@ -77,6 +87,16 @@ class GeneralConfiguration implements DataConfigurationInterface
             $this->configuration->set('PS_QTY_DISCOUNT_ON_COMBINATION', (int) $config['quantity_discount']);
             $this->configuration->set('PS_FORCE_FRIENDLY_PRODUCT', (int) $config['force_friendly_url']);
             $this->configuration->set('PS_PRODUCT_ACTIVATION_DEFAULT', (int) $config['default_status']);
+
+            // suzy: 2020-05-21 商品列表顯示加入購物車按鈕
+            $this->configuration->set('SIMPLICITY_SHOW_ADD_CART_IN_LISTING', $catalogMode ? 0 : (int) $config['cart_in_listing']);
+
+            // suzy: 2020-05-21 分類頁顯示排序下拉
+            $this->configuration->set('TC_SEARCH_SHOW_SORT_IN_LISTING', (int) $config['sort_in_listing']);
+
+            // suzy: 2020-05-21 商品頁顯示標籤
+            $this->configuration->set('TC_SEARCH_SHOW_TAGS_IN_PRODUCT', (int) $config['tag_in_product']);
+
         }
 
         return $errors;
@@ -96,6 +116,15 @@ class GeneralConfiguration implements DataConfigurationInterface
             'quantity_discount',
             'force_friendly_url',
             'default_status',
+
+            // suzy: 2020-05-21 商品列表顯示加入購物車按鈕
+            'cart_in_listing',
+
+            // suzy: 2020-05-21 分類頁顯示排序下拉
+            'sort_in_listing',
+
+            // suzy: 2020-05-21 商品頁顯示標籤
+            'tag_in_product',
         ]);
 
         $resolver->resolve($configuration);

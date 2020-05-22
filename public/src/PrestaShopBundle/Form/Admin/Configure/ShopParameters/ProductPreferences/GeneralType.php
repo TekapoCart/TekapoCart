@@ -64,7 +64,17 @@ class GeneralType extends TranslatorAwareType
                 'required' => true,
             ])
             ->add('force_friendly_url', SwitchType::class)
-            ->add('default_status', SwitchType::class);
+            ->add('default_status', SwitchType::class)
+
+            // suzy: 2020-05-21 商品列表顯示加入購物車按鈕
+            ->add('cart_in_listing', SwitchType::class)
+
+            // suzy: 2020-05-21 分類頁顯示排序下拉
+            ->add('sort_in_listing', SwitchType::class)
+
+            // suzy: 2020-05-21 商品頁顯示標籤
+            ->add('tag_in_product', SwitchType::class)
+        ;
     }
 
     /**
