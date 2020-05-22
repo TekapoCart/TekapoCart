@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>loyalty</name>
+    <displayName><![CDATA[紅利點數]]></displayName>
+    <version><![CDATA[1.3.4]]></version>
+    <description><![CDATA[訂單成立獲贈紅利點數，兌換成優惠券，下次購買可折抵消費金額。]]></description>
+    <author><![CDATA[PrestaShop]]></author>
+    <tab><![CDATA[pricing_promotion]]></tab>
+	<confirmUninstall><![CDATA[Are you sure you want to delete all loyalty points and customer history?]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>

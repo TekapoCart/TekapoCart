@@ -68,10 +68,10 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             // 'product_detail' => $this->l('Product detail'),
             // 'product_block' => $this->l('Product block'),
             'content' => '商品區塊',
-            'categories' => '分類',
+            'categories' => '分類管理',
             'navigation_column' => '左側欄',
-            'product_management' => '商品',
-            'product_detail' => '商品額外資訊',
+            'product_management' => '商品管理',
+            'product_detail' => '額外資訊',
             'product_block' => '加強曝光商品區塊',
 
         );
@@ -118,11 +118,10 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                     */
                 ),
                 'modules' => array(
-                    // suzy: 2018-08-21 新增 ps_customersignin、simplicity_sociallogin、simplicity_headerbar
+                    // suzy: 2018-08-21 新增 ps_customersignin、simplicity_headerbar
                     'simplicity_headerbar' => 0,
                     'ps_mainmenu' => 22321,
                     'ps_customersignin' => 0,
-                    'simplicity_sociallogin' => 0,
                 ),
             ),
             'slider' => array(
@@ -188,8 +187,8 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                         // suzy: 2019-12-10 中文翻譯
                         // $this->l('Pagination'),
                         // $this->l('Set the numbers of products you want to display per page and how.'),
-                        '商品設定',
-                        '更多商品相關詳細設定',
+                        '商品規則',
+                        '更多進階選項，例如：切換目錄模式、顯示購物車按鈕、顯示排序下拉、每頁顯示產品等等。',
                     ),
                 ),
             );
@@ -214,11 +213,10 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                     */
                 ),
                 'modules' => array(
-                    // suzy: 2018-08-21 新增 ps_customersignin、simplicity_sociallogin、simplicity_headerbar
+                    // suzy: 2018-08-21 新增 ps_customersignin、simplicity_headerbar
                     'simplicity_headerbar' => 0,
                     'ps_mainmenu' => 22321,
                     'ps_customersignin' => 0,
-                    'simplicity_sociallogin' => 0,
                 ),
             );
         } else {
@@ -256,10 +254,11 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             'categories' => array(
                 'pages' => array(
                     'AdminCategories' => array(
-                        $this->l('Categories'),
+                        // $this->l('Categories'),
                         // suzy: 2019-12-10 文字翻譯
                         // $this->l('Create a full range of Categories and Subcategories to classify your products, add categoryies desciptions and manage your catalog easily.'),
-                        '新增、修改、刪除、排序 商品分類、次分類'
+                        '分類管理',
+                        '新增、修改、刪除、排序、內容編輯等等。'
                     ),
                 ),
             ),
@@ -303,10 +302,11 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
             $productManagement = array(
                 'sfRoutePages' => array(
                     'admin_product_catalog' => array(
-                        $this->l('Catalog'),
+                        // $this->l('Catalog'),
                         // suzy: 2019-12-10 中文翻譯
                         // $this->l('Access your list of products to manage your catalog efficiently.'),
-                        '新增、修改、刪除、排序 商品內容、商品圖片'
+                        '商品管理',
+                        '新增、修改、刪除、排序內容編輯等等。'
                     ),
                     /* suzy: 2019-12-10 隱藏 Stock
                     'admin_stock_overview' => array(
@@ -378,11 +378,10 @@ class AdminPsThemeCustoConfigurationController extends ModuleAdminController
                      */
                 ),
                 'modules' => array(
-                    // suzy: 2018-08-21 新增 ps_customersignin、simplicity_sociallogin、simplicity_headerbar
+                    // suzy: 2018-08-21 新增 ps_customersignin、simplicity_headerbar
                     'simplicity_headerbar' => 0,
                     'ps_mainmenu' => 22321,
                     'ps_customersignin' => 0,
-                    'simplicity_sociallogin' => 0,
                 ),
             ),
             'product_management' => $productManagement,

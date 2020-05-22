@@ -2,8 +2,8 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{loyalty}prestashop>loyalty_30146a132c2aa28808a8411ed74c12ed'] = 'Customer loyalty and rewards';
-$_MODULE['<{loyalty}prestashop>loyalty_f8763c754ba455aa6e8ddf0e62911eb7'] = 'Provide a loyalty program to your customers.';
+$_MODULE['<{loyalty}prestashop>loyalty_30146a132c2aa28808a8411ed74c12ed'] = '紅利點數';
+$_MODULE['<{loyalty}prestashop>loyalty_f8763c754ba455aa6e8ddf0e62911eb7'] = '訂單成立獲贈紅利點數，兌換成優惠券，下次購買可折抵消費金額。';
 $_MODULE['<{loyalty}prestashop>loyalty_f0338d5a7bbd642cc188ca69c8a97b12'] = 'Are you sure you want to delete all loyalty points and customer history?';
 $_MODULE['<{loyalty}prestashop>loyalty_7307b68f93443d5863f1d3943c546b20'] = 'Récompense de fidélité';
 $_MODULE['<{loyalty}prestashop>loyalty_e81b2826b5aebd9c92fb5d090f0cdc9d'] = 'Vous devez choisir au moins une catégorie pour l\'action du bon';
