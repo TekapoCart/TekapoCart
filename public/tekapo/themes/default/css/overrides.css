@@ -5,13 +5,28 @@ body {
     font-size: 14px;
 }
 
-a,
-.bootstrap a {
+a, .bootstrap a {
     color: #11a7e1;
 }
 
 .bootstrap h2 {
     font-size: 20px;
+}
+
+.bootstrap .size_l {
+    font-size: 18px;
+}
+
+.bootstrap .size_xxl {
+    font-size: 22px;
+}
+
+.bootstrap .btn {
+    font-size: 14px;
+}
+
+.configuration-rectangle .dropdown-action {
+    line-height: 22px;
 }
 
 .category-title,
@@ -76,6 +91,42 @@ table.table {
 }
 
 .bootstrap .table tbody>tr>td {
-    padding: 7px;
+    padding: 1px 7px;
 }
 
+#content.bootstrap .panel .panel-heading {
+    font-size: 16px;
+    height: 38px;
+}
+
+.bootstrap .badge {
+    border-radius: 3.5px;
+}
+
+.bootstrap #dashboard #dashtrends #dashtrends_toolbar dl dt {
+    height: 25px;
+}
+
+.bootstrap #dashboard section>section header {
+    padding: 5px 8px;
+}
+
+.header-toolbar .title {
+    font-size: 20px;
+}
+
+.form-text {
+    font-size: 14px;
+}
+
+.bootstrap .box-stats .kpi-content .value {
+    font-size: 15px;
+}
+
+.bootstrap .box-stats {
+    height: 40px;
+}
+
+#content.bootstrap h3:not(.modal-title) {
+    font-size: 14px;
+}
