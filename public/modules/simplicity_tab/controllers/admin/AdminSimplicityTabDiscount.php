@@ -1,6 +1,6 @@
 <?php
 
-class AdminSimplicityMarketingModulesController extends ModuleAdminController
+class AdminSimplicityTabDiscountController extends ModuleAdminController
 {
     public $module;
 
@@ -48,14 +48,11 @@ class AdminSimplicityMarketingModulesController extends ModuleAdminController
             header("Cache-Control: post-check=0, pre-check=0", false);
             header("Pragma: no-cache");
 
-            return Tools::redirectAdmin($this->context->link->getAdminLink('AdminSimplicityModules'));
+            return Tools::redirectAdmin($this->context->link->getAdminLink('AdminSimplicityTabDiscount'));
         }
 
         $modulesNames = [
-            'gsitemap',
-            'ps_googleanalytics',
-            'simplicity_gtm',
-            'gshoppingflux',
+            'loyalty'
         ];
 
         $modules_to_present = [];
@@ -75,7 +72,7 @@ class AdminSimplicityMarketingModulesController extends ModuleAdminController
         }
 
         $this->context->smarty->assign([
-            'base_url' => $this->context->link->getAdminLink('AdminSimplicityModules', true),
+            'base_url' => $this->context->link->getAdminLink('AdminSimplicityTabDiscount', true),
             'modules_to_present' => $modules_to_present,
 
         ]);

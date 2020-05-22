@@ -1,6 +1,6 @@
 <?php
 
-class AdminSimplicityModulesController extends ModuleAdminController
+class AdminSimplicityTabPSController extends ModuleAdminController
 {
     public $module;
 
@@ -48,7 +48,7 @@ class AdminSimplicityModulesController extends ModuleAdminController
             header("Cache-Control: post-check=0, pre-check=0", false);
             header("Pragma: no-cache");
 
-            return Tools::redirectAdmin($this->context->link->getAdminLink('AdminSimplicityModules'));
+            return Tools::redirectAdmin($this->context->link->getAdminLink('AdminSimplicityTabPS'));
         }
 
         $modulesNames = [
@@ -83,7 +83,7 @@ class AdminSimplicityModulesController extends ModuleAdminController
         }
 
         $this->context->smarty->assign([
-            'base_url' => $this->context->link->getAdminLink('AdminSimplicityModules', true),
+            'base_url' => $this->context->link->getAdminLink('AdminSimplicityTabPS', true),
             'modules_to_present' => $modules_to_present,
 
         ]);
