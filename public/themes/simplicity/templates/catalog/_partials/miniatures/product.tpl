@@ -23,7 +23,7 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 {block name='product_miniature_item'}
-  <article class="product-miniature js-product-miniature{if isset($cssClass)} {$cssClass}{/if}{if $configuration.show_add_cart_in_listing} has-button{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
+  <article class="product-miniature js-product-miniature{if isset($cssClass)} {$cssClass}{/if}{if $product.show_price && $configuration.show_add_cart_in_listing} has-button{/if}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}" itemscope itemtype="http://schema.org/Product">
     {if strlen($product.sticker) > 0}<div class="product-sticker" style="background-image: url('{$urls.img_ps_url}cms/sticker/{$product.sticker}');{if strpos($product.sticker, 'nshift') !== false} top: 0; left: 0;{/if}"></div>{/if}
     <div class="thumbnail-container">
       {block name='product_thumbnail'}
