@@ -226,7 +226,7 @@ class Ps_Customtext extends Module implements WidgetInterface
             'submit' => array(
                 'title' => $this->trans('Save', array(), 'Admin.Actions'),
             ),
-            // suzy: 2019-08-30 隱藏「返回列表」，改成返回「返回佈景模組」
+            // suzy: 2019-08-30 隱藏「返回列表」，改成返回「返回內容模組」
             /*
             'buttons' => array(
                 array(
@@ -238,8 +238,8 @@ class Ps_Customtext extends Module implements WidgetInterface
             */
             'buttons' => array(
                 array(
-                    'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
-                    'title' => '返回佈景模組',
+                    'href' => $this->context->link->getAdminLink('AdminSimplicityTabContent', true),
+                    'title' => '返回內容模組',
                     'icon' => 'process-icon-back'
                 )
             )

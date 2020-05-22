@@ -957,11 +957,11 @@ class Ps_ImageSlider extends Module implements WidgetInterface
                 'submit' => array(
                     'title' => $this->getTranslator()->trans('Save', array(), 'Admin.Actions'),
                 ),
-                // suzy: 2019-08-30 新增「返回佈景模組」
+                // suzy: 2019-08-30 新增「返回模組」
                 'buttons' => array(
                     array(
-                        'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
-                        'title' => '返回佈景模組',
+                        'href' => $this->context->link->getAdminLink('AdminSimplicityTabContent', true),
+                        'title' => '返回內容模組',
                         'icon' => 'process-icon-back'
                     )
                 )
