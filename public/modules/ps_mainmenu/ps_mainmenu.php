@@ -1185,7 +1185,6 @@ class Ps_MainMenu extends Module implements WidgetInterface
         */
 
         // BEGIN Manufacturer
-        /* suzy: 2018-08-21 隱藏 品牌
         $html .= '<optgroup label="'.$this->trans('Brand', array(), 'Admin.Global').'">';
         // Option to show all Manufacturers
         $html .= '<option value="ALLMAN0">'.$this->trans('All brands', array(), 'Modules.Mainmenu.Admin').'</option>';
@@ -1196,7 +1195,6 @@ class Ps_MainMenu extends Module implements WidgetInterface
             }
         }
         $html .= '</optgroup>';
-        */
 
         // BEGIN Categories
         $shop = new Shop((int)Shop::getContextShopID());
