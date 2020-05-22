@@ -248,6 +248,7 @@ function GtmJs() {
         }
 
         product = publicValues.visibleProducts[idProduct];
+        product.quantity = 1;
 
         if (product) {
 
@@ -1149,7 +1150,7 @@ function GtmJs() {
     function getProductLayer(product, platform) {
         var productFields = {
             'gua': ['id', 'name', 'category', 'brand', 'price', 'list', 'position', 'variant', 'quantity'],
-            'facebook': ['id', 'quantity', 'price'],
+            'facebook': ['id', 'quantity'],
             'common': ['id', 'name', 'category', 'brand', 'price', 'list', 'position', 'variant', 'quantity', 'reference']
         };
         var renameFields = {
