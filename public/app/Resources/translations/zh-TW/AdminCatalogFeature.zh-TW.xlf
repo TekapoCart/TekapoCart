@@ -1598,7 +1598,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:284</note>
       </trans-unit>
       <trans-unit id="da2f2f1035487e79b7f5bfd9c5c3eeab" approved="yes">
         <source>Unread threads</source>
-        <target xml:lang="zh-TW">未答覆完畢</target>
+        <target xml:lang="zh-TW">未讀取</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:285</note>
       </trans-unit>
@@ -1634,13 +1634,13 @@ File: controllers/admin/AdminCustomerThreadsController.php:574</note>
       </trans-unit>
       <trans-unit id="dab57a3f740e26922519aebc7e3d602a" approved="yes">
         <source>Reply to the next unanswered message in this thread</source>
-        <target xml:lang="zh-TW">此主題下個未答覆完畢的訊息</target>
+        <target xml:lang="zh-TW">下個未讀取訊息</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:633</note>
       </trans-unit>
       <trans-unit id="5e7304b3032d56f1e9a1ce34cfd4a4ff" approved="yes">
         <source>Mark as "handled"</source>
-        <target xml:lang="zh-TW">標記為「處理完畢」</target>
+        <target xml:lang="zh-TW">標記為「關閉」</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:640</note>
       </trans-unit>
@@ -1658,7 +1658,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:656</note>
       </trans-unit>
       <trans-unit id="bd31a5029e3ca883955fdf21f7528078" approved="yes">
         <source>Disable pending status</source>
-        <target xml:lang="zh-TW">停用等待狀態</target>
+        <target xml:lang="zh-TW">解除等待答覆狀態</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:679</note>
       </trans-unit>
