@@ -1591,13 +1591,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
     <body>
       <trans-unit id="eb1cef1202fdc4d7954899fbf9f1734b" approved="yes">
         <source>Number of days for which the product is considered 'new'</source>
-        <target xml:lang="zh-TW">商品建立後多少天內視為新品</target>
+        <target xml:lang="zh-TW">新增商品多少天內前台顯示為新品</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_general.html.twig:42</note>
       </trans-unit>
       <trans-unit id="9d980493b9016efc42443b1fdae49f33" approved="yes">
         <source>Max size of product summary</source>
-        <target xml:lang="zh-TW">產品簡介的字數上限</target>
+        <target xml:lang="zh-TW">產品摘要字數上限</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_general.html.twig:48</note>
       </trans-unit>
@@ -1621,13 +1621,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="52be3e936f99d9746870ca7d356b3f21" approved="yes">
         <source>Force update of friendly URL</source>
-        <target xml:lang="zh-TW">強制 FRIENDLY URL 更新</target>
+        <target xml:lang="zh-TW">品名變更連動網址</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_general.html.twig:58</note>
       </trans-unit>
       <trans-unit id="8a93e785ac0d7204479e4697cbe8696c" approved="yes">
         <source>Default activation status</source>
-        <target xml:lang="zh-TW">預設上架狀態</target>
+        <target xml:lang="zh-TW">新增商品前台顯示</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_general.html.twig:63</note>
       </trans-unit>
@@ -1694,13 +1694,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="e29857ad6c4bbba99614831d7e3e5a3f" approved="yes">
         <source>Default order by</source>
-        <target xml:lang="zh-TW">預設排序：</target>
+        <target xml:lang="zh-TW">排序條件：</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_pagination.html.twig:41</note>
       </trans-unit>
       <trans-unit id="114a8ec626471fdc120f863a9fb25e4c" approved="yes">
         <source>Default order method</source>
-        <target xml:lang="zh-TW">預設排序方式</target>
+        <target xml:lang="zh-TW">排序方向：</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_pagination.html.twig:46</note>
       </trans-unit>
@@ -1716,13 +1716,13 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="be6be43cab36ddf8024d237c4a2414f7" approved="yes">
         <source>Allow ordering of out-of-stock products</source>
-        <target xml:lang="zh-TW">允許訂購無庫存產品</target>
+        <target xml:lang="zh-TW">開放購買無庫存商品</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_stock.html.twig:35</note>
       </trans-unit>
       <trans-unit id="69983ae81c0090a571d3f60aedbd0d46" approved="yes">
         <source>Enable stock management</source>
-        <target xml:lang="zh-TW">啟用倉庫管理</target>
+        <target xml:lang="zh-TW">啟用庫存管理</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_stock.html.twig:41</note>
       </trans-unit>
@@ -1760,7 +1760,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="65055b5469b4ad0c6f799ad782d1ebe5" approved="yes">
         <source>Default pack stock management</source>
-        <target xml:lang="zh-TW">預設庫存管理</target>
+        <target xml:lang="zh-TW">組合庫存扣除規則</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_stock.html.twig:80</note>
       </trans-unit>

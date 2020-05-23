@@ -48,7 +48,8 @@ class PageType extends AbstractType
             ->add('display_quantities', SwitchType::class)
             ->add('display_last_quantities', IntegerType::class)
             ->add('display_unavailable_attributes', SwitchType::class)
-            ->add('allow_add_variant_to_cart_from_listing', SwitchType::class)
+            // suzy: 2020-05-23 隱藏 Display the "add to cart" button when a product has attributes
+            //->add('allow_add_variant_to_cart_from_listing', SwitchType::class)
             ->add('attribute_anchor_separator', ChoiceType::class, [
                 'choices' => [
                     '-' => '-',

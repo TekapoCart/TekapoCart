@@ -65,9 +65,9 @@
           {if $product.availability == 'available'}
             <i class="material-icons rtl-no-flip product-available">&#xE5CA;</i>
           {elseif $product.availability == 'last_remaining_items'}
-            <i class="material-icons product-last-items">&#xE002;</i>
+            <i class="material-icons product-last-items">error_outline</i>
           {else}
-            <i class="material-icons product-unavailable">&#xE14B;</i>
+            <i class="material-icons product-unavailable">remove_circle_outline</i>
           {/if}
           {$product.availability_message}
         {/if}

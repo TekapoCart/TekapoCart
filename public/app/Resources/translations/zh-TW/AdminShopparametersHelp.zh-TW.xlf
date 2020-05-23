@@ -528,7 +528,7 @@ File: src/PrestaShopBundle/Form/Admin/Configure/ShopParameters/ProductPreference
     <body>
       <trans-unit id="885af23392ddb34eaabf65d3b86b216c" approved="yes">
         <source>By default, the Add to Cart button is hidden when a product is unavailable. You can choose to have it displayed in all cases.</source>
-        <target xml:lang="zh-TW">在預設的情形底下，當商品不可購買時，『放入購物車』的按鈕會被隱藏起來。您可以選擇無論如何都要顯示該按鈕。</target>
+        <target xml:lang="zh-TW">當商品無庫存時，仍顯示「加入購物車」按鈕。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_stock.html.twig:35</note>
       </trans-unit>
@@ -588,7 +588,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
     <body>
       <trans-unit id="80af0f0b70143f575fdfd6fa3ca3cb89" approved="yes">
         <source>Set the maximum size of the summary of your product description (in characters).</source>
-        <target xml:lang="zh-TW">設定產品簡介的字數上限（字元數）。</target>
+        <target xml:lang="zh-TW">設定產品摘要字數上限（字元數）。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_general.html.twig:48</note>
       </trans-unit>
@@ -600,7 +600,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="07d295aa9281a95bf9c27348393f688a" approved="yes">
         <source>When active, friendly URL will be updated on every save.</source>
-        <target xml:lang="zh-TW">啟用之後，每次儲存都會更新其 SEO 友善網址。</target>
+        <target xml:lang="zh-TW">每當品名修改，是否友善網址也會一起連動改變。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_general.html.twig:58</note>
       </trans-unit>
@@ -610,7 +610,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
     <body>
       <trans-unit id="9175b705bec9604985209d1f2d88c785" approved="yes">
         <source>Set to "0" to disable this feature.</source>
-        <target xml:lang="zh-TW">設為0 ，禁用此功能</target>
+        <target xml:lang="zh-TW">若為 0，即停用此功能</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_page.html.twig:43</note>
       </trans-unit>
