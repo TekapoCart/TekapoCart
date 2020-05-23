@@ -183,8 +183,8 @@ class dashactivity extends Module
         // suzy: 2020-05-23 活躍使用者
         $online_visitor = 0;
         if (Validate::isLoadedObject($gapi) && $gapi->isConfigured()) {
-            // suzy: 2020-05-23 ga:activeVisitors 換成 ga:users
-            if ($result = $gapi->requestReportData('', 'ga:users', null, null, null, null, 1, 1)) {
+            // suzy: 2020-05-23 ga:activeVisitors 換成 rt:users
+            if ($result = $gapi->requestReportData('', 'rt:users', null, null, null, null, 1, 1)) {
                 $online_visitor = $result[0]['metrics']['users'];
             }
         } else {
