@@ -3447,7 +3447,7 @@ File: admin-dev/themes/default/template/controllers/specific_price_rule/helpers/
     <body>
       <trans-unit id="908f8d9f34f375a55dd5b6a86489d364" approved="yes">
         <source>No result</source>
-        <target xml:lang="zh-TW">無任何結果</target>
+        <target xml:lang="zh-TW">無紀錄</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/dashboard/helpers/view/view.tpl:28</note>
       </trans-unit>

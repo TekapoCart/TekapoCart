@@ -1598,13 +1598,13 @@ File: controllers/admin/AdminCustomerThreadsController.php:284</note>
       </trans-unit>
       <trans-unit id="da2f2f1035487e79b7f5bfd9c5c3eeab" approved="yes">
         <source>Unread threads</source>
-        <target xml:lang="zh-TW">未讀取</target>
+        <target xml:lang="zh-TW">處理中</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:285</note>
       </trans-unit>
       <trans-unit id="939315783ef4f2eb1cbdac37f3fd1e6b" approved="yes">
         <source>Closed threads</source>
-        <target xml:lang="zh-TW">已結案</target>
+        <target xml:lang="zh-TW">處理完畢</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:286</note>
       </trans-unit>
@@ -1616,7 +1616,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:410</note>
       </trans-unit>
       <trans-unit id="0134539df13231b95613415c0a75af42" approved="yes">
         <source>Pending Discussion Threads</source>
-        <target xml:lang="zh-TW">尚待回覆問題</target>
+        <target xml:lang="zh-TW">待回覆問題</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:549</note>
       </trans-unit>
@@ -1628,25 +1628,25 @@ File: controllers/admin/AdminCustomerThreadsController.php:561</note>
       </trans-unit>
       <trans-unit id="6092e157634b78d790fc607b587d1274" approved="yes">
         <source>Messages per Thread</source>
-        <target xml:lang="zh-TW">平均問題訊息</target>
+        <target xml:lang="zh-TW">平均訊息數</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:574</note>
       </trans-unit>
       <trans-unit id="dab57a3f740e26922519aebc7e3d602a" approved="yes">
         <source>Reply to the next unanswered message in this thread</source>
-        <target xml:lang="zh-TW">此主題下個未回覆的訊息</target>
+        <target xml:lang="zh-TW">此主題下個待回覆的訊息</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:633</note>
       </trans-unit>
       <trans-unit id="5e7304b3032d56f1e9a1ce34cfd4a4ff" approved="yes">
         <source>Mark as "handled"</source>
-        <target xml:lang="zh-TW">顯示為"處理中"</target>
+        <target xml:lang="zh-TW">標記為「處理完畢」</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:640</note>
       </trans-unit>
       <trans-unit id="ea907b9c1af0f060fa2c21beed25880e" approved="yes">
         <source>Re-open</source>
-        <target xml:lang="zh-TW">重開</target>
+        <target xml:lang="zh-TW">重啟</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:647</note>
       </trans-unit>
@@ -1670,13 +1670,13 @@ File: controllers/admin/AdminCustomerThreadsController.php:672</note>
       </trans-unit>
       <trans-unit id="119ce51409ff0ec366e67df0c852ede7" approved="yes">
         <source>Message to: </source>
-        <target xml:lang="zh-TW">訊息： </target>
+        <target xml:lang="zh-TW">訊息：</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:758</note>
       </trans-unit>
       <trans-unit id="ed96f783e467cc984e4945063760e2c4" approved="yes">
         <source>Product: </source>
-        <target xml:lang="zh-TW">商品： </target>
+        <target xml:lang="zh-TW">商品：</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:761</note>
       </trans-unit>

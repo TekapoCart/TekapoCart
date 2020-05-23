@@ -104,7 +104,7 @@ File: modules/dashproducts/dashproducts.php:540</note>
     <body>
       <trans-unit id="3e361ce73ecabd6524af286d55809ed7" approved="yes">
         <source>Products and Sales</source>
-        <target xml:lang="zh-TW">商品與銷售排行</target>
+        <target xml:lang="zh-TW">新進訂單＆排行榜</target>
         <note>Context:
 File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:28</note>
       </trans-unit>

@@ -555,7 +555,7 @@ File: admin-dev/themes/default/template/controllers/customer_threads/helpers/lis
       </trans-unit>
       <trans-unit id="95923cff2ad4637372adcdf25e4581f8" approved="yes">
         <source>Meaning of status</source>
-        <target xml:lang="zh-TW">狀態的意義</target>
+        <target xml:lang="zh-TW">狀態</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/helpers/list/list_header.tpl:64</note>
       </trans-unit>
