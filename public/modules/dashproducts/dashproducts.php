@@ -487,7 +487,9 @@ class dashproducts extends Module
                 $date_from,
                 $date_to,
                 '-ga:visits',
-                'ga:pagePath=~/([a-z]{2}/)?([a-z]+/)?[0-9][0-9]*\-.*\.html$',
+                // suzy: 2020-05-23 change pagePath 
+                // 'ga:pagePath=~/([a-z]{2}/)?([a-z]+/)?[0-9][0-9]*\-.*\.html$',
+                'ga:pagePath=~/([a-z]{2}/)?([a-z]+/)?([0-9][0-9]*/).*$',
                 1,
                 10
             );
