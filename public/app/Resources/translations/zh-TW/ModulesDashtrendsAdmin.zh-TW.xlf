@@ -81,7 +81,7 @@ File: modules/dashtrends/views/templates/hook/dashboard_zone_two.tpl:34</note>
       </trans-unit>
       <trans-unit id="7a6e858f8c7c0b78fb4d43cefcb8c017" approved="yes">
         <source>Ecommerce Conversion Rate is the percentage of visits that resulted in an validated order.</source>
-        <target xml:lang="zh-TW">轉換率為造訪次數/訂單數的百分比。</target>
+        <target xml:lang="zh-TW">轉換率為工作階段/訂單數的百分比。</target>
         <note>Line: 65</note>
       </trans-unit>
       <trans-unit id="8dedc1b3ee3a92212fb5b5acad7f207f" approved="yes">

@@ -80,13 +80,13 @@ File: modules/dashactivity/views/templates/hook/dashboard_zone_one.tpl:27</note>
       </trans-unit>
       <trans-unit id="edfc5fccc0439856b5bd432522ef47aa" approved="yes">
         <source>Online Visitors</source>
-        <target xml:lang="zh-TW">訪客</target>
+        <target xml:lang="zh-TW">活躍使用者</target>
         <note>Context:
 File: modules/dashactivity/views/templates/hook/dashboard_zone_one.tpl:45</note>
       </trans-unit>
       <trans-unit id="962b7da7912bc637b03626e23b5832b5" approved="yes">
         <source>in the last %d minutes</source>
-        <target xml:lang="zh-TW">最後 %d 分鐘</target>
+        <target xml:lang="zh-TW">近 %d 分鐘</target>
         <note>Context:
 File: modules/dashactivity/views/templates/hook/dashboard_zone_one.tpl:58</note>
       </trans-unit>
@@ -164,7 +164,7 @@ File: modules/dashactivity/views/templates/hook/dashboard_zone_one.tpl:148</note
       </trans-unit>
       <trans-unit id="d7e637a6e9ff116de2fa89551240a94d" approved="yes">
         <source>Visits</source>
-        <target xml:lang="zh-TW">造訪次數</target>
+        <target xml:lang="zh-TW">工作階段</target>
         <note>Context:
 File: modules/dashactivity/views/templates/hook/dashboard_zone_one.tpl:153</note>
       </trans-unit>
