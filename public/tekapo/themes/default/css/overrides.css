@@ -133,6 +133,7 @@ table.table {
 
 #content.bootstrap h3:not(.modal-title) {
     font-size: 14px;
+    font-family: inherit;
 }
 
 #dashactivity_config .control-label.col-lg-3 {

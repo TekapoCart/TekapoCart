@@ -40,25 +40,25 @@ File: modules/dashproducts/dashproducts.php:190</note>
       </trans-unit>
       <trans-unit id="ed4832a84ee072b00a6740f657183598" approved="yes">
         <source>Views</source>
-        <target xml:lang="zh-TW">檢視</target>
+        <target xml:lang="zh-TW">瀏覽數</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:289</note>
       </trans-unit>
       <trans-unit id="2c04f1ad7694378897b98624780327ff" approved="yes">
         <source>Added to cart</source>
-        <target xml:lang="zh-TW">新增到購物車</target>
+        <target xml:lang="zh-TW">加入購物車</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:294</note>
       </trans-unit>
       <trans-unit id="ce4ee01637f4279d02d0f232459dc9a4" approved="yes">
         <source>Purchased</source>
-        <target xml:lang="zh-TW">已購買</target>
+        <target xml:lang="zh-TW">購買數</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:299</note>
       </trans-unit>
       <trans-unit id="1eb18ea1d018abef5759cef60ddc289b" approved="yes">
         <source>You must enable the "Save global page views" option from the "Data mining for statistics" module in order to display the most viewed products, or use the Google Analytics module.</source>
-        <target xml:lang="zh-TW">gapi 模組必須先設定成功方可查看人氣商品。</target>
+        <target xml:lang="zh-TW">gapi 模組必須先設定成功方可查看最受關注商品。</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:363</note>
       </trans-unit>
@@ -88,7 +88,7 @@ File: modules/dashproducts/dashproducts.php:532</note>
       </trans-unit>
       <trans-unit id="14d24dddc4c67abf8364b980b2ccd5a2" approved="yes">
         <source>Number of "Most Viewed" to display</source>
-        <target xml:lang="zh-TW">顯示「人氣商品」數量</target>
+        <target xml:lang="zh-TW">顯示「最受關注」數量</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:536</note>
       </trans-unit>
@@ -122,7 +122,7 @@ File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:56</note>
       </trans-unit>
       <trans-unit id="be5006eb5af9ab6dbca803f8d3065bbc" approved="yes">
         <source>Most Viewed</source>
-        <target xml:lang="zh-TW">人氣商品</target>
+        <target xml:lang="zh-TW">最受關注</target>
         <note>Context:
 File: modules/dashproducts/views/templates/hook/dashboard_zone_two.tpl:98</note>
       </trans-unit>
