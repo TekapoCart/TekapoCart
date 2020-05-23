@@ -1478,13 +1478,13 @@ File: controllers/admin/AdminCustomerThreadsController.php:57</note>
       </trans-unit>
       <trans-unit id="70e7ab74282fb27b8c100e017b037135" approved="yes">
         <source>Pending 1</source>
-        <target xml:lang="zh-TW">稍後回覆 1</target>
+        <target xml:lang="zh-TW">稍後答覆 1</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:58</note>
       </trans-unit>
       <trans-unit id="1033cc268ed0919b5d4e76ea6053ed25" approved="yes">
         <source>Pending 2</source>
-        <target xml:lang="zh-TW">稍後回覆 2</target>
+        <target xml:lang="zh-TW">稍後答覆 2</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:59</note>
       </trans-unit>
@@ -1580,7 +1580,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:281</note>
       </trans-unit>
       <trans-unit id="068f62c804cc9c4cd4f6dfc5b5d3ecaa" approved="yes">
         <source>Threads pending</source>
-        <target xml:lang="zh-TW">待回覆</target>
+        <target xml:lang="zh-TW">稍後答覆</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:282</note>
       </trans-unit>
@@ -1598,7 +1598,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:284</note>
       </trans-unit>
       <trans-unit id="da2f2f1035487e79b7f5bfd9c5c3eeab" approved="yes">
         <source>Unread threads</source>
-        <target xml:lang="zh-TW">未答覆</target>
+        <target xml:lang="zh-TW">未答覆完畢</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:285</note>
       </trans-unit>
@@ -1616,7 +1616,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:410</note>
       </trans-unit>
       <trans-unit id="0134539df13231b95613415c0a75af42" approved="yes">
         <source>Pending Discussion Threads</source>
-        <target xml:lang="zh-TW">待回覆問題</target>
+        <target xml:lang="zh-TW">稍後答覆問題</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:549</note>
       </trans-unit>
@@ -1634,7 +1634,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:574</note>
       </trans-unit>
       <trans-unit id="dab57a3f740e26922519aebc7e3d602a" approved="yes">
         <source>Reply to the next unanswered message in this thread</source>
-        <target xml:lang="zh-TW">此主題下個待回覆的訊息</target>
+        <target xml:lang="zh-TW">此主題下個未答覆完畢的訊息</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:633</note>
       </trans-unit>
@@ -1652,7 +1652,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:647</note>
       </trans-unit>
       <trans-unit id="4e852df9fae5b1f8b5e97233733dca5e" approved="yes">
         <source>Mark as "pending 1" (will be answered later)</source>
-        <target xml:lang="zh-TW">標記為「稍後回覆 1」</target>
+        <target xml:lang="zh-TW">標記為「稍後答覆 1」</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:656</note>
       </trans-unit>
@@ -1664,7 +1664,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:679</note>
       </trans-unit>
       <trans-unit id="005ae88a1f2c4664a5009cc0c8d14f7b" approved="yes">
         <source>Mark as "pending 2" (will be answered later)</source>
-        <target xml:lang="zh-TW">標記為「稍後回覆 2」</target>
+        <target xml:lang="zh-TW">標記為「稍後答覆 2」</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:672</note>
       </trans-unit>
