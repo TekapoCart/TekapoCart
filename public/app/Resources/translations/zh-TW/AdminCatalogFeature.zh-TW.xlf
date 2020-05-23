@@ -1478,13 +1478,13 @@ File: controllers/admin/AdminCustomerThreadsController.php:57</note>
       </trans-unit>
       <trans-unit id="70e7ab74282fb27b8c100e017b037135" approved="yes">
         <source>Pending 1</source>
-        <target xml:lang="zh-TW">稍後回覆1</target>
+        <target xml:lang="zh-TW">稍後回覆 1</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:58</note>
       </trans-unit>
       <trans-unit id="1033cc268ed0919b5d4e76ea6053ed25" approved="yes">
         <source>Pending 2</source>
-        <target xml:lang="zh-TW">等候中 2</target>
+        <target xml:lang="zh-TW">稍後回覆 2</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:59</note>
       </trans-unit>
@@ -1598,7 +1598,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:284</note>
       </trans-unit>
       <trans-unit id="da2f2f1035487e79b7f5bfd9c5c3eeab" approved="yes">
         <source>Unread threads</source>
-        <target xml:lang="zh-TW">未回覆</target>
+        <target xml:lang="zh-TW">未答覆</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:285</note>
       </trans-unit>
@@ -1652,7 +1652,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:647</note>
       </trans-unit>
       <trans-unit id="4e852df9fae5b1f8b5e97233733dca5e" approved="yes">
         <source>Mark as "pending 1" (will be answered later)</source>
-        <target xml:lang="zh-TW">標記為「稍後回覆1」</target>
+        <target xml:lang="zh-TW">標記為「稍後回覆 1」</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:656</note>
       </trans-unit>
@@ -1664,7 +1664,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:679</note>
       </trans-unit>
       <trans-unit id="005ae88a1f2c4664a5009cc0c8d14f7b" approved="yes">
         <source>Mark as "pending 2" (will be answered later)</source>
-        <target xml:lang="zh-TW">標記為「稍後回覆2」</target>
+        <target xml:lang="zh-TW">標記為「稍後回覆 2」</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:672</note>
       </trans-unit>

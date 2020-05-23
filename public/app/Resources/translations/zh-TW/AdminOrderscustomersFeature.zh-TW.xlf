@@ -525,13 +525,13 @@ File: admin-dev/themes/default/template/controllers/customer_threads/helpers/lis
       </trans-unit>
       <trans-unit id="70e7ab74282fb27b8c100e017b037135" approved="yes">
         <source>Pending 1</source>
-        <target xml:lang="zh-TW">稍後回覆2</target>
+        <target xml:lang="zh-TW">稍後回覆 1</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/helpers/list/list_header.tpl:69</note>
       </trans-unit>
       <trans-unit id="1033cc268ed0919b5d4e76ea6053ed25" approved="yes">
         <source>Pending 2</source>
-        <target xml:lang="zh-TW">等候中 2</target>
+        <target xml:lang="zh-TW">稍後回覆 2</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/helpers/list/list_header.tpl:70</note>
       </trans-unit>

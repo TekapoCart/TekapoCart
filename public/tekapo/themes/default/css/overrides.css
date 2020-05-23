@@ -154,3 +154,7 @@ table.table {
 .bootstrap h6 {
     font-family: inherit;
 }
+
+.bootstrap .list-unstyled li {
+    padding: 2px 0;
+}
