@@ -390,8 +390,12 @@ class Gapi extends Module
 		$response = Tools::jsonDecode($response_json, true);
 
 		$result = array();
-		if (isset($response['rows']) && is_array($response['rows']))
-			foreach ($response['rows'] as $row)
+
+		// suzy: 2020-05-23 
+//        if (isset($response['rows']) && is_array($response['rows']))
+//            foreach ($response['rows'] as $row)
+		if (isset($response) && is_array($response))
+			foreach ($response as $row)
 			{
 				$metrics = array();
 				$dimensions = array();
