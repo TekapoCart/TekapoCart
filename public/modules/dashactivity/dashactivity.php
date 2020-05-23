@@ -179,11 +179,19 @@ class dashactivity extends Module
         // Online visitors is only available with Analytics Real Time still in private beta at this time (October 18th, 2013).
         // if ($result = $gapi->requestReportData('', 'ga:activeVisitors', null, null, null, null, 1, 1))
         // $online_visitor = $result[0]['metrics']['activeVisitors'];
-        if ($maintenance_ips = Configuration::get('PS_MAINTENANCE_IP')) {
-            $maintenance_ips = implode(',', array_map('ip2long', array_map('trim', explode(',', $maintenance_ips))));
-        }
-        if (Configuration::get('PS_STATSDATA_CUSTOMER_PAGESVIEWS')) {
-            $sql = 'SELECT c.id_guest, c.ip_address, c.date_add, c.http_referer, pt.name as page
+
+        // suzy: 2020-05-23 活躍使用者
+        $online_visitor = 0;
+        if (Validate::isLoadedObject($gapi) && $gapi->isConfigured()) {
+             if ($result = $gapi->requestReportData('', 'ga:activeVisitors', null, null, null, null, 1, 1)) {
+                 $online_visitor = $result[0]['metrics']['activeVisitors'];
+             }
+        } else {
+            if ($maintenance_ips = Configuration::get('PS_MAINTENANCE_IP')) {
+                $maintenance_ips = implode(',', array_map('ip2long', array_map('trim', explode(',', $maintenance_ips))));
+            }
+            if (Configuration::get('PS_STATSDATA_CUSTOMER_PAGESVIEWS')) {
+                $sql = 'SELECT c.id_guest, c.ip_address, c.date_add, c.http_referer, pt.name as page
 					FROM `'._DB_PREFIX_.'connections` c
 					LEFT JOIN `'._DB_PREFIX_.'connections_page` cp ON c.id_connections = cp.id_connections
 					LEFT JOIN `'._DB_PREFIX_.'page` p ON p.id_page = cp.id_page
@@ -196,8 +204,8 @@ class dashactivity extends Module
 					'.($maintenance_ips ? 'AND c.ip_address NOT IN ('.preg_replace('/[^,0-9]/', '', $maintenance_ips).')' : '').'
 					GROUP BY c.id_connections
 					ORDER BY c.date_add DESC';
-        } else {
-            $sql = 'SELECT c.id_guest, c.ip_address, c.date_add, c.http_referer, "-" as page
+            } else {
+                $sql = 'SELECT c.id_guest, c.ip_address, c.date_add, c.http_referer, "-" as page
 					FROM `'._DB_PREFIX_.'connections` c
 					INNER JOIN `'._DB_PREFIX_.'guest` g ON c.id_guest = g.id_guest
 					WHERE (g.id_customer IS NULL OR g.id_customer = 0)
@@ -205,9 +213,10 @@ class dashactivity extends Module
 						AND TIME_TO_SEC(TIMEDIFF(\''.pSQL(date('Y-m-d H:i:00', time())).'\', c.`date_add`)) < 900
 					'.($maintenance_ips ? 'AND c.ip_address NOT IN ('.preg_replace('/[^,0-9]/', '', $maintenance_ips).')' : '').'
 					ORDER BY c.date_add DESC';
+            }
+            Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+            $online_visitor = Db::getInstance()->NumRows();
         }
-        Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
-        $online_visitor = Db::getInstance()->NumRows();
 
         $pending_orders = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
 			SELECT COUNT(*)
