@@ -183,9 +183,10 @@ class dashactivity extends Module
         // suzy: 2020-05-23 活躍使用者
         $online_visitor = 0;
         if (Validate::isLoadedObject($gapi) && $gapi->isConfigured()) {
-             if ($result = $gapi->requestReportData('', 'ga:activeVisitors', null, null, null, null, 1, 1)) {
-                 $online_visitor = $result[0]['metrics']['activeVisitors'];
-             }
+            // suzy: 2020-05-23 ga:activeVisitors 換成 ga:users
+            if ($result = $gapi->requestReportData('', 'ga:users', null, null, null, null, 1, 1)) {
+                $online_visitor = $result[0]['metrics']['users'];
+            }
         } else {
             if ($maintenance_ips = Configuration::get('PS_MAINTENANCE_IP')) {
                 $maintenance_ips = implode(',', array_map('ip2long', array_map('trim', explode(',', $maintenance_ips))));
