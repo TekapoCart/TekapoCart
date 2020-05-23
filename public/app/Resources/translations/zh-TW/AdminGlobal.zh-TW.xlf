@@ -1277,7 +1277,7 @@ File: controllers/admin/AdminLanguagesController.php:135</note>
     <body>
       <trans-unit id="f8c8b903cb2e4f297e4b96d4b9c1e98a" approved="yes">
         <source>Employee</source>
-        <target xml:lang="zh-TW">帳號</target>
+        <target xml:lang="zh-TW">管理者</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/AdvancedParameters/LogsPage/Blocks/table.html.twig:36</note>
       </trans-unit>

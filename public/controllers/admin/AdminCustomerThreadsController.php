@@ -79,20 +79,21 @@ class AdminCustomerThreadsControllerCore extends AdminController
                 'title' => $this->trans('Email', array(), 'Admin.Global'),
                 'filter_key' => 'a!email',
             ),
-            'contact' => array(
-                'title' => $this->trans('Type', array(), 'Admin.Catalog.Feature'),
-                'type' => 'select',
-                'list' => $contact_array,
-                'filter_key' => 'cl!id_contact',
-                'filter_type' => 'int',
-            ),
-            'language' => array(
-                'title' => $this->trans('Language', array(), 'Admin.Global'),
-                'type' => 'select',
-                'list' => $language_array,
-                'filter_key' => 'l!id_lang',
-                'filter_type' => 'int',
-            ),
+        // suzy: 2020-05-23 隱藏欄位
+//            'contact' => array(
+//                'title' => $this->trans('Type', array(), 'Admin.Catalog.Feature'),
+//                'type' => 'select',
+//                'list' => $contact_array,
+//                'filter_key' => 'cl!id_contact',
+//                'filter_type' => 'int',
+//            ),
+//            'language' => array(
+//                'title' => $this->trans('Language', array(), 'Admin.Global'),
+//                'type' => 'select',
+//                'list' => $language_array,
+//                'filter_key' => 'l!id_lang',
+//                'filter_type' => 'int',
+//            ),
             'status' => array(
                 'title' => $this->trans('Status', array(), 'Admin.Global'),
                 'type' => 'select',
@@ -113,18 +114,19 @@ class AdminCustomerThreadsControllerCore extends AdminController
                 'tmpTableFilter' => true,
                 'maxlength' => 40,
             ),
-            'private' => array(
-                'title' => $this->trans('Private', array(), 'Admin.Catalog.Feature'),
-                'type' => 'select',
-                'filter_key' => 'private',
-                'align' => 'center',
-                'cast' => 'intval',
-                'callback' => 'printOptinIcon',
-                'list' => array(
-                    '0' => $this->trans('No', array(), 'Admin.Global'),
-                    '1' => $this->trans('Yes', array(), 'Admin.Global'),
-                ),
-            ),
+            // suzy: 2020-05-23 隱藏欄位
+//            'private' => array(
+//                'title' => $this->trans('Private', array(), 'Admin.Catalog.Feature'),
+//                'type' => 'select',
+//                'filter_key' => 'private',
+//                'align' => 'center',
+//                'cast' => 'intval',
+//                'callback' => 'printOptinIcon',
+//                'list' => array(
+//                    '0' => $this->trans('No', array(), 'Admin.Global'),
+//                    '1' => $this->trans('Yes', array(), 'Admin.Global'),
+//                ),
+//            ),
             'date_upd' => array(
                 'title' => $this->trans('Last message', array(), 'Admin.Catalog.Feature'),
                 'havingFilter' => true,

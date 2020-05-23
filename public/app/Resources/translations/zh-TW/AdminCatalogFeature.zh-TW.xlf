@@ -1580,7 +1580,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:281</note>
       </trans-unit>
       <trans-unit id="068f62c804cc9c4cd4f6dfc5b5d3ecaa" approved="yes">
         <source>Threads pending</source>
-        <target xml:lang="zh-TW">稍後答覆</target>
+        <target xml:lang="zh-TW">稍後答覆數</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:282</note>
       </trans-unit>
@@ -1616,7 +1616,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:410</note>
       </trans-unit>
       <trans-unit id="0134539df13231b95613415c0a75af42" approved="yes">
         <source>Pending Discussion Threads</source>
-        <target xml:lang="zh-TW">稍後答覆問題</target>
+        <target xml:lang="zh-TW">未答覆問題數</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:549</note>
       </trans-unit>
@@ -1658,7 +1658,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:656</note>
       </trans-unit>
       <trans-unit id="bd31a5029e3ca883955fdf21f7528078" approved="yes">
         <source>Disable pending status</source>
-        <target xml:lang="zh-TW">解除等待答覆狀態</target>
+        <target xml:lang="zh-TW">解除「稍後答覆」狀態</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:679</note>
       </trans-unit>
