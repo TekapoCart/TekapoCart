@@ -58,7 +58,7 @@ File: modules/dashproducts/dashproducts.php:299</note>
       </trans-unit>
       <trans-unit id="1eb18ea1d018abef5759cef60ddc289b" approved="yes">
         <source>You must enable the "Save global page views" option from the "Data mining for statistics" module in order to display the most viewed products, or use the Google Analytics module.</source>
-        <target xml:lang="zh-TW">你必須啟用 gapi 模組來查看人氣商品。</target>
+        <target xml:lang="zh-TW">gapi 模組必須先設定成功方可查看人氣商品。</target>
         <note>Context:
 File: modules/dashproducts/dashproducts.php:363</note>
       </trans-unit>

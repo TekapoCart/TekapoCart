@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>dashactivity</name>
-    <displayName><![CDATA[控制面板活動]]></displayName>
+    <displayName><![CDATA[儀表板活動]]></displayName>
     <version><![CDATA[2.0.2]]></version>
     <description><![CDATA[]]></description>
     <author><![CDATA[PrestaShop]]></author>

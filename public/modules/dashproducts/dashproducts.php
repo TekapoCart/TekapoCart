@@ -311,7 +311,9 @@ class dashproducts extends Module
             )
         );
 
-        if (Configuration::get('PS_STATSDATA_PAGESVIEWS')) {
+        // suzy: 2020-05-23 加上 gapi 判斷
+        $gapi = Module::isInstalled('gapi') ? Module::getInstanceByName('gapi') : false;
+        if (Configuration::get('PS_STATSDATA_PAGESVIEWS') || (Validate::isLoadedObject($gapi) && $gapi->isConfigured())) {
             $products = $this->getTotalViewed($date_from, $date_to, (int)Configuration::get('DASHPRODUCT_NBR_SHOW_MOST_VIEWED'));
             $body = array();
             if (is_array($products) && count($products)) {

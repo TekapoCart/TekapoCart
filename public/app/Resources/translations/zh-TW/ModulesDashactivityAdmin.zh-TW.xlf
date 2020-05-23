@@ -16,37 +16,37 @@ File: modules/dashactivity/dashactivity.php:100</note>
       </trans-unit>
       <trans-unit id="914030b0a079e4eec3b3f5090c0fc35a" approved="yes">
         <source>Active cart</source>
-        <target xml:lang="zh-TW">加入購物車</target>
+        <target xml:lang="zh-TW">活躍購物車</target>
         <note>Context:
 File: modules/dashactivity/dashactivity.php:422</note>
       </trans-unit>
       <trans-unit id="78fa968db0e87c6fc302614b26f93b5d" approved="yes">
         <source>How long (in minutes) a cart is to be considered as active after the last recorded change (default: 30 min).</source>
-        <target xml:lang="zh-TW">距離一個購物車的最後記錄的變化在多少分鐘後應被認為是活動的。(預設30分鐘)</target>
+        <target xml:lang="zh-TW">在設定時間內有更新紀錄的購物車可被視為活躍中的購物車。(預設30分)</target>
         <note>Context:
 File: modules/dashactivity/dashactivity.php:423</note>
       </trans-unit>
       <trans-unit id="47b8a33a5335cce8d4e353c4d1743f31" approved="yes">
         <source>Online visitor</source>
-        <target xml:lang="zh-TW">在線上的遊客</target>
+        <target xml:lang="zh-TW">活躍使用者</target>
         <note>Context:
 File: modules/dashactivity/dashactivity.php:440</note>
       </trans-unit>
       <trans-unit id="b13a895857368f29e5e127767388b0ab" approved="yes">
         <source>How long (in minutes) a visitor is to be considered as online after their last action (default: 30 min).</source>
-        <target xml:lang="zh-TW">一個遊客的最後活動在多少分鐘後應被認為是在線上的。(預設30分鐘)</target>
+        <target xml:lang="zh-TW">在設定時間內有瀏覽頁面的使用者可被視為活躍中的使用者。(預設30分)</target>
         <note>Context:
 File: modules/dashactivity/dashactivity.php:441</note>
       </trans-unit>
       <trans-unit id="6ad366c171531a83ffbc5625e159f340" approved="yes">
         <source>Abandoned cart (min)</source>
-        <target xml:lang="zh-TW">被遺棄的購物車 (分鐘)</target>
+        <target xml:lang="zh-TW">未結購物車（始）</target>
         <note>Context:
 File: modules/dashactivity/dashactivity.php:458</note>
       </trans-unit>
       <trans-unit id="8f1f252cfd3cbbcba7a2325f12e3dbc4" approved="yes">
         <source>How long (in hours) after the last action a cart is to be considered as abandoned (default: 24 hrs).</source>
-        <target xml:lang="zh-TW">距離一個購物車的最後活動在多少小時後應被認為是被遺棄的。(預設24小時)</target>
+        <target xml:lang="zh-TW">在設定的時間點以後無任何活動的購物車可被視為未結帳的購物車。(預設24H)</target>
         <note>Context:
 File: modules/dashactivity/dashactivity.php:459</note>
       </trans-unit>
@@ -58,13 +58,13 @@ File: modules/dashactivity/dashactivity.php:469</note>
       </trans-unit>
       <trans-unit id="a5493eb7cba36f452249d093e7757adc" approved="yes">
         <source>Abandoned cart (max)</source>
-        <target xml:lang="zh-TW">被遺棄的購物車 (最大數)</target>
+        <target xml:lang="zh-TW">未結購物車 (終)</target>
         <note>Context:
 File: modules/dashactivity/dashactivity.php:465</note>
       </trans-unit>
       <trans-unit id="45e9c82415a3bee4413485c6bcb4347f" approved="yes">
         <source>How long (in hours) after the last action a cart is no longer to be considered as abandoned (default: 24 hrs).</source>
-        <target xml:lang="zh-TW">距離一個購物車的最後活動在多少小時後不應被認為是被遺棄的。(預設24小時)</target>
+        <target xml:lang="zh-TW">在設定的時間點以後不再追蹤未結帳的購物車。(預設48H)</target>
         <note>Context:
 File: modules/dashactivity/dashactivity.php:466</note>
       </trans-unit>
