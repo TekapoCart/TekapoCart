@@ -525,7 +525,7 @@ File: admin-dev/themes/default/template/controllers/customer_threads/helpers/lis
       </trans-unit>
       <trans-unit id="70e7ab74282fb27b8c100e017b037135" approved="yes">
         <source>Pending 1</source>
-        <target xml:lang="zh-TW">等候中 1</target>
+        <target xml:lang="zh-TW">稍後回覆2</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/helpers/list/list_header.tpl:69</note>
       </trans-unit>
@@ -1825,7 +1825,7 @@ File: admin-dev/themes/default/template/controllers/customer_threads/helpers/vie
       </trans-unit>
       <trans-unit id="3f8faa0e229dbd775fa36b8c15bf73a6" approved="yes">
         <source>Forward this discussion to another employee</source>
-        <target xml:lang="zh-TW">將此討論轉發給另一名管理者</target>
+        <target xml:lang="zh-TW">將此問題轉發給另一名管理者</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/helpers/view/view.tpl:47</note>
       </trans-unit>
@@ -1871,7 +1871,7 @@ File: admin-dev/themes/default/template/controllers/customer_threads/helpers/vie
       </trans-unit>
       <trans-unit id="42ff79fde8fc930db50949b4f700c661" approved="yes">
         <source>Forward this discussion to an employee:</source>
-        <target xml:lang="zh-TW">將此討論轉發給管理者:</target>
+        <target xml:lang="zh-TW">將此問題轉發給：</target>
         <note>Context:
 File: admin-dev/themes/default/template/controllers/customer_threads/helpers/view/modal.tpl:35</note>
       </trans-unit>

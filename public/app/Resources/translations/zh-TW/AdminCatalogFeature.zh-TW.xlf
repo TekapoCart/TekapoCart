@@ -1466,19 +1466,19 @@ File: admin-dev/themes/default/template/controllers/attributes/helpers/form/form
     <body>
       <trans-unit id="c3bf447eabe632720a3aa1a7ce401274" approved="yes">
         <source>Open</source>
-        <target xml:lang="zh-TW">待回覆</target>
+        <target xml:lang="zh-TW">開啟</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:56</note>
       </trans-unit>
       <trans-unit id="03f4a47830f97377a35321051685071e" approved="yes">
         <source>Closed</source>
-        <target xml:lang="zh-TW">處理完畢</target>
+        <target xml:lang="zh-TW">關閉</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:57</note>
       </trans-unit>
       <trans-unit id="70e7ab74282fb27b8c100e017b037135" approved="yes">
         <source>Pending 1</source>
-        <target xml:lang="zh-TW">等候中 1</target>
+        <target xml:lang="zh-TW">稍後回覆1</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:58</note>
       </trans-unit>
@@ -1496,7 +1496,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:111</note>
       </trans-unit>
       <trans-unit id="47f9082fc380ca62d531096aa1d110f1" approved="yes">
         <source>Private</source>
-        <target xml:lang="zh-TW">私人</target>
+        <target xml:lang="zh-TW">私密備註</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:117</note>
       </trans-unit>
@@ -1586,25 +1586,25 @@ File: controllers/admin/AdminCustomerThreadsController.php:282</note>
       </trans-unit>
       <trans-unit id="2fb7efc7cfbbb4672a5f3a021f1a2462" approved="yes">
         <source>Total number of customer messages</source>
-        <target xml:lang="zh-TW">客戶詢問</target>
+        <target xml:lang="zh-TW">詢問數</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:283</note>
       </trans-unit>
       <trans-unit id="8d937d958b984dde93c972a335f87d4b" approved="yes">
         <source>Total number of employee messages</source>
-        <target xml:lang="zh-TW">管理者回覆</target>
+        <target xml:lang="zh-TW">答覆數</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:284</note>
       </trans-unit>
       <trans-unit id="da2f2f1035487e79b7f5bfd9c5c3eeab" approved="yes">
         <source>Unread threads</source>
-        <target xml:lang="zh-TW">處理中</target>
+        <target xml:lang="zh-TW">未回覆</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:285</note>
       </trans-unit>
       <trans-unit id="939315783ef4f2eb1cbdac37f3fd1e6b" approved="yes">
         <source>Closed threads</source>
-        <target xml:lang="zh-TW">處理完畢</target>
+        <target xml:lang="zh-TW">已關閉</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:286</note>
       </trans-unit>
@@ -1652,7 +1652,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:647</note>
       </trans-unit>
       <trans-unit id="4e852df9fae5b1f8b5e97233733dca5e" approved="yes">
         <source>Mark as "pending 1" (will be answered later)</source>
-        <target xml:lang="zh-TW">標示為"稍後回覆1"</target>
+        <target xml:lang="zh-TW">標記為「稍後回覆1」</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:656</note>
       </trans-unit>
@@ -1664,7 +1664,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:679</note>
       </trans-unit>
       <trans-unit id="005ae88a1f2c4664a5009cc0c8d14f7b" approved="yes">
         <source>Mark as "pending 2" (will be answered later)</source>
-        <target xml:lang="zh-TW">標示為"稍後回覆2"</target>
+        <target xml:lang="zh-TW">標記為「稍後回覆2」</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:672</note>
       </trans-unit>

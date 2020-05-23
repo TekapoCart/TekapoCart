@@ -133,10 +133,24 @@ table.table {
 
 #content.bootstrap h3:not(.modal-title) {
     font-size: 14px;
-    font-family: inherit;
 }
 
 #dashactivity_config .control-label.col-lg-3 {
     width: 100%;
     text-align: left;
+}
+
+.bootstrap .h1,
+.bootstrap .h2,
+.bootstrap .h3,
+.bootstrap .h4,
+.bootstrap .h5,
+.bootstrap .h6,
+.bootstrap h1,
+.bootstrap h2,
+.bootstrap h3,
+.bootstrap h4,
+.bootstrap h5,
+.bootstrap h6 {
+    font-family: inherit;
 }
