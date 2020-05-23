@@ -197,14 +197,24 @@ class dashactivity extends Module
 					GROUP BY c.id_connections
 					ORDER BY c.date_add DESC';
         } else {
+            // suzy: 2020-05-23 < 900 被寫死，要用 ((int)Configuration::get('DASHACTIVITY_VISITOR_ONLINE') * 60)
+//            $sql = 'SELECT c.id_guest, c.ip_address, c.date_add, c.http_referer, "-" as page
+//					FROM `'._DB_PREFIX_.'connections` c
+//					INNER JOIN `'._DB_PREFIX_.'guest` g ON c.id_guest = g.id_guest
+//					WHERE (g.id_customer IS NULL OR g.id_customer = 0)
+//						'.Shop::addSqlRestriction(false, 'c').'
+//						AND TIME_TO_SEC(TIMEDIFF(\''.pSQL(date('Y-m-d H:i:00', time())).'\', c.`date_add`)) < 900
+//					'.($maintenance_ips ? 'AND c.ip_address NOT IN ('.preg_replace('/[^,0-9]/', '', $maintenance_ips).')' : '').'
+//					ORDER BY c.date_add DESC';
+            $diff = (int)Configuration::get('DASHACTIVITY_VISITOR_ONLINE') * 60;
             $sql = 'SELECT c.id_guest, c.ip_address, c.date_add, c.http_referer, "-" as page
 					FROM `'._DB_PREFIX_.'connections` c
-					INNER JOIN `'._DB_PREFIX_.'guest` g ON c.id_guest = g.id_guest
-					WHERE (g.id_customer IS NULL OR g.id_customer = 0)
+					WHERE 1 
 						'.Shop::addSqlRestriction(false, 'c').'
-						AND TIME_TO_SEC(TIMEDIFF(\''.pSQL(date('Y-m-d H:i:00', time())).'\', c.`date_add`)) < 900
+						AND TIME_TO_SEC(TIMEDIFF(\''.pSQL(date('Y-m-d H:i:00', time())).'\', c.`date_add`)) < ' . $diff . '
 					'.($maintenance_ips ? 'AND c.ip_address NOT IN ('.preg_replace('/[^,0-9]/', '', $maintenance_ips).')' : '').'
 					ORDER BY c.date_add DESC';
+
         }
         Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
         $online_visitor = Db::getInstance()->NumRows();
@@ -225,13 +235,15 @@ class dashactivity extends Module
 			'.Shop::addSqlRestriction(Shop::SHARE_ORDER)
         );
 
-        $return_exchanges = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
-			SELECT COUNT(*)
-			FROM `'._DB_PREFIX_.'orders` o
-			LEFT JOIN `'._DB_PREFIX_.'order_return` or2 ON o.id_order = or2.id_order
-			WHERE or2.`date_add` BETWEEN "'.pSQL($params['date_from']).'" AND "'.pSQL($params['date_to']).'"
-			'.Shop::addSqlRestriction(Shop::SHARE_ORDER, 'o')
-        );
+        // suzy: 2020-05-23 停用退換貨
+        $return_exchanges = 0;
+//        $return_exchanges = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
+//			SELECT COUNT(*)
+//			FROM `'._DB_PREFIX_.'orders` o
+//			LEFT JOIN `'._DB_PREFIX_.'order_return` or2 ON o.id_order = or2.id_order
+//			WHERE or2.`date_add` BETWEEN "'.pSQL($params['date_from']).'" AND "'.pSQL($params['date_to']).'"
+//			'.Shop::addSqlRestriction(Shop::SHARE_ORDER, 'o')
+//        );
 
         $products_out_of_stock = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
 			SELECT SUM(IF(IFNULL(stock.quantity, 0) > 0, 0, 1))

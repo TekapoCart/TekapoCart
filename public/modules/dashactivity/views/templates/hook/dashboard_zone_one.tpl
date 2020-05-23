@@ -68,12 +68,12 @@
 		<header><i class="icon-time"></i> {l s='Currently Pending' d='Modules.Dashactivity.Admin'}</header>
 		<ul class="data_list">
 			<li>
-				<span class="data_label"><a href="{$link->getAdminLink('AdminOrders')|escape:'html':'UTF-8'}">{l s='Orders' d='Admin.Global'}</a></span>
+				<span class="data_label"><a href="{$link->getAdminLink('AdminOrders')|escape:'html':'UTF-8'}">{* suzy: 加文字 *}已付款未出貨{l s='Orders' d='Admin.Global'}</a></span>
 				<span class="data_value size_l">
 					<span id="pending_orders"></span>
 				</span>
 			</li>
-			<li>
+			<li style="display: none;">{* suzy: 隱藏 退換貨欄位*}
 				<span class="data_label"><a href="{$link->getAdminLink('AdminReturn')|escape:'html':'UTF-8'}">{l s='Return/Exchanges' d='Modules.Dashactivity.Admin'}</a></span>
 				<span class="data_value size_l">
 					<span id="return_exchanges"></span>

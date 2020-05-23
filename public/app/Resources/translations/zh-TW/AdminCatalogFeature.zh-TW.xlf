@@ -1634,7 +1634,7 @@ File: controllers/admin/AdminCustomerThreadsController.php:574</note>
       </trans-unit>
       <trans-unit id="dab57a3f740e26922519aebc7e3d602a" approved="yes">
         <source>Reply to the next unanswered message in this thread</source>
-        <target xml:lang="zh-TW">下個未讀取訊息</target>
+        <target xml:lang="zh-TW">下個未回覆訊息</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:633</note>
       </trans-unit>

@@ -1479,7 +1479,7 @@ File: controllers/admin/AdminCartsController.php:170</note>
       </trans-unit>
       <trans-unit id="ffbb5322a3702b0d8d9c7f506209c540" approved="yes">
         <source>Average Order Value</source>
-        <target xml:lang="zh-TW">平均訂單交易金額</target>
+        <target xml:lang="zh-TW">平均客單價</target>
         <note>Context:
 File: controllers/admin/AdminCartsController.php:183</note>
       </trans-unit>
@@ -1573,7 +1573,7 @@ File: controllers/admin/AdminOrdersController.php:1230</note>
       </trans-unit>
       <trans-unit id="1f065062cdb50b501c5cb5160cf21ab0" approved="yes">
         <source>Net Profit per Visit</source>
-        <target xml:lang="zh-TW">每位顧客代表的淨利</target>
+        <target xml:lang="zh-TW">淨利</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1657</note>
       </trans-unit>

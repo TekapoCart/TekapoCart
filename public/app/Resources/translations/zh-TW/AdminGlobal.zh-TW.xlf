@@ -1471,7 +1471,7 @@ File: controllers/admin/AdminOrdersController.php:1631</note>
       </trans-unit>
       <trans-unit id="ffbb5322a3702b0d8d9c7f506209c540" approved="yes">
         <source>Average Order Value</source>
-        <target xml:lang="zh-TW">平均訂單交易金額</target>
+        <target xml:lang="zh-TW">客單價</target>
         <note>Context:
 File: controllers/admin/AdminOrdersController.php:1644</note>
       </trans-unit>
@@ -1559,7 +1559,7 @@ File: controllers/admin/AdminSlipController.php:63</note>
     <body>
       <trans-unit id="54e85d70ea67acdcc86963b14d6223a8" approved="yes">
         <source>Abandoned Carts</source>
-        <target xml:lang="zh-TW">加入購物車紀錄</target>
+        <target xml:lang="zh-TW">購物車未結</target>
         <note>Context:
 File: modules/dashactivity/views/templates/hook/dashboard_zone_one.tpl:83</note>
       </trans-unit>
