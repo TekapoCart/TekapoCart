@@ -1466,13 +1466,13 @@ File: admin-dev/themes/default/template/controllers/attributes/helpers/form/form
     <body>
       <trans-unit id="c3bf447eabe632720a3aa1a7ce401274" approved="yes">
         <source>Open</source>
-        <target xml:lang="zh-TW">開啟</target>
+        <target xml:lang="zh-TW">待回覆</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:56</note>
       </trans-unit>
       <trans-unit id="03f4a47830f97377a35321051685071e" approved="yes">
         <source>Closed</source>
-        <target xml:lang="zh-TW">關閉</target>
+        <target xml:lang="zh-TW">處理完畢</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:57</note>
       </trans-unit>
@@ -1574,13 +1574,13 @@ File: controllers/admin/AdminCustomerThreadsController.php:228</note>
       </trans-unit>
       <trans-unit id="693c61ec70b6c06dbd376fd208a125a0" approved="yes">
         <source>Total threads</source>
-        <target xml:lang="zh-TW">問題總數</target>
+        <target xml:lang="zh-TW">問題數</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:281</note>
       </trans-unit>
       <trans-unit id="068f62c804cc9c4cd4f6dfc5b5d3ecaa" approved="yes">
         <source>Threads pending</source>
-        <target xml:lang="zh-TW">等待回覆</target>
+        <target xml:lang="zh-TW">待回覆</target>
         <note>Context:
 File: controllers/admin/AdminCustomerThreadsController.php:282</note>
       </trans-unit>
