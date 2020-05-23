@@ -321,7 +321,7 @@ class Gapi extends Module
 				'submit' => array('title' => $this->l('Save and Authenticate')),
 			)
 		);
-echo $helper->currentIndex;exit;
+
 		$helper->tpl_vars = array('currentIndex' => $helper->currentIndex);
 
 		return $html.$helper->generateOptions($fields_options);
@@ -390,7 +390,7 @@ echo $helper->currentIndex;exit;
 		$response = Tools::jsonDecode($response_json, true);
 
 		$result = array();
-        
+
         if (isset($response['rows']) && is_array($response['rows']))
             foreach ($response['rows'] as $row)
 			{
