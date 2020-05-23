@@ -489,7 +489,7 @@ class dashproducts extends Module
                 '-ga:visits',
                 // suzy: 2020-05-23 change pagePath /lc-3/28/lc3-chrome
                 // 'ga:pagePath=~/([a-z]{2}/)?([a-z]+/)?[0-9][0-9]*\-.*\.html$',
-                'ga:pagePath=~/*',
+                'ga:pagePath=~/([a-z]{2}/)?([a-z]+)/([0-9][0-9]*)/*',
                 1,
                 10
             );
@@ -497,7 +497,8 @@ class dashproducts extends Module
 
             if ($result) {
                 foreach ($result as $row) {
-                    if (preg_match('@/([a-z]{2}/)?([a-z]+/)?([0-9]+)\-.*\.html$@', $row['dimensions']['pagePath'], $matches)) {
+                    // if (preg_match('@/([a-z]{2}/)?([a-z]+/)?([0-9]+)\-.*\.html$@', $row['dimensions']['pagePath'], $matches)) {
+                    if (preg_match('@([a-z]{2}/)?([a-z]+)/([0-9][0-9]*)/*@', $row['dimensions']['pagePath'], $matches)) {
                         $products[] = array('id_object' => (int)$matches[3], 'counter' => $row['metrics']['visits']);
                     }
                 }
