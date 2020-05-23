@@ -701,3 +701,5 @@ INSERT INTO `ps_tab_lang` (`id_tab`, `id_lang`, `name`) VALUES
 (149, 2, '內容模組'),
 (149, 3, '內容模組'),
 (149, 4, '內容模組');
+
+UPDATE `ps_tab` SET `active` = '0' WHERE `ps_tab`.`id_tab` = 32;

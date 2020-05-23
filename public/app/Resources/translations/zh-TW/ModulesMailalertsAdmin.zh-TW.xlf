@@ -59,7 +59,7 @@ File: modules/ps_emailalerts/ps_emailalerts.php:897
       </trans-unit>
       <trans-unit id="bad4762226d82261d8c31fc120a03ed2" approved="yes">
         <source>Gives the customer the option of receiving a notification when an out-of-stock product is available again.</source>
-        <target xml:lang="zh-TW">缺貨商品恢復供應時向客戶發送通知。</target>
+        <target xml:lang="zh-TW">無庫存商品恢復供應時向客戶發送通知。</target>
         <note>Context:
 File: modules/ps_emailalerts/ps_emailalerts.php:899</note>
       </trans-unit>

@@ -42,7 +42,7 @@
 		<ul class="data_list_large">
 			<li>
 				<span class="data_label size_l">
-					<a href="{$link->getAdminLink('AdminStats')|escape:'html':'UTF-8'}&amp;module=statslive">{l s='Online Visitors' d='Modules.Dashactivity.Admin'}</a>
+					{* suzy: hide a link<a href="{$link->getAdminLink('AdminStats')|escape:'html':'UTF-8'}&amp;module=statslive">*}{l s='Online Visitors' d='Modules.Dashactivity.Admin'}{*</a>*}
 					<small class="text-muted"><br/>
 						{l s='in the last %d minutes' sprintf=$DASHACTIVITY_VISITOR_ONLINE|intval d='Modules.Dashactivity.Admin'}
 					</small>
@@ -53,7 +53,7 @@
 			</li>
 			<li>
 				<span class="data_label size_l">
-					<a href="{$link->getAdminLink('AdminCarts')|escape:'html':'UTF-8'}">{l s='Active Shopping Carts' d='Modules.Dashactivity.Admin'}</a>
+					{* suzy: hide a link<a href="{$link->getAdminLink('AdminCarts')|escape:'html':'UTF-8'}">*}{l s='Active Shopping Carts' d='Modules.Dashactivity.Admin'}{*</a>*}
 					<small class="text-muted"><br/>
 						{l s='in the last %d minutes' sprintf=$DASHACTIVITY_CART_ACTIVE|intval d='Modules.Dashactivity.Admin'}
 					</small>
@@ -124,13 +124,13 @@
 				</span>
 			</li>
 			<li>
-				<span class="data_label"><a href="{$link->getAdminLink('AdminStats')|escape:'html':'UTF-8'}&amp;module=statsnewsletter">{l s='New Subscriptions' d='Modules.Dashactivity.Admin'}</a></span>
+				<span class="data_label">{* suzy: hide a link <a href="{$link->getAdminLink('AdminStats')|escape:'html':'UTF-8'}&amp;module=statsnewsletter">*}{l s='New Subscriptions' d='Modules.Dashactivity.Admin'}{*</a>*}</span>
 				<span class="data_value size_md">
 					<span id="new_registrations"></span>
 				</span>
 			</li>
 			<li>
-				<span class="data_label"><a href="{$link->getAdminLink('AdminModules')|escape:'html':'UTF-8'}&amp;configure=ps_emailsubscription&amp;module_name=ps_emailsubscription">{l s='Total Subscribers' d='Modules.Dashactivity.Admin'}</a></span>
+				<span class="data_label"><a href="{* suzy: change a link {$link->getAdminLink('AdminModules')|escape:'html':'UTF-8'}&amp;configure=ps_emailsubscription&amp;module_name=ps_emailsubscription*}{$link->getAdminLink('AdminPsEmailSubscription', true)}">{l s='Total Subscribers' d='Modules.Dashactivity.Admin'}</a></span>
 				<span class="data_value size_md">
 					<span id="total_suscribers"></span>
 				</span>
@@ -150,13 +150,13 @@
 				</li>
 			{/if}
 			<li>
-				<span class="data_label"><a href="{$link->getAdminLink('AdminStats')|escape:'html':'UTF-8'}&amp;module=statsforecast">{l s='Visits' d='Modules.Dashactivity.Admin'}</a></span>
+				<span class="data_label">{* suzy: hide a link <a href="{$link->getAdminLink('AdminStats')|escape:'html':'UTF-8'}&amp;module=statsforecast">*}{l s='Visits' d='Modules.Dashactivity.Admin'}{*</a>*}</span>
 				<span class="data_value size_md">
 					<span id="visits"></span>
 				</span>
 			</li>
 			<li>
-				<span class="data_label"><a href="{$link->getAdminLink('AdminStats')|escape:'html':'UTF-8'}&amp;module=statsvisits">{l s='Unique Visitors' d='Modules.Dashactivity.Admin'}</a></span>
+				<span class="data_label">{* suzy: hide a link <a href="{$link->getAdminLink('AdminStats')|escape:'html':'UTF-8'}&amp;module=statsvisits">*}{l s='Unique Visitors' d='Modules.Dashactivity.Admin'}{*</a>*}</span>
 				<span class="data_value size_md">
 					<span id="unique_visitors"></span>
 				</span>
