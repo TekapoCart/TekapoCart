@@ -14,9 +14,8 @@ Fix
 - 後台快速連結可以正確產生可用連結
 - ps_emailsubscription 關閉匯出
 Steps
-- 2020-05-13.sql
-- 2020-05-19-ga-hooks.sql
 - 2020-05-20-tab.sql
+- 2020-05-20-check-redundant.sql
 *******************************************
 * 1.2.2 (May 13, 2020)
 *******************************************
@@ -29,7 +28,18 @@ Fix
 - 模組儲存後 refresh，避免按上一頁「確認重新提送表單」困擾
 Steps
 - 2020-05-12.sql
+(確認 module id, hook id, authorization_role id 一致)
+SELECT MAX(id_authorization_role) FROM ps_authorization_role; 1008
+SELECT MAX(id_hook) FROM ps_hook; 455
+SELECT MAX(id_module) FROM ps_module; 114
 - install loyalty & save & disable
+- 2020-05-13.sql
+- install simplicity_tab
+- install simplicity_custom
+- 2020-05-14.sql
+- install statssearch
+- install gapi
+
 *******************************************
 * 1.2.1 (May 06, 2020)
 *******************************************
