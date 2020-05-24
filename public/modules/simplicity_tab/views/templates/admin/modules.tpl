@@ -3,7 +3,7 @@
     {foreach from=$modules_to_present item=module}
         <tr>
             <td class="text-left" style="width: 50px;">
-                <img class="module-logo" src="https://test.tekapo.cart//modules/{$module.name}/logo.png" style="width: 40px;">
+                <img class="module-logo" src="{$smarty.const._MODULE_DIR_}{$module.name}/logo.png" style="width: 40px;">
             </td>
             <td class="text-left">
                 <div style="font-weight: 700; margin-bottom: 7px;">

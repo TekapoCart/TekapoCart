@@ -35,6 +35,7 @@
 		<span id="footer-load-time"><i class="icon-time" title="{l s='Load time: ' d='Admin.Navigation.Footer'}"></i> {number_format(microtime(true) - $timer_start, 3, '.', '')}s</span>
 	</div>
 
+	{* suzy: 2020-05-25 隱藏
 	<div class="col-sm-2 hidden-xs">
 		<div class="social-networks">
 			<a class="link-social link-youtube _blank" href="https://www.youtube.com/user/prestashop" title="Youtube">
@@ -101,6 +102,7 @@
 			{/if}
 		</div>
 	</div>
+	*}
 
 	<div class="col-sm-3">
 		{hook h="displayBackOfficeFooter"}

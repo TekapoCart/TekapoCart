@@ -20,7 +20,7 @@
 }
 
 .product-information {
-  font-size: $base-font-size;
+  font-size: $font-size-lg;
   color: $gray-darker;
 
   .manufacturer-logo {
@@ -524,7 +524,7 @@
 #product-availability {
   margin-top: 0.625rem;
   display: inline-block;
-  font-weight: $font-weight-bold;
+  // font-weight: $font-weight-bold;
   line-height: 0.9;
   .material-icons {
     line-height: inherit;
@@ -537,6 +537,9 @@
   }
   .product-last-items {
     color: $brand-warning;
+  }
+  .material-icons {
+    font-size: $font-size-lg;
   }
 }
 
