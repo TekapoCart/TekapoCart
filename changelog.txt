@@ -8,7 +8,6 @@ Improve
 Steps
 - install simplicity_feed
 - 2020-06-01.sql
-- install productcomments
 *******************************************
 * 1.2.3 (May 20, 2020)
 *******************************************
