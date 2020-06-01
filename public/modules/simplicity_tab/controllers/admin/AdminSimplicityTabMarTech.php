@@ -56,8 +56,9 @@ class AdminSimplicityTabMarTechController extends ModuleAdminController
             'gsitemap',
             'ps_googleanalytics',
             'simplicity_gtm',
-            'gshoppingflux',
             'gapi',
+            // 'gshoppingflux',
+            'simplicity_feed',
         ];
 
         $modules_to_present = [];
