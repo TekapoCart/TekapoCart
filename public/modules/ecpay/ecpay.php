@@ -406,7 +406,7 @@ class Ecpay extends PaymentModule
             ),
             'buttons' => array(
                 array(
-                    'href' => $this->context->link->getAdminLink('AdminSimplicityModules', true),
+                    'href' => $this->context->link->getAdminLink('AdminSimplicityTabPS', true),
                     'title' => '返回金物流模組',
                     'icon' => 'process-icon-back'
                 )

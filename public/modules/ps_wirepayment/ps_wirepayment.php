@@ -408,7 +408,7 @@ class Ps_Wirepayment extends PaymentModule
                 // suzy: 2020-01-29 加返回按鈕
                 'buttons' => array(
                     array(
-                        'href' => $this->context->link->getAdminLink('AdminSimplicityModules', true),
+                        'href' => $this->context->link->getAdminLink('AdminSimplicityTabPS', true),
                         'title' => '返回金物流模組',
                         'icon' => 'process-icon-back'
                     )
