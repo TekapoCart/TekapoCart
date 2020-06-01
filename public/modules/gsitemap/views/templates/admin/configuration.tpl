@@ -88,7 +88,7 @@
    {/if}
    {* suzy: 2020-05-15 返回按鈕 *}
    <div class="panel-footer">
-      <a href="{$back_theme_url}" class="btn btn-default"><i class="process-icon-back"></i> 返回數據分析＆應用</a>
+      <a href="{$back_theme_url}" class="btn btn-default"><i class="process-icon-back"></i> 返回串接＆應用</a>
    </div>
 </div>
 

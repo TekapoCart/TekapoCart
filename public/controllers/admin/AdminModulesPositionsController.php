@@ -517,7 +517,7 @@ class AdminModulesPositionsControllerCore extends AdminController
                 'simplicity_cmsblock',
                 'simplicity_headerbar',
                 'simplicity_logo',
-                'simplicity_igfeed',
+                // 'simplicity_igfeed',
                 'simplicity_footerbar',
             ])) {
                 if ($tmp_instance = Module::getInstanceById($module['id_module'])) {

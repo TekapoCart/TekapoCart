@@ -259,8 +259,8 @@ class Ps_Googleanalytics extends Module
             // suzy: 2020-05-17 返回按鈕
             'buttons' => array(
                 array(
-                    'href' => $this->context->link->getAdminLink('AdminSimplicityMarketingModules', true),
-                    'title' => '返回數據分析＆應用',
+                    'href' => $this->context->link->getAdminLink('AdminSimplicityTabMarTech', true),
+                    'title' => '返回串接＆應用',
                     'icon' => 'process-icon-back'
                 )
             )

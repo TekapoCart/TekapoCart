@@ -267,7 +267,7 @@ class Gsitemap extends Module
             'shop' => $this->context->shop,
 
             // suzy: 2020-05-14 返回按鈕
-            'back_theme_url' => $this->context->link->getAdminLink('AdminSimplicityMarketingModules', true),
+            'back_theme_url' => $this->context->link->getAdminLink('AdminSimplicityTabMarTech', true),
 
 
         ));

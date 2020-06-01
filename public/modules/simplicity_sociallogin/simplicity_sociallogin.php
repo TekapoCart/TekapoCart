@@ -344,8 +344,8 @@ class Simplicity_Sociallogin extends Module
                 ),
                 'buttons' => array(
                     array(
-                        'href' => $this->context->link->getAdminLink('AdminPsThemeCustoConfiguration', false).'&token='.Tools::getAdminTokenLite('AdminPsThemeCustoConfiguration'),
-                        'title' => '返回佈景模組',
+                        'href' => $this->context->link->getAdminLink('AdminSimplicityTabMarTech', true),
+                        'title' => '返回串接＆應用',
                         'icon' => 'process-icon-back'
                     )
                 )

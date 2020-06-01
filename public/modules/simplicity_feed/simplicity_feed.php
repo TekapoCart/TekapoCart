@@ -314,7 +314,7 @@ class Simplicity_Feed extends Module
             'buttons' => array(
                 array(
                     'href' => $this->context->link->getAdminLink('AdminSimplicityTabMarTech', true),
-                    'title' => '返回串接＆應用模組',
+                    'title' => '返回串接＆應用',
                     'icon' => 'process-icon-back'
                 )
             )
