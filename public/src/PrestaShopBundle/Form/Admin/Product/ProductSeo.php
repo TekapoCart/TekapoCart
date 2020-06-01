@@ -34,6 +34,9 @@ use Symfony\Component\Form\Extension\Core\Type as FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+// suzy: 2020-05-25 加上跟分類 link_rewrite 一樣的檢核規則
+use Symfony\Component\Validator\Constraints\Regex;
+
 /**
  * This form class is responsible to generate the product SEO form.
  */
@@ -127,6 +130,15 @@ class ProductSeo extends CommonAbstractType
                 [
                     'type' => FormType\TextType::class,
                     'options' => [
+
+                        // suzy: 2020-05-25 加上跟分類 link_rewrite 一樣的檢核規則
+                        'constraints' => [
+                            new Regex([
+                                'pattern' => '/^[_a-zA-Z0-9\x{0600}-\x{06FF}\pL-]+$/u',
+                                'message' => $this->translator->trans('%s is invalid.', [], 'Admin.Notifications.Error'),
+                            ]),
+                        ],
+
                         'attr' => [
                             'class' => 'serp-watched-url',
                         ],

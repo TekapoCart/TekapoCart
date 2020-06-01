@@ -221,7 +221,8 @@ abstract class AbstractCategoryType extends TranslatorAwareType
                 'options' => [
                     'constraints' => [
                         new Regex([
-                            'pattern' => (bool) $this->configuration->get('PS_ALLOW_ACCENTED_CHARS_URL') ? '/^[_a-zA-Z0-9\x{0600}-\x{06FF}\pL\pS-]+$/u' : '/^[^<>={}]*$/u',
+                            // suzy: 2020-05-25 網址不可放行加號 +，由 /^[_a-zA-Z0-9\x{0600}-\x{06FF}\pL\pS-]+$/u 改 /^[_a-zA-Z0-9\x{0600}-\x{06FF}\pL-]+$/u
+                            'pattern' => (bool) $this->configuration->get('PS_ALLOW_ACCENTED_CHARS_URL') ? '/^[_a-zA-Z0-9\x{0600}-\x{06FF}\pL-]+$/u' : '/^[^<>={}]*$/u',
                             'message' => $this->trans('%s is invalid.', 'Admin.Notifications.Error'),
                         ]),
                     ],

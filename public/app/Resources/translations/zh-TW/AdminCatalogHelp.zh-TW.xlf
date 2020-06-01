@@ -146,7 +146,7 @@ File: controllers/admin/AdminCategoriesController.php:619</note>
       </trans-unit>
       <trans-unit id="09e2683b6b92b326691cd992f6e5684b" approved="yes">
         <source>Only letters, numbers, underscore (_) and the minus (-) character are allowed.</source>
-        <target xml:lang="zh-TW">接受字母、數字、底線（_）、減號（-）。</target>
+        <target xml:lang="zh-TW">網址規則：字母 a-z、數字 0-9、底線 _、減號 -。</target>
         <note>Context:
 File: controllers/admin/AdminCategoriesController.php:627</note>
       </trans-unit>
@@ -714,7 +714,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_
     <body>
       <trans-unit id="c533675166b567256cae22139534b713" approved="yes">
         <source>This is the human-readable URL, as generated from the product's name. You can change it if you want.</source>
-        <target xml:lang="zh-TW">您可以修改成與商品相關且有意義的英文網址。</target>
+        <target xml:lang="zh-TW">將網址設為有意義的英文網址。網址規則：字母 a-z、數字 0-9、底線 _、減號 -。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Product/ProductPage/Forms/form_seo.html.twig:53</note>
       </trans-unit>
