@@ -157,39 +157,24 @@ class Simplicity_Feed extends Module
         $this->categoriesName = Category::getAllCategoriesName(Configuration::get('PS_ROOT_CATEGORY'), Configuration::get('PS_LANG_DEFAULT'), false, $this->context->shop->id);
 
         # Set the options
-        $descriptions = array(
-            array(
-                'id_option' => 'description_short',
-                'name' => '摘要',
-            ),
-            array(
-                'id_option' => 'description',
-                'name' => '說明',
-            ),
-            array(
-                'id_option' => 'meta_description',
-                'name' => 'SEO Meta 描述',
-            ),
-        );
-
-        $categories = [
-            'id_option' => '-',
+        $categories[] = [
+            'id' => '-',
             'name' => '不限'
         ];
         foreach ($this->categoriesName as $key => $value) {
             $categories[] = array(
-                'id_option' => $value['id_category'],
+                'id' => $value['id_category'],
                 'name' => $value['name']
             );
         }
 
-        $manufacturers = [
-            'id_option' => '-',
+        $manufacturers[] = [
+            'id' => '-',
             'name' => '不限'
         ];
         foreach (Manufacturer::getManufacturers(false, $this->context->language->id, false) as $key => $value) {
             $manufacturers[] = array(
-                'id_option' => $value['id_manufacturer'],
+                'id' => $value['id_manufacturer'],
                 'name' => $value['name']
             );
         }
@@ -244,8 +229,21 @@ class Simplicity_Feed extends Module
                     'label' => '說明欄位',
                     'name' => 'simplicity_feed_export_description',
                     'options' => array(
-                        'query' => $descriptions,
-                        'id' => 'id_option',
+                        'query' => array(
+                            array(
+                                'id' => 'description_short',
+                                'name' => '摘要',
+                            ),
+                            array(
+                                'id' => 'description',
+                                'name' => '說明',
+                            ),
+                            array(
+                                'id' => 'meta_description',
+                                'name' => 'SEO Meta 描述',
+                            ),
+                        ),
+                        'id' => 'id',
                         'name' => 'name'
                     ),
                 ),
@@ -255,7 +253,7 @@ class Simplicity_Feed extends Module
                     'name' => 'simplicity_feed_export_category',
                     'options' => array(
                         'query' => $categories,
-                        'id' => 'id_option',
+                        'id' => 'id',
                         'name' => 'name'
                     ),
                 ),
@@ -265,7 +263,7 @@ class Simplicity_Feed extends Module
                     'name' => 'simplicity_feed_export_manufacturers',
                     'options' => array(
                         'query' => $manufacturers,
-                        'id' => 'id_option',
+                        'id' => 'id',
                         'name' => 'name'
                     ),
                 ),

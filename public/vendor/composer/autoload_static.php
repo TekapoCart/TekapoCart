@@ -12958,6 +12958,8 @@ class ComposerStaticInitdd1afd7647c6348b95bedf78d5c0043e
         'Html2Text\\Html2TextException' => __DIR__ . '/..' . '/soundasleep/html2text/src/Html2TextException.php',
         'Incenteev\\ParameterHandler\\Processor' => __DIR__ . '/..' . '/incenteev/composer-parameter-handler/Processor.php',
         'Incenteev\\ParameterHandler\\ScriptHandler' => __DIR__ . '/..' . '/incenteev/composer-parameter-handler/ScriptHandler.php',
+        'Incenteev\\ParameterHandler\\Tests\\ProcessorTest' => __DIR__ . '/..' . '/incenteev/composer-parameter-handler/Tests/ProcessorTest.php',
+        'Incenteev\\ParameterHandler\\Tests\\ScriptHandlerTest' => __DIR__ . '/..' . '/incenteev/composer-parameter-handler/Tests/ScriptHandlerTest.php',
         'IntlDateFormatter' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/IntlDateFormatter.php',
         'JSCompilerContext' => __DIR__ . '/..' . '/mrclay/minify/min/lib/JSMinPlus.php',
         'JSMin' => __DIR__ . '/..' . '/mrclay/minify/min/lib/JSMin.php',

@@ -2187,7 +2187,7 @@ File: modules/gsitemap/gsitemap.php:46</note>
       </trans-unit>
       <trans-unit id="935a6bc13704a117d22333c3155b5dae" approved="yes">
         <source>Generate your Google sitemap file</source>
-        <target xml:lang="zh-TW">產生您的 Google Sitemap 檔案</target>
+        <target xml:lang="zh-TW">產生 Google Sitemap 檔案。</target>
         <note>Context:
 File: modules/gsitemap/gsitemap.php:47</note>
       </trans-unit>

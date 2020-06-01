@@ -12303,6 +12303,8 @@ return array(
     'Html2Text\\Html2TextException' => $vendorDir . '/soundasleep/html2text/src/Html2TextException.php',
     'Incenteev\\ParameterHandler\\Processor' => $vendorDir . '/incenteev/composer-parameter-handler/Processor.php',
     'Incenteev\\ParameterHandler\\ScriptHandler' => $vendorDir . '/incenteev/composer-parameter-handler/ScriptHandler.php',
+    'Incenteev\\ParameterHandler\\Tests\\ProcessorTest' => $vendorDir . '/incenteev/composer-parameter-handler/Tests/ProcessorTest.php',
+    'Incenteev\\ParameterHandler\\Tests\\ScriptHandlerTest' => $vendorDir . '/incenteev/composer-parameter-handler/Tests/ScriptHandlerTest.php',
     'IntlDateFormatter' => $vendorDir . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/IntlDateFormatter.php',
     'JSCompilerContext' => $vendorDir . '/mrclay/minify/min/lib/JSMinPlus.php',
     'JSMin' => $vendorDir . '/mrclay/minify/min/lib/JSMin.php',

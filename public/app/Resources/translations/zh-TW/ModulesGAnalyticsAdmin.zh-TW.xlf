@@ -8,6 +8,18 @@
         <note>Context:
 File: modules/ps_googleanalytics/ps_googleanalytics.php:51</note>
       </trans-unit>
+      <trans-unit id="135d2522825fa02688ab25a2e1c88c73" approved="yes">
+        <source>Gain clear insights into important metrics about your customers, using Google Analytics</source>
+        <target xml:lang="zh-TW">使用 Google Analytics 深入瞭解客戶行為。</target>
+        <note>Context:
+File: modules/ps_googleanalytics/ps_googleanalytics.php:52</note>
+      </trans-unit>
+      <trans-unit id="7ed5c154078e30b30b2f214299c5e9f5" approved="yes">
+        <source>Are you sure you want to uninstall Google Analytics? You will lose all the data related to this module.</source>
+        <target xml:lang="zh-TW">Are you sure you want to uninstall Google Analytics? You will lose all the data related to this module.</target>
+        <note>Context:
+File: modules/ps_googleanalytics/ps_googleanalytics.php:54</note>
+      </trans-unit>
       <trans-unit id="612e1a524ec979815b12182c34e2daa0" approved="yes">
         <source>Account ID updated successfully</source>
         <target xml:lang="zh-TW">成功更新設定</target>
