@@ -6,12 +6,14 @@ include_once('../../init.php');
 $appId = Configuration::get('TC_MAIL_API_CLIENT_ID');
 $appSecret = Configuration::get('TC_MAIL_API_CLIENT_SECRET');
 $token = Configuration::get('TC_MAIL_API_TOKEN');
+$redirectURI = Context::getContext()->shop->getBaseURL(true) . 'modules/simplicity_sociallogin/gmail.php';
 
 $client = new Google_Client();
 $client->setClientId($appId);
 $client->setClientSecret($appSecret);
 $client->addScope([Google_Service_Gmail::GMAIL_SEND]);
 $client->setAccessType('offline');
+$client->setRedirectUri($redirectURI);
 $token = json_decode(Configuration::get('TC_MAIL_API_TOKEN'), true);
 if (strlen($token) > 0) {
     $client->setAccessToken($token);
@@ -30,7 +32,7 @@ if ($client->isAccessTokenExpired()) {
         Configuration::updateValue('TC_MAIL_API_TOKEN', json_encode($client->getAccessToken()));
         echo '取得新 token 成功';
     } else {
-        $redirectURI = Context::getContext()->shop->getBaseURL(true) . 'modules/simplicity_sociallogin/gmail.php';
+
         $client->setRedirectUri($redirectURI);
         $authUrl = $client->createAuthUrl();
         echo '未通過驗證 <a href="' . $authUrl . '">前往取得 token</a>';
