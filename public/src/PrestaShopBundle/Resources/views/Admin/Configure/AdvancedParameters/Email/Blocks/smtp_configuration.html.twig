@@ -28,7 +28,7 @@
   <div class="col-12">
     <div class="card js-smtp-configuration {% if emailConfigurationForm.email_config.mail_method.vars.value != smtpMailMethod %}d-none{% endif %}">
       <h3 class="card-header">
-        <i class="material-icons">settings</i> SMTP 帳戶 {# suzy: 改標題名稱 {{ 'Email'|trans({}, 'Admin.Global') }} #}
+        <i class="material-icons">settings</i> 發信帳號設定 {# suzy: 改標題名稱 {{ 'Email'|trans({}, 'Admin.Global') }} #}
       </h3>
       <div class="card-block row">
         <div class="card-text">
@@ -49,7 +49,8 @@
           </div>
 
           <div class="form-group row">
-            {{ ps.label_with_help(('SMTP username'|trans), ('Leave blank if not applicable.'|trans({}, 'Admin.Advparameters.Help'))) }}
+            {# suzy: 2020-06-20 { ps.label_with_help(('SMTP username'|trans), ('Leave blank if not applicable.'|trans({}, 'Admin.Advparameters.Help'))) }#}
+            {{ ps.label_with_help(('SMTP username'|trans), 'SMTP 帳號 或 API Client ID') }}
             <div class="col-sm">
               {{ form_errors(emailConfigurationForm.smtp_config.username) }}
               {{ form_widget(emailConfigurationForm.smtp_config.username) }}
@@ -57,7 +58,8 @@
           </div>
 
           <div class="form-group row">
-            {{ ps.label_with_help(('SMTP password'|trans), ('Leave blank if not applicable.'|trans({}, 'Admin.Advparameters.Help'))) }}
+            {# suzy: 2020-06-20 { ps.label_with_help(('SMTP password'|trans), ('Leave blank if not applicable.'|trans({}, 'Admin.Advparameters.Help'))) }#}
+            {{ ps.label_with_help(('SMTP password'|trans), 'SMTP 密碼 或 API Client Secret') }}
             <div class="col-sm">
               {{ form_errors(emailConfigurationForm.smtp_config.password) }}
               {{ form_widget(emailConfigurationForm.smtp_config.password) }}
@@ -78,7 +80,8 @@
           </div>
 
           <div class="form-group row">
-            {{ ps.label_with_help(('Port'|trans), ('Port number to use.'|trans)) }}
+            {# suzy: 2020-06-20 { ps.label_with_help(('Port'|trans), ('Port number to use.'|trans)) }#}
+            {{ ps.label_with_help(('Port'|trans), '加密格式為 TLS 時，連接埠請填寫：587；加密格式為 SSL 時，連接埠請填寫：465。') }}
             <div class="col-sm">
               {{ form_errors(emailConfigurationForm.smtp_config.port) }}
               {{ form_widget(emailConfigurationForm.smtp_config.port) }}

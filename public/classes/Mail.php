@@ -600,6 +600,8 @@ class MailCore extends ObjectModel
             if ($configuration['PS_MAIL_TYPE'] == Mail::TYPE_BOTH ||
                 $configuration['PS_MAIL_TYPE'] == Mail::TYPE_HTML
             ) {
+                // suzy: 2020-06-02 Gmail API
+                $templateHtml = str_replace(array_keys($templateVars), array_values($templateVars), $templateHtml);
                 $message->addPart($templateHtml, 'text/html', 'utf-8');
             }
 
@@ -628,7 +630,59 @@ class MailCore extends ObjectModel
                 'message' => &$message,
             ]);
 
-            $send = $swift->send($message);
+//            $time = (string)microtime(true);
+//            PrestaShopLogger::addLog(
+//                $time,
+//                3,
+//                null,
+//                'Swift_Message'
+//            );
+
+            // suzy: 2020-06-02 Gmail API
+            if (strlen(Configuration::get('TC_MAIL_API_CLIENT_ID')) > 0) {
+                try {
+                    $client = new Google_Client();
+                    $client->setClientId(Configuration::get('TC_MAIL_API_CLIENT_ID'));
+                    $client->setClientSecret(Configuration::get('TC_MAIL_API_CLIENT_SECRET'));
+                    $client->setScopes([Google_Service_Gmail::GMAIL_SEND]);
+                    $client->setAccessType('offline');
+                    $token = json_decode(Configuration::get('TC_MAIL_API_TOKEN'), true);
+                    $client->setAccessToken($token);
+                    if ($client->isAccessTokenExpired()) {
+                        if ($client->getRefreshToken()) {
+                            $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+                            Configuration::updateValue('TC_MAIL_API_TOKEN', json_encode($client->getAccessToken()));
+                        } else {
+                            throw new exception('cant refresh gmail api token');
+                        }
+                    }
+                    $service = new Google_Service_Gmail($client);
+                    $msg = new Google_Service_Gmail_Message();
+                    $mime = strtr(base64_encode($message->toString()), array('+' => '-', '/' => '_'));
+                    $msg->setRaw($mime);
+                    $result = $service->users_messages->send('me', $msg);
+                    $result->getId();
+                    $send = 1;
+                } catch (Exception $e) {
+                    PrestaShopLogger::addLog(
+                        'Google Client API Error: ' . $e->getMessage(),
+                        3,
+                        null,
+                        'Swift_Message'
+                    );
+                    $send = $swift->send($message);
+                }
+            } else {
+                $send = $swift->send($message);
+            }
+
+//            $time = (string)microtime(true);
+//            PrestaShopLogger::addLog(
+//                $time,
+//                3,
+//                null,
+//                'Swift_Message'
+//            );
 
             ShopUrl::resetMainDomainCache();
 

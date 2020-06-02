@@ -95,19 +95,19 @@ File: controllers/admin/AdminShopController.php:846</note>
     <body>
       <trans-unit id="a60bc065c0296646c5a07e55c0cfff6e" approved="yes">
         <source>Fully qualified domain name (keep this field empty if you don't know).</source>
-        <target xml:lang="zh-TW">完整的網域名稱（如果不清楚就保留空白）。</target>
+        <target xml:lang="zh-TW">用 AWS 發信才需要用到的欄位</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:139</note>
       </trans-unit>
       <trans-unit id="2a3c280f73a3389c6ba4b2d87c8aa15f" approved="yes">
         <source>IP address or server name (e.g. smtp.mydomain.com).</source>
-        <target xml:lang="zh-TW">IP地址或者主機名稱（例如：smtp.mydomain.com）</target>
+        <target xml:lang="zh-TW">IP 或主機名稱（例如：smtp.gmail.com）</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:146</note>
       </trans-unit>
       <trans-unit id="a5d35e0a66d41c7d12c0df6e643fa0ff" approved="yes">
         <source>Leave blank if not applicable.</source>
-        <target xml:lang="zh-TW">如不適用請留白。</target>
+        <target xml:lang="zh-TW">若無請留空。</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:158</note>
       </trans-unit>
