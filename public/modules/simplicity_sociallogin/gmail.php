@@ -34,7 +34,7 @@ if ($client->isAccessTokenExpired()) {
         $redirectURI = Context::getContext()->shop->getBaseURL(true) . 'modules/simplicity_sociallogin/gmail.php';
         $client->setRedirectUri($redirectURI);
         $authUrl = $client->createAuthUrl();
-        echo '未通過驗證 <a href=" . $authUrl . ">前往取得 token</a>';
+        echo '未通過驗證 <a href="' . $authUrl . '">前往取得 token</a>';
     }
 } else {
     echo 'token 尚未過期，不需更新';
