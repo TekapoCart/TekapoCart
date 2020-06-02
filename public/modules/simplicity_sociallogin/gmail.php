@@ -14,8 +14,8 @@ $client->setClientSecret($appSecret);
 $client->addScope([Google_Service_Gmail::GMAIL_SEND]);
 $client->setAccessType('offline');
 $client->setRedirectUri($redirectURI);
-$token = json_decode(Configuration::get('TC_MAIL_API_TOKEN'), true);
-if (strlen($token) > 0) {
+if (strlen(Configuration::get('TC_MAIL_API_TOKEN')) > 0) {
+    $token = json_decode(Configuration::get('TC_MAIL_API_TOKEN'), true);
     $client->setAccessToken($token);
 }
 if ($client->isAccessTokenExpired()) {
@@ -32,8 +32,6 @@ if ($client->isAccessTokenExpired()) {
         Configuration::updateValue('TC_MAIL_API_TOKEN', json_encode($client->getAccessToken()));
         echo '取得新 token 成功';
     } else {
-
-        $client->setRedirectUri($redirectURI);
         $authUrl = $client->createAuthUrl();
         echo '未通過驗證 <a href="' . $authUrl . '">前往取得 token</a>';
     }

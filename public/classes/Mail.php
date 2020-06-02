@@ -646,8 +646,8 @@ class MailCore extends ObjectModel
                     $client->setClientSecret(Configuration::get('TC_MAIL_API_CLIENT_SECRET'));
                     $client->setScopes([Google_Service_Gmail::GMAIL_SEND]);
                     $client->setAccessType('offline');
-                    $token = json_decode(Configuration::get('TC_MAIL_API_TOKEN'), true);
-                    if (strlen($token) > 0) {
+                    if (strlen(Configuration::get('TC_MAIL_API_TOKEN')) > 0) {
+                        $token = json_decode(Configuration::get('TC_MAIL_API_TOKEN'), true);
                         $client->setAccessToken($token);
                     }
                     if ($client->isAccessTokenExpired()) {
