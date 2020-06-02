@@ -61,6 +61,7 @@ class Simplicity_Feed extends Module
             'google_product_category' => array('label' => 'google_product_category'),
             'product_category' => array('label' => 'product_type'),
         );
+
     }
 
     public function install()
@@ -391,7 +392,7 @@ class Simplicity_Feed extends Module
             // 固定班底
             $row['item_group_id'] = $p->id;
             $row['name'] = $p->name;
-            $row['description'] = in_array($export_id_description, ['description_short', 'description', 'meta_description']) ? trim(strip_tags($p->{$export_id_description})) : trim(strip_tags($p->description_short));
+            $row['description'] = in_array($export_id_description, ['description_short', 'description', 'meta_description']) ? trim(strip_tags((string)$p->{$export_id_description})) : trim(strip_tags((string)$p->description_short));
             $row['condition'] = $p->condition;
             $row['manufacturer_name'] = strlen($p->manufacturer_name) > 0 ? $p->manufacturer_name : Tools::getValue('simplicity_feed_export_manufacturers_default');
             $row['google_product_category'] = isset($this->googleCategories[$p->id_category_default]['id_google']) ? $this->googleCategories[$p->id_category_default]['id_google'] : 0;
