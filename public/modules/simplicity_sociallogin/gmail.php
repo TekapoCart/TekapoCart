@@ -24,7 +24,6 @@ if ($client->isAccessTokenExpired()) {
     } elseif (strlen($_GET['code']) > 0) {
         $authCode = $_GET['code'];
         $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-        $client->setAccessToken($accessToken);
         if (array_key_exists('error', $accessToken)) {
             throw new Exception(join(', ', $accessToken));
         }
