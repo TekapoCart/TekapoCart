@@ -158,3 +158,12 @@ table.table {
 .bootstrap .list-unstyled li {
     padding: 2px 0;
 }
+
+#header_infos #header_employee_box #employee_infos #employee_links .employee_avatar img {
+    width: 45px;
+    height: 45px;
+}
+
+#header_infos #header_employee_box #employee_infos #employee_links .employee-wrapper-profile {
+    margin: 15px 7px 15px 17px;
+}
