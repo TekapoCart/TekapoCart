@@ -62,7 +62,7 @@ File: controllers/admin/AdminEmailsController.php:75</note>
       </trans-unit>
       <trans-unit id="ec76c5b544633d334c7a3f92db1c7efd" approved="yes">
         <source>Send emails to</source>
-        <target xml:lang="zh-TW">接收客服通知的信箱</target>
+        <target xml:lang="zh-TW">接收客服問答的客服信箱</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:96</note>
       </trans-unit>
@@ -74,7 +74,7 @@ File: controllers/admin/AdminEmailsController.php:110</note>
       </trans-unit>
       <trans-unit id="e6095b01597caf275fb24fa766fb8a57" approved="yes">
         <source>Set my own SMTP parameters (for advanced users ONLY)</source>
-        <target xml:lang="zh-TW">使用獨立的發信帳號（正式上線請使用此選項）</target>
+        <target xml:lang="zh-TW">使用獨立的 SMTP 發信帳號（正式上線請使用此選項）</target>
         <note>Context:
 File: controllers/admin/AdminEmailsController.php:111</note>
       </trans-unit>
