@@ -313,7 +313,7 @@ File: controllers/admin/AdminStoresController.php:431</note>
       </trans-unit>
       <trans-unit id="de30ac479f8a73106c51739a0bc92cdc" approved="yes">
         <source>Displayed in emails and page titles.</source>
-        <target xml:lang="zh-TW">顯示在前台 Page Title 及通知信中</target>
+        <target xml:lang="zh-TW">聯絡我們左欄標題、通知信主旨前綴、頁尾 Copyright。</target>
         <note>Context:
 File: controllers/admin/AdminStoresController.php:439</note>
       </trans-unit>

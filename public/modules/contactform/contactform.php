@@ -287,8 +287,33 @@ class Contactform extends Module implements WidgetInterface
     {
         $notifications = false;
 
-        if (Tools::isSubmit('submitMessage')) {
-            $this->sendMessage();
+        // suzy: 2020-06-03 加上 reCAPTCHA
+        if (Tools::isSubmit('submitMessage') || Tools::getValue('g-recaptcha-response')) {
+
+            if (Configuration::get('TC_RECAPTCHA_ENABLE')) {
+                $data = array('secret' => Configuration::get('TC_RECAPTCHA_SECRET'), 'response' => Tools::getValue('g-recaptcha-response'));
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL,"https://www.google.com/recaptcha/api/siteverify");
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $response = curl_exec($ch);
+                curl_close($ch);
+                $arrResponse = json_decode($response, true);
+
+                if (!$arrResponse['success'] || ($arrResponse['success'] && $arrResponse['score'] < (double) Configuration::get('TC_RECAPTCHA_MIN_SCORE', 0.5))) {
+                    $this->context->controller->errors[] = $this->trans(
+                        'An error occurred while sending the message, please try again.',
+                        [],
+                        'Modules.Contactform.Shop'
+                    );
+                }
+            }
+            if (empty($this->context->controller->errors)) {
+                $this->sendMessage();
+            }
+
+            // $this->sendMessage();
 
             if (!empty($this->context->controller->errors)) {
                 $notifications['messages'] = $this->context->controller->errors;
@@ -342,6 +367,9 @@ class Contactform extends Module implements WidgetInterface
         }
 
         return [
+            // suzy: 2020-06-03 加上 reCAPTCHA
+            'recaptcha_key' => Configuration::get('TC_RECAPTCHA_ENABLE') ? trim(Configuration::get('TC_RECAPTCHA_KEY')) : '',
+
             'contact' => $this->contact,
             'notifications' => $notifications,
             'token' => $this->context->cookie->contactFormToken,

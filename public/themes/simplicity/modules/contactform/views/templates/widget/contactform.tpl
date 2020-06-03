@@ -23,7 +23,7 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 <section class="contact-form">
-  <form action="{$urls.pages.contact}" method="post" {if $contact.allow_file_upload}enctype="multipart/form-data"{/if}>
+  <form id="contact-form" action="{$urls.pages.contact}" method="post" {if $contact.allow_file_upload}enctype="multipart/form-data"{/if}>
 
     {if $notifications}
       <div class="col-xs-12 alert {if $notifications.nw_error}alert-danger{else}alert-success{/if}">
@@ -132,9 +132,24 @@
         </style>
         <input type="text" name="url" value=""/>
         <input type="hidden" name="token" value="{$token}" />
+        {if strlen($recaptcha_key) > 0 }
+        <input class="btn btn-primary g-recaptcha"
+               data-sitekey="{$recaptcha_key}"
+               data-callback="onSubmit"
+               data-action="submit"
+               type="submit" name="submitMessage" value="{l s='Send' d='Shop.Theme.Actions'}">
+        {else}
         <input class="btn btn-primary" type="submit" name="submitMessage" value="{l s='Send' d='Shop.Theme.Actions'}">
+        {/if}
       </footer>
     {/if}
 
   </form>
 </section>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function onSubmit(token) {
+        document.getElementById("contact-form").submit();
+    }
+</script>

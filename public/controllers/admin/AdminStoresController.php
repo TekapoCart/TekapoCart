@@ -524,6 +524,37 @@ class AdminStoresControllerCore extends AdminController
 //                'validation' => 'isGenericName',
 //                'type' => 'text',
 //            ),
+
+            // suzy: 2020-06-03 reCAPTCHA
+            'TC_RECAPTCHA_ENABLE' => array(
+                'title' => '開啟 Google reCAPTCHA',
+                'validation' => 'isBool',
+                'cast' => 'intval',
+                'type' => 'bool',
+                'hint' => 'reCAPTCHA 會對嘗試送出訊息的使用者進行查核，並給予一個 0.0-1.0 之間的分數。1.0 代表很可能為良好，0.0 代表很可能為機器人。而低於最低分數者將被限制無法送出訊息。',
+                'desc' => 'reCAPTCHA 為 Google 防止機器人橫行所推出的機制。',
+            ),
+            'TC_RECAPTCHA_KEY' => array(
+                'title' => 'Google reCAPTCHA 網站金鑰',
+                'validation' => 'isGenericName',
+                'type' => 'text',
+                'hint' => '開啟 Google reCAPTCHA 選項時，此欄位為必填。',
+            ),
+            'TC_RECAPTCHA_SECRET' => array(
+                'title' => 'Google reCAPTCHA 密鑰',
+                'validation' => 'isGenericName',
+                'type' => 'text',
+                'hint' => '開啟 Google reCAPTCHA 選項時，此欄位為必填。',
+            ),
+            'TC_RECAPTCHA_MIN_SCORE' => array(
+                'title' => 'Google reCAPTCHA 最低分數',
+                'validation' => 'isGenericName',
+                'type' => 'text',
+                'hint' => '開啟 Google reCAPTCHA 選項時，此欄位為必填。',
+                'desc' => '0.0-1.0 之間的分數，預設值 0.5',
+            ),
+
+
         );
 
         return $formFields;
