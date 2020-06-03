@@ -11,7 +11,17 @@ $(document).ready(function() {
 			}
 		},
 		submitHandler: function(form) {
-			doAjaxLogin($('#redirect').val());
+			// suzy: 2020-06-03 reCAPTCHA
+			if ($('#recaptcha_key').text().length > 0) {
+                grecaptcha.ready(function() {
+                    grecaptcha.execute($('#recaptcha_key').text(), {action: 'submit'}).then(function(gtoken) {
+                        doAjaxLogin($('#redirect').val(), gtoken);
+                    });
+                });
+			} else {
+                doAjaxLogin($('#redirect').val(), '');
+			}
+            // doAjaxLogin($('#redirect').val());
 		},
 		// override jquery validate plugin defaults for bootstrap 3
 		highlight: function(element) {
@@ -181,7 +191,7 @@ function displayLogin() {
  *
  * @param string redirect name of the controller to redirect to after login (or null)
  */
-function doAjaxLogin(redirect) {
+function doAjaxLogin(redirect, gtoken) { // suzy: 2020-06-03 reCAPTCHA
 	$('#error').hide();
 	$('#login_form').fadeIn('slow', function() {
 		$.ajax({
@@ -191,6 +201,7 @@ function doAjaxLogin(redirect) {
 			async: true,
 			dataType: "json",
 			data: {
+                "g-recaptcha-response": gtoken, // suzy: 2020-06-03 reCAPTCHA
 				ajax: "1",
 				token: "",
 				controller: "AdminLogin",

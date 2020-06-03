@@ -527,30 +527,34 @@ class AdminStoresControllerCore extends AdminController
 
             // suzy: 2020-06-03 reCAPTCHA
             'TC_RECAPTCHA_ENABLE' => array(
-                'title' => '開啟 Google reCAPTCHA',
+                'title' => '「聯絡我們」啟用 reCAPTCHA',
                 'validation' => 'isBool',
                 'cast' => 'intval',
                 'type' => 'bool',
-                'hint' => 'reCAPTCHA 會對嘗試送出訊息的使用者進行查核，並給予一個 0.0-1.0 之間的分數。1.0 代表很可能為良好，0.0 代表很可能為機器人。而低於最低分數者將被限制無法送出訊息。',
-                'desc' => 'reCAPTCHA 為 Google 防止機器人橫行所推出的機制。',
+                'desc' => 'reCAPTCHA 為 Google 防止機器人橫行所推出的機制。reCAPTCHA 會對嘗試送出訊息的使用者進行查核，並提供 0.0-1.0 之間的分數供參考。1.0 代表很可能為良好，0.0 代表很可能為機器人。低於 0.5 將無法送出訊息。',
+            ),
+            'TC_RECAPTCHA_ADMIN_ENABLE' => array(
+                'title' => '「後台登入」啟用 reCAPTCHA',
+                'validation' => 'isBool',
+                'cast' => 'intval',
+                'type' => 'bool',
             ),
             'TC_RECAPTCHA_KEY' => array(
-                'title' => 'Google reCAPTCHA 網站金鑰',
+                'title' => 'reCAPTCHA 網站金鑰',
                 'validation' => 'isGenericName',
                 'type' => 'text',
-                'hint' => '開啟 Google reCAPTCHA 選項時，此欄位為必填。',
+                'hint' => '啟用 reCAPTCHA 時，此欄位為必填。',
             ),
             'TC_RECAPTCHA_SECRET' => array(
-                'title' => 'Google reCAPTCHA 密鑰',
+                'title' => 'reCAPTCHA 密鑰',
                 'validation' => 'isGenericName',
                 'type' => 'text',
-                'hint' => '開啟 Google reCAPTCHA 選項時，此欄位為必填。',
+                'hint' => '啟用 reCAPTCHA 時，此欄位為必填。',
             ),
             'TC_RECAPTCHA_MIN_SCORE' => array(
-                'title' => 'Google reCAPTCHA 最低分數',
+                'title' => 'reCAPTCHA 最低分數',
                 'validation' => 'isGenericName',
                 'type' => 'text',
-                'hint' => '開啟 Google reCAPTCHA 選項時，此欄位為必填。',
                 'desc' => '0.0-1.0 之間的分數，預設值 0.5',
             ),
 

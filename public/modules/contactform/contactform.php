@@ -300,7 +300,6 @@ class Contactform extends Module implements WidgetInterface
                 $response = curl_exec($ch);
                 curl_close($ch);
                 $arrResponse = json_decode($response, true);
-
                 if (!$arrResponse['success'] || ($arrResponse['success'] && $arrResponse['score'] < (double) Configuration::get('TC_RECAPTCHA_MIN_SCORE', 0.5))) {
                     $this->context->controller->errors[] = $this->trans(
                         'An error occurred while sending the message, please try again.',
@@ -309,6 +308,7 @@ class Contactform extends Module implements WidgetInterface
                     );
                 }
             }
+
             if (empty($this->context->controller->errors)) {
                 $this->sendMessage();
             }

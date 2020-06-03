@@ -171,8 +171,8 @@
         {* suzy: 2018-08-20 修改 login footer *}
 		<p class="text-center text-muted">
 			&copy; {$smarty.now|date_format:"%Y"} <a href="https://www.tekapo.io/" target="_blank">TekapoCart</a><br/>
-			Based on <a href="https://www.prestashop.com/" target="_blank">PrestaShop</a> &
-			Hosted on <a href="https://cloud.google.com/" target="_blank">Google Cloud Platform</a>
+			Based on <a href="https://www.prestashop.com/" target="_blank" rel="noreferrer">PrestaShop</a> &
+			Hosted on <a href="https://cloud.google.com/" target="_blank" rel="noreferrer">Google Cloud Platform</a>
 		</p>
 		{* suzy: 2018-08-12 隱藏 social links
 		<p class="text-center">
@@ -191,3 +191,9 @@
 		</p>*}
 	</div>
 </div>
+
+{* suzy: 2020-06-03 reCAPTCHA *}
+{if strlen($recaptcha_key) > 0 }
+<span id="recaptcha_key" style="display: none;">{$recaptcha_key}</span>
+<script src="https://www.google.com/recaptcha/api.js?render={$recaptcha_key}"></script>
+{/if}

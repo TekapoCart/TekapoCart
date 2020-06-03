@@ -99,6 +99,9 @@ class AdminLoginControllerCore extends AdminController
         }
 
         $this->context->smarty->assign(array(
+            // suzy: 2020-06-03 加上 reCAPTCHA
+            'recaptcha_key' => Configuration::get('TC_RECAPTCHA_ADMIN_ENABLE') ? trim(Configuration::get('TC_RECAPTCHA_KEY')) : '',
+
             'randomNb' => $rand,
             'adminUrl' => Tools::getCurrentUrlProtocolPrefix() . Tools::getShopDomain() . __PS_BASE_URI__ . $rand,
         ));
@@ -176,6 +179,26 @@ class AdminLoginControllerCore extends AdminController
 
     public function processLogin()
     {
+        // suzy: 2020-06-03 加上 reCAPTCHA
+        if (Configuration::get('TC_RECAPTCHA_ADMIN_ENABLE')) {
+            $data = array('secret' => Configuration::get('TC_RECAPTCHA_SECRET'), 'response' => Tools::getValue('g-recaptcha-response'));
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL,"https://www.google.com/recaptcha/api/siteverify");
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+            curl_close($ch);
+            $arrResponse = json_decode($response, true);
+            if (!$arrResponse['success'] || ($arrResponse['success'] && $arrResponse['score'] < (double) Configuration::get('TC_RECAPTCHA_MIN_SCORE', 0.5))) {
+                $this->context->controller->errors[] = $this->trans(
+                    'Invalid reCAPTCHA.',
+                    [],
+                    'Admin.Notifications.Error'
+                );
+            }
+        }
+
         /* Check fields validity */
         $passwd = trim(Tools::getValue('passwd'));
         $email = trim(Tools::getValue('email'));
