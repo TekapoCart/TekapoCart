@@ -935,7 +935,7 @@ File: controllers/admin/AdminMetaController.php:649</note>
     <body>
       <trans-unit id="db72e24b402e8baf8df6ca786a59e4de" approved="yes">
         <source>Rewritten URL</source>
-        <target xml:lang="zh-TW">URL</target>
+        <target xml:lang="zh-TW">友善網址</target>
         <note>Context:
 File: controllers/admin/AdminImportController.php:204</note>
       </trans-unit>

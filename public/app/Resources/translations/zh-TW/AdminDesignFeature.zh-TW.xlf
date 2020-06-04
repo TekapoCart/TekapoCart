@@ -16,19 +16,19 @@ File: classes/lang/KeysReference/ThemeLang.php:28</note>
       </trans-unit>
       <trans-unit id="710c71f05157207e5c47015fc032564d" approved="yes">
         <source>Two columns, small left column</source>
-        <target xml:lang="zh-TW">兩欄，左欄位較窄</target>
+        <target xml:lang="zh-TW">兩欄，左窄右寬</target>
         <note>Context:
 File: classes/lang/KeysReference/ThemeLang.php:29</note>
       </trans-unit>
       <trans-unit id="4c318832b92e5f7b818aba037e1ed5ac" approved="yes">
         <source>Two columns, small right column</source>
-        <target xml:lang="zh-TW">兩欄，右欄位較窄</target>
+        <target xml:lang="zh-TW">兩欄，左寬右窄</target>
         <note>Context:
 File: classes/lang/KeysReference/ThemeLang.php:30</note>
       </trans-unit>
       <trans-unit id="05559f48f0ea41ebb03f6d08b95e1e25" approved="yes">
         <source>No side columns, ideal for distraction-free pages such as product pages.</source>
-        <target xml:lang="zh-TW">單欄，沒有側欄，專一呈現主要內容。</target>
+        <target xml:lang="zh-TW">無側欄</target>
         <note>Context:
 File: classes/lang/KeysReference/ThemeLang.php:32</note>
       </trans-unit>
@@ -40,13 +40,13 @@ File: classes/lang/KeysReference/ThemeLang.php:34</note>
       </trans-unit>
       <trans-unit id="74266ad9cb6f32c9da66592ca748ef8d" approved="yes">
         <source>Two columns with a small left column.</source>
-        <target xml:lang="zh-TW">左側較窄的雙欄。</target>
+        <target xml:lang="zh-TW">輔助內容位於主要內容左邊</target>
         <note>Context:
 File: classes/lang/KeysReference/ThemeLang.php:36</note>
       </trans-unit>
       <trans-unit id="fefe6a1aca554473c855e076d0376b52" approved="yes">
         <source>Two columns with a small right column.</source>
-        <target xml:lang="zh-TW">右側較窄的雙欄。</target>
+        <target xml:lang="zh-TW">輔助內容位於主要內容右邊</target>
         <note>Context:
 File: classes/lang/KeysReference/ThemeLang.php:38</note>
       </trans-unit>

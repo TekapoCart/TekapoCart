@@ -207,6 +207,25 @@ class MetaCore extends ObjectModel
     }
 
     /**
+     * suzy: 2020-06-04 排除 configurable = 0
+     *
+     * Get configurable metas.
+     *
+     * @param int $idLang
+     *
+     * @return array|false|mysqli_result|PDOStatement|resource|null
+     */
+    public static function getConfigurableMeta($idLang)
+    {
+        return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+		SELECT *
+		FROM ' . _DB_PREFIX_ . 'meta m
+		LEFT JOIN ' . _DB_PREFIX_ . 'meta_lang ml ON m.id_meta = ml.id_meta
+		AND ml.id_lang = ' . (int) $idLang . '
+		' . Shop::addSqlRestrictionOnLang('ml') . ' WHERE m.configurable=1');
+    }
+
+    /**
      * Updates the current Meta in the database.
      *
      * @param bool $nullValues Whether we want to use NULL values instead of empty quotes values

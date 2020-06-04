@@ -1445,7 +1445,7 @@ File: admin-dev/themes/default/template/controllers/groups/helpers/view/view.tpl
     <body>
       <trans-unit id="6252c0f2c2ed83b7b06dfca86d4650bb" approved="yes">
         <source>Invalid characters:</source>
-        <target xml:lang="zh-TW">無效字元：</target>
+        <target xml:lang="zh-TW">不可使用：</target>
         <note>Context:
 File: controllers/admin/AdminCountriesController.php:197</note>
       </trans-unit>

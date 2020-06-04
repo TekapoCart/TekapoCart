@@ -60,7 +60,9 @@ final class MetaGridDefinitionFactory extends AbstractGridDefinitionFactory
      */
     protected function getName()
     {
-        return $this->trans('SEO & URLs', [], 'Admin.Navigation.Menu');
+        // suzy: 2020-06-05
+        // return $this->trans('SEO & URLs', [], 'Admin.Navigation.Menu');
+        return '內建頁面 SEO 設定';
     }
 
     /**

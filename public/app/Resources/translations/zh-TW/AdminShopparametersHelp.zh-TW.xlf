@@ -40,13 +40,13 @@ File: controllers/admin/AdminMetaController.php:119</note>
       </trans-unit>
       <trans-unit id="219985722a429b6aaceef7d363e6a565" approved="yes">
         <source>Name of the related page.</source>
-        <target xml:lang="zh-TW">相關頁面名稱</target>
+        <target xml:lang="zh-TW">此欄位不可修改</target>
         <note>Context:
 File: controllers/admin/AdminMetaController.php:333</note>
       </trans-unit>
       <trans-unit id="14bc1d17bbcf8fb45debf11fb7c5f80b" approved="yes">
         <source>Title of this page.</source>
-        <target xml:lang="zh-TW">該頁標題</target>
+        <target xml:lang="zh-TW">頁面標題</target>
         <note>Context:
 File: controllers/admin/AdminMetaController.php:342</note>
       </trans-unit>
@@ -64,7 +64,7 @@ File: controllers/admin/AdminMetaController.php:362</note>
       </trans-unit>
       <trans-unit id="0210e7a00cf2cd3cca0e4d7ed3bdf86f" approved="yes">
         <source>To add tags, click in the field, write something, and then press the "Enter" key.</source>
-        <target xml:lang="zh-TW">新增標籤，請在下面輸入並按 ENTER 完成</target>
+        <target xml:lang="zh-TW">請先輸入文字後並按下送出鍵。</target>
         <note>Context:
 File: controllers/admin/AdminMetaController.php:363</note>
       </trans-unit>
@@ -76,7 +76,7 @@ File: controllers/admin/AdminMetaController.php:375</note>
       </trans-unit>
       <trans-unit id="7aa534250fe76a40d96078a07b6f44e8" approved="yes">
         <source>Only letters and hyphens are allowed.</source>
-        <target xml:lang="zh-TW">僅可用字母及 ( - )</target>
+        <target xml:lang="zh-TW">自訂網址規則：字母 a-z、數字 0-9、底線 _、減號 -。</target>
         <note>Context:
 File: controllers/admin/AdminMetaController.php:376</note>
       </trans-unit>
@@ -86,7 +86,7 @@ File: controllers/admin/AdminMetaController.php:376</note>
     <body>
       <trans-unit id="6252c0f2c2ed83b7b06dfca86d4650bb" approved="yes">
         <source>Invalid characters:</source>
-        <target xml:lang="zh-TW">無效字元：</target>
+        <target xml:lang="zh-TW">不可使用：</target>
         <note>Context:
 File: controllers/admin/AdminGendersController.php:123</note>
       </trans-unit>
