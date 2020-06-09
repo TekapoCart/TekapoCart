@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>gsitemap</name>
-    <displayName><![CDATA[Google Sitemap]]></displayName>
+    <displayName><![CDATA[Google sitemap]]></displayName>
     <version><![CDATA[4.1.0]]></version>
-    <description><![CDATA[產生 Google Sitemap]]></description>
+    <description><![CDATA[產生 Google Sitemap 檔案。]]></description>
     <author><![CDATA[PrestaShop]]></author>
     <tab><![CDATA[seo]]></tab>
 	<confirmUninstall><![CDATA[Are you sure you want to uninstall this module?]]></confirmUninstall>

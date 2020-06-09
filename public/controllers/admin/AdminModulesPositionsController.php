@@ -106,7 +106,11 @@ class AdminModulesPositionsControllerCore extends AdminController
 
     // suzy: 2020-05-12 模組名稱
     public $module_name_mapping = [
-        'module-loyalty-default' => '會員中心 回饋點數',
+        'module-loyalty-default' => '會員中心 紅利點數',
+        'module-simplicity_blog-home' => '部落格 首頁',
+        'module-simplicity_blog-category' => '部落格 分類頁',
+        'module-simplicity_blog-search' => '部落格 搜尋',
+        'module-simplicity_blog-page' => '部落格 文章',
     ];
 
     /**

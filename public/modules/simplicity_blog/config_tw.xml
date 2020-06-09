@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>simplicity_blog</name>
+    <displayName><![CDATA[部落格]]></displayName>
+    <version><![CDATA[1.0.0]]></version>
+    <description><![CDATA[強化自訂頁面功能，獨立部落格專區。]]></description>
+    <author><![CDATA[TekapoCart]]></author>
+    <tab><![CDATA[]]></tab>
+    <is_configurable>1</is_configurable>
+    <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>

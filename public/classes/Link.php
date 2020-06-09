@@ -557,6 +557,122 @@ class LinkCore
     }
 
     /**
+     * suzy: 2020-06-09 為部落格而生
+     *
+     * @param $cms
+     * @param null $alias
+     * @param null $ssl
+     * @param null $idLang
+     * @param null $idShop
+     * @param bool $relativeProtocol
+     * @return string
+     */
+    public function getBlogLink(
+        $cms,
+        $alias = null,
+        $ssl = null,
+        $idLang = null,
+        $idShop = null,
+        $relativeProtocol = false
+    ) {
+
+        if (!$idLang) {
+            $idLang = Context::getContext()->language->id;
+        }
+
+        return $this->getBaseLink() .
+        Dispatcher::getInstance()->createUrl(
+            'simplicity_blog_page',
+            $idLang,
+            array('id_cms' => (int)$cms['id_cms'], 'slug' => (string)$cms['link_rewrite']),
+            true
+        );
+
+    }
+
+    /**
+     * suzy: 2020-06-09 為部落格而生
+     *
+     * @param $cms
+     * @param null $alias
+     * @param null $ssl
+     * @param null $idLang
+     * @param null $idShop
+     * @param bool $relativeProtocol
+     * @return string
+     */
+    public function getBlogCategoryLink(
+        $cms,
+        $alias = null,
+        $ssl = null,
+        $idLang = null,
+        $idShop = null,
+        $relativeProtocol = false
+    ) {
+
+        if (!$idLang) {
+            $idLang = Context::getContext()->language->id;
+        }
+
+        return $this->getBaseLink() .
+            Dispatcher::getInstance()->createUrl(
+                'simplicity_blog_category',
+                $idLang,
+                array('id_cms_category' => (int)$cms['id_cms'], 'slug' => (string)$cms['link_rewrite']),
+                true
+            );
+
+    }
+
+    /**
+     * suzy: 2020-06-09 為部落格而生
+     *
+     * @param null $idLang
+     * @return string
+     */
+    public function getBlogHome(
+        $idLang = null
+    ) {
+
+        if (!$idLang) {
+            $idLang = Context::getContext()->language->id;
+        }
+
+        return $this->getBaseLink() .
+            Dispatcher::getInstance()->createUrl(
+                'simplicity_blog_home',
+                $idLang,
+                [],
+                true
+            );
+
+    }
+
+    /**
+     * suzy: 2020-06-09 為部落格而生
+     *
+     * @param null $idLang
+     * @return string
+     */
+    public function getBlogSearch(
+        $idLang = null
+    ) {
+
+        if (!$idLang) {
+            $idLang = Context::getContext()->language->id;
+        }
+
+        return $this->getBaseLink() .
+            Dispatcher::getInstance()->createUrl(
+                'simplicity_blog_search',
+                $idLang,
+                [],
+                true
+            );
+
+    }
+
+    /**
      * Create a link to a supplier.
      *
      * @param mixed $supplier Supplier object (can be an ID supplier, but deprecated)

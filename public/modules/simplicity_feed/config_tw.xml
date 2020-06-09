@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>simplicity_feed</name>
+    <displayName><![CDATA[Product Feed 產品目錄]]></displayName>
+    <version><![CDATA[1.0]]></version>
+    <description><![CDATA[用途：刊登 Google / Facebook 動態廣告、Facebook 商店。]]></description>
+    <author><![CDATA[TekapoCart]]></author>
+    <tab><![CDATA[]]></tab>
+    <is_configurable>1</is_configurable>
+    <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>

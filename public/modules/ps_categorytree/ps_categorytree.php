@@ -296,9 +296,34 @@ class Ps_CategoryTree extends Module implements WidgetInterface
             }
         }
 
+        /* suzy: 2018-07-03 分類調整
         return [
             'categories' => $this->getCategories($category),
             'currentCategory' => $category->id,
         ];
+        */
+        $categories = $this->getCategories($category);
+        return [
+            'categories' => $categories,
+            'c_tree_path' => isset($categories['children']) && count($categories['children']) && method_exists($this->context->controller, 'getCategory') && ($curr_category = $this->context->controller->getCategory()) ? self::getTreePath($categories['children'], $curr_category->id) : false,
+            'currentCategory' => method_exists($this->context->controller, 'getCategory') && ($curr_category = $this->context->controller->getCategory()) ? $curr_category->id : 0,
+        ];
     }
+
+    /* suzy: 2018-07-03 分類調整 */
+    public static function getTreePath($categories, $id, array $path = [])
+    {
+        foreach ($categories as $cate) {
+            if ($cate['id'] == $id)
+                return $path;
+            $path[] = $cate['id'];
+            if(is_array($cate['children']) && count($cate['children'])) {
+                if ($result = self::getTreePath($cate['children'], $id, $path))
+                    return $result;
+            }
+            array_pop($path);
+        }
+        return false;
+    }
+
 }

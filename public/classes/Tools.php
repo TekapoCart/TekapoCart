@@ -3347,6 +3347,44 @@ exit;
     }
 
     /**
+     * suzy: 2020-06-06 為部落格而生
+     *
+     * @param $type
+     * @param null $value
+     * @param bool $prefix
+     * @return int|mixed|null|string
+     */
+    public static function getCMSOrder($type, $value = null, $prefix = false)
+    {
+        switch ($type) {
+            case 'by':
+                $list = array(0 => 'name', 1 => 'date_add', 2 => 'date_upd', 3 => 'position');
+                $value = (null === $value || $value === false || $value === '') ? (int) Configuration::get('PS_PRODUCTS_ORDER_BY') : $value;
+                $value = (isset($list[$value])) ? $list[$value] : ((in_array($value, $list)) ? $value : 'position');
+                $order_by_prefix = '';
+                if ($prefix) {
+                    if ($value == 'id_cms' || $value == 'date_add' || $value == 'date_upd' || $value == 'position') {
+                        $order_by_prefix = 'cms.';
+                    } elseif ($value == 'name') {
+                        $order_by_prefix = 'cmsl.';
+                    }
+                }
+
+                return $order_by_prefix . $value;
+
+                break;
+
+            case 'way':
+                $value = (null === $value || $value === false || $value === '') ? (int) Configuration::get('PS_PRODUCTS_ORDER_WAY') : $value;
+                $list = array(0 => 'asc', 1 => 'desc');
+
+                return (isset($list[$value])) ? $list[$value] : ((in_array($value, $list)) ? $value : 'asc');
+
+                break;
+        }
+    }
+
+    /**
      * Convert a shorthand byte value from a PHP configuration directive to an integer value.
      *
      * @param string $value value to convert

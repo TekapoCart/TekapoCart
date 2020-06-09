@@ -43,6 +43,21 @@ class CMSCore extends ObjectModel
     public $indexation;
     public $active;
 
+    // suzy: 2020-06-08 為部落格而生
+//    public $id_employee;
+//    public $available_date;
+//    public $reading;
+//    public $show_reading = true;
+//    public $show_comment = true;
+    public $date_add;
+    public $date_upd;
+//    public $tags;
+//    public $products;
+//    public $further_readings;
+
+    // suzy: 2020-06-06 為部落格而生
+    protected static $cmsPropertiesCache = array();
+
     /**
      * @see ObjectModel::$definition
      */
@@ -56,6 +71,10 @@ class CMSCore extends ObjectModel
             'position' => array('type' => self::TYPE_INT),
             'indexation' => array('type' => self::TYPE_BOOL),
             'active' => array('type' => self::TYPE_BOOL),
+
+            // suzy: 2020-06-08 為部落格而生
+            'date_add' => array('type' => self::TYPE_DATE, 'validate' => 'isDate'),
+            'date_upd' => array('type' => self::TYPE_DATE, 'validate' => 'isDate'),
 
             /* Lang fields */
             'meta_description' => array('type' => self::TYPE_STRING, 'lang' => true, 'validate' => 'isGenericName', 'size' => 512),
@@ -361,5 +380,82 @@ class CMSCore extends ObjectModel
     public static function getRepositoryClassName()
     {
         return '\\PrestaShop\\PrestaShop\\Core\\CMS\\CMSRepository';
+    }
+
+
+    /**
+     * suzy: 2020-06-06 為部落格而生
+     *
+     * @param $id_lang
+     * @param $query_result
+     * @return array
+     */
+    public static function getResultsProperties($id_lang, $query_result)
+    {
+        $results_array = array();
+
+        if (is_array($query_result)) {
+            foreach ($query_result as $row) {
+                if ($row2 = CMS::getResultProperties($id_lang, $row)) {
+                    $results_array[] = $row2;
+                }
+            }
+        }
+
+        return $results_array;
+    }
+
+    /**
+     * suzy: 2020-06-06 為部落格而生
+     *
+     * @param $id_lang
+     * @param $row
+     * @param Context|null $context
+     * @return mixed
+     */
+    public static function getResultProperties($id_lang, $row, Context $context = null)
+    {
+//        Hook::exec('actionGetProductPropertiesBefore', [
+//            'id_lang' => $id_lang,
+//            'product' => &$row,
+//            'context' => $context,
+//        ]);
+
+        if (!$row['id_cms']) {
+            return false;
+        }
+
+        if ($context == null) {
+            $context = Context::getContext();
+        }
+
+        $cache_key = $row['id_cms'] . '-' .  $id_lang;
+
+        if (isset(self::$cmsPropertiesCache[$cache_key])) {
+            return array_merge($row, self::$cmsPropertiesCache[$cache_key]);
+        }
+
+        // Datas
+        $row['category'] = CMSCategory::getLinkRewrite((int) $row['id_cms_category'], (int) $id_lang);
+        $row['category_name'] = Db::getInstance()->getValue('SELECT name FROM ' . _DB_PREFIX_ . 'cms_category_lang WHERE id_shop = ' . (int) $context->shop->id . ' AND id_lang = ' . (int) $id_lang . ' AND id_category = ' . (int) $row['id_cms_category']);
+
+        $row['link'] = $context->link->getBaseLink() . Dispatcher::getInstance()->createUrl('simplicity_blog_page',
+            (int) $id_lang,
+            array('id_cms' => (int) $row['id_cms'], 'slug' => (string) $row['link_rewrite']), true);
+
+        $images = simplexml_import_dom(DOMDocument::loadHTML($row['content']))->xpath("//img/@src");
+        $row['image'] = count($images) > 0 ? (string)reset($images) : '';
+
+
+//        Hook::exec('actionGetProductPropertiesAfter', [
+//            'id_lang' => $id_lang,
+//            'product' => &$row,
+//            'context' => $context,
+//        ]);
+
+
+        self::$cmsPropertiesCache[$cache_key] = $row;
+
+        return self::$cmsPropertiesCache[$cache_key];
     }
 }

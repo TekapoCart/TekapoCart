@@ -165,6 +165,32 @@ class CMSCategoryCore extends ObjectModel
         );
     }
 
+    /**
+     * suzy: 2020-06-07 為部落格而生
+     *
+     * @param array $ids
+     * @return array
+     */
+    public function recurseCategoryIds($ids = [])
+    {
+        $id_lang = Context::getContext()->language->id;
+
+        if (count($ids) == 0) {
+            $ids[] = $this->id;
+        }
+
+        $subcats = $this->getSubCategories($id_lang, true);
+        if ($subcats && count($subcats)) {
+            foreach ($subcats as &$subcat) {
+                $categ = new CMSCategory($subcat['id_cms_category'], $id_lang);
+                $ids[] = $subcat['id_cms_category'];
+                $ids = $categ->recurseCategoryIds($ids);
+            }
+        }
+
+        return $ids;
+    }
+
     public static function getRecurseCategory($id_lang = null, $current = 1, $active = 1, $links = 0, Link $link = null)
     {
         if (!$link) {
@@ -707,5 +733,100 @@ class CMSCategoryCore extends ObjectModel
         $arr_return = Db::getInstance()->executeS($sql);
 
         return $arr_return;
+    }
+
+    /**
+     * 為部落格而生
+     *
+     * @param $idLang
+     * @param $p
+     * @param $n
+     * @param null $orderyBy
+     * @param null $orderWay
+     * @param bool $getTotal
+     * @param bool $active
+     * @param bool $random
+     * @param int $randomNumberProducts
+     * @param bool $checkAccess
+     * @param Context|null $context
+     * @return array
+     */
+    public function getCMS(
+        $idLang,
+        $p,
+        $n,
+        $orderyBy = null,
+        $orderWay = null,
+        $getTotal = false,
+        $active = true,
+        $random = false,
+        $randomNumberProducts = 1,
+        $checkAccess = true,
+        Context $context = null
+    ) {
+        if (!$context) {
+            $context = Context::getContext();
+        }
+
+        $ids = implode(',', $this->recurseCategoryIds());
+
+        /* Return only the number of cms */
+        if ($getTotal) {
+            $sql = 'SELECT COUNT(cms.`id_cms`) AS total
+					FROM `' . _DB_PREFIX_ . 'cms` cms
+					' . Shop::addSqlAssociation('cms', 'cms') . '
+					WHERE cms.`id_cms_category` IN (' . $ids . ') ' .
+                ($active ? ' AND cms.`active` = 1' : '');
+
+            return (int) Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue($sql);
+        }
+
+        if ($p < 1) {
+            $p = 1;
+        }
+
+        /** Tools::strtolower is a fix for all modules which are now using lowercase values for 'orderBy' parameter */
+        $orderyBy = Validate::isOrderBy($orderyBy) ? Tools::strtolower($orderyBy) : 'position';
+        $orderWay = Validate::isOrderWay($orderWay) ? Tools::strtoupper($orderWay) : 'ASC';
+
+        $orderByPrefix = false;
+        if ($orderyBy == 'id_cms' || $orderyBy == 'date_add' || $orderyBy == 'date_upd' || $orderyBy == 'position') {
+            $orderByPrefix = 'cms';
+        } elseif ($orderyBy == 'name') {
+            $orderByPrefix = 'cmsl';
+        } elseif ($orderyBy == 'position') {
+            $orderByPrefix = 'cms';
+        }
+
+        $sql = 'SELECT cms.*, cms_shop.*, cmsl.`meta_title`, cmsl.`meta_description`, cmsl.`content`, 
+                    cmsl.`link_rewrite`, 
+					catl.`name` AS category_name
+				FROM `' . _DB_PREFIX_ . 'cms` cms
+				' . Shop::addSqlAssociation('cms', 'cms') . '
+				LEFT JOIN `' . _DB_PREFIX_ . 'cms_category_lang` catl
+					ON (cms.`id_cms_category` = catl.`id_cms_category`
+					AND catl.`id_lang` = ' . (int) $idLang . Shop::addSqlRestrictionOnLang('catl') . ')
+				LEFT JOIN `' . _DB_PREFIX_ . 'cms_lang` cmsl
+					ON (cms.`id_cms` = cmsl.`id_cms`
+					AND cmsl.`id_lang` = ' . (int) $idLang . Shop::addSqlRestrictionOnLang('cmsl') . ')
+				WHERE cms_shop.`id_shop` = ' . (int) $context->shop->id . '
+					AND cms.`id_cms_category` IN (' . $ids . ') '
+            . ($active ? ' AND cms.`active` = 1' : '');
+
+        if ($random === true) {
+            $sql .= ' ORDER BY RAND() LIMIT ' . (int) $randomNumberProducts;
+        } else {
+            $sql .= ' ORDER BY ' . (!empty($orderByPrefix) ? $orderByPrefix . '.' : '') . '`' . bqSQL($orderyBy) . '` ' . pSQL($orderWay) . '
+			LIMIT ' . (((int) $p - 1) * (int) $n) . ',' . (int) $n;
+        }
+
+        $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql, true, false);
+
+        if (!$result) {
+            return array();
+        }
+
+        // Modify SQL result
+        return CMS::getResultsProperties($idLang, $result);
     }
 }

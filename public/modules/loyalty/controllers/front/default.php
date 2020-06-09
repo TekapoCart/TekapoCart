@@ -29,6 +29,7 @@
  */
 class LoyaltyDefaultModuleFrontController extends ModuleFrontController
 {
+    public $controller_name = 'default';
     public $ssl = true;
     public $display_column_left = false;
 

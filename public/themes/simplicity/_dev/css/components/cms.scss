@@ -4,15 +4,12 @@
 
 .cms-page-list,
 .cms-subcategory-list {
-
   li {
-    width: 33%;
     display: inline-block;
     vertical-align: top;
     margin-bottom: 20px;
-
     padding: 10px 0;
-
+    width: 33%;
     &:nth-child(3n) {
       padding-left: 10px;
     }
@@ -28,11 +25,6 @@
   img {
     width: 100%;
     margin-bottom: 10px;
-  }
-
-  .cms-page-title,
-  .cms-subcategory-title {
-
   }
 
   .cms-page-desc,

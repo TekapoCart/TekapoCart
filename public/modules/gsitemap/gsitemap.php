@@ -561,14 +561,29 @@ class Gsitemap extends Module
         if (method_exists('ShopUrl', 'resetMainDomainCache')) {
             ShopUrl::resetMainDomainCache();
         }
+
         $cmss_id = Db::getInstance()->ExecuteS('SELECT c.`id_cms` FROM `' . _DB_PREFIX_ . 'cms` c INNER JOIN `' . _DB_PREFIX_ . 'cms_lang` cl ON c.`id_cms` = cl.`id_cms` ' . ($this->tableColumnExists(_DB_PREFIX_ . 'supplier_shop') ? 'INNER JOIN `' . _DB_PREFIX_ . 'cms_shop` cs ON c.`id_cms` = cs.`id_cms` ' : '') . 'INNER JOIN `' . _DB_PREFIX_ . 'cms_category` cc ON c.id_cms_category = cc.id_cms_category AND cc.active = 1
             WHERE c.`active` =1 AND c.`indexation` =1 AND c.`id_cms` >= ' . (int) $id_cms . ($this->tableColumnExists(_DB_PREFIX_ . 'supplier_shop') ? ' AND cs.id_shop = ' . (int) $this->context->shop->id : '') . ' AND cl.`id_lang` = ' . (int) $lang['id_lang'] . ' GROUP BY  c.`id_cms` ORDER BY c.`id_cms` ASC');
+
+        // suzy: 2020-06-09 為部落格而生
+        $root_blog_category = (int) Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY');
+        $cms_category = new CMSCategory(
+            $root_blog_category,
+            $this->context->language->id
+        );
+        $bcids = implode(',', $cms_category->recurseCategoryIds());
 
         if (is_array($cmss_id)) {
             foreach ($cmss_id as $cms_id) {
                 $cms = new CMS((int) $cms_id['id_cms'], $lang['id_lang']);
                 $cms->link_rewrite = urlencode((is_array($cms->link_rewrite) ? $cms->link_rewrite[(int) $lang['id_lang']] : $cms->link_rewrite));
-                $url = $link->getCMSLink($cms, null, null, $lang['id_lang']);
+
+                // suzy: 2020-06-09 為部落格而生
+                if (in_array($cms_id['id_cms_category'], $bcids)) {
+                    $url = $link->getBlogLink($cms, null, null, $lang['id_lang']);
+                } else {
+                    $url = $link->getCMSLink($cms, null, null, $lang['id_lang']);
+                }
 
                 if (!$this->addLinkToSitemap($link_sitemap, array(
                     'type' => 'cms',

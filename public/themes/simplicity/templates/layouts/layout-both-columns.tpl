@@ -65,6 +65,8 @@
                 {hook h='displayLeftColumnProduct'}
               {elseif $page.page_name == 'contact'}
                 {hook h="displayLeftColumnContact"}
+              {elseif strstr($page.page_name, 'module-simplicity_blog-') !== FALSE }
+                {hook h="displayLeftColumnBlog"}
               {else}
                 {hook h="displayLeftColumn"}
               {/if}
@@ -85,6 +87,8 @@
             <div id="right-column" class="col-xs-12 col-sm-4 col-md-3">
               {if $page.page_name == 'product'}
                 {hook h='displayRightColumnProduct'}
+              {elseif strstr($page.page_name, 'module-simplicity_blog-') !== FALSE }
+                {hook h="displayRightColumnBlog"}
               {else}
                 {hook h="displayRightColumn"}
               {/if}
