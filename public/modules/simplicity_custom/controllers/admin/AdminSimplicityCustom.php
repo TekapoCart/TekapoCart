@@ -77,12 +77,11 @@ class AdminSimplicityCustomController extends ModuleAdminController
     private function _getForm()
     {
         $helper = new HelperForm();
-        $helper->module = $this;
-        $helper->name_controller = $this->name;
-        $helper->identifier = $this->identifier;
-        $helper->token = Tools::getAdminTokenLite('AdminSimplicityTweak');
-        $helper->currentIndex = $this->context->link->getAdminLink('AdminSimplicityTweak', true);
-        $helper->title = $this->displayName;
+        $helper->module = $this->module;
+        $helper->name_controller = $this->module->name;
+        $helper->token = Tools::getAdminTokenLite('AdminSimplicityCustom');
+        $helper->currentIndex = $this->context->link->getAdminLink('AdminSimplicityCustom', true);
+        $helper->title = $this->module->displayName;
 
         $helper->fields_value['body_bg_css'] = Configuration::get('SIMPLICITY_LOGO_BODY_BG_CSS');
 
@@ -100,7 +99,7 @@ class AdminSimplicityCustomController extends ModuleAdminController
         $this->fields_form[] = array(
             'form' => array(
                 'legend' => array(
-                    'title' => $this->displayName,
+                    'title' => $this->module->displayName,
                 ),
                 'description' => '',
                 'input' => array(

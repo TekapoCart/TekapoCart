@@ -1,10 +1,18 @@
 TekapoCart <hi@tekapo.io>
 -------------------------------------------
 *******************************************
+* 1.2.5 (Jun 10, 2020)
+*******************************************
+- 部落格
+Steps
+- install simplicity_blog
+- 手動修改 shop*.json 欄位翻譯
+*******************************************
 * 1.2.4 (Jun 01, 2020)
 *******************************************
 Improve
 - 產品目錄 Product Feed
+- 通知信支援 Google API
 Steps
 - install simplicity_feed
 - 2020-06-01.sql
@@ -33,7 +41,6 @@ Improve
 Fix
 - 正確抓取模組前台 controller 名稱，用於模組位置 exception
 - 修正若折扣為空值不新增 order_cart_rule （贈品情況）
-- 模組儲存後 refresh，避免按上一頁「確認重新提送表單」困擾
 Steps
 - 2020-05-12.sql
 (確認 module id, hook id, authorization_role id 一致)

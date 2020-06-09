@@ -252,6 +252,11 @@ File: controllers/admin/AdminCmsController.php:173</note>
         <note>Context:
 File: controllers/admin/AdminCmsController.php:183</note>
       </trans-unit>
+      <trans-unit id="79e48ca19eefe7806fbaf27df903e8d5">
+        <source>Page category</source>
+        <target xml:lang="zh-TW">自訂頁面分類</target>
+        <note>Line: 40</note>
+      </trans-unit>
       <trans-unit id="cc4fbd30d676ea2f9994b7063a8ada15" approved="yes">
         <source>Pages in this category</source>
         <target xml:lang="zh-TW">本分類中網頁</target>

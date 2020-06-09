@@ -10,7 +10,7 @@
             <h1 class="article__title med">
                 <a href="{$cms.link}">{$cms.meta_title}</a>
             </h1>
-            <div class="article__date" style="display: block;">{dateFormat date=$cms.date_add full=0} · 3 分鐘</div>
+            <div class="article__date" style="display: block;">{dateFormat date=$cms.date_add full=0}</div>
             <div class="article-preview__content">
                 {$cms.meta_description|truncate:70:'...'}
             </div>

@@ -116,7 +116,7 @@ class Simplicity_BlogSearchModuleFrontController extends CMSListingFrontControll
         $breadcrumb = parent::getBreadcrumbLinks();
 
         $breadcrumb['links'][] = array(
-            'title' => '部落格',
+            'title' => Configuration::get('SIMPLICITY_BLOG_NAME', $this->context->language->id),
             'url' => $this->context->link->getBlogHome($this->context->language->id),
         );
 

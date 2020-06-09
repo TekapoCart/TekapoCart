@@ -58,7 +58,26 @@ INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `positio
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '460', '1'), ('122', '2', '460', '1'), ('122', '3', '460', '1'), ('122', '4', '460', '1');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '461', '1'), ('122', '2', '461', '1'), ('122', '3', '461', '1'), ('122', '4', '461', '1');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '13', '7'), ('122', '2', '13', '7'), ('122', '3', '13', '7'), ('122', '4', '13', '7');
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '298', '1'), ('122', '2', '298', '1'), ('122', '3', '298', '1'), ('122', '4', '298', '1');
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '330', '1'), ('122', '2', '330', '1'), ('122', '3', '330', '1'), ('122', '4', '330', '1');
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '325', '1'), ('122', '2', '325', '1'), ('122', '3', '325', '1'), ('122', '4', '325', '1');
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '293', '1'), ('122', '2', '293', '1'), ('122', '3', '293', '1'), ('122', '4', '293', '1');
 
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_CREATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1069;
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_READ' WHERE `ps_authorization_role`.`id_authorization_role` = 1070;
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_UPDATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1071;
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_DELETE' WHERE `ps_authorization_role`.`id_authorization_role` = 1072;
+
+UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 1;
+UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 2;
+UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 3;
+UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 4;
+
+UPDATE `ps_tab` SET `id_parent` = '117' WHERE `ps_tab`.`id_tab` = 150;
+UPDATE `ps_tab` SET `position` = '4' WHERE `ps_tab`.`id_tab` = 150;
+UPDATE `ps_tab` SET `module` = 'simplicity_blog' WHERE `ps_tab`.`id_tab` = 150;
+UPDATE `ps_tab` SET `class_name` = 'AdminSimplicityBlog' WHERE `ps_tab`.`id_tab` = 150;
+UPDATE `ps_tab` SET `icon` = 'edit' WHERE `ps_tab`.`id_tab` = 150;
 
 -- CMS SCHEMA 變動
 ALTER TABLE `ps_cms` ADD `date_add` DATETIME NULL DEFAULT NULL AFTER `indexation`, ADD `date_upd` DATETIME NULL DEFAULT NULL AFTER `date_add`;

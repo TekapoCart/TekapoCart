@@ -648,7 +648,7 @@ class LinkCore
 
         return $this->getBaseLink() .
             Dispatcher::getInstance()->createUrl(
-                'simplicity_blog_home',
+                'simplicity_blog',
                 $idLang,
                 [],
                 true

@@ -1190,12 +1190,6 @@ class AdminModulesControllerCore extends AdminController
             Tools::redirectAdmin($back);
         }
 
-        // suzy: 2020-05-12 refresh 避開「確認重新提送表單」困擾
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            header('Location: ' . $_SERVER['REQUEST_URI']);
-            exit;
-        }
-
     }
 
     /**

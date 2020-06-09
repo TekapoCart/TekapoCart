@@ -597,25 +597,25 @@ File: controllers/admin/AdminSearchConfController.php:79</note>
       </trans-unit>
       <trans-unit id="a1f25953ca9e49615b12a626584680c5" approved="yes">
         <source>Building the product index may take a few minutes.</source>
-        <target xml:lang="zh-TW">建立商品索引會花上數分鐘。</target>
+        <target xml:lang="zh-TW">商品索引會花上數分鐘。</target>
         <note>Context:
 File: controllers/admin/AdminSearchConfController.php:82</note>
       </trans-unit>
       <trans-unit id="b90813d74ad3dc25c5b976d932fd72d7" approved="yes">
         <source>If your server stops before the process ends, you can resume the indexing by clicking "Add missing products to the index".</source>
-        <target xml:lang="zh-TW">若在完成前就停止，您可以點擊「增加缺少商品到索引」繼續。</target>
+        <target xml:lang="zh-TW">若在完成前就停止，您可以點擊「建立未索引商品」繼續。</target>
         <note>Context:
 File: controllers/admin/AdminSearchConfController.php:83</note>
       </trans-unit>
       <trans-unit id="d86f8ed15ec7a8f87fb1b0ed501dbb6b" approved="yes">
         <source>Add missing products to the index</source>
-        <target xml:lang="zh-TW">增加缺少商品到索引</target>
+        <target xml:lang="zh-TW">建立未索引商品</target>
         <note>Context:
 File: controllers/admin/AdminSearchConfController.php:87</note>
       </trans-unit>
       <trans-unit id="9897b2f361910e5188f231de872d8856" approved="yes">
         <source>Re-build the entire index</source>
-        <target xml:lang="zh-TW">重建整個索引</target>
+        <target xml:lang="zh-TW">重建全部商品索引</target>
         <note>Context:
 File: controllers/admin/AdminSearchConfController.php:91</note>
       </trans-unit>

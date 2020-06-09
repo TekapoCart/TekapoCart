@@ -4,6 +4,8 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+include_once _PS_MODULE_DIR_ . 'simplicity_blog/classes/SearchCMS.php';
+
 use PrestaShop\PrestaShop\Adapter\Category\CategoryCMSSearchProvider;
 use PrestaShop\PrestaShop\Core\CMS\Search\CMSSearchContext;
 use PrestaShop\PrestaShop\Core\CMS\Search\CMSSearchQuery;
@@ -12,8 +14,7 @@ use PrestaShop\PrestaShop\Core\CMS\Search\SortOrder;
 class Simplicity_Blog extends Module
 {
 
-    private $blogParams = [];
-    private $blogLangParams = [];
+    private $homeTemplateFile;
 
     public function __construct()
     {
@@ -29,17 +30,7 @@ class Simplicity_Blog extends Module
         $this->displayName = '部落格';
         $this->description = '強化自訂頁面功能，獨立部落格專區。';
 
-        $this->blogParams = [
-            'SIMPLICITY_BLOG_ROOT_CATEGORY',
-            'SIMPLICITY_BLOG_PER_PAGE',
-            'SIMPLICITY_BLOG_LATEST_HOME_DISPLAY',
-            'SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY',
-            'SIMPLICITY_BLOG_SHOW_IMAGE',
-        ];
-
-        $this->blogLangParams = [
-            'SIMPLICITY_BLOG_NAME',
-        ];
+        $this->homeTemplateFile = 'module:simplicity_blog/views/templates/hook/home.tpl';
     }
 
     public function install()
@@ -49,14 +40,16 @@ class Simplicity_Blog extends Module
             OR !$this->registerHook('displayLeftColumnBlog')
             OR !$this->registerHook('displayRightColumnBlog')
             OR !$this->registerHook('displayHome')
-            OR !$this->installDb()
+            OR !$this->registerHook('actionAfterCreateCmsPageFormHandler')
+            OR !$this->registerHook('actionAfterUpdateCmsPageFormHandler')
+            OR !$this->installTables()
         ) {
             return false;
         }
         return true;
     }
 
-    private function installDb()
+    private function installTables()
     {
         $sql = [];
 
@@ -84,7 +77,6 @@ class Simplicity_Blog extends Module
             }
         }
         return true;
-
     }
 
     public function hookModuleRoutes()
@@ -143,217 +135,57 @@ class Simplicity_Blog extends Module
         );
     }
 
+
+    public function _clearCache($template, $cache_id = null, $compile_id = null)
+    {
+        parent::_clearCache($this->homeTemplateFile);
+    }
+
     public function getContent()
     {
-        // ini_set('max_execution_time', 7200);
-        // SearchCms::indexation(true);
-
-        $html_content = '';
-
-        # Update the settings
-        if (Tools::isSubmit('blog_submit')) {
-            # Validate the POST parameters
-            $this->postValidation();
-
-            if (!empty($this->postError)) {
-                # Display the POST error
-                $html_content .= $this->displayError($this->postError);
-            } else {
-                $html_content .= $this->postProcess();
-            }
-        }
-
-        # Display the setting form
-        $html_content .= $this->displayForm();
-
-        return $html_content;
-
-
-
     }
 
-    private function postValidation()
+    public function hookActionAfterCreateCmsPageFormHandler($params)
     {
-        $required_fields = array(
-
-        );
-
-        foreach ($required_fields as $field_name => $field_desc) {
-            $tmp_field_value = Tools::getValue($field_name);
-            if (empty($tmp_field_value)) {
-                $this->postError = $field_desc . $this->l(' is required');
-                return;
-            }
-        }
+        $this->_clearCache('*');
+        SearchCMS::indexation(false, $params['id']);
     }
 
-    private function displayForm()
+    public function hookActionAfterUpdateCmsPageFormHandler($params)
     {
-
-        # Set the options
-        $categories[] = [
-            'id' => '-',
-            'name' => '無'
-        ];
-
-        $cms_category = new CMSCategory(1, $this->context->language->id);
-        foreach ($cms_category->recurseCategoryPairs([], false) as $key => $value) {
-            $categories[] = array(
-                'id' => $value['id_cms_category'],
-                'name' => $value['name'],
-            );
-        }
-
-        # Set the configurations for generating a setting form
-        $fields_form[0]['form'] = array(
-            'legend' => array(
-                'title' => '部落格設定',
-            ),
-            'input' => array(
-                array(
-                    'type' => 'select',
-                    'label' => '部落格',
-                    'name' => 'SIMPLICITY_BLOG_ROOT_CATEGORY',
-                    'options' => array(
-                        'query' => $categories,
-                        'id' => 'id',
-                        'name' => 'name'
-                    ),
-                    'desc' => '選擇一個自訂頁面分類做為部落格首頁',
-                ),
-                array(
-                    'type' => 'text',
-                    'lang' => true,
-                    'label' => '部落格名稱',
-                    'name' => 'SIMPLICITY_BLOG_NAME',
-                ),
-                array(
-                    'type' => 'text',
-                    'label' => '每頁顯示數量',
-                    'name' => 'SIMPLICITY_BLOG_PER_PAGE',
-                    'class' => 'fixed-width-xl',
-                ),
-                array(
-                    'type' => 'text',
-                    'label' => '首頁顯示近期文章數量',
-                    'name' => 'SIMPLICITY_BLOG_LATEST_HOME_DISPLAY',
-                    'class' => 'fixed-width-xl',
-                ),
-                array(
-                    'type' => 'text',
-                    'label' => '側欄顯示近期文章數量',
-                    'name' => 'SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY',
-                    'class' => 'fixed-width-xl',
-                ),
-                array(
-                    'type' => 'switch',
-                    'label' => '列表頁顯示圖片',
-                    'name' => 'SIMPLICITY_BLOG_SHOW_IMAGE',
-                    'values' => array(
-                        array(
-                            'value' => true,
-                        ),
-                        array(
-                            'value' => false
-                        )
-                    )
-                ),
-            ),
-            'submit' => array(
-                'name' => 'blog_submit',
-                'title' => $this->l('Save'),
-            ),
-            'buttons' => array(
-                array(
-                    'href' => $this->context->link->getAdminLink('AdminSimplicityTabContent', true),
-                    'title' => '返回內容模組',
-                    'icon' => 'process-icon-back'
-                )
-            )
-        );
-
-        $helper = new HelperForm();
-
-        # Module, token and currentIndex
-        $helper->module = $this;
-        $helper->name_controller = $this->name;
-        $helper->token = Tools::getAdminTokenLite('AdminModules');
-        $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
-
-        # Get the default language
-        $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
-
-        # Language
-        $helper->default_form_language = $default_lang;
-        $helper->allow_employee_form_lang = $default_lang;
-
-        # Load the current settings
-        foreach ($this->blogParams as $param_name) {
-            $helper->fields_value[$param_name] = Configuration::get($param_name);
-        }
-
-        # Multiple languages
-        $languages = Language::getLanguages(false);
-        foreach ($this->blogLangParams as $param_name) {
-            foreach ($languages as $lang) {
-                $helper->fields_value[$param_name][$lang['id_lang']] = Configuration::get($param_name, $lang['id_lang']);
-            }
-        }
-        $helper->tpl_vars = array(
-            'languages' => $this->context->controller->getLanguages(),
-            'id_language' => $this->context->language->id
-        );
-
-        return $helper->generateForm($fields_form);
+        $this->hookActionAfterCreateCmsPageFormHandler($params);
     }
 
-    private function postProcess()
+    public function hookActionAfterCreateCmsPageCategoryFormHandler($params)
     {
-        if ((int)Tools::getValue('SIMPLICITY_BLOG_PER_PAGE') <= 0) {
-            $_POST['SIMPLICITY_BLOG_PER_PAGE'] = '12';
-        }
-
-        if ((int)Tools::getValue('SIMPLICITY_BLOG_LATEST_HOME_DISPLAY') <= 0) {
-            $_POST['SIMPLICITY_BLOG_LATEST_HOME_DISPLAY'] = '3';
-        }
-
-        if ((int)Tools::getValue('SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY') <= 0) {
-            $_POST['SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY'] = '5';
-        }
-
-        foreach ($this->blogParams as $param_name) {
-            if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
-                return $this->displayError($param_name . ' ' . $this->l('updated failed'));
-            }
-        }
-
-        # Multiple languages
-        $languages = Language::getLanguages(false);
-        foreach ($this->blogLangParams as $param_name) {
-            $values = [];
-            foreach ($languages as $lang) {
-                $values[$lang['id_lang']] = Tools::getValue($param_name . '_'.$lang['id_lang']);
-                if (!Configuration::updateValue($param_name, $values)) {
-                    return $this->displayError($param_name . ' ' . $this->l('updated failed'));
-                }
-            }
-        }
-
-        return $this->displayConfirmation($this->trans('Settings updated.', array(), 'Admin.Notifications.Success'));
+        $this->_clearCache('*');
     }
+
+    public function hookActionAfterUpdateCmsPageCategoryFormHandler($params)
+    {
+        $this->hookActionAfterCreateCmsPageCategoryFormHandler($params);
+    }
+
 
     public function hookDisplayHome($params)
     {
-        $root_blog_category_id = (int) Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY');
-        $root_blog_category = new CMSCategory((int)$root_blog_category_id, $this->context->language->id);
+        if (!$this->isCached($this->homeTemplateFile, $this->getCacheId('simplicity_blog'))) {
+            $root_blog_category_id = (int)Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY');
+            $root_blog_category = new CMSCategory((int)$root_blog_category_id, $this->context->language->id);
 
-        // latest
-        $this->smarty->assign([
-            'latest_cms' => $this->getLatest($root_blog_category),
-            'show_image' => (int) Configuration::get('SIMPLICITY_BLOG_SHOW_IMAGE'),
-        ]);
+            if (!Validate::isLoadedObject($root_blog_category) || !$root_blog_category->active) {
+                return;
+            }
 
-        return $this->display(__FILE__, 'views/templates/hook/home.tpl');
+            // latest
+            $this->smarty->assign([
+                'latest_cms' => $this->getLatest($root_blog_category),
+                'show_image' => (int)Configuration::get('SIMPLICITY_BLOG_SHOW_IMAGE'),
+            ]);
+        }
+
+        // return $this->display(__FILE__, 'views/templates/hook/home.tpl');
+        return $this->fetch($this->homeTemplateFile, $this->getCacheId('simplicity_blog'));
     }
 
     public function hookDisplayLeftColumnBlog($params)
@@ -365,6 +197,10 @@ class Simplicity_Blog extends Module
     {
         $root_blog_category_id = (int) Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY');
         $root_blog_category = new CMSCategory((int)$root_blog_category_id, $this->context->language->id);
+
+        if (!Validate::isLoadedObject($root_blog_category) || !$root_blog_category->active) {
+            return;
+        }
 
         // search
         $this->smarty->assign([
@@ -391,8 +227,8 @@ class Simplicity_Blog extends Module
 
     private function getLatest($root_blog_category)
     {
-        $blog_latest_home_display = (int) Configuration::get('SIMPLICITY_BLOG_LATEST_HOME_DISPLAY');
-        $blog_latest_column_display = (int) Configuration::get('SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY');
+        $blog_latest_home_display = (int)Configuration::get('SIMPLICITY_BLOG_LATEST_HOME_DISPLAY');
+        $blog_latest_column_display = (int)Configuration::get('SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY');
 
         $display = $blog_latest_home_display > $blog_latest_column_display ? $blog_latest_home_display : $blog_latest_column_display;
 
@@ -402,8 +238,7 @@ class Simplicity_Blog extends Module
             ->setResultsPerPage($display)
             ->setPage(1)
             ->setIdCategory(1)
-            ->setSortOrder(new SortOrder('cms', 'cms.`date_add`', 'DESC'))
-        ;
+            ->setSortOrder(new SortOrder('cms', 'cms.`date_add`', 'DESC'));
 
         $provider = new CategoryCMSSearchProvider(
             $this->getTranslator(),
@@ -421,6 +256,7 @@ class Simplicity_Blog extends Module
         foreach ($result->getResults() as $rawCMS) {
             $latest_cms[] = $assembler->assembleCMS($rawCMS);
         }
+
         return $latest_cms;
     }
 

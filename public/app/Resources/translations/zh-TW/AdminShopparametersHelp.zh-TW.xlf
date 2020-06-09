@@ -158,7 +158,7 @@ File: controllers/admin/AdminShopController.php:492</note>
     <body>
       <trans-unit id="12399d580627a1a5889cdc44e6e48b5a" approved="yes">
         <source>Enable the automatic indexing of products. If you enable this feature, the products will be indexed in the search automatically when they are saved. If the feature is disabled, you will have to index products manually by using the links provided in the field set.</source>
-        <target xml:lang="zh-TW">啟用商品自動索引。啟用這個功能後，商品會在儲存時自動被搜尋索引，您會需要使用欄位集合中提供的連結來手動調整商品索引</target>
+        <target xml:lang="zh-TW">啟用商品自動索引。啟用這個功能後，商品會在儲存時自動產生索引。</target>
         <note>Context:
 File: controllers/admin/AdminSearchConfController.php:106</note>
       </trans-unit>

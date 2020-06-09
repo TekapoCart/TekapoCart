@@ -53,6 +53,9 @@ class Simplicity_BlogPageModuleFrontController extends ModuleFrontController
 
         $cmsVar = $this->objectPresenter->present($this->cms);
 
+        $images = simplexml_import_dom(DOMDocument::loadHTML($cmsVar['content']))->xpath("//img/@src");
+        $cmsVar['image'] = count($images) > 0 ? (string)reset($images) : '';
+
         // suzy: 2018-08-17 支援 商品 html
         $cmsVar['content'] = Tools::parseContent($cmsVar['content']);
 
@@ -78,7 +81,7 @@ class Simplicity_BlogPageModuleFrontController extends ModuleFrontController
         $dispatcher = Dispatcher::getInstance();
 
         $breadcrumb['links'][] = array(
-            'title' => '部落格',
+            'title' => Configuration::get('SIMPLICITY_BLOG_NAME', $this->context->language->id),
             'url' => $this->context->link->getBlogHome($this->context->language->id),
         );
 

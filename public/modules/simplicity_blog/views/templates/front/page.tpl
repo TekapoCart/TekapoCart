@@ -12,13 +12,24 @@
         <div class="article">
 
             <div class="article__body clearfix">
-                <h1 class="article__title">{$cms.meta_title} </h1>
+                <h1 class="article__title" itemprop="headline">{$cms.meta_title} </h1>
                 <div class="article__date">{dateFormat date=$cms.date_add full=0}</div>
                 <div class="article__content">
                     {$cms.content nofilter}
                 </div>
             </div>
 
+            <meta itemprop="datePublished" content="{dateFormat date=$cms.date_add full=1}">
+            <meta itemprop="author" content="{$shop.name}">
+            {if strlen($cms.image) > 0}
+            <meta itemprop="image" content="{$cms.image}">
+            {/if}
+            <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                    <meta itemprop="url" content="{$shop.logo}">
+                </div>
+                <meta itemprop="name" content="{$shop.name}">
+            </div>
         </div>
 
         {/block}
