@@ -50,6 +50,7 @@ class Simplicity_BlogHomeModuleFrontController extends CMSListingFrontController
         $this->context->smarty->assign(array(
             'category' => $categoryVar,
             'subcategories' => $this->getTemplateVarSubCategories(),
+            'show_image' => (int) Configuration::get('SIMPLICITY_BLOG_SHOW_IMAGE'),
         ));
     }
 
@@ -64,16 +65,6 @@ class Simplicity_BlogHomeModuleFrontController extends CMSListingFrontController
                 'id' => $this->cms_category->id,
             ]
         );
-    }
-
-    protected function getAjaxCMSSearchVariables()
-    {
-        $data = parent::getAjaxCMSSearchVariables();
-        $rendered_products_header = $this->render('module:simplicity_blog/views/templates/front/_partials/category-header',
-            array('listing' => $data));
-        $data['rendered_products_header'] = $rendered_products_header;
-
-        return $data;
     }
 
     protected function getCMSSearchQuery()
@@ -109,7 +100,8 @@ class Simplicity_BlogHomeModuleFrontController extends CMSListingFrontController
 
             $category['image'] = '';
 
-            $category['url'] = $this->context->link->getBlogCategoryLink($category);
+            $category['url'] = '';
+            $category['url'] = $this->context->link->getBlogCategoryLink($category['id_cms_category'], $category['link_rewrite']);
 
             return $category;
         }, $this->cms_category->getSubCategories($this->context->language->id));

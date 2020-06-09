@@ -241,7 +241,7 @@ abstract class CMSListingFrontControllerCore extends ModuleFrontController
 
         $resultsPerPage = (int) Tools::getValue('resultsPerPage');
         if ($resultsPerPage <= 0) {
-            $resultsPerPage = Configuration::get('PS_PRODUCTS_PER_PAGE');
+            $resultsPerPage = Configuration::get('SIMPLICITY_BLOG_PER_PAGE');
         }
 
         // we need to set a few parameters from back-end preferences

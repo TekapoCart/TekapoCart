@@ -108,7 +108,6 @@ class Simplicity_Blog extends Module
 
     public function hookModuleRoutes()
     {
-
         $listing_prefix = 'blogs';
         $page_prefix = 'blog';
 
@@ -161,7 +160,6 @@ class Simplicity_Blog extends Module
             ),
 
         );
-
     }
 
     public function getContent()
@@ -171,54 +169,43 @@ class Simplicity_Blog extends Module
         exit;
     }
 
+    public function hookDisplayHome($params)
+    {
+        $root_blog_category_id = (int) Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY');
+        $root_blog_category = new CMSCategory((int)$root_blog_category_id, $this->context->language->id);
+
+        // latest
+        $this->smarty->assign([
+            'latest_cms' => $this->getLatest($root_blog_category),
+            'show_image' => (int) Configuration::get('SIMPLICITY_BLOG_SHOW_IMAGE'),
+        ]);
+
+        return $this->display(__FILE__, 'views/templates/hook/home.tpl');
+    }
+
     public function hookDisplayLeftColumnBlog($params)
     {
-
+        $this->hookDisplayRightColumnBlog($params);
     }
 
     public function hookDisplayRightColumnBlog($params)
     {
+        $root_blog_category_id = (int) Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY');
+        $root_blog_category = new CMSCategory((int)$root_blog_category_id, $this->context->language->id);
 
-//        $this->setLastVisitedCategory();
-
-        $root_blog_category = (int) Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY');
-        $category = new CMSCategory((int)$root_blog_category, $this->context->language->id);
+        // search
+        $this->smarty->assign([
+            'search_controller_url' => $this->context->link->getBlogSearch(),
+        ]);
 
         // latest
-        $context = new CMSSearchContext($this->context);
-        $query = new CMSSearchQuery();
-        $query
-            ->setResultsPerPage(10)
-            ->setPage(1)
-            ->setIdCategory(1)
-            ->setSortOrder(new SortOrder('cms', 'cms.`date_add`', 'DESC'))
-        ;
-
-        $provider = new CategoryCMSSearchProvider(
-            $this->getTranslator(),
-            $category
-        );
-
-        $result = $provider->runQuery(
-            $context,
-            $query
-        );
-
-        $assembler = new CMSAssembler($this->context);
-
-        $latest_cms = [];
-
-        foreach ($result->getResults() as $rawCMS) {
-            $latest_cms[] = $assembler->assembleCMS($rawCMS);
-        }
-
         $this->smarty->assign([
-            'latest_cms' => $latest_cms,
+            'latest_cms' => $this->getLatest($root_blog_category),
         ]);
 
         // category
-        if (Validate::isLoadedObject($category) && $category->active) {
-            $categories = $this->getCategories($category);
+        if (Validate::isLoadedObject($root_blog_category) && $root_blog_category->active) {
+            $categories = $this->getCategories($root_blog_category);
             $this->smarty->assign([
                 'categories' => $categories,
                 'c_tree_path' => isset($categories['children']) && count($categories['children']) && method_exists($this->context->controller, 'getCategory') && ($curr_category = $this->context->controller->getCategory()) ? self::getTreePath($categories['children'], $curr_category->id) : false,
@@ -229,19 +216,40 @@ class Simplicity_Blog extends Module
         return $this->display(__FILE__, 'views/templates/hook/column.tpl');
     }
 
-//    public function setLastVisitedCategory()
-//    {
-//        if (method_exists($this->context->controller, 'getCategory') && ($category = $this->context->controller->getCategory())) {
-//            $this->context->cookie->last_visited_category = $category->id;
-//        } elseif (method_exists($this->context->controller, 'getProduct') && ($product = $this->context->controller->getProduct())) {
-//            if (!isset($this->context->cookie->last_visited_category)
-//                || !Product::idIsOnCategoryId($product->id, array(array('id_category' => $this->context->cookie->last_visited_category)))
-//                || !Category::inShopStatic($this->context->cookie->last_visited_category, $this->context->shop)
-//            ) {
-//                $this->context->cookie->last_visited_category = (int)$product->id_category_default;
-//            }
-//        }
-//    }
+    private function getLatest($root_blog_category)
+    {
+        $blog_latest_home_display = (int) Configuration::get('SIMPLICITY_BLOG_LATEST_HOME_DISPLAY');
+        $blog_latest_column_display = (int) Configuration::get('SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY');
+
+        $display = $blog_latest_home_display > $blog_latest_column_display ? $blog_latest_home_display : $blog_latest_column_display;
+
+        $context = new CMSSearchContext($this->context);
+        $query = new CMSSearchQuery();
+        $query
+            ->setResultsPerPage($display)
+            ->setPage(1)
+            ->setIdCategory(1)
+            ->setSortOrder(new SortOrder('cms', 'cms.`date_add`', 'DESC'))
+        ;
+
+        $provider = new CategoryCMSSearchProvider(
+            $this->getTranslator(),
+            $root_blog_category
+        );
+
+        $result = $provider->runQuery(
+            $context,
+            $query
+        );
+
+        $assembler = new CMSAssembler($this->context);
+
+        $latest_cms = [];
+        foreach ($result->getResults() as $rawCMS) {
+            $latest_cms[] = $assembler->assembleCMS($rawCMS);
+        }
+        return $latest_cms;
+    }
 
     private function getCategories($category)
     {
@@ -269,8 +277,7 @@ class Simplicity_Blog extends Module
     public function getTree($resultParents, $resultIds, $maxDepth, $id_category = null, $currentDepth = 0)
     {
         if (is_null($id_category)) {
-            // Configuration::get('PS_ROOT_BLOG_CATEGORY')
-            $id_category = 1;
+            $id_category = Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY');
         }
 
         $children = [];

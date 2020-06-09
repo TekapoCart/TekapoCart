@@ -45,6 +45,8 @@ class Simplicity_BlogSearchModuleFrontController extends CMSListingFrontControll
 
                 // suzy: 2020-03-18 meta title, meta description
                 'seo_title' => $this->getTranslator()->trans('Search results', array(), 'Shop.Theme.Catalog') . '：' . implode(', ', $keywords),
+
+                'show_image' => (int) Configuration::get('SIMPLICITY_BLOG_SHOW_IMAGE'),
             )
         );
     }
@@ -119,7 +121,7 @@ class Simplicity_BlogSearchModuleFrontController extends CMSListingFrontControll
         );
 
         $breadcrumb['links'][] = array(
-            'title' => '文章搜尋',
+            'title' => $this->module->l('Blog Search'),
             'url' => $this->context->link->getBlogSearch($this->context->language->id),
         );
 

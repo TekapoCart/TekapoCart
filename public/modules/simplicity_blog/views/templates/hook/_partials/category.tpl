@@ -1,5 +1,5 @@
 <div class="article__newposts">
-    <h2>文章分類</h2>
+    <h2>{l s='Categories' mod='simplicity_blog'}</h2>
     {function name="categories" nodes=[] depth=0}
         {strip}
             {if $nodes|count}

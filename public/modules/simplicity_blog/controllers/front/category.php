@@ -74,6 +74,7 @@ class Simplicity_BlogCategoryModuleFrontController extends CMSListingFrontContro
         $this->context->smarty->assign(array(
             'category' => $categoryVar,
             'subcategories' => $this->getTemplateVarSubCategories(),
+            'show_image' => (int) Configuration::get('SIMPLICITY_BLOG_SHOW_IMAGE'),
         ));
     }
 
@@ -88,16 +89,6 @@ class Simplicity_BlogCategoryModuleFrontController extends CMSListingFrontContro
                 'id' => $this->cms_category->id,
             ]
         );
-    }
-
-    protected function getAjaxCMSSearchVariables()
-    {
-        $data = parent::getAjaxCMSSearchVariables();
-        $rendered_products_header = $this->render('module:simplicity_blog/views/templates/front/_partials/category-header',
-            array('listing' => $data));
-        $data['rendered_products_header'] = $rendered_products_header;
-
-        return $data;
     }
 
     protected function getCMSSearchQuery()
@@ -130,9 +121,8 @@ class Simplicity_BlogCategoryModuleFrontController extends CMSListingFrontContro
     protected function getTemplateVarSubCategories()
     {
         return array_map(function (array $category) {
-
             $category['image'] = '';
-            $category['url'] = $this->context->link->getBlogCategoryLink($category);
+            $category['url'] = $this->context->link->getBlogCategoryLink($category['id_cms_category'], $category['link_rewrite']);
 
             return $category;
         }, $this->cms_category->getSubCategories($this->context->language->id));
@@ -149,15 +139,12 @@ class Simplicity_BlogCategoryModuleFrontController extends CMSListingFrontContro
 
         $cmsCategory = new CMSCategory($this->cms_category->id);
 
-        // if ($cmsCategory->id_parent != 0) {
-            foreach (array_reverse($cmsCategory->getParentsCategories()) as $category) {
-                $cmsSubCategory = new CMSCategory($category['id_cms_category']);
-                $breadcrumb['links'][] = array(
-                    'title' => $cmsSubCategory->getName(),
-                    'url' => $this->context->link->getBlogCategoryLink($cmsSubCategory),
-                );
-            }
-        // }
+        foreach (array_reverse($cmsCategory->getParentsCategories()) as $category) {
+            $breadcrumb['links'][] = array(
+                'title' => $category['name'],
+                'url' => $this->context->link->getBlogCategoryLink($category['id_cms_category'], $category['link_rewrite']),
+            );
+        }
 
         return $breadcrumb;
     }

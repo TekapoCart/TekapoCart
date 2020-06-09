@@ -13,18 +13,18 @@
             {if $listing.cms|count}
 
                 {block name='result_list_top'}
-                    {include file='module:simplicity_blog/views/templates/front/_partials/results-top.tpl' listing=$listing}
+                    {include file='module:simplicity_blog/views/templates/front/_partials/results-top.tpl'}
                 {/block}
 
                 <div id="">
                     {block name='result_list'}
-                        {include file='module:simplicity_blog/views/templates/front/_partials/results.tpl' listing=$listing}
+                        {include file='module:simplicity_blog/views/templates/front/_partials/results.tpl'}
                     {/block}
                 </div>
 
                 <div id="js-result-list-bottom">
                     {block name='result_list_bottom'}
-                        {include file='module:simplicity_blog/views/templates/front/_partials/results-bottom.tpl' listing=$listing}
+                        {include file='module:simplicity_blog/views/templates/front/_partials/results-bottom.tpl'}
                     {/block}
                 </div>
 

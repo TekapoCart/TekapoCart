@@ -1,5 +1,5 @@
 <div class="article__newposts">
-    <h2>近期文章</h2>
+    <h2>{l s='Latest' mod='simplicity_blog'}</h2>
     
     {foreach from=$latest_cms item="cms" name=latest_cms}
     <a href="{$cms.link}">

@@ -571,7 +571,7 @@ class Gsitemap extends Module
             $root_blog_category,
             $this->context->language->id
         );
-        $bcids = implode(',', $cms_category->recurseCategoryIds());
+        $bcids = $cms_category->recurseCategoryIds();
 
         if (is_array($cmss_id)) {
             foreach ($cmss_id as $cms_id) {
@@ -579,7 +579,7 @@ class Gsitemap extends Module
                 $cms->link_rewrite = urlencode((is_array($cms->link_rewrite) ? $cms->link_rewrite[(int) $lang['id_lang']] : $cms->link_rewrite));
 
                 // suzy: 2020-06-09 為部落格而生
-                if (in_array($cms_id['id_cms_category'], $bcids)) {
+                if (in_array($cms->id_cms_category, $bcids)) {
                     $url = $link->getBlogLink($cms, null, null, $lang['id_lang']);
                 } else {
                     $url = $link->getCMSLink($cms, null, null, $lang['id_lang']);

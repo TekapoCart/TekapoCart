@@ -457,7 +457,9 @@ class Ps_Googleanalytics extends Module
         }
 
         $listing = $this->context->smarty->getTemplateVars('listing');
-        $products = $this->wrapProducts($listing['products'], array(), true);
+        // suzy: 2020-06-09 修正 Undefined index: products
+        // $products = $this->wrapProducts($listing['products'], array(), true);
+        $products = $this->wrapProducts(isset($listing['products']) ? $listing['products'] : null, array(), true);
 
         if ($controller_name == 'order' || $controller_name == 'orderopc') {
             $this->js_state = 1;

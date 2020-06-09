@@ -584,7 +584,7 @@ class LinkCore
         Dispatcher::getInstance()->createUrl(
             'simplicity_blog_page',
             $idLang,
-            array('id_cms' => (int)$cms['id_cms'], 'slug' => (string)$cms['link_rewrite']),
+            array('id_cms' => (int)$cms->id_cms, 'slug' => (string)$cms->link_rewrite),
             true
         );
 
@@ -593,7 +593,7 @@ class LinkCore
     /**
      * suzy: 2020-06-09 為部落格而生
      *
-     * @param $cms
+     * @param $cms_category
      * @param null $alias
      * @param null $ssl
      * @param null $idLang
@@ -602,7 +602,7 @@ class LinkCore
      * @return string
      */
     public function getBlogCategoryLink(
-        $cms,
+        $cms_category,
         $alias = null,
         $ssl = null,
         $idLang = null,
@@ -614,11 +614,19 @@ class LinkCore
             $idLang = Context::getContext()->language->id;
         }
 
-        return $this->getBaseLink() .
-            Dispatcher::getInstance()->createUrl(
+        $url = $this->getBaseLink();
+        $dispatcher = Dispatcher::getInstance();
+
+        if (!is_object($cms_category)) {
+            if ($alias !== null) {
+                return $url . $dispatcher->createUrl('simplicity_blog_category', $idLang, array('id_cms_category' => (int)$cms_category, 'slug' => (string)$alias));
+            }
+        }
+
+        return $url . $dispatcher->createUrl(
                 'simplicity_blog_category',
                 $idLang,
-                array('id_cms_category' => (int)$cms['id_cms'], 'slug' => (string)$cms['link_rewrite']),
+                array('id_cms_category' => (int)$cms_category->id_cms_category, 'slug' => (string)$cms_category->link_rewrite),
                 true
             );
 

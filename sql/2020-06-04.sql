@@ -57,6 +57,8 @@ INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `positi
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '459', '1'), ('122', '2', '459', '1'), ('122', '3', '459', '1'), ('122', '4', '459', '1');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '460', '1'), ('122', '2', '460', '1'), ('122', '3', '460', '1'), ('122', '4', '460', '1');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '461', '1'), ('122', '2', '461', '1'), ('122', '3', '461', '1'), ('122', '4', '461', '1');
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '13', '7'), ('122', '2', '13', '7'), ('122', '3', '13', '7'), ('122', '4', '13', '7');
+
 
 -- CMS SCHEMA 變動
 ALTER TABLE `ps_cms` ADD `date_add` DATETIME NULL DEFAULT NULL AFTER `indexation`, ADD `date_upd` DATETIME NULL DEFAULT NULL AFTER `date_add`;
