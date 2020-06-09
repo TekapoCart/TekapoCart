@@ -191,6 +191,36 @@ class CMSCategoryCore extends ObjectModel
         return $ids;
     }
 
+    /**
+     * suzy: 2020-06-07 為部落格而生
+     *
+     * @param array $pairs
+     * @param $active
+     * @return array
+     */
+    public function recurseCategoryPairs($pairs = [], $active = true)
+    {
+        $id_lang = Context::getContext()->language->id;
+
+        if (!is_array($pairs)) {
+            $pairs = [];
+        }
+
+        $subcats = $this->getSubCategories($id_lang, $active);
+        if ($subcats && count($subcats)) {
+            foreach ($subcats as &$subcat) {
+                $categ = new CMSCategory($subcat['id_cms_category'], $id_lang);
+                $pairs[$categ->id_cms_category] = [
+                    'id_cms_category' => $subcat['id_cms_category'],
+                    'name' => str_repeat('-', ($categ->level_depth - 1)) . ' ' . $categ->name,
+                ];
+                $pairs = $categ->recurseCategoryPairs($pairs, $active);
+            }
+        }
+
+        return $pairs;
+    }
+
     public static function getRecurseCategory($id_lang = null, $current = 1, $active = 1, $links = 0, Link $link = null)
     {
         if (!$link) {
@@ -418,7 +448,7 @@ class CMSCategoryCore extends ObjectModel
 		WHERE `id_parent` = ' . (int) $this->id . '
 		' . ($active ? 'AND `active` = 1' : '') . '
 		GROUP BY c.`id_cms_category`
-		ORDER BY `name` ASC');
+		ORDER BY `position` ASC'); // suzy: 2020-06-09 ORDER BY name 改成 position
 
         // Modify SQL result
         foreach ($result as &$row) {

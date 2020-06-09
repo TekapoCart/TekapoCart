@@ -12,6 +12,9 @@ use PrestaShop\PrestaShop\Core\CMS\Search\SortOrder;
 class Simplicity_Blog extends Module
 {
 
+    private $blogParams = [];
+    private $blogLangParams = [];
+
     public function __construct()
     {
         $this->name = 'simplicity_blog';
@@ -25,6 +28,18 @@ class Simplicity_Blog extends Module
 
         $this->displayName = '部落格';
         $this->description = '強化自訂頁面功能，獨立部落格專區。';
+
+        $this->blogParams = [
+            'SIMPLICITY_BLOG_ROOT_CATEGORY',
+            'SIMPLICITY_BLOG_PER_PAGE',
+            'SIMPLICITY_BLOG_LATEST_HOME_DISPLAY',
+            'SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY',
+            'SIMPLICITY_BLOG_SHOW_IMAGE',
+        ];
+
+        $this->blogLangParams = [
+            'SIMPLICITY_BLOG_NAME',
+        ];
     }
 
     public function install()
@@ -33,7 +48,8 @@ class Simplicity_Blog extends Module
             OR !$this->registerHook('moduleRoutes')
             OR !$this->registerHook('displayLeftColumnBlog')
             OR !$this->registerHook('displayRightColumnBlog')
-            // OR !$this->installDb()
+            OR !$this->registerHook('displayHome')
+            OR !$this->installDb()
         ) {
             return false;
         }
@@ -44,56 +60,21 @@ class Simplicity_Blog extends Module
     {
         $sql = [];
 
-        $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'tc_cart_shipping` (
-                `id_tc_cart_shipping` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                `id_cart` INT(10) UNSIGNED NULL DEFAULT NULL,
-                `id_carrier` INT(10) UNSIGNED NULL DEFAULT NULL,
-                `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
-                `store_code` VARCHAR(10) NULL DEFAULT NULL,
-                `store_name` VARCHAR(255) NULL DEFAULT NULL,
-                `store_addr` VARCHAR(255) NULL DEFAULT NULL,
-                `delivery_date` VARCHAR(10) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達日",
-                `delivery_time` VARCHAR(2) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達時段",
-                `date_add` DATETIME NOT NULL,
-                `date_upd` DATETIME NOT NULL,                
-                PRIMARY KEY (`id_tc_cart_shipping`),
-                KEY `id_cart_carrier` (`id_cart`,`id_carrier`)
+        $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'simplicity_blog_index` (
+                `id_cms` int(11) UNSIGNED NOT NULL,
+                `id_word` int(11) UNSIGNED NOT NULL,
+                `weight` smallint(4) UNSIGNED NOT NULL DEFAULT \'1\'               
+                PRIMARY KEY (`id_word`, `id_cms`),
+                KEY `id_cms` (`id_cms`,`weight`)
             )
             ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET utf8 COLLATE utf8_general_ci;';
 
-        $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'tc_order_shipping` (
-                `id_tc_order_shipping` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                `id_order` INT(10) UNSIGNED NULL DEFAULT NULL,
-                `order_reference` VARCHAR(16) NULL DEFAULT NULL,
-                `module` VARCHAR(64) NULL DEFAULT NULL,
-                `send_status` VARCHAR(50) NULL DEFAULT NULL COMMENT "ezship: 訂單狀態, ecpay: 物流子類型",
-                `pay_type` VARCHAR(50) NULL DEFAULT NULL COMMENT "ezship: 訂單類別, ecpay: 是否代收貨款",
-                `store_type` VARCHAR(50) NULL DEFAULT NULL,                                 
-                `store_code` VARCHAR(10) NULL DEFAULT NULL,
-                `store_name` VARCHAR(255) NULL DEFAULT NULL,
-                `store_addr` VARCHAR(255) NULL DEFAULT NULL,
-                `rv_name` VARCHAR(255) NULL DEFAULT NULL,
-                `rv_mobile` VARCHAR(32) NULL DEFAULT NULL,
-                `rv_zip` VARCHAR(12) NULL DEFAULT NULL,
-                `rv_address` VARCHAR(255) NULL DEFAULT NULL,
-                `distance` VARCHAR(2) NULL DEFAULT NULL COMMENT "ecpay: 宅配距離",
-                `specification` VARCHAR(4) NULL DEFAULT NULL COMMENT "ecpay: 包裹規格",
-                `delivery_date` VARCHAR(10) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達日",
-                `delivery_time` VARCHAR(2) NULL DEFAULT NULL COMMENT "ecpay: 包裹預定送達時段",
-                `sn_id` VARCHAR(64) NULL DEFAULT NULL COMMENT "ezship: 店到店編號, ecpay: 物流交易編號",
-                `return_status` VARCHAR(50) NULL DEFAULT NULL,
-                `return_message` TEXT NULL DEFAULT NULL,
-                `cvs_shipping_number` VARCHAR(50) NULL DEFAULT NULL COMMENT "ecpay: 寄貨編號",
-                `cvs_validation_number` VARCHAR(50) NULL DEFAULT NULL COMMENT "ecpay: 驗證碼",
-                `home_shipping_number` VARCHAR(50) NULL DEFAULT NULL COMMENT "ecpay: 托運單號",
-                `change_store_status` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT "ecpay: 更新門市通知",                
-                `change_store_message` TEXT NULL DEFAULT NULL COMMENT "ecpay: 更新門市訊息",
-                `date_add` DATETIME NOT NULL,
-                `date_upd` DATETIME NOT NULL,                
-                PRIMARY KEY (`id_tc_order_shipping`),
-                KEY `order_reference` (`order_reference`),
-                KEY `id_order` (`id_order`),
-                KEY `sn_id` (`sn_id`)
+        $sql[] = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . 'simplicity_blog_word` (
+                `id_word` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+                `id_shop` int(11) UNSIGNED NOT NULL DEFAULT \'1\',
+                `id_lang` int(10) UNSIGNED NOT NULL,
+                `word` varchar(15) NOT NULL                               
+                PRIMARY KEY (`id_word`)
             )
             ENGINE=' . _MYSQL_ENGINE_ . ' CHARACTER SET utf8 COLLATE utf8_general_ci;';
 
@@ -165,8 +146,200 @@ class Simplicity_Blog extends Module
     public function getContent()
     {
         // ini_set('max_execution_time', 7200);
-        SearchCms::indexation(true);
-        exit;
+        // SearchCms::indexation(true);
+
+        $html_content = '';
+
+        # Update the settings
+        if (Tools::isSubmit('blog_submit')) {
+            # Validate the POST parameters
+            $this->postValidation();
+
+            if (!empty($this->postError)) {
+                # Display the POST error
+                $html_content .= $this->displayError($this->postError);
+            } else {
+                $html_content .= $this->postProcess();
+            }
+        }
+
+        # Display the setting form
+        $html_content .= $this->displayForm();
+
+        return $html_content;
+
+
+
+    }
+
+    private function postValidation()
+    {
+        $required_fields = array(
+
+        );
+
+        foreach ($required_fields as $field_name => $field_desc) {
+            $tmp_field_value = Tools::getValue($field_name);
+            if (empty($tmp_field_value)) {
+                $this->postError = $field_desc . $this->l(' is required');
+                return;
+            }
+        }
+    }
+
+    private function displayForm()
+    {
+
+        # Set the options
+        $categories[] = [
+            'id' => '-',
+            'name' => '無'
+        ];
+
+        $cms_category = new CMSCategory(1, $this->context->language->id);
+        foreach ($cms_category->recurseCategoryPairs([], false) as $key => $value) {
+            $categories[] = array(
+                'id' => $value['id_cms_category'],
+                'name' => $value['name'],
+            );
+        }
+
+        # Set the configurations for generating a setting form
+        $fields_form[0]['form'] = array(
+            'legend' => array(
+                'title' => '部落格設定',
+            ),
+            'input' => array(
+                array(
+                    'type' => 'select',
+                    'label' => '部落格',
+                    'name' => 'SIMPLICITY_BLOG_ROOT_CATEGORY',
+                    'options' => array(
+                        'query' => $categories,
+                        'id' => 'id',
+                        'name' => 'name'
+                    ),
+                    'desc' => '選擇一個自訂頁面分類做為部落格首頁',
+                ),
+                array(
+                    'type' => 'text',
+                    'lang' => true,
+                    'label' => '部落格名稱',
+                    'name' => 'SIMPLICITY_BLOG_NAME',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => '每頁顯示數量',
+                    'name' => 'SIMPLICITY_BLOG_PER_PAGE',
+                    'class' => 'fixed-width-xl',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => '首頁顯示近期文章數量',
+                    'name' => 'SIMPLICITY_BLOG_LATEST_HOME_DISPLAY',
+                    'class' => 'fixed-width-xl',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => '側欄顯示近期文章數量',
+                    'name' => 'SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY',
+                    'class' => 'fixed-width-xl',
+                ),
+                array(
+                    'type' => 'switch',
+                    'label' => '列表頁顯示圖片',
+                    'name' => 'SIMPLICITY_BLOG_SHOW_IMAGE',
+                    'values' => array(
+                        array(
+                            'value' => true,
+                        ),
+                        array(
+                            'value' => false
+                        )
+                    )
+                ),
+            ),
+            'submit' => array(
+                'name' => 'blog_submit',
+                'title' => $this->l('Save'),
+            ),
+            'buttons' => array(
+                array(
+                    'href' => $this->context->link->getAdminLink('AdminSimplicityTabContent', true),
+                    'title' => '返回內容模組',
+                    'icon' => 'process-icon-back'
+                )
+            )
+        );
+
+        $helper = new HelperForm();
+
+        # Module, token and currentIndex
+        $helper->module = $this;
+        $helper->name_controller = $this->name;
+        $helper->token = Tools::getAdminTokenLite('AdminModules');
+        $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
+
+        # Get the default language
+        $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
+
+        # Language
+        $helper->default_form_language = $default_lang;
+        $helper->allow_employee_form_lang = $default_lang;
+
+        # Load the current settings
+        foreach ($this->blogParams as $param_name) {
+            $helper->fields_value[$param_name] = Configuration::get($param_name);
+        }
+
+        # Multiple languages
+        $languages = Language::getLanguages(false);
+        foreach ($this->blogLangParams as $param_name) {
+            foreach ($languages as $lang) {
+                $helper->fields_value[$param_name][$lang['id_lang']] = Configuration::get($param_name, $lang['id_lang']);
+            }
+        }
+        $helper->tpl_vars = array(
+            'languages' => $this->context->controller->getLanguages(),
+            'id_language' => $this->context->language->id
+        );
+
+        return $helper->generateForm($fields_form);
+    }
+
+    private function postProcess()
+    {
+        if ((int)Tools::getValue('SIMPLICITY_BLOG_PER_PAGE') <= 0) {
+            $_POST['SIMPLICITY_BLOG_PER_PAGE'] = '12';
+        }
+
+        if ((int)Tools::getValue('SIMPLICITY_BLOG_LATEST_HOME_DISPLAY') <= 0) {
+            $_POST['SIMPLICITY_BLOG_LATEST_HOME_DISPLAY'] = '3';
+        }
+
+        if ((int)Tools::getValue('SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY') <= 0) {
+            $_POST['SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY'] = '5';
+        }
+
+        foreach ($this->blogParams as $param_name) {
+            if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
+                return $this->displayError($param_name . ' ' . $this->l('updated failed'));
+            }
+        }
+
+        # Multiple languages
+        $languages = Language::getLanguages(false);
+        foreach ($this->blogLangParams as $param_name) {
+            $values = [];
+            foreach ($languages as $lang) {
+                $values[$lang['id_lang']] = Tools::getValue($param_name . '_'.$lang['id_lang']);
+                if (!Configuration::updateValue($param_name, $values)) {
+                    return $this->displayError($param_name . ' ' . $this->l('updated failed'));
+                }
+            }
+        }
+
+        return $this->displayConfirmation($this->trans('Settings updated.', array(), 'Admin.Notifications.Success'));
     }
 
     public function hookDisplayHome($params)
