@@ -93,6 +93,12 @@ class AdminSimplicityBlogController extends ModuleAdminController
             $_POST['SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY'] = '5';
         }
 
+        // 換分類清空索引
+        $clearIndex = false;
+        if ((int)Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY') != (int)Tools::getValue('SIMPLICITY_BLOG_ROOT_CATEGORY')) {
+            $clearIndex = true;
+        }
+
         foreach ($this->blogParams as $param_name) {
             if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
                 return $this->module->displayError($param_name . ' ' . $this->l('updated failed'));
@@ -112,6 +118,15 @@ class AdminSimplicityBlogController extends ModuleAdminController
         }
 
         $this->module->_clearCache('*');
+
+        if ($clearIndex) {
+            Db::getInstance()->execute('TRUNCATE ' . _DB_PREFIX_ . 'simplicity_blog_index');
+            Db::getInstance()->execute('TRUNCATE ' . _DB_PREFIX_ . 'simplicity_blog_word');
+            Db::getInstance()->execute('UPDATE `' . _DB_PREFIX_ . 'cms` cms' . Shop::addSqlAssociation('cms', 'cms') . '
+				SET cms_shop.`indexed` = 0 WHERE cms.`active` = 1');
+            SearchCms::indexation(Tools::getValue('full'));
+        }
+
         return $this->module->displayConfirmation($this->trans('Settings updated.', array(), 'Admin.Notifications.Success'));
     }
 
@@ -203,32 +218,39 @@ class AdminSimplicityBlogController extends ModuleAdminController
             )
         );
 
-        list($total, $indexed) = Db::getInstance()->getRow('SELECT COUNT(*) as "0", SUM(cms_shop.indexed) as "1" FROM ' . _DB_PREFIX_ . 'cms cms' . Shop::addSqlAssociation('cms', 'cms') . ' WHERE cms.`active` = 1');
-        
-        $this->fields_form[] = array(
-            'form' => array(
-                'legend' => array(
-                    'title' => '內容索引',
-                ),
-                'input' => array(
-                    array(
-                        'type' => 'html',
-                        'name' => '',
-                        'html_content' => '<p>
+        $root_blog_category_id = (int)Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY', 1);
+        $root_blog_category = new CMSCategory((int)$root_blog_category_id, $this->context->language->id);
+        if (Validate::isLoadedObject($root_blog_category)) {
+
+            $ids = implode(',', $root_blog_category->recurseCategoryIds());
+
+            list($total, $indexed) = Db::getInstance()->getRow('SELECT COUNT(*) as "0", SUM(cms_shop.indexed) as "1" FROM ' . _DB_PREFIX_ . 'cms cms' . Shop::addSqlAssociation('cms', 'cms') . ' WHERE cms.`active` = 1 AND cms.`id_cms_category` IN (' . $ids . ')' );
+
+            $this->fields_form[] = array(
+                'form' => array(
+                    'legend' => array(
+                        'title' => '內容索引',
+                    ),
+                    'input' => array(
+                        array(
+                            'type' => 'html',
+                            'name' => '',
+                            'html_content' => '<p>
 					    	已完成內容索引分析，在前台搜尋時會出現符合的結果。<br />
 						    已索引 <strong>' . (int) $indexed . ' / ' . (int) $total . '</strong>.
 					        </p>
-					        <p>索引會花上數分鐘。若在完成前就停止，您可以點擊「建立未索引內容」繼續。</p>
+					        <p>索引可能會花上數分鐘。若在完成前就停止，您可以點擊「建立未索引內容」繼續。</p>
 					        <a href="' . Context::getContext()->link->getAdminLink('AdminSimplicityBlog', true) . '&action=searchCron&ajax=1&redirect=1' . (Shop::getContext() == Shop::CONTEXT_SHOP ? '&id_shop=' . (int) Context::getContext()->shop->id : '') . '" class="btn-link">
 						    <i class="icon-external-link-sign"></i>建立未索引內容
 					        </a><br />
 					        <a href="' . Context::getContext()->link->getAdminLink('AdminSimplicityBlog', true) . '&action=searchCron&ajax=1&full=1&redirect=1' . (Shop::getContext() == Shop::CONTEXT_SHOP ? '&id_shop=' . (int) Context::getContext()->shop->id : '') . '" class="btn-link">
 						    <i class="icon-external-link-sign"></i>重建全部內容索引
 					        </a><br /><br />'
-                    )
-                ),
-            )
-        );
+                        )
+                    ),
+                )
+            );
+        }
 
         $helper = new HelperForm();
 

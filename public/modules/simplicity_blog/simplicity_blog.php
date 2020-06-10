@@ -209,11 +209,6 @@ class Simplicity_Blog extends Module
             return;
         }
 
-        // 文章搜尋
-        $this->smarty->assign([
-            'search_controller_url' => $this->context->link->getBlogSearch(),
-        ]);
-
         // 文章分類
         if (Validate::isLoadedObject($root_blog_category) && $root_blog_category->active) {
             $categories = $this->getCategories($root_blog_category);

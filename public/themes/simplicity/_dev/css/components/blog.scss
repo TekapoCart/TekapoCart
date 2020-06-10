@@ -53,8 +53,8 @@
 
   .blog-preview {
     padding: 30px;
-    h1 {
-      font-size: 20px;
+    h3 {
+      font-size: $font-size-h2;
       line-height: 30px;
       margin: 0;
       // min-height: 72px;
@@ -116,7 +116,7 @@
   }
 }
 
-.blog-sidebar, .blog-top {
+.blog-sidebar {
   width: 100%;
   /*max-width: 300px;*/
 
@@ -134,7 +134,7 @@
     border: 1px solid $category-border-color;
 
     h2 {
-      font-size: 21px;
+      font-size: $font-size-h2;
       line-height: 25px;
     }
     .block-content {
@@ -210,7 +210,7 @@
 
 .blog-page {
   h1 {
-    font-size: 36px;
+    font-size: $font-size-h1;
     color: $gray-darker;
     line-height: 36px;
   }
@@ -218,7 +218,7 @@
     font-size: 14px;
     color: $gray;
     padding-top: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
   }
   .blog-content {
     font-size: 14px;

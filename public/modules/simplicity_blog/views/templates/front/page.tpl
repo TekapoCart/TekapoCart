@@ -8,27 +8,25 @@
     <section id="content" class="page-content page-cms page-cms-{$cms.id}">
 
         {block name='cms_content'}
-
-        <div class="blog-page">
-            <h1 itemprop="headline">{$cms.meta_title} </h1>
-            <div class="blog-date">{dateFormat date=$cms.date_add full=0}</div>
-            <div class="blog-content">
-                {$cms.content nofilter}
-            </div>
-
-            <meta itemprop="datePublished" content="{dateFormat date=$cms.date_add full=1}">
-            <meta itemprop="author" content="{$shop.name}">
-            {if strlen($cms.image) > 0}
-            <meta itemprop="image" content="{$cms.image}">
-            {/if}
-            <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-                <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
-                    <meta itemprop="url" content="{$shop.logo}">
+            <div class="blog-page">
+                <h1 itemprop="headline">{$cms.meta_title} </h1>
+                <div class="blog-date">{dateFormat date=$cms.date_add full=0}</div>
+                <div class="blog-content">
+                    {$cms.content nofilter}
                 </div>
-                <meta itemprop="name" content="{$shop.name}">
-            </div>
-        </div>
 
+                <meta itemprop="datePublished" content="{dateFormat date=$cms.date_add full=1}">
+                <meta itemprop="author" content="{$shop.name}">
+                {if strlen($cms.image) > 0}
+                    <meta itemprop="image" content="{$cms.image}">
+                {/if}
+                <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                        <meta itemprop="url" content="{$shop.logo}">
+                    </div>
+                    <meta itemprop="name" content="{$shop.name}">
+                </div>
+            </div>
         {/block}
 
         {block name='hook_cms_dispute_information'}

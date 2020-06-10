@@ -132,10 +132,16 @@ class SearchCMS
     {
         $ids = null;
         if (!$id_cms) {
+
+            $root_blog_category_id = (int)Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY', 1);
+            $root_blog_category = new CMSCategory((int)$root_blog_category_id);
+            $bcids = implode(',', $root_blog_category->recurseCategoryIds());
+
             // Limit cms for each step but be sure that each attribute is taken into account
             $sql = 'SELECT cms.id_cms FROM ' . _DB_PREFIX_ . 'cms cms
 				' . Shop::addSqlAssociation('cms', 'cms', true, null, true) . '
 				WHERE cms_shop.`indexed` = 0
+				AND cms.`id_cms_category` IN ('.$bcids.')
 				AND cms.`active` = 1
 				ORDER BY cms_shop.`id_cms` ASC
 				LIMIT ' . (int) $limit;
@@ -231,7 +237,11 @@ class SearchCMS
         } elseif ($full) {
             $db->execute('TRUNCATE ' . _DB_PREFIX_ . 'simplicity_blog_index');
             $db->execute('TRUNCATE ' . _DB_PREFIX_ . 'simplicity_blog_word');
-            ObjectModel::updateMultishopTable('CMS', array('indexed' => 0));
+            $db->execute('UPDATE `' . _DB_PREFIX_ . 'cms` cms
+				' . Shop::addSqlAssociation('cms', 'cms') . '
+				SET cms_shop.`indexed` = 0
+				WHERE cms.`active` = 1
+				');
         } else {
             $db->execute('DELETE si FROM `' . _DB_PREFIX_ . 'simplicity_blog_index` si
 				INNER JOIN `' . _DB_PREFIX_ . 'cms` cms ON (cms.id_cms = si.id_cms)

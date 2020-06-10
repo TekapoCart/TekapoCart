@@ -172,6 +172,10 @@
 @include media-breakpoint-down(sm) { /* 768px 以下 */
   #wrapper {
     box-shadow: none;
+    .breadcrumb {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
   }
   #checkout-cart-summary {
     float: none;

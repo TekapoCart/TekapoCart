@@ -6,9 +6,9 @@
             </a>
         {/if}
         <div class="blog-preview">
-            <h1>
+            <h3>
                 <a href="{$cms.link}">{$cms.meta_title}</a>
-            </h1>
+            </h3>
             <div class="blog-date">{dateFormat date=$cms.date_add full=0}</div>
             <div class="blog-meta-description">
                 {$cms.meta_description|truncate:70:'...'}
