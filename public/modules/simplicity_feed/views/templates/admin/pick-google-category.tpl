@@ -70,8 +70,7 @@
                 <tr>
                     {if $category['id'] > 1}
                         <td style="width: 30%;">
-                            {$category['name']}
-                            <br>
+                            {$category['name']}<br>
                             <small>
                                 {foreach $category['parents'] as $parent name=path}
                                     {$parent.name} {if not $smarty.foreach.path.last} > {/if}

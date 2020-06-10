@@ -112,6 +112,9 @@ class CmsPageDefinitionFactory extends AbstractGridDefinitionFactory
      */
     protected function getName()
     {
+        // suzy: 2020-06-10 修改文字
+        return '自訂頁面';
+
         $cmsCategoryName = $this->queryBus->handle(new GetCmsPageCategoryNameForListing());
 
         return $this->trans(

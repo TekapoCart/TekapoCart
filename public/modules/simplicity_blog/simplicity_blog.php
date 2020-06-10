@@ -81,8 +81,11 @@ class Simplicity_Blog extends Module
 
     public function hookModuleRoutes()
     {
-        $listing_prefix = 'blogs';
-        $page_prefix = 'blog';
+        $home_meta = Meta::getMetaByPage('module-simplicity_blog-home', $this->context->language->id);
+        $page_meta = Meta::getMetaByPage('module-simplicity_blog-page', $this->context->language->id);
+
+        $listing_prefix = !empty($home_meta['url_rewrite']) ? $home_meta['url_rewrite'] : 'blogs';
+        $page_prefix = !empty($page_meta['url_rewrite']) ? $home_meta['url_rewrite'] : 'blog';
 
         return array(
             // 部落格 首頁
@@ -134,7 +137,6 @@ class Simplicity_Blog extends Module
 
         );
     }
-
 
     public function _clearCache($template, $cache_id = null, $compile_id = null)
     {

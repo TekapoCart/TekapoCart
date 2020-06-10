@@ -183,7 +183,7 @@ class Simplicity_Feed extends Module
         # Set the configurations for generating a setting form
         $fields_form[0]['form'] = array(
             'legend' => array(
-                'title' => '設定匯出規則',
+                'title' => '匯出規則',
                 'icon' => 'icon-cogs'
             ),
             'input' => array(

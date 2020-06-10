@@ -68,6 +68,11 @@ UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_RE
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_UPDATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1071;
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_DELETE' WHERE `ps_authorization_role`.`id_authorization_role` = 1072;
 
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_CREATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1065;
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_READ' WHERE `ps_authorization_role`.`id_authorization_role` = 1066;
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_UPDATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1067;
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_DELETE' WHERE `ps_authorization_role`.`id_authorization_role` = 1068;
+
 UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 1;
 UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 2;
 UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 3;
@@ -78,6 +83,33 @@ UPDATE `ps_tab` SET `position` = '4' WHERE `ps_tab`.`id_tab` = 150;
 UPDATE `ps_tab` SET `module` = 'simplicity_blog' WHERE `ps_tab`.`id_tab` = 150;
 UPDATE `ps_tab` SET `class_name` = 'AdminSimplicityBlog' WHERE `ps_tab`.`id_tab` = 150;
 UPDATE `ps_tab` SET `icon` = 'edit' WHERE `ps_tab`.`id_tab` = 150;
+
+INSERT IGNORE INTO `ps_authorization_role` (`id_authorization_role`, `slug`) VALUES
+(1073, 'ROLE_MOD_MODULE_SIMPLICITY_BLOG_CREATE'),
+(1074, 'ROLE_MOD_MODULE_SIMPLICITY_BLOG_READ'),
+(1075, 'ROLE_MOD_MODULE_SIMPLICITY_BLOG_UPDATE'),
+(1076, 'ROLE_MOD_MODULE_SIMPLICITY_BLOG_DELETE');
+
+INSERT IGNORE INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES
+('1', '1073'), ('1', '1074'), ('1', '1075'), ('1', '1076');
+
+INSERT IGNORE INTO `ps_authorization_role` (`id_authorization_role`, `slug`) VALUES
+(1077, 'ROLE_MOD_TAB_ADMINSIMPLICITYFEED_CREATE'),
+(1078, 'ROLE_MOD_TAB_ADMINSIMPLICITYFEED_DELETE'),
+(1079, 'ROLE_MOD_TAB_ADMINSIMPLICITYFEED_READ'),
+(1080, 'ROLE_MOD_TAB_ADMINSIMPLICITYFEED_UPDATE');
+
+INSERT IGNORE INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES
+('1', '1077'), ('1', '1078'), ('1', '1079'), ('1', '1080');
+
+INSERT INTO `ps_tab` (`id_tab`, `id_parent`, `position`, `module`, `class_name`, `active`, `hide_host_mode`, `icon`) VALUES (151, '-1', '0', 'simplicity_feed', 'AdminSimplicityFeed', '1', '0', 'edit');
+INSERT INTO `ps_tab_lang` (`id_tab`, `id_lang`, `name`) VALUES ('151', '1', '產品目錄'), ('151', '2', '產品目錄'), ('151', '3', '產品目錄'), ('151', '4', '產品目錄');
+
+--
+UPDATE `ps_cms_category_lang` SET `name` = '所有自訂頁面', `link_rewrite` = 'all' WHERE `ps_cms_category_lang`.`id_cms_category` = 1 AND `ps_cms_category_lang`.`id_lang` = 1;
+UPDATE `ps_cms_category_lang` SET `name` = 'All Pages', `link_rewrite` = 'all' WHERE `ps_cms_category_lang`.`id_cms_category` = 1 AND `ps_cms_category_lang`.`id_lang` = 2;
+UPDATE `ps_cms_category_lang` SET `name` = 'All Pages', `link_rewrite` = 'all' WHERE `ps_cms_category_lang`.`id_cms_category` = 1 AND `ps_cms_category_lang`.`id_lang` = 3;
+UPDATE `ps_cms_category_lang` SET `name` = 'All Pages', `link_rewrite` = 'all' WHERE `ps_cms_category_lang`.`id_cms_category` = 1 AND `ps_cms_category_lang`.`id_lang` = 4;
 
 -- CMS SCHEMA 變動
 ALTER TABLE `ps_cms` ADD `date_add` DATETIME NULL DEFAULT NULL AFTER `indexation`, ADD `date_upd` DATETIME NULL DEFAULT NULL AFTER `date_add`;

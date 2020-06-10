@@ -5,8 +5,6 @@ class AdminSimplicityFeedController extends ModuleAdminController
 
     public $module;
 
-    protected $image_type = 'home_default';
-
     public function __construct()
     {
         parent::__construct();
@@ -16,6 +14,20 @@ class AdminSimplicityFeedController extends ModuleAdminController
             Tools::redirectAdmin($this->context->link->getAdminLink('AdminHome'));
         }
 
+    }
+
+    public function init()
+    {
+        parent::init();
+    }
+
+    public function initContent()
+    {
+        parent::initContent();
+
+        if (Tools::getValue('ajax')) {
+            $this->ajaxProcess();
+        }
     }
 
     public function ajaxProcess()
@@ -81,13 +93,6 @@ class AdminSimplicityFeedController extends ModuleAdminController
 
             $googleCategory = new GoogleCategory($id_googlecategory);
             $googleCategory->delete();
-        }
-    }
-
-    public function initContent()
-    {
-        if (Tools::getValue('ajax')) {
-            $this->ajaxProcess();
         }
     }
 

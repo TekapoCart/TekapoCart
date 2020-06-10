@@ -202,8 +202,11 @@ class CMSCategoryCore extends ObjectModel
     {
         $id_lang = Context::getContext()->language->id;
 
-        if (!is_array($pairs)) {
-            $pairs = [];
+        if (!is_array($pairs) || count($pairs) === 0) {
+            $pairs[$this->id_cms_category] = [
+                'id_cms_category' => $this->id_cms_category,
+                'name' => $this->name,
+            ];
         }
 
         $subcats = $this->getSubCategories($id_lang, $active);
@@ -211,8 +214,8 @@ class CMSCategoryCore extends ObjectModel
             foreach ($subcats as &$subcat) {
                 $categ = new CMSCategory($subcat['id_cms_category'], $id_lang);
                 $pairs[$categ->id_cms_category] = [
-                    'id_cms_category' => $subcat['id_cms_category'],
-                    'name' => str_repeat('-', ($categ->level_depth - 1)) . ' ' . $categ->name,
+                    'id_cms_category' => $categ->id_cms_category,
+                    'name' => str_repeat(' · ', ($categ->level_depth - 1)) . ' ' . $categ->name,
                 ];
                 $pairs = $categ->recurseCategoryPairs($pairs, $active);
             }

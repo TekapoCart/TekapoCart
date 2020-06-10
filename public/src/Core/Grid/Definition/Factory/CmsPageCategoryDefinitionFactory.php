@@ -102,7 +102,9 @@ final class CmsPageCategoryDefinitionFactory extends AbstractGridDefinitionFacto
      */
     protected function getName()
     {
-        return $this->trans('Categories', [], 'Admin.Navigation.Menu');
+        // suzy: 2020-06-10 修改文字
+        // return $this->trans('Categories', [], 'Admin.Navigation.Menu');
+        return '分類';
     }
 
     /**

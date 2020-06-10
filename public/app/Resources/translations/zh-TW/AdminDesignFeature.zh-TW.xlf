@@ -224,7 +224,7 @@ File: controllers/admin/AdminCmsCategoriesController.php:246</note>
     <body>
       <trans-unit id="1f6162e1430a8d5020bf4c20dc02499f" approved="yes">
         <source>Pages in category "%name%"</source>
-        <target xml:lang="zh-TW">分類 "%name%" 的頁面</target>
+        <target xml:lang="zh-TW">分類 "%name%" 的自訂頁面</target>
         <note>Context:
 File: controllers/admin/AdminCmsController.php:75</note>
       </trans-unit>

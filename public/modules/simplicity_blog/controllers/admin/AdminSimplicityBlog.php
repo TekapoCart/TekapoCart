@@ -52,7 +52,6 @@ class AdminSimplicityBlogController extends ModuleAdminController
         # Display the setting form
         $this->content .= $this->_getForm();
         $this->context->smarty->assign('content', $this->content);
-
     }
 
     public function initPageHeaderToolbar()
@@ -68,9 +67,7 @@ class AdminSimplicityBlogController extends ModuleAdminController
 
     private function postValidation()
     {
-        $required_fields = array(
-
-        );
+        $required_fields = [];
 
         foreach ($required_fields as $field_name => $field_desc) {
             $tmp_field_value = Tools::getValue($field_name);
@@ -278,7 +275,7 @@ class AdminSimplicityBlogController extends ModuleAdminController
         // Considering the indexing task can be really long, we ask the PHP process to not stop before 2 hours.
         ini_set('max_execution_time', 7200);
         SearchCms::indexation(Tools::getValue('full'));
-        
+
         if (Tools::getValue('redirect')) {
             Tools::redirectAdmin($_SERVER['HTTP_REFERER'] . '&conf=4');
         }
