@@ -1,9 +1,9 @@
-<div class="article__newposts">
+<div class="blog-latest">
     <h2>{l s='Latest' mod='simplicity_blog'}</h2>
     
     {foreach from=$latest_cms item="cms" name=latest_cms}
     <a href="{$cms.link}">
-        <div class="article__newpost"{if $smarty.foreach.latest_cms.iteration == 1} style="border: none;"{/if}>
+        <div class="item"{if $smarty.foreach.latest_cms.iteration == 1} style="border: none;"{/if}>
             <div class="title">{$cms.meta_title}</div>
             <div class="date">{dateFormat date=$cms.date_add full=0}</div>
         </div>

@@ -162,18 +162,6 @@ class AdminSimplicityBlogController extends ModuleAdminController
                         'class' => 'fixed-width-xl',
                     ),
                     array(
-                        'type' => 'text',
-                        'label' => '首頁顯示近期文章數量',
-                        'name' => 'SIMPLICITY_BLOG_LATEST_HOME_DISPLAY',
-                        'class' => 'fixed-width-xl',
-                    ),
-                    array(
-                        'type' => 'text',
-                        'label' => '側欄顯示近期文章數量',
-                        'name' => 'SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY',
-                        'class' => 'fixed-width-xl',
-                    ),
-                    array(
                         'type' => 'switch',
                         'label' => '列表頁顯示圖片',
                         'name' => 'SIMPLICITY_BLOG_SHOW_IMAGE',
@@ -186,6 +174,19 @@ class AdminSimplicityBlogController extends ModuleAdminController
                             )
                         )
                     ),
+                    array(
+                        'type' => 'text',
+                        'label' => '側欄顯示近期文章數量',
+                        'name' => 'SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY',
+                        'class' => 'fixed-width-xl',
+                    ),
+                    array(
+                        'type' => 'text',
+                        'label' => '商店首頁顯示近期文章數量',
+                        'name' => 'SIMPLICITY_BLOG_LATEST_HOME_DISPLAY',
+                        'class' => 'fixed-width-xl',
+                    ),
+
                 ),
                 'submit' => array(
                     'name' => 'blog_submit',

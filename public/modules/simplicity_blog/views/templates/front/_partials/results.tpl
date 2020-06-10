@@ -1,4 +1,4 @@
-<div class="blog__articles">
+<div class="blog-list">
 
     {foreach from=$listing.cms item="cms"}
         {block name='cms_miniature'}

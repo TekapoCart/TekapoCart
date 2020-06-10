@@ -1,4 +1,4 @@
-<div class="article__newposts">
+<div class="blog-search">
     <h2>{l s='Blog Search' mod='simplicity_blog'}</h2>
 
     <div style="padding: 20px 0;">

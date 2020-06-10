@@ -1,5 +1,6 @@
-<div class="article__newposts">
+<div class="blog-categories">
     <h2>{l s='Categories' mod='simplicity_blog'}</h2>
+
     {function name="categories" nodes=[] depth=0}
         {strip}
             {if $nodes|count}
