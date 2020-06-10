@@ -1,3 +1,18 @@
+.featured-blogs {
+  .heading {
+    h3 {
+      font-size: $font-size-h1;
+      display:inline-block;
+      margin-bottom: 15px;
+    }
+    a {
+      margin-top: 5px;
+      float: right;
+    }
+  }
+  margin-bottom: 15px;
+}
+
 .blog-list {
   display: flex;
   flex-wrap: wrap;
@@ -73,18 +88,19 @@
   .blog-read-more {
     padding: 10px;
     margin: auto auto 40px auto;
-    // width: 80%;
     width: 80%;
-    color: #ffffff;
-
-    // background: #313131;
-    // border-radius: 30px;
-
-    background: $gray;
     text-align: center;
-    transition: all 0.3s ease-in;
+    // transition: all 0.3s ease-in;
+
+    // color: #fff;
+    // background: $gray;
+    color: $gray-darker;
+    border: 1px solid $gray;
+
     &:hover {
+      color: #fff;
       background: $brand-primary;
+      border: 1px solid $brand-primary;
     }
   }
 }
@@ -100,26 +116,40 @@
   }
 }
 
-.blog-sidebar {
-  // margin-top: 50px;
+.blog-sidebar, .blog-top {
   width: 100%;
-  max-width: 300px;
+  /*max-width: 300px;*/
 
   .blog-search, .blog-categories, .blog-latest, .blog-tags {
     width: 100%;
     float: right !important;
-    border: 1px solid #BABABA;
-    background: #FFFFFF;
-    /* box-shadow: 2px 4px 15px 0 rgba(0,0,0,0.03); */
-    padding: 40px;
-    padding: 20px;
-    // margin-bottom: 40px;
+
+    background: #fff;
     margin-bottom: 20px;
     font-size: 14px;
+    padding: 20px;
+
+    // 有背景色時可不加邊框
+    // box-shadow: 2px 4px 15px 0 rgba(0,0,0,0.03);
+    border: 1px solid $category-border-color;
 
     h2 {
       font-size: 21px;
       line-height: 25px;
+    }
+    .block-content {
+      padding: 20px 0;
+    }
+  }
+
+  .blog-search {
+    .form-control {
+      width: 65%;
+      display: inline-block;
+      border-color: $category-border-color;
+    }
+    .form-control-submit {
+      vertical-align: baseline;
     }
   }
 
@@ -181,12 +211,12 @@
 .blog-page {
   h1 {
     font-size: 36px;
-    color: #323232;
+    color: $gray-darker;
     line-height: 36px;
   }
   .blog-date {
     font-size: 14px;
-    color: #ABABAB;
+    color: $gray;
     padding-top: 20px;
     margin-bottom: 60px;
   }
@@ -208,7 +238,6 @@
       margin-left: 0;
     }
     .blog-miniature:nth-child(2n) {
-      // margin-right: 2.5%;
       margin-left: 2.5%;
     }
   }
@@ -227,5 +256,6 @@
 }
 
 body {
+  // 有背景色時更好看
   // background: #F7F7F7;
 }

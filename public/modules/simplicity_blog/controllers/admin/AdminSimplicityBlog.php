@@ -22,6 +22,7 @@ class AdminSimplicityBlogController extends ModuleAdminController
 
         $this->blogLangParams = [
             'SIMPLICITY_BLOG_NAME',
+            'SIMPLICITY_BLOG_HOME_NAME',
         ];
     }
 
@@ -84,11 +85,11 @@ class AdminSimplicityBlogController extends ModuleAdminController
             $_POST['SIMPLICITY_BLOG_PER_PAGE'] = '12';
         }
 
-        if ((int)Tools::getValue('SIMPLICITY_BLOG_LATEST_HOME_DISPLAY') <= 0) {
+        if ((int)Tools::getValue('SIMPLICITY_BLOG_LATEST_HOME_DISPLAY') < 0) {
             $_POST['SIMPLICITY_BLOG_LATEST_HOME_DISPLAY'] = '3';
         }
 
-        if ((int)Tools::getValue('SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY') <= 0) {
+        if ((int)Tools::getValue('SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY') < 0) {
             $_POST['SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY'] = '5';
         }
 
@@ -140,7 +141,7 @@ class AdminSimplicityBlogController extends ModuleAdminController
                 'input' => array(
                     array(
                         'type' => 'select',
-                        'label' => '部落格',
+                        'label' => '分類',
                         'name' => 'SIMPLICITY_BLOG_ROOT_CATEGORY',
                         'options' => array(
                             'query' => $categories,
@@ -152,7 +153,7 @@ class AdminSimplicityBlogController extends ModuleAdminController
                     array(
                         'type' => 'text',
                         'lang' => true,
-                        'label' => '部落格名稱',
+                        'label' => '部落格標題',
                         'name' => 'SIMPLICITY_BLOG_NAME',
                     ),
                     array(
@@ -182,9 +183,16 @@ class AdminSimplicityBlogController extends ModuleAdminController
                     ),
                     array(
                         'type' => 'text',
-                        'label' => '商店首頁顯示近期文章數量',
+                        'label' => '首頁顯示近期文章數量',
                         'name' => 'SIMPLICITY_BLOG_LATEST_HOME_DISPLAY',
                         'class' => 'fixed-width-xl',
+                    ),
+                    array(
+                        'type' => 'text',
+                        'lang' => true,
+                        'label' => '首頁標題',
+                        'name' => 'SIMPLICITY_BLOG_HOME_NAME',
+                        'desc' => '如欲隱藏標題，可將欄位留空。',
                     ),
 
                 ),

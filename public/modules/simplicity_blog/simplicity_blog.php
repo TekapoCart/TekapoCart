@@ -179,14 +179,19 @@ class Simplicity_Blog extends Module
                 return;
             }
 
+            if ((int)Configuration::get('SIMPLICITY_BLOG_LATEST_HOME_DISPLAY') <= 0) {
+                return;
+            }
+
             // latest
             $this->smarty->assign([
-                'latest_cms' => $this->getLatest($root_blog_category),
+                'label' => Configuration::get('SIMPLICITY_BLOG_HOME_NAME', $this->context->language->id),
+                'blog_home_url' => $this->context->link->getBlogHome($this->context->language->id),
+                'latest_cms' => $this->getLatest($root_blog_category, (int)Configuration::get('SIMPLICITY_BLOG_LATEST_HOME_DISPLAY')),
                 'show_image' => (int)Configuration::get('SIMPLICITY_BLOG_SHOW_IMAGE'),
             ]);
         }
 
-        // return $this->display(__FILE__, 'views/templates/hook/home.tpl');
         return $this->fetch($this->homeTemplateFile, $this->getCacheId('simplicity_blog'));
     }
 
@@ -204,17 +209,12 @@ class Simplicity_Blog extends Module
             return;
         }
 
-        // search
+        // 文章搜尋
         $this->smarty->assign([
             'search_controller_url' => $this->context->link->getBlogSearch(),
         ]);
 
-        // latest
-        $this->smarty->assign([
-            'latest_cms' => $this->getLatest($root_blog_category),
-        ]);
-
-        // category
+        // 文章分類
         if (Validate::isLoadedObject($root_blog_category) && $root_blog_category->active) {
             $categories = $this->getCategories($root_blog_category);
             $this->smarty->assign([
@@ -224,16 +224,18 @@ class Simplicity_Blog extends Module
             ]);
         }
 
+        // 近期文章
+        if ((int)Configuration::get('SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY') > 0) {
+            $this->smarty->assign([
+                'latest_cms' => $this->getLatest($root_blog_category, (int)Configuration::get('SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY')),
+            ]);
+        }
+
         return $this->display(__FILE__, 'views/templates/hook/column.tpl');
     }
 
-    private function getLatest($root_blog_category)
+    private function getLatest($root_blog_category, $display = 12)
     {
-        $blog_latest_home_display = (int)Configuration::get('SIMPLICITY_BLOG_LATEST_HOME_DISPLAY');
-        $blog_latest_column_display = (int)Configuration::get('SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY');
-
-        $display = $blog_latest_home_display > $blog_latest_column_display ? $blog_latest_home_display : $blog_latest_column_display;
-
         $context = new CMSSearchContext($this->context);
         $query = new CMSSearchQuery();
         $query

@@ -1,6 +1,6 @@
+{if isset($latest_cms) && count($latest_cms) > 0 }
 <div class="blog-latest">
     <h2>{l s='Latest' mod='simplicity_blog'}</h2>
-    
     {foreach from=$latest_cms item="cms" name=latest_cms}
     <a href="{$cms.link}">
         <div class="item"{if $smarty.foreach.latest_cms.iteration == 1} style="border: none;"{/if}>
@@ -9,5 +9,5 @@
         </div>
     </a>
     {/foreach}
-
 </div>
+{/if}

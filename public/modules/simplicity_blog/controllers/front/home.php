@@ -112,7 +112,7 @@ class Simplicity_BlogHomeModuleFrontController extends CMSListingFrontController
         $breadcrumb = parent::getBreadcrumbLinks();
 
         $breadcrumb['links'][] = array(
-            'title' => Configuration::get('PS_BLOCK_BESTSELLERS_LABEL', $this->context->language->id),
+            'title' => Configuration::get('SIMPLICITY_BLOG_NAME', $this->context->language->id),
             'url' => $this->context->link->getBlogHome($this->context->language->id),
         );
 
