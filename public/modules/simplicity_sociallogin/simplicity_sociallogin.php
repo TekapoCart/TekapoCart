@@ -2,6 +2,9 @@
 
 class Simplicity_Sociallogin extends Module
 {
+
+    private $configParams = [];
+
     public function __construct()
     {
         $this->name = 'simplicity_sociallogin';
@@ -13,8 +16,21 @@ class Simplicity_Sociallogin extends Module
 
         parent::__construct();
 
-        $this->displayName = 'Social Login 社群登入';
-        $this->description = '支援使用 Google、Facebook 會員登入。';
+        $this->displayName = '基本串接＆應用';
+        $this->description = 'Google / Facebook 社群帳號登入、Facebook 留言框、reCAPTCHA 我不是機器人。';
+
+        $this->configParams = [
+            'SIMPLICITY_G_APP_ID',
+            'SIMPLICITY_G_APP_SECRET',
+            'SIMPLICITY_FB_APP_ID',
+            'SIMPLICITY_FB_APP_SECRET',
+
+            'TC_RECAPTCHA_ENABLE',
+            'TC_RECAPTCHA_ADMIN_ENABLE',
+            'TC_RECAPTCHA_KEY',
+            'TC_RECAPTCHA_SECRET',
+            'TC_RECAPTCHA_MIN_SCORE',
+        ];
     }
 
     public function install()
@@ -287,90 +303,185 @@ class Simplicity_Sociallogin extends Module
 
     /////////////////////////////////////////////////////////////////////////////////////////
 
-
     public function getContent()
     {
-        if (Tools::isSubmit('submitModule')) {
+        $html_content = '';
 
-            Configuration::updateValue('SIMPLICITY_G_APP_ID', Tools::getValue('g_app_id', ''));
-            Configuration::updateValue('SIMPLICITY_G_APP_SECRET', Tools::getValue('g_app_secret', ''));
+        # Update the settings
+        if (Tools::isSubmit('config_submit')) {
+            # Validate the POST parameters
+            $this->postValidation();
 
-            Configuration::updateValue('SIMPLICITY_FB_APP_ID', Tools::getValue('app_id', ''));
-            Configuration::updateValue('SIMPLICITY_FB_APP_SECRET', Tools::getValue('app_secret', ''));
-
-            return $this->displayConfirmation($this->trans('The settings have been updated.', array(), 'Admin.Notifications.Success'))
-                . $this->renderForm();
+            if (!empty($this->postError)) {
+                # Display the POST error
+                $html_content .= $this->displayError($this->postError);
+            } else {
+                $html_content .= $this->postProcess();
+            }
         }
 
-        return $this->renderForm();
+        # Display the setting form
+        $html_content .= $this->displayForm();
+
+        return $html_content;
     }
 
-    public function renderForm()
+    private function postValidation()
     {
-        $fields_form = array(
+        $required_fields = array(
+        );
+
+        foreach ($required_fields as $field_name => $field_desc) {
+            $tmp_field_value = Tools::getValue($field_name);
+            if (empty($tmp_field_value)) {
+                $this->postError = $field_desc . $this->l(' is required');
+                return;
+            }
+        }
+    }
+
+    private function displayForm()
+    {
+        # Set the configurations for generating a setting form
+        $fields_form[]['form'] = array(
+            'legend' => array(
+                'title' => '社群登入設定',
+            ),
+            'input' => array(
+                array(
+                    'type' => 'text',
+                    'label' => 'Google 用戶端 ID',
+                    'name' => 'SIMPLICITY_G_APP_ID',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => 'Google 用戶端密鑰',
+                    'name' => 'SIMPLICITY_G_APP_SECRET',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => 'Facebook APP ID',
+                    'name' => 'SIMPLICITY_FB_APP_ID',
+                ),
+                array(
+                    'type' => 'text',
+                    'label' => 'Facebook APP Secret',
+                    'name' => 'SIMPLICITY_FB_APP_SECRET',
+                ),
+            ),
+            'submit' => array(
+                'name' => 'config_submit',
+                'title' => $this->l('Save'),
+            ),
+            'buttons' => array(
+                array(
+                    'href' => $this->context->link->getAdminLink('AdminSimplicityTabMarTech', true),
+                    'title' => '返回串接＆應用',
+                    'icon' => 'process-icon-back'
+                )
+            )
+        );
+
+        $fields_form[] = array(
             'form' => array(
                 'legend' => array(
-                    'title' => $this->trans('Settings', array(), 'Admin.Global'),
-                    'icon' => 'icon-cogs'
+                    'title' => 'reCAPTCHA 設定',
                 ),
                 'input' => array(
                     array(
-                        'type' => 'text',
-                        'label' => 'Google 用戶端 ID',
-                        'name' => 'g_app_id',
-                        'desc' => '',
+                        'type' => 'switch',
+                        'label' => '聯絡我們啟用 reCAPTCHA',
+                        'name' => 'TC_RECAPTCHA_ENABLE',
+                        'is_bool' => true,
+                        'values' => array(
+                            array(
+                                'id' => 'active_on',
+                                'value' => 1,
+                                'label' => $this->l('Enabled'),
+                            ),
+                            array(
+                                'id' => 'active_off',
+                                'value' => 0,
+                                'label' => $this->l('Disabled'),
+                            ),
+                        ),
+                    ),
+                    array(
+                        'type' => 'switch',
+                        'label' => '後台登入啟用 reCAPTCHA',
+                        'name' => 'TC_RECAPTCHA_ENABLE',
+                        'is_bool' => true,
+                        'values' => array(
+                            array(
+                                'id' => 'active_on',
+                                'value' => 1,
+                                'label' => $this->l('Enabled'),
+                            ),
+                            array(
+                                'id' => 'active_off',
+                                'value' => 0,
+                                'label' => $this->l('Disabled'),
+                            ),
+                        ),
                     ),
                     array(
                         'type' => 'text',
-                        'label' => 'Google 用戶端密鑰',
-                        'name' => 'g_app_secret',
-                        'desc' => '',
+                        'label' => 'reCAPTCHA 網站金鑰',
+                        'name' => 'TC_RECAPTCHA_KEY',
                     ),
                     array(
                         'type' => 'text',
-                        'label' => 'Facebook APP ID',
-                        'name' => 'app_id',
-                        'desc' => '',
+                        'label' => 'reCAPTCHA 密鑰',
+                        'name' => 'TC_RECAPTCHA_SECRET',
                     ),
                     array(
                         'type' => 'text',
-                        'label' => 'Facebook APP Secret',
-                        'name' => 'app_secret',
-                        'desc' => '',
+                        'label' => 'reCAPTCHA 分數',
+                        'name' => 'TC_RECAPTCHA_MIN_SCORE',
+                        'desc' => '0.0-1.0 之間的分數，預設值 0.5',
                     ),
                 ),
                 'submit' => array(
-                    'title' => $this->trans('Save', array(), 'Admin.Global'),
+                    'name' => 'config_submit',
+                    'title' => $this->l('Save'),
                 ),
-                'buttons' => array(
-                    array(
-                        'href' => $this->context->link->getAdminLink('AdminSimplicityTabMarTech', true),
-                        'title' => '返回串接＆應用',
-                        'icon' => 'process-icon-back'
-                    )
-                )
-            ),
+            )
         );
 
         $helper = new HelperForm();
-        $helper->show_toolbar = false;
-        $helper->table =  $this->table;
-        $helper->submit_action = 'submitModule';
-        $helper->tpl_vars = array(
-            'fields_value' => $this->getConfigFieldsValues(),
-        );
 
-        return $helper->generateForm(array($fields_form));
+        # Module, token and currentIndex
+        $helper->module = $this;
+        $helper->name_controller = $this->name;
+        $helper->token = Tools::getAdminTokenLite('AdminModules');
+        $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
+
+        # Get the default language
+        $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
+
+        # Language
+        $helper->default_form_language = $default_lang;
+        $helper->allow_employee_form_lang = $default_lang;
+
+        # Load the current settings
+        foreach ($this->configParams as $param_name) {
+            $helper->fields_value[$param_name] = Configuration::get($param_name);
+        }
+
+        return $helper->generateForm($fields_form);
     }
 
-    public function getConfigFieldsValues()
+    private function postProcess()
     {
-        return array(
-            'g_app_id' => Tools::getValue('g_app_id', Configuration::get('SIMPLICITY_G_APP_ID')),
-            'g_app_secret' => Tools::getValue('g_app_secret', Configuration::get('SIMPLICITY_G_APP_SECRET')),
-            'app_id' => Tools::getValue('fb_app_id', Configuration::get('SIMPLICITY_FB_APP_ID')),
-            'app_secret' => Tools::getValue('fb_app_id', Configuration::get('SIMPLICITY_FB_APP_SECRET')),
-        );
+
+        foreach ($this->configParams as $param_name) {
+
+            if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
+                return $this->displayError($param_name . ' ' . $this->l('updated failed'));
+            }
+        }
+
+        return $this->displayConfirmation($this->trans('Settings updated.', array(), 'Admin.Notifications.Success'));
     }
 
 }

@@ -1627,7 +1627,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
       </trans-unit>
       <trans-unit id="8a93e785ac0d7204479e4697cbe8696c" approved="yes">
         <source>Default activation status</source>
-        <target xml:lang="zh-TW">新增商品前台顯示</target>
+        <target xml:lang="zh-TW">新增商品時預設「前台顯示」</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks/product_preferences_general.html.twig:63</note>
       </trans-unit>

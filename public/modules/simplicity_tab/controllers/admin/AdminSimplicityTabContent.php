@@ -56,7 +56,6 @@ class AdminSimplicityTabContentController extends ModuleAdminController
             'ps_imageslider',
             'ps_customtext',
             'ps_banner',
-            'simplicity_blog',
             'simplicity_footerbar',
         ];
 

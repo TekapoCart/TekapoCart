@@ -121,3 +121,5 @@ UPDATE `ps_meta` SET `configurable` = '0' WHERE `ps_meta`.`id_meta` = 14;
 
 -- configurable=1 搜尋結果
 UPDATE `ps_meta` SET `configurable` = '1' WHERE `ps_meta`.`id_meta` = 22;
+
+

@@ -524,41 +524,6 @@ class AdminStoresControllerCore extends AdminController
 //                'validation' => 'isGenericName',
 //                'type' => 'text',
 //            ),
-
-            // suzy: 2020-06-03 reCAPTCHA
-            'TC_RECAPTCHA_ENABLE' => array(
-                'title' => '「聯絡我們」啟用 reCAPTCHA',
-                'validation' => 'isBool',
-                'cast' => 'intval',
-                'type' => 'bool',
-                'desc' => 'reCAPTCHA 為 Google 防止機器人橫行所推出的機制。reCAPTCHA 會對嘗試送出訊息的使用者進行查核，並提供 0.0-1.0 之間的分數供參考。1.0 代表很可能為良好，0.0 代表很可能為機器人。低於 0.5 將無法送出訊息。',
-            ),
-            'TC_RECAPTCHA_ADMIN_ENABLE' => array(
-                'title' => '「後台登入」啟用 reCAPTCHA',
-                'validation' => 'isBool',
-                'cast' => 'intval',
-                'type' => 'bool',
-            ),
-            'TC_RECAPTCHA_KEY' => array(
-                'title' => 'reCAPTCHA 網站金鑰',
-                'validation' => 'isGenericName',
-                'type' => 'text',
-                'hint' => '啟用 reCAPTCHA 時，此欄位為必填。',
-            ),
-            'TC_RECAPTCHA_SECRET' => array(
-                'title' => 'reCAPTCHA 密鑰',
-                'validation' => 'isGenericName',
-                'type' => 'text',
-                'hint' => '啟用 reCAPTCHA 時，此欄位為必填。',
-            ),
-            'TC_RECAPTCHA_MIN_SCORE' => array(
-                'title' => 'reCAPTCHA 最低分數',
-                'validation' => 'isGenericName',
-                'type' => 'text',
-                'desc' => '0.0-1.0 之間的分數，預設值 0.5',
-            ),
-
-
         );
 
         return $formFields;

@@ -26,10 +26,14 @@
 
 
 {block name=pageTitle}
+{*
 <h2 class="page-title">
 	{l s='Configure' d='Admin.Actions'}
 </h2>
+
 <h4 class="page-subtitle">{$module_display_name}</h4>
+*}
+<h1 class="page-title">{$module_display_name}</h1>
 {/block}
 {block name=pageBreadcrumb}
 <ul class="breadcrumb page-breadcrumb">
