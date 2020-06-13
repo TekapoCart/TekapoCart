@@ -119,9 +119,6 @@ UPDATE `ps_cms_category_lang` SET `name` = 'All Pages', `link_rewrite` = 'all' W
 UPDATE `ps_cms_category_lang` SET `name` = 'All Pages', `link_rewrite` = 'all' WHERE `ps_cms_category_lang`.`id_cms_category` = 1 AND `ps_cms_category_lang`.`id_lang` = 3;
 UPDATE `ps_cms_category_lang` SET `name` = 'All Pages', `link_rewrite` = 'all' WHERE `ps_cms_category_lang`.`id_cms_category` = 1 AND `ps_cms_category_lang`.`id_lang` = 4;
 
--- CMS SCHEMA 變動
-ALTER TABLE `ps_cms` ADD `date_add` DATETIME NULL DEFAULT NULL AFTER `indexation`, ADD `date_upd` DATETIME NULL DEFAULT NULL AFTER `date_add`;
-
 -- configurable=0 部落格列表、部落格搜尋、購物車
 UPDATE `ps_meta` SET `configurable` = '0' WHERE `ps_meta`.`id_meta` = 55;
 UPDATE `ps_meta` SET `configurable` = '0' WHERE `ps_meta`.`id_meta` = 57;
@@ -129,5 +126,9 @@ UPDATE `ps_meta` SET `configurable` = '0' WHERE `ps_meta`.`id_meta` = 14;
 
 -- configurable=1 搜尋結果
 UPDATE `ps_meta` SET `configurable` = '1' WHERE `ps_meta`.`id_meta` = 22;
+
+-- CMS SCHEMA 變動
+ALTER TABLE `ps_cms` ADD `date_add` DATETIME NULL DEFAULT NULL AFTER `indexation`, ADD `date_upd` DATETIME NULL DEFAULT NULL AFTER `date_add`;
+
 
 
