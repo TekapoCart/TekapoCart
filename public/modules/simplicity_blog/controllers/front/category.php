@@ -141,7 +141,16 @@ class Simplicity_BlogCategoryModuleFrontController extends CMSListingFrontContro
 
         $cmsCategory = new CMSCategory($this->cms_category->id);
 
-        foreach (array_reverse($cmsCategory->getParentsCategories()) as $category) {
+        $root_blog_category = (int)Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY');
+        $parentCategories = $cmsCategory->getParentsCategories();
+        $blogCategories = [];
+        foreach ($parentCategories as $key => $category) {
+            if ($category['id_cms_category'] == $root_blog_category) {
+                break;
+            }
+            $blogCategories[] = $category;
+        }
+        foreach (array_reverse($blogCategories) as $category) {
             $breadcrumb['links'][] = array(
                 'title' => $category['name'],
                 'url' => $this->context->link->getBlogCategoryLink($category['id_cms_category'], $category['link_rewrite']),

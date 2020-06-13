@@ -118,24 +118,25 @@ class Simplicity_BlogPageModuleFrontController extends ModuleFrontController
     {
         $breadcrumb = parent::getBreadcrumbLinks();
 
-        $baseLink = $this->context->link->getBaseLink();
-        $dispatcher = Dispatcher::getInstance();
-
         $breadcrumb['links'][] = array(
             'title' => Configuration::get('SIMPLICITY_BLOG_NAME', $this->context->language->id),
             'url' => $this->context->link->getBlogHome($this->context->language->id),
         );
 
-        if ($this->cms_category->id_parent != 0) {
-            foreach (array_reverse($this->cms_category->getParentsCategories()) as $category) {
-                $cmsSubCategory = new CMSCategory($category['id_cms_category']);
-                $breadcrumb['links'][] = array(
-                    'title' => $cmsSubCategory->getName(),
-                    'url' => $baseLink . $dispatcher->createUrl('simplicity_blog_category',
-                            $this->context->language->id,
-                            array('id_cms_category' => (int)$cmsSubCategory->id_cms_category, 'slug' => (string)$cmsSubCategory->link_rewrite[$this->context->language->id]), true),
-                );
+        $root_blog_category = (int)Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY');
+        $parentCategories = $this->cms_category->getParentsCategories();
+        $blogCategories = [];
+        foreach ($parentCategories as $key => $category) {
+            if ($category['id_cms_category'] == $root_blog_category) {
+                break;
             }
+            $blogCategories[] = $category;
+        }
+        foreach (array_reverse($blogCategories) as $category) {
+            $breadcrumb['links'][] = array(
+                'title' => $category['name'],
+                'url' => $this->context->link->getBlogCategoryLink($category['id_cms_category'], $category['link_rewrite']),
+            );
         }
 
         $breadcrumb['links'][] = array(
