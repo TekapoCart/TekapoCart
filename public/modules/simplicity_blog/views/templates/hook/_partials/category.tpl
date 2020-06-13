@@ -1,3 +1,4 @@
+{if $categories.children|count > 0}
 <div class="blog-categories">
     <h2>{l s='Categories' mod='simplicity_blog'}</h2>
 
@@ -44,3 +45,4 @@
         </ul>
     </div>
 </div>
+{/if}
