@@ -10,7 +10,7 @@ Steps
 - 2020-06-04.sql
 - 手動修改 shop*.json 欄位翻譯
 - 注意 多商店 SIMPLICITY_SHOW_ADD_CART_IN_LISTING 的 BUG
-- 2020-06-04-multishop.sql
+- 2020-06-04-check-multishop.sql
 *******************************************
 * 1.2.4 (Jun 01, 2020)
 *******************************************
