@@ -117,8 +117,8 @@ INSERT IGNORE INTO `ps_authorization_role` (`id_authorization_role`, `slug`) VAL
 INSERT IGNORE INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES
 ('1', '1077'), ('1', '1078'), ('1', '1079'), ('1', '1080');
 
-INSERT INTO `ps_tab` (`id_tab`, `id_parent`, `position`, `module`, `class_name`, `active`, `hide_host_mode`, `icon`) VALUES (151, '-1', '0', 'simplicity_feed', 'AdminSimplicityFeed', '1', '0', 'edit');
-INSERT INTO `ps_tab_lang` (`id_tab`, `id_lang`, `name`) VALUES ('151', '1', '產品目錄'), ('151', '2', '產品目錄'), ('151', '3', '產品目錄'), ('151', '4', '產品目錄');
+INSERT IGNORE INTO `ps_tab` (`id_tab`, `id_parent`, `position`, `module`, `class_name`, `active`, `hide_host_mode`, `icon`) VALUES (151, '-1', '0', 'simplicity_feed', 'AdminSimplicityFeed', '1', '0', 'edit');
+INSERT IGNORE INTO `ps_tab_lang` (`id_tab`, `id_lang`, `name`) VALUES ('151', '1', '產品目錄'), ('151', '2', '產品目錄'), ('151', '3', '產品目錄'), ('151', '4', '產品目錄');
 
 --
 UPDATE `ps_cms_category_lang` SET `name` = '所有自訂頁面', `link_rewrite` = 'all' WHERE `ps_cms_category_lang`.`id_cms_category` = 1 AND `ps_cms_category_lang`.`id_lang` = 1;
