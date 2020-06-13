@@ -6,6 +6,7 @@ TekapoCart <hi@tekapo.io>
 - 部落格
 Steps
 - install simplicity_blog
+- 2020-06-04-schema.sql
 - 2020-06-04.sql
 - 手動修改 shop*.json 欄位翻譯
 - 注意 多商店 SIMPLICITY_SHOW_ADD_CART_IN_LISTING 的 BUG

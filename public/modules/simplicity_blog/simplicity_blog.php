@@ -23,7 +23,7 @@ class Simplicity_Blog extends Module
         $this->author = 'TekapoCart';
         $this->bootstrap = true;
 
-        $this->controllers = array('home', 'category', 'search', 'page');
+        $this->controllers = array('category', 'page', 'search', 'home');
 
         parent::__construct();
 

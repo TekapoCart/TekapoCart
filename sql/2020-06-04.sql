@@ -4,7 +4,6 @@ UPDATE `ps_tab_lang` SET `name` = '內建佈景＆模組' WHERE `ps_tab_lang`.`i
 UPDATE `ps_meta_lang` SET `title` = '新增/修改配送資訊' WHERE `ps_meta_lang`.`id_meta` = 11 AND `ps_meta_lang`.`id_shop` = 1 AND `ps_meta_lang`.`id_lang` = 1;
 
 --- customizable=0
-ALTER TABLE `ps_meta` ADD `customizable` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER `configurable`;
 UPDATE `ps_meta` SET `customizable` = '0' WHERE `ps_meta`.`id_meta` = 5;
 UPDATE `ps_meta` SET `customizable` = '0' WHERE `ps_meta`.`id_meta` = 7;
 UPDATE `ps_meta` SET `customizable` = '0' WHERE `ps_meta`.`id_meta` = 9;
@@ -68,7 +67,6 @@ INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `positio
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('82', '1', '460', '2'), ('82', '2', '460', '2'), ('82', '3', '460', '2'), ('82', '4', '460', '2');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('82', '1', '461', '2'), ('82', '2', '461', '2'), ('82', '3', '461', '2'), ('82', '4', '461', '2');
 
-
 UPDATE `ps_hook_module` SET `position` = '2' WHERE `ps_hook_module`.`id_module` = 61 AND `ps_hook_module`.`id_hook` = 27;
 
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_CREATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1069;
@@ -76,10 +74,10 @@ UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_RE
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_UPDATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1071;
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_DELETE' WHERE `ps_authorization_role`.`id_authorization_role` = 1072;
 
-UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_CREATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1065;
-UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_READ' WHERE `ps_authorization_role`.`id_authorization_role` = 1066;
-UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_UPDATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1067;
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_DELETE' WHERE `ps_authorization_role`.`id_authorization_role` = 1068;
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_UPDATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1067;
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_READ' WHERE `ps_authorization_role`.`id_authorization_role` = 1066;
+UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_CREATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1065;
 
 UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 1;
 UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 2;
@@ -127,8 +125,6 @@ UPDATE `ps_meta` SET `configurable` = '0' WHERE `ps_meta`.`id_meta` = 14;
 -- configurable=1 搜尋結果
 UPDATE `ps_meta` SET `configurable` = '1' WHERE `ps_meta`.`id_meta` = 22;
 
--- CMS SCHEMA 變動
-ALTER TABLE `ps_cms` ADD `date_add` DATETIME NULL DEFAULT NULL AFTER `indexation`, ADD `date_upd` DATETIME NULL DEFAULT NULL AFTER `date_add`;
 
 
 
