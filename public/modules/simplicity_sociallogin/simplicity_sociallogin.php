@@ -240,7 +240,7 @@ class Simplicity_Sociallogin extends Module
 
     public function hookDisplayLeftColumnBlog($params)
     {
-        $this->hookDisplayRightColumnBlog($params);
+        return $this->hookDisplayRightColumnBlog($params);
     }
 
     public function hookDisplayRightColumnBlog($params)

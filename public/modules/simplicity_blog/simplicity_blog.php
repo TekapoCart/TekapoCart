@@ -145,6 +145,7 @@ class Simplicity_Blog extends Module
 
     public function getContent()
     {
+        return Tools::redirectAdmin($this->context->link->getAdminLink('AdminSimplicityBlog'));
     }
 
     public function hookActionAfterCreateCmsPageFormHandler($params)
@@ -197,7 +198,7 @@ class Simplicity_Blog extends Module
 
     public function hookDisplayLeftColumnBlog($params)
     {
-        $this->hookDisplayRightColumnBlog($params);
+        return $this->hookDisplayRightColumnBlog($params);
     }
 
     public function hookDisplayRightColumnBlog($params)
