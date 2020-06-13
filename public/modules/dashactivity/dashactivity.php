@@ -183,7 +183,6 @@ class dashactivity extends Module
             $maintenance_ips = implode(',', array_map('ip2long', array_map('trim', explode(',', $maintenance_ips))));
         }
         if (Configuration::get('PS_STATSDATA_CUSTOMER_PAGESVIEWS')) {
-            echo 'aaa';exit;
             $sql = 'SELECT c.id_guest, c.ip_address, c.date_add, c.http_referer, pt.name as page
 					FROM `'._DB_PREFIX_.'connections` c
 					LEFT JOIN `'._DB_PREFIX_.'connections_page` cp ON c.id_connections = cp.id_connections
@@ -215,7 +214,6 @@ class dashactivity extends Module
 						AND TIME_TO_SEC(TIMEDIFF(\''.pSQL(date('Y-m-d H:i:00', time())).'\', c.`date_add`)) < ' . $diff . '
 					'.($maintenance_ips ? 'AND c.ip_address NOT IN ('.preg_replace('/[^,0-9]/', '', $maintenance_ips).')' : '').'
 					ORDER BY c.date_add DESC';
-            echo $sql;exit;
 
         }
         Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
