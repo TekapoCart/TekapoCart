@@ -49,10 +49,18 @@ INSERT IGNORE INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `de
 INSERT IGNORE INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `description`, `keywords`, `url_rewrite`) VALUES ('57', '1', '1', '部落格搜尋', '', '', ''), ('57', '1', '2', '', '', '', ''), ('57', '1', '3', '', '', '', ''), ('57', '1', '4', '', '', '', ''), ('57', '2', '1', '', '', '', ''), ('57', '2', '2', '', '', '', ''), ('57', '2', '3', '', '', '', ''), ('57', '2', '4', '', '', '', ''), ('57', '3', '1', '', '', '', ''), ('57', '3', '2', '', '', '', ''), ('57', '3', '3', '', '', '', ''), ('57', '3', '4', '', '', '', ''), ('57', '4', '1', '', '', '', ''), ('57', '4', '2', '', '', '', ''), ('57', '4', '3', '', '', '', ''), ('57', '4', '4', '', '', '', '');
 INSERT IGNORE INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `description`, `keywords`, `url_rewrite`) VALUES ('58', '1', '1', '部落格首頁', '', '', ''), ('58', '1', '2', '', '', '', ''), ('58', '1', '3', '', '', '', ''), ('58', '1', '4', '', '', '', ''), ('58', '2', '1', '', '', '', ''), ('58', '2', '2', '', '', '', ''), ('58', '2', '3', '', '', '', ''), ('58', '2', '4', '', '', '', ''), ('58', '3', '1', '', '', '', ''), ('58', '3', '2', '', '', '', ''), ('58', '3', '3', '', '', '', ''), ('58', '3', '4', '', '', '', ''), ('58', '4', '1', '', '', '', ''), ('58', '4', '2', '', '', '', ''), ('58', '4', '3', '', '', '', ''), ('58', '4', '4', '', '', '', '');
 
-INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (459, 'moduleRoutes', '前台網址規則', '', '1', '0');
-INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (460, 'displayLeftColumnBlog', '部落格 左側欄', '', '1', '20');
-INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (461, 'displayRightColumnBlog', '部落格 右側欄', '', '1', '41');
-INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (462, 'displayFooterBlog', '部落格頁 頁尾', '', '1', '42');
+-- INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (459, 'moduleRoutes', '前台網址規則', '', '1', '0');
+-- INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (460, 'displayLeftColumnBlog', '部落格 左側欄', '', '1', '20');
+-- INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (461, 'displayRightColumnBlog', '部落格 右側欄', '', '1', '41');
+-- INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (462, 'displayFooterBlog', '部落格頁 頁尾', '', '1', '42');
+
+DELETE FROM `ps_hook` WHERE `id_hook` IN (458, 459, 460, 461, 462);
+INSERT INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES
+(458, 'displayProductListReviews', 'displayProductListReviews', '', 1, 0),
+(459, 'moduleRoutes', '前台網址規則', '', 1, 0),
+(460, 'displayLeftColumnBlog', '部落格 左側欄', '', 1, 20),
+(461, 'displayRightColumnBlog', '部落格 右側欄', '', 1, 41),
+(462, 'displayFooterBlog', '部落格頁 頁尾', '', 1, 42);
 
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '459', '1'), ('122', '2', '459', '1'), ('122', '3', '459', '1'), ('122', '4', '459', '1');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '460', '1'), ('122', '2', '460', '1'), ('122', '3', '460', '1'), ('122', '4', '460', '1');
