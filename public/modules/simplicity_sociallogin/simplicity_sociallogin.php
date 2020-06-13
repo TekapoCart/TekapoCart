@@ -16,7 +16,7 @@ class Simplicity_Sociallogin extends Module
 
         parent::__construct();
 
-        $this->displayName = '基本串接＆應用';
+        $this->displayName = '簡易串接＆應用';
         $this->description = 'Google / Facebook 社群帳號登入、Facebook 留言框、reCAPTCHA 我不是機器人。';
 
         $this->configParams = [
@@ -125,10 +125,40 @@ class Simplicity_Sociallogin extends Module
         return $loginUrl;
     }
 
-//    public function hookHeader()
-//    {
-//        $this->context->controller->addCSS(($this->_path) . 'facebook.css', 'all');
-//    }
+    public function hookHeader($params)
+    {
+        // $this->context->controller->addCSS(($this->_path) . 'facebook.css', 'all');
+
+        $controller = Tools::getValue('controller');
+        $module = Tools::getValue('module');
+
+        switch ($controller) {
+            case 'product':
+                if ((int) Configuration::get('SIMPLICITY_PRODUCT_SHOW_COMMENTS')) {
+                    return $this->display(__FILE__, 'hook-fb-init.tpl');
+                }
+                break;
+            case 'category':
+            case 'search':
+            case 'home':
+                if ($module == 'simplicity_blog') {
+                    if ((int) Configuration::get('SIMPLICITY_BLOG_SHOW_FB_PAGE')) {
+                        return $this->display(__FILE__, 'hook-fb-init.tpl');
+                    }
+                }
+
+                break;
+            case 'page':
+                if ($module == 'simplicity_blog') {
+                    if ((int) Configuration::get('SIMPLICITY_BLOG_SHOW_COMMENTS') || (int) Configuration::get('SIMPLICITY_BLOG_SHOW_FB_PAGE')) {
+                        return $this->display(__FILE__, 'hook-fb-init.tpl');
+                    }
+                }
+                break;
+        }
+
+
+    }
 
     public function hookDisplayCustomerLoginLink()
     {

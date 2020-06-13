@@ -101,7 +101,7 @@ class Simplicity_Blog extends Module
             // 部落格 分類頁
             'simplicity_blog_category' => array(
                 'controller' => 'category',
-                'rule' => $listing_prefix . '/category/{id_cms_category}-{slug}',
+                'rule' => $page_prefix . '/category/{id_cms_category}-{slug}',
                 'keywords' => array(
                     'id_cms_category' => array('regexp' => '[_a-zA-Z0-9-\pL]*', 'param' => 'id_cms_category'),
                     'slug' => array('regexp' => '[_a-zA-Z0-9-\pL]*'),

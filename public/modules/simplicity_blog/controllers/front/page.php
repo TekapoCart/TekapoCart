@@ -157,6 +157,7 @@ class Simplicity_BlogPageModuleFrontController extends ModuleFrontController
         }
 
         $meta_tags = Meta::getCmsMetas($this->cms->id, $this->context->language->id, $this->getPageName());
+
         $page['meta']['title'] = $meta_tags['meta_title'];
         $page['meta']['description'] = $meta_tags['meta_description'];
         $page['meta']['keywords'] = $meta_tags['meta_keywords'];
