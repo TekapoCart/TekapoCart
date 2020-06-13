@@ -79,6 +79,15 @@ UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_UPD
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_READ' WHERE `ps_authorization_role`.`id_authorization_role` = 1066;
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_MODULE_SIMPLICITY_FEED_CREATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1065;
 
+INSERT IGNORE INTO `ps_tab` (`id_tab`, `id_parent`, `position`, `module`, `class_name`, `active`, `hide_host_mode`, `icon`) VALUES
+(150, 117, 4, 'simplicity_blog', 'AdminSimplicityBlog', 1, 0, 'edit');
+
+INSERT IGNORE INTO `ps_tab_lang` (`id_tab`, `id_lang`, `name`) VALUES
+(150, 1, '部落格'),
+(150, 2, '部落格'),
+(150, 3, '部落格'),
+(150, 4, '部落格');
+
 UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 1;
 UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 2;
 UPDATE `ps_tab_lang` SET `name` = '部落格' WHERE `ps_tab_lang`.`id_tab` = 150 AND `ps_tab_lang`.`id_lang` = 3;
