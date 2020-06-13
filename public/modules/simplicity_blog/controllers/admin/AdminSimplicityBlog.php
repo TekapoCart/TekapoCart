@@ -218,7 +218,7 @@ class AdminSimplicityBlogController extends ModuleAdminController
             )
         );
 
-        $root_blog_category_id = (int)Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY', 1);
+        $root_blog_category_id = (int)Configuration::get('SIMPLICITY_BLOG_ROOT_CATEGORY');
         $root_blog_category = new CMSCategory((int)$root_blog_category_id, $this->context->language->id);
         if (Validate::isLoadedObject($root_blog_category)) {
 
