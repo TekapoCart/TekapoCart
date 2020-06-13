@@ -478,7 +478,7 @@ class Simplicity_Sociallogin extends Module
                     array(
                         'type' => 'switch',
                         'label' => '後台登入啟用 reCAPTCHA',
-                        'name' => 'TC_RECAPTCHA_ENABLE',
+                        'name' => 'TC_RECAPTCHA_ADMIN_ENABLE',
                         'is_bool' => true,
                         'values' => array(
                             array(
