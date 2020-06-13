@@ -84,12 +84,15 @@ class Simplicity_BlogPageModuleFrontController extends ModuleFrontController
 
         $cmsVar = $this->objectPresenter->present($this->cms);
 
-        $images = simplexml_import_dom(DOMDocument::loadHTML($cmsVar['content']))->xpath("//img/@src");
-        $cmsVar['image'] = count($images) > 0 ? (string)reset($images) : '';
-        if (strlen($cmsVar['image']) > 0) {
-            $size = @getimagesize($cmsVar['image']);
-            $cmsVar['image_width'] = $size[0];
-            $cmsVar['image_height'] = $size[1];
+        $cmsVar['image'] = '';
+        if (strlen($cmsVar['content']) > 0) {
+            $images = simplexml_import_dom(DOMDocument::loadHTML($cmsVar['content']))->xpath("//img/@src");
+            $cmsVar['image'] = count($images) > 0 ? (string)reset($images) : '';
+            if (strlen($cmsVar['image']) > 0) {
+                $size = @getimagesize($cmsVar['image']);
+                $cmsVar['image_width'] = $size[0];
+                $cmsVar['image_height'] = $size[1];
+            }
         }
 
         $cmsVar['canonical_url'] = $this->getCanonicalURL();

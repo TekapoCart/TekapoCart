@@ -415,11 +415,6 @@ class CMSCore extends ObjectModel
      */
     public static function getResultProperties($id_lang, $row, Context $context = null)
     {
-//        Hook::exec('actionGetProductPropertiesBefore', [
-//            'id_lang' => $id_lang,
-//            'product' => &$row,
-//            'context' => $context,
-//        ]);
 
         if (!$row['id_cms']) {
             return false;
@@ -443,16 +438,11 @@ class CMSCore extends ObjectModel
             (int) $id_lang,
             array('id_cms' => (int) $row['id_cms'], 'slug' => (string) $row['link_rewrite']), true);
 
-        $images = simplexml_import_dom(DOMDocument::loadHTML($row['content']))->xpath("//img/@src");
-        $row['image'] = count($images) > 0 ? (string)reset($images) : '';
-
-
-//        Hook::exec('actionGetProductPropertiesAfter', [
-//            'id_lang' => $id_lang,
-//            'product' => &$row,
-//            'context' => $context,
-//        ]);
-
+        $row['image'] = '';
+        if (strlen($row['content']) > 0) {
+            $images = simplexml_import_dom(DOMDocument::loadHTML($row['content']))->xpath("//img/@src");
+            $row['image'] = count($images) > 0 ? (string)reset($images) : '';
+        }
 
         self::$cmsPropertiesCache[$cache_key] = $row;
 
