@@ -251,6 +251,7 @@ class Simplicity_Sociallogin extends Module
             $this->smarty->assign('fb_page_show_facepile', (int) Configuration::get('SIMPLICITY_FB_PAGE_SHOW_FACEPILE'));
             return $this->display(__FILE__, 'hook-fb-page.tpl');
         }
+        return;
     }
 
     /////////////////////////////////////////////////////////////////////////////////
