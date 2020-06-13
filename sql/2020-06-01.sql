@@ -22,3 +22,6 @@ INSERT IGNORE INTO `ps_authorization_role` (`id_authorization_role`, `slug`) VAL
 
 INSERT IGNORE INTO `ps_access` (`id_profile`, `id_authorization_role`) VALUES
 ('1', '1069'), ('1', '1070'), ('1', '1071'), ('1', '1072');
+
+INSERT INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES
+(458, 'displayProductListReviews', 'displayProductListReviews', '', 1, 0);
