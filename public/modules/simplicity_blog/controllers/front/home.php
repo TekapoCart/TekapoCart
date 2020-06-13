@@ -50,6 +50,7 @@ class Simplicity_BlogHomeModuleFrontController extends CMSListingFrontController
         $this->context->smarty->assign(array(
             'category' => $categoryVar,
             'subcategories' => $this->getTemplateVarSubCategories(),
+            'seo_title' => $this->getListingLabel(),
             'show_image' => (int) Configuration::get('SIMPLICITY_BLOG_SHOW_IMAGE'),
         ));
     }
@@ -100,7 +101,6 @@ class Simplicity_BlogHomeModuleFrontController extends CMSListingFrontController
 
             $category['image'] = '';
 
-            $category['url'] = '';
             $category['url'] = $this->context->link->getBlogCategoryLink($category['id_cms_category'], $category['link_rewrite']);
 
             return $category;
@@ -136,7 +136,11 @@ class Simplicity_BlogHomeModuleFrontController extends CMSListingFrontController
 
     public function getListingLabel()
     {
-        return Configuration::get('SIMPLICITY_BLOG_NAME', $this->context->language->id);
+        if (strlen(Configuration::get('SIMPLICITY_BLOG_NAME', $this->context->language->id)) > 0) {
+            return Configuration::get('SIMPLICITY_BLOG_NAME', $this->context->language->id);
+        } else {
+            return $this->getTemplateVarPage()['meta']['title'];
+        }
     }
 
 }

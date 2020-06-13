@@ -85,7 +85,7 @@ class Simplicity_Blog extends Module
         $page_meta = Meta::getMetaByPage('module-simplicity_blog-page', $this->context->language->id);
 
         $listing_prefix = !empty($home_meta['url_rewrite']) ? $home_meta['url_rewrite'] : 'blogs';
-        $page_prefix = !empty($page_meta['url_rewrite']) ? $home_meta['url_rewrite'] : 'blog';
+        $page_prefix = !empty($page_meta['url_rewrite']) ? $page_meta['url_rewrite'] : 'blog';
 
         return array(
             // 部落格 首頁

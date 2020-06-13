@@ -42,10 +42,7 @@ class Simplicity_BlogSearchModuleFrontController extends CMSListingFrontControll
             array(
                 'search_string' => $this->search_string,
                 'search_tag' => $this->search_tag,
-
-                // suzy: 2020-03-18 meta title, meta description
                 'seo_title' => $this->getTranslator()->trans('Search results', array(), 'Shop.Theme.Catalog') . '：' . implode(', ', $keywords),
-
                 'show_image' => (int) Configuration::get('SIMPLICITY_BLOG_SHOW_IMAGE'),
             )
         );

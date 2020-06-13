@@ -53,6 +53,7 @@ INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `descripti
 INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (459, 'moduleRoutes', '前台網址規則', '', '1', '0');
 INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (460, 'displayLeftColumnBlog', '部落格 左側欄', '', '1', '20');
 INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (461, 'displayRightColumnBlog', '部落格 右側欄', '', '1', '41');
+INSERT IGNORE INTO `ps_hook` (`id_hook`, `name`, `title`, `description`, `position`, `sort`) VALUES (462, 'displayFooterBlog', '部落格頁 頁尾', '', '1', '42');
 
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '459', '1'), ('122', '2', '459', '1'), ('122', '3', '459', '1'), ('122', '4', '459', '1');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '460', '1'), ('122', '2', '460', '1'), ('122', '3', '460', '1'), ('122', '4', '460', '1');
@@ -62,6 +63,13 @@ INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `positio
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '330', '1'), ('122', '2', '330', '1'), ('122', '3', '330', '1'), ('122', '4', '330', '1');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '325', '1'), ('122', '2', '325', '1'), ('122', '3', '325', '1'), ('122', '4', '325', '1');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '293', '1'), ('122', '2', '293', '1'), ('122', '3', '293', '1'), ('122', '4', '293', '1');
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('82', '1', '462', '1'), ('82', '2', '462', '1'), ('82', '3', '462', '1'), ('82', '4', '462', '1');
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('82', '1', '27', '1'), ('82', '2', '27', '1'), ('82', '3', '27', '1'), ('82', '4', '27', '1');
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('82', '1', '460', '2'), ('82', '2', '460', '2'), ('82', '3', '460', '2'), ('82', '4', '460', '2');
+INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('82', '1', '461', '2'), ('82', '2', '461', '2'), ('82', '3', '461', '2'), ('82', '4', '461', '2');
+
+
+UPDATE `ps_hook_module` SET `position` = '2' WHERE `ps_hook_module`.`id_module` = 61 AND `ps_hook_module`.`id_hook` = 27;
 
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_CREATE' WHERE `ps_authorization_role`.`id_authorization_role` = 1069;
 UPDATE `ps_authorization_role` SET `slug` = 'ROLE_MOD_TAB_ADMINSIMPLICITYBLOG_READ' WHERE `ps_authorization_role`.`id_authorization_role` = 1070;

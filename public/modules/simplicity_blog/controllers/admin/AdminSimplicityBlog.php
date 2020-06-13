@@ -241,16 +241,35 @@ class AdminSimplicityBlogController extends ModuleAdminController
 					        </p>
 					        <p>索引可能會花上數分鐘。若在完成前就停止，您可以點擊「建立未索引內容」繼續。</p>
 					        <a href="' . Context::getContext()->link->getAdminLink('AdminSimplicityBlog', true) . '&action=searchCron&ajax=1&redirect=1' . (Shop::getContext() == Shop::CONTEXT_SHOP ? '&id_shop=' . (int) Context::getContext()->shop->id : '') . '" class="btn-link">
-						    <i class="icon-external-link-sign"></i>建立未索引內容
+						    <i class="icon-external-link-sign"></i> 建立未索引內容
 					        </a><br />
 					        <a href="' . Context::getContext()->link->getAdminLink('AdminSimplicityBlog', true) . '&action=searchCron&ajax=1&full=1&redirect=1' . (Shop::getContext() == Shop::CONTEXT_SHOP ? '&id_shop=' . (int) Context::getContext()->shop->id : '') . '" class="btn-link">
-						    <i class="icon-external-link-sign"></i>重建全部內容索引
+						    <i class="icon-external-link-sign"></i> 重建全部內容索引
 					        </a><br /><br />'
                         )
                     ),
                 )
             );
         }
+
+        $this->fields_form[] = array(
+            'form' => array(
+                'legend' => array(
+                    'title' => 'Facebook 留言框、粉絲專頁設定',
+                ),
+                'input' => array(
+                    array(
+                        'type' => 'html',
+                        'name' => '',
+                        'html_content' => '
+					        <a href="' . Context::getContext()->link->getAdminLink('AdminModules', true) . '&configure=simplicity_sociallogin" class="btn-link">
+						    <i class="icon-external-link-sign"></i> 前往設定
+					        </a><br />
+					        '
+                    )
+                ),
+            )
+        );
 
         $helper = new HelperForm();
 

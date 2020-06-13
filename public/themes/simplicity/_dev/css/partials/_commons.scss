@@ -56,6 +56,14 @@ pre {
   font-weight: $font-weight-normal;
 }
 
+#left-column {
+  padding-left: 0;
+}
+
+#right-column {
+  padding-right: 0;
+}
+
 .display1-size {
   font-size: $display1-size;
 }

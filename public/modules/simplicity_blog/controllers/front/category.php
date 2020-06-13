@@ -65,6 +65,8 @@ class Simplicity_BlogCategoryModuleFrontController extends CMSListingFrontContro
 
         parent::init();
 
+        // $this->canonicalRedirection();
+
         $categoryVar = $this->getTemplateVarCategory();
 
         if (!empty($filteredCategory['object'])) {
@@ -160,6 +162,11 @@ class Simplicity_BlogCategoryModuleFrontController extends CMSListingFrontContro
         $page['body_classes']['cms-category-id-' . $this->cms_category->id] = true;
         $page['body_classes']['cms-category-id-parent-' . $this->cms_category->id_parent] = true;
         $page['body_classes']['cms-category-depth-level-' . $this->cms_category->level_depth] = true;
+
+        $meta_tags = Meta::getCmsCategoryMetas($this->cms_category->id, $this->context->language->id, $this->getPageName());
+        $page['meta']['title'] = $meta_tags['meta_title'];
+        $page['meta']['description'] = $meta_tags['meta_description'];
+        $page['meta']['keywords'] = $meta_tags['meta_keywords'];
 
         return $page;
     }

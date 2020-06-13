@@ -30,6 +30,14 @@ class Simplicity_Sociallogin extends Module
             'TC_RECAPTCHA_KEY',
             'TC_RECAPTCHA_SECRET',
             'TC_RECAPTCHA_MIN_SCORE',
+
+            'SIMPLICITY_BLOG_SHOW_COMMENTS',
+            'SIMPLICITY_PRODUCT_SHOW_COMMENTS',
+
+            'SIMPLICITY_FB_PAGE_URL',
+            'SIMPLICITY_BLOG_SHOW_FB_PAGE',
+            'SIMPLICITY_FB_PAGE_TAB',
+            'SIMPLICITY_FB_PAGE_SHOW_FACEPILE',
         ];
     }
 
@@ -182,6 +190,37 @@ class Simplicity_Sociallogin extends Module
         $this->smarty->assign('fb_login_url', $this->getFbLoginUrl());
         $this->smarty->assign('g_login_url', $this->getGLoginUrl());
         return $this->display(__FILE__, 'hook-checkout.tpl');
+    }
+
+    public function hookDisplayFooterBlog($params)
+    {
+        if ((int) Configuration::get('SIMPLICITY_BLOG_SHOW_COMMENTS')) {
+            $this->smarty->assign('canonical_url', $params['cms']['canonical_url']);
+            return $this->display(__FILE__, 'hook-fb-comments.tpl');
+        }
+    }
+
+    public function hookDisplayFooterProduct($params)
+    {
+        if ((int) Configuration::get('SIMPLICITY_PRODUCT_SHOW_COMMENTS')) {
+            $this->smarty->assign('canonical_url', $params['product']['canonical_url']);
+            return $this->display(__FILE__, 'hook-fb-comments.tpl');
+        }
+    }
+
+    public function hookDisplayLeftColumnBlog($params)
+    {
+        $this->hookDisplayRightColumnBlog($params);
+    }
+
+    public function hookDisplayRightColumnBlog($params)
+    {
+        if ((int) Configuration::get('SIMPLICITY_BLOG_SHOW_FB_PAGE')) {
+            $this->smarty->assign('fb_pabe_url', Configuration::get('SIMPLICITY_FB_PAGE_URL'));
+            $this->smarty->assign('fb_page_tab', Configuration::get('SIMPLICITY_FB_PAGE_TAB'));
+            $this->smarty->assign('fb_page_show_facepile', (int) Configuration::get('SIMPLICITY_FB_PAGE_SHOW_FACEPILE'));
+            return $this->display(__FILE__, 'hook-fb-page.tpl');
+        }
     }
 
     /////////////////////////////////////////////////////////////////////////////////
@@ -448,6 +487,108 @@ class Simplicity_Sociallogin extends Module
             )
         );
 
+        // https://developers.facebook.com/docs/plugins/comments/
+        $fields_form[] = array(
+            'form' => array(
+                'legend' => array(
+                    'title' => 'Facebook 留言設定',
+                ),
+                'description' => '',
+                'input' => array(
+                    array(
+                        'type' => 'text',
+                        'label' => 'Facebook APP ID',
+                        'name' => 'SIMPLICITY_FB_APP_ID',
+                        'class' => 'fixed-width-xl',
+                    ),
+                    array(
+                        'type' => 'switch',
+                        'label' => '部落格頁顯示 Facebook 留言框',
+                        'name' => 'SIMPLICITY_BLOG_SHOW_COMMENTS',
+                        'values' => array(
+                            array(
+                                'value' => true,
+                            ),
+                            array(
+                                'value' => false
+                            )
+                        )
+                    ),
+                    array(
+                        'type' => 'switch',
+                        'label' => '商品頁頁顯示 Facebook 留言框',
+                        'name' => 'SIMPLICITY_PRODUCT_SHOW_COMMENTS',
+                        'values' => array(
+                            array(
+                                'value' => true,
+                            ),
+                            array(
+                                'value' => false
+                            )
+                        )
+                    ),
+                ),
+                'submit' => array(
+                    'name' => 'config_submit',
+                    'title' => $this->l('Save'),
+                ),
+            )
+        );
+
+        // https://developers.facebook.com/docs/plugins/page-plugin
+        $fields_form[] = array(
+            'form' => array(
+                'legend' => array(
+                    'title' => 'Facebook 粉絲專頁設定',
+                ),
+                'description' => '',
+                'input' => array(
+                    array(
+                        'type' => 'text',
+                        'label' => 'Facebook 粉絲專頁網址',
+                        'name' => 'SIMPLICITY_FB_PAGE_URL',
+                    ),
+                    array(
+                        'type' => 'switch',
+                        'label' => '部落格側欄顯示 Facebook 粉絲專頁',
+                        'name' => 'SIMPLICITY_BLOG_SHOW_FB_PAGE',
+                        'values' => array(
+                            array(
+                                'value' => true,
+                            ),
+                            array(
+                                'value' => false
+                            )
+                        )
+                    ),
+                    array(
+                        'type' => 'text',
+                        'label' => '頁籤',
+                        'name' => 'SIMPLICITY_FB_PAGE_TAB',
+                        'class' => 'fixed-width-xl',
+                        'desc' => '顯示的頁籤，亦即 timeline、events、messages。如需加入多個頁籤，請使用逗號分隔，亦即 timeline, events。',
+                    ),
+                    array(
+                        'type' => 'switch',
+                        'label' => '顯示朋友的大頭貼照',
+                        'name' => 'SIMPLICITY_FB_PAGE_SHOW_FACEPILE',
+                        'values' => array(
+                            array(
+                                'value' => true,
+                            ),
+                            array(
+                                'value' => false
+                            )
+                        )
+                    ),
+                ),
+                'submit' => array(
+                    'name' => 'config_submit',
+                    'title' => $this->l('Save'),
+                ),
+            )
+        );
+
         $helper = new HelperForm();
 
         # Module, token and currentIndex
@@ -474,8 +615,11 @@ class Simplicity_Sociallogin extends Module
     private function postProcess()
     {
 
-        foreach ($this->configParams as $param_name) {
+        if (strlen(Tools::getValue('SIMPLICITY_FB_PAGE_TAB')) === 0) {
+            $_POST['SIMPLICITY_FB_PAGE_TAB'] = 'timeline';
+        }
 
+        foreach ($this->configParams as $param_name) {
             if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
                 return $this->displayError($param_name . ' ' . $this->l('updated failed'));
             }

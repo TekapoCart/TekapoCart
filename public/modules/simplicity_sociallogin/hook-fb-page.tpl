@@ -1,0 +1,1 @@
+<div class="fb-page" data-href="https://www.facebook.com/TekapoCart" data-tabs="{$fb_page_tab}" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="{$fb_page_show_facepile}"><blockquote cite="{$fb_pabe_url}" class="fb-xfbml-parse-ignore"><a href="{$fb_pabe_url}"></a></blockquote></div>
