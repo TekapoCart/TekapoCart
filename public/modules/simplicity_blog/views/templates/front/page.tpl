@@ -21,9 +21,7 @@
 {/block}
 
 {block name='page_title'}
-    <header class="page-header">
-        <h1 itemprop="headline">{$cms.meta_title}</h1>
-    </header>
+    {$cms.meta_title}
 {/block}
 
 {block name='page_content_container'}
