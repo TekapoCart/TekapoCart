@@ -1,5 +1,4 @@
 <script>
-
     var locale = "{Tools::getValue('locale')}";
     var controllerUrl = "{$controller_url}";
 
@@ -66,7 +65,7 @@
 <div class='row'>
     <div class='bootstrap'>
         <table class="table">
-            {foreach $categories AS $category}
+            {foreach $categories as $category}
                 <tr>
                     {if $category['id'] > 1}
                         <td style="width: 30%;">

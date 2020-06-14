@@ -16,8 +16,6 @@ class Simplicity_Feed extends Module
 
     protected $imageType = 'home_default';
 
-    protected $categoriesName;
-
     protected $googleCategories;
 
     public function __construct()
@@ -155,17 +153,18 @@ class Simplicity_Feed extends Module
         $id_lang_default = (int)Configuration::get('PS_LANG_DEFAULT');
         $currency = new Currency($id_currency_default, $this->context->language->id);
 
-        $this->categoriesName = Category::getAllCategoriesName(Configuration::get('PS_ROOT_CATEGORY'), Configuration::get('PS_LANG_DEFAULT'), false, $this->context->shop->id);
 
         # Set the options
         $categories[] = [
             'id' => '-',
             'name' => '不限'
         ];
-        foreach ($this->categoriesName as $key => $value) {
+
+        $category = new Category(Configuration::get('PS_ROOT_CATEGORY'), $this->context->language->id);
+        foreach ($category->recurseCategoryPairs([], false) as $key => $value) {
             $categories[] = array(
                 'id' => $value['id_category'],
-                'name' => $value['name']
+                'name' => $value['name'],
             );
         }
 
@@ -348,7 +347,7 @@ class Simplicity_Feed extends Module
 
         $delimiter = ',';
 
-        $fileName = 'catalogue_' . date("Y_m_d_H_i_s") . '.csv';
+        $fileName = 'catalog_products_' . date("Y_m_d_H_i_s") . '.csv';
         header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
         header('Content-Description: File Transfer');
         header("Content-type: text/csv");
@@ -377,6 +376,7 @@ class Simplicity_Feed extends Module
         $this->googleCategories = GoogleCategory::getAllByLanguage($export_id_lang);
 
         $products = Product::getProducts($export_id_lang, 0, 0, 'id_product', 'ASC', $export_id_category, true);
+
         foreach ($products as $product) {
 
             $p = new Product($product['id_product'], true, $export_id_lang, $id_shop);

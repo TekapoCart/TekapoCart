@@ -53,12 +53,15 @@ class AdminSimplicityTabMarTechController extends ModuleAdminController
 
         $modulesNames = [
             'simplicity_sociallogin',
+            'simplicity_feed',
             'gsitemap',
+
+            // 'gshoppingflux',
+
             'ps_googleanalytics',
             'gapi',
-            // 'gshoppingflux',
-            'simplicity_feed',
             'simplicity_gtm',
+
         ];
 
         $modules_to_present = [];

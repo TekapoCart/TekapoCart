@@ -52,7 +52,7 @@ class AdminSimplicityFeedController extends ModuleAdminController
                 'controller_url' => $this->context->link->getAdminLink('AdminSimplicityFeed'),
             ]);
 
-            echo $this->context->smarty->fetch(_PS_MODULE_DIR_ . 'simplicity_feed/views/templates/admin/pick-google-category.tpl');
+            $this->ajaxDie($this->context->smarty->fetch(_PS_MODULE_DIR_ . 'simplicity_feed/views/templates/admin/pick-google-category.tpl'));
 
         } elseif (Tools::getValue('action') == 'filter') {
 

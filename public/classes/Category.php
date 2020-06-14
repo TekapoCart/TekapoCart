@@ -717,6 +717,45 @@ class CategoryCore extends ObjectModel
     }
 
     /**
+     * suzy: 2020-06-14 為產品目錄而生
+     *
+     * @param array $pairs
+     * @param $active
+     * @return array
+     */
+    public function recurseCategoryPairs($pairs = [], $active = true)
+    {
+        $id_lang = Context::getContext()->language->id;
+
+        if (!is_array($pairs)) {
+            $pairs = [];
+        }
+
+        $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS('
+		SELECT c.*, cl.id_lang, cl.name, cl.description, cl.link_rewrite, cl.meta_title, cl.meta_keywords, cl.meta_description
+		FROM `' . _DB_PREFIX_ . 'category` c
+		' . Shop::addSqlAssociation('category', 'c') . '
+		LEFT JOIN `' . _DB_PREFIX_ . 'category_lang` cl ON (c.`id_category` = cl.`id_category` AND `id_lang` = ' . (int) $id_lang . ')
+		WHERE `id_parent` = ' . (int) $this->id . '
+		' . ($active ? 'AND `active` = 1' : '') . '
+		GROUP BY c.`id_category`
+		ORDER BY `position` ASC');
+
+        if ($result && count($result)) {
+            foreach ($result as $subcat) {
+                $categ = new Category($subcat['id_category'], $id_lang);
+                $pairs[$categ->id_category] = [
+                    'id_category' => $categ->id_category,
+                    'name' => str_repeat(' · ', ($categ->level_depth - 1)) . ' ' . $categ->name,
+                ];
+                $pairs = $categ->recurseCategoryPairs($pairs, $active);
+            }
+        }
+
+        return $pairs;
+    }
+
+    /**
      * Get nested categories.
      *
      * @param int|null $idRootCategory Root Category ID
