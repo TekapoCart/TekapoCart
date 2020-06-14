@@ -40,6 +40,7 @@ class Simplicity_Feed extends Module
             'simplicity_feed_export_currency',
             'simplicity_feed_export_exclude_price_limit',
             'simplicity_feed_export_exclude_price_limit_value',
+            'simplicity_feed_secret',
         );
 
         $this->feedFields = array(
@@ -115,7 +116,7 @@ class Simplicity_Feed extends Module
         $html_content = '';
 
         # Update the settings
-        if (Tools::isSubmit('feed_submit')) {
+        if (Tools::isSubmit('feed_submit') || Tools::isSubmit('feed_submit_export')) {
             # Validate the POST parameters
             $this->postValidation();
 
@@ -180,7 +181,7 @@ class Simplicity_Feed extends Module
         }
 
         # Set the configurations for generating a setting form
-        $fields_form[0]['form'] = array(
+        $fields_form[]['form'] = array(
             'legend' => array(
                 'title' => '匯出規則',
                 'icon' => 'icon-cogs'
@@ -304,12 +305,26 @@ class Simplicity_Feed extends Module
                     'name' => 'simplicity_feed_export_google_categories',
                     'html_content' => $this->googleCategoryBlock(),
                 ),
+                array(
+                    'type' => 'text',
+                    'label' => '權杖',
+                    'name' => 'simplicity_feed_secret',
+                    'desc' => '自動產生',
+                    'readonly' => true,
+                ),
             ),
             'submit' => array(
-                'name' => 'feed_submit',
+                'name' => 'feed_submit_export',
                 'title' => $this->l('Export'),
             ),
             'buttons' => array(
+                array(
+                    'title' => '儲存',
+                    'name' => 'feed_submit',
+                    'icon' => 'process-icon-save',
+                    'type' => 'submit',
+                    'class' => 'btn btn-default pull-right',
+                ),
                 array(
                     'href' => $this->context->link->getAdminLink('AdminSimplicityTabMarTech', true),
                     'title' => '返回串接＆應用',
@@ -317,6 +332,28 @@ class Simplicity_Feed extends Module
                 )
             )
         );
+
+        if (strlen(Configuration::get('simplicity_feed_secret')) > 0) {
+            $fields_form[] = array(
+                'form' => array(
+                    'legend' => array(
+                        'title' => '透過網址上傳至 Facebook 目錄',
+                    ),
+                    'input' => array(
+                        array(
+                            'type' => 'html',
+                            'name' => '',
+                            'html_content' => '
+                            <p>網址<br>' . $this->context->shop->getBaseURL(true, false) . _MODULE_DIR_ . $this->name . '/feed.php?token=' . Configuration::get('simplicity_feed_secret') . '</p>
+					        <a href="https://www.facebook.com/products/catalogs/" class="btn-link">
+						    <i class="icon-external-link-sign"></i> 前往目錄管理工具設定
+					        </a><br />
+					        '
+                        )
+                    ),
+                )
+            );
+        }
 
         $helper = new HelperForm();
 
@@ -470,6 +507,10 @@ class Simplicity_Feed extends Module
 
     private function postProcess()
     {
+        if (strlen(Tools::getValue('simplicity_feed_secret')) === 0) {
+            $_POST['simplicity_feed_secret'] = substr(sha1(openssl_random_pseudo_bytes(1024)), 0, 16);
+        }
+
         # Update Feed parameters
         foreach ($this->feedParams as $param_name) {
             if (!Configuration::updateValue($param_name, Tools::getValue($param_name))) {
@@ -477,9 +518,12 @@ class Simplicity_Feed extends Module
             }
         }
 
-        // return $this->displayConfirmation($this->l('Settings updated'));
+        if (Tools::isSubmit('feed_submit_export')) {
+            return $this->generateFeed();
+        } else {
+            return $this->displayConfirmation($this->trans('Settings updated.', array(), 'Admin.Notifications.Success'));
+        }
 
-        return $this->generateFeed();
     }
 
     private function googleCategoryBlock()
