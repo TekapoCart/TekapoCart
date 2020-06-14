@@ -365,11 +365,11 @@ class Simplicity_Feed extends Module
         }
         fputcsv($f, $titles, $delimiter, '"');
 
-        $export_id_lang = Configuration::getValue('simplicity_feed_export_language') > 0 ? (int)Tools::getValue('simplicity_feed_export_language') : (int)Configuration::get('PS_LANG_DEFAULT');
-        $export_id_currency = Configuration::getValue('simplicity_feed_export_currency') > 0 ? (int)Tools::getValue('simplicity_feed_export_currency'): (int)Configuration::get('PS_CURRENCY_DEFAULT');
+        $export_id_lang = Configuration::getValue('simplicity_feed_export_language') > 0 ? (int)Configuration::getValue('simplicity_feed_export_language') : (int)Configuration::get('PS_LANG_DEFAULT');
+        $export_id_currency = Configuration::getValue('simplicity_feed_export_currency') > 0 ? (int)Configuration::getValue('simplicity_feed_export_currency'): (int)Configuration::get('PS_CURRENCY_DEFAULT');
         $export_id_description = Configuration::getValue('simplicity_feed_export_description');
-        $export_id_category = Configuration::getValue('simplicity_feed_export_category') > 0 ? (int)Tools::getValue('simplicity_feed_export_category') : false;
-        $export_id_brand = Configuration::getValue('simplicity_feed_export_manufacturers') > 0 ? (int)Tools::getValue('simplicity_feed_export_manufacturers') : false;
+        $export_id_category = Configuration::getValue('simplicity_feed_export_category') > 0 ? (int)Configuration::getValue('simplicity_feed_export_category') : false;
+        $export_id_brand = Configuration::getValue('simplicity_feed_export_manufacturers') > 0 ? (int)Configuration::getValue('simplicity_feed_export_manufacturers') : false;
         $currency = new Currency($export_id_currency);
         $id_shop = (int)$this->context->shop->id;
 
@@ -438,11 +438,11 @@ class Simplicity_Feed extends Module
 
                 $p->loadStockData();
 
-                if (Tools::getValue('simplicity_feed_export_instock') == 1 && $p->quantity <= 0) {
+                if (Configuration::getValue('simplicity_feed_export_instock') == 1 && $p->quantity <= 0) {
                     continue;
                 }
 
-                if (Tools::getValue('simplicity_feed_export_exclude_price_limit') == 1) {
+                if (Configuration::getValue('simplicity_feed_export_exclude_price_limit') == 1) {
                     $price = $this->getProductPrice(false, $p, null, $currency);
                     if ($price < (float)Tools::getValue('simplicity_feed_export_exclude_price_limit_value')) {
                         continue;
