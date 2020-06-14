@@ -365,11 +365,11 @@ class Simplicity_Feed extends Module
         }
         fputcsv($f, $titles, $delimiter, '"');
 
-        $export_id_lang = Configuration::getValue('simplicity_feed_export_language') > 0 ? (int)Configuration::getValue('simplicity_feed_export_language') : (int)Configuration::get('PS_LANG_DEFAULT');
-        $export_id_currency = Configuration::getValue('simplicity_feed_export_currency') > 0 ? (int)Configuration::getValue('simplicity_feed_export_currency'): (int)Configuration::get('PS_CURRENCY_DEFAULT');
-        $export_id_description = Configuration::getValue('simplicity_feed_export_description');
-        $export_id_category = Configuration::getValue('simplicity_feed_export_category') > 0 ? (int)Configuration::getValue('simplicity_feed_export_category') : false;
-        $export_id_brand = Configuration::getValue('simplicity_feed_export_manufacturers') > 0 ? (int)Configuration::getValue('simplicity_feed_export_manufacturers') : false;
+        $export_id_lang = Configuration::get('simplicity_feed_export_language') > 0 ? (int)Configuration::get('simplicity_feed_export_language') : (int)Configuration::get('PS_LANG_DEFAULT');
+        $export_id_currency = Configuration::get('simplicity_feed_export_currency') > 0 ? (int)Configuration::get('simplicity_feed_export_currency'): (int)Configuration::get('PS_CURRENCY_DEFAULT');
+        $export_id_description = Configuration::get('simplicity_feed_export_description');
+        $export_id_category = Configuration::get('simplicity_feed_export_category') > 0 ? (int)Configuration::get('simplicity_feed_export_category') : false;
+        $export_id_brand = Configuration::get('simplicity_feed_export_manufacturers') > 0 ? (int)Configuration::get('simplicity_feed_export_manufacturers') : false;
         $currency = new Currency($export_id_currency);
         $id_shop = (int)$this->context->shop->id;
 
@@ -394,7 +394,7 @@ class Simplicity_Feed extends Module
             $row['name'] = $p->name;
             $row['description'] = in_array($export_id_description, ['description_short', 'description', 'meta_description']) ? trim(strip_tags((string)$p->{$export_id_description})) : trim(strip_tags((string)$p->description_short));
             $row['condition'] = $p->condition;
-            $row['manufacturer_name'] = strlen($p->manufacturer_name) > 0 ? $p->manufacturer_name : Configuration::getValue('simplicity_feed_export_manufacturers_default');
+            $row['manufacturer_name'] = strlen($p->manufacturer_name) > 0 ? $p->manufacturer_name : Configuration::get('simplicity_feed_export_manufacturers_default');
             $row['google_product_category'] = isset($this->googleCategories[$p->id_category_default]['id_google']) ? $this->googleCategories[$p->id_category_default]['id_google'] : 0;
             $row['product_category'] = $this->getProductCategoriesName($p);
             $row['image_link'] = $this->getProductCoverImageLink($p);
@@ -404,13 +404,13 @@ class Simplicity_Feed extends Module
 
                 foreach ($this->getProductAttributes($p->id) as $attribute) {
 
-                    if (Tools::getValue('simplicity_feed_export_instock') == 1 && $attribute['quantity'] <= 0) {
+                    if (Configuration::get('simplicity_feed_export_instock') == 1 && $attribute['quantity'] <= 0) {
                         continue;
                     }
 
-                    if (Tools::getValue('simplicity_feed_export_exclude_price_limit') == 1) {
+                    if (Configuration::get('simplicity_feed_export_exclude_price_limit') == 1) {
                         $price = $this->getProductPrice(false, $p, $attribute['id_product_attribute'], $currency);
-                        if ($price < (float)Tools::getValue('simplicity_feed_export_exclude_price_limit_value')) {
+                        if ($price < (float)Configuration::get('simplicity_feed_export_exclude_price_limit_value')) {
                             continue;
                         }
                     }
@@ -438,13 +438,13 @@ class Simplicity_Feed extends Module
 
                 $p->loadStockData();
 
-                if (Configuration::getValue('simplicity_feed_export_instock') == 1 && $p->quantity <= 0) {
+                if (Configuration::get('simplicity_feed_export_instock') == 1 && $p->quantity <= 0) {
                     continue;
                 }
 
-                if (Configuration::getValue('simplicity_feed_export_exclude_price_limit') == 1) {
+                if (Configuration::get('simplicity_feed_export_exclude_price_limit') == 1) {
                     $price = $this->getProductPrice(false, $p, null, $currency);
-                    if ($price < (float)Tools::getValue('simplicity_feed_export_exclude_price_limit_value')) {
+                    if ($price < (float)Configuration::get('simplicity_feed_export_exclude_price_limit_value')) {
                         continue;
                     }
                 }
