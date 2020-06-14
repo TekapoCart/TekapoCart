@@ -40,7 +40,7 @@ File: controllers/front/HistoryController.php:58</note>
     <body>
       <trans-unit id="f9ddd507fdf437437efdcb333a0f4ff0" approved="yes">
         <source>This product is not visible to your customers.</source>
-        <target xml:lang="zh-TW">您的客戶無法瀏覽本商品。</target>
+        <target xml:lang="zh-TW">商品預覽模式，尚未對外公開。</target>
         <note>Context:
 File: controllers/front/ProductController.php:167</note>
       </trans-unit>

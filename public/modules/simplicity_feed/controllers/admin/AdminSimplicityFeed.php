@@ -60,9 +60,9 @@ class AdminSimplicityFeedController extends ModuleAdminController
             $pattern = preg_quote(Tools::getValue('q'), '/');
             $pattern = "/^.*$pattern.*\$/mi";
             if (preg_match_all($pattern, $contents, $matches)) {
-                echo implode("\n", $matches[0]);
+                $this->ajaxDie(implode("\n", $matches[0]));
             } else {
-                echo $this->l('No matches found');
+                $this->ajaxDie('找不到資料');
             }
 
         } elseif (Tools::getValue('action') == 'save') {
