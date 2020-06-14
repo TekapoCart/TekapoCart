@@ -3,7 +3,10 @@ TekapoCart <hi@tekapo.io>
 *******************************************
 * 1.2.5 (Jun 13, 2020)
 *******************************************
+Improve
 - 部落格
+- 微客製 custom.js
+- Google reCAPTCHA
 Steps
 - 2020-06-04-schema.sql
 - 2020-06-04.sql
@@ -16,6 +19,9 @@ Steps
 Improve
 - 產品目錄 Product Feed
 - 通知信支援 Google API
+Fix
+- 分類 link_rewrite 不可放行 + 號，輸入 + 會跳錯誤訊息，而不是前台出現 404
+- 商品 link_rewrite 加上跟分類一樣的檢核，輸入 + 會跳錯誤訊息
 Steps
 - install simplicity_feed
 - 2020-06-01.sql
