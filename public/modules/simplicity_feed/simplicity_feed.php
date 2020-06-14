@@ -365,11 +365,11 @@ class Simplicity_Feed extends Module
         }
         fputcsv($f, $titles, $delimiter, '"');
 
-        $export_id_lang = Tools::getValue('simplicity_feed_export_language') > 0 ? (int)Tools::getValue('simplicity_feed_export_language') : (int)Configuration::get('PS_LANG_DEFAULT');
-        $export_id_currency = Tools::getValue('simplicity_feed_export_currency') > 0 ? (int)Tools::getValue('simplicity_feed_export_currency'): (int)Configuration::get('PS_CURRENCY_DEFAULT');
-        $export_id_description = Tools::getValue('simplicity_feed_export_description');
-        $export_id_category = Tools::getValue('simplicity_feed_export_category') > 0 ? (int)Tools::getValue('simplicity_feed_export_category') : false;
-        $export_id_brand = Tools::getValue('simplicity_feed_export_manufacturers') > 0 ? (int)Tools::getValue('simplicity_feed_export_manufacturers') : false;
+        $export_id_lang = Configuration::getValue('simplicity_feed_export_language') > 0 ? (int)Tools::getValue('simplicity_feed_export_language') : (int)Configuration::get('PS_LANG_DEFAULT');
+        $export_id_currency = Configuration::getValue('simplicity_feed_export_currency') > 0 ? (int)Tools::getValue('simplicity_feed_export_currency'): (int)Configuration::get('PS_CURRENCY_DEFAULT');
+        $export_id_description = Configuration::getValue('simplicity_feed_export_description');
+        $export_id_category = Configuration::getValue('simplicity_feed_export_category') > 0 ? (int)Tools::getValue('simplicity_feed_export_category') : false;
+        $export_id_brand = Configuration::getValue('simplicity_feed_export_manufacturers') > 0 ? (int)Tools::getValue('simplicity_feed_export_manufacturers') : false;
         $currency = new Currency($export_id_currency);
         $id_shop = (int)$this->context->shop->id;
 
@@ -394,7 +394,7 @@ class Simplicity_Feed extends Module
             $row['name'] = $p->name;
             $row['description'] = in_array($export_id_description, ['description_short', 'description', 'meta_description']) ? trim(strip_tags((string)$p->{$export_id_description})) : trim(strip_tags((string)$p->description_short));
             $row['condition'] = $p->condition;
-            $row['manufacturer_name'] = strlen($p->manufacturer_name) > 0 ? $p->manufacturer_name : Tools::getValue('simplicity_feed_export_manufacturers_default');
+            $row['manufacturer_name'] = strlen($p->manufacturer_name) > 0 ? $p->manufacturer_name : Configuration::getValue('simplicity_feed_export_manufacturers_default');
             $row['google_product_category'] = isset($this->googleCategories[$p->id_category_default]['id_google']) ? $this->googleCategories[$p->id_category_default]['id_google'] : 0;
             $row['product_category'] = $this->getProductCategoriesName($p);
             $row['image_link'] = $this->getProductCoverImageLink($p);
