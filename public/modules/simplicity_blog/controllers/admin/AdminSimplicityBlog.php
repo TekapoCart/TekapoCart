@@ -176,7 +176,7 @@ class AdminSimplicityBlogController extends ModuleAdminController
                         'label' => '每頁顯示數量',
                         'name' => 'SIMPLICITY_BLOG_PER_PAGE',
                         'class' => 'fixed-width-xl',
-                        'disc' => '建議：12',
+                        'desc' => '建議：12',
                     ),
                     array(
                         'type' => 'switch',
@@ -196,14 +196,14 @@ class AdminSimplicityBlogController extends ModuleAdminController
                         'label' => '側欄顯示近期文章數量',
                         'name' => 'SIMPLICITY_BLOG_LATEST_COLUMN_DISPLAY',
                         'class' => 'fixed-width-xl',
-                        'disc' => '建議：5',
+                        'desc' => '建議：5',
                     ),
                     array(
                         'type' => 'text',
                         'label' => '首頁顯示近期文章數量',
                         'name' => 'SIMPLICITY_BLOG_LATEST_HOME_DISPLAY',
                         'class' => 'fixed-width-xl',
-                        'disc' => '建議：3',
+                        'desc' => '建議：3',
                     ),
                     array(
                         'type' => 'text',

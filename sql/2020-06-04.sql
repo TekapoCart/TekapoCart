@@ -98,6 +98,7 @@ UPDATE `ps_tab` SET `position` = '4' WHERE `ps_tab`.`id_tab` = 150;
 UPDATE `ps_tab` SET `module` = 'simplicity_blog' WHERE `ps_tab`.`id_tab` = 150;
 UPDATE `ps_tab` SET `class_name` = 'AdminSimplicityBlog' WHERE `ps_tab`.`id_tab` = 150;
 UPDATE `ps_tab` SET `icon` = 'edit' WHERE `ps_tab`.`id_tab` = 150;
+UPDATE `ps_tab` SET `active` = '0' WHERE `ps_tab`.`id_tab` = 150;
 
 INSERT IGNORE INTO `ps_authorization_role` (`id_authorization_role`, `slug`) VALUES
 (1073, 'ROLE_MOD_MODULE_SIMPLICITY_BLOG_CREATE'),
