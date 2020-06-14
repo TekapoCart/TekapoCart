@@ -62,6 +62,17 @@ class AdminSimplicityCustomController extends ModuleAdminController
                 }
             }
 
+            $custom_js_block = Tools::getValue('custom_js_block');
+            if (!empty($custom_js_block)) {
+                $path = _PS_ROOT_DIR_ . '/themes/' . $this->context->shop->theme_name . '/assets/js/custom.js';
+                if (file_exists($path)) {
+                    if ($write_fd = @fopen($path, 'wb')) {
+                        fwrite($write_fd, $custom_js_block);
+                        fclose($write_fd);
+                    }
+                }
+            }
+
             Tools::clearCache();
 
             if (!$output) {
@@ -93,6 +104,14 @@ class AdminSimplicityCustomController extends ModuleAdminController
             $helper->fields_value['custom_css_block'] = '找不到 custom.css';
         }
 
+        $path = _PS_ROOT_DIR_ . '/themes/' . $this->context->shop->theme_name . '/assets/js/custom.js';
+        if (file_exists($path)) {
+            $content = file_get_contents($path);
+            $helper->fields_value['custom_js_block'] = $content;
+        } else {
+            $helper->fields_value['custom_js_block'] = '找不到 custom.js';
+        }
+
         $helper->submit_action = 'subMOD';
 
         # form
@@ -118,6 +137,15 @@ class AdminSimplicityCustomController extends ModuleAdminController
                         'label' => '網站背景 background',
                         'name' => 'body_bg_css',
                         'desc' => "一行 CSS 搞定背景圖特效。<br>範例1：#ddebeb<br>範例2：url('https://raw.githubusercontent.com/TekapoCart/theme_resources/master/background/wood-1920.png') 0 0 repeat fixed #000"
+                    ),
+
+                    array(
+                        'type' => 'textarea',
+                        'name' => 'custom_js_block',
+                        'label' => 'custom.js',
+                        'cols' => 30,
+                        'rows' => 10,
+                        'desc' => '新增/覆蓋/自訂 JS 樣式，檔案所在位置 /themes/' . $this->context->shop->theme_name . '/assets/css/custom.js。<br>若切換佈景，則會讀取新佈景的 custom.js。',
                     ),
                 ),
                 'submit' => array(
