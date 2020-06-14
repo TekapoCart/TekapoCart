@@ -16,7 +16,6 @@ if (strlen(Configuration::get('simplicity_feed_secret')) > 0 && Tools::getValue(
 
 } else {
 
-
     // suzy: 2019-09-07 不讓 Browser Keep Cache
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);

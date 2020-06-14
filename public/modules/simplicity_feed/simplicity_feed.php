@@ -344,7 +344,7 @@ class Simplicity_Feed extends Module
                             'type' => 'html',
                             'name' => '',
                             'html_content' => '
-                            <p>網址<br>' . $this->context->shop->getBaseURL(true, false) . _MODULE_DIR_ . $this->name . '/feed.php?token=' . Configuration::get('simplicity_feed_secret') . '</p>
+                            <p>可設定排程<br>' . $this->context->shop->getBaseURL(true, false) . _MODULE_DIR_ . $this->name . '/feed.php?token=' . Configuration::get('simplicity_feed_secret') . '</p>
 					        <a href="https://www.facebook.com/products/catalogs/" class="btn-link">
 						    <i class="icon-external-link-sign"></i> 前往目錄管理工具設定
 					        </a><br />
