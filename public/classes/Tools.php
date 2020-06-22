@@ -4790,6 +4790,21 @@ exit;
         return Cache::retrieve($cache_key);
     }
 
+    /**
+     * suzy: 2020-06-22 CRON use
+     *
+     * @param $ip
+     * @return bool
+     */
+    public static function isLocalIp($ip)
+    {
+        if ( ! filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) ) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
 
 /**

@@ -40,7 +40,7 @@ include _PS_ADMIN_DIR_.'/../config/config.inc.php';
 //        }
 //    }
 //}
-if ($_SERVER['REMOTE_ADDR'] === '127.0.0.1') {
+if (Tools::isLocalIp($_SERVER['REMOTE_ADDR'])) {
     $shop_ids = Shop::getCompleteListOfShopsID();
     foreach ($shop_ids as $shop_id) {
         Shop::setContext(Shop::CONTEXT_SHOP, (int)$shop_id);
