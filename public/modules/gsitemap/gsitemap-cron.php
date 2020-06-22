@@ -38,7 +38,7 @@ include(dirname(__FILE__) . '/../../init.php');
 //        die('Bad token');
 //    }
 //}
-if (Tools::isLocalIp($_SERVER['REMOTE_ADDR'])) {
+if (!Tools::isLocalIp($_SERVER['REMOTE_ADDR'])) {
     if (Tools::substr(Tools::encrypt('gsitemap/cron'), 0, 10) != Tools::getValue('token') || !Module::isInstalled('gsitemap')) {
         die('Bad token');
     }
