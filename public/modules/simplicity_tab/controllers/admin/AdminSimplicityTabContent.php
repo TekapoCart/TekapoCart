@@ -58,6 +58,7 @@ class AdminSimplicityTabContentController extends ModuleAdminController
             'ps_banner',
             'simplicity_blog',
             'simplicity_footerbar',
+            'simplicity_igfeed',
         ];
 
         $modules_to_present = [];

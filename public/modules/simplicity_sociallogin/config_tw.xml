@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>simplicity_sociallogin</name>
-    <displayName><![CDATA[Social Login 社群登入]]></displayName>
+    <displayName><![CDATA[簡易串接＆應用]]></displayName>
     <version><![CDATA[1.0.0]]></version>
-    <description><![CDATA[支援使用 Google、Facebook 會員登入。]]></description>
+    <description><![CDATA[Google / Facebook 社群帳號登入、Facebook 留言框、reCAPTCHA 我不是機器人。]]></description>
     <author><![CDATA[TekapoCart]]></author>
     <tab><![CDATA[]]></tab>
     <is_configurable>1</is_configurable>
