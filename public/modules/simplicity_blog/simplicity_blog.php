@@ -42,6 +42,8 @@ class Simplicity_Blog extends Module
             OR !$this->registerHook('displayHome')
             OR !$this->registerHook('actionAfterCreateCmsPageFormHandler')
             OR !$this->registerHook('actionAfterUpdateCmsPageFormHandler')
+            OR !$this->registerHook('actionAfterCreateCmsPageCategoryFormHandler')
+            OR !$this->registerHook('actionAfterUpdateCmsPageCategoryFormHandler')
             OR !$this->installTables()
         ) {
             return false;

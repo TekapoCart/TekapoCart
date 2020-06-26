@@ -42,8 +42,6 @@ class Gapi extends Module
 
 		$this->displayName = $this->l('Google Analytics API');
 		$this->description = $this->l('Connect to Google Analytics\' API to retrieve your data and display it on your dashboard.');
-
-	    $this->install();
 	}
 
 	public function isConfigured()
