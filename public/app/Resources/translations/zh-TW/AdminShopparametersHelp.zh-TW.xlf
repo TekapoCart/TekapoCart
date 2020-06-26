@@ -632,7 +632,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/Blocks
     <body>
       <trans-unit id="23d2e4d116d9d457eed9dd3a29f7ac51" approved="yes">
         <source>Activate or deactivate your shop (It is a good idea to deactivate your shop while you perform maintenance. Please note that the webservice will not be disabled).</source>
-        <target xml:lang="zh-TW">啟用或停用商店（如果您要執行維護操作建議先停用，需要注意的是網頁服務不會被停用）</target>
+        <target xml:lang="zh-TW">啟用或停用商店。可使用此功能停用前台服務，請注意 RESTful API 仍會持續提供服務。</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/maintenance.html.twig:45</note>
       </trans-unit>

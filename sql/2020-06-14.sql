@@ -81,3 +81,7 @@ INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `descripti
 (58, 4, 2, 'Blogs', '', '', 'blogs'),
 (58, 4, 3, 'Blogs', '', '', 'blogs'),
 (58, 4, 4, 'Blogs', '', '', 'blogs');
+
+-- id_module 104 不該有 carrier
+SELECT * FROM `ps_module_carrier` WHERE `id_module` = 104 ORDER BY `id_module` ASC;
+SELECT * FROM `ps_module_currency` WHERE `id_module` = 104;

@@ -1,3 +1,5 @@
+
+-- 101: 實體店
 INSERT IGNORE INTO `ps_carrier_lang` (`id_carrier`, `id_shop`, `id_lang`, `delay`, `shipped_email_info`) VALUES
 ('101', '2', '1', '店內取貨', ''),
 ('101', '2', '2', 'Pickup in-store', ''),
@@ -26,6 +28,7 @@ INSERT IGNORE INTO `ps_carrier_tax_rules_group_shop` (`id_carrier`, `id_tax_rule
 
 ----
 
+-- 102: 當面交易
 INSERT IGNORE INTO `ps_carrier_lang` (`id_carrier`, `id_shop`, `id_lang`, `delay`, `shipped_email_info`) VALUES
 ('102', '2', '1', '限台北內湖南港，量大可送貨到府', ''),
 ('102', '2', '2', 'Taipei Only', ''),
@@ -54,7 +57,7 @@ INSERT IGNORE INTO `ps_carrier_tax_rules_group_shop` (`id_carrier`, `id_tax_rule
 
 ----
 
-
+-- 114: 郵局 Chunghwa Post
 INSERT IGNORE INTO `ps_carrier_lang` (`id_carrier`, `id_shop`, `id_lang`, `delay`, `shipped_email_info`) VALUES
 ('114', '2', '1', '2-3 天', ''),
 ('114', '2', '2', 'Home Delivery', ''),
@@ -83,6 +86,7 @@ INSERT IGNORE INTO `ps_carrier_tax_rules_group_shop` (`id_carrier`, `id_tax_rule
 
 ----
 
+-- 115: ezShip OK超商 / 萊爾富 / 全家取貨
 INSERT IGNORE INTO `ps_carrier_lang` (`id_carrier`, `id_shop`, `id_lang`, `delay`, `shipped_email_info`) VALUES
 (115, 2, 1, '2-3 天', '預計 2 日送達指定門市，取件人需出示身份證件，讓門市人員核對無誤，方可取貨。您可至 <a href=\"https://www.ezship.com.tw/receiver_query/ezship_query_shipstatus_2017.jsp\" target=\"_blank\">ezShip 網站</a> 查看配送狀態。'),
 (115, 2, 2, '2-3 days', ''),
@@ -107,6 +111,7 @@ INSERT IGNORE INTO `ps_carrier_tax_rules_group_shop` (`id_carrier`, `id_tax_rule
 
 ----
 
+-- 116: ezShip 宅配
 INSERT IGNORE INTO `ps_carrier_lang` (`id_carrier`, `id_shop`, `id_lang`, `delay`, `shipped_email_info`) VALUES
 (116, 2, 1, '2-3 天', ''),
 (116, 2, 2, '2-3 days', ''),
@@ -131,6 +136,7 @@ INSERT IGNORE INTO `ps_carrier_tax_rules_group_shop` (`id_carrier`, `id_tax_rule
 
 ----
 
+-- 綠界 711 取貨
 INSERT IGNORE INTO `ps_carrier_lang` (`id_carrier`, `id_shop`, `id_lang`, `delay`, `shipped_email_info`) VALUES
 ('117', '2', '1', '2-3 天', ''),
 ('117', '2', '2', '2-3 天', ''),
@@ -159,6 +165,7 @@ INSERT IGNORE INTO `ps_carrier_tax_rules_group_shop` (`id_carrier`, `id_tax_rule
 
 ----
 
+-- 118: 綠界 黑貓宅配
 INSERT IGNORE INTO `ps_carrier_lang` (`id_carrier`, `id_shop`, `id_lang`, `delay`, `shipped_email_info`) VALUES
 ('118', '2', '1', '2-3 天', ''),
 ('118', '2', '2', '2-3 天', ''),
@@ -187,6 +194,7 @@ INSERT IGNORE INTO `ps_carrier_tax_rules_group_shop` (`id_carrier`, `id_tax_rule
 
 ----
 
+-- 119: 711 交貨便
 INSERT IGNORE INTO `ps_carrier_lang` (`id_carrier`, `id_shop`, `id_lang`, `delay`, `shipped_email_info`) VALUES
 ('119', '2', '1', '2-3 天', ''),
 ('119', '2', '2', '2-3 天', ''),
@@ -214,32 +222,43 @@ INSERT IGNORE INTO `ps_carrier_tax_rules_group_shop` (`id_carrier`, `id_tax_rule
 INSERT IGNORE INTO `ps_carrier_tax_rules_group_shop` (`id_carrier`, `id_tax_rules_group`, `id_shop`) VALUES ('119', '0', '4');
 
 
+INSERT IGNORE INTO `ps_carrier_group` (`id_carrier`, `id_group`) VALUES ('128', '2');
+INSERT IGNORE INTO `ps_carrier_group` (`id_carrier`, `id_group`) VALUES ('128', '3');
+INSERT IGNORE INTO `ps_carrier_group` (`id_carrier`, `id_group`) VALUES ('129', '1');
+
 ----
 
+-- 105: 全家取貨
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('105', '2', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('105', '3', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('105', '4', '7');
 
+-- 106: 全家取貨付款
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('106', '2', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('106', '3', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('106', '4', '7');
 
+-- 107: 黑貓宅配 常溫
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('107', '2', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('107', '3', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('107', '4', '7');
 
+-- 108: 黑貓宅配 冷藏
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('108', '2', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('108', '3', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('108', '4', '7');
 
+-- 109: 黑貓宅配 冷凍
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('109', '2', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('109', '3', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('109', '4', '7');
 
+-- 110: 黑貓貨到付現 常溫
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('110', '2', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('110', '3', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('110', '4', '7');
 
+-- 111: 黑貓貨到付現 冷藏
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('111', '2', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('111', '3', '7');
 INSERT IGNORE INTO `ps_module_shop` (`id_module`, `id_shop`, `enable_device`) VALUES ('111', '4', '7');

@@ -1776,7 +1776,7 @@ File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/mainte
       </trans-unit>
       <trans-unit id="daf835712085aaaf81818e7ebfeb66b8" approved="yes">
         <source>Maintenance IP</source>
-        <target xml:lang="zh-TW">維護 IP：</target>
+        <target xml:lang="zh-TW">維護者 IP：</target>
         <note>Context:
 File: src/PrestaShopBundle/Resources/views/Admin/Configure/ShopParameters/maintenance.html.twig:50</note>
       </trans-unit>
