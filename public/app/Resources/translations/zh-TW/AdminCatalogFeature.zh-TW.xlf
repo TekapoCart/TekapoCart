@@ -214,19 +214,19 @@ File: src/PrestaShopBundle/Form/Admin/Product/ProductInformation.php:287</note>
     <body>
       <trans-unit id="428a70e43c5371126c0fb675e98c61d5" approved="yes">
         <source>List of empty categories:</source>
-        <target xml:lang="zh-TW">無商品分類</target>
+        <target xml:lang="zh-TW">無分類</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:114</note>
       </trans-unit>
       <trans-unit id="0181e2b8568143a3608fea8e657a81cb" approved="yes">
         <source>List of products with combinations but without available quantities for sale:</source>
-        <target xml:lang="zh-TW">無庫存商品（多規格）</target>
+        <target xml:lang="zh-TW">無庫存 - 多規格</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:158</note>
       </trans-unit>
       <trans-unit id="d06aa90bdc7545b64a808ef956b20b77" approved="yes">
         <source>List of products without combinations and without available quantities for sale:</source>
-        <target xml:lang="zh-TW">無庫存可銷售的商品（一般商品）</target>
+        <target xml:lang="zh-TW">無庫存 - 一般商品</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:202</note>
       </trans-unit>
@@ -238,7 +238,7 @@ File: controllers/admin/AdminTrackingController.php:232</note>
       </trans-unit>
       <trans-unit id="c205cafb2813572f3f96669cf2b97cf0" approved="yes">
         <source>List of products without images</source>
-        <target xml:lang="zh-TW">無圖片商品</target>
+        <target xml:lang="zh-TW">無圖片</target>
         <note>Context:
 File: controllers/admin/AdminTrackingController.php:263</note>
       </trans-unit>

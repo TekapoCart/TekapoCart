@@ -2,8 +2,8 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{loyalty}prestashop>loyalty_30146a132c2aa28808a8411ed74c12ed'] = '點數回饋';
-$_MODULE['<{loyalty}prestashop>loyalty_f8763c754ba455aa6e8ddf0e62911eb7'] = '訂單成立獲贈紅利點數，兌換成優惠券，下次購買可折抵消費金額。';
+$_MODULE['<{loyalty}prestashop>loyalty_30146a132c2aa28808a8411ed74c12ed'] = '點數兌換';
+$_MODULE['<{loyalty}prestashop>loyalty_f8763c754ba455aa6e8ddf0e62911eb7'] = '消費賺點數，點數兌換優惠券，優惠券折抵下次購買訂單金額。';
 $_MODULE['<{loyalty}prestashop>loyalty_f0338d5a7bbd642cc188ca69c8a97b12'] = 'Are you sure you want to delete all loyalty points and customer history?';
 $_MODULE['<{loyalty}prestashop>loyalty_7307b68f93443d5863f1d3943c546b20'] = 'Récompense de fidélité';
 $_MODULE['<{loyalty}prestashop>loyalty_e81b2826b5aebd9c92fb5d090f0cdc9d'] = 'Vous devez choisir au moins une catégorie pour l\'action du bon';
@@ -11,7 +11,7 @@ $_MODULE['<{loyalty}prestashop>loyalty_f38f5974cdc23279ffe6d203641a8bdf'] = 'Set
 $_MODULE['<{loyalty}prestashop>loyalty_8b80d4b6307990874b832cc15a92e5a3'] = 'Missing parameters';
 $_MODULE['<{loyalty}prestashop>loyalty_a82e0d057f443115e807bd6ca595fc8c'] = 'Incorrect Order object.';
 $_MODULE['<{loyalty}prestashop>loyalty_94c69408d25102ba7ddcf3533b56c407'] = '找不到客戶資料';
-$_MODULE['<{loyalty}prestashop>loyalty_94c2a3734a95577d173f702aa67a4788'] = '紅利點數 (%d 點)';
+$_MODULE['<{loyalty}prestashop>loyalty_94c2a3734a95577d173f702aa67a4788'] = '此品項可獲得點數回饋 (%d 點)';
 $_MODULE['<{loyalty}prestashop>loyalty_309cd9f5437d1bb06a7fdab1811afe1a'] = '沒有點數';
 $_MODULE['<{loyalty}prestashop>loyalty_a240fa27925a635b08dc28c9e4f9216d'] = '來源訂單';
 $_MODULE['<{loyalty}prestashop>loyalty_44749712dbec183e983dcd78a7736c41'] = '產生日期';
@@ -28,7 +28,7 @@ $_MODULE['<{loyalty}prestashop>loyalty_4cb08bf5ad3d3c7b010dde725a078b28'] = '已
 $_MODULE['<{loyalty}prestashop>loyalty_df05c2db84dacb19b599b489bf3963db'] = '無可兌換';
 $_MODULE['<{loyalty}prestashop>loyalty_01371a1d58e9234c0b9dbc08cf54fa8b'] = 'Not available on discounts.';
 $_MODULE['<{loyalty}prestashop>loyalty_f4f70727dc34561dfde1a3c529b6205c'] = 'Settings';
-$_MODULE['<{loyalty}prestashop>loyalty_8334a158298fbcf163f4dcb4a387d150'] = '集點換算';
+$_MODULE['<{loyalty}prestashop>loyalty_8334a158298fbcf163f4dcb4a387d150'] = '點數換算';
 $_MODULE['<{loyalty}prestashop>loyalty_ea92f82fb14a544ac9d38c3e6c8dc03b'] = '= 1 點';
 $_MODULE['<{loyalty}prestashop>loyalty_cd53f34f7289c573ba717b7767919a96'] = '1 點 = ';
 $_MODULE['<{loyalty}prestashop>loyalty_bd43f22cbd337b68c1ee876323e1241d'] = '現金折抵';
@@ -55,7 +55,7 @@ $_MODULE['<{loyalty}prestashop>loyalty_4f2a91e15af2631ff9424564b8a45fb2'] = '新
 $_MODULE['<{loyalty}prestashop>loyalty_453e6aa38d87b28ccae545967c53004f'] = '失效';
 $_MODULE['<{loyalty}prestashop>loyalty_6366c60fc5b4f4fce0e3dd146494a4f4'] = '已兌換';
 $_MODULE['<{loyalty}prestashop>loyalty_13148717f8faa9037f37d28971dfc219'] = '可兌換';
-$_MODULE['<{loyalty}prestashop>loyalty_c540093e64d84440025b2d8201f04336'] = '紅利點數';
+$_MODULE['<{loyalty}prestashop>loyalty_c540093e64d84440025b2d8201f04336'] = '點數回饋';
 $_MODULE['<{loyalty}prestashop>loyalty_01abfc750a0c942167651c40d088531d'] = '#';
 $_MODULE['<{loyalty}prestashop>loyalty_5acc2ceeb883ba07cef2d02ea382f242'] = 'You have not placed any orders.';
 $_MODULE['<{loyalty}prestashop>loyalty_c48105520852bbd0fa692e4c9fd61628'] = '點數可使用於以下分類：';
@@ -79,26 +79,26 @@ $_MODULE['<{loyalty}prestashop>loyalty_4c8d2e0395ae7d21e374dcbeb1cbeaaa'] = '%d 
 $_MODULE['<{loyalty}prestashop>loyalty_1f67ea7a0b26e9eacc70523bde28df0c'] = 'more...';
 $_MODULE['<{loyalty}prestashop>loyalty_a16cf3ec5200cc519f4fe48e34b1df83'] = '* 優惠券的最低消費金額：';
 $_MODULE['<{loyalty}prestashop>loyalty_8e69341aca5dbf9f55c2e75a2ed5df3c'] = '尚未有優惠券';
-$_MODULE['<{loyalty}prestashop>loyalty_00d56a5e37c19c59d521530fc8e7f337'] = '尚未有紅利點數';
+$_MODULE['<{loyalty}prestashop>loyalty_00d56a5e37c19c59d521530fc8e7f337'] = '尚未有點數';
 $_MODULE['<{loyalty}prestashop>loyalty_0b3db27bc15f682e92ff250ebb167d4b'] = 'Back to Your Account';
 $_MODULE['<{loyalty}prestashop>loyalty_8cf04a9734132302f96da8e113e80ce5'] = 'Home';
 
-$_MODULE['<{loyalty}prestashop>my-account_c540093e64d84440025b2d8201f04336'] = '紅利點數';
+$_MODULE['<{loyalty}prestashop>my-account_c540093e64d84440025b2d8201f04336'] = '點數回饋';
 
-$_MODULE['<{loyalty}prestashop>product_054a9c66cc92b7f1bfcacee3b7c7ad54'] = '特價不計入紅利點數';
+$_MODULE['<{loyalty}prestashop>product_054a9c66cc92b7f1bfcacee3b7c7ad54'] = '此品項為特價商品不列入點數。';
 $_MODULE['<{loyalty}prestashop>product_e94d481804904a48c1a8093e7a069570'] = 'No reward points for this product.';
-$_MODULE['<{loyalty}prestashop>product_08ef6b34ab8e7039ef0ee69378f0ac0b'] = '紅利點數';
-$_MODULE['<{loyalty}prestashop>product_2996152bb442bf98c80c515c6055de5f'] = '點';
-$_MODULE['<{loyalty}prestashop>product_b40d5c523ee75453134b1449dd9cd13a'] = '點';
-$_MODULE['<{loyalty}prestashop>product_b9cb3a85529dd593c14c838e22976cff'] = '購物車累積紅利點數';
-$_MODULE['<{loyalty}prestashop>product_0aab81de5c4c87021772015efc184d67'] = '點';
-$_MODULE['<{loyalty}prestashop>product_78ee54aa8f813885fe2fe20d232518b9'] = '點';
+$_MODULE['<{loyalty}prestashop>product_08ef6b34ab8e7039ef0ee69378f0ac0b'] = '依據品項價格，單項最高可回饋';
+$_MODULE['<{loyalty}prestashop>product_2996152bb442bf98c80c515c6055de5f'] = '點。';
+$_MODULE['<{loyalty}prestashop>product_b40d5c523ee75453134b1449dd9cd13a'] = '點。';
+$_MODULE['<{loyalty}prestashop>product_b9cb3a85529dd593c14c838e22976cff'] = 'Ⓟ 將獲得點數';
+$_MODULE['<{loyalty}prestashop>product_0aab81de5c4c87021772015efc184d67'] = '點。';
+$_MODULE['<{loyalty}prestashop>product_78ee54aa8f813885fe2fe20d232518b9'] = '點。';
 $_MODULE['<{loyalty}prestashop>product_443c3e03e194c2a4cdb107808b051615'] = '可以直接折抵現金';
 
 $_MODULE['<{loyalty}prestashop>shopping-cart_ea2c0ea1a08add3a75273e7f32f05f7a'] = 'fidélité';
-$_MODULE['<{loyalty}prestashop>shopping-cart_562b7108857d8394e83861d0529cc7dd'] = '購物車累積紅利點數';
+$_MODULE['<{loyalty}prestashop>shopping-cart_562b7108857d8394e83861d0529cc7dd'] = 'Ⓟ 將獲得點數';
 $_MODULE['<{loyalty}prestashop>shopping-cart_2996152bb442bf98c80c515c6055de5f'] = '點';
 $_MODULE['<{loyalty}prestashop>shopping-cart_78ee54aa8f813885fe2fe20d232518b9'] = '點';
 $_MODULE['<{loyalty}prestashop>shopping-cart_443c3e03e194c2a4cdb107808b051615'] = '可以直接折抵現金';
-$_MODULE['<{loyalty}prestashop>shopping-cart_2d354f4df80bbebf309f184c3953dc1d'] = '訪客結帳無法累積紅利點數';
-$_MODULE['<{loyalty}prestashop>shopping-cart_8cec799df06a3f5a026b31fcd95e0172'] = '加入更多商品進購物車以獲得紅利點數';
+$_MODULE['<{loyalty}prestashop>shopping-cart_2d354f4df80bbebf309f184c3953dc1d'] = '訪客結帳無法累積點數';
+$_MODULE['<{loyalty}prestashop>shopping-cart_8cec799df06a3f5a026b31fcd95e0172'] = '加入更多商品進購物車以獲得點數';

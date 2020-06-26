@@ -85,3 +85,5 @@ INSERT INTO `ps_meta_lang` (`id_meta`, `id_shop`, `id_lang`, `title`, `descripti
 -- id_module 104 不該有 carrier
 SELECT * FROM `ps_module_carrier` WHERE `id_module` = 104 ORDER BY `id_module` ASC;
 SELECT * FROM `ps_module_currency` WHERE `id_module` = 104;
+
+UPDATE `ps_tab_lang` SET `name` = '商品檢查' WHERE `ps_tab_lang`.`id_tab` = 12 AND `ps_tab_lang`.`id_lang` = 1;
