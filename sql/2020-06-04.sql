@@ -62,10 +62,7 @@ INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `positio
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '330', '1'), ('122', '2', '330', '1'), ('122', '3', '330', '1'), ('122', '4', '330', '1');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '325', '1'), ('122', '2', '325', '1'), ('122', '3', '325', '1'), ('122', '4', '325', '1');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('122', '1', '293', '1'), ('122', '2', '293', '1'), ('122', '3', '293', '1'), ('122', '4', '293', '1');
-INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('82', '1', '462', '1'), ('82', '2', '462', '1'), ('82', '3', '462', '1'), ('82', '4', '462', '1');
 INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('82', '1', '27', '1'), ('82', '2', '27', '1'), ('82', '3', '27', '1'), ('82', '4', '27', '1');
-INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('82', '1', '460', '2'), ('82', '2', '460', '2'), ('82', '3', '460', '2'), ('82', '4', '460', '2');
-INSERT IGNORE INTO `ps_hook_module` (`id_module`, `id_shop`, `id_hook`, `position`) VALUES ('82', '1', '461', '2'), ('82', '2', '461', '2'), ('82', '3', '461', '2'), ('82', '4', '461', '2');
 
 UPDATE `ps_hook_module` SET `position` = '2' WHERE `ps_hook_module`.`id_module` = 61 AND `ps_hook_module`.`id_hook` = 27;
 
