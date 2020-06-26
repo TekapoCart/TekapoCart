@@ -505,6 +505,11 @@ class AdminSearchControllerCore extends AdminController
             Context::getContext()->shop->setContext(Shop::CONTEXT_SHOP, (int) Tools::getValue('id_shop'));
         }
 
+        // suzy: 2020-06-27 不讓 Browser Keep Cache
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
+
         // Considering the indexing task can be really long, we ask the PHP process to not stop before 2 hours.
         ini_set('max_execution_time', 7200);
         Search::indexation(Tools::getValue('full'));
