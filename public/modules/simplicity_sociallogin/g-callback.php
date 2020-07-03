@@ -40,6 +40,8 @@ try {
 
 } catch(Exception $e) {
     echo 'Google SDK returned an error: ' . $e->getMessage();
+
+    Tools::redirect(Context::getContext()->link->getPageLink('index'));
     exit;
 }
 

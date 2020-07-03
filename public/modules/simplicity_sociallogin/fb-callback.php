@@ -48,6 +48,8 @@ if (! isset($accessToken)) {
         header('HTTP/1.0 400 Bad Request');
         echo 'Bad request (2)';
     }
+
+    Tools::redirect(Context::getContext()->link->getPageLink('index'));
     exit;
 }
 
