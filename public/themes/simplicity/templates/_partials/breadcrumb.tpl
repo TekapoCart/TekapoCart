@@ -28,6 +28,15 @@
     {block name='breadcrumb_item'}
       {if $smarty.foreach.breadcrumb.last}
       {*<span itemprop="name">{$path.title}</span>*}
+      {elseif $smarty.foreach.breadcrumb.first}
+      <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+        <a itemprop="item" href="{$path.url}">
+          <span itemprop="name" class="hidden-sm-down">{$path.title}</span>
+          <span class="hidden-md-up"><i class="material-icons" style="transform: initial;">storefront</i></span>
+        </a>
+        <i class="material-icons">arrow_drop_down</i>
+        <meta itemprop="position" content="{$smarty.foreach.breadcrumb.iteration}">
+      </li>
       {else}
       <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
         <a itemprop="item" href="{$path.url}"><span itemprop="name">{$path.title}</span></a>
