@@ -133,7 +133,7 @@
                   <input type="hidden" name="token" value="{$static_token}">
                   <input type="hidden" name="id_product" value="{$product.id}">
                   <input type="hidden" name="qty" value="{$product.minimal_quantity}" min="{$product.minimal_quantity}">
-                  <a class="btn btn-secondary add-to-cart" data-button-action="add-to-cart" type="submit">
+                  <a class="btn btn-secondary add-to-cart" data-button-action="add-to-cart">
                       {l s='Add to cart' d='Shop.Theme.Actions'}
                   </a>
               </form>
