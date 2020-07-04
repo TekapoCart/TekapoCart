@@ -10,7 +10,7 @@
 }
 
 .zoom-in {
-  transform: scale(0.9);
+  opacity: 0;
   animation-delay: .3s;
   animation-duration: 1.8s;
   animation-name: zoom-in;
