@@ -4272,6 +4272,16 @@ exit;
                     $def->addAttribute('p', 'itemprop', 'Text');
                     $def->addAttribute('meta', 'content', 'Text');
 
+                    // suzy: 2020-07-04 aos
+                    $def->addAttribute('div', 'data-aos', 'Text');
+                    $def->addAttribute('div', 'data-aos-offset', 'Text');
+                    $def->addAttribute('div', 'data-aos-delay', 'Text');
+                    $def->addAttribute('div', 'data-aos-duration', 'Text');
+                    $def->addAttribute('div', 'data-aos-easing', 'Text');
+                    $def->addAttribute('div', 'data-aos-once', 'Text');
+                    $def->addAttribute('div', 'data-aos-mirror', 'Text');
+                    $def->addAttribute('div', 'data-aos-anchor-placement', 'Text');
+
                 }
 
                 $purifier = new HTMLPurifier($config);
