@@ -55,16 +55,25 @@ if ($gsitemap->active) {
         $list_id_shop[] = (int) $shop['id_shop'];
     }
 
-    // suzy: 2020-06-23 修正 Tools::getIsset BUG
+    // suzy: 2020-07-04 支援 multishop
     // $id_shop = (Tools::getIsset(Tools::getValue('id_shop')) && in_array(Tools::getValue('id_shop'), $list_id_shop)) ? (int) Tools::getValue('id_shop') : (int) Configuration::get('PS_SHOP_DEFAULT');
-    $id_shop = in_array(Tools::getValue('id_shop'), $list_id_shop) ? (int) Tools::getValue('id_shop') : (int) Configuration::get('PS_SHOP_DEFAULT');
     $gsitemap->cron = true;
 
-    /* for the main run initiat the sitemap's files name stored in the database */
-    if (!Tools::getIsset(Tools::getValue('continue'))) {
-        $gsitemap->emptySitemap((int) $id_shop);
+    // suzy: 2020-07-04 支援 multishop
+
+//    /* for the main run initiat the sitemap's files name stored in the database */
+//    if (!Tools::getIsset(Tools::getValue('continue'))) {
+//        $gsitemap->emptySitemap((int) $id_shop);
+//    }
+//
+//    /* Create the Google sitemap's files */
+//    $gsitemap->createSitemap((int) $id_shop);
+
+    foreach ($list_id_shop as $id_shop) {
+        if (Tools::getValue('continue')) {
+            $gsitemap->emptySitemap((int) $id_shop);
+        }
+        $gsitemap->createSitemap((int) $id_shop);
     }
-    
-    /* Create the Google sitemap's files */
-    $gsitemap->createSitemap((int) $id_shop);
+
 }
