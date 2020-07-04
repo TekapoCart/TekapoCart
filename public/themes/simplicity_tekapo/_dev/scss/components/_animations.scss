@@ -10,6 +10,7 @@
 }
 
 .zoom-in {
+  opacity: 0;
   animation-delay: .3s;
   animation-duration: 1.8s;
   animation-name: zoom-in;
