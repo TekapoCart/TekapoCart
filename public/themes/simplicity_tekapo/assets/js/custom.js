@@ -139,7 +139,8 @@ $(function(){
 
         return false;
     });
-
+    
+    AOS.init();
 
 })
 
