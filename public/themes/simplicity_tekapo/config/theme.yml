@@ -5,6 +5,11 @@ version: 1.0.0
 assets:
   use_parent_assets: true
   js:
+    all:
+      - id: js-aos
+        path: js/aos/aos.js
+        priority: 500
+        position: bottom
     cms:
       - id: jquery-bxslider
         path: js/jquery/plugins/bxslider/jquery.bxslider.js
@@ -14,20 +19,18 @@ assets:
         path: assets/js/cms.js
         priority: 501
         position: bottom
-      - id: js-aos
-        path: js/aos/aos.js
-        priority: 502
-        position: bottom
   css:
+    all:
+      - id: css-aos
+        path: js/aos/aos.css
+        priority: 500
+        media: all
     cms:
       - id: css-bxslider
         path: js/jquery/plugins/bxslider/jquery.bxslider.css
         priority: 500
         media: all
-      - id: css-aos
-        path: js/aos/aos.css
-        priority: 501
-        media: all
+
 
 global_settings:
   hooks:
