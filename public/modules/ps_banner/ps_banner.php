@@ -305,11 +305,13 @@ class Ps_Banner extends Module implements WidgetInterface
         $thumb = $pieces[0] . '_' . $this->small_postfix . '.' . $pieces[1]; // 1.png -> 1_small.png
         if (!file_exists(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $thumb)) {
             $temp_name = _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $imgname;
-            list($temp_width, $temp_height, $temp_type, $temp_attr) = @getimagesize($temp_name);
-            $small_width = $this->small_width;
-            $small_height = round($small_width * $temp_height / $temp_width);
-            $type = $pieces[1];
-            ImageManager::resize($temp_name, _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $pieces[0] . '_' . $this->small_postfix . '.' . $type, $small_width, $small_height, $type);
+            if (file_exists($temp_name)) {
+                list($temp_width, $temp_height, $temp_type, $temp_attr) = @getimagesize($temp_name);
+                $small_width = $this->small_width;
+                $small_height = round($small_width * $temp_height / $temp_width);
+                $type = $pieces[1];
+                ImageManager::resize($temp_name, _PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $pieces[0] . '_' . $this->small_postfix . '.' . $type, $small_width, $small_height, $type);
+            }
         }
         if ($thumb && file_exists(_PS_MOD_IMG_DIR_ . $this->name . DIRECTORY_SEPARATOR . $thumb)) {
             $this->smarty->assign('banner_thumb', $this->context->link->protocol_content . Tools::getMediaServer($imgname) . _PS_MOD_IMG_ . $this->name . '/' . $thumb);
