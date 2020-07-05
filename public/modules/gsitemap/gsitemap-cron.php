@@ -77,7 +77,7 @@ if ($gsitemap->active) {
         $gsitemap->createSitemap((int) $id_shop);
 
         // suzy: 2020-07-04 加 output
-        echo date('Y-m-d') . ' shop id: ' . $id_shop . ' gsitemap OK';
+        echo date('Y-m-d') . ' shop id: ' . $id_shop . ' cron gsitemap OK';
         echo "\n";
     }
 }

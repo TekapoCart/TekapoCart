@@ -46,5 +46,5 @@ if (Tools::isLocalIp($_SERVER['REMOTE_ADDR'])) {
         Shop::setContext(Shop::CONTEXT_SHOP, (int)$shop_id);
         Currency::refreshCurrencies();
     }
-    echo 'ok';
+    echo date('Y-m-d') . ' cron currency rates OK';
 }
