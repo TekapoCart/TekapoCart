@@ -49,7 +49,8 @@ $gsitemap = Module::getInstanceByName('gsitemap');
 /* Check if the module is enabled */
 if ($gsitemap->active) {
     /* Check if the requested shop exists */
-    $shops = Db::getInstance()->ExecuteS('SELECT id_shop FROM `' . _DB_PREFIX_ . 'shop`');
+    // suzy: 2020-07-04 加 active
+    $shops = Db::getInstance()->ExecuteS('SELECT id_shop FROM `' . _DB_PREFIX_ . 'shop` AND active=1');
     $list_id_shop = array();
     foreach ($shops as $shop) {
         $list_id_shop[] = (int) $shop['id_shop'];
@@ -74,6 +75,9 @@ if ($gsitemap->active) {
             $gsitemap->emptySitemap((int) $id_shop);
         }
         $gsitemap->createSitemap((int) $id_shop);
-    }
 
+        // suzy: 2020-07-04 加 output
+        echo date('Y-m-d') . ' shop id: ' . $id_shop . ' gsitemap OK';
+        echo "\n";
+    }
 }
